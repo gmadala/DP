@@ -27,8 +27,8 @@
         <div class="info-block-image">
           <span nxg-icon="icon-info"></span>
         </div>
-        <h6 class="info-block-text" translate>
-          Amounts shown are valid through 8pm Eastern Time
+        <h6 class="info-block-text">
+          <span translate>Amounts shown are valid through 8pm Eastern Time</span>
           <span ng-show="canPayNow">today ({{ todayDate | moment }})</span>
           <span ng-show="!canPayNow">({{ nextBusinessDay | moment }})</span>
         </h6>
@@ -84,7 +84,7 @@
               <p class="lockup-major">{{ fee.FeeType || 'N/A' }}</p>
               <p class="visible-xs">{{ fee.Description }}</p>
               <div class="col-xs-12 vertical-spacing">
-                <p class="visible-xs" translate>Payment Due: </p>
+                <p class="visible-xs"><span translate>Payment Due</span>: </p>
                 <div nxg-payment-buttons="fee"
                      item="fee"
                      on-queue="isFeeOnQueue(fee.FinancialRecordId)"
@@ -92,7 +92,7 @@
                 </div>
                 <div class="paired-body vertical-spacing visible-xs">
                   <p class="lockup-minor" ng-class="{ 'color-danger': getDueStatus(fee, false) == 'overdue' }">
-                    <span translate>Due: </span>
+                    <span translate>Due</span>:
                   <span class="paired-media svg-icon" ng-class="getDueStatus(fee, false)" ng-switch="getDueStatus(fee, false)">
                     <span ng-switch-when="today" nxg-icon="icon-warning"></span>
                     <span ng-switch-when="overdue" nxg-icon="icon-alert"></span>
@@ -213,7 +213,7 @@
                     <p class="lockup-minor caps stock"><span translate>STK</span>: <span nxg-highlight="payment.StockNumber" highlight="payment.data.query"></span></p>
                   </div>
                 </div>
-                <div class="row">
+                <div>
                   <div class="col-xs-6 visible-xs">
                     <p class="lockup-minor vertical-spacing"><span translate>Payment Due</span>:</p>
                   </div>
