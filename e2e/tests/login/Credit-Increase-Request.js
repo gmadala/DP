@@ -3,16 +3,17 @@
  */
 'use strict';
 
-var loginRecover = require('../../framework/login-recover.js');
+var loginRecover = require('../../framework/login-recover-objects.js');
 var login = require('../../framework/login.js');
-var modal = require('../../framework/modal_objects.js');
+var modal = require('../../framework/modal-objects.js');
 var dashboard = require('../../framework/dashboard-objects.js');
 var creditIncrease = require('../../framework/credit-increase-request-objects.js');
+var receipts = require('../../framework/receipts-objects.js');
 var delay = 200;
-var longDelay = 500;
-var userName= '36017RDT';
 var homepageUrl="https://test.nextgearcapital.com/test/#/login";
-
+var tempIncrease;
+var userName= '53190md';
+var password= 'ngcpass!0';
 describe("Log In Suite  \n ", function () {
 
   beforeEach(function () {
@@ -22,32 +23,53 @@ describe("Log In Suite  \n ", function () {
 
   });
 
-  it("1. As a dealer I want to request a temporary credit increase", function () {
-    login.login2('53190md','ngcpass!0');
+  xit("1. As a dealer I want to request a temporary credit increase", function () {
+    //Login and go to request credit increase
+    login.login2(userName,password);
     dashboard.clickRequestCreditIncreaset();
-    creditIncrease.clickfirstLineOfCredit();
-    browser.sleep(5000);
+    //Select Credit line and click on temp
+    creditIncrease.clickFirstLineOfCredit();
+    creditIncrease.clickTemporaryIncrease();
+    creditIncrease.enterIncreaseAmount('1000');
+    creditIncrease.clickRequestButton();
+    //Check success modal
+    expect(modal.header()).toEqual("Request a Credit Increase");
+    expect(modal.body()).toEqual("Your request has been submitted. Credit requests typically take 3-5 business days to process. You will be notified as soon as your request has been processed.");
+    modal.clickOkButton();
+
+
 
   });
   xit("2. As a dealer I want to request a permanent credit increase", function () {
-    //Check Forgot username or password link
-    expect(login.textforgotUsernamePassword()).toEqual("Forgot your username or password?");
-    login.clickforgotUsernamePassword();
-    expect(browser.getCurrentUrl()).toEqual(forgotUrl);
-
-    loginRecover.enterEmail(validEmail);
-    expect(loginRecover.getSubmitButtonText()).toEqual("Submit");
-    loginRecover.clickUsernameSubmit();
-
-    expect(modal.header()).toEqual("Success");
-    expect(modal.body()).toEqual("Thank you, check your email for the requested account information.");
-
-    //Exit out and verify back to main
+    //Login and go to request credit increase
+    login.login2(userName,password);
+    dashboard.clickRequestCreditIncreaset();
+    //Select Credit line and click on temp
+    creditIncrease.clickFirstLineOfCredit();
+    creditIncrease.clickPermanentIncrease();
+    creditIncrease.enterIncreaseAmount('1000');
+    creditIncrease.clickRequestButton();
+    //Check success modal
+    expect(modal.header()).toEqual("Request a Credit Increase");
+    expect(modal.body()).toEqual("Your request has been submitted. Credit requests typically take 3-5 business days to process. You will be notified as soon as your request has been processed.");
     modal.clickOkButton();
-    expect(browser.getCurrentUrl()).toEqual(homepageUrl);
+
 
   });
-
+  it("3. As a dealer I want to print a receipt", function () {
+    //Login and go to request credit increase
+    login.login2(userName,password);
+    dashboard.clickReceiptsLink();
+    browser.sleep(5000);
+    receipts.clickFirstReceipt();
+    receipts.clickExportReceipts();
+    browser.sleep(5000);
+    browser.getAllWindowHandles().then(function (handles) {
+      browser.switchTo().window(handles[1]).then(function () {
+        expect(browser.getCurrentUrl()).toEqual("http://www.nextgearcapital.com/apply-for-credit/");
+      });
+    });
+  });
 
 
 

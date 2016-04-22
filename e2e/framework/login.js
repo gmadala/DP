@@ -1,7 +1,7 @@
 var userName = '53190md';
 var password = 'ngcpass!0';
 var delay = 200;
-var longDelay = 500;
+var longDelay = 1000;
 login = {
 
   elements: {

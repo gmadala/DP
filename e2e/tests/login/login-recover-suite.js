@@ -1,8 +1,8 @@
 'use strict';
 
-var loginRecover = require('../../framework/login-recover.js');
+var loginRecover = require('../../framework/login-recover-objects.js');
 var login = require('../../framework/login.js');
-var modal = require('../../framework/modal_objects.js');
+var modal = require('../../framework/modal-objects.js');
 var delay = 200;
 var longDelay = 500;
 var userName= '36017RDT';
@@ -23,7 +23,7 @@ describe("Log In Suite  \n ", function () {
 
   });
 
-  xit("1. As a new dealer I want to signup to Mynextgear", function () {
+  it("1. As a new dealer I want to signup to Mynextgear", function () {
     //Check button text
     expect(login.textsignUpLogin()).toEqual("Sign Up");
 
@@ -33,7 +33,7 @@ describe("Log In Suite  \n ", function () {
     expect(browser.getCurrentUrl()).toEqual("http://www.nextgearcapital.com/apply-for-credit/");
 
   });
- xit("2. As a dealer I forgot my user name. My email is correct and no problems", function () {
+ it("2. As a dealer I forgot my user name. My email is correct and no problems", function () {
     //Check Forgot username or password link
     expect(login.textforgotUsernamePassword()).toEqual("Forgot your username or password?");
     login.clickforgotUsernamePassword();
@@ -52,7 +52,7 @@ describe("Log In Suite  \n ", function () {
 
   });
 
-  xit("3. As a dealer I forgot my user name. My email is NOT correct and have to reenter email", function () {
+  it("3. As a dealer I forgot my user name. My email is NOT correct and have to reenter email", function () {
     //Login with incorrect password
     login.login2('53190md','incorrect');
     expect(login.getInvalidLoginText1()).toEqual("We're sorry, but you used a username or password that doesn't match our records.");

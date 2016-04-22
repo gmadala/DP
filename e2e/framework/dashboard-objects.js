@@ -4,6 +4,11 @@
 var delay = 200;
 
 dashboard = {
+  receiptsLink: function () {
+
+    return element(by.css('a[ng-href="#/receipts"]'));
+
+  },
 
   requestCreditIncrease: function () {
 
@@ -14,6 +19,12 @@ dashboard = {
 //Locator End
 
   //Clicking
+  clickReceiptsLink: function () {
+
+    this.receiptsLink().click();
+    browser.sleep(delay);
+
+  },
   clickRequestCreditIncreaset: function () {
 
     this.requestCreditIncrease().click();

@@ -4,23 +4,61 @@
 var delay = 200;
 
 creditIncrease = {
+  permanentIncrease: function () {
+
+    return element(by.id('isNotTemp'));
+
+  },
 
   firstLineOfCredit: function () {
 
     return element.all(by.id('lineOfCredit')).get(1);
 
   },
+  temporaryIncrease: function () {
+
+    return element(by.id('isTemp'));
+
+  },
+  increaseAmount: function () {
+
+    return element(by.id('increaseAmt'));
+
+  },
+  requestButton: function () {
+
+    return element(by.id('confirmRequestButton'));
+
+  },
 
 //Locator End
 
   //Clicking
-  clickfirstLineOfCredit: function () {
+  clickPermanentIncrease: function () {
+
+    this.permanentIncrease().click();
+    browser.sleep(delay);
+
+  },
+
+  clickRequestButton: function () {
+
+    this.requestButton().click();
+    browser.sleep(delay);
+
+  },
+  clickFirstLineOfCredit: function () {
 
     this.firstLineOfCredit().click();
     browser.sleep(delay);
 
   },
+  clickTemporaryIncrease: function () {
 
+    this.temporaryIncrease().click();
+    browser.sleep(delay);
+
+  },
 
   //Getting
   getPasswordErrorTextPhoneNumber: function () {
@@ -31,11 +69,13 @@ creditIncrease = {
 
 
   //Sending
-  enterQuestion9: function (param) {
+  enterIncreaseAmount: function (param) {
 
-    return this.securityQuestion9().clear().sendKeys(param);
+     this.increaseAmount().sendKeys(param);
+    browser.sleep(delay);
 
   },
+
 
 
   //Count
