@@ -1,0 +1,105 @@
+<h3 class="modal-header" translate>
+  Business Search
+</h3>
+
+<div class="modal-body">
+  <form class="row form-block" name="dealerNameSearch">
+    <div class="col-xs-4">
+      <label translate>Business Name</label>
+      <input class="full-width" type="text" id="businessSearchModalBusinessName" ng-model="proposedQuery.name" nxg-requires="proposedQuery.name.length >= 3" ng-class="{ 'nxg-invalid': validity.$error.nxgRequires }" nxg-autofocus>
+      <label for="businessSearchModalBusinessName" class="text-error" ng-show="validity.$error.nxgRequires" translate>
+        Please enter at least 3 characters.
+      </label>
+    </div>
+
+    <div class="col-xs-3 custom">
+      <label translate>City</label>
+      <input class="full-width" type="text" id="businessSearchModalCity" class="input-medium" ng-model="proposedQuery.city" ng-pattern="/^[A-Za-z ]*$/" ng-class="{ 'nxg-invalid': validity.$error.pattern }">
+      <label for="businessSearchModalCity" class="text-error" ng-show="validity.$error.pattern" translate>City names must only have letters and spaces.</label>
+    </div>
+
+    <div class="col-xs-3 custom">
+      <label translate>State</label>
+      <div class="style-select auto">
+        <select id="state" ng-model="proposedQuery.state" ng-options="state.StateName for state in states">
+          <option value=""></option>
+        </select>
+      </div>
+    </div>
+
+    <div class="col-xs-2">
+      <button class="btn inline-submit" ng-click="search()" translate>
+        Search
+      </button>
+    </div>
+  </form>
+
+  <div class="form-block" ng-show="data.results.length > 0">
+    <p class="paragraph" translate>Select a business name below to query the account.</p>
+  </div>
+
+  <div ng-switch="data.results.length > 0 || data.loading">
+    <p class="notice-box" ng-switch-when="false" ng-switch="!isQueryValid(data.query)">
+      <span ng-switch-when="false" translate>Sorry, no results found. Please try a new search.</span>
+      <span ng-switch-when="true" translate>Please enter a name, and city or state, to search.</span>
+    </p>
+
+    <div class="search-results" ng-switch-when="true"
+       nxg-infinite-scroll="fetchNextResults()"
+       nxg-infinite-scroll-disabled="data.loading"
+       nxg-infinite-scroll-show-indicator="data.loading"
+       nxg-scroll-container>
+      <table class="table table-secondary table-striped">
+        <thead>
+          <tr>
+            <th class="sortable-secondary"
+                ng-click="sortBy('BusinessName')"
+                ng-class="{ sorted : data.sortBy == 'BusinessName', desc : data.sortDescending }">
+              <nxg-sortable sortable-text="{{ 'Business Name' | translate }}"></nxg-sortable>
+            </th>
+            <th class="sortable-secondary"
+                ng-click="sortBy('BusinessLegalName')"
+                ng-class="{ sorted : data.sortBy == 'BusinessLegalName', desc : data.sortDescending }">
+              <nxg-sortable sortable-text="{{ 'Legal Name' | translate }}"></nxg-sortable>
+            </th>
+            <th class="sortable-secondary"
+                ng-click="sortBy('BusinessNumber')"
+                ng-class="{ sorted : data.sortBy == 'BusinessNumber', desc : data.sortDescending }">
+              <nxg-sortable sortable-text="{{ 'Business No.' | translate }}"></nxg-sortable>
+            </th>
+            <th class="sortable-secondary"
+                ng-click="sortBy('City')"
+                ng-class="{ sorted : data.sortBy == 'City', desc : data.sortDescending }">
+              <nxg-sortable sortable-text="{{ 'City' | translate }}"></nxg-sortable>
+            </th>
+            <th class="sortable-secondary"
+                ng-click="sortBy('State')"
+                ng-class="{ sorted : data.sortBy == 'State', desc : data.sortDescending }">
+              <nxg-sortable sortable-text="{{ 'State' | translate }}"></nxg-sortable>
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr ng-repeat="business in data.results | orderBy:sortField.business:sortDescending.business">
+            <td class="value">
+              <a href ng-click="showCreditQuery(business)">
+                <span nxg-highlight="business.BusinessName" highlight="business.data.query"></span>
+              </a>
+            </td>
+            <td>{{ business.BusinessLegalName }}</td>
+            <td>{{ business.BusinessNumber }}</td>
+            <td>{{ business.City }}</td>
+            <td>{{ business.State }}</td>
+          </tr>
+        </tbody>
+      </table>
+      <p class="text-error notice-box" ng-show="data.hitInfiniteScrollMax" translate>
+        There are too many results to display, please refine your search further.
+      </p>
+    </div>
+  </div>
+</div>
+
+<div class="modal-footer">
+  <button ng-click="close()" class="btn-cta cta-primary" translate>Close Window</button>
+</div>

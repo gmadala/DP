@@ -1,0 +1,186 @@
+<h3 class="modal-header" translate>Add Account</h3>
+
+<section class="modal-body to-edge add-account" ng-show="isTermsConditions">
+  <h4 translate class="add-account">Step 2 of 2: Designated Account Change Request and Consent</h4>
+  <div class="legal-textarea add-account">
+    <p class="well-item">
+      By submitting this Designated Account change request and consent, I am certifying to NextGear Capital, Inc.
+      (“Lender”) that I am Borrower or an authorized representative of Borrower and have all necessary authority and
+      permissions to make the changes to Borrower’s Designated Account(s) and/or otherwise carry out the transactions
+      contemplated herein, in each case for and on behalf of Borrower. Capitalized terms used herein but not defined
+      herein shall have the respective meanings as set forth in that certain ACH Authorization or ACH Authorization
+      and Request, as the case may be, executed by Borrower in favor of Lender (each an “ACH Authorization”).
+    </p>
+
+    <p class="well-item">
+      By clicking “I acknowledge that I have reviewed and agree” and then “Submit”, Borrower acknowledges and agrees
+      that the Borrower’s Designated Account information shall be amended to include, in the case Borrower is adding
+      a bank account, the bank account information provided herein, all without further action by Borrower or Lender.
+      Further, that effective immediately such bank account shall be a Designated Account. Borrower further
+      acknowledges and agrees, whether amending to add a bank account or to carry out another transaction that this
+      Designated Account change request shall serve as Borrower’s written request and consent to amend Borrower’s
+      Designated Account information as provided herein.
+    </p>
+
+    <p class="well-item">
+      Borrower further acknowledges and agrees that:
+    </p>
+
+    <ul>
+      <li>
+        This Designated Account change request and consent may take up to two (2) Business Days for Lender to process.
+        Subject to the provisions noted below, once this Designated Account change request and consent is processed by
+        Lender, all Authorized Debits, Authorized Credits and other authorized transactions, will be initiated by Lender
+        pursuant to Borrower’s ACH Authorization. Lender may send to Borrower at its Designated Email a confirmation of
+        each Designated Account change and other transactions processed hereunder. Borrower shall maintain the active
+        status of the Designated Email at all times and shall provide immediate written notification to Lender of any
+        change in the Designated Email.
+      </li>
+    </ul>
+    </p>
+
+    <ul>
+      <li>
+        Except as specifically provided for herein, this Designated Account change request and consent does not in any
+        way terminate, amend or modify, in whole or in part, the Note or any other Loan Documents, including any ACH
+        Authorization or similar authorization (including the designation of any bank account as a Designated Account)
+        or any other agreements between Borrower and Lender or executed by Borrower in favor of Lender. Each bank
+        account listed herein, and each bank account previously designated by Borrower as a Designated Account, if any,
+        shall remain a Designated Account, regardless of its status (e.g. active, inactive, default deposit, default
+        payment), and shall be subject to Authorized Debits, as provided for in any ACH Authorization, which remains in
+        effect.
+      </li>
+    </ul>
+    </p>
+  </div>
+  <div class="modal-footer add-account">
+    <div class="cr-inline text-left" style="margin-left:10px;">
+      <input type="checkbox" name="terms" id="enableAddAccountTerms" ng-model="agree"/>
+      <label for="enableAddAccountTerms" class="checkbox-img small"></label>
+      <label for="enableAddAccountTerms" class="cr-label" translate>
+        I acknowledge that I have reviewed and agree.
+      </label>
+    </div>
+  </div>
+</section>
+
+<div class="modal-body to-edge" nxg-autofocus ng-show="isAddAccount">
+  <p class="required-text">* <span translate>required</span></p>
+  <h4 translate class="add-account step-two">Step 1 of 2: Add Your Account</h4>
+  <form class="modal-inner add-account" name="financialAccountForm">
+    <div class="row">
+      <div class="col-xs-12">
+        <label for="bankName"><span translate>Bank Name</span> *</label>
+        <input type="text" id="bankName" name="bankName" class="input-full" maxlength="{{maxBankLength}}" ng-model="account.BankName"
+               ng-required="true" ng-class="{ 'nxg-invalid': financialAccountForm.bankName.$error.required && financialAccountForm.bankName.$dirty}">
+        <label for="bankName" class="text-error" ng-show="financialAccountForm.bankName.$error.required && financialAccountForm.bankName.$dirty" translate>
+          Please enter a bank name.
+        </label>
+      </div>
+    </div>
+    <div ng-if="isAddModal">
+      <div class="row ng-scope">
+        <div class="col-xs-6 custom">
+          <label for="accountNumber"><span translate>Account Number</span> *</label>
+        </div>
+        <div class="col-xs-6 custom">
+          <label for="confirmAccountNumber"><span translate>Confirm Account Number</span> *</label>
+        </div>
+      </div>
+      <div class="row ng-scope">
+        <div class="col-xs-6 custom">
+          <input type="text" id="accountNumber" name="accountNumber" class="input-full" maxlength="16"
+                 ng-model="account.AccountNumber" ng-required="true"
+                 ng-class="{ 'nxg-invalid': (financialAccountForm.accountNumber.$error.pattern ||
+                 financialAccountForm.accountNumber.$error.required) && financialAccountForm.accountNumber.$dirty}"
+                 ng-pattern="accountNumberRegex">
+          <label for="accountNumber" class="text-error" ng-show="financialAccountForm.accountNumber.$error.pattern  &&
+          financialAccountForm.accountNumber.$dirty" translate>
+            Account number must only have numbers.
+          </label>
+          <label for="accountNumber" class="text-error" ng-show="financialAccountForm.accountNumber.$error.required  &&
+          financialAccountForm.accountNumber.$dirty" translate>
+            Please enter an account number.
+          </label>
+        </div>
+        <div class="col-xs-6 custom">
+          <input type="text" id="confirmAccountNumber" name="confirmAccountNumber" class="input-full" maxlength="16"
+                 ng-model="inputs.confirmAccountNumber" ng-required="true"
+                 ng-class="{ 'nxg-invalid': (financialAccountForm.confirmAccountNumber.$error.required &&
+                 financialAccountForm.confirmAccountNumber.$dirty) ||
+                 ((account.AccountNumber != inputs.confirmAccountNumber) && financialAccountForm.confirmAccountNumber.$dirty)}"
+                 ng-paste="$event.preventDefault()">
+          <label for="confirmAccountNumber" class="text-error"
+                 ng-show="!financialAccountForm.confirmAccountNumber.$error.required &&
+                 ((account.AccountNumber != inputs.confirmAccountNumber) &&
+                 financialAccountForm.confirmAccountNumber.$dirty)" translate>
+            Does not match with account number.
+          </label>
+          <label for=confirmAccountNumber class="text-error" ng-show="financialAccountForm.confirmAccountNumber.$error.required &&
+          financialAccountForm.confirmAccountNumber.$dirty" translate>
+            Please confirm the account number.
+          </label>
+        </div>
+      </div>
+      <div class="row ng-scope">
+        <div class="col-xs-6 custom">
+          <label for="routingNumber"><span translate>Routing Number</span> *</label>
+          <input type="text" id="routingNumber" name="routingNumber" class="input-full" maxlength="9"
+                 ng-model="account.RoutingNumber" ng-required="true"
+                 ng-class="{ 'nxg-invalid': (financialAccountForm.routingNumber.$error.pattern ||
+                 financialAccountForm.routingNumber.$error.required) && financialAccountForm.routingNumber.$dirty}"
+                 ng-pattern="routingNumberRegex">
+          <label for="routingNumber" class="text-error" ng-show="financialAccountForm.routingNumber.$error.pattern &&
+          financialAccountForm.routingNumber.$dirty" translate>
+            Routing number must have 9 digits.
+          </label>
+          <label for="routingNumber" class="text-error" ng-show="financialAccountForm.routingNumber.$error.required &&
+          financialAccountForm.routingNumber.$dirty" translate>
+            Please enter a routing number.
+          </label>
+        </div>
+        <div class="col-xs-6 custom image-tooltip">
+          <span translate>Where can I find my account and routing numbers?</span>
+          <div class="btn-help btn-help-adjust"
+               tooltip-placement="right"
+               uib-tooltip-html="tooltipImage">
+            <span class="glyphicon glyphicon-picture"></span>
+          </div>
+        </div>
+      </div>
+      <nxg-address city="true"
+                   info="account"
+                   state="true"
+                   validity="financialAccountForm">
+      </nxg-address>
+    </div>
+    <div class="row ng-scope">
+      <div class="col-xs-12 custom cr-inline">
+        <input type="checkbox" name="defaultForDisbursement" id="defaultForDisbursement"
+               ng-model="account.IsDefaultDisbursement" ng-disabled="!account.IsActive"/>
+        <label class="checkbox-img" for="defaultForDisbursement"></label>
+        <label class="cr-label" for="defaultForDisbursement" ng-class="{'text-disabled' : !account.IsActive}">
+          <strong translate>Default for deposits</strong>
+        </label>
+      </div>
+      <div class="col-xs-12 custom cr-inline">
+        <input type="checkbox" name="defaultForPayment" id="defaultForPayment"
+               ng-model="account.IsDefaultPayment" ng-disabled="!account.IsActive"/>
+        <label class="checkbox-img" for="defaultForPayment"></label>
+        <label class="cr-label" for="defaultForPayment" ng-class="{'text-disabled' : !account.IsActive}">
+          <strong translate>Default for payments</strong>
+        </label>
+      </div>
+    </div>
+  </form>
+</div>
+
+<div class="modal-footer">
+  <button type="button" ng-disabled="loading" ng-click="close()" class="btn-cta cta-secondary" translate>Cancel</button>
+  <button type="submit" id="submitProceed" class="btn-cta cta-primary" ng-click="acceptChanges()" translate
+          nxg-autofocus ng-show="!submit" ng-disabled="financialAccountForm.$invalid">Proceed to Step 2</button>
+  <button type="submit" id="submitSave" class="btn-cta cta-primary"
+          ng-click="confirmRequest()" translate nxg-autofocus ng-show="submit" ng-disabled="!agree">Submit</button>
+</div>
+
+

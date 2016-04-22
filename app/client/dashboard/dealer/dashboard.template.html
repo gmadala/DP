@@ -1,0 +1,364 @@
+<section class="row upcoming">
+  <!-- Calendar -->
+  <div class="col-xs-9 nxg-dash-calendar-container well dash-well" >
+    <div class="dash-calendar-header">
+      <h5>
+        <a href class="featured today-btn" ng-class="{ 'disabled': isPast() }" ng-click="onClickToday()"><span translate>Today</span>:</a>
+        {{ today }}
+      </h5>
+
+      <div class="cta btn-toggle btn-toggle-static">
+        <div class="btn-slider" ng-class="{ 'active-left':isWeekMode(), 'active-right':!isWeekMode() }"></div>
+        <button class="btn" id="week" ng-click="changeViewMode('week')" id="weekView" translate >Week</button>
+        <button class="btn" id="month" ng-click="changeViewMode('month')" id="monthViewDash" translate >Month</button>
+      </div>
+    </div>
+
+    <div nxg-upcoming-calendar display="viewMode" language="calLanguage" data="dashboardData.calendarData"></div>
+
+    <!-- Upcoming Payments Table -->
+    <div uib-collapse="isCollapsed" ng-init="isCollapsed = true" ng-class="{ open: !isCollapsed }">
+      <div class="upcoming-payments table-holder">
+        <table class="table table-striped table-secondary table-border">
+          <thead>
+            <tr>
+              <th translate>Due Date</th>
+              <th translate>Description</th>
+              <th translate>Payoff Due</th>
+              <th translate>Payment Due</th>
+            </tr>
+          </thead>
+          <tr ng-repeat="payment in dashboardData.UpcomingPaymentsList">
+            <td class="center" ng-switch="getDueStatus(payment)">
+              <div class="paired" ng-switch-when="overdue">
+                <span class="paired-media" nxg-icon="icon-alert"></span>
+                <span class="paired-body color-danger value">
+                  {{ payment.DueDate | moment }}
+                </span>
+              </div>
+
+              <div class="paired" ng-switch-when="today">
+                <span class="paired-media" nxg-icon="icon-warning"></span>
+                <span class="paired-body color-warning value">
+                  {{ payment.DueDate | moment }}
+                </span>
+              </div>
+
+              <div class="paired" ng-switch-when="future">
+                <span class="paired-media svg-icon"></span>
+                <span class="paired-body">
+                  {{ payment.DueDate | moment }}
+                </span>
+              </div>
+            </td>
+
+            <td>
+              <a id="stockNumber{{ payment.StockNumber }}"class="primary" href="#/vehicledetails?stockNumber={{ payment.StockNumber }}">{{ payment.Description }}</a>
+            </td>
+            <td class="numeric">
+              <span>{{ payment.PayoffDue | currency }}</span>
+            </td>
+            <td class="numeric">
+              <span>{{ payment.PaymentDue | currency }}</span>
+            </td>
+          </tr>
+        </table>
+      </div>
+    </div>
+
+    <button id="showorhide" class="accordion-button paired-reversed" ng-click="isCollapsed = !isCollapsed" ng-class="{ expanded:!isCollapsed }">
+      <span class="paired-body">
+        <span ng-show="isCollapsed" translate>Show Payment Details</span>
+        <span ng-show="!isCollapsed" translate>Hide Payment Details</span>
+      </span>
+      <span class="paired-media" ng-class="{ 'point-up':!isCollapsed, 'point-down':isCollapsed }" nxg-icon="icon-chevron">
+      </span>
+    </button>
+  </div>
+
+  <!-- Payment Summary -->
+  <div class="col-xs-3 custom well payment-summary dash-well left-margin-large">
+    <h2 class="well-title" translate>Payments Summary</h2>
+    <ul class="counter-list">
+      <li id="overdue" class="clickable" ng-click="filterPayments('overdue')">
+        <span class="counter" ng-class="{overdue: paymentSummary[viewMode].OverduePayments > 0}">{{paymentSummary[viewMode].OverduePayments}}</span>
+        <div class="dash-lockup">
+          <p class="dash-minor"
+             translate
+             translate-n="paymentSummary[viewMode].OverduePayments"
+             translate-plural="Overdue"
+             translate-comment="Payment(s) overdue">
+            Overdue
+          </p>
+          <h4 class="dash-major" ng-class="{'overdue-amount': paymentSummary[viewMode].OverduePaymentAmount > 0}" id="overduePaymentDash">{{paymentSummary[viewMode].OverduePaymentAmount | currency}}</h4>
+        </div>
+      </li>
+      <li id="today" class="clickable" ng-click="filterPayments('today')">
+        <span class="counter" ng-class="{'due-today': paymentSummary[viewMode].PaymentsDueToday > 0}" id="paymentsDueDash">{{paymentSummary[viewMode].PaymentsDueToday}}</span>
+        <div class="dash-lockup">
+          <p class="dash-minor"
+             translate
+             translate-n="paymentSummary[viewMode].PaymentsDueToday"
+             translate-plural="Due Today"
+             translate-comment="Payment(s) due today">
+            Due Today
+          </p>
+          <h4 class="dash-major">{{paymentSummary[viewMode].PaymentsDueTodayAmount | currency}}</h4>
+        </div>
+      </li>
+      <li id="week" class="clickable" ng-click="filterPayments(viewMode)">
+        <span class="counter">{{paymentSummary[viewMode].UpcomingPayments}}</span>
+
+        <div class="dash-lockup">
+          <span class="lockup-minor" ng-show="viewMode === 'week'"
+                translate
+                translate-n="paymentSummary[viewMode].UpcomingPayments"
+                translate-plural="Due This Week"
+                translate-comment="Payment(s) due this week">
+            Due This Week
+          </span>
+          <span class="lockup-minor" ng-show="viewMode === 'month'"
+                translate
+                translate-n="paymentSummary[viewMode].UpcomingPayments"
+                translate-plural="Due This Month"
+                translate-comment="Payment(s) due this month" id="dueThisMonthDash">
+            Due This Month
+          </span>
+          <h4 class="dash-major">{{paymentSummary[viewMode].UpcomingPaymentsAmount | currency}}</h4>
+        </div>
+      </li>
+      <li id="fees" class="clickable" ng-click="filterPayments()">
+        <span class="counter">{{paymentSummary[viewMode].AccountFees}}</span>
+        <div class="dash-lockup">
+          <p class="dash-minor" translate
+             translate-n="paymentSummary[viewMode].AccountFees"
+             translate-plural="Account Fees">Account Fee</p>
+          <h4 class="dash-major">{{paymentSummary[viewMode].AccountFeeAmount | currency}}</h4>
+        </div>
+      </li>
+    </ul>
+    <button class="btn-cta cta-full cta-primary" ng-click="onClickButtonLink('payments')" id="viewAllButton">
+      <span class="paired-body" translate>View All Payments</span>
+      <span class="paired-media" nxg-icon="icon-eye"></span>
+    </button>
+
+    <!-- Payments Chart -->
+    <div class="payments-chart" uib-collapse="isCollapsed" ng-init="isCollapsed = true" ng-class="{ open: !isCollapsed }">
+      <div class="chart-obj"
+          nxg-chart
+          nxg-chart-type="pie"
+          nxg-chart-tooltip="false"
+          nxg-chart-size="chartOptions.size"
+          nxg-chart-data="chartData.payments"
+          nxg-donut-options="chartOptions.donutOptions"
+          nxg-chart-title="chartData.paymentsTitle">
+      </div>
+
+      <table class="table table-unstyle chart-legend text-left">
+        <tr>
+          <td><i class="chart-legend-color nxg-chart-fees"></i></td>
+          <td translate>Fees</td>
+          <td class="table-value numeric">{{ dashboardData.paymentChartData.fees | currency }}</td>
+        </tr>
+        <tr>
+          <td><i class="chart-legend-color nxg-chart-payments"></i></td>
+          <td translate>Payments</td>
+          <td class="table-value numeric">{{ dashboardData.paymentChartData.payments | currency }}</td>
+        </tr>
+        <tr>
+          <td><i class="chart-legend-color nxg-chart-scheduled-payments"></i></td>
+          <td translate>Scheduled</td>
+          <td class="table-value numeric">
+            {{ dashboardData.paymentChartData.scheduledPayments | currency }}
+          </td>
+        </tr>
+      </table>
+    </div>
+  </div>
+</section>
+
+<section class="page-break"></section>
+
+<section class="row">
+  <!-- Credit Summary -->
+  <div class="col-xs-5 well dash-well">
+    <h2 class="well-title" translate>Credit Information</h2>
+    <div class="row clearfix">
+      <div class="col-xs-4 donut-nested">
+          <div class="donut-outer"
+                nxg-chart
+                nxg-chart-type="pie"
+                nxg-chart-tooltip="false"
+                nxg-chart-size="chartOptions.size"
+                nxg-chart-data="chartData.credit.outer"
+                nxg-donut-options="chartOptions.donutOptions"
+                nxg-chart-title="chartData.creditTitle"></div>
+          <div class="donut-inner"
+                nxg-chart
+                nxg-chart-type="pie"
+                nxg-chart-tooltip="false"
+                nxg-chart-size="chartOptions.innerSize"
+                nxg-chart-data="chartData.credit.inner"
+                nxg-donut-options="chartOptions.donutOptions"></div>
+      </div>
+
+      <div class="col-xs-8">
+        <div class="chart-legend">
+          <h6 class="static-option" ng-show="dashboardData.LinesOfCredit.length == 1">{{ dashboardData.selectedLineOfCredit.CreditTypeName }}</h6>
+          <div class="style-select auto" ng-hide="dashboardData.LinesOfCredit.length == 1">
+            <select id="lineOfCredit" name="lineOfCredit" ng-model="dashboardData.selectedLineOfCredit" ng-options="loc.CreditTypeName for loc in dashboardData.LinesOfCredit"></select>
+          </div>
+          <table class="table table-legend">
+            <tr>
+              <td><i class="chart-legend-color nxg-chart-total-credit"></i></td>
+              <td class="table-label" translate>Total</td>
+              <td class="table-symbol">=</td>
+              <td class="table-value table-numeric">
+                {{ dashboardData.selectedLineOfCredit.LineOfCreditAmount | numeral:'$0,0.00' }}
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <i class="chart-legend-color nxg-chart-utilized-credit"></i>
+              </td>
+              <td class="table-label" translate>Utilized</td>
+              <td class="table-symbol color-danger">–</td>
+              <td class="table-value table-numeric">{{ dashboardData.selectedLineOfCredit.UtilizedCreditAmount | numeral:'$0,0.00' }}</td>
+            </tr>
+            <tr>
+              <td>
+                <i class="chart-legend-color nxg-chart-available-credit"></i>
+              </td>
+              <td class="table-label" translate>Available</td>
+              <td class="table-symbol">=</td>
+              <td class="table-value table-numeric">{{ dashboardData.selectedLineOfCredit.AvailableCreditAmount | numeral:'$0,0.00' }}</td>
+            </tr>
+          </table>
+          <p class="tip" ng-show="dashboardData.selectedLineOfCredit.TempLineOfCreditExpiration != null" translate>This line has a temporary credit increase of {{ dashboardData.selectedLineOfCredit.TempLineOfCreditAmount | numeral:'$0,0.00' }} that expires on {{dashboardData.selectedLineOfCredit.TempLineOfCreditExpiration | moment}}.</p>
+        </div>
+      </div>
+    </div>
+    <button class="btn-cta cta-full cta-secondary" href="javascript:void(0)" ng-click="onRequestCredIncr()" id="requestCreditButton">
+        <span class="paired-body" translate>Request Credit Increase</span>
+        <span class="paired-media icon-x-small" nxg-icon="icon-triangle"></span>
+    </button>
+  </div>
+
+  <!-- Receipts Summary -->
+  <div class="col-xs-4 well recent-receipts dash-well left-margin-large">
+    <h2 class="well-title" translate>Recent Receipts</h2>
+    <table class="table table-striped table-secondary">
+      <thead>
+        <th translate>Receipt Date</th>
+        <th translate>Receipt No.</th>
+        <th translate>Amount</th>
+      </thead>
+      <tr ng-repeat="receipt in dashboardData.Receipts">
+        <td class="table-label">{{ receipt.ReceiptDate | moment }}</td>
+        <td class="table-value center"><a ng-href="{{ receipt.$receiptURL }}" target="_blank">#{{ receipt.ReceiptNumber }}</a></td>
+        <td class="table-value table-numeric">{{ receipt.ReceiptAmount | currency }}</td>
+      </tr>
+    </table>
+    <button id="viewAllReceipts" class="btn-cta cta-full cta-secondary" ng-click="onClickButtonLink('receipts')">
+      <span class="paired-body" translate>View All Receipts</span>
+      <span class="paired-media icon-x-small" nxg-icon="icon-triangle"></span>
+    </button>
+  </div>
+
+  <!-- Unapplied Funds Summary -->
+  <div nxg-unapplied-funds-widget
+       balance="dashboardData.UnappliedFundsTotal"
+       available="dashboardData.TotalAvailableUnappliedFunds">
+  </div>
+</section>
+
+<section class="row">
+  <!-- Floor Plan Summary -->
+  <div class="col-xs-2 well dash-well">
+    <h2 class="well-title" translate>Floor Plan</h2>
+    <ul class="counter-list">
+      <li class="row">
+        <div class="col-xs-6 custom leftMarginMedium">
+          <span class="counter">
+            {{ dashboardData.ApprovedFloorplans | alt }}
+          </span>
+        </div>
+        <div class="col-xs-6 custom counter-label zeroPadding">
+          <span uib-tooltip="{{ 'This status applies to vehicles floored via NextGearCapital.com or by a NextGear Capital employee via NextGear\'s Discover system that have been approved and are currently on the NextGear dealer\'s floor plan.' | translate }}"
+                tooltip-placement="right"
+                tooltip-popup-delay="700">
+              <a id="fpApproved" href="javascript:void(0)" ng-click="filterFloorplans('approved')" translate>Approved</a>
+          </span>
+        </div>
+      </li>
+
+      <li class="row">
+        <div class="col-xs-6 custom ">
+          <span class="counter">
+            {{ dashboardData.PendingFloorplans | alt }}
+          </span>
+        </div>
+        <div class="col-xs-6 custom counter-label zeroPadding">
+          <span uib-tooltip="{{ 'This status applies to vehicles floored via NextGearCapital.com or by a NextGear Capital employee via NextGear\'s Discover system that have not yet been approved by a NextGear employee.' | translate }}"
+                tooltip-placement="right"
+                tooltip-popup-delay="700">
+              <a id="fpPending" href="javascript:void(0)" ng-click="filterFloorplans('pending')" translate>Pending</a>
+          </span>
+        </div>
+      </li>
+
+      <li class="row">
+        <div class="col-xs-6 custom ">
+          <span class="counter">
+            {{ dashboardData.DeniedFloorplans | alt }}
+          </span>
+        </div>
+        <div class="col-xs-6 custom counter-label zeroPadding">
+          <span uib-tooltip="{{ 'This status applies to vehicles floored via NextGearCapital.com that have been denied by a NextGear Capital employee. Please contact NextGear Customer Service to find out why a vehicle has been denied.' | translate }}"
+                tooltip-placement="right"
+                tooltip-popup-delay="700">
+              <a id="fpDenied" href="javascript:void(0)" ng-click="filterFloorplans('denied')" translate>Denied</a>
+          </span>
+        </div>
+      </li>
+    </ul>
+
+    <button id="floorPlan" class="btn-cta cta-full cta-secondary btn-floor-plans" ng-click="onClickButtonLink('floorplan')">
+      <span class="paired-body" translate>Floor Plans</span>
+      <span class="paired-media icon-x-small" nxg-icon="icon-triangle"></span>
+    </button>
+  </div><!-- end .summary.floorplan -->
+
+  <div class="left-margin-large col-xs-10 well dash-well">
+    <h2 class="well-title" translate>Recently Floored Vehicles</h2>
+    <div ng-switch="floorplanData.results.length > 0 || floorplanData.loading">
+      <p class="notice-box" ng-switch-when="false" translate>
+        Sorry, no results found.
+      </p>
+
+      <div class="table-fixed-header" ng-switch-when="true">
+        <div class="header-bkgd"></div>
+        <div class="table-fixed-header-inner"
+             nxg-infinite-scroll="floorplanData.fetchNextResults()"
+             nxg-infinite-scroll-disabled="floorplanData.loading"
+             nxg-infinite-scroll-show-indicator="floorplanData.loading"
+             nxg-scroll-container>
+          <table class="table table-striped table-secondary">
+            <thead>
+              <th class="bigger"><div class="th-inner" translate>Floored On</div></th>
+              <th><div class="th-inner" translate>Description</div></th>
+              <th class="bigger"><div class="th-inner" translate>Line of Credit</div></th>
+              <th><div class="th-inner" translate>Status</div></th>
+            </thead>
+            <tr ng-repeat="item in floorplanData.results">
+              <td class="center">{{ item.FlooringDate | moment }}</td>
+              <td class="table-value"><a id="{{ item.Description }}" ng-model="item.StockNumber" href="#/vehicledetails?stockNumber={{ item.StockNumber }}">{{ item.Description }}</a></td>
+              <td>{{ item.LineOfCredit }}</td>
+              <td>{{ item.FloorplanStatusName }}</td>
+            </tr>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

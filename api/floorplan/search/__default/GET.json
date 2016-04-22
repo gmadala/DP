@@ -34,7 +34,9 @@
         "TitleLocation": "Buyer",
         "BuyerName": "Tricolor Auto",
         "ConsignerTicketNumber": "abcdefg-3245346",
-        "TitleEditable": false
+        "TitleEditable": false,
+        "AuctionBuyerID": 100,
+        "AuctionLocation": "ABC Pennsylvania"
       },
       {
         "$__SECTION 1__": "----- Common data -----",
@@ -66,7 +68,9 @@
         "TitleLocation": "Buyer",
         "BuyerName": "Tricolor Auto",
         "ConsignerTicketNumber": "abcdefg-45675878",
-        "TitleEditable": false
+        "TitleEditable": false,
+        "AuctionBuyerID": 101,
+        "AuctionLocation": "ABC Texas"
       },
       {
         "$__SECTION 1__": "----- Common data -----",
@@ -98,7 +102,9 @@
         "TitleLocation": "Buyer",
         "BuyerName": "Tricolor Auto",
         "ConsignerTicketNumber": "abcdefg-45675878",
-        "TitleEditable": true
+        "TitleEditable": true,
+        "AuctionBuyerID": 102,
+        "AuctionLocation": "ABC Indianapolis"
       },
       {
         "$__SECTION 1__": "----- Common data -----",
@@ -130,7 +136,9 @@
         "TitleLocation": "Buyer",
         "BuyerName": "Tricolor Auto",
         "ConsignerTicketNumber": "abcdefg-3454y467",
-        "TitleEditable": true
+        "TitleEditable": true,
+        "AuctionBuyerID": 103,
+        "AuctionLocation": "ABC Mississippi"
       }
     ]
   }

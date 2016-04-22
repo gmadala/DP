@@ -278,7 +278,9 @@
   }
 
   &.buyer {
-    max-width: 150px;
+    //max-width: 150px;
+    min-width: 225px;
+    max-width: 300px;
   }
 
   &.description-no-vin {

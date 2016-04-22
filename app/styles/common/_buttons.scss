@@ -35,6 +35,44 @@
   }
 }
 
+.date-picker button {
+  border: none;
+  border-radius: 0;
+  &:disabled{
+    border: none;
+    border-radius: 0;
+  }
+
+  &:hover{
+    background-color: #eee;
+    border-radius: 0;
+  }
+
+  &.btn-info.active{
+    color: #fff;
+    background-color: $highlight;
+    border-radius: 0;
+  }
+
+  &.active:hover{
+    color: #fff;
+    background-color: #025;
+    border-radius: 0;
+  }
+
+  .text-info{
+    color: #069;
+  }
+
+  &.active .text-info{
+    color: #fff;
+
+    &:hover{
+      color: #fff;
+    }
+  }
+
+}
 /*
  * BTN CLASS
  * Used to style any and all buttons within the desktop app.
