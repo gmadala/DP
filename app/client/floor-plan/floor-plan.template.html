@@ -99,8 +99,8 @@
                 <div class="visible-xs vertical-spacing">
                   <div class="col-xs-6">
                     <p> <span translate>Purchased: </span> {{ item.UnitPurchaseDate | moment }} </p>
-                    <p ng-show="item.SellerName"> <span translate>Seller: </span> {{ item.SellerName }} </p>
-                    <p> <span translate>Status: </span> <strong>{{ item.FloorplanStatusName }}</strong> </p>
+                    <p class="vertical-spacing" ng-show="item.SellerName"> <span translate>Seller: </span> {{ item.SellerName }} </p>
+                    <p class="vertical-spacing"> <span translate>Status: </span> <strong>{{ item.FloorplanStatusName }}</strong> </p>
                   </div>
                   <div class="col-xs-6">
                     <p ng-show="item.LastPaymentDate"> <span translate>Last Payment: </span> {{ item.LastPaymentDate | moment }} </p>
@@ -112,7 +112,7 @@
                   </div>
                 </div>
 
-                <!--end mobile view—->-->
+                <!--end mobile view-->
                        </td>
                        <td class="hidden-xs">
                          <p translate> {{ item.FloorplanStatusName }} </p>

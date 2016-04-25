@@ -10,35 +10,38 @@
     <h3 translate>Payment Options</h3>
     <p class="paragraph"><span translate>Select a payment from the options below</span>:</p>
 
-    <ul class="form-block">
-      <li class="cr-inline" style="height: 30px;">
+    <div  class="form-block">
+      <div class="cr-inline" style="height: 30px;">
         <input class="col-xs-1" type="radio" ng-model="selector.paymentOption" name="paymentOption" ng-value="PaymentOptions.TYPE_PAYOFF" id="paymentOptionPayoff" required />
         <label class="radio-img col-xs-2" style="top: 0px" for="paymentOptionPayoff"></label>
         <label class="cr-label col-xs-9" style="top: 5px" for="paymentOptionPayoff">
           <strong>{{ paymentObject.getCheckoutAmount(PaymentOptions.TYPE_PAYOFF) | currency }}</strong> – <span translate>Payoff this vehicle</span>
         </label>
-      </li>
-      <li class="cr-inline" style="height: 30px;">
+      </div>
+      <div class="cr-inline" style="height: 30px;">
         <input class="col-xs-1" type="radio" ng-model="selector.paymentOption" name="paymentOption" ng-value="PaymentOptions.TYPE_PAYMENT" id="paymentOptionCurtailment" required />
         <label class="radio-img col-xs-2" style="top: 0px" for="paymentOptionCurtailment"></label>
         <label class="cr-label col-xs-9" style="top: 5px" for="paymentOptionCurtailment">
           <strong>{{ paymentObject.getCheckoutAmount(PaymentOptions.TYPE_PAYMENT) - curtailmentObject.additionalPrincipal | currency }}</strong> – <span translate>Curtailment Payment</span>
         </label>
-        <div class="form-row col-xs-12" ng-show="selector.paymentOption == PaymentOptions.TYPE_PAYMENT && (maxAdditional > 0.01)">
+      </div>
+
+      <div class="cr-inline" style="height: 40px" ng-show="selector.paymentOption == PaymentOptions.TYPE_PAYMENT && (maxAdditional > 0.01)">
+        <div class="form-row col-xs-12" >
           <span class="input-prepend dollar">
             <span class="add-on no-top">$</span>
             <input type="text"
-            class="input-small"
-            name="additionalAmount"
-            id="additionalAmount"
-            ng-model="curtailmentObject.additionalPrincipal"
-            placeholder="0.00"
-            ng-pattern="/^[0-9]{1,3}(?:,?[0-9]{3})*(\.[0-9]{1,2})?$/"
-            nxg-min="0"
-            nxg-max="{{ maxAdditional }}"
-            nxg-input-currency="{{ maxAdditional }}"
+                   class="input-small"
+                   name="additionalAmount"
+                   id="additionalAmount"
+                   ng-model="curtailmentObject.additionalPrincipal"
+                   placeholder="0.00"
+                   ng-pattern="/^[0-9]{1,3}(?:,?[0-9]{3})*(\.[0-9]{1,2})?$/"
+                   nxg-min="0"
+                   nxg-max="{{ maxAdditional }}"
+                   nxg-input-currency="{{ maxAdditional }}"
 
-            ng-class="{ 'nxg-invalid':validity.additionalAmount.$error.pattern || validity.additionalAmount.$error.nxgMin || validity.additionalAmount.$error.nxgMax }" />
+                   ng-class="{ 'nxg-invalid':validity.additionalAmount.$error.pattern || validity.additionalAmount.$error.nxgMin || validity.additionalAmount.$error.nxgMax }" />
           </span><span class="additionalPaymentText no-left-margin">-– <span translate>Additional Principal Payment</span></span>
         </div>
         <div class="form-row">
@@ -47,23 +50,22 @@
             Payout Amount must be $0.01 to {{ maxAdditional | currency }}
           </label>
         </div>
-      </li>
+      </div>
 
-      <li class="cr-inline" style="height: 30px;" ng-show="paymentObject.interest.amount > 0">
+      <div class="cr-inline" style="height: 30px;" ng-show="paymentObject.interest.amount > 0">
         <input class="col-xs-1" type="radio" ng-model="selector.paymentOption" name="paymentOption" ng-value="PaymentOptions.TYPE_INTEREST" id="paymentOptionInterest" required />
         <label class="radio-img col-xs-2" style="top: 0px" for="paymentOptionInterest"></label>
         <label class="cr-label col-xs-9" style="top: 5px" for="paymentOptionInterest">
           <strong>{{ paymentObject.getCheckoutAmount(PaymentOptions.TYPE_INTEREST) | currency }}</strong> – <span translate>Interest-Only Payment</span>
         </label>
-      </li>
+      </div>
 
-      <li class="static-option" ng-show="optionInterestOnly">
-        <span class="disclaimer-interest" translate>
-          Submitting an interest only payment will not advance the due date.
-        </span>
-      </li>
-
-    </ul>
+      <div class="static-option" ng-show="optionInterestOnly">
+      <span class="disclaimer-interest" translate>
+        Submitting an interest only payment will not advance the due date.
+      </span>
+      </div>
+    </div>
   </form>
   <div class="aside modal-inner">
     <h3 translate>Payment Breakdown</h3>
