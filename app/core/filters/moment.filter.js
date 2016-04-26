@@ -15,17 +15,25 @@
     .module('nextgearWebApp')
     .filter('moment', momentFn);
 
-  momentFn.$inject = ['moment'];
+  momentFn.$inject = ['moment', 'gettextCatalog'];
 
-  function momentFn(moment) {
-
+  function momentFn(moment, gettextCatalog) {
     return function (input, outputFormat, inputFormat) {
-      outputFormat = outputFormat || 'MM/DD/YYYY';
+      var languageId = gettextCatalog.currentLanguage;
+      if( outputFormat === undefined ) {
+        if (languageId === 'es' || languageId === 'fr_CA') {
+          outputFormat = 'DD/MM/YYYY';
+        }
+        else {
+          outputFormat = 'MM/DD/YYYY';
+        }
+      }else {
+        outputFormat = outputFormat;
+      }
       if (input === null || !angular.isDefined(input)) {
         return input;
       }
       return moment(input, inputFormat).format(outputFormat);
     };
-
   }
 })();
