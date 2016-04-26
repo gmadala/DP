@@ -79,7 +79,7 @@
           </div>
         </div>
         <div class="row">
-          <div class="col-sm-6 col-xs-12" ng-show="!dateRangeShown && showInventoryLocation && inventoryLocations.length > 1">
+          <div class="col-sm-6 col-xs-12" ng-show="!dateRangeShown && showInventoryLocation && inventoryLocations.length > 2">
 
             <label for="invLocSelect" translate>Filter by Inventory Location</label>
 
@@ -90,7 +90,7 @@
                       ng-options="i.value as i.label for i in inventoryLocations"></select>
             </div>
           </div>
-          <div class="col-sm-6 col-xs-12" ng-show="dateRangeShown && showInventoryLocation && inventoryLocations.length > 1">
+          <div class="col-sm-6 col-xs-12" ng-show="dateRangeShown && showInventoryLocation && inventoryLocations.length > 2">
             <label for="invLocSelect" translate>Filter by Inventory Location</label>
 
             <div class="style-select input-large">

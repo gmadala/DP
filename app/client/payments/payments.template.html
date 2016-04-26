@@ -213,7 +213,7 @@
                     <p class="lockup-minor caps stock"><span translate>STK</span>: <span nxg-highlight="payment.StockNumber" highlight="payment.data.query"></span></p>
                   </div>
                 </div>
-                <div>
+                <div class="row no-margin">
                   <div class="col-xs-6 visible-xs">
                     <p class="lockup-minor vertical-spacing"><span translate>Payment Due</span>:</p>
                   </div>
@@ -233,12 +233,12 @@
                       {{ payment.DueDate | moment }}
                     </p>
                   </div>
-                  <div class="vertical-spacing">
-                    <a ng-show="showExtendLink(payment)" ng-click="payments.extension(payment)" href="javascript:void(0)" translate>Request Extension</a>
-                  </div>
                 </div>
                 <div class="col-xs-6 visible-xs no-left-margin">
                   <div nxg-payment-buttons="payoff" item="payment" on-queue="isPaymentOnQueue(payment.FloorplanId)"></div>
+                </div>
+                <div class="col-xs-12 visible-xs vertical-spacing">
+                  <a ng-show="showExtendLink(payment)" ng-click="payments.extension(payment)" href="javascript:void(0)" translate>Request Extension</a>
                 </div>
               </td>
 

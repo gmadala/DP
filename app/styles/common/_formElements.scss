@@ -934,14 +934,11 @@ ul.files-container li .file-delete:hover{
   display: block !important;
 }
 .search-date-picker {
-     button span{
-       top: 58%;
-       right: 8%;
-       margin: 0;
-     }
-     input{
-       width: 85%;
-     }
+   input{
+     width: 85%;
+     height: 30px;
+     line-height: 18px;
+   }
 }
 
 .reports-search-date-picker {
