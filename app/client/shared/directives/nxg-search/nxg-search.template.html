@@ -48,7 +48,7 @@
                        show-button-bar="false"
                        is-open="dateStartDatePicker.opened"
                        ng-class="{ 'nxg-invalid': validity.$error.invalidDateRange || validity.$error.invalidFormat }">
-                <button tabindex="-1" type="button" class="btn-default btn-unstyle" ng-click="openStartDatePicker()"><span nxg-icon="icon-calendar"></span></button>
+                <button tabindex="-1" type="button" class="btn-default btn-unstyle" ng-click="openStartDatePicker()"><span  class="icon-small" nxg-icon="icon-calendar"></span></button>
                 <label for="startDate" class="text-error"
                        ng-show="validity.startDate.$error.date" translate>
                   Please enter a Valid Start Date.
@@ -69,7 +69,7 @@
                        show-button-bar="false"
                        is-open="dateEndDatePicker.opened"
                        ng-class="{ 'nxg-invalid': validity.$error.invalidDateRange }">
-                <button tabindex="-1" type="button" class="btn-default btn-unstyle" ng-click="openEndDatePicker()"><span nxg-icon="icon-calendar"></span></button>
+                <button tabindex="-1" type="button" class="btn-default btn-unstyle" ng-click="openEndDatePicker()"><span class="icon-small" nxg-icon="icon-calendar"></span></button>
                 <label for="endDate" class="text-error"
                        ng-show="validity.endDate.$error.date" translate>
                   Please enter a Valid End Date.
