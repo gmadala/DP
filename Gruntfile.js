@@ -17,21 +17,6 @@ module.exports = function(grunt) {
 
   var defaultTarget = 'test';
   var defaultVersion = '15.11.3';
-  var defaultProtractorSuite = 'login'; // TODO may want to change to smoke or dealer later
-
-  // element format:
-  // 0 = 'mock' if the user will be available in the mockApi (mockApi currently only care about 'auction':'test')
-  // 1 = suite name to be run (ex: payments, auction, login)
-  // 2 = username with the correct privilege to the suite
-  // 3 = password for the username
-  var counter = 0;
-  var effectiveUsers = [];
-  var users = [
-    ['non-mock', 'dealer', '53190md', 'password@1'],
-    ['non-mock', 'auction', '10264', 'password@1'],
-    ['mock', 'dealer', 'dealer', 'test'],
-    ['mock', 'auction', 'auction', 'test']
-  ];
 
   try {
     yeomanConfig.app = require('./bower.json').appPath || yeomanConfig.app;
@@ -552,17 +537,8 @@ module.exports = function(grunt) {
     protractor: { // a specific suite can be run with grunt protractor:run --suite=suite_name
       options: {
         keepAlive: true,
-        configFile: 'e2e/protractor.conf.js',
-        noColor: false,
-        args: { // the args here are for when this task is run directly from the command line with --options
-          suite: grunt.option('suite') || defaultProtractorSuite, // change to smoke or dealer later
-          params: {
-            user: grunt.option('params.user'),
-            password: grunt.option('params.password'),
-            suite: grunt.option('suite') || defaultProtractorSuite,
-            env: (grunt.option('apiBase') || '') ? 'dev' : 'non-dev'
-          }
-        }
+        configFile: 'e2e/conf.js',
+        noColor: false
       },
       run: {
       }
@@ -620,68 +596,8 @@ module.exports = function(grunt) {
     'shell:webdriverUpdate',
     'livereload-start',
     'connect:livereload',
-    'protractor:run'
+    'protractor'
   ]);
-
-  grunt.registerTask('test:e2e:users', 'Runs e2e tests with multiple logins', function () {
-    // a target will be specified when doing a build to 'dist' so server those files for that case.
-    var useDist = grunt.option('target');
-    var apiBase = grunt.option('apiBase');
-
-    // TODO: remove the following line to test against real API
-    useDist = undefined;
-
-    grunt.log.writeln('Running test:e2e:users with target "' + (useDist || 'dev') + '" build.');
-    grunt.task.run('dev-setup', 'shell:webdriverUpdate', 'livereload-start', 'connect:' + (useDist ? 'dist' : 'livereload'));
-    // find out which users configuration can be run based on the target of this grunt task.
-    for (var j = 0; j < users.length; j++) {
-      var user = users[j];
-      if ((apiBase || '') === '' && (useDist || '') === '') {
-        if (user[0] === 'mock') {
-          effectiveUsers.push(user);
-        }
-      } else {
-        if (user[0] !== 'mock') {
-          effectiveUsers.push(user);
-        }
-      }
-    }
-    // prepare the protractor configuration and then run protractor
-    for (var i = 0; i < effectiveUsers.length; i++) {
-      grunt.task.run('prepare-protractor');
-      grunt.task.run('protractor:run');
-    }
-  });
-
-  grunt.registerTask('prepare-protractor', 'Build config and run protractor.', function () {
-    var effectiveUser = effectiveUsers[counter];
-    var target = grunt.option('target');
-    var apiBase = grunt.option('apiBase');
-
-    // TODO: remove the following line to test against real API
-    target = undefined;
-
-    // create param object needed to run protractor
-    var params = {};
-    params.user = effectiveUser[2];
-    params.password = effectiveUser[3];
-    params.suite = effectiveUser[1];
-    if ((apiBase || '') === '' && (target || '') === '') {
-      // this is the values set inside the mock api
-      params.validVin = '1234567';
-      params.invalidVin = '123456';
-    }
-    // set the configuration
-    grunt.config(['protractor', 'run'], {
-      options: {
-        args: {
-          suite: effectiveUser[1],
-          params: params
-        }
-      }
-    });
-    counter++;
-  });
 
   grunt.registerTask('build-maintenance', [
     'gitinfo',
