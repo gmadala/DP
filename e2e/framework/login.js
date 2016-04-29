@@ -1,8 +1,10 @@
+'use strict';
+
 var userName = '53190md';
 var password = 'ngcpass!0';
 var delay = 200;
 var longDelay = 1000;
-login = {
+var login = {
 
   elements: {
     //Locators
@@ -50,7 +52,6 @@ login = {
   clickLoginButton: function () {
 
     return this.elements.loginButton().click();
-    browser.sleep(delay);
 
   },
   clickforgotUsernamePassword: function () {

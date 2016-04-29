@@ -1,59 +1,56 @@
-/**
- * Created by Javier.Calderon on 3/29/2016.
- */
-var delay = 200;
+'use strict';
 
-creditIncrease = {
-  permanentIncrease: function () {
+var delay = 200;
+var creditIncrease = {
+  permanentIncrease: function() {
 
     return element(by.id('isNotTemp'));
 
   },
 
-  firstLineOfCredit: function () {
+  firstLineOfCredit: function() {
 
     return element.all(by.id('lineOfCredit')).get(1);
 
   },
-  temporaryIncrease: function () {
+  temporaryIncrease: function() {
 
     return element(by.id('isTemp'));
 
   },
-  increaseAmount: function () {
+  increaseAmount: function() {
 
     return element(by.id('increaseAmt'));
 
   },
-  requestButton: function () {
+  requestButton: function() {
 
     return element(by.id('confirmRequestButton'));
 
   },
-
-//Locator End
+  //Locator End
 
   //Clicking
-  clickPermanentIncrease: function () {
+  clickPermanentIncrease: function() {
 
     this.permanentIncrease().click();
     browser.sleep(delay);
 
   },
 
-  clickRequestButton: function () {
+  clickRequestButton: function() {
 
     this.requestButton().click();
     browser.sleep(delay);
 
   },
-  clickFirstLineOfCredit: function () {
+  clickFirstLineOfCredit: function() {
 
     this.firstLineOfCredit().click();
     browser.sleep(delay);
 
   },
-  clickTemporaryIncrease: function () {
+  clickTemporaryIncrease: function() {
 
     this.temporaryIncrease().click();
     browser.sleep(delay);
@@ -61,31 +58,29 @@ creditIncrease = {
   },
 
   //Getting
-  getPasswordErrorTextPhoneNumber: function () {
+  getPasswordErrorTextPhoneNumber: function() {
     return this.passwordErrorPhoneNumbers().get(2).getText();
 
   },
 
 
-
   //Sending
-  enterIncreaseAmount: function (param) {
+  enterIncreaseAmount: function(param) {
 
-     this.increaseAmount().sendKeys(param);
+    this.increaseAmount().sendKeys(param);
     browser.sleep(delay);
 
   },
 
 
-
   //Count
-  disabledCount: function () {
+  disabledCount: function() {
 
     return this.disabledFields().count();
 
   },
   //LAST ONE
-  placeholder: function (index) {
+  placeholder: function(index) {
 
     this._thumbnail(index).click();
 

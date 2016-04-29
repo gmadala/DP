@@ -4,26 +4,25 @@ var loginRecover = require('../../framework/login-recover-objects.js');
 var login = require('../../framework/login.js');
 var modal = require('../../framework/modal-objects.js');
 var delay = 200;
-var longDelay = 500;
-var userName= '36017RDT';
-var incorrectAnswer ='f' ;
-var correctAnswer ='a' ;
-var validEmail= 'test@gmail.com';
-var invalidEmail= 'asdas@gmail.com';
-var invalidFormatEmail= 'sadsadas';
-var homepageUrl="https://test.nextgearcapital.com/test/#/login";
-var forgotUrl="https://test.nextgearcapital.com/test/#/login/recover";
+var userName = '36017RDT';
+var incorrectAnswer = 'f';
+var correctAnswer = 'a';
+var validEmail = 'test@gmail.com';
+var invalidEmail = 'asdas@gmail.com';
+var invalidFormatEmail = 'sadsadas';
+var homepageUrl = "https://test.nextgearcapital.com/test/#/login";
+var forgotUrl = "https://test.nextgearcapital.com/test/#/login/recover";
 
-describe("Log In Suite  \n ", function () {
+describe("Log In Suite  \n ", function() {
 
-  beforeEach(function () {
+  beforeEach(function() {
     browser.get(homepageUrl);
     browser.ignoreSynchronization = true;
     browser.sleep(delay);
 
   });
 
-  it("1. As a new dealer I want to signup to Mynextgear", function () {
+  it("1. As a new dealer I want to signup to Mynextgear", function() {
     //Check button text
     expect(login.textsignUpLogin()).toEqual("Sign Up");
 
@@ -33,7 +32,7 @@ describe("Log In Suite  \n ", function () {
     expect(browser.getCurrentUrl()).toEqual("http://www.nextgearcapital.com/apply-for-credit/");
 
   });
- it("2. As a dealer I forgot my user name. My email is correct and no problems", function () {
+  it("2. As a dealer I forgot my user name. My email is correct and no problems", function() {
     //Check Forgot username or password link
     expect(login.textforgotUsernamePassword()).toEqual("Forgot your username or password?");
     login.clickforgotUsernamePassword();
@@ -52,9 +51,9 @@ describe("Log In Suite  \n ", function () {
 
   });
 
-  it("3. As a dealer I forgot my user name. My email is NOT correct and have to reenter email", function () {
+  it("3. As a dealer I forgot my user name. My email is NOT correct and have to reenter email", function() {
     //Login with incorrect password
-    login.login2('53190md','incorrect');
+    login.login2('53190md', 'incorrect');
     expect(login.getInvalidLoginText1()).toEqual("We're sorry, but you used a username or password that doesn't match our records.");
     expect(login.getInvalidLoginText2()).toEqual('If you are experiencing an issue logging in, click "Forgot your username or password?" below, or contact:');
     //Check button text
@@ -67,7 +66,7 @@ describe("Log In Suite  \n ", function () {
     loginRecover.enterEmail(invalidEmail);
     //Check username box is disabled and submit
     expect(loginRecover.disabledCount()).toEqual(1);
-    expect(element(By.model('passwordRecovery.username')).isEnabled()).toBe(false);
+    expect(element(by.model('passwordRecovery.username')).isEnabled()).toBe(false);
     //THis is a better way of determining enabled or disabled. THe above line works but the line below does not..not sure why. Below is hte preferred way to do it
     //expect(loginRecover.userName.isDisabled()).toBe(true); ///Work on an alternate way of checking this field
     expect(loginRecover.getSubmitButtonText()).toEqual("Submit");
@@ -96,7 +95,7 @@ describe("Log In Suite  \n ", function () {
     expect(browser.getCurrentUrl()).toEqual(homepageUrl);
 
   });
-  xit("4. As a dealer I forgot my password. All my answers are correct", function () {
+  xit("4. As a dealer I forgot my password. All my answers are correct", function() {
     //Check button text
     expect(login.textforgotUsernamePassword()).toEqual("Forgot your username or password?");
     login.clickforgotUsernamePassword();
@@ -123,7 +122,7 @@ describe("Log In Suite  \n ", function () {
 
   });
 
-  xit("6. As a dealer I forgot my password. All my answers are NOTcorrect", function () {
+  xit("6. As a dealer I forgot my password. All my answers are NOTcorrect", function() {
     //Check button text
     expect(login.textforgotUsernamePassword()).toEqual("Forgot your username or password?");
     login.clickforgotUsernamePassword();
@@ -158,7 +157,7 @@ describe("Log In Suite  \n ", function () {
     modal.clickOkButton();
     expect(browser.getCurrentUrl()).toEqual(homepageUrl);
   });
-  xit("7. As a dealer I am trying to login with an invalid username", function () {
+  xit("7. As a dealer I am trying to login with an invalid username", function() {
 
   });
 });

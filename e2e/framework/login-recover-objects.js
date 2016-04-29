@@ -1,8 +1,10 @@
-var correctSecurityAnswer = 'a';
-var incorrectSecurityAnswer = 'f';
+'use strict';
+
+// var correctSecurityAnswer = 'a';
+// var incorrectSecurityAnswer = 'f';
 var delay = 200;
 
-loginRecover = {
+var loginRecover = {
   //userName: function () {
   //
   //  return browser.element(by.model('passwordRecovery.username'));
@@ -110,7 +112,7 @@ loginRecover = {
 
   },
 
-//Locator End
+  //Locator End
 
   //Clicking
   clickPasswordSubmit: function () {

@@ -1,9 +1,7 @@
-/**
- * Created by Javier.Calderon on 3/29/2016.
- */
-var delay = 200;
+'use strict';
 
-dashboard = {
+var delay = 200;
+var dashboard = {
   receiptsLink: function () {
 
     return element(by.css('a[ng-href="#/receipts"]'));
@@ -16,7 +14,7 @@ dashboard = {
 
   },
 
-//Locator End
+  //Locator End
 
   //Clicking
   clickReceiptsLink: function () {

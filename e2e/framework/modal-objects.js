@@ -1,18 +1,18 @@
-var longDelay = 1000;
-modal_objects = {
+'use strict';
+
+// var longDelay = 1000;
+var modalObjects = {
 
   //Locators
 
   modalHeader: function () {
 
     return element(by.css('.modal-header'));
-    browser.sleep(longDelay);
 
   },
   modalBody: function () {
 
     return element(by.css('.modal-body'));
-    browser.sleep(longDelay);
 
   },
   //Text on button will change but still same button(Ok, Close Window etc....)
@@ -45,4 +45,4 @@ modal_objects = {
 };
 
 
-module.exports = modal_objects;
+module.exports = modalObjects;

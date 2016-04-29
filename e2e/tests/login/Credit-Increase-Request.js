@@ -1,9 +1,6 @@
-/**
- * Created by Javier.Calderon on 3/25/2016.
- */
 'use strict';
 
-var loginRecover = require('../../framework/login-recover-objects.js');
+// var loginRecover = require('../../framework/login-recover-objects.js');
 var login = require('../../framework/login.js');
 var modal = require('../../framework/modal-objects.js');
 var dashboard = require('../../framework/dashboard-objects.js');
@@ -11,7 +8,7 @@ var creditIncrease = require('../../framework/credit-increase-request-objects.js
 var receipts = require('../../framework/receipts-objects.js');
 var delay = 200;
 var homepageUrl="https://test.nextgearcapital.com/test/#/login";
-var tempIncrease;
+// var tempIncrease;
 var userName= '53190md';
 var password= 'ngcpass!0';
 describe("Log In Suite  \n ", function () {
