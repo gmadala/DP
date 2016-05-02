@@ -79,13 +79,6 @@
       &:hover {
         text-decoration: underline;
       }
-
-      &.cancel {
-        font-size: $small-font-size;
-        font-weight: normal;
-        color: #1B769D;
-        padding-top: 2px;
-      }
     }
   }
 
@@ -289,4 +282,8 @@ p.no-results {
 .promo-contact{
   padding-bottom: 9px;
   color: black;
+}
+
+.cancel {
+  margin: 0 15px 0 0;
 }
