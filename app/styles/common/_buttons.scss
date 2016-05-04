@@ -30,7 +30,7 @@
     }
   }
 
-  .well & {
+  .dash-well & {
     top: -1px; // we don't need to account for the well's margin because we're inside it.
   }
 }
