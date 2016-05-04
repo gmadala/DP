@@ -212,13 +212,13 @@
 
       $scope.vinDetailsErrorFlag = true;
       if (!$scope.form.$valid) {
-        if($scope.attachDocumentsEnabled && $scope.files.length < 1){
+        if(isDealer && $scope.attachDocumentsEnabled && $scope.files.length < 1){
           $scope.missingDocuments = true;
         }
         return false;
       }
 
-      if($scope.attachDocumentsEnabled && $scope.files.length < 1){
+      if(isDealer && $scope.attachDocumentsEnabled && $scope.files.length < 1){
         $scope.missingDocuments = true;
         return false;
       }
