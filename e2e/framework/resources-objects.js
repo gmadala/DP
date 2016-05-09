@@ -16,7 +16,7 @@ var resourcesObjects = {
     return element(by.linkText('Welcome Packet'));
 
   },
-  dealerFudingChecklis: function () {
+  dealerFudingChecklist: function () {
 
     return element(by.linkText('Dealer Funding Checklist'));
 
@@ -52,9 +52,34 @@ var resourcesObjects = {
 
   },
   //End of locators. Locators need to go before this
+  //Click
+  clickWelcomePacket: function () {
+    browser.sleep(delay);
+    this.welcomePacket().click();
+  },
+  clickRatesAndFees: function () {
+    browser.sleep(delay);
+    this.ratesAndFees().click();
+  },
+  clickDealerFunding: function () {
+    browser.sleep(delay);
+    this.dealerFudingChecklist().click();
+  },
+  clickTitleManagement: function () {
+    browser.sleep(delay);
+    this.titleManagement().click();
+  },
 
   //Functions can go below
 
+  checkNewTab: function (url) {
+    browser.sleep(delay);
+    browser.getAllWindowHandles().then(function (handles) {
+      browser.switchTo().window(handles[1]).then(function () {
+        expect(browser.getCurrentUrl()).toContain(url);
+      });
+    });
+  },
 
   //LAST ONE
   clickOkButton: function () {

@@ -7,6 +7,11 @@ var dashboard = {
     return element(by.css('a[ng-href="#/receipts"]'));
 
   },
+  resourcesLink: function () {
+
+    return element(by.css('a[ng-href="#/documents"]'));
+
+  },
 
   requestCreditIncrease: function () {
 
@@ -17,6 +22,12 @@ var dashboard = {
   //Locator End
 
   //Clicking
+  clickResources: function () {
+
+    this.resourcesLink().click();
+    browser.sleep(delay);
+
+  },
   clickReceiptsLink: function () {
 
     this.receiptsLink().click();
