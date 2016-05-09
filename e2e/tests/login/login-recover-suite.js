@@ -88,6 +88,7 @@ describe("Log In Suite  \n ", function() {
     loginRecover.clickUsernameSubmit();
 
     //Verify Success Modal
+
     expect(modal.header()).toEqual("Success");
     expect(modal.body()).toEqual("Thank you, check your email for the requested account information.");
     //Exit out and verify back to main
@@ -95,7 +96,7 @@ describe("Log In Suite  \n ", function() {
     expect(browser.getCurrentUrl()).toEqual(homepageUrl);
 
   });
-  xit("4. As a dealer I forgot my password. All my answers are correct", function() {
+  it("4. As a dealer I forgot my password. All my answers are correct", function() {
     //Check button text
     expect(login.textforgotUsernamePassword()).toEqual("Forgot your username or password?");
     login.clickforgotUsernamePassword();
@@ -122,7 +123,7 @@ describe("Log In Suite  \n ", function() {
 
   });
 
-  xit("6. As a dealer I forgot my password. All my answers are NOTcorrect", function() {
+  it("6. As a dealer I forgot my password. All my answers are NOT correct", function() {
     //Check button text
     expect(login.textforgotUsernamePassword()).toEqual("Forgot your username or password?");
     login.clickforgotUsernamePassword();
