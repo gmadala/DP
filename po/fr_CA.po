@@ -202,7 +202,7 @@ msgstr "2. Informations sur la vente"
 
 #: app/client/floor-vehicle/floor-car.template.html:209
 msgid "3. Documents & Instructions"
-msgstr ""
+msgstr "3. Documents et directives"
 
 #: app/client/shared/modals/request-credit-increase/request-credit-increase.template.html:48
 msgid "3. How much would you like to increase it by?"
@@ -474,7 +474,7 @@ msgstr "Numéro(s) d'accès à l'encan"
 #: app/client/dealer-search/auction-dealer-search.template.html:57
 #: app/client/shared/modals/credit-query/credit-query.template.html:11
 msgid "AuctionACCESS #"
-msgstr ""
+msgstr "No AuctionACCESS"
 
 #: app/client/shared/modals/confirm/confirm-disable-autopay.template.html:3
 msgid "Authorization and Request to Unenroll"
@@ -958,7 +958,7 @@ msgstr "Rotation en jours"
 
 #: app/client/dealer-search/auction-dealer-search.template.html:23
 msgid "Dealer"
-msgstr ""
+msgstr "Concessionnaire"
 
 #: app/client/shared/directives/navbar/navbar.template.html:29
 msgid "Dealer #"
@@ -970,7 +970,7 @@ msgstr "Liste de vérification de financement du concessionnaire"
 
 #: app/client/shared/modals/credit-query/credit-query.template.html:1
 msgid "Dealer Information"
-msgstr ""
+msgstr "Information sur le concessionnaire"
 
 #: app/client/shared/directives/navbar/navbar.controller.js:49
 msgid "Dealer Search"
@@ -1272,15 +1272,15 @@ msgstr "Durée prolongée"
 #: app/client/floor-plan/auction-seller-floor-plan.template.html:83
 #: app/client/shared/modals/credit-query/credit-query.template.html:15
 msgid "External Buyer ID"
-msgstr ""
+msgstr "ID de l'acheteur externe"
 
 #: app/client/floor-plan/auction-seller-floor-plan.template.html:70
 msgid "External Seller ID"
-msgstr ""
+msgstr "ID du vendeur externe"
 
 #: app/client/floor-plan/auction-seller-floor-plan.template.html:66
 msgid "External Stock #"
-msgstr ""
+msgstr "No de stock externe"
 
 #: app/client/value-lookup/value-lookup.html:501
 #: app/client/vehicle-details/vehicle-details.html:339
@@ -1397,7 +1397,7 @@ msgstr "Activité financière"
 
 #: app/client/dealer-search/auction-dealer-search.template.html:2
 msgid "Find a Dealer"
-msgstr ""
+msgstr "Trouver un concessionnaire"
 
 #: app/client/floor-plan/auction-seller-floor-plan.template.html:2
 #: app/client/floor-plan/floor-plan.template.html:4
@@ -1436,7 +1436,7 @@ msgstr "Valeurs estimées du plan de nantissement"
 
 #: app/client/dashboard/auction/auction-dashboard.template.html:123
 msgid "Floor Plan Volume History"
-msgstr ""
+msgstr "Historique du volume du plan de nantissement"
 
 #: app/client/dashboard/dealer/dashboard.template.html:327
 msgid "Floor Plans"
@@ -1561,7 +1561,7 @@ msgstr "Rapports d'historique"
 
 #: app/client/shared/modals/financial-account/financial-account.template.html:60
 msgid "I acknowledge that I have reviewed and agree."
-msgstr ""
+msgstr "Je reconnais avoir lu les conditions et je consens à ces dernières."
 
 #: app/client/shared/modals/confirm/confirm-enable-autopay.template.html:107
 msgid ""
@@ -1712,7 +1712,7 @@ msgstr "Marge de crédit"
 
 #: app/client/shared/modals/credit-query/credit-query.template.html:34
 msgid "Line(s) of Credit"
-msgstr ""
+msgstr "Marge(s) de crédit"
 
 #: app/client/promos/promos.template.html:16
 msgid "Location"
@@ -1897,6 +1897,13 @@ msgid ""
 "while we actively work to improve our\n"
 "            service to you. Thank you for using myNextGear!"
 msgstr ""
+"myNextGear n'est pas accessible pour le moment. Nous effectuons une mise à "
+"jour qui permettra d'ajouter de nouvelles fonctionnalités et de nouveaux "
+"avantages à notre site. Nous\n"
+" sommes désolés des inconvénients que cela pourrait causer et nous vous "
+"remercions pour votre patience pendant que nous améliorons les services que "
+"nous\n"
+" vous offrons. Merci d'utiliser myNextGear!"
 
 #: app/client/account-management/nxg-financial-account/nxg-financial-account.directive.js:51
 #: app/client/account-management/nxg-financial-account/nxg-financial-account.directive.js:82
@@ -1957,11 +1964,11 @@ msgstr ""
 #: app/client/dealer-search/auction-dealer-search.template.html:47
 #: app/client/shared/modals/credit-query/credit-query.template.html:7
 msgid "NGC Buyer #"
-msgstr ""
+msgstr "No d'acheteur NGC"
 
 #: app/client/floor-plan/auction-seller-floor-plan.template.html:62
 msgid "NGC Stock #"
-msgstr ""
+msgstr "No de stock NGC"
 
 #: app/client/account-management/account-management.template.html:195
 #: app/client/account-management/account-management.template.html:200
@@ -2484,7 +2491,7 @@ msgstr "Veuillez entrer une adresse de courriel valide."
 
 #: app/client/shared/directives/nxg-search/nxg-search.template.html:71
 msgid "Please enter a Valid End Date."
-msgstr ""
+msgstr "Veuillez entrer une date de fin valide."
 
 #: app/client/reports/nxg-stock-numbers-input/nxg-stock-numbers-input.template.html:53
 msgid "Please enter a valid End Stock Number"
@@ -2511,11 +2518,11 @@ msgstr "Veuillez entrer une date d'achat valide."
 
 #: app/client/floor-vehicle/auction-bulk-flooring.template.html:152
 msgid "Please enter a Valid Sale Date."
-msgstr ""
+msgstr "Veuillez entrer une date de vente valide."
 
 #: app/client/shared/directives/nxg-search/nxg-search.template.html:51
 msgid "Please enter a Valid Start Date."
-msgstr ""
+msgstr "Veuillez entrer une date de début valide."
 
 #: app/client/reports/nxg-stock-numbers-input/nxg-stock-numbers-input.template.html:45
 msgid "Please enter a valid Start Stock Number"
@@ -2714,7 +2721,7 @@ msgstr "Veuillez sélectionner une couleur."
 
 #: app/client/reports/dealer/reports.template.html:41
 msgid "Please select a Date in the future."
-msgstr ""
+msgstr "Veuillez sélectionner une date ultérieure."
 
 #: app/client/reports/auction/auction-reports.template.html:59
 #: app/client/reports/dealer/reports.template.html:167
@@ -2797,7 +2804,7 @@ msgstr "Veuillez sélectionner « Temporaire » ou « Permanent »."
 #: app/client/reports/dealer/reports.template.html:121
 #: app/client/reports/dealer/reports.template.html:228
 msgid "Please select past End Date."
-msgstr ""
+msgstr "Veuillez sélectionner une date d'échéance antérieure."
 
 #: app/client/floor-vehicle/auction-bulk-flooring.template.html:50
 #: app/client/floor-vehicle/floor-car.template.html:55
@@ -2807,7 +2814,7 @@ msgstr ""
 
 #: app/client/floor-vehicle/floor-car.template.html:292
 msgid "Please upload your floor plan documents."
-msgstr ""
+msgstr "Veuillez télécharger vos documents du plan de nantissement."
 
 #: app/client/payments/payments.template.html:55
 msgid "Posted"
@@ -3097,7 +3104,7 @@ msgstr "Le numéro d'acheminement ne doit contenir que 9 chiffres."
 
 #: app/client/floor-vehicle/auction-bulk-flooring.template.html:130
 msgid "Sale Date"
-msgstr ""
+msgstr "Date de vente"
 
 #: app/client/floor-vehicle/auction-bulk-flooring.template.html:78
 msgid "Sale Information"
@@ -3163,6 +3170,9 @@ msgid ""
 "or fees\n"
 "      may continue to accrue between now and your scheduled payment date."
 msgstr ""
+"Les paiements programmés ne seront pas effectués avant la date programmée. "
+"Des frais et/ou des intérêts peuvent continuer de s'accumuler d'ici la date "
+"de votre paiement programmé."
 
 #: app/client/dealer-search/business-search-modal/business-search.template.html:17
 #: app/client/dealer-search/dealer-name-search-modal/dealer-name-search.template.html:31
@@ -3174,6 +3184,8 @@ msgid ""
 "Search by Dealer's NextGear Capital Business Number, Business Name, "
 "AuctionACCESS number, or External Buyer ID."
 msgstr ""
+"Rechercher par numéro d'entreprise de concessionnaire NextGear Capital, nom "
+"d'entreprise, numéro AuctionACCESS ou ID d'acheteur externe."
 
 #: app/client/login/login-recover/login-recover.template.html:83
 #: app/client/profile-settings/auction/auction-settings.template.html:62
@@ -3359,10 +3371,14 @@ msgid ""
 "Sorry, no results found. Please <a ng-click=\"resetSellerSearch()\" title="
 "\"New Search\">try a new search</a>."
 msgstr ""
+"Désolé, aucun résultat n'a été trouvé. Veuillez tenter une nouvelle "
+"recherche."
 
 #: app/client/dealer-search/auction-dealer-search.template.html:25
 msgid "Sorry, no results found. Please try a new search query."
 msgstr ""
+"Désolé, aucun résultat n'a été trouvé. Veuillez tenter une nouvelle requête "
+"de recherche."
 
 #: app/client/dealer-search/business-search-modal/business-search.template.html:29
 #: app/client/dealer-search/dealer-name-search-modal/dealer-name-search.template.html:43
@@ -3412,11 +3428,11 @@ msgstr "État"
 
 #: app/client/shared/modals/financial-account/financial-account.template.html:69
 msgid "Step 1 of 2: Add Your Account"
-msgstr ""
+msgstr "Étape 1 de 2 : ajouter votre compte"
 
 #: app/client/shared/modals/financial-account/financial-account.template.html:4
 msgid "Step 2 of 2: Designated Account Change Request and Consent"
-msgstr ""
+msgstr "Étape 2 de 2 : demande de changement de compte désigné et consentement"
 
 #: app/client/checkout/checkout.template.html:102
 #: app/client/checkout/confirm-checkout-modal/confirm-checkout.template.html:39
@@ -4516,6 +4532,29 @@ msgstr "Code Postal"
 #: app/client/shared/directives/nxg-address/nxg-address.template.html:87
 msgid "Zip Code"
 msgstr "Code postal"
+
+#~ msgid ""
+#~ "To floor plan purchases older than 365 days, please contact NextGear "
+#~ "Capital Floorplan Services at fundingservices@nextgearcapital.com, attach "
+#~ "the Bill of Sale, and provide the customer's NextGear Dealer Number."
+#~ msgstr ""
+#~ "Pour les achats de plans de nantissement datant de plus de 365 jours, "
+#~ "veuillez communiquer avec les services de plans de nantissement de "
+#~ "NextGear Capital à l'adresse : fundingservices@nextgearcapital.com, "
+#~ "annexer l'acte de vente et fournir le numéro de concessionnaire NextGear "
+#~ "du client."
+
+#~ msgid ""
+#~ "To floor plan purchases older than 7 days, please contact NextGear "
+#~ "Capital Floor plan Services at fundingservices@nextgearcapital.com, "
+#~ "attach the Bill of Sale, and provide the customer's NextGear Dealer "
+#~ "Number."
+#~ msgstr ""
+#~ "Pour les achats de plans de nantissement datant de plus de 7 jours, "
+#~ "veuillez communiquer avec les services de plans de nantissement de "
+#~ "NextGear Capital à l'adresse : fundingservices@nextgearcapital.com, "
+#~ "annexer l'acte de vente et fournir le numéro de concessionnaire NextGear "
+#~ "du client."
 
 #~ msgid "3. Optional Items"
 #~ msgstr "3. Éléments facultatifs"
