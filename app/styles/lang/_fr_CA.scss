@@ -281,6 +281,12 @@ body.lang_fr_CA {
     .questText{font-size:11px;}
   }
 
+  #AccountManagementPage {
+    .well-default-header {
+      padding-bottom: 10px;
+    }
+  }
+
   #DocumentsPage {
     .video-well {
       display: none;

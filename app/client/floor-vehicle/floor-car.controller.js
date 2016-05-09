@@ -47,6 +47,7 @@
     // init files as empty array to avoid
     // error of undefined.length from $watcher
     $scope.files = [];
+    $scope.missingDocuments = false;
 
     $scope.$watch('files', function(newValue, oldValue){
       if(newValue.length !== oldValue.length){
@@ -211,6 +212,14 @@
 
       $scope.vinDetailsErrorFlag = true;
       if (!$scope.form.$valid) {
+        if(isDealer && $scope.attachDocumentsEnabled && $scope.files.length < 1){
+          $scope.missingDocuments = true;
+        }
+        return false;
+      }
+
+      if(isDealer && $scope.attachDocumentsEnabled && $scope.files.length < 1){
+        $scope.missingDocuments = true;
         return false;
       }
 
