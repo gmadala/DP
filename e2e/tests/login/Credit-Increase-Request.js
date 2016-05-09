@@ -8,7 +8,7 @@ var creditIncrease = require('../../framework/credit-increase-request-objects.js
 var receipts = require('../../framework/receipts-objects.js');
 var delay = 200;
 var homepageUrl="https://test.nextgearcapital.com/test/#/login";
-// var tempIncrease;
+var tempIncrease= 1000;
 var userName= '53190md';
 var password= 'ngcpass!0';
 describe("Log In Suite  \n ", function () {
@@ -20,7 +20,7 @@ describe("Log In Suite  \n ", function () {
 
   });
 
-  xit("1. As a dealer I want to request a temporary credit increase", function () {
+  it("1. As a dealer I want to request a temporary credit increase", function () {
     //Login and go to request credit increase
     login.login2(userName,password);
     dashboard.clickRequestCreditIncreaset();
@@ -37,14 +37,14 @@ describe("Log In Suite  \n ", function () {
 
 
   });
-  xit("2. As a dealer I want to request a permanent credit increase", function () {
+  it("2. As a dealer I want to request a permanent credit increase", function () {
     //Login and go to request credit increase
     login.login2(userName,password);
     dashboard.clickRequestCreditIncreaset();
     //Select Credit line and click on temp
     creditIncrease.clickFirstLineOfCredit();
     creditIncrease.clickPermanentIncrease();
-    creditIncrease.enterIncreaseAmount('1000');
+    creditIncrease.enterIncreaseAmount(tempIncrease);
     creditIncrease.clickRequestButton();
     //Check success modal
     expect(modal.header()).toEqual("Request a Credit Increase");
@@ -53,7 +53,7 @@ describe("Log In Suite  \n ", function () {
 
 
   });
-  it("3. As a dealer I want to print a receipt", function () {
+  it("3. As a dealer I want to print a receipt by grouped VIN", function () {
     //Login and go to request credit increase
     login.login2(userName,password);
     dashboard.clickReceiptsLink();
@@ -63,7 +63,7 @@ describe("Log In Suite  \n ", function () {
     browser.sleep(5000);
     browser.getAllWindowHandles().then(function (handles) {
       browser.switchTo().window(handles[1]).then(function () {
-        expect(browser.getCurrentUrl()).toEqual("http://www.nextgearcapital.com/apply-for-credit/");
+        expect(browser.getCurrentUrl()).toContain("https://test.nextgearcapital.com/MobileService/api/receipt/viewMultiple/receipts?");
       });
     });
   });
