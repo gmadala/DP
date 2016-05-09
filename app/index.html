@@ -2,7 +2,7 @@
 <html>
   <head>
     <title>myNextGear</title>
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
     <meta charset="utf-8">
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -36,41 +36,44 @@
   </head>
   <body>
     <!-- htmlmin:ignore -->
-      <!-- processhtml:include:svgDist,server /img/icons/icon_defs.svg -->
-        This will pull in the content of our svg file for use across the app.
-      <!-- /processhtml -->
+    <!-- processhtml:include:svgDist,server /img/icons/icon_defs.svg -->
+    This will pull in the content of our svg file for use across the app.
+    <!-- /processhtml -->
     <!-- htmlmin:ignore -->
 
     <div class="nxg-main-container" nxg-messages>
       <div nav-bar></div>
-      <div class="nxg-main-view" ng-class="{ 'no-left-margin': navState.current.data.margin }" nxg-fluid-container>
+      <div class="nxg-main-view" ng-class="{ 'no-left-margin': navState.current.data.margin }">
         <div ui-view id="{{ navState.current.data.pageId }}Page"></div>
       </div>
       <div nxg-activity></div>
     </div>
 
     <footer class="row-footer">
-     <div>
+      <div>
         <a class="col-sm-12 nxg-cox-logo" href="https://www.coxautoinc.com/" target="_blank"></a>
-     </div>
+      </div>
       <ul class="horizontal-list">
         <li><a href="http://www.autotrader.com/" target="_blank" nxg_track="{{metric.AUTOTRADER_INDEX}}">Autotrader</a></li>
         <li><a href="http://www.dealshield.com/" class="footer-element" target="_blank" nxg_track="{{metric.DEALSHIELD_INDEX}}">DealShield</a></li>
         <li><a href="http://goautoexchange.com/" class="footer-element" target="_blank" nxg_track="{{metric.GOAUTOEXCHANGE_INDEX}}">Go Auto Exchange</a></li>
         <li><a href="https://www.gofinancial.com/" class="footer-element" target="_blank" nxg_track="{{metric.GOFINANCIAL_INDEX}}">Go Financial</a></li>
-        <li><a href="http://www.haystak.com/"  class="footer-element"  target="_blank" nxg_track="{{metric.HAYSTACK_INDEX}}">Haystak Digital Marketing</a></li>
+        <li><a href="http://www.haystak.com/" class="footer-element" target="_blank" nxg_track="{{metric.HAYSTACK_INDEX}}">Haystak Digital Marketing</a></li>
       </ul>
       <ul class="horizontal-list">
         <li><a href="http://www.homenetauto.com/" target="_blank" nxg_track="{{metric.HOMENET_INDEX}}">HomeNet Automotive</a></li>
         <li><a href="http://www.kbb.com/" class="footer-element" target="_blank" nxg_track="{{metric.KELLYBLUEBOOK_INDEX}}">Kelley Blue Book</a></li>
-        <li><a href="https://www.manheim.com/"  class="footer-element" target="_blank" nxg_track="{{metric.MANHEIM_INDEX}}">Manheim</a></li>
-        <li><a href="http://www.readyautotransport.com/"  class="footer-element" target="_blank" nxg_track="{{metric.READYAUTO_INDEX}}">Ready Auto Transport</a></li>
-        <li><a href="http://www.vauto.com/home/"  class="footer-element" target="_blank" nxg_track="{{metric.VAUTO_INDEX}}">vAuto</a></li>
+        <li><a href="https://www.manheim.com/" class="footer-element" target="_blank" nxg_track="{{metric.MANHEIM_INDEX}}">Manheim</a></li>
+        <li><a href="http://www.readyautotransport.com/" class="footer-element" target="_blank" nxg_track="{{metric.READYAUTO_INDEX}}">Ready Auto Transport</a>
+        </li>
+        <li><a href="http://www.vauto.com/home/" class="footer-element" target="_blank" nxg_track="{{metric.VAUTO_INDEX}}">vAuto</a></li>
         <li><a href="http://www.vinsolutions.com/" target="_blank" nxg_track="{{metric.VINSOLUTIONS_INDEX}}">VinSolutions</a></li>
       </ul>
       <ul class="horizontal-list" style="margin: 12px 0 11px 0;padding-bottom:5px;">
-        <li >&copy; 2013-2015 NextGear Capital, Inc. All Rights Reserved.</li>
-        <li><nxg-privacy-statement></nxg-privacy-statement></li>
+        <li>&copy; 2013-2015 NextGear Capital, Inc. All Rights Reserved.</li>
+        <li>
+          <nxg-privacy-statement></nxg-privacy-statement>
+        </li>
         <li><a href="http://www.nextgearcapital.com/contact-us" target="_blank" translate>Contact Us</a></li>
         <!-- @if ENV != 'production' !><li>Revision &nbsp;<!-- @endif -->
         <!-- @if ENV != 'production' --><!-- @echo GIT_SHA --><!-- @endif -->
@@ -132,7 +135,7 @@
 
     <script src="client/account-management/account-management.service.js"></script>
     <script src="client/account-management/account-management.controller.js"></script>
-    <script src="client/account-management/nxg-financial-account/nxg-financial-account.directive.js" ></script>
+    <script src="client/account-management/nxg-financial-account/nxg-financial-account.directive.js"></script>
 
     <script src="client/analytics/top-auctions-modal/top-auctions.controller.js"></script>
     <script src="client/analytics/analytics.service.js"></script>

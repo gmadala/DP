@@ -13,7 +13,6 @@
 }
 
 .dropdown-spaced {
-  margin-top: 4px;
   text-transform: uppercase;
 }
 
@@ -38,6 +37,10 @@
   .col-md-6 {
     @extend %center;
   }
+  display: flex;
+  align-items: center;
+  //justify-content: center;
+  flex-direction: row;
 }
 
 .nxg-logo {
@@ -47,11 +50,12 @@
   background-position: 0px 0;
   height: 70px;
   position: relative;
-  top: 10px;
+  top: 3px;
   padding-top: 1px;
   z-index: 5;
 }
-.nxg-small-logo{
+
+.nxg-small-logo {
   background: url(../img/nxg_logo.png);
   background-repeat: no-repeat;
   background-size: 65px 65px;
@@ -60,7 +64,7 @@
   padding: 0;
 }
 
-.user-info{
+.user-info {
   display: block;
   position: relative;
   font-weight: bold;
@@ -70,24 +74,30 @@
     text-decoration: none;
   }
 
-  :hover, :hover{
+  :hover, :hover {
     text-decoration: none;
   }
 
-  .dealer-number{
+  .dealer-number {
     text-transform: uppercase;
+    // border-left: 1px solid black;
+    // padding-left: 5px;
+    // margin-left: 5px;
+  }
+
+  .align-right {
+    text-align: right;
+  }
+
+  .spacer {
     border-left: 1px solid black;
     padding-left: 5px;
     margin-left: 5px;
   }
 
-  .align-right{
-    text-align: right;
-  }
-
 }
 
-.menu-divider{
+.menu-divider {
   border-bottom: 1px solid #bbb;
   padding-top: 5px;
   margin-bottom: 5px;
@@ -103,11 +113,11 @@
   padding: 10px 20px;
   border: 1px solid $border;
   z-index: 100;
-  min-width:225px;
+  min-width: 225px;
   max-width: 23.40426%; // same as col-xs-3, which is the width of the parent element
 
   &.expanded {
-    @include box-shadow(rgba(0,0,0,0.25) 0 3px 3px);
+    @include box-shadow(rgba(0, 0, 0, 0.25) 0 3px 3px);
 
     .user-info:after {
       border-top: transparent;
@@ -192,12 +202,31 @@
       display: inline-block;
       padding: 8px 8px 9px;
 
+      .caret {
+        border-top-color: $white;
+      }
+
       &.active {
         border-bottom: 4px solid $primary;
       }
 
       &:hover {
         color: #CCCCCC;
+        .caret {
+          border-top-color: #CCCCCC;
+        }
+      }
+    }
+  }
+
+  .dropdown-menu {
+    background-color: $highlight;
+    font-size: $baseFontSize;
+    li {
+      a {
+        &:hover {
+          background-color: $highlight;
+        }
       }
     }
   }
@@ -248,8 +277,6 @@
     }
   }
 
-
-
   .cart-btn {
     @include border-bottom-right-radius($borderRadius);
     display: block;
@@ -263,6 +290,13 @@
     border: 0;
     border-left: 1px solid $border;
     margin: 0 0 0 -1px;
+
+    font-size: 9px !important;
+
+    color: #AAAAAA;
+    cursor: default;
+    pointer-events: none;
+    text-decoration: none;
 
     .svg-icon svg {
       fill: $btn-text-disabled;
@@ -291,6 +325,56 @@
   }
 }
 
+.cart-btn {
+  //@include border-bottom-right-radius($borderRadius);
+  //display: block;
+  //float: right;
+  //height: 38px; // to account for gray border on bottom
+  //color: $btn-text-disabled;
+  //background-color: darken($btn-bkgd-disabled, 2%);
+  //font-size: 14px;
+  //font-weight: bold;
+  //padding: 12px 10px 10px;
+  //border: 0;
+  //border-left: 1px solid $border;
+  //margin: 0 0 0 -1px;
+
+  font-size: 9px;
+
+  color: #AAAAAA;
+  cursor: default;
+  pointer-events: none;
+  //text-decoration: none;
+
+  //.svg-icon svg {
+  //  fill: $btn-text-disabled;
+  //  position: relative;
+  //  top: -2px;
+  //  margin-left: 2px;
+  //}
+
+  &.has-items {
+    color: $highlight;
+    cursor: pointer !important;
+    pointer-events: auto;
+
+    &:hover {
+      cursor: pointer !important;
+      pointer-events: auto;
+      //text-decoration: none;
+      color: darken($highlight, 10%);
+
+      //.svg-icon svg {
+      //  fill: $white;
+      //}
+    }
+
+    //.svg-icon svg {
+    //  fill: $white;
+    //}
+  }
+}
+
 .nav-bkgd {
   @include box-shadow(rgba(black, 0.25) 0px 2px 3px);
   height: 48px;
@@ -312,10 +396,11 @@
     margin-top: 16px;
   }
 }
+
 @media (max-width: 1200px) {
-  .cart-btn {
-    width: 45px;
-    font-size:9px !important;
-  }
+  //.cart-btn {
+  //  width: 45px;
+  //  font-size: 9px !important;
+  //}
 
 }
