@@ -202,7 +202,7 @@ msgstr "2. Información de ventas"
 
 #: app/client/floor-vehicle/floor-car.template.html:209
 msgid "3. Documents & Instructions"
-msgstr ""
+msgstr "3. Documentos e Instrucciones"
 
 #: app/client/shared/modals/request-credit-increase/request-credit-increase.template.html:48
 msgid "3. How much would you like to increase it by?"
@@ -476,7 +476,7 @@ msgstr "Número(s) de acceso a la subasta"
 #: app/client/dealer-search/auction-dealer-search.template.html:57
 #: app/client/shared/modals/credit-query/credit-query.template.html:11
 msgid "AuctionACCESS #"
-msgstr ""
+msgstr "AuctionACCESS #"
 
 #: app/client/shared/modals/confirm/confirm-disable-autopay.template.html:3
 msgid "Authorization and Request to Unenroll"
@@ -961,7 +961,7 @@ msgstr "Días de rotación"
 
 #: app/client/dealer-search/auction-dealer-search.template.html:23
 msgid "Dealer"
-msgstr ""
+msgstr "Distribuidor"
 
 #: app/client/shared/directives/navbar/navbar.template.html:29
 msgid "Dealer #"
@@ -973,7 +973,7 @@ msgstr "Lista de Verificación de Financiamiento a Proveedores"
 
 #: app/client/shared/modals/credit-query/credit-query.template.html:1
 msgid "Dealer Information"
-msgstr ""
+msgstr "Información del distribuidor"
 
 #: app/client/shared/directives/navbar/navbar.controller.js:49
 msgid "Dealer Search"
@@ -1276,15 +1276,15 @@ msgstr "Plazo ampliado"
 #: app/client/floor-plan/auction-seller-floor-plan.template.html:83
 #: app/client/shared/modals/credit-query/credit-query.template.html:15
 msgid "External Buyer ID"
-msgstr ""
+msgstr "Identificación de comprador externo"
 
 #: app/client/floor-plan/auction-seller-floor-plan.template.html:70
 msgid "External Seller ID"
-msgstr ""
+msgstr "Identificación de vendedor externo"
 
 #: app/client/floor-plan/auction-seller-floor-plan.template.html:66
 msgid "External Stock #"
-msgstr ""
+msgstr "Número de inventario externo"
 
 #: app/client/value-lookup/value-lookup.html:501
 #: app/client/vehicle-details/vehicle-details.html:339
@@ -1401,7 +1401,7 @@ msgstr "Actividad financiera"
 
 #: app/client/dealer-search/auction-dealer-search.template.html:2
 msgid "Find a Dealer"
-msgstr ""
+msgstr "Encuentre a un distribuidor"
 
 #: app/client/floor-plan/auction-seller-floor-plan.template.html:2
 #: app/client/floor-plan/floor-plan.template.html:4
@@ -1440,7 +1440,7 @@ msgstr "Estimados del valor del plan de piso"
 
 #: app/client/dashboard/auction/auction-dashboard.template.html:123
 msgid "Floor Plan Volume History"
-msgstr ""
+msgstr "Historial del volumen del plan de piso"
 
 #: app/client/dashboard/dealer/dashboard.template.html:327
 msgid "Floor Plans"
@@ -1565,7 +1565,7 @@ msgstr "Reportes históricos"
 
 #: app/client/shared/modals/financial-account/financial-account.template.html:60
 msgid "I acknowledge that I have reviewed and agree."
-msgstr ""
+msgstr "Acepto haberlo revisado y estoy de acuerdo."
 
 #: app/client/shared/modals/confirm/confirm-enable-autopay.template.html:107
 msgid ""
@@ -1717,7 +1717,7 @@ msgstr "Línea de crédito"
 
 #: app/client/shared/modals/credit-query/credit-query.template.html:34
 msgid "Line(s) of Credit"
-msgstr ""
+msgstr "Línea(s) de crédito"
 
 #: app/client/promos/promos.template.html:16
 msgid "Location"
@@ -1902,6 +1902,10 @@ msgid ""
 "while we actively work to improve our\n"
 "            service to you. Thank you for using myNextGear!"
 msgstr ""
+"myNextGear no está disponible temporalmente, estamos actualizando "
+"características y beneficios adicionales. Disculpe las molestias; le "
+"agradecemos su paciencia mientras trabajamos activamente para mejorar el "
+"servicio que le proporcionamos. Gracias por utilizar myNextGear."
 
 #: app/client/account-management/nxg-financial-account/nxg-financial-account.directive.js:51
 #: app/client/account-management/nxg-financial-account/nxg-financial-account.directive.js:82
@@ -1962,11 +1966,11 @@ msgstr ""
 #: app/client/dealer-search/auction-dealer-search.template.html:47
 #: app/client/shared/modals/credit-query/credit-query.template.html:7
 msgid "NGC Buyer #"
-msgstr ""
+msgstr "# de comprador NGC"
 
 #: app/client/floor-plan/auction-seller-floor-plan.template.html:62
 msgid "NGC Stock #"
-msgstr ""
+msgstr "# de inventario NGC"
 
 #: app/client/account-management/account-management.template.html:195
 #: app/client/account-management/account-management.template.html:200
@@ -2487,7 +2491,7 @@ msgstr "Por favor, ingrese una dirección de correo electrónico válida."
 
 #: app/client/shared/directives/nxg-search/nxg-search.template.html:71
 msgid "Please enter a Valid End Date."
-msgstr ""
+msgstr "Por favor, capture una fecha final válida."
 
 #: app/client/reports/nxg-stock-numbers-input/nxg-stock-numbers-input.template.html:53
 msgid "Please enter a valid End Stock Number"
@@ -2514,11 +2518,11 @@ msgstr "Por favor, ingrese una fecha de compra válida."
 
 #: app/client/floor-vehicle/auction-bulk-flooring.template.html:152
 msgid "Please enter a Valid Sale Date."
-msgstr ""
+msgstr "Por favor, capture una fecha de venta válida."
 
 #: app/client/shared/directives/nxg-search/nxg-search.template.html:51
 msgid "Please enter a Valid Start Date."
-msgstr ""
+msgstr "Por favor, capture una fecha de inicio válida."
 
 #: app/client/reports/nxg-stock-numbers-input/nxg-stock-numbers-input.template.html:45
 msgid "Please enter a valid Start Stock Number"
@@ -2715,7 +2719,7 @@ msgstr "Por favor, seleccione un color."
 
 #: app/client/reports/dealer/reports.template.html:41
 msgid "Please select a Date in the future."
-msgstr ""
+msgstr "Seleccione una fecha en el futuro."
 
 #: app/client/reports/auction/auction-reports.template.html:59
 #: app/client/reports/dealer/reports.template.html:167
@@ -2798,7 +2802,7 @@ msgstr "Por favor, seleccione \"temporal\" o \"permanente\"."
 #: app/client/reports/dealer/reports.template.html:121
 #: app/client/reports/dealer/reports.template.html:228
 msgid "Please select past End Date."
-msgstr ""
+msgstr "Seleccione una fecha final pasada."
 
 #: app/client/floor-vehicle/auction-bulk-flooring.template.html:50
 #: app/client/floor-vehicle/floor-car.template.html:55
@@ -2807,7 +2811,7 @@ msgstr "Por favor, seleccione quién tiene el título."
 
 #: app/client/floor-vehicle/floor-car.template.html:292
 msgid "Please upload your floor plan documents."
-msgstr ""
+msgstr "Cargue los documentos de su plan de piso."
 
 #: app/client/payments/payments.template.html:55
 msgid "Posted"
@@ -3095,7 +3099,7 @@ msgstr "El número de enrutamiento debe tener 9 dígitos."
 
 #: app/client/floor-vehicle/auction-bulk-flooring.template.html:130
 msgid "Sale Date"
-msgstr ""
+msgstr "Fecha de venta"
 
 #: app/client/floor-vehicle/auction-bulk-flooring.template.html:78
 msgid "Sale Information"
@@ -3161,6 +3165,9 @@ msgid ""
 "or fees\n"
 "      may continue to accrue between now and your scheduled payment date."
 msgstr ""
+"Los pagos programados no se realizan antes de la fecha programada <br> Los "
+"intereses y/u otros cargos podrán seguir acumulándose entre hoy y su fecha "
+"de pago programada."
 
 #: app/client/dealer-search/business-search-modal/business-search.template.html:17
 #: app/client/dealer-search/dealer-name-search-modal/dealer-name-search.template.html:31
@@ -3172,6 +3179,8 @@ msgid ""
 "Search by Dealer's NextGear Capital Business Number, Business Name, "
 "AuctionACCESS number, or External Buyer ID."
 msgstr ""
+"Búsqueda por número/nombre comercial de distribuidor de NextGear Capital, "
+"número AuctionACCESS o identificación de comprador externo"
 
 #: app/client/login/login-recover/login-recover.template.html:83
 #: app/client/profile-settings/auction/auction-settings.template.html:62
@@ -3359,10 +3368,13 @@ msgid ""
 "Sorry, no results found. Please <a ng-click=\"resetSellerSearch()\" title="
 "\"New Search\">try a new search</a>."
 msgstr ""
+"Disculpe, no encontramos ningún resultado. Por favor, <a ng-click="
+"\"resetSellerSearch()\"title=\"New Search\">haga una nueva búsqueda</a>."
 
 #: app/client/dealer-search/auction-dealer-search.template.html:25
 msgid "Sorry, no results found. Please try a new search query."
 msgstr ""
+"Disculpe, no encontramos ningún resultado, Por favor, consulte de nuevo."
 
 #: app/client/dealer-search/business-search-modal/business-search.template.html:29
 #: app/client/dealer-search/dealer-name-search-modal/dealer-name-search.template.html:43
@@ -3412,11 +3424,11 @@ msgstr "Estatus"
 
 #: app/client/shared/modals/financial-account/financial-account.template.html:69
 msgid "Step 1 of 2: Add Your Account"
-msgstr ""
+msgstr "Paso 1 de 2: Agregue su cuenta"
 
 #: app/client/shared/modals/financial-account/financial-account.template.html:4
 msgid "Step 2 of 2: Designated Account Change Request and Consent"
-msgstr ""
+msgstr "Paso 2 de 2: Petición y autorización de cambio de cuenta designada"
 
 #: app/client/checkout/checkout.template.html:102
 #: app/client/checkout/confirm-checkout-modal/confirm-checkout.template.html:39
@@ -4499,6 +4511,27 @@ msgstr "Código postal"
 #: app/client/shared/directives/nxg-address/nxg-address.template.html:87
 msgid "Zip Code"
 msgstr "Código postal"
+
+#~ msgid ""
+#~ "To floor plan purchases older than 365 days, please contact NextGear "
+#~ "Capital Floorplan Services at fundingservices@nextgearcapital.com, attach "
+#~ "the Bill of Sale, and provide the customer's NextGear Dealer Number."
+#~ msgstr ""
+#~ "Para poner en plan de piso compras de más de 365 días, póngase en "
+#~ "contacto con Servicios de Plan de Piso de NextGear Capital en "
+#~ "fundingservices@nextgearcapital.com, anexe la nota de venta y proporcione "
+#~ "el número de cliente de NextGear Capital."
+
+#~ msgid ""
+#~ "To floor plan purchases older than 7 days, please contact NextGear "
+#~ "Capital Floor plan Services at fundingservices@nextgearcapital.com, "
+#~ "attach the Bill of Sale, and provide the customer's NextGear Dealer "
+#~ "Number."
+#~ msgstr ""
+#~ "Para poner en plan de piso compras de más de 7 días, póngase en contacto "
+#~ "con Servicios de Plan de Piso de NextGear Capital en "
+#~ "fundingservices@nextgearcapital.com, anexe la nota de venta y proporcione "
+#~ "el número de cliente de NextGear Capital."
 
 #~ msgid "3. Optional Items"
 #~ msgstr "3. Artículos opcionales"
