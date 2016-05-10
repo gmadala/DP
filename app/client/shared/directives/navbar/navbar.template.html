@@ -1,85 +1,71 @@
 <header class="app-header" ng-class="{ login: !navState.current.data.showNavBar, auctions: !user.isDealer() }">
   <div class="container">
     <div class="header">
-      <a ng-href="{{user.homeLink()}}" class="col-xs-5 custom ng-binding">
+      <a ng-href="{{user.homeLink()}}" class="col-xs-4 custom ng-binding">
         <div class="nxg-logo" nxg-debug-title></div>
       </a>
 
-      <!-- <div class="col-xs-6" ng-show="navState.current.data.showNavBar">
-          <div class="nav-secondary" ng-show="user.isDealer()">
-              <ul>
-                  <li ng-repeat="link in user.navLinks().secondary" class="link link_{{ link.activeWhen }}">
-                      <a ng-href="{{link.href}}" class="navLink" ng-class="{ active: isActive(link.activeWhen) }">{{link.name}}</a>
-                  </li>
-                  <li ng-show="chatEnabled">
-                      <a nxg-chat-with-us nxg-track="{{metric.CLICK_CHAT_NOW_LINK}}"
-                         track-properties="{{ kissMetricData }}" translate>Chat</a>
-                  </li>
-              </ul>
-              <button class="cart-btn" ng-disabled="getQueueCount() < 1" ng-click="onCartClicked()" ng-class="{ 'has-items': getQueueCount() > 0 }">
-                  {{ getQueueCount() }}
-                  <span class="glyphicon glyphicon-shopping-cart icon-small"></span>
-              </button>
+      <div class="col-xs-8 user-info no-left-padding no-right-padding" ng-show="navState.current.data.showNavBar">
+        <div class="user-info-list pull-right">
+          <div>
+            {{ user.BusinessName | truncate:20}}
           </div>
-      </div> -->
-
-      <div class="col-xs-7 user-info pull-right no-right-padding" ng-show="navState.current.data.showNavBar">
-        <div class="align-right">{{ user.BusinessName | uppercase |truncate:20 }}
-                  <span>
-                    <span class="dealer-number spacer" ng-show="user.isDealer()" translate>
-                      Dealer #
-                    </span>
-                    <span class="dealer-number spacer" ng-show="!user.isDealer()" translate>
-                      Auction #
-                    </span>
-                    {{ user.BusinessNumber }}
-                  </span>
-
-                  <span uib-dropdown>
-                      <div class="pull-right align-right dropdown-toggle dropdown-spaced spacer" uib-dropdown-toggle data-toggle="dropdown"
-                           id="settingsDropdown"
-                           aria-haspopup="true" aria-expanded="false">
-                        <a>
-                          <span translate>My Account</span>
-                          <span style="border-top: 4px solid #069" class="caret"></span>
-                        </a>
-                      </div>
-                      <ul class="dropdown-menu dropdown-bold text-right" uib-dropdown-menu role="menu" aria-labelledby="settingsDropdown">
-                        <li>
-                          <a href="#/act/settings" ng-show="!user.isDealer()">
-                            <strong translate>Settings</strong>
-                          </a>
-                          <a href="#/profile_settings" ng-show="user.isDealer()">
-                            <strong translate>Profile Settings</strong>
-                          </a>
-                        </li>
-                        <li>
-                          <a ng-href="#/account_management" ng-show="user.isDealer()">
-                            <strong translate>Account Management</strong>
-                          </a>
-                        </li>
-                        <li class="menu-divider"></li>
-                        <li>
-                          <a href="javascript:void(0)" ng-click="user.logout()">
-                            <strong translate>Sign Out</strong>
-                          </a>
-                        </li>
-                      </ul>
-                  </span>
-                  <span class="pull-right spacer" ng-show="chatEnabled">
-                        <a nxg-chat-with-us nxg-track="{{metric.CLICK_CHAT_NOW_LINK}}"
-                           track-properties="{{ kissMetricData }}" translate>Chat</a>
-                  </span>
-                  <span class="pull-right spacer">
-                    <a class="cart-btn" ng-disabled="getQueueCount() < 1" ng-click="onCartClicked()" ng-class="{ 'has-items': getQueueCount() > 0 }">
-                      {{ getQueueCount() }}
-                      <span class="glyphicon glyphicon-shopping-cart icon-small"></span>
-                    </a>
-                  </span>
+          <div class="spacer">
+            <span class="" ng-show="user.isDealer()" translate>
+              Dealer #
+            </span>
+            <span class="" ng-show="!user.isDealer()" translate>
+              Auction #
+            </span>
+            {{ user.BusinessNumber }}
+          </div>
+          <div class=" spacer">
+            <a class="cart-btn" ng-disabled="getQueueCount() < 1" ng-click="onCartClicked()" ng-class="{ 'has-items': getQueueCount() > 0 }">
+              {{ getQueueCount() }}
+              <span class="glyphicon glyphicon-shopping-cart icon-left-margin"></span>
+            </a>
+          </div>
+          <div class=" spacer" ng-show="chatEnabled">
+            <a nxg-chat-with-us nxg-track="{{metric.CLICK_CHAT_NOW_LINK}}"
+               track-properties="{{ kissMetricData }}" translate>Chat
+              <span class="glyphicon glyphicon-comment icon-left-margin"></span>
+            </a>
+          </div>
+          <div uib-dropdown class="spacer">
+            <span class="dropdown-toggle" uib-dropdown-toggle data-toggle="dropdown"
+                  id="settingsDropdown"
+                  aria-haspopup="true" aria-expanded="false">
+              <a>
+                <span translate>My Account</span>
+                <span style="border-top: 4px solid #069" class="caret"></span>
+              </a>
+            </span>
+            <ul class="dropdown-menu dropdown-bold text-right" uib-dropdown-menu role="menu" aria-labelledby="settingsDropdown">
+              <li>
+                <a href="#/act/settings" ng-show="!user.isDealer()">
+                  <strong translate>Settings</strong>
+                </a>
+                <a href="#/profile_settings" ng-show="user.isDealer()">
+                  <strong translate>Profile Settings</strong>
+                </a>
+              </li>
+              <li>
+                <a ng-href="#/account_management" ng-show="user.isDealer()">
+                  <strong translate>Account Management</strong>
+                </a>
+              </li>
+              <li class="menu-divider"></li>
+              <li>
+                <a href="javascript:void(0)" ng-click="user.logout()">
+                  <strong translate>Sign Out</strong>
+                </a>
+              </li>
+            </ul>
+          </div>
         </div>
       </div>
 
-      <div class="col-xs-5 col-xs-offset-4" ng-hide="navState.current.data.showNavBar">
+      <div class="col-xs-5 col-xs-offset-3" ng-hide="navState.current.data.showNavBar">
         <div class="nav-language-chooser">
           <span class="icon-xx-large" nxg-icon="icon-globe"></span>
           <div class="cta btn-toggle toggle-three">

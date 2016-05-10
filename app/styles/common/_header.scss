@@ -12,16 +12,11 @@
   }
 }
 
-.dropdown-spaced {
-  text-transform: uppercase;
-}
-
 .dropdown-bold {
   a {
     color: $accent;
     font-size: 11px;
     font-weight: bold;
-    text-transform: uppercase;
 
     &:hover {
       color: #999;
@@ -32,14 +27,12 @@
 
 .header {
   @extend .row;
-  //position: relative;
 
   .col-md-6 {
     @extend %center;
   }
   display: flex;
   align-items: center;
-  //justify-content: center;
   flex-direction: row;
 }
 
@@ -78,21 +71,23 @@
     text-decoration: none;
   }
 
-  .dealer-number {
-    text-transform: uppercase;
-    // border-left: 1px solid black;
-    // padding-left: 5px;
-    // margin-left: 5px;
-  }
-
   .align-right {
     text-align: right;
   }
 
   .spacer {
     border-left: 1px solid black;
-    padding-left: 5px;
-    margin-left: 5px;
+    padding-left: 10px;
+    margin-left: 10px;
+  }
+
+  .user-info-list {
+    display: inline-flex;
+  }
+
+  .dropdown-menu {
+    right: 0;
+    left: inherit;
   }
 
 }
@@ -291,8 +286,6 @@
     border-left: 1px solid $border;
     margin: 0 0 0 -1px;
 
-    font-size: 9px !important;
-
     color: #AAAAAA;
     cursor: default;
     pointer-events: none;
@@ -326,32 +319,9 @@
 }
 
 .cart-btn {
-  //@include border-bottom-right-radius($borderRadius);
-  //display: block;
-  //float: right;
-  //height: 38px; // to account for gray border on bottom
-  //color: $btn-text-disabled;
-  //background-color: darken($btn-bkgd-disabled, 2%);
-  //font-size: 14px;
-  //font-weight: bold;
-  //padding: 12px 10px 10px;
-  //border: 0;
-  //border-left: 1px solid $border;
-  //margin: 0 0 0 -1px;
-
-  font-size: 9px;
-
   color: #AAAAAA;
   cursor: default;
   pointer-events: none;
-  //text-decoration: none;
-
-  //.svg-icon svg {
-  //  fill: $btn-text-disabled;
-  //  position: relative;
-  //  top: -2px;
-  //  margin-left: 2px;
-  //}
 
   &.has-items {
     color: $highlight;
@@ -361,17 +331,8 @@
     &:hover {
       cursor: pointer !important;
       pointer-events: auto;
-      //text-decoration: none;
       color: darken($highlight, 10%);
-
-      //.svg-icon svg {
-      //  fill: $white;
-      //}
     }
-
-    //.svg-icon svg {
-    //  fill: $white;
-    //}
   }
 }
 
@@ -395,12 +356,4 @@
   .cta {
     margin-top: 16px;
   }
-}
-
-@media (max-width: 1200px) {
-  //.cart-btn {
-  //  width: 45px;
-  //  font-size: 9px !important;
-  //}
-
 }
