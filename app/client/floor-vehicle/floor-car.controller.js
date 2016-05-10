@@ -412,7 +412,7 @@
      */
     $scope.canAttachDocuments = function () {
       return ($scope.attachDocumentsEnabled && User.isUnitedStates());
-     };
+    };
 
   }
 })();
