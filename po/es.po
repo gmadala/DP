@@ -201,7 +201,7 @@ msgid "2. Sale Information"
 msgstr "2. Información de ventas"
 
 #: app/client/floor-vehicle/floor-car.template.html:209
-msgid "3. Documents & Instructions"
+msgid "3. Documents &amp; Instructions"
 msgstr "3. Documentos e Instrucciones"
 
 #: app/client/shared/modals/request-credit-increase/request-credit-increase.template.html:48
@@ -671,7 +671,7 @@ msgstr "¿No puede arrastrar y soltar?"
 #: app/client/checkout/schedule-checkout-modal/schedule-checkout.template.html:81
 #: app/client/dashboard/nxg-unapplied-funds-widget/request-payout-modal.template.html:53
 #: app/client/floor-vehicle/auction-bulk-flooring.template.html:182
-#: app/client/floor-vehicle/floor-car.controller.js:353
+#: app/client/floor-vehicle/floor-car.controller.js:365
 #: app/client/login/login-create-password/login-create-password.template.html:35
 #: app/client/login/login-update-security/login-update-security.template.html:40
 #: app/client/profile-settings/auction/auction-settings.template.html:220
@@ -1527,7 +1527,7 @@ msgstr "Cargos futuros"
 msgid "Future Payments"
 msgstr "Pagos Futuros"
 
-#: app/client/floor-vehicle/floor-car.controller.js:356
+#: app/client/floor-vehicle/floor-car.controller.js:368
 msgid "Go Home"
 msgstr "Ir a la página principal"
 
@@ -1682,7 +1682,7 @@ msgstr "Ubicación del inventario"
 msgid "It looks like this was the result of either:"
 msgstr "Parece que éste es el resultado de:"
 
-#: app/client/floor-vehicle/floor-car.controller.js:358
+#: app/client/floor-vehicle/floor-car.controller.js:370
 msgid "Keep Editing"
 msgstr "Siga editando"
 
@@ -1793,7 +1793,7 @@ msgstr "Búsqueda manual"
 msgid "Manufacturer Aging Report (PDF)"
 msgstr "Informe de antigüedad del fabricante (PDF)"
 
-#: app/client/floor-vehicle/floor-car.controller.js:392
+#: app/client/floor-vehicle/floor-car.controller.js:404
 #: app/client/value-lookup/value-lookup.html:178
 #: app/client/value-lookup/value-lookup.html:275
 #: app/client/value-lookup/value-lookup.html:34
@@ -2049,7 +2049,7 @@ msgstr ""
 "Cantidad de automóviles comprados por subasta (en los últimos 12 meses)"
 
 #: app/client/floor-vehicle/auction-bulk-flooring.template.html:20
-#: app/client/floor-vehicle/floor-car.controller.js:394
+#: app/client/floor-vehicle/floor-car.controller.js:406
 #: app/client/floor-vehicle/floor-car.template.html:21
 msgid "Odometer"
 msgstr "Odómetro"
@@ -3402,7 +3402,7 @@ msgstr "Fecha de inicio"
 msgid "Start Date should not be later than End Date."
 msgstr "La fecha de inicio no debe ser posterior a la fecha de terminación."
 
-#: app/client/floor-vehicle/floor-car.controller.js:357
+#: app/client/floor-vehicle/floor-car.controller.js:369
 msgid "Start Over"
 msgstr "Volver a iniciar"
 
@@ -3862,19 +3862,27 @@ msgstr ""
 "Para ampliar esta unidad por un período adicional, por favor, haga clic a "
 "continuación."
 
-#: app/client/floor-vehicle/floor-car.template.html:112
+#: app/client/floor-vehicle/floor-car.controller.js:61
 msgid ""
 "To floor plan purchases older than 365 days, please contact NextGear Capital "
 "Floorplan Services at fundingservices@nextgearcapital.com, attach the Bill "
 "of Sale, and provide the customer's NextGear Dealer Number."
 msgstr ""
+"Para poner en plan de piso compras de más de 365 días, póngase en contacto "
+"con Servicios de Plan de Piso de NextGear Capital en "
+"fundingservices@nextgearcapital.com, anexe la nota de venta y proporcione el "
+"número de cliente de NextGear Capital."
 
-#: app/client/floor-vehicle/auction-bulk-flooring.template.html:147
+#: app/client/floor-vehicle/floor-car.controller.js:66
 msgid ""
 "To floor plan purchases older than 7 days, please contact NextGear Capital "
 "Floor plan Services at fundingservices@nextgearcapital.com, attach the Bill "
 "of Sale, and provide the customer's NextGear Dealer Number."
 msgstr ""
+"Para poner en plan de piso compras de más de 7 días, póngase en contacto con "
+"Servicios de Plan de Piso de NextGear Capital en "
+"fundingservices@nextgearcapital.com, anexe la nota de venta y proporcione el "
+"número de cliente de NextGear Capital."
 
 #: app/client/account-management/account-management.template.html:293
 #: app/client/account-management/account-management.template.html:309
@@ -4287,7 +4295,7 @@ msgstr "Paquete de Bienvenida"
 msgid "Welcome to myNextGear!"
 msgstr "¡Bienvenido(a) a myNextGear!"
 
-#: app/client/floor-vehicle/floor-car.controller.js:354
+#: app/client/floor-vehicle/floor-car.controller.js:366
 msgid "What would you like to do?"
 msgstr "¿Qué desea hacer?"
 
@@ -4511,27 +4519,6 @@ msgstr "Código postal"
 #: app/client/shared/directives/nxg-address/nxg-address.template.html:87
 msgid "Zip Code"
 msgstr "Código postal"
-
-#~ msgid ""
-#~ "To floor plan purchases older than 365 days, please contact NextGear "
-#~ "Capital Floorplan Services at fundingservices@nextgearcapital.com, attach "
-#~ "the Bill of Sale, and provide the customer's NextGear Dealer Number."
-#~ msgstr ""
-#~ "Para poner en plan de piso compras de más de 365 días, póngase en "
-#~ "contacto con Servicios de Plan de Piso de NextGear Capital en "
-#~ "fundingservices@nextgearcapital.com, anexe la nota de venta y proporcione "
-#~ "el número de cliente de NextGear Capital."
-
-#~ msgid ""
-#~ "To floor plan purchases older than 7 days, please contact NextGear "
-#~ "Capital Floor plan Services at fundingservices@nextgearcapital.com, "
-#~ "attach the Bill of Sale, and provide the customer's NextGear Dealer "
-#~ "Number."
-#~ msgstr ""
-#~ "Para poner en plan de piso compras de más de 7 días, póngase en contacto "
-#~ "con Servicios de Plan de Piso de NextGear Capital en "
-#~ "fundingservices@nextgearcapital.com, anexe la nota de venta y proporcione "
-#~ "el número de cliente de NextGear Capital."
 
 #~ msgid "3. Optional Items"
 #~ msgstr "3. Artículos opcionales"
