@@ -24,7 +24,8 @@
     'gettextCatalog',
     'AccountManagement',
     'Upload',
-    'nxgConfig'
+    'nxgConfig',
+    'gettext'
   ];
 
   function FloorCarCtrl(
@@ -42,7 +43,8 @@
     gettextCatalog,
     AccountManagement,
     Upload,
-    nxgConfig) {
+    nxgConfig,
+    gettext) {
 
     // init files as empty array to avoid
     // error of undefined.length from $watcher
@@ -55,6 +57,16 @@
         $scope.form.documents.$setValidity('maxSize', true);
       }
     });
+
+    var purchaseDateDisclaimer = gettext("To floor plan purchases older than 365 days, please contact NextGear Capital" +
+      " Floorplan Services at fundingservices@nextgearcapital.com, attach the Bill of Sale," +
+      " and provide the customer's NextGear Dealer Number.");
+    $scope.purchaseDateDisclaimer = gettextCatalog.getString(purchaseDateDisclaimer);
+
+    var aucPurchaseDateDisclaimer = gettext("To floor plan purchases older than 7 days, please contact NextGear Capital " +
+      "Floor plan Services at fundingservices@nextgearcapital.com, attach the Bill of Sale, " +
+      "and provide the customer's NextGear Dealer Number.");
+    $scope.aucPurchaseDateDisclaimer = gettextCatalog.getString(aucPurchaseDateDisclaimer);
 
     var isDealer = User.isDealer();
     var uibModal  = $uibModal;
