@@ -201,7 +201,7 @@ msgid "2. Sale Information"
 msgstr "2. Informations sur la vente"
 
 #: app/client/floor-vehicle/floor-car.template.html:209
-msgid "3. Documents & Instructions"
+msgid "3. Documents &amp; Instructions"
 msgstr "3. Documents et directives"
 
 #: app/client/shared/modals/request-credit-increase/request-credit-increase.template.html:48
@@ -669,7 +669,7 @@ msgstr "Impossible de glisser-déposer?"
 #: app/client/checkout/schedule-checkout-modal/schedule-checkout.template.html:81
 #: app/client/dashboard/nxg-unapplied-funds-widget/request-payout-modal.template.html:53
 #: app/client/floor-vehicle/auction-bulk-flooring.template.html:182
-#: app/client/floor-vehicle/floor-car.controller.js:353
+#: app/client/floor-vehicle/floor-car.controller.js:365
 #: app/client/login/login-create-password/login-create-password.template.html:35
 #: app/client/login/login-update-security/login-update-security.template.html:40
 #: app/client/profile-settings/auction/auction-settings.template.html:220
@@ -1523,7 +1523,7 @@ msgstr "Frais futurs"
 msgid "Future Payments"
 msgstr "Paiements futurs"
 
-#: app/client/floor-vehicle/floor-car.controller.js:356
+#: app/client/floor-vehicle/floor-car.controller.js:368
 msgid "Go Home"
 msgstr "Retour au menu principal"
 
@@ -1677,7 +1677,7 @@ msgstr "Emplacement de l'inventaire"
 msgid "It looks like this was the result of either:"
 msgstr "Ceci semble être dû à l'une ou l'autre des raisons suivantes :"
 
-#: app/client/floor-vehicle/floor-car.controller.js:358
+#: app/client/floor-vehicle/floor-car.controller.js:370
 msgid "Keep Editing"
 msgstr "Continuer l'édition"
 
@@ -1788,7 +1788,7 @@ msgstr "Recherche manuelle"
 msgid "Manufacturer Aging Report (PDF)"
 msgstr "Rapport de classement chronologique du fabricant (PDF)"
 
-#: app/client/floor-vehicle/floor-car.controller.js:392
+#: app/client/floor-vehicle/floor-car.controller.js:404
 #: app/client/value-lookup/value-lookup.html:178
 #: app/client/value-lookup/value-lookup.html:275
 #: app/client/value-lookup/value-lookup.html:34
@@ -2046,7 +2046,7 @@ msgid "Number of Cars Purchased Per-Auction (in the last 12 months)"
 msgstr "Nombre de voitures achetées par encan (au cours des 12 derniers mois)"
 
 #: app/client/floor-vehicle/auction-bulk-flooring.template.html:20
-#: app/client/floor-vehicle/floor-car.controller.js:394
+#: app/client/floor-vehicle/floor-car.controller.js:406
 #: app/client/floor-vehicle/floor-car.template.html:21
 msgid "Odometer"
 msgstr "Odomètre"
@@ -3406,7 +3406,7 @@ msgstr "Date de début"
 msgid "Start Date should not be later than End Date."
 msgstr "La date de début doit être antérieure à la date de fin."
 
-#: app/client/floor-vehicle/floor-car.controller.js:357
+#: app/client/floor-vehicle/floor-car.controller.js:369
 msgid "Start Over"
 msgstr "Recommencer"
 
@@ -3874,19 +3874,27 @@ msgstr ""
 "Pour prolonger cette unité pour une période additionnelle, veuillez cliquer "
 "ci-dessous."
 
-#: app/client/floor-vehicle/floor-car.template.html:112
+#: app/client/floor-vehicle/floor-car.controller.js:61
 msgid ""
 "To floor plan purchases older than 365 days, please contact NextGear Capital "
 "Floorplan Services at fundingservices@nextgearcapital.com, attach the Bill "
 "of Sale, and provide the customer's NextGear Dealer Number."
 msgstr ""
+"Pour les achats de plans de nantissement datant de plus de 365 jours, "
+"veuillez communiquer avec les services de plans de nantissement de NextGear "
+"Capital à l'adresse : fundingservices@nextgearcapital.com, annexer l'acte de "
+"vente et fournir le numéro de concessionnaire NextGear du client."
 
-#: app/client/floor-vehicle/auction-bulk-flooring.template.html:147
+#: app/client/floor-vehicle/floor-car.controller.js:66
 msgid ""
 "To floor plan purchases older than 7 days, please contact NextGear Capital "
 "Floor plan Services at fundingservices@nextgearcapital.com, attach the Bill "
 "of Sale, and provide the customer's NextGear Dealer Number."
 msgstr ""
+"Pour les achats de plans de nantissement datant de plus de 7 jours, veuillez "
+"communiquer avec les services de plans de nantissement de NextGear Capital à "
+"l'adresse : fundingservices@nextgearcapital.com, annexer l'acte de vente et "
+"fournir le numéro de concessionnaire NextGear du client."
 
 #: app/client/account-management/account-management.template.html:293
 #: app/client/account-management/account-management.template.html:309
@@ -4302,7 +4310,7 @@ msgstr "Trousse de bienvenue"
 msgid "Welcome to myNextGear!"
 msgstr "Bienvenue chez MyNextGear!"
 
-#: app/client/floor-vehicle/floor-car.controller.js:354
+#: app/client/floor-vehicle/floor-car.controller.js:366
 msgid "What would you like to do?"
 msgstr "Qu'aimeriez-vous faire?"
 
@@ -4533,28 +4541,8 @@ msgstr "Code Postal"
 msgid "Zip Code"
 msgstr "Code postal"
 
-#~ msgid ""
-#~ "To floor plan purchases older than 365 days, please contact NextGear "
-#~ "Capital Floorplan Services at fundingservices@nextgearcapital.com, attach "
-#~ "the Bill of Sale, and provide the customer's NextGear Dealer Number."
-#~ msgstr ""
-#~ "Pour les achats de plans de nantissement datant de plus de 365 jours, "
-#~ "veuillez communiquer avec les services de plans de nantissement de "
-#~ "NextGear Capital à l'adresse : fundingservices@nextgearcapital.com, "
-#~ "annexer l'acte de vente et fournir le numéro de concessionnaire NextGear "
-#~ "du client."
-
-#~ msgid ""
-#~ "To floor plan purchases older than 7 days, please contact NextGear "
-#~ "Capital Floor plan Services at fundingservices@nextgearcapital.com, "
-#~ "attach the Bill of Sale, and provide the customer's NextGear Dealer "
-#~ "Number."
-#~ msgstr ""
-#~ "Pour les achats de plans de nantissement datant de plus de 7 jours, "
-#~ "veuillez communiquer avec les services de plans de nantissement de "
-#~ "NextGear Capital à l'adresse : fundingservices@nextgearcapital.com, "
-#~ "annexer l'acte de vente et fournir le numéro de concessionnaire NextGear "
-#~ "du client."
+#~ msgid "3. Documents & Instructions"
+#~ msgstr "3. Documents et directives"
 
 #~ msgid "3. Optional Items"
 #~ msgstr "3. Éléments facultatifs"
