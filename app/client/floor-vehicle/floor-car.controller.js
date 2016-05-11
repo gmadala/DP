@@ -411,7 +411,7 @@
      * @return {Boolean} Is the user allowed to upload documents?
      */
     $scope.canAttachDocuments = function () {
-      return ($scope.attachDocumentsEnabled);
+      return ($scope.attachDocumentsEnabled && User.isUnitedStates());
     };
 
   }
