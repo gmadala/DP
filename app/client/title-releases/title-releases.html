@@ -20,7 +20,7 @@
            filterable="true">
       </div>
 
-      <div class="well" ng-switch="data.results.length > 0 || data.loading">
+      <div class="panel panel-default" ng-switch="data.results.length > 0 || data.loading">
         <h2 class="well-title" translate>Title Release Requests</h2>
         <p class="notice-box" ng-switch-when="false" translate>
           Sorry, no results found. Please <a ng-click="resetSearch()" title="New Search">try a new search</a>.
@@ -99,6 +99,15 @@
         </p>
       </div>
     </section>
-    <section class="col-xs-3 custom well request-queue sticky" nxg-requests-summary eligibility="eligibility" nxg-sticky header=".nxg-sticky-header" footer=".well-footer" scroll=".queue-list"></section>
+    <div class="col-xs-3">
+      <section class="panel panel-default request-queue sticky"
+               nxg-requests-summary
+               eligibility="eligibility"
+               nxg-sticky
+               header=".nxg-sticky-header"
+               footer=".well-footer"
+               scroll=".queue-list">
+      </section>
+    </div>
   </section>
 </div>
