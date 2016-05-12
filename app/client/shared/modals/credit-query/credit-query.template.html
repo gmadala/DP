@@ -4,42 +4,59 @@
 
 <section class="modal-body" nxg-autofocus>
   <div class="row">
-    <div class="col-xs-5 paragraph" translate>NGC Buyer #</div>
-    <div class="col-xs-7 paragraph value">{{ business.number }}</div>
+    <div class="col-xs-4 paragraph" translate>Business Name</div>
+    <div class="col-xs-8 paragraph value">{{ business.name }}</div>
   </div>
   <div class="row">
-    <div class="col-xs-5 paragraph" translate>AuctionACCESS #</div>
-    <div class="col-xs-7 paragraph value">{{ business.auctionAccessNumbers }}</div>
-  </div>
-  <div class="row">
-    <div class="col-xs-5 paragraph" translate>External Buyer ID</div>
-    <div class="col-xs-7 value" ng-hide="business.externalId">
-      <input type="text" ng-model="externalId">
-      <button class="btn" ng-click="saveExternalId()">Save</button>
-    </div>
-    <div class="col-xs-7 paragraph value" ng-show="business.externalId">{{ business.externalId }}</div>
-  </div>
-  <div class="row">
-    <div class="col-xs-5 paragraph" translate>Business Name</div>
-    <div class="col-xs-7 paragraph value">{{ business.name }}</div>
-  </div>
-  <div class="row">
-    <div class="col-xs-5 paragraph" translate>Address</div>
-    <div class="col-xs-7 paragraph value">
+    <div class="col-xs-4 paragraph" translate>Address</div>
+    <div class="col-xs-8 paragraph value">
       {{ business.address }} <br />
       {{ business.city }}, {{ business.state }} {{ business.zipCode }}
     </div>
   </div>
   <div class="row">
-    <div class="col-xs-5 paragraph" translate>Line(s) of Credit</div>
-    <div class="col-xs-7 paragraph value">
+    <div class="col-xs-4 paragraph" translate>Line(s) of Credit</div>
+    <div class="col-xs-8 paragraph value">
       <div ng-repeat="credit in business.creditQuery.results">
         {{ credit.CreditType }} - {{ credit.CreditAvailable | currency }}<br />
       </div>
     </div>
   </div>
-</section>
+  <div class="row number">
+    <div class="col-xs-4" translate>NGC Buyer #</div>
+    <div class="col-xs-8 value">{{ business.number }}</div>
+  </div>
+  <div class="row number">
+    <div class="col-xs-4" translate>AuctionACCESS #</div>
+    <div class="col-xs-8 value">{{ business.auctionAccessNumbers }}</div>
+  </div>
 
+  <div class="row number">
+    <div class="col-xs-4" translate>External Buyer ID</div>
+
+    <div class="col-xs-8  value"  ng-hide="business.externalId">
+      <button class="btn-unstyle"  ng-click="activate()"  ng-hide="active"><span class="glyphicon glyphicon-plus"></span><span class="edit-text" translate>Add</span></button>
+      <input class="col-xs-7 input-external" type="text" ng-model="externalId" ng-show="active" maxlength="50">
+      <button class="btn" style="margin-top:1px;" ng-click="saveExternalId()" ng-show="active">Save</button>
+    </div>
+
+    <div class="col-xs-8 value" ng-show="business.externalId">
+      <div  class="col-xs-8 external-display"  ng-hide="active">{{ business.externalId }}</div>
+      <div ng-hide="active" class="col-xs-4 value">
+        <button class="btn-unstyle" ng-click="activate()" ng-hide="active"><span class="glyphicon glyphicon-pencil"></span><span class="edit-text" translate>Edit</span></button>
+      </div>
+    </div>
+
+    <div class="col-xs-8 value" ng-show="business.externalId">
+      <div ng-show="active">
+        <input class="col-xs-7 input-external" type="text" ng-model="business.externalId" ng-show="active"
+               maxlength="50">
+        <button class="btn" style="margin-top:1px;"  ng-click="saveExternalId()" ng-show="active">Save</button>
+      </div>
+    </div>
+
+  </div>
+</section>
 <div class="modal-footer">
   <button ng-click="close()" class="btn-cta cta-primary">
     <span ng-show="business.creditQuery.requested" translate>Close Window</span>

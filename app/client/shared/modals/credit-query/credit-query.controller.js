@@ -73,17 +73,28 @@
       }
     };
 
+    $scope.active = false;
+
+    $scope.activate = function() {
+      $scope.active = true;
+    };
+
+    $scope.hideSave = false;
     $scope.saveExternalId = function() {
+
+      var externalId = ( $scope.business.externalId ===  '' || $scope.business.externalId ===  null) ? $scope.externalId : $scope.business.externalId ;
+
       User.getInfo()
-        .then(function(info) {
-          return dealerSearch.relateExternal($scope.business.number, info.BusinessId, $scope.externalId);
-        })
-        .then(function(response) {
-          if (response.key) {
-            $scope.business.externalId = $scope.externalId;
-            $scope.dirty = true;
-          }
-        });
+          .then(function (info) {
+            return dealerSearch.relateExternal($scope.business.number, info.BusinessId, externalId);
+          })
+          .then(function (response) {
+            if (response.key) {
+              $scope.business.externalId = externalId;
+              $scope.dirty = true;
+              $scope.active = false;
+            }
+          });
     };
 
     // Allow the dialog to close itself using the "Cancel" button.
