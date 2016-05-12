@@ -520,6 +520,11 @@ input[type="radio"] {
   }
 }
 
+.cr-inline-label {
+  position: relative;
+  top: 6px;
+}
+
 /*
  * TABULAR INLINE CHECKBOXES
  * Specific use case for inline checkboxes within narrow table cells
