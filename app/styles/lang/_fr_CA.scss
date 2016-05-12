@@ -84,7 +84,7 @@ body.lang_fr_CA {
       }
     }
 
-    .col-xs-2.well.dash-well ul{
+    .col-xs-2.well.dash-well ul {
       margin-top: 8%;
     }
 
@@ -149,13 +149,12 @@ body.lang_fr_CA {
     }
   }
 
-
   #TitleReleasesPage {
 
     .requests-grid {
       .btn-title-request {
         width: 150px;
-        font-size:8px;
+        font-size: 8px;
       }
     }
 
@@ -176,7 +175,9 @@ body.lang_fr_CA {
     .lockup-minor {
       font-size: 11px;
     }
-    .search Label {font-size:11px;}
+    .search Label {
+      font-size: 11px;
+    }
 
     @media (max-width: 1090px) {
 
@@ -195,11 +196,11 @@ body.lang_fr_CA {
 
     }
 
-    @media (max-width: 400px){
-      .well-title{
+    @media (max-width: 400px) {
+      .well-title {
         font-size: 14px;
 
-        .well-sub-title, a, .right{
+        .well-sub-title, a, .right {
           font-size: 10px !important;
         }
       }
@@ -245,7 +246,6 @@ body.lang_fr_CA {
     }
   }
 
-
   #ReceiptsPage {
     .filter-options {
       .col-md-5 {
@@ -257,8 +257,9 @@ body.lang_fr_CA {
       }
     }
 
-    .search-form Label {font-size:11px;}
-
+    .search-form Label {
+      font-size: 11px;
+    }
 
     @media (min-width: 1150px) {
       .filter-options {
@@ -269,7 +270,6 @@ body.lang_fr_CA {
       }
     }
   }
-
 
   #ProfileSettingsPage, #AccountManagementPage, #AuctionSettingsPage {
     @media (max-width: 1090px) {
@@ -288,7 +288,24 @@ body.lang_fr_CA {
       }
 
     }
-    .questText{font-size:11px;}
+    .questText {
+      font-size: 11px;
+    }
+  }
+
+  #AccountManagementPage {
+    .well-default-header {
+      padding-bottom: 10px;
+    }
+  }
+
+  #DocumentsPage {
+    .video-well {
+      display: none;
+    }
+    .documents-well {
+      width: 45%;
+    }
   }
 
   #AuctionFloorplanPage {
@@ -309,7 +326,6 @@ body.lang_fr_CA {
     padding: 5px 7px;
   }
 
-
   /* Navs */
   .nav-secondary {
     height: 52px;
@@ -327,7 +343,9 @@ body.lang_fr_CA {
     .link_floorcar {
       width: 150px;
 
-      a {padding: 0 !important;}
+      a {
+        padding: 0 !important;
+      }
     }
 
     .cart-btn {
