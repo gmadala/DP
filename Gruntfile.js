@@ -573,11 +573,10 @@ module.exports = function(grunt) {
   ]);
 
   grunt.registerTask('server-np', [
-       'dev-setup',
-       'livereload-start',
-       'connect:livereload',
-       'watch'
-   ]);
+    'dev-setup',
+    'connect:livereload',
+    'watch'
+  ]);
 
   grunt.registerTask('server-ie', [
     'dev-setup',
