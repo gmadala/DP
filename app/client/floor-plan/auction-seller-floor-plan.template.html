@@ -5,8 +5,8 @@
      filter-label="{{ 'Filter by Status' | translate }}"
      filter-options="filterOptions"
      active-criteria="floorplanData.searchCriteria"
-     on-search="floorplanData.search(floorplanData.searchCriteria)"
-     on-clear="floorplanData.resetSearch(filterOptions)"
+     on-search="floorplanData.sellerSearch(floorplanData.searchCriteria)"
+     on-clear="floorplanData.resetSellerSearch(filterOptions)"
      help-text="{{ 'Date range based on Date Floored OR Disbursement Date.' | translate }}"
      filterable="true">
 </div>
@@ -14,35 +14,35 @@
 <div class="well" ng-switch="floorplanData.results.length > 0 || floorplanData.loading">
   <h2 class="well-title" translate>Floor Plan</h2>
   <p class="notice-box" ng-switch-when="false" translate>
-    Sorry, no results found. Please <a ng-click="resetSearch()" title="New Search">try a new search</a>.
+    Sorry, no results found. Please <a ng-click="resetSellerSearch()" title="New Search">try a new search</a>.
   </p>
   <section ng-switch-when="true"
-           nxg-infinite-scroll="floorplanData.fetchNextResults()"
+           nxg-infinite-scroll="floorplanData.fetchNextSellerResults()"
            nxg-infinite-scroll-disabled="floorplanData.loading"
            nxg-infinite-scroll-show-indicator="floorplanData.loading">
 
     <table class="table table-striped table-primary">
       <thead>
-        <th class="sortable"
-            ng-click="floorplanData.sortBy('FlooringDate')"
-            ng-class="{ sorted : floorplanData.searchCriteria.sortField == 'FlooringDate', desc : floorplanData.searchCriteria.sortDescending }">
-          <nxg-sortable sortable-text="{{ 'Dates' | translate }}"></nxg-sortable>
-        </th>
-        <th class="sortable"
-            ng-click="floorplanData.sortBy('UnitMake')"
-            ng-class="{ sorted : floorplanData.searchCriteria.sortField == 'UnitMake', desc : floorplanData.searchCriteria.sortDescending }">
-          <nxg-sortable sortable-text="{{ 'Description' | translate }}"></nxg-sortable>
-        </th>
-        <th translate>Status</th>
-        <th translate>Purchased For</th>
-        <th class="sortable"
-            ng-click="floorplanData.sortBy('BuyerBusinessName')"
-            ng-class="{ sorted : floorplanData.searchCriteria.sortField == 'BuyerBusinessName', desc : floorplanData.searchCriteria.sortDescending }">
-          <nxg-sortable sortable-text="{{ 'Buyer' | translate }}"></nxg-sortable>
-        </th>
-        <th translate>Ticket No.</th>
-        <th translate>Title Location</th>
-        <th translate>Title</th>
+      <th class="sortable"
+          ng-click="floorplanData.sortSellerBy('FlooringDate')"
+          ng-class="{ sorted : floorplanData.searchCriteria.sortField == 'FlooringDate', desc : floorplanData.searchCriteria.sortDescending }">
+        <nxg-sortable sortable-text="{{ 'Dates' | translate }}"></nxg-sortable>
+      </th>
+      <th class="sortable"
+          ng-click="floorplanData.sortSellerBy('UnitMake')"
+          ng-class="{ sorted : floorplanData.searchCriteria.sortField == 'UnitMake', desc : floorplanData.searchCriteria.sortDescending }">
+        <nxg-sortable sortable-text="{{ 'Description' | translate }}"></nxg-sortable>
+      </th>
+      <th translate>Status</th>
+      <th translate>Purchased For</th>
+      <th class="sortable"
+          ng-click="floorplanData.sortSellerBy('BuyerBusinessName')"
+          ng-class="{ sorted : floorplanData.searchCriteria.sortField == 'BuyerBusinessName', desc : floorplanData.searchCriteria.sortDescending }">
+        <nxg-sortable sortable-text="{{ 'Buyer' | translate }}"></nxg-sortable>
+      </th>
+      <th translate>Ticket No.</th>
+      <th translate>Title Location</th>
+      <th translate>Title</th>
       </thead>
 
       <tr ng-repeat="item in floorplanData.results">
@@ -56,22 +56,32 @@
         <td class="description-narrow">
           <p class="lockup-major" nxg-highlight="item.Description" highlight="item.data.query"></p>
           <p class="lockup-minor caps">
-            <span translate>VIN</span>: <span nxg-highlight="item.UnitVIN" highlight="searchCriteria.query" class="break-word"></span>
+            <span translate>VIN</span>: <span nxg-highlight="item.UnitVin" highlight="searchCriteria.query" class="break-word"></span>
+          </p>
+          <p class="lockup-minor">
+                        <span><span translate>NGC Stock #</span>&nbsp;<span nxg-highlight="item.StockNumber" highlight="searchCriteria.query"
+                                                                class="break-word"></span></span>
+          </p>
+          <p class="lockup-minor" ng-show="item.ExternalStockNumber">
+            <span translate>External Stock #</span>&nbsp;<span nxg-highlight="item.ExternalStockNumber" highlight="searchCriteria.query"
+                                                           class="break-word"></span>
+          </p>
+          <p class="lockup-minor" ng-show="item.ExternalSellerId">
+            <span translate>External Seller ID</span>:&nbsp;<span nxg-highlight="item.ExternalSellerId" highlight="searchCriteria.query"
+                                                             class="break-word"></span>
           </p>
         </td>
         <td>
-          <h5>{{ item.FloorplanStatusName }}</h5>
+          <h5>{{ item.FloorplanStatusName | translate }}</h5>
         </td>
         <td class="numeric">
           <h4>{{ item.PurchaseAmount | currency }}</h4>
         </td>
         <td class="buyer">
           <h5>{{ item.BuyerName }}</h5>
-          <p class="lockup-minor">
-            <span translate>Auction Buyer ID</span>: <span nxg-highlight="item.AuctionBuyerID" highlight="searchCriteria.query" class="break-word"></span>
-          </p>
-          <p class="lockup-minor">
-            <span translate>Auction Location</span>: <span nxg-highlight="item.AuctionLocation" highlight="searchCriteria.query" class="break-word"></span>
+          <p class="lockup-minor" ng-show="item.ExternalBuyerId">
+            <span translate>External Buyer ID</span>: <span nxg-highlight="item.ExternalBuyerId" highlight="searchCriteria.query"
+                                                            class="break-word"></span>
           </p>
         </td>
         <td>
@@ -79,11 +89,11 @@
         </td>
         <td>
           <h5>{{ item.TitleLocation }}</h5>
-          <input type="hidden" ng-model="item.sellerHasTitleChanged" />
+          <input type="hidden" ng-model="item.sellerHasTitleChanged"/>
           <div class="seller-has-title-box cr-inline-narrow" ng-show="item.TitleEditable">
             <input type="checkbox" id="{{ item.FloorplanId }}" name="sellerHasTitle"
                    ng-model="item.sellerHasTitle"
-                   ng-click="sellerHasTitle(item, item.sellerHasTitle)" />
+                   ng-click="sellerHasTitle(item, item.sellerHasTitle)"/>
             <label class="checkbox-img small"
                    for="{{ item.FloorplanId }}" ng-if="hideTooltip(item.sellerHasTitle, item.sellerHasTitleChanged)">
             </label>
@@ -96,15 +106,15 @@
                    tooltip-animation="true" translate>
             </label>
             <div class="medium-left-margin">
-            <label for="{{ item.FloorplanId }}" class="cr-label" translate>
-              I Have the Title
-            </label></div>
+              <label for="{{ item.FloorplanId }}" class="cr-label" translate>
+                I Have the Title
+              </label></div>
           </div>
         </td>
         <td>
           <a class="btn btn-square" ng-show="item.TitleImageAvailable"
-            ng-href="{{ item.$titleURL }}"
-            target="_blank">
+             ng-href="{{ item.$titleURL }}"
+             target="_blank">
             <span nxg-icon="icon-title"></span>
           </a>
         </td>

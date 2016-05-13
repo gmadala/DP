@@ -13,8 +13,6 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Poedit 1.7.1\n"
 
-#: app/client/dealer-search/auction-dealer-search.template.html:108
-#: app/client/dealer-search/auction-dealer-search.template.html:38
 #: app/client/value-lookup/value-lookup.html:83
 msgid "- OR -"
 msgstr "- O -"
@@ -40,10 +38,6 @@ msgstr ""
 #: app/client/account-management/account-management.template.html:350
 msgid "[New Label Here]"
 msgstr "[New Label Here]"
-
-#: app/client/shared/modals/message-box/message-box.template.html:7
-msgid "{{ buttons.label }}"
-msgstr ""
 
 #: app/client/vehicle-details/vehicle-details.html:22
 msgid ""
@@ -113,10 +107,6 @@ msgid ""
 msgstr ""
 "{{ selectedReceipts.length }} <span class=\"lockup-minor heavy\">de</span> 20"
 
-#: app/client/shared/modals/message-box/message-box.template.html:1
-msgid "{{ title }}"
-msgstr ""
-
 #: app/client/analytics/analytics.template.html:241
 msgid "# of Cars Purchased"
 msgstr "# de automóviles comprados"
@@ -185,7 +175,7 @@ msgstr ""
 
 #: app/client/checkout/checkout.template.html:215
 #: app/client/floor-vehicle/auction-bulk-flooring.template.html:109
-#: app/client/floor-vehicle/floor-car.template.html:134
+#: app/client/floor-vehicle/floor-car.template.html:135
 msgid "$"
 msgstr "$"
 
@@ -210,13 +200,13 @@ msgstr "2. ¿Quiere que dicho aumento sea temporal o permanente?"
 msgid "2. Sale Information"
 msgstr "2. Información de ventas"
 
+#: app/client/floor-vehicle/floor-car.template.html:209
+msgid "3. Documents &amp; Instructions"
+msgstr "3. Documentos e Instrucciones"
+
 #: app/client/shared/modals/request-credit-increase/request-credit-increase.template.html:48
 msgid "3. How much would you like to increase it by?"
 msgstr "3. ¿De cuánto desea que sea el aumento?"
-
-#: app/client/floor-vehicle/floor-car.template.html:207
-msgid "3. Optional Items"
-msgstr "3. Artículos opcionales"
 
 #: app/404.html:148
 msgid "a mistyped address"
@@ -270,11 +260,11 @@ msgstr "Administración de Cuentas"
 
 #: app/client/account-management/account-management.template.html:12
 #: app/client/account-management/account-management.template.html:21
-#: app/client/shared/modals/financial-account/financial-account.template.html:104
+#: app/client/shared/modals/financial-account/financial-account.template.html:84
 msgid "Account Number"
 msgstr "Número de la cuenta"
 
-#: app/client/shared/modals/financial-account/financial-account.template.html:117
+#: app/client/shared/modals/financial-account/financial-account.template.html:97
 msgid "Account number must only have numbers."
 msgstr "El número de la cuenta solo debe contener números."
 
@@ -288,7 +278,6 @@ msgstr "Acciones"
 
 #: app/client/account-management/account-management.template.html:15
 #: app/client/account-management/account-management.template.html:23
-#: app/client/shared/modals/financial-account/financial-account.template.html:87
 msgid "Active"
 msgstr "Activa"
 
@@ -346,7 +335,7 @@ msgid "Additional Principal Payment"
 msgstr "Pago de capital adicional"
 
 #: app/client/floor-vehicle/floor-car-confirm-modal/floor-car-confirm.template.html:30
-#: app/client/shared/modals/credit-query/credit-query.template.html:22
+#: app/client/shared/modals/credit-query/credit-query.template.html:27
 msgid "Address"
 msgstr "Dirección"
 
@@ -447,7 +436,8 @@ msgstr "¿Aplicar estos fondos al pago?"
 #: app/client/analytics/analytics.template.html:17
 #: app/client/dashboard/auction/auction-dashboard.template.html:45
 #: app/client/dashboard/dealer/dashboard.template.html:290
-#: app/client/floor-plan/floor-plan.controller.js:52
+#: app/client/floor-plan/auction-seller-floor-plan.controller.js:47
+#: app/client/floor-plan/floor-plan.controller.js:48
 #: app/client/reports/dealer/reports.controller.js:65
 #: app/client/vehicle-details/vehicle-details.controller.js:400
 msgid "Approved"
@@ -457,11 +447,13 @@ msgstr "Aprobado"
 msgid "Approved Floor Plans"
 msgstr "Planes de piso aprobados"
 
-#: app/client/floor-plan/floor-plan.controller.js:80
+#: app/client/floor-plan/auction-seller-floor-plan.controller.js:75
+#: app/client/floor-plan/floor-plan.controller.js:76
 msgid "Approved/Not Paid"
 msgstr "Aprobado/No pagado"
 
-#: app/client/floor-plan/floor-plan.controller.js:76
+#: app/client/floor-plan/auction-seller-floor-plan.controller.js:71
+#: app/client/floor-plan/floor-plan.controller.js:72
 msgid "Approved/Paid"
 msgstr "Aprobado/Pagado"
 
@@ -477,14 +469,14 @@ msgstr "# de subasta"
 msgid "Auction Access No."
 msgstr "Núm. de acceso a la subasta"
 
-#: app/client/dealer-search/auction-dealer-search.template.html:42
-msgid "Auction Access Number"
-msgstr "Número de acceso a la subasta"
-
 #: app/client/floor-vehicle/floor-car-confirm-modal/floor-car-confirm.template.html:22
-#: app/client/shared/modals/credit-query/credit-query.template.html:14
 msgid "Auction Access Number(s)"
 msgstr "Número(s) de acceso a la subasta"
+
+#: app/client/dealer-search/auction-dealer-search.template.html:57
+#: app/client/shared/modals/credit-query/credit-query.template.html:11
+msgid "AuctionACCESS #"
+msgstr "AuctionACCESS #"
 
 #: app/client/shared/modals/confirm/confirm-disable-autopay.template.html:3
 msgid "Authorization and Request to Unenroll"
@@ -500,7 +492,6 @@ msgid "Available"
 msgstr "Disponible"
 
 #: app/client/analytics/analytics.template.html:82
-#: app/client/shared/modals/credit-query/credit-query.template.html:37
 msgid "Available Credit"
 msgstr "Crédito disponible"
 
@@ -555,7 +546,7 @@ msgstr "Títulos en espera de 16 - 30 días"
 msgid "Awaiting Titles 30+ Days"
 msgstr "Títulos en espera de más de 30 días"
 
-#: app/client/floor-vehicle/floor-car.template.html:217
+#: app/client/floor-vehicle/floor-car.template.html:220
 #: app/client/vehicle-details/vehicle-details.html:461
 msgid "Back of Title"
 msgstr "Reverso del título"
@@ -565,7 +556,7 @@ msgstr "Reverso del título"
 msgid "Bank Account"
 msgstr "Cuenta bancaria"
 
-#: app/client/floor-vehicle/floor-car.template.html:180
+#: app/client/floor-vehicle/floor-car.template.html:181
 msgid "Bank Account for Deposit (when applicable)"
 msgstr "Cuenta bancaria para depósitos (en su caso)"
 
@@ -575,7 +566,7 @@ msgstr "Cuenta bancaria para pago"
 
 #: app/client/account-management/account-management.template.html:11
 #: app/client/account-management/account-management.template.html:20
-#: app/client/shared/modals/financial-account/financial-account.template.html:93
+#: app/client/shared/modals/financial-account/financial-account.template.html:73
 msgid "Bank Name"
 msgstr "Nombre del banco"
 
@@ -599,7 +590,7 @@ msgstr "Las de mejor y peor movimiento por código postal"
 msgid "Best Movers"
 msgstr "Las de mejor movimiento"
 
-#: app/client/floor-vehicle/floor-car.template.html:215
+#: app/client/floor-vehicle/floor-car.template.html:218
 #: app/client/vehicle-details/vehicle-details.html:459
 msgid "Bill of Sale"
 msgstr "Nota de venta"
@@ -608,11 +599,12 @@ msgstr "Nota de venta"
 msgid "Business Email"
 msgstr "Correo electrónico del negocio"
 
+#: app/client/dealer-search/auction-dealer-search.template.html:37
 #: app/client/dealer-search/business-search-modal/business-search.template.html:44
 #: app/client/dealer-search/dealer-name-search-modal/dealer-name-search.template.html:58
 #: app/client/dealer-search/dealer-name-search-modal/dealer-name-search.template.html:8
 #: app/client/floor-vehicle/floor-car-confirm-modal/floor-car-confirm.template.html:26
-#: app/client/shared/modals/credit-query/credit-query.template.html:18
+#: app/client/shared/modals/credit-query/credit-query.template.html:23
 msgid "Business Name"
 msgstr "Nombre del negocio"
 
@@ -626,7 +618,6 @@ msgid "Business No."
 msgstr "Núm. de negocio"
 
 #: app/client/floor-vehicle/floor-car-confirm-modal/floor-car-confirm.template.html:16
-#: app/client/shared/modals/credit-query/credit-query.template.html:10
 msgid "Business Number"
 msgstr "Número del negocio"
 
@@ -649,12 +640,7 @@ msgstr "Resumen del negocio"
 msgid "Buyer"
 msgstr "Comprador"
 
-#: app/client/shared/modals/credit-query/credit-query.template.html:1
-msgid "Buyer Business Line of Credit Query"
-msgstr "Consulta de línea de crédito del negocio del comprador"
-
 #: app/client/floor-vehicle/floor-car-confirm-modal/floor-car-confirm.template.html:13
-#: app/client/shared/modals/credit-query/credit-query.template.html:6
 msgid "Buyer Information"
 msgstr "Información del comprador"
 
@@ -672,7 +658,7 @@ msgstr ""
 msgid "By Stock #, VIN, or Description"
 msgstr "Por número de inventario, VIN o descripción"
 
-#: app/client/floor-vehicle/floor-car.template.html:267
+#: app/client/floor-vehicle/floor-car.template.html:270
 #: app/client/vehicle-details/vehicle-details.html:512
 msgid "Can't drag &amp; drop?"
 msgstr "¿No puede arrastrar y soltar?"
@@ -685,7 +671,7 @@ msgstr "¿No puede arrastrar y soltar?"
 #: app/client/checkout/schedule-checkout-modal/schedule-checkout.template.html:81
 #: app/client/dashboard/nxg-unapplied-funds-widget/request-payout-modal.template.html:53
 #: app/client/floor-vehicle/auction-bulk-flooring.template.html:182
-#: app/client/floor-vehicle/floor-car.controller.js:344
+#: app/client/floor-vehicle/floor-car.controller.js:365
 #: app/client/login/login-create-password/login-create-password.template.html:35
 #: app/client/login/login-update-security/login-update-security.template.html:40
 #: app/client/profile-settings/auction/auction-settings.template.html:220
@@ -695,8 +681,7 @@ msgstr "¿No puede arrastrar y soltar?"
 #: app/client/profile-settings/dealer/profile-settings.template.html:9
 #: app/client/shared/modals/confirm/confirm-disable-autopay.template.html:10
 #: app/client/shared/modals/confirm/confirm-enable-autopay.template.html:114
-#: app/client/shared/modals/credit-query/credit-query.template.html:49
-#: app/client/shared/modals/financial-account/financial-account.template.html:199
+#: app/client/shared/modals/financial-account/financial-account.template.html:179
 #: app/client/vehicle-details/vehicle-details.html:108
 msgid "Cancel"
 msgstr "Cancelar"
@@ -745,7 +730,7 @@ msgstr "Cheque #"
 msgid "Checkout"
 msgstr "Verificación"
 
-#: app/client/dealer-search/auction-dealer-search.template.html:98
+#: app/client/dealer-search/auction-dealer-search.template.html:62
 #: app/client/dealer-search/business-search-modal/business-search.template.html:62
 #: app/client/dealer-search/dealer-name-search-modal/dealer-name-search.template.html:16
 #: app/client/dealer-search/dealer-name-search-modal/dealer-name-search.template.html:73
@@ -753,7 +738,6 @@ msgstr "Verificación"
 msgid "City"
 msgstr "Ciudad"
 
-#: app/client/dealer-search/auction-dealer-search.template.html:121
 #: app/client/dealer-search/dealer-name-search-modal/dealer-name-search.template.html:18
 #: app/client/shared/directives/nxg-address/nxg-address.template.html:59
 msgid "City names must only have letters and spaces."
@@ -788,7 +772,7 @@ msgstr "Cerrar detalles"
 #: app/client/dealer-search/business-search-modal/business-search.template.html:101
 #: app/client/dealer-search/dealer-name-search-modal/dealer-name-search.template.html:104
 #: app/client/floor-vehicle/nxg-vin-details/multiple-vehicles-modal/multiple-vehicles.template.html:23
-#: app/client/shared/modals/credit-query/credit-query.template.html:48
+#: app/client/shared/modals/credit-query/credit-query.template.html:45
 #: app/client/shared/modals/extension-request/payment-extension.template.html:44
 #: app/client/shared/modals/floor-car-message/floor-car-message.template.html:38
 #: app/client/shared/modals/request-credit-increase/request-credit-increase.controller.js:88
@@ -814,16 +798,19 @@ msgstr "Programa de protección de garantía"
 msgid "Color"
 msgstr "Color"
 
-#: app/client/floor-plan/floor-plan.controller.js:56
+#: app/client/floor-plan/auction-seller-floor-plan.controller.js:51
+#: app/client/floor-plan/floor-plan.controller.js:52
 #: app/client/reports/dealer/reports.controller.js:66
 msgid "Completed"
 msgstr "Terminado"
 
-#: app/client/floor-plan/floor-plan.controller.js:88
+#: app/client/floor-plan/auction-seller-floor-plan.controller.js:83
+#: app/client/floor-plan/floor-plan.controller.js:84
 msgid "Completed/Not Paid"
 msgstr "Terminado/No pagado"
 
-#: app/client/floor-plan/floor-plan.controller.js:84
+#: app/client/floor-plan/auction-seller-floor-plan.controller.js:79
+#: app/client/floor-plan/floor-plan.controller.js:80
 msgid "Completed/Paid"
 msgstr "Terminado/Pagado"
 
@@ -831,7 +818,7 @@ msgstr "Terminado/Pagado"
 msgid "Confirm"
 msgstr "Confirmar"
 
-#: app/client/shared/modals/financial-account/financial-account.template.html:107
+#: app/client/shared/modals/financial-account/financial-account.template.html:87
 msgid "Confirm Account Number"
 msgstr "Confirmar número de cuenta"
 
@@ -913,10 +900,6 @@ msgstr ""
 "notificará por correo electrónico tan pronto como se haya procesado su "
 "solicitud."
 
-#: app/client/shared/modals/credit-query/credit-query.template.html:36
-msgid "Credit Type"
-msgstr "Tipo de crédito"
-
 #: app/client/analytics/analytics.template.html:78
 msgid "Credits and Payments"
 msgstr "Créditos y pagos"
@@ -976,6 +959,10 @@ msgstr "Días de piso "
 msgid "Days to Turn"
 msgstr "Días de rotación"
 
+#: app/client/dealer-search/auction-dealer-search.template.html:23
+msgid "Dealer"
+msgstr "Distribuidor"
+
 #: app/client/shared/directives/navbar/navbar.template.html:29
 msgid "Dealer #"
 msgstr "Distribuidor #"
@@ -984,17 +971,9 @@ msgstr "Distribuidor #"
 msgid "Dealer Funding Checklist"
 msgstr "Lista de Verificación de Financiamiento a Proveedores"
 
-#: app/client/dealer-search/auction-dealer-search.template.html:80
-msgid "Dealer Name"
-msgstr "Nombre del distribuidor"
-
-#: app/client/dealer-search/auction-dealer-search.template.html:72
-msgid "Dealer Name Search"
-msgstr "Búsqueda por nombre de distribuidor"
-
-#: app/client/dealer-search/auction-dealer-search.template.html:3
-msgid "Dealer Number Search"
-msgstr "Búsqueda por número de distribuidor"
+#: app/client/shared/modals/credit-query/credit-query.template.html:1
+msgid "Dealer Information"
+msgstr "Información del distribuidor"
 
 #: app/client/shared/directives/navbar/navbar.controller.js:49
 msgid "Dealer Search"
@@ -1013,11 +992,11 @@ msgstr "Dirección predeterminada"
 msgid "Default Deposit Account:"
 msgstr "Cuenta predeterminada para depósitos:"
 
-#: app/client/shared/modals/financial-account/financial-account.template.html:183
+#: app/client/shared/modals/financial-account/financial-account.template.html:163
 msgid "Default for deposits"
 msgstr "Depósitos por defecto"
 
-#: app/client/shared/modals/financial-account/financial-account.template.html:191
+#: app/client/shared/modals/financial-account/financial-account.template.html:171
 msgid "Default for payments"
 msgstr "Cuenta predeterminada para pagos"
 
@@ -1031,12 +1010,14 @@ msgid "Delivery Type"
 msgstr "Tipo de entrega"
 
 #: app/client/dashboard/dealer/dashboard.template.html:320
-#: app/client/floor-plan/floor-plan.controller.js:48
+#: app/client/floor-plan/auction-seller-floor-plan.controller.js:43
+#: app/client/floor-plan/floor-plan.controller.js:44
 #: app/client/reports/dealer/reports.controller.js:67
 msgid "Denied"
 msgstr "Negado"
 
-#: app/client/floor-plan/floor-plan.controller.js:72
+#: app/client/floor-plan/auction-seller-floor-plan.controller.js:67
+#: app/client/floor-plan/floor-plan.controller.js:68
 msgid "Denied/Not Paid"
 msgstr "Denegado/No pagado"
 
@@ -1058,6 +1039,7 @@ msgstr "Denegado/No pagado"
 msgid "Description"
 msgstr "Descripción"
 
+#: app/client/dealer-search/auction-dealer-search.template.html:69
 #: app/client/promos/promos.template.html:40
 #: app/client/promos/promos.template.html:69
 msgid "Details"
@@ -1088,7 +1070,7 @@ msgstr "Detalles del desembolso"
 msgid "Disbursement Groups"
 msgstr "Grupos de desembolso"
 
-#: app/client/floor-vehicle/floor-car.template.html:209
+#: app/client/floor-vehicle/floor-car.template.html:212
 #: app/client/vehicle-details/vehicle-details.html:453
 msgid "Document Upload"
 msgstr "Cargar documento"
@@ -1097,7 +1079,7 @@ msgstr "Cargar documento"
 msgid "Documents"
 msgstr "Documentos"
 
-#: app/client/shared/modals/financial-account/financial-account.template.html:133
+#: app/client/shared/modals/financial-account/financial-account.template.html:113
 msgid "Does not match with account number."
 msgstr "No coincide con el número de cuenta."
 
@@ -1109,7 +1091,7 @@ msgstr "Descargue myNextGear mobile para Android"
 msgid "Download myNextGear mobile iOS"
 msgstr "Descargue myNextGear mobile para iOS"
 
-#: app/client/floor-vehicle/floor-car.template.html:241
+#: app/client/floor-vehicle/floor-car.template.html:244
 #: app/client/vehicle-details/vehicle-details.html:485
 msgid "Drag files here..."
 msgstr "Arrastre los archivos aquí..."
@@ -1290,6 +1272,20 @@ msgstr "Inventario exportable"
 msgid "Extended Term"
 msgstr "Plazo ampliado"
 
+#: app/client/dealer-search/auction-dealer-search.template.html:52
+#: app/client/floor-plan/auction-seller-floor-plan.template.html:83
+#: app/client/shared/modals/credit-query/credit-query.template.html:15
+msgid "External Buyer ID"
+msgstr "Identificación de comprador externo"
+
+#: app/client/floor-plan/auction-seller-floor-plan.template.html:70
+msgid "External Seller ID"
+msgstr "Identificación de vendedor externo"
+
+#: app/client/floor-plan/auction-seller-floor-plan.template.html:66
+msgid "External Stock #"
+msgstr "Número de inventario externo"
+
 #: app/client/value-lookup/value-lookup.html:501
 #: app/client/vehicle-details/vehicle-details.html:339
 msgid "Extra Clean"
@@ -1403,6 +1399,10 @@ msgstr "Cuentas financieras"
 msgid "Financial Activity"
 msgstr "Actividad financiera"
 
+#: app/client/dealer-search/auction-dealer-search.template.html:2
+msgid "Find a Dealer"
+msgstr "Encuentre a un distribuidor"
+
 #: app/client/floor-plan/auction-seller-floor-plan.template.html:2
 #: app/client/floor-plan/floor-plan.template.html:4
 #: app/client/shared/directives/nxg-search/nxg-search.template.html:12
@@ -1426,7 +1426,7 @@ msgstr "Fecha de puesta en piso"
 msgid "Floor Plan"
 msgstr "Plan de piso"
 
-#: app/client/floor-vehicle/floor-car.template.html:304
+#: app/client/floor-vehicle/floor-car.template.html:312
 msgid "Floor Plan Comments"
 msgstr "Comentarios de planes de piso"
 
@@ -1440,7 +1440,7 @@ msgstr "Estimados del valor del plan de piso"
 
 #: app/client/dashboard/auction/auction-dashboard.template.html:123
 msgid "Floor Plan Volume History"
-msgstr ""
+msgstr "Historial del volumen del plan de piso"
 
 #: app/client/dashboard/dealer/dashboard.template.html:327
 msgid "Floor Plans"
@@ -1484,7 +1484,7 @@ msgstr "para {{ item.ScheduledDate | moment }}"
 msgid "for {{ item.ScheduledPaymentDate | moment }}"
 msgstr "para {{ item.ScheduledPaymentDate | moment }}"
 
-#: app/client/floor-vehicle/floor-car.template.html:211
+#: app/client/floor-vehicle/floor-car.template.html:214
 #: app/client/vehicle-details/vehicle-details.html:455
 msgid ""
 "For faster funding, please upload your floor plan documents now. Document "
@@ -1509,7 +1509,7 @@ msgstr "¿Olvidó su nombre de usuario o contraseña?"
 msgid "Forgot Your Username?"
 msgstr "¿Olvidó su nombre de usuario?"
 
-#: app/client/floor-vehicle/floor-car.template.html:216
+#: app/client/floor-vehicle/floor-car.template.html:219
 #: app/client/vehicle-details/vehicle-details.html:460
 msgid "Front of Title"
 msgstr "Frente del título"
@@ -1527,7 +1527,7 @@ msgstr "Cargos futuros"
 msgid "Future Payments"
 msgstr "Pagos Futuros"
 
-#: app/client/floor-vehicle/floor-car.controller.js:347
+#: app/client/floor-vehicle/floor-car.controller.js:368
 msgid "Go Home"
 msgstr "Ir a la página principal"
 
@@ -1563,12 +1563,9 @@ msgstr "Ocultar detalles de pago"
 msgid "Historical Reports"
 msgstr "Reportes históricos"
 
-#: app/client/shared/modals/financial-account/financial-account.template.html:70
-msgid ""
-"I acknowledge that I have reviewed and agree to the Terms and Conditions."
-msgstr ""
-"Reconozco que he revisado los términos y condiciones y estoy de acuerdo con "
-"ellos."
+#: app/client/shared/modals/financial-account/financial-account.template.html:60
+msgid "I acknowledge that I have reviewed and agree."
+msgstr "Acepto haberlo revisado y estoy de acuerdo."
 
 #: app/client/shared/modals/confirm/confirm-enable-autopay.template.html:107
 msgid ""
@@ -1578,7 +1575,7 @@ msgstr ""
 "Revisé la Autorización y solicitud de pagos automáticos y estoy de acuerdo "
 "con ella."
 
-#: app/client/floor-plan/auction-seller-floor-plan.template.html:93
+#: app/client/floor-plan/auction-seller-floor-plan.template.html:109
 msgid "I Have the Title"
 msgstr "Tengo este título"
 
@@ -1589,14 +1586,6 @@ msgid ""
 msgstr ""
 "Si está teniendo problemas para conectarse, haga clic en \"¿Olvidó su nombre "
 "de usuario o contraseña?\" abajo o póngase en contacto con:"
-
-#: app/client/dealer-search/auction-dealer-search.template.html:5
-msgid ""
-"If you have the NextGear Capital Dealer Number or Auction Access Number, use "
-"the Dealer Number search."
-msgstr ""
-"Si cuenta con el número de distribuidor de NextGear Capital o con el número "
-"de acceso a la subasta, utilice la búsqueda por número de distribuidor."
 
 #: app/client/checkout/confirm-checkout-modal/confirm-checkout.template.html:94
 msgid ""
@@ -1670,7 +1659,7 @@ msgstr "Caracter inválido en VIN"
 msgid "Invalid date range"
 msgstr "Rango de fechas no válido"
 
-#: app/client/floor-vehicle/floor-car.template.html:262
+#: app/client/floor-vehicle/floor-car.template.html:265
 #: app/client/vehicle-details/vehicle-details.html:507
 msgid "invalid files."
 msgstr "archivos inválidos."
@@ -1693,7 +1682,7 @@ msgstr "Ubicación del inventario"
 msgid "It looks like this was the result of either:"
 msgstr "Parece que éste es el resultado de:"
 
-#: app/client/floor-vehicle/floor-car.controller.js:349
+#: app/client/floor-vehicle/floor-car.controller.js:370
 msgid "Keep Editing"
 msgstr "Siga editando"
 
@@ -1714,16 +1703,21 @@ msgstr "Último pago"
 msgid "Last Payment Date"
 msgstr "Fecha del último pago"
 
+#: app/client/dealer-search/auction-dealer-search.template.html:42
 #: app/client/dealer-search/business-search-modal/business-search.template.html:49
 #: app/client/dealer-search/dealer-name-search-modal/dealer-name-search.template.html:63
 msgid "Legal Name"
 msgstr "Razón social"
 
 #: app/client/dashboard/dealer/dashboard.template.html:350
-#: app/client/floor-vehicle/floor-car.template.html:155
+#: app/client/floor-vehicle/floor-car.template.html:156
 #: app/client/vehicle-details/vehicle-details.html:60
 msgid "Line of Credit"
 msgstr "Línea de crédito"
+
+#: app/client/shared/modals/credit-query/credit-query.template.html:34
+msgid "Line(s) of Credit"
+msgstr "Línea(s) de crédito"
 
 #: app/client/promos/promos.template.html:16
 msgid "Location"
@@ -1779,9 +1773,9 @@ msgstr ""
 #: app/client/floor-vehicle/auction-bulk-flooring.template.html:47
 #: app/client/floor-vehicle/auction-bulk-flooring.template.html:99
 #: app/client/floor-vehicle/floor-car.template.html:12
-#: app/client/floor-vehicle/floor-car.template.html:162
-#: app/client/floor-vehicle/floor-car.template.html:176
-#: app/client/floor-vehicle/floor-car.template.html:188
+#: app/client/floor-vehicle/floor-car.template.html:163
+#: app/client/floor-vehicle/floor-car.template.html:177
+#: app/client/floor-vehicle/floor-car.template.html:189
 #: app/client/floor-vehicle/floor-car.template.html:52
 #: app/client/floor-vehicle/floor-car.template.html:66
 msgid "Make Selection"
@@ -1799,7 +1793,7 @@ msgstr "Búsqueda manual"
 msgid "Manufacturer Aging Report (PDF)"
 msgstr "Informe de antigüedad del fabricante (PDF)"
 
-#: app/client/floor-vehicle/floor-car.controller.js:383
+#: app/client/floor-vehicle/floor-car.controller.js:404
 #: app/client/value-lookup/value-lookup.html:178
 #: app/client/value-lookup/value-lookup.html:275
 #: app/client/value-lookup/value-lookup.html:34
@@ -1908,6 +1902,10 @@ msgid ""
 "while we actively work to improve our\n"
 "            service to you. Thank you for using myNextGear!"
 msgstr ""
+"myNextGear no está disponible temporalmente, estamos actualizando "
+"características y beneficios adicionales. Disculpe las molestias; le "
+"agradecemos su paciencia mientras trabajamos activamente para mejorar el "
+"servicio que le proporcionamos. Gracias por utilizar myNextGear."
 
 #: app/client/account-management/nxg-financial-account/nxg-financial-account.directive.js:51
 #: app/client/account-management/nxg-financial-account/nxg-financial-account.directive.js:82
@@ -1953,15 +1951,11 @@ msgstr "Valores de NextGear Capital Book"
 msgid "NextGear Capital Book Wholesale Values"
 msgstr "Valores de mayoreo de NextGear Capital Book"
 
-#: app/client/dealer-search/auction-dealer-search.template.html:9
-msgid "NextGear Capital Dealer Number"
-msgstr "Número de distribuidor de NextGear Capital"
-
 #: app/client/resources/auction/auction-resources.template.html:2
 msgid "NextGear Capital Documents"
 msgstr "Documentos de NextGear Capital"
 
-#: app/client/floor-plan/auction-seller-floor-plan.template.html:89
+#: app/client/floor-plan/auction-seller-floor-plan.template.html:105
 msgid ""
 "NextGear Capital has been notified of this change and will be sending "
 "funding soon."
@@ -1969,12 +1963,21 @@ msgstr ""
 "Se ha notificado a NextGear Capital de este cambio y pronto le enviará "
 "financiamiento."
 
+#: app/client/dealer-search/auction-dealer-search.template.html:47
+#: app/client/shared/modals/credit-query/credit-query.template.html:7
+msgid "NGC Buyer #"
+msgstr "# de comprador NGC"
+
+#: app/client/floor-plan/auction-seller-floor-plan.template.html:62
+msgid "NGC Stock #"
+msgstr "# de inventario NGC"
+
 #: app/client/account-management/account-management.template.html:195
 #: app/client/account-management/account-management.template.html:200
 #: app/client/account-management/account-management.template.html:372
 #: app/client/account-management/account-management.template.html:380
 #: app/client/checkout/checkout.template.html:208
-#: app/client/floor-vehicle/floor-car.template.html:89
+#: app/client/floor-vehicle/floor-car.template.html:90
 #: app/client/profile-settings/auction/auction-settings.template.html:171
 #: app/client/profile-settings/auction/auction-settings.template.html:176
 #: app/client/shared/directives/nxg-payment-buttons/cancel-fee-modal/cancel-fee.template.html:26
@@ -1991,19 +1994,8 @@ msgstr "No hay ninguna notificación activada actualmente."
 msgid "No Payment Activity Available"
 msgstr "No hay ninguna actividad de pago disponible."
 
-#: app/client/dealer-search/auction-dealer-search.template.html:56
-msgid "No results found, please enter a valid Auction Access Number."
-msgstr ""
-"No se encontró ningún resultado; por favor, capture un número válidode "
-"acceso a subasta."
-
-#: app/client/dealer-search/auction-dealer-search.template.html:26
-msgid "No results found, please enter a valid Dealer Number."
-msgstr ""
-"No se encontró ningún resultado, por favor, capture un número válido de "
-"distribuidor."
-
-#: app/client/floor-plan/floor-plan.controller.js:92
+#: app/client/floor-plan/auction-seller-floor-plan.controller.js:87
+#: app/client/floor-plan/floor-plan.controller.js:88
 msgid "No Title/Paid"
 msgstr "Sin título/pagado"
 
@@ -2039,7 +2031,7 @@ msgstr "No es elegible para liberación de título"
 msgid "Not found <span>:(</span>"
 msgstr "No se encontró <span>:(</span>"
 
-#: app/client/floor-vehicle/floor-car.template.html:221
+#: app/client/floor-vehicle/floor-car.template.html:224
 #: app/client/vehicle-details/vehicle-details.html:465
 msgid "Not sure what to send?"
 msgstr "¿No está seguro(a) de qué enviar?"
@@ -2057,7 +2049,7 @@ msgstr ""
 "Cantidad de automóviles comprados por subasta (en los últimos 12 meses)"
 
 #: app/client/floor-vehicle/auction-bulk-flooring.template.html:20
-#: app/client/floor-vehicle/floor-car.controller.js:385
+#: app/client/floor-vehicle/floor-car.controller.js:406
 #: app/client/floor-vehicle/floor-car.template.html:21
 msgid "Odometer"
 msgstr "Odómetro"
@@ -2066,11 +2058,11 @@ msgstr "Odómetro"
 #: app/client/dashboard/nxg-unapplied-funds-widget/nxg-unapplied-funds-widget.controller.js:54
 #: app/client/login/login-recover/login-recover.controller.js:149
 #: app/client/shared/directives/nxg-messages/nxg-messages-modal.template.html:11
-#: app/client/shared/modals/financial-account/financial-account.controller.js:149
+#: app/client/shared/modals/financial-account/financial-account.controller.js:159
 msgid "OK"
 msgstr "De acuerdo"
 
-#: app/client/floor-vehicle/floor-car.template.html:285
+#: app/client/floor-vehicle/floor-car.template.html:288
 #: app/client/vehicle-details/vehicle-details.html:530
 msgid "One or more files exceeded the 5MB limit."
 msgstr "Hay uno o más archivos que exceden el límite de 5 MB."
@@ -2079,7 +2071,7 @@ msgstr "Hay uno o más archivos que exceden el límite de 5 MB."
 msgid "Original Term"
 msgstr "Plazo original"
 
-#: app/client/floor-vehicle/floor-car.template.html:218
+#: app/client/floor-vehicle/floor-car.template.html:221
 #: app/client/vehicle-details/vehicle-details.html:462
 msgid "Other required documents"
 msgstr "Otros documentos que deben presentarse"
@@ -2286,7 +2278,8 @@ msgstr "El importe del pago debe ser de $0.01 a {{ maxAdditional | currency }}"
 #: app/client/analytics/analytics.template.html:57
 #: app/client/dashboard/auction/auction-dashboard.template.html:85
 #: app/client/dashboard/dealer/dashboard.template.html:305
-#: app/client/floor-plan/floor-plan.controller.js:44
+#: app/client/floor-plan/auction-seller-floor-plan.controller.js:39
+#: app/client/floor-plan/floor-plan.controller.js:40
 #: app/client/vehicle-details/vehicle-details.controller.js:401
 msgid "Pending"
 msgstr "Pendiente"
@@ -2295,7 +2288,8 @@ msgstr "Pendiente"
 msgid "Pending Floor Plans"
 msgstr "Planes pendientes de puesta en piso"
 
-#: app/client/floor-plan/floor-plan.controller.js:68
+#: app/client/floor-plan/auction-seller-floor-plan.controller.js:63
+#: app/client/floor-plan/floor-plan.controller.js:64
 msgid "Pending/Not Paid"
 msgstr "Pendiente/No pagado"
 
@@ -2359,7 +2353,7 @@ msgstr ""
 msgid "Please choose a line of credit."
 msgstr "Por favor, seleccione una línea de crédito."
 
-#: app/client/shared/modals/financial-account/financial-account.template.html:139
+#: app/client/shared/modals/financial-account/financial-account.template.html:119
 msgid "Please confirm the account number."
 msgstr "Confirme el número de cuenta."
 
@@ -2384,7 +2378,7 @@ msgstr ""
 "continuación."
 
 #: app/client/account-management/nxg-financial-account/nxg-financial-account.template.html:11
-#: app/client/shared/modals/financial-account/financial-account.template.html:96
+#: app/client/shared/modals/financial-account/financial-account.template.html:76
 msgid "Please enter a bank name."
 msgstr "Escriba el nombre del banco."
 
@@ -2393,10 +2387,6 @@ msgid "Please enter a business name or number to search."
 msgstr ""
 "Por favor, ingrese un nombre o número de negocio para hacer una búsqueda."
 
-#: app/client/dealer-search/auction-dealer-search.template.html:125
-msgid "Please enter a City or select a State."
-msgstr "Por favor, ingrese una ciudad o seleccione un estado."
-
 #: app/client/shared/directives/nxg-address/nxg-address.template.html:54
 msgid "Please enter a city."
 msgstr "Escriba la ciudad."
@@ -2404,14 +2394,6 @@ msgstr "Escriba la ciudad."
 #: app/client/floor-vehicle/auction-bulk-flooring.template.html:60
 msgid "Please enter a Consigner Ticket Number."
 msgstr "Por favor, ingrese el número de cupón del remitente."
-
-#: app/client/dealer-search/auction-dealer-search.template.html:87
-msgid "Please enter a Dealer Name."
-msgstr "Por favor, ingrese un nombre de distribuidor."
-
-#: app/client/dealer-search/auction-dealer-search.template.html:29
-msgid "Please enter a Dealer Number."
-msgstr "Por favor, ingrese un número de distribuidor."
 
 #: app/client/floor-vehicle/nxg-vin-details/nxg-vin-details.template.html:87
 msgid "Please enter a four-digit Year."
@@ -2435,11 +2417,6 @@ msgid "Please enter a numeric value with no more than 2 decimal places."
 msgstr ""
 "Por favor, capture un valor numérico con un máximo de 2 lugares decimales."
 
-#: app/client/dealer-search/auction-dealer-search.template.html:32
-#: app/client/dealer-search/auction-dealer-search.template.html:62
-msgid "Please enter a numeric value."
-msgstr "Por favor, ingrese un valor numérico."
-
 #: app/client/login/login.template.html:31
 msgid "Please enter a password."
 msgstr "Por favor, ingrese una contraseña."
@@ -2458,7 +2435,7 @@ msgid "Please enter a positive integer value with no decimals."
 msgstr "Por favor, ingrese un número entero positivo sin decimales."
 
 #: app/client/floor-vehicle/auction-bulk-flooring.template.html:119
-#: app/client/floor-vehicle/floor-car.template.html:144
+#: app/client/floor-vehicle/floor-car.template.html:145
 msgid ""
 "Please enter a positive numeric value with no <br> special characters, such "
 "as a dollar sign."
@@ -2472,7 +2449,7 @@ msgid ""
 msgstr ""
 "Por favor, ingrese un valor numérico positivo con un máximo de 2 decimales."
 
-#: app/client/shared/modals/financial-account/financial-account.template.html:157
+#: app/client/shared/modals/financial-account/financial-account.template.html:137
 msgid "Please enter a routing number."
 msgstr "Escriba el número de enrutamiento."
 
@@ -2514,7 +2491,7 @@ msgstr "Por favor, ingrese una dirección de correo electrónico válida."
 
 #: app/client/shared/directives/nxg-search/nxg-search.template.html:71
 msgid "Please enter a Valid End Date."
-msgstr ""
+msgstr "Por favor, capture una fecha final válida."
 
 #: app/client/reports/nxg-stock-numbers-input/nxg-stock-numbers-input.template.html:53
 msgid "Please enter a valid End Stock Number"
@@ -2535,17 +2512,17 @@ msgstr "Por favor, ingrese una contraseña válida."
 msgid "Please enter a valid phone number."
 msgstr "Por favor, ingrese un número de teléfono válido."
 
-#: app/client/floor-vehicle/floor-car.template.html:118
+#: app/client/floor-vehicle/floor-car.template.html:119
 msgid "Please enter a Valid Purchase Date."
 msgstr "Por favor, ingrese una fecha de compra válida."
 
 #: app/client/floor-vehicle/auction-bulk-flooring.template.html:152
 msgid "Please enter a Valid Sale Date."
-msgstr ""
+msgstr "Por favor, capture una fecha de venta válida."
 
 #: app/client/shared/directives/nxg-search/nxg-search.template.html:51
 msgid "Please enter a Valid Start Date."
-msgstr ""
+msgstr "Por favor, capture una fecha de inicio válida."
 
 #: app/client/reports/nxg-stock-numbers-input/nxg-stock-numbers-input.template.html:45
 msgid "Please enter a valid Start Stock Number"
@@ -2556,7 +2533,7 @@ msgid "Please enter a valid street address."
 msgstr "Escriba una dirección válida."
 
 #: app/client/floor-vehicle/auction-bulk-flooring.template.html:123
-#: app/client/floor-vehicle/floor-car.template.html:149
+#: app/client/floor-vehicle/floor-car.template.html:150
 msgid "Please enter a value less than $1,000,000,000,000."
 msgstr "Por favor, ingrese un valor menor a $1,000,000,000,000."
 
@@ -2582,7 +2559,7 @@ msgstr "Por favor, capture un año entre 1901 y {{ settings.maxYear }}."
 msgid "Please enter a Year."
 msgstr "Por favor, capture el año."
 
-#: app/client/shared/modals/financial-account/financial-account.template.html:121
+#: app/client/shared/modals/financial-account/financial-account.template.html:101
 msgid "Please enter an account number."
 msgstr "Escriba el número de cuenta."
 
@@ -2609,10 +2586,6 @@ msgstr ""
 msgid "Please enter an Answer."
 msgstr "Por favor, ingrese una respuesta."
 
-#: app/client/dealer-search/auction-dealer-search.template.html:59
-msgid "Please enter an Auction Access Number."
-msgstr "Por favor, ingrese un número de acceso a la subasta."
-
 #: app/client/reports/nxg-stock-numbers-input/nxg-stock-numbers-input.template.html:49
 msgid "Please enter an End Stock Number"
 msgstr "Por favor, capture un número de inventario final."
@@ -2628,7 +2601,6 @@ msgstr ""
 msgid "Please enter an increase amount."
 msgstr "Por favor, ingrese una cantidad a aumentar."
 
-#: app/client/dealer-search/auction-dealer-search.template.html:90
 #: app/client/dealer-search/business-search-modal/business-search.template.html:13
 #: app/client/dealer-search/dealer-name-search-modal/dealer-name-search.template.html:10
 #: app/client/floor-vehicle/nxg-business-field/nxg-business-field.template.html:25
@@ -2670,7 +2642,7 @@ msgid "Please enter the Mileage."
 msgstr "Por favor, ingrese el kilometraje."
 
 #: app/client/floor-vehicle/auction-bulk-flooring.template.html:115
-#: app/client/floor-vehicle/floor-car.template.html:140
+#: app/client/floor-vehicle/floor-car.template.html:141
 msgid "Please enter the Purchase Amount."
 msgstr "Por favor, ingrese el importe de la compra."
 
@@ -2728,7 +2700,7 @@ msgid "Please review the following and submit your payments below."
 msgstr "Por favor, revise lo siguiente y envíe sus pagos a continuación."
 
 #: app/client/floor-vehicle/auction-bulk-flooring.template.html:176
-#: app/client/floor-vehicle/floor-car.template.html:191
+#: app/client/floor-vehicle/floor-car.template.html:192
 msgid "Please select a Bank Account for Deposit."
 msgstr "Seleccione una cuenta bancaria para el depósito."
 
@@ -2747,14 +2719,14 @@ msgstr "Por favor, seleccione un color."
 
 #: app/client/reports/dealer/reports.template.html:41
 msgid "Please select a Date in the future."
-msgstr ""
+msgstr "Seleccione una fecha en el futuro."
 
 #: app/client/reports/auction/auction-reports.template.html:59
 #: app/client/reports/dealer/reports.template.html:167
 msgid "Please select a Date in the past."
 msgstr "Por favor, seleccione una fecha en el pasado."
 
-#: app/client/floor-vehicle/floor-car.template.html:165
+#: app/client/floor-vehicle/floor-car.template.html:166
 msgid "Please select a Line of Credit."
 msgstr "Por favor, seleccione una línea de crédito."
 
@@ -2830,12 +2802,16 @@ msgstr "Por favor, seleccione \"temporal\" o \"permanente\"."
 #: app/client/reports/dealer/reports.template.html:121
 #: app/client/reports/dealer/reports.template.html:228
 msgid "Please select past End Date."
-msgstr ""
+msgstr "Seleccione una fecha final pasada."
 
 #: app/client/floor-vehicle/auction-bulk-flooring.template.html:50
 #: app/client/floor-vehicle/floor-car.template.html:55
 msgid "Please select who has the title."
 msgstr "Por favor, seleccione quién tiene el título."
+
+#: app/client/floor-vehicle/floor-car.template.html:292
+msgid "Please upload your floor plan documents."
+msgstr "Cargue los documentos de su plan de piso."
 
 #: app/client/payments/payments.template.html:55
 msgid "Posted"
@@ -2863,7 +2839,7 @@ msgstr "Principal"
 msgid "Privacy Statement"
 msgstr "Declaración de privacidad"
 
-#: app/client/shared/modals/financial-account/financial-account.template.html:200
+#: app/client/shared/modals/financial-account/financial-account.template.html:180
 msgid "Proceed to Step 2"
 msgstr "Proceda al Paso 2"
 
@@ -2898,13 +2874,13 @@ msgstr "Promociones / Eventos de Venta"
 
 #: app/client/floor-vehicle/auction-bulk-flooring.template.html:107
 #: app/client/floor-vehicle/floor-car-confirm-modal/floor-car-confirm.template.html:74
-#: app/client/floor-vehicle/floor-car.template.html:132
+#: app/client/floor-vehicle/floor-car.template.html:133
 #: app/client/vehicle-details/vehicle-details.html:52
 msgid "Purchase Amount"
 msgstr "Importe de la compra"
 
 #: app/client/floor-vehicle/floor-car-confirm-modal/floor-car-confirm.template.html:79
-#: app/client/floor-vehicle/floor-car.template.html:93
+#: app/client/floor-vehicle/floor-car.template.html:94
 #: app/client/vehicle-details/vehicle-details.html:35
 msgid "Purchase Date"
 msgstr "Fecha de la compra"
@@ -2919,10 +2895,6 @@ msgstr "Comprado"
 #: app/client/floor-plan/auction-seller-floor-plan.template.html:37
 msgid "Purchased For"
 msgstr "Comprado para"
-
-#: app/client/shared/modals/credit-query/credit-query.template.html:51
-msgid "Query"
-msgstr "Consulta"
 
 #: app/client/reports/nxg-stock-numbers-input/nxg-stock-numbers-input.directive.js:37
 msgid "Range of Stock #'s"
@@ -3078,7 +3050,10 @@ msgstr "Solicitar<br>ampliación"
 msgid "Requests Summary"
 msgstr "Resumen de solicitudes"
 
-#: app/client/shared/modals/financial-account/financial-account.template.html:78
+#: app/client/floor-vehicle/floor-car.template.html:210
+#: app/client/floor-vehicle/floor-car.template.html:4
+#: app/client/floor-vehicle/floor-car.template.html:79
+#: app/client/shared/modals/financial-account/financial-account.template.html:68
 msgid "required"
 msgstr "obligatorio"
 
@@ -3100,8 +3075,8 @@ msgstr "Recursos"
 msgid "Return to Form"
 msgstr "Volver al formato"
 
-#: app/client/floor-vehicle/floor-car.template.html:196
-#: app/client/floor-vehicle/floor-car.template.html:311
+#: app/client/floor-vehicle/floor-car.template.html:197
+#: app/client/floor-vehicle/floor-car.template.html:319
 msgid "Review and Floor Vehicle"
 msgstr "Revisión y vehículo en piso"
 
@@ -3114,17 +3089,17 @@ msgstr "Revise lo siguiente y envíe sus solicitudes de liberación de título."
 msgid "Rough"
 msgstr "Aproximado"
 
-#: app/client/shared/modals/financial-account/financial-account.template.html:147
+#: app/client/shared/modals/financial-account/financial-account.template.html:127
 msgid "Routing Number"
 msgstr "Número de enrutamiento"
 
-#: app/client/shared/modals/financial-account/financial-account.template.html:153
+#: app/client/shared/modals/financial-account/financial-account.template.html:133
 msgid "Routing number must have 9 digits."
 msgstr "El número de enrutamiento debe tener 9 dígitos."
 
 #: app/client/floor-vehicle/auction-bulk-flooring.template.html:130
 msgid "Sale Date"
-msgstr ""
+msgstr "Fecha de venta"
 
 #: app/client/floor-vehicle/auction-bulk-flooring.template.html:78
 msgid "Sale Information"
@@ -3190,15 +3165,22 @@ msgid ""
 "or fees\n"
 "      may continue to accrue between now and your scheduled payment date."
 msgstr ""
+"Los pagos programados no se realizan antes de la fecha programada <br> Los "
+"intereses y/u otros cargos podrán seguir acumulándose entre hoy y su fecha "
+"de pago programada."
 
 #: app/client/dealer-search/business-search-modal/business-search.template.html:17
 #: app/client/dealer-search/dealer-name-search-modal/dealer-name-search.template.html:31
 msgid "Search"
 msgstr "Búsqueda"
 
-#: app/client/dealer-search/auction-dealer-search.template.html:130
-msgid "Search Dealers"
-msgstr "Buscar distribuidores"
+#: app/client/dealer-search/auction-dealer-search.template.html:7
+msgid ""
+"Search by Dealer's NextGear Capital Business Number, Business Name, "
+"AuctionACCESS number, or External Buyer ID."
+msgstr ""
+"Búsqueda por número/nombre comercial de distribuidor de NextGear Capital, "
+"número AuctionACCESS o identificación de comprador externo"
 
 #: app/client/login/login-recover/login-recover.template.html:83
 #: app/client/profile-settings/auction/auction-settings.template.html:62
@@ -3263,10 +3245,12 @@ msgid "Self-Service Links"
 msgstr "Vínculos de auto servicio"
 
 #: app/client/analytics/top-auctions-modal/top-auctions.template.html:12
-#: app/client/floor-plan/floor-plan.controller.js:168
-#: app/client/floor-plan/floor-plan.service.js:102
+#: app/client/floor-plan/auction-seller-floor-plan.controller.js:162
+#: app/client/floor-plan/floor-plan.controller.js:164
+#: app/client/floor-plan/floor-plan.service.js:107
+#: app/client/floor-plan/floor-plan.service.js:158
 #: app/client/floor-plan/floor-plan.template.html:51
-#: app/client/floor-vehicle/floor-car.template.html:122
+#: app/client/floor-vehicle/floor-car.template.html:123
 #: app/client/vehicle-details/vehicle-details.html:73
 msgid "Seller"
 msgstr "Vendedor"
@@ -3280,7 +3264,7 @@ msgid "Seller Floor Plan Search"
 msgstr "Búsqueda del plan de piso del vendedor"
 
 #: app/client/floor-vehicle/floor-car-confirm-modal/floor-car-confirm.template.html:85
-#: app/client/floor-vehicle/floor-car.template.html:170
+#: app/client/floor-vehicle/floor-car.template.html:171
 msgid "Send Payment To"
 msgstr "Enviar pago a"
 
@@ -3371,7 +3355,6 @@ msgstr ""
 "\"receipts.resetSearch()\" title=\"Nueva búsqueda\">realice una nueva "
 "búsqueda</a>."
 
-#: app/client/floor-plan/auction-seller-floor-plan.template.html:16
 #: app/client/title-releases/title-releases.html:24
 msgid ""
 "Sorry, no results found. Please <a ng-click=\"resetSearch()\" title=\"New "
@@ -3379,6 +3362,19 @@ msgid ""
 msgstr ""
 "Lo sentimos, no encontramos ningún resultado. Por favor, <a ng-click="
 "\"resetSearch()\" title=\"Nueva búsqueda\">realice una nueva búsqueda</a>."
+
+#: app/client/floor-plan/auction-seller-floor-plan.template.html:16
+msgid ""
+"Sorry, no results found. Please <a ng-click=\"resetSellerSearch()\" title="
+"\"New Search\">try a new search</a>."
+msgstr ""
+"Disculpe, no encontramos ningún resultado. Por favor, <a ng-click="
+"\"resetSellerSearch()\"title=\"New Search\">haga una nueva búsqueda</a>."
+
+#: app/client/dealer-search/auction-dealer-search.template.html:25
+msgid "Sorry, no results found. Please try a new search query."
+msgstr ""
+"Disculpe, no encontramos ningún resultado, Por favor, consulte de nuevo."
 
 #: app/client/dealer-search/business-search-modal/business-search.template.html:29
 #: app/client/dealer-search/dealer-name-search-modal/dealer-name-search.template.html:43
@@ -3406,11 +3402,11 @@ msgstr "Fecha de inicio"
 msgid "Start Date should not be later than End Date."
 msgstr "La fecha de inicio no debe ser posterior a la fecha de terminación."
 
-#: app/client/floor-vehicle/floor-car.controller.js:348
+#: app/client/floor-vehicle/floor-car.controller.js:369
 msgid "Start Over"
 msgstr "Volver a iniciar"
 
-#: app/client/dealer-search/auction-dealer-search.template.html:112
+#: app/client/dealer-search/auction-dealer-search.template.html:67
 #: app/client/dealer-search/business-search-modal/business-search.template.html:67
 #: app/client/dealer-search/dealer-name-search-modal/dealer-name-search.template.html:22
 #: app/client/dealer-search/dealer-name-search-modal/dealer-name-search.template.html:78
@@ -3426,13 +3422,13 @@ msgstr "Estado"
 msgid "Status"
 msgstr "Estatus"
 
-#: app/client/shared/modals/financial-account/financial-account.template.html:4
-msgid "Step 1 of 2: Terms and Conditions"
-msgstr "Paso 1 de 2: Términos y condiciones"
+#: app/client/shared/modals/financial-account/financial-account.template.html:69
+msgid "Step 1 of 2: Add Your Account"
+msgstr "Paso 1 de 2: Agregue su cuenta"
 
-#: app/client/shared/modals/financial-account/financial-account.template.html:79
-msgid "Step 2 of 2: Add Your Account"
-msgstr "Paso 2 de 2: Agregue su cuenta"
+#: app/client/shared/modals/financial-account/financial-account.template.html:4
+msgid "Step 2 of 2: Designated Account Change Request and Consent"
+msgstr "Paso 2 de 2: Petición y autorización de cambio de cuenta designada"
 
 #: app/client/checkout/checkout.template.html:102
 #: app/client/checkout/confirm-checkout-modal/confirm-checkout.template.html:39
@@ -3492,7 +3488,7 @@ msgstr "Estilo"
 
 #: app/client/login/login-recover/login-recover.template.html:107
 #: app/client/login/login-recover/login-recover.template.html:44
-#: app/client/shared/modals/financial-account/financial-account.template.html:202
+#: app/client/shared/modals/financial-account/financial-account.template.html:182
 msgid "Submit"
 msgstr "Enviar"
 
@@ -3522,11 +3518,11 @@ msgid "Subtotal"
 msgstr "Subtotal"
 
 #: app/client/login/login-recover/login-recover.controller.js:147
-#: app/client/shared/modals/financial-account/financial-account.controller.js:147
+#: app/client/shared/modals/financial-account/financial-account.controller.js:157
 msgid "Success"
 msgstr "Éxito"
 
-#: app/client/floor-vehicle/floor-car.template.html:225
+#: app/client/floor-vehicle/floor-car.template.html:228
 #: app/client/vehicle-details/vehicle-details.html:469
 msgid "Supported formats: image, word, excel and pdf. 5MB max per file."
 msgstr ""
@@ -3614,6 +3610,7 @@ msgstr ""
 "Hay múltiples estilos de vehículos que corresponden a este VIN. Por favor, "
 "seleccione el estilo adecuado a continuación."
 
+#: app/client/dealer-search/auction-dealer-search.template.html:109
 #: app/client/dealer-search/business-search-modal/business-search.template.html:93
 #: app/client/dealer-search/dealer-name-search-modal/dealer-name-search.template.html:96
 #: app/client/floor-plan/floor-plan.template.html:98
@@ -3729,7 +3726,8 @@ msgstr "Cupón Núm."
 msgid "Title"
 msgstr "Título"
 
-#: app/client/floor-plan/floor-plan.controller.js:168
+#: app/client/floor-plan/auction-seller-floor-plan.controller.js:162
+#: app/client/floor-plan/floor-plan.controller.js:164
 msgid "Title Absent"
 msgstr "Título ausente"
 
@@ -3864,28 +3862,27 @@ msgstr ""
 "Para ampliar esta unidad por un período adicional, por favor, haga clic a "
 "continuación."
 
-#: app/client/floor-vehicle/floor-car.template.html:111
+#: app/client/floor-vehicle/floor-car.controller.js:61
 msgid ""
 "To floor plan purchases older than 365 days, please contact NextGear Capital "
 "Floorplan Services at fundingservices@nextgearcapital.com, attach the Bill "
 "of Sale, and provide the customer's NextGear Dealer Number."
 msgstr ""
+"Para poner en plan de piso compras de más de 365 días, póngase en contacto "
+"con Servicios de Plan de Piso de NextGear Capital en "
+"fundingservices@nextgearcapital.com, anexe la nota de venta y proporcione el "
+"número de cliente de NextGear Capital."
 
-#: app/client/floor-vehicle/auction-bulk-flooring.template.html:147
+#: app/client/floor-vehicle/floor-car.controller.js:66
 msgid ""
 "To floor plan purchases older than 7 days, please contact NextGear Capital "
 "Floor plan Services at fundingservices@nextgearcapital.com, attach the Bill "
 "of Sale, and provide the customer's NextGear Dealer Number."
 msgstr ""
-
-#: app/client/dealer-search/auction-dealer-search.template.html:75
-msgid ""
-"To look up a dealer in Dealer search, use a combination of their Name and "
-"City or\n"
-"      State."
-msgstr ""
-"Para buscar a un distribuidor en búsqueda de distribuidores, utilice una "
-"combinación de su nombre y su ciudad y/o estado."
+"Para poner en plan de piso compras de más de 7 días, póngase en contacto con "
+"Servicios de Plan de Piso de NextGear Capital en "
+"fundingservices@nextgearcapital.com, anexe la nota de venta y proporcione el "
+"número de cliente de NextGear Capital."
 
 #: app/client/account-management/account-management.template.html:293
 #: app/client/account-management/account-management.template.html:309
@@ -3951,7 +3948,7 @@ msgstr "Precio total de compra"
 msgid "Tracking Number"
 msgstr "Número de rastreo"
 
-#: app/client/floor-vehicle/floor-car.template.html:80
+#: app/client/floor-vehicle/floor-car.template.html:81
 msgid "Trade in"
 msgstr "Canje"
 
@@ -3963,9 +3960,9 @@ msgstr "Canje"
 msgid "Transaction Details"
 msgstr "Detalles de la transacción"
 
-#: app/client/shared/services/api/api.service.js:227
-#: app/client/shared/services/api/api.service.js:258
-#: app/client/shared/services/api/api.service.js:268
+#: app/client/shared/services/api/api.service.js:232
+#: app/client/shared/services/api/api.service.js:263
+#: app/client/shared/services/api/api.service.js:273
 msgid ""
 "Unable to communicate with the NextGear Capital system. Please try again "
 "later."
@@ -4011,7 +4008,7 @@ msgstr "Darse de baja"
 msgid "Unschedule"
 msgstr "Desprogramar"
 
-#: app/client/floor-vehicle/floor-car.template.html:280
+#: app/client/floor-vehicle/floor-car.template.html:283
 #: app/client/vehicle-details/vehicle-details.html:526
 msgid "Unsupported file found in selection."
 msgstr "Se encontró un archivo no compatible en la selección."
@@ -4044,7 +4041,7 @@ msgstr "Nombre de usuario"
 msgid "Utilized"
 msgstr "Utilizado"
 
-#: app/client/floor-vehicle/floor-car.template.html:257
+#: app/client/floor-vehicle/floor-car.template.html:260
 #: app/client/vehicle-details/vehicle-details.html:501
 msgid "valid files."
 msgstr "archivos válidos."
@@ -4091,8 +4088,10 @@ msgid "View a Report"
 msgstr "Ver un reporte"
 
 #: app/client/dashboard/dealer/dashboard.controller.js:224
-#: app/client/floor-plan/floor-plan.controller.js:40
-#: app/client/floor-plan/floor-plan.controller.js:64
+#: app/client/floor-plan/auction-seller-floor-plan.controller.js:35
+#: app/client/floor-plan/auction-seller-floor-plan.controller.js:59
+#: app/client/floor-plan/floor-plan.controller.js:36
+#: app/client/floor-plan/floor-plan.controller.js:60
 #: app/client/payments/payments.controller.js:61
 #: app/client/receipts/receipts.controller.js:248
 #: app/client/shared/directives/nxg-search/nxg-search.controller.js:61
@@ -4129,7 +4128,7 @@ msgstr "Ver recibos"
 msgid "View Report"
 msgstr "Ver informe"
 
-#: app/client/floor-vehicle/floor-car.template.html:222
+#: app/client/floor-vehicle/floor-car.template.html:225
 #: app/client/vehicle-details/vehicle-details.html:466
 msgid "View the Dealer Funding Checklist."
 msgstr "Ver lista de verificación de financiamiento del distribuidor"
@@ -4296,11 +4295,11 @@ msgstr "Paquete de Bienvenida"
 msgid "Welcome to myNextGear!"
 msgstr "¡Bienvenido(a) a myNextGear!"
 
-#: app/client/floor-vehicle/floor-car.controller.js:345
+#: app/client/floor-vehicle/floor-car.controller.js:366
 msgid "What would you like to do?"
 msgstr "¿Qué desea hacer?"
 
-#: app/client/shared/modals/financial-account/financial-account.template.html:163
+#: app/client/shared/modals/financial-account/financial-account.template.html:143
 msgid "Where can I find my account and routing numbers?"
 msgstr "¿Dónde puedo encontrar mis números de cuenta y de enrutamiento?"
 
@@ -4341,7 +4340,7 @@ msgstr "Año"
 #: app/client/account-management/account-management.template.html:370
 #: app/client/account-management/account-management.template.html:384
 #: app/client/checkout/checkout.template.html:202
-#: app/client/floor-vehicle/floor-car.template.html:85
+#: app/client/floor-vehicle/floor-car.template.html:86
 #: app/client/profile-settings/auction/auction-settings.template.html:170
 #: app/client/profile-settings/auction/auction-settings.template.html:179
 #: app/client/shared/directives/nxg-payment-buttons/cancel-fee-modal/cancel-fee.template.html:27
@@ -4421,7 +4420,7 @@ msgstr ""
 "Puede seleccionar una dirección que ya haya sido aprobada en el archivo de "
 "NextGear Capital."
 
-#: app/client/shared/modals/financial-account/financial-account.controller.js:148
+#: app/client/shared/modals/financial-account/financial-account.controller.js:158
 msgid "Your account was saved successfully."
 msgstr "Su cuenta se guardó con éxito."
 
@@ -4520,6 +4519,89 @@ msgstr "Código postal"
 #: app/client/shared/directives/nxg-address/nxg-address.template.html:87
 msgid "Zip Code"
 msgstr "Código postal"
+
+#~ msgid "3. Optional Items"
+#~ msgstr "3. Artículos opcionales"
+
+#~ msgid "Auction Access Number"
+#~ msgstr "Número de acceso a la subasta"
+
+#~ msgid "Buyer Business Line of Credit Query"
+#~ msgstr "Consulta de línea de crédito del negocio del comprador"
+
+#~ msgid "Credit Type"
+#~ msgstr "Tipo de crédito"
+
+#~ msgid "Dealer Name"
+#~ msgstr "Nombre del distribuidor"
+
+#~ msgid "Dealer Name Search"
+#~ msgstr "Búsqueda por nombre de distribuidor"
+
+#~ msgid "Dealer Number Search"
+#~ msgstr "Búsqueda por número de distribuidor"
+
+#~ msgid ""
+#~ "I acknowledge that I have reviewed and agree to the Terms and Conditions."
+#~ msgstr ""
+#~ "Reconozco que he revisado los términos y condiciones y estoy de acuerdo "
+#~ "con ellos."
+
+#~ msgid ""
+#~ "If you have the NextGear Capital Dealer Number or Auction Access Number, "
+#~ "use the Dealer Number search."
+#~ msgstr ""
+#~ "Si cuenta con el número de distribuidor de NextGear Capital o con el "
+#~ "número de acceso a la subasta, utilice la búsqueda por número de "
+#~ "distribuidor."
+
+#~ msgid "NextGear Capital Dealer Number"
+#~ msgstr "Número de distribuidor de NextGear Capital"
+
+#~ msgid "No results found, please enter a valid Auction Access Number."
+#~ msgstr ""
+#~ "No se encontró ningún resultado; por favor, capture un número válidode "
+#~ "acceso a subasta."
+
+#~ msgid "No results found, please enter a valid Dealer Number."
+#~ msgstr ""
+#~ "No se encontró ningún resultado, por favor, capture un número válido de "
+#~ "distribuidor."
+
+#~ msgid "Please enter a City or select a State."
+#~ msgstr "Por favor, ingrese una ciudad o seleccione un estado."
+
+#~ msgid "Please enter a Dealer Name."
+#~ msgstr "Por favor, ingrese un nombre de distribuidor."
+
+#~ msgid "Please enter a Dealer Number."
+#~ msgstr "Por favor, ingrese un número de distribuidor."
+
+#~ msgid "Please enter a numeric value."
+#~ msgstr "Por favor, ingrese un valor numérico."
+
+#~ msgid "Please enter an Auction Access Number."
+#~ msgstr "Por favor, ingrese un número de acceso a la subasta."
+
+#~ msgid "Query"
+#~ msgstr "Consulta"
+
+#~ msgid "Search Dealers"
+#~ msgstr "Buscar distribuidores"
+
+#~ msgid "Step 1 of 2: Terms and Conditions"
+#~ msgstr "Paso 1 de 2: Términos y condiciones"
+
+#~ msgid "Step 2 of 2: Add Your Account"
+#~ msgstr "Paso 2 de 2: Agregue su cuenta"
+
+#~ msgid ""
+#~ "To look up a dealer in Dealer search, use a combination of their Name and "
+#~ "City or\n"
+#~ "      State."
+#~ msgstr ""
+#~ "Para buscar a un distribuidor en búsqueda de distribuidores, utilice una "
+#~ "combinación de su nombre y su ciudad y/o estado."
 
 #~ msgid "INACTIVE"
 #~ msgstr "INACTIVA"

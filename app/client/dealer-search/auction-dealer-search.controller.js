@@ -1,4 +1,4 @@
-(function() {
+(function () {
 
   'use strict';
 
@@ -13,7 +13,7 @@
     $scope.proposedQuery = null;
     $scope.searchExecuted = false;
 
-    User.getInfo().then(function(info) {
+    User.getInfo().then(function (info) {
       $scope.data = {
         query: null, // proposed query is copied here on search
         results: [],
@@ -26,7 +26,7 @@
       };
     });
 
-    $scope.search = function() {
+    $scope.search = function () {
       // search means "start from the beginning with current criteria"
 
       $scope.validity = angular.copy($scope.dealerSearchForm);
@@ -46,7 +46,7 @@
       $scope.fetchNextResults();
     };
 
-    $scope.fetchNextResults = function() {
+    $scope.fetchNextResults = function () {
       var paginator = $scope.data.paginator;
       if (paginator && !paginator.hasMore()) {
         if (paginator.hitMaximumLimit()) {
@@ -63,17 +63,17 @@
         $scope.data.sortDescending,
         paginator
       ).then(
-        function(result) {
+        function (result) {
           $scope.data.loading = false;
           $scope.data.paginator = result.$paginator;
           Array.prototype.push.apply($scope.data.results, result.SearchResults);
-        }, function(/*error*/) {
+        }, function (/*error*/) {
           $scope.data.loading = false;
         }
       );
     };
 
-    $scope.sortBy = function(fieldName) {
+    $scope.sortBy = function (fieldName) {
       if ($scope.data.sortBy === fieldName) {
         // already sorting by this field, just flip the direction
         $scope.data.sortDescending = !$scope.data.sortDescending;
@@ -97,7 +97,7 @@
           controller: 'CreditQueryCtrl',
           dialogClass: 'modal modal-medium',
           resolve: {
-            options: function() {
+            options: function () {
               return {
                 businessId: business.businessId,
                 businessNumber: business.businessNumber,
@@ -113,7 +113,7 @@
             }
           }
         };
-        $uibModal.open(dialogOptions).result.then(function(dirty) {
+        $uibModal.open(dialogOptions).result.then(function (dirty) {
           if (dirty) {
             $scope.search();
           }
