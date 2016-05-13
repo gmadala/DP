@@ -1,6 +1,4 @@
 'use strict';
-
-var delay = 200;
 var creditIncrease = {
   permanentIncrease: function() {
 
@@ -10,7 +8,7 @@ var creditIncrease = {
 
   firstLineOfCredit: function() {
 
-    return element.all(by.id('lineOfCredit')).get(1);
+    return element.all(by.id('lineOfCredit0'));
 
   },
   temporaryIncrease: function() {
@@ -34,26 +32,26 @@ var creditIncrease = {
   clickPermanentIncrease: function() {
 
     this.permanentIncrease().click();
-    browser.sleep(delay);
+    browser.sleep(browser.params.shortDelay);
 
   },
 
   clickRequestButton: function() {
 
     this.requestButton().click();
-    browser.sleep(delay);
+    browser.sleep(browser.params.shortDelay);
 
   },
   clickFirstLineOfCredit: function() {
 
     this.firstLineOfCredit().click();
-    browser.sleep(delay);
+    browser.sleep(browser.params.shortDelay);
 
   },
   clickTemporaryIncrease: function() {
 
     this.temporaryIncrease().click();
-    browser.sleep(delay);
+    browser.sleep(browser.params.shortDelay);
 
   },
 
@@ -66,9 +64,9 @@ var creditIncrease = {
 
   //Sending
   enterIncreaseAmount: function(param) {
-
+    browser.sleep(browser.params.shortDelay);
     this.increaseAmount().sendKeys(param);
-    browser.sleep(delay);
+
 
   },
 
@@ -78,13 +76,13 @@ var creditIncrease = {
 
     return this.disabledFields().count();
 
-  },
-  //LAST ONE
-  placeholder: function(index) {
-
-    this._thumbnail(index).click();
-
   }
+  //LAST ONE
+  //placeholder: function(index) {
+  //
+  //  this.thumbnail(index).click();
+  //
+  //}
 };
 
 module.exports = creditIncrease;

@@ -1,6 +1,5 @@
 'use strict';
 
-var delay = 200;
 var dashboard = {
   receiptsLink: function () {
 
@@ -23,21 +22,21 @@ var dashboard = {
 
   //Clicking
   clickResources: function () {
-
+    browser.sleep(browser.sleep(browser.params.longDelay));
     this.resourcesLink().click();
-    browser.sleep(delay);
+
 
   },
   clickReceiptsLink: function () {
-
+    browser.sleep(browser.sleep(browser.params.longDelay));
     this.receiptsLink().click();
-    browser.sleep(delay);
+
 
   },
-  clickRequestCreditIncreaset: function () {
-
+  clickRequestCreditIncrease: function () {
+    browser.sleep(browser.sleep(browser.params.longDelay));
     this.requestCreditIncrease().click();
-    browser.sleep(delay);
+
 
   },
 

@@ -16,7 +16,7 @@ var resourcesObjects = {
     return element(by.linkText('Welcome Packet'));
 
   },
-  dealerFudingChecklist: function () {
+  dealerFundingChecklist: function () {
 
     return element(by.linkText('Dealer Funding Checklist'));
 
@@ -51,8 +51,26 @@ var resourcesObjects = {
     return element(by.linkText('Claim Form'));
 
   },
+  iosApp: function () {
+
+    return element(by.css('a[nxg-track="Dealer Resources - iOS Apps"]'));
+
+  },
+  androidApp: function () {
+
+    return element(by.css('a[nxg-track="Dealer Resources - Android Apps"]'));
+
+  },
   //End of locators. Locators need to go before this
   //Click
+  clickAndroid: function () {
+    browser.sleep(delay);
+    this.androidApp().click();
+  },
+  clickIosApp: function () {
+    browser.sleep(delay);
+    this.iosApp().click();
+  },
   clickWelcomePacket: function () {
     browser.sleep(delay);
     this.welcomePacket().click();
@@ -63,11 +81,31 @@ var resourcesObjects = {
   },
   clickDealerFunding: function () {
     browser.sleep(delay);
-    this.dealerFudingChecklist().click();
+    this.dealerFundingChecklist().click();
   },
   clickTitleManagement: function () {
     browser.sleep(delay);
     this.titleManagement().click();
+  },
+  clickInstructionsForBuyers: function () {
+    browser.sleep(delay);
+    this.instructionsBuyers().click();
+  },
+  clickWelcomeLetter: function () {
+    browser.sleep(delay);
+    this.welcomeLetter().click();
+  },
+  clickGuidelines: function () {
+    browser.sleep(delay);
+    this.guidelines().click();
+  },
+  clickInformationSheet: function () {
+    browser.sleep(delay);
+    this.informationSheet().click();
+  },
+  clickClaimForm: function () {
+    browser.sleep(delay);
+    this.claimForm().click();
   },
 
   //Functions can go below
