@@ -6,22 +6,20 @@ var modal = require('../../framework/modal-objects.js');
 var dashboard = require('../../framework/dashboard-objects.js');
 var creditIncrease = require('../../framework/credit-increase-request-objects.js');
 var receipts = require('../../framework/receipts-objects.js');
-var delay = 200;
 var homepageUrl="https://test.nextgearcapital.com/test/#/login";
 var tempIncrease= 1000;
-var password= 'ngcpass!0';
 describe("Log In Suite  \n ", function () {
 
   beforeEach(function () {
     browser.get(homepageUrl);
     browser.ignoreSynchronization = true;
-    browser.sleep(delay);
+    browser.sleep(browser.params.shortDelay);
 
   });
 
   it("1. As a dealer I want to request a temporary credit increase", function () {
     //Login and go to request credit increase
-    login.login2(browser.params.userName,password);
+    login.login2(browser.params.userName,browser.params.password);
     dashboard.clickRequestCreditIncrease();
     //Select Credit line and click on temp
     //creditIncrease.clickFirstLineOfCredit();
@@ -38,7 +36,7 @@ describe("Log In Suite  \n ", function () {
   });
   it("2. As a dealer I want to request a permanent credit increase", function () {
     //Login and go to request credit increase
-    login.login2(browser.params.userName,password);
+    login.login2(browser.params.userName,browser.params.password);
     dashboard.clickRequestCreditIncrease();
     //Select Credit line and click on temp
     //creditIncrease.clickFirstLineOfCredit();
@@ -54,7 +52,7 @@ describe("Log In Suite  \n ", function () {
   });
   it("3. As a dealer I want to print a receipt by grouped VIN", function () {
     //Login and go to request credit increase
-    login.login2(browser.params.userName,password);
+    login.login2(browser.params.userName,browser.params.password);
     dashboard.clickReceiptsLink();
     receipts.clickFirstReceipt();
     receipts.clickExportReceipts();

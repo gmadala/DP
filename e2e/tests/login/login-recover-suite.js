@@ -3,7 +3,6 @@
 var loginRecover = require('../../framework/login-recover-objects.js');
 var login = require('../../framework/login.js');
 var modal = require('../../framework/modal-objects.js');
-var delay = 200;
 var userName = '36017RDT';
 var incorrectAnswer = 'f';
 var correctAnswer = 'a';
@@ -18,7 +17,7 @@ describe("Log In Suite  \n ", function() {
   beforeEach(function() {
     browser.get(homepageUrl);
     browser.ignoreSynchronization = true;
-    browser.sleep(delay);
+    browser.sleep(browser.params.shortDelay);
 
   });
 
