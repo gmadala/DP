@@ -27,36 +27,36 @@
     kissMetricInfo) {
 
     $scope.isCollapsed = true;
-    var  paymentsSubMenu =  [
-      { name: gettextCatalog.getString('Make a Payment'), href: '#/payments', activeWhen: 'payments', subMenu: paymentsSubMenu},
-      {name: gettextCatalog.getString('Receipts'), href: '#/receipts', activeWhen: 'receipts'},
-    ],
-    floorplansSubMenu = [
-      { name: gettextCatalog.getString('View Existing'), href: '#/floorplan', activeWhen: 'floorplan', subMenu: floorplansSubMenu},
-      { name: gettextCatalog.getString('Floor a Vehicle'), href: '#/floorcar', activeWhen: 'floorcar'},
-      { name: gettextCatalog.getString('Value Lookup'), href: '#/valueLookup', activeWhen: 'valueLookup'},
-    ],
-    resourcesSubMenu = [
-      { name: gettextCatalog.getString('Reports'), href: '#/reports', activeWhen: 'reports'},
-      { name: gettextCatalog.getString('Analytics'), href: '#/analytics', activeWhen: 'analytics'},
-      { name: gettextCatalog.getString('Resources'), href: '#/documents', activeWhen: 'documents'},
-    ];
+    var paymentsSubMenu = [
+        {name: gettextCatalog.getString('Make a Payment'), href: '#/payments', activeWhen: 'payments', subMenu: paymentsSubMenu},
+        {name: gettextCatalog.getString('Receipts'), href: '#/receipts', activeWhen: 'receipts'},
+      ],
+      floorplansSubMenu = [
+        {name: gettextCatalog.getString('View Floor Plan'), href: '#/floorplan', activeWhen: 'floorplan', subMenu: floorplansSubMenu},
+        {name: gettextCatalog.getString('Floor a Vehicle'), href: '#/floorcar', activeWhen: 'floorcar'},
+        {name: gettextCatalog.getString('Value Lookup'), href: '#/valueLookup', activeWhen: 'valueLookup'},
+      ],
+      resourcesSubMenu = [
+        {name: gettextCatalog.getString('Resources'), href: '#/documents', activeWhen: 'documents'},
+        {name: gettextCatalog.getString('Reports'), href: '#/reports', activeWhen: 'reports'},
+        {name: gettextCatalog.getString('Analytics'), href: '#/analytics', activeWhen: 'analytics'},
+      ];
     var dealerLinks = {
         primary: [
-          { name: gettextCatalog.getString('Dashboard'), href: '#/home', activeWhen: 'dashboard'},
-          { name: gettextCatalog.getString('Payments'), href: '#/payments', activeWhen: 'payments', subMenu: paymentsSubMenu},
-          { name: gettextCatalog.getString('Floor Plans'), href: '#/floorplan', activeWhen: 'floorplan', subMenu: floorplansSubMenu},
-          { name: gettextCatalog.getString('Resources'), href: '#/documents', activeWhen: 'documents', subMenu: resourcesSubMenu}
+          {name: gettextCatalog.getString('Dashboard'), href: '#/home', activeWhen: 'dashboard'},
+          {name: gettextCatalog.getString('Payments'), href: '#/payments', activeWhen: 'payments', subMenu: paymentsSubMenu},
+          {name: gettextCatalog.getString('Floor Plan'), href: '#/floorplan', activeWhen: 'floorplan', subMenu: floorplansSubMenu},
+          {name: gettextCatalog.getString('Resources'), href: '#/documents', activeWhen: 'documents', subMenu: resourcesSubMenu}
         ]
       },
       auctionLinks = {
         primary: [
-          { name: gettextCatalog.getString('Dashboard'), href: '#/act/home', activeWhen: 'auction_dashboard'},
-          { name: gettextCatalog.getString('Dealer Search'), href: '#/act/dealersearch', activeWhen: 'auction_dealersearch'},
-          { name: gettextCatalog.getString('Floor a Vehicle'), href: '#/act/bulkflooring', activeWhen: 'auction_bulkflooring'},
-          { name: gettextCatalog.getString('Seller Floor Plan Search'), href: '#/act/sellerfloorplan', activeWhen: 'auction_sellerfloorplan'},
-          { name: gettextCatalog.getString('View a Report'), href: '#/act/reports', activeWhen: 'auction_reports'},
-          { name: gettextCatalog.getString('Resources'), href: '#/act/documents', activeWhen: 'auction_documents'}
+          {name: gettextCatalog.getString('Dashboard'), href: '#/act/home', activeWhen: 'auction_dashboard'},
+          {name: gettextCatalog.getString('Dealer Search'), href: '#/act/dealersearch', activeWhen: 'auction_dealersearch'},
+          {name: gettextCatalog.getString('Floor a Vehicle'), href: '#/act/bulkflooring', activeWhen: 'auction_bulkflooring'},
+          {name: gettextCatalog.getString('Seller Floor Plan Search'), href: '#/act/sellerfloorplan', activeWhen: 'auction_sellerfloorplan'},
+          {name: gettextCatalog.getString('View a Report'), href: '#/act/reports', activeWhen: 'auction_reports'},
+          {name: gettextCatalog.getString('Resources'), href: '#/act/documents', activeWhen: 'auction_documents'}
         ]
       };
 
@@ -72,12 +72,7 @@
           $scope.displayTitleRelease = info.DisplayTitleReleaseProgram;
           $scope.eventSalesEnabled = User.getFeatures().hasOwnProperty('eventSales') ? User.getFeatures().eventSales.enabled : true;
           if ($scope.isUnitedStates) {
-            // dealerLinks.secondary.splice(1, 0, {
-            //   name: gettextCatalog.getString('Value Lookup'),
-            //   href: '#/valueLookup',
-            //   activeWhen: 'valueLookup'
-            // });
-            if($scope.eventSalesEnabled){
+            if ($scope.eventSalesEnabled) {
               resourcesSubMenu.push({
                 name: gettextCatalog.getString('Promos'),
                 href: '#/promos',
@@ -161,6 +156,27 @@
     // link appropriately.
     $scope.isActive = function(activeWhen) {
       return $state.includes(activeWhen);
+    };
+    $scope.isActiveGroup = function(subMenu) {
+      for (var link in subMenu) {
+        if ($state.includes(subMenu[link].activeWhen)) {
+          return true;
+        }
+      }
+      return false;
+    };
+
+    $scope.showSubMenu = function() {
+      $scope.canShowMenu = true;
+    };
+
+    $scope.hideSubMenu = function() {
+      if ($scope.canShowMenu) {
+        $scope.canShowMenu = false;
+      }
+    };
+    $scope.toggleSubMenu = function() {
+      $scope.canShowMenu = !$scope.canShowMenu;
     };
 
     $rootScope.$on('$stateChangeSuccess', function () {

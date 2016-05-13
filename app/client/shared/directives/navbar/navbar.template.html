@@ -8,27 +8,24 @@
       <div class="col-xs-8 user-info no-left-padding no-right-padding" ng-show="navState.current.data.showNavBar">
         <div class="user-info-list pull-right">
           <div>
-            {{ user.BusinessName | truncate:20}}
-          </div>
-          <div class="spacer">
             <span class="" ng-show="user.isDealer()" translate>
               Dealer #
             </span>
             <span class="" ng-show="!user.isDealer()" translate>
-              Auction #
+              NGC #
             </span>
             {{ user.BusinessNumber }}
           </div>
-          <div class=" spacer">
+          <div class="spacer">
             <a class="cart-btn" ng-disabled="getQueueCount() < 1" ng-click="onCartClicked()" ng-class="{ 'has-items': getQueueCount() > 0 }">
               {{ getQueueCount() }}
-              <span class="glyphicon glyphicon-shopping-cart icon-left-margin"></span>
+              <span class="glyphicon glyphicon-shopping-cart"></span>
             </a>
           </div>
-          <div class=" spacer" ng-show="chatEnabled">
+          <div class="spacer" ng-show="chatEnabled">
             <a nxg-chat-with-us nxg-track="{{metric.CLICK_CHAT_NOW_LINK}}"
                track-properties="{{ kissMetricData }}" translate>Chat
-              <span class="glyphicon glyphicon-comment icon-left-margin"></span>
+              <span class="glyphicon glyphicon-comment"></span>
             </a>
           </div>
           <div uib-dropdown class="spacer">
@@ -65,7 +62,7 @@
         </div>
       </div>
 
-      <div class="col-xs-5 col-xs-offset-3" ng-hide="navState.current.data.showNavBar">
+      <div class="col-xs-8" ng-hide="navState.current.data.showNavBar">
         <div class="nav-language-chooser">
           <span class="icon-xx-large" nxg-icon="icon-globe"></span>
           <div class="cta btn-toggle toggle-three">
@@ -84,13 +81,15 @@
     <div class="container">
       <div class="header">
         <ul class="nav-primary">
-          <li ng-repeat="link in user.navLinks().primary" class="link_{{ link.activeWhen }} dropdown" ng-class="{dropdown: link.subMenu}" uib-dropdown
-              style>
-            <a ng-href="{{link.href}}" class="navLink" ng-class="{ active: isActive(link.activeWhen) }" ng-if="!link.subMenu">{{link.name}}</a>
-            <a ng-href="{{link.href}}" class="dropdown-toggle" ng-class="{ active: isActive(link.activeWhen) }" ng-if="link.subMenu"
-               uib-dropdown-toggle role="button">{{link.name}} <span class="caret"></span></a>
-            <ul class="dropdown-menu" ng-if="link.subMenu">
-              <li ng-repeat="item in link.subMenu"><a href="{{item.href}}">{{item.name}}</a></li>
+          <li ng-repeat="link in user.navLinks().primary" class="link_{{ link.activeWhen }} dropdown" ng-class="{dropdown: link.subMenu}">
+            <a ng-href="{{link.href}}" ng-class="{ active: isActive(link.activeWhen) }" ng-if="!link.subMenu">{{link.name}}</a>
+            <a ng-href="{{link.href}}" class="sub-menu " ng-class="{ active: isActiveGroup(link.subMenu) }"
+               ng-if="link.subMenu" ng-click="toggleSubMenu()" ng-mouseenter="showSubMenu()">
+              {{link.name}} <span class="caret"></span></a>
+            <ul class="dropdown-menu" ng-if="link.subMenu" ng-show="canShowMenu" ng-class="{'show-menu':canShowMenu}" uib-dropdown-menu>
+              <li ng-repeat="item in link.subMenu" ng-class="{ active: isActive(item.activeWhen) }" ng-click="hideSubMenu()">
+                <a href="{{item.href}}">{{item.name}}</a>
+              </li>
             </ul>
           </li>
         </ul>
