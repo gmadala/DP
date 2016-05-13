@@ -91,6 +91,9 @@ module.exports = {
               uploadDocuments: {
                 enabled: true
               },
+              uploadDocumentsAuction: {
+                enabled: true
+              },
               eventSales: {
                 enabled: true
               }
