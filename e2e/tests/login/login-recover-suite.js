@@ -3,7 +3,6 @@
 var loginRecover = require('../../framework/login-recover-objects.js');
 var login = require('../../framework/login.js');
 var modal = require('../../framework/modal-objects.js');
-var userName = '36017RDT';
 var incorrectAnswer = 'f';
 var correctAnswer = 'a';
 var validEmail = 'test@gmail.com';
@@ -95,13 +94,13 @@ describe("Log In Suite  \n ", function() {
     expect(browser.getCurrentUrl()).toEqual(homepageUrl);
 
   });
-  it("4. As a dealer I forgot my password. All my answers are correct", function() {
+  xit("4. As a dealer I forgot my password. All my answers are correct", function() {
     //Check button text
     expect(login.textForgotUsernamePassword()).toEqual("Forgot your username or password?");
     login.clickForgotUsernamePassword();
     expect(browser.getCurrentUrl()).toEqual(forgotUrl);
     //Enter Username
-    loginRecover.enterUsername(userName);
+    loginRecover.enterUsername('36017RDT');
     //Validate email address field is disabled and click
     expect(loginRecover.disabledCount()).toEqual(1);
     loginRecover.clickPasswordSubmit();
@@ -122,13 +121,13 @@ describe("Log In Suite  \n ", function() {
 
   });
 
-  it("6. As a dealer I forgot my password. All my answers are NOT correct", function() {
+  it("5. As a dealer I forgot my password. All my answers are NOT correct", function() {
     //Check button text
     expect(login.textForgotUsernamePassword()).toEqual("Forgot your username or password?");
     login.clickForgotUsernamePassword();
     expect(browser.getCurrentUrl()).toEqual(forgotUrl);
     //Enter Username
-    loginRecover.enterUsername(userName);
+    loginRecover.enterUsername(browser.params.userName2);
     //Validate email address field is disabled and click
     expect(loginRecover.disabledCount()).toEqual(1);
     loginRecover.clickPasswordSubmit();

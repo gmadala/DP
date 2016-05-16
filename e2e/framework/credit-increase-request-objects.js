@@ -30,9 +30,9 @@ var creditIncrease = {
 
   //Clicking
   clickPermanentIncrease: function() {
-
-    this.permanentIncrease().click();
     browser.sleep(browser.params.shortDelay);
+    this.permanentIncrease().click();
+
 
   },
 
@@ -42,16 +42,16 @@ var creditIncrease = {
     browser.sleep(browser.params.shortDelay);
 
   },
-  clickFirstLineOfCredit: function() {
-
-    this.firstLineOfCredit().click();
-    browser.sleep(browser.params.shortDelay);
-
-  },
+  //clickFirstLineOfCredit: function() {
+  //
+  //  this.firstLineOfCredit().click();
+  //  browser.sleep(browser.params.shortDelay);
+  //
+  //},
   clickTemporaryIncrease: function() {
-
-    this.temporaryIncrease().click();
     browser.sleep(browser.params.shortDelay);
+    this.temporaryIncrease().click();
+
 
   },
 

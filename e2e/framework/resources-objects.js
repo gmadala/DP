@@ -1,7 +1,6 @@
 'use strict';
 
-// var longDelay = 1000;
-var delay = 500;
+
 var resourcesObjects = {
 
   //Locators
@@ -64,54 +63,54 @@ var resourcesObjects = {
   //End of locators. Locators need to go before this
   //Click
   clickAndroid: function () {
-    browser.sleep(delay);
+    browser.sleep(browser.params.shortDelay);
     this.androidApp().click();
   },
   clickIosApp: function () {
-    browser.sleep(delay);
+    browser.sleep(browser.params.shortDelay);
     this.iosApp().click();
   },
   clickWelcomePacket: function () {
-    browser.sleep(delay);
+    browser.sleep(browser.params.shortDelay);
     this.welcomePacket().click();
   },
   clickRatesAndFees: function () {
-    browser.sleep(delay);
+    browser.sleep(browser.params.shortDelay);
     this.ratesAndFees().click();
   },
   clickDealerFunding: function () {
-    browser.sleep(delay);
+    browser.sleep(browser.params.shortDelay);
     this.dealerFundingChecklist().click();
   },
   clickTitleManagement: function () {
-    browser.sleep(delay);
+    browser.sleep(browser.params.shortDelay);
     this.titleManagement().click();
   },
   clickInstructionsForBuyers: function () {
-    browser.sleep(delay);
+    browser.sleep(browser.params.shortDelay);
     this.instructionsBuyers().click();
   },
   clickWelcomeLetter: function () {
-    browser.sleep(delay);
+    browser.sleep(browser.params.shortDelay);
     this.welcomeLetter().click();
   },
   clickGuidelines: function () {
-    browser.sleep(delay);
+    browser.sleep(browser.params.shortDelay);
     this.guidelines().click();
   },
   clickInformationSheet: function () {
-    browser.sleep(delay);
+    browser.sleep(browser.params.shortDelay);
     this.informationSheet().click();
   },
   clickClaimForm: function () {
-    browser.sleep(delay);
+    browser.sleep(browser.params.shortDelay);
     this.claimForm().click();
   },
 
   //Functions can go below
 
   checkNewTab: function (url) {
-    browser.sleep(delay);
+    browser.sleep(browser.params.mediumDelay);
     browser.getAllWindowHandles().then(function (handles) {
       browser.switchTo().window(handles[1]).then(function () {
         expect(browser.getCurrentUrl()).toContain(url);

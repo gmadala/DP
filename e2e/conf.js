@@ -26,7 +26,8 @@ exports.config = {
     realtimeFailure: true
   },
   params: {
-    userName: '97421EH',
+    userName:'97421EH',
+    userName2:'36017RDT',
     password:'ngcpass!0',
     shortDelay: '1000',
     mediumDelay:'3000',
