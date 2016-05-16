@@ -5,9 +5,9 @@
     .module('nextgearWebApp')
     .controller('VinDetailsCtrl', VinDetailsCtrl);
 
-  VinDetailsCtrl.$inject = ['$scope', 'moment', '$uibModal', '$q', 'Blackbook'];
+  VinDetailsCtrl.$inject = ['$scope', 'moment', '$uibModal', '$q', 'Blackbook','User'];
 
-  function VinDetailsCtrl($scope, moment, $uibModal, $q, Blackbook) {
+  function VinDetailsCtrl($scope, moment, $uibModal, $q, Blackbook, User) {
 
     var uibModal = $uibModal;
 
@@ -70,6 +70,10 @@
         s.vinMode = 'none';
       }
     };
+
+    $scope.isDealer = function () {
+      return User.isDealer() ;
+    }
 
     $scope.vinExit = function () {
       // on leaving VIN field, if it has a syntactically valid value that has not yet been looked up, do it now
