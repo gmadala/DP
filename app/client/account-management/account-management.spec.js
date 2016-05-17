@@ -146,7 +146,8 @@ describe('Controller: AccountManagementCtrl', function () {
           autoPay: {enabled: true},
           addBankAccount: {enabled: true},
           editBankAccount: {enabled: true},
-          uploadDocuments: {enabled: true}
+          uploadDocuments: {enabled: true},
+          uploadDocumentsAuction: {enabled: true}
         };
       }
     };
