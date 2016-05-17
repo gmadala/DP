@@ -176,6 +176,15 @@
  */
 body.modal-open {
   overflow: hidden;
+  padding-right: 15px;
+}
+
+/* Tablet */
+@media only screen and (max-width: 768px) and (orientation: portrait), only screen and (max-width: 1024px) and (orientation: landscape) {
+  body.modal-open {
+    padding-right: initial;
+
+  }
 }
 
 @media print {
