@@ -64,8 +64,11 @@
 
     $scope.historyReportUrl = api.contentLink('/report/vehiclehistorydetail/' + $stateParams.stockNumber + '/VehicleHistory');
     $scope.isCollapsed = true;
+    var isDealer = User.isDealer();
+    var attachDocsDealer = isDealer && User.getFeatures().hasOwnProperty('uploadDocuments') ? User.getFeatures().uploadDocuments.enabled : false;
+    var attachDocsAuction = !isDealer && User.getFeatures().hasOwnProperty('uploadDocuments') ? User.getFeatures().uploadDocumentsAuction.enabled : false;
 
-    $scope.attachDocumentsEnabled = User.getFeatures().hasOwnProperty('uploadDocuments') ? User.getFeatures().uploadDocuments.enabled : false;
+    $scope.attachDocumentsEnabled = attachDocsDealer || attachDocsAuction;
 
     $scope.goToCheckout = function() {
       $state.transitionTo('checkout');

@@ -22,6 +22,7 @@
   //border: 0;
   //margin-top:60px;
   //z-index:2000;
+  overflow: visible;
 
   &.modal-long{
     height: 60%;
@@ -171,22 +172,6 @@
   }
 }
 
-/*
- When a modal is open, stop the body from being able to scroll
- */
-body.modal-open {
-  overflow: hidden;
-  padding-right: 15px;
-}
-
-/* Tablet */
-@media only screen and (max-width: 768px) and (orientation: portrait), only screen and (max-width: 1024px) and (orientation: landscape) {
-  body.modal-open {
-    padding-right: initial;
-
-  }
-}
-
 @media print {
   /*
    When printing, hide anything that's behind a modal, position the modal at the top left,
@@ -222,4 +207,8 @@ body.modal-open {
       max-height: none;
     }
   }
+}
+
+.modal-sm {
+   width: 500px;
 }

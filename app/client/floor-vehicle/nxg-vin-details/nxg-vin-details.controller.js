@@ -5,9 +5,9 @@
     .module('nextgearWebApp')
     .controller('VinDetailsCtrl', VinDetailsCtrl);
 
-  VinDetailsCtrl.$inject = ['$scope', 'moment', '$uibModal', '$q', 'Blackbook'];
+  VinDetailsCtrl.$inject = ['$scope', 'moment', '$uibModal', '$q', 'Blackbook','User'];
 
-  function VinDetailsCtrl($scope, moment, $uibModal, $q, Blackbook) {
+  function VinDetailsCtrl($scope, moment, $uibModal, $q, Blackbook, User) {
 
     var uibModal = $uibModal;
 
@@ -69,6 +69,10 @@
         $scope.errorFlag = false;
         s.vinMode = 'none';
       }
+    };
+
+    $scope.isDealer = function() {
+      return User.isDealer();
     };
 
     $scope.vinExit = function () {

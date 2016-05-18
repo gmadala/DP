@@ -55,7 +55,8 @@ p {
   color: $text;
   margin: 0;
 }
-p.spaced{
+
+p.spaced {
   padding: 5px 0 5px 0;
 }
 
@@ -104,15 +105,16 @@ a, a:link, a:visited {
   text-align: center;
   margin: 20px 0;
 }
-  .lockup-major {
-    font-weight: bold;
-    color: #666666;
-    margin-bottom: 3px;
-  }
 
-  .lockup-minor {
-    margin: 0;
-  }
+.lockup-major {
+  font-weight: bold;
+  color: #666666;
+  margin-bottom: 3px;
+}
+
+.lockup-minor {
+  margin: 0;
+}
 
 .alt-lockup {
   @extend %align-right;
@@ -135,7 +137,7 @@ a, a:link, a:visited {
   border-top: 1px solid #bbb;
 
   .receipt-minor {
-    padding:2px;
+    padding: 2px;
     font-size: 12px;
     color: #808080;
   }
@@ -145,10 +147,11 @@ a, a:link, a:visited {
     color: $highlight;
   }
 }
-.future-payments{
+
+.future-payments {
   background-color: #F2F2F2;
-  width : 100%;
-  padding:20px 20px 20px 20px;
+  width: 100%;
+  padding: 20px 20px 20px 20px;
 }
 
 .more-payments {
@@ -157,18 +160,20 @@ a, a:link, a:visited {
   font-size: 10px;
 }
 
-.bottom-padding{
+.bottom-padding {
   padding-bottom: 5px;
 }
 
 .block-title {
   font-size: 12px;
 }
+
 .receipt-option {
-  width:100%;
-  padding:20px;
+  width: 100%;
+  padding: 20px;
   border-bottom: 1px solid #bbb;
 }
+
 .receipt-modal {
   border-bottom: 1px solid #bbb;
   background-color: #F2F2F2;
@@ -177,6 +182,11 @@ a, a:link, a:visited {
 // Titles, subtitles, & other special type classes
 .paragraph {
   margin: 10px 0;
+}
+
+.number {
+  margin-bottom: 5px;
+  margin-top: 5px;
 }
 
 .subtitle {
@@ -217,14 +227,14 @@ a, a:link, a:visited {
   font-size: 10px;
 }
 
-.alt-addr{
+.alt-addr {
   padding-top: 15px;
-  li{
+  li {
     padding-bottom: 15px;
   }
 }
 
-.recent-transaction.transaction-date{
+.recent-transaction.transaction-date {
   color: $primary;
 }
 
@@ -246,7 +256,7 @@ ul {
 
 .horizontal-list { // used for footer content
   margin: 5px 0;
-  padding-left:10px;
+  padding-left: 10px;
 
   li {
     display: inline-block;
@@ -258,16 +268,24 @@ ul {
   }
 }
 
-.footer-element{
+.footer-element {
   padding-left: 2px;
 }
 
-ul.document-list{
+ul.document-list {
   padding-left: 5%;
   line-height: 20px;
 }
 
-.vertical-spacing{
+.input-external {
+  padding-left: 7px;
+}
+
+.external-display {
+  padding: 0px;
+}
+
+.vertical-spacing {
   margin: 10px 0 5px 0;
 }
 
