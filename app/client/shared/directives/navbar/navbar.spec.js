@@ -61,7 +61,8 @@ describe('Directive: navBar', function () {
             autoPay: {enabled: true},
             addBankAccount: {enabled: true},
             editBankAccount: {enabled: true},
-            uploadDocuments: {enabled: true}
+            uploadDocuments: {enabled: true},
+            uploadDocumentsAuction: {enabled: true}
           };
         }
       };
@@ -81,6 +82,7 @@ describe('Directive: navBar', function () {
             addBankAccount: {enabled: true},
             editBankAccount: {enabled: true},
             uploadDocuments: {enabled: true},
+            uploadDocumentsAuction: {enabled: true},
             eventSales: {enabled: true}
           };
         }

@@ -70,7 +70,10 @@
 
     var isDealer = User.isDealer();
     var uibModal  = $uibModal;
-    $scope.attachDocumentsEnabled = User.getFeatures().hasOwnProperty('uploadDocuments') ? User.getFeatures().uploadDocuments.enabled : false;
+    var attachDocsDealer = isDealer && User.getFeatures().hasOwnProperty('uploadDocuments') ? User.getFeatures().uploadDocuments.enabled : false;
+    var attachDocsAuction = !isDealer && User.getFeatures().hasOwnProperty('uploadDocuments') ? User.getFeatures().uploadDocumentsAuction.enabled : false;
+
+    $scope.attachDocumentsEnabled = attachDocsDealer || attachDocsAuction;
 
     // init a special version of today's date for our datepicker which only works right with dates @ midnight
     var today = new Date();
@@ -224,13 +227,13 @@
 
       $scope.vinDetailsErrorFlag = true;
       if (!$scope.form.$valid) {
-        if($scope.attachDocumentsEnabled && $scope.files.length < 1){
+        if(isDealer && $scope.attachDocumentsEnabled && $scope.files.length < 1){
           $scope.missingDocuments = true;
         }
         return false;
       }
 
-      if($scope.attachDocumentsEnabled && $scope.files.length < 1){
+      if(isDealer && $scope.attachDocumentsEnabled && $scope.files.length < 1){
         $scope.missingDocuments = true;
         return false;
       }
@@ -411,7 +414,7 @@
      * @return {Boolean} Is the user allowed to upload documents?
      */
     $scope.canAttachDocuments = function () {
-      return ($scope.attachDocumentsEnabled);
+      return ($scope.attachDocumentsEnabled && User.isUnitedStates());
     };
 
   }
