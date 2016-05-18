@@ -59,7 +59,7 @@ describe('Controller: FloorCarCtrl', function () {
         return true;
       },
       getFeatures: function(){
-        return {uploadDocuments: {enabled: false}};
+        return {uploadDocuments: {enabled: false}, uploadDocumentsAuction: {enabled: false}};
       }
     };
 

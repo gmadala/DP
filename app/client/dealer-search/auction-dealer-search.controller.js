@@ -96,6 +96,7 @@
           templateUrl: 'client/shared/modals/credit-query/credit-query.template.html',
           controller: 'CreditQueryCtrl',
           dialogClass: 'modal modal-medium',
+          size: 'sm',
           resolve: {
             options: function () {
               return {
