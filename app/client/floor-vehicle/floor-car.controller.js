@@ -24,7 +24,8 @@
     'gettextCatalog',
     'AccountManagement',
     'Upload',
-    'nxgConfig'
+    'nxgConfig',
+    'gettext'
   ];
 
   function FloorCarCtrl(
@@ -42,7 +43,8 @@
     gettextCatalog,
     AccountManagement,
     Upload,
-    nxgConfig) {
+    nxgConfig,
+    gettext) {
 
     // init files as empty array to avoid
     // error of undefined.length from $watcher
@@ -56,9 +58,22 @@
       }
     });
 
+    var purchaseDateDisclaimer = gettext("To floor plan purchases older than 365 days, please contact NextGear Capital" +
+      " Floorplan Services at fundingservices@nextgearcapital.com, attach the Bill of Sale," +
+      " and provide the customer's NextGear Dealer Number.");
+    $scope.purchaseDateDisclaimer = gettextCatalog.getString(purchaseDateDisclaimer);
+
+    var aucPurchaseDateDisclaimer = gettext("To floor plan purchases older than 7 days, please contact NextGear Capital " +
+      "Floor plan Services at fundingservices@nextgearcapital.com, attach the Bill of Sale, " +
+      "and provide the customer's NextGear Dealer Number.");
+    $scope.aucPurchaseDateDisclaimer = gettextCatalog.getString(aucPurchaseDateDisclaimer);
+
     var isDealer = User.isDealer();
     var uibModal  = $uibModal;
-    $scope.attachDocumentsEnabled = User.getFeatures().hasOwnProperty('uploadDocuments') ? User.getFeatures().uploadDocuments.enabled : false;
+    var attachDocsDealer = isDealer && User.getFeatures().hasOwnProperty('uploadDocuments') ? User.getFeatures().uploadDocuments.enabled : false;
+    var attachDocsAuction = !isDealer && User.getFeatures().hasOwnProperty('uploadDocuments') ? User.getFeatures().uploadDocumentsAuction.enabled : false;
+
+    $scope.attachDocumentsEnabled = attachDocsDealer || attachDocsAuction;
 
     // init a special version of today's date for our datepicker which only works right with dates @ midnight
     var today = new Date();
@@ -399,7 +414,7 @@
      * @return {Boolean} Is the user allowed to upload documents?
      */
     $scope.canAttachDocuments = function () {
-      return ($scope.attachDocumentsEnabled);
+      return ($scope.attachDocumentsEnabled && User.isUnitedStates());
     };
 
   }

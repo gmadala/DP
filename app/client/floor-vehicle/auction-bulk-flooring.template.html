@@ -144,7 +144,7 @@
         <button class="btn-alert" style="padding:0;" ng-show="validity.purchaseAuctionDatePicker.$error.past || validity.purchaseAuctionDatePicker.$error.future"
                 tooltip-placement="right"
                 tooltip-trigger="mouseenter"
-                uib-tooltip="{{ 'To floor plan purchases older than 7 days, please contact NextGear Capital Floor plan Services at fundingservices@nextgearcapital.com, attach the Bill of Sale, and provide the customer’s NextGear Dealer Number.' | translate }}"
+                uib-tooltip-html="aucPurchaseDateDisclaimer"
                 tooltip-animation="true">
           <span nxg-icon="icon-alert"></span>
         </button>

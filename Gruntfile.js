@@ -33,26 +33,29 @@ module.exports = function(grunt) {
         tasks: ['compass']
       },
       livereload: {
+        options: {
+            livereload: true
+        },
         files: [
-          '<%= yeoman.app %>/**/*.html',
-          '!<%= yeoman.app %>/index.html',
-          '.tmp/index.html',
-          '{.tmp,<%= yeoman.app %>}/styles/**/*.css',
-          '{.tmp,<%= yeoman.app %>}/client/**/*.js',
-          '{.tmp,<%= yeoman.app %>}/private-components/**/*.js',
-          '<%= yeoman.app %>/styles/img/**/*.{png,jpg,jpeg,gif,webp,svg}'
-        ],
-        tasks: ['livereload']
+        '<%= yeoman.app %>/**/*.html',
+        '!<%= yeoman.app %>/index.html',
+        '.tmp/index.html',
+        '{.tmp,<%= yeoman.app %>}/styles/**/*.css',
+        '{.tmp,<%= yeoman.app %>}/client/**/*.js',
+        '{.tmp,<%= yeoman.app %>}/private-components/**/*.js',
+        '<%= yeoman.app %>/styles/img/**/*.{png,jpg,jpeg,gif,webp,svg}'
+        ]
       },
       html: {
-        files: ['{.tmp,<%= yeoman.app %>}/index.html'],
+        files: ['<%= yeoman.app %>/index.html'],
         tasks: ['processhtml:server']
       }
     },
     connect: {
       options: {
         port: 9000,
-        hostname: '0.0.0.0'
+        hostname: 'localhost',
+        livereload: true
       },
       livereload: {
         options: {
@@ -551,8 +554,6 @@ module.exports = function(grunt) {
     }
   });
 
-  grunt.renameTask('regarde', 'watch');
-
   grunt.registerTask('dev-setup', [
     'gitinfo',
     'env:dev',
@@ -566,7 +567,6 @@ module.exports = function(grunt) {
 
   grunt.registerTask('server', [
     'dev-setup',
-    'livereload-start',
     'connect:livereload',
     'shell:chrome',
     'watch'
@@ -574,7 +574,6 @@ module.exports = function(grunt) {
 
   grunt.registerTask('server-ie', [
     'dev-setup',
-    'livereload-start',
     'connect:livereload',
     'shell:ie',
     'watch'
@@ -594,7 +593,6 @@ module.exports = function(grunt) {
   grunt.registerTask('test:e2e', [
     'dev-setup',
     'shell:webdriverUpdate',
-    'livereload-start',
     'connect:livereload',
     'protractor'
   ]);

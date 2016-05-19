@@ -161,6 +161,9 @@ describe('Controller: VehicleDetailsCtrl', function () {
     };
 
     userMock = {
+      isDealer: function() {
+        return true;
+      },
       getInfo: function() {
         return $q.when({
           BusinessNumber: '789',
@@ -179,7 +182,7 @@ describe('Controller: VehicleDetailsCtrl', function () {
         });
       },
       getFeatures: function(){
-        return {uploadDocuments: {enabled: false}};
+        return {uploadDocuments: {enabled: false}, uploadDocumentsAuction: {enabled: false}};
       },
       isUnitedStates: function() {
         return true;
