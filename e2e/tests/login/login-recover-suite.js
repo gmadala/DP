@@ -14,13 +14,15 @@ var forgotUrl = "https://test.nextgearcapital.com/test/#/login/recover";
 describe("Log In Suite  \n ", function() {
 
   beforeEach(function() {
+    browser.sleep(browser.params.shortDelay);
+    browser.driver.manage().window().maximize();
     browser.get(homepageUrl);
     browser.ignoreSynchronization = true;
-    browser.sleep(browser.params.shortDelay);
+
 
   });
 
-  it("1. As a new dealer I want to signup to Mynextgear", function() {
+  xit("1. As a new dealer I want to signup to Mynextgear", function() {
     //Check button text
     expect(login.textSignUpLogin()).toEqual("Sign Up");
 
@@ -28,6 +30,8 @@ describe("Log In Suite  \n ", function() {
     login.clickSignUpLogin();
     //Validate correct URL
     expect(browser.getCurrentUrl()).toEqual("http://www.nextgearcapital.com/apply-for-credit/");
+    browser.sleep(3000);
+    browser.close();
 
   });
   it("2. As a dealer I forgot my user name. My email is correct and no problems", function() {
@@ -94,7 +98,7 @@ describe("Log In Suite  \n ", function() {
     expect(browser.getCurrentUrl()).toEqual(homepageUrl);
 
   });
-  xit("4. As a dealer I forgot my password. All my answers are correct", function() {
+  it("4. As a dealer I forgot my password. All my answers are correct", function() {
     //Check button text
     expect(login.textForgotUsernamePassword()).toEqual("Forgot your username or password?");
     login.clickForgotUsernamePassword();
