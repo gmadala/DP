@@ -29,7 +29,7 @@
             </a>
           </div>
           <div uib-dropdown class="spacer">
-            <span class="dropdown-toggle" uib-dropdown-toggle data-toggle="dropdown"
+            <span class="dropdown-toggle" uib-dropdown-toggle
                   id="settingsDropdown"
                   aria-haspopup="true" aria-expanded="false">
               <a>
@@ -77,23 +77,40 @@
     </div>
   </div>
 
-  <div class="nav-bkgd" ng-show="navState.current.data.showNavBar">
+  <nav class="navbar navbar-default mng-navbar" ng-show="navState.current.data.showNavBar">
     <div class="container">
-      <div class="header">
-        <ul class="nav-primary">
-          <li ng-repeat="link in user.navLinks().primary" class="link_{{ link.activeWhen }} dropdown" ng-class="{dropdown: link.subMenu}">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse" aria-expanded="false">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+      </div>
+
+
+      <div class="collapse navbar-collapse" id="navbar-collapse">
+        <ul class="nav navbar-nav ">
+          <li ng-repeat="link in user.navLinks().primary" class="link_{{ link.activeWhen }}" ng-class="{'dropdown': link.subMenu, 'hover': link.hasHover}">
             <a ng-href="{{link.href}}" ng-class="{ active: isActive(link.activeWhen) }" ng-if="!link.subMenu">{{link.name}}</a>
-            <a ng-href="{{link.href}}" class="sub-menu " ng-class="{ active: isActiveGroup(link.subMenu) }"
-               ng-if="link.subMenu" ng-click="toggleSubMenu()" ng-mouseenter="showSubMenu()">
+            <a class="sub-menu dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"
+               ng-class="{ active: isActiveGroup(link.subMenu) }"
+               ng-if="link.subMenu"
+               ng-click="gotoPageIf(link.href, link.activeWhen); removeHover()"
+               ng-mouseenter="addHover()"
+               ng-mouseleave="removeHover()"
+            >
               {{link.name}} <span class="caret"></span></a>
-            <ul class="dropdown-menu" ng-if="link.subMenu" ng-show="canShowMenu" ng-class="{'show-menu':canShowMenu}" uib-dropdown-menu>
-              <li ng-repeat="item in link.subMenu" ng-class="{ active: isActive(item.activeWhen) }" ng-click="hideSubMenu()">
-                <a href="{{item.href}}">{{item.name}}</a>
+            <ul class="dropdown-menu" ng-if="link.subMenu" ng-mouseenter="addHover()"
+                ng-mouseleave="removeHover()">
+              <li ng-repeat="item in link.subMenu" ng-class="{ active: isActive(item.activeWhen) }" ng-click="removeHover()">
+                <a href="#" ng-href="{{item.href}}">{{item.name}}</a>
               </li>
             </ul>
           </li>
         </ul>
       </div>
     </div>
-  </div>
+  </nav>
+
 </header>

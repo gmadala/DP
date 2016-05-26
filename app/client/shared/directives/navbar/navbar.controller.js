@@ -13,18 +13,21 @@
     'Payments',
     'gettextCatalog',
     'language',
-    'kissMetricInfo'
+    'kissMetricInfo',
+    '$location',
+    '$timeout'
   ];
 
-  function NavBarCtrl(
-    $rootScope,
-    $scope,
-    $state,
-    User,
-    Payments,
-    gettextCatalog,
-    language,
-    kissMetricInfo) {
+  function NavBarCtrl($rootScope,
+                      $scope,
+                      $state,
+                      User,
+                      Payments,
+                      gettextCatalog,
+                      language,
+                      kissMetricInfo,
+                      $location,
+                      $timeout) {
 
     $scope.isCollapsed = true;
     var paymentsSubMenu = [
@@ -157,6 +160,7 @@
     $scope.isActive = function(activeWhen) {
       return $state.includes(activeWhen);
     };
+
     $scope.isActiveGroup = function(subMenu) {
       for (var link in subMenu) {
         if ($state.includes(subMenu[link].activeWhen)) {
@@ -166,17 +170,23 @@
       return false;
     };
 
-    $scope.showSubMenu = function() {
-      $scope.canShowMenu = true;
-    };
-
-    $scope.hideSubMenu = function() {
-      if ($scope.canShowMenu) {
-        $scope.canShowMenu = false;
+    $scope.gotoPageIf = function(page) {
+      var desktop = document.getElementsByClassName('no-touch');
+      if (desktop.length > 0) {
+        $location.path(page.substring(1));
+        //remove open class
+        $timeout(function() {
+          document.getElementsByClassName('dropdown open')[0].classList.remove('open');
+        }, 0);
       }
     };
-    $scope.toggleSubMenu = function() {
-      $scope.canShowMenu = !$scope.canShowMenu;
+
+    $scope.addHover = function() {
+      this.link.hasHover = true;
+    };
+
+    $scope.removeHover = function() {
+      this.link.hasHover = false;
     };
 
     $rootScope.$on('$stateChangeSuccess', function () {
