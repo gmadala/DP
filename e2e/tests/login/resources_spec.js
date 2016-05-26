@@ -4,7 +4,6 @@ var login = require('../../framework/login.js');
 var resources = require('../../framework/resources-objects.js');
 
 var homepageUrl = "http://localhost:9000/#/login";
-var resourceUrl = "http://localhost:9000/#/documents";
 var delay = 2000;
 
 describe('Testing Resources Page', function () {

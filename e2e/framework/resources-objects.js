@@ -14,7 +14,7 @@ var myNextGearMobileIOS = element(by.linkText('Download myNextGear mobile iOS'))
 var myNextGearMobileAndroid = element(by.linkText('Download myNextGear mobile Android'));
 var resources = {
 
- clickResources : function () {
+  clickResources : function () {
   resourcesLink.click();
   browser.waitForAngular();
 },
@@ -23,9 +23,9 @@ var resources = {
     browser.waitForAngular();
   },
   clickDealerFundingChecklist:  function() {
-      browser.sleep(500);
-      browser.waitForAngular();
-      dealerFunding.click();
+    browser.sleep(500);
+    browser.waitForAngular();
+    dealerFunding.click();
   },
   clickWelcomePacket : function() {
     browser.sleep(500);
@@ -72,6 +72,5 @@ var resources = {
     browser.waitForAngular();
     myNextGearMobileAndroid.click();
   }
-
 };
 module.exports = resources;

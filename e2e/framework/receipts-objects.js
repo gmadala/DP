@@ -16,12 +16,12 @@ var receiptObjects = {
   },
   //End of locators. Locators need to go before this
   clickExportReceipts: function () {
-    browser.params.shortDelay;
+    browser.sleep(browser.params.shortDelay);
     this.exportReceipts().get(0).click();
 
   },
   clickFirstReceipt: function () {
-    browser.params.shortDelay;
+    browser.sleep(browser.params.shortDelay);
     this.firstReceipt().get(0).click();
 
 
