@@ -23,6 +23,14 @@ exports.config = {
     showColors: true,
     defaultTimeoutInterval: 30000,
     realtimeFailure: true
+  },
+  params: {
+    userName:'97421EH',
+    userName2:'36017RDT',
+    password:'ngcpass!0',
+    shortDelay: '1000',
+    mediumDelay:'3000',
+    longDelay:'5000'
   }
 
 };

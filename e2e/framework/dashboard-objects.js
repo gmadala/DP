@@ -1,10 +1,14 @@
 'use strict';
 
-var delay = 200;
 var dashboard = {
   receiptsLink: function () {
 
     return element(by.css('a[ng-href="#/receipts"]'));
+
+  },
+  resourcesLink: function () {
+
+    return element(by.css('a[ng-href="#/documents"]'));
 
   },
 
@@ -17,16 +21,22 @@ var dashboard = {
   //Locator End
 
   //Clicking
-  clickReceiptsLink: function () {
+  clickResources: function () {
+    browser.sleep(browser.sleep(browser.params.longDelay));
+    this.resourcesLink().click();
 
-    this.receiptsLink().click();
-    browser.sleep(delay);
 
   },
-  clickRequestCreditIncreaset: function () {
+  clickReceiptsLink: function () {
+    browser.sleep(browser.sleep(browser.params.longDelay));
+    this.receiptsLink().click();
 
+
+  },
+  clickRequestCreditIncrease: function () {
+    browser.sleep(browser.sleep(browser.params.longDelay));
     this.requestCreditIncrease().click();
-    browser.sleep(delay);
+
 
   },
 

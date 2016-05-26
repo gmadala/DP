@@ -1,15 +1,8 @@
 'use strict';
 
-// var correctSecurityAnswer = 'a';
-// var incorrectSecurityAnswer = 'f';
-var delay = 200;
+
 
 var loginRecover = {
-  //userName: function () {
-  //
-  //  return browser.element(by.model('passwordRecovery.username'));
-  //
-  //},
 
   //Locators
   //Password error phone numbers
@@ -18,11 +11,11 @@ var loginRecover = {
     return element.all(by.css('table.error-table'));
 
   },
-  passwordErrorPhoneNumberText: function () {
-
-    return element(by.css('p[ng-show="passwordRecovery.questionsFailed"]'));
-
-  },
+  //passwordErrorPhoneNumberText: function () {
+  //
+  //  return element(by.css('p[ng-show="passwordRecovery.questionsFailed"]'));
+  //
+  //},
   passwordErrorText: function () {
 
     return element(by.css('p[ng-show="passwordRecovery.questionsFailed"]'));
@@ -118,13 +111,13 @@ var loginRecover = {
   clickPasswordSubmit: function () {
 
     this.submitPassword().click();
-    browser.sleep(delay);
+    browser.sleep(browser.params.shortDelay);
 
   },
   clickUsernameSubmit: function () {
 
     this.submitUsername().click();
-    browser.sleep(delay);
+    browser.sleep(browser.params.shortDelay);
   },
 
   //Getting
@@ -201,25 +194,25 @@ var loginRecover = {
 
   },
 
-  enterQuestion5: function (param) {
-
-    return this.securityQuestion5().sendKeys(param);
-
-  },
-  enterQuestion3: function (param) {
-
-    return this.securityQuestion3().sendKeys(param);
-
-  },
+  //enterQuestion5: function (param) {
+  //
+  //  return this.securityQuestion5().sendKeys(param);
+  //
+  //},
+  //enterQuestion3: function (param) {
+  //
+  //  return this.securityQuestion3().sendKeys(param);
+  //
+  //},
   enterUsername: function (param) {
 
     return this.userName().clear().sendKeys(param);
 
   },
   enterEmail: function (param) {
-
+    browser.sleep(browser.params.shortDelay);
     this.email().clear().sendKeys(param);
-    browser.sleep(delay);
+
   },
 
   //Count
