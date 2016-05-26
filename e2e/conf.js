@@ -12,9 +12,9 @@ exports.config = {
 
   // Spec patterns are relative to the current working directly when
   // protractor is called.
-  specs: ['tests/login/login-recover-suite.js','tests/login/credit-increase-request.js'],
+  specs: ['tests/login/resources_spec.js'],
   // untrackOutstandingTimeouts: true,
-  restartBrowserBetweenTests: true,
+  restartBrowserBetweenTests: false,
 
   // Options to be passed to Jasmine.
   jasmineNodeOpts: {
