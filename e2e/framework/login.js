@@ -3,7 +3,7 @@
 var userName = '53190md';
 var password = 'ngcpass!0';
 var delay = 200;
-var longDelay = 1000;
+var longDelay = 2000;
 var login = {
 
   elements: {
@@ -54,13 +54,13 @@ var login = {
     return this.elements.loginButton().click();
 
   },
-  clickforgotUsernamePassword: function () {
+  clickForgotUsernamePassword: function () {
 
     this.elements.forgotUsernamePassword().click();
     browser.sleep(delay);
 
   },
-  clicksignUpLogin: function () {
+  clickSignUpLogin: function () {
 
     this.elements.signUpLogin().click();
     //put the waits in the page objects when actions are taken so that it is ready for the test to do what you need it to. It creates cleaner tests too
@@ -69,7 +69,7 @@ var login = {
 
   //Getting
   getInvalidLoginText1: function () {
-
+    browser.sleep(delay);
 
     return this.elements.invalidLoginError1().getText();
 
@@ -86,13 +86,13 @@ var login = {
     return this.elements.loginButton().getText();
 
   },
-  textsignUpLogin: function () {
+  textSignUpLogin: function () {
 
 
     return this.elements.signUpLogin().getText();
 
   },
-  textforgotUsernamePassword: function () {
+  textForgotUsernamePassword: function () {
 
     return this.elements.forgotUsernamePassword().getText();
 
@@ -116,10 +116,10 @@ var login = {
     this.clickLoginButton();
   },
   login2: function (param1,param2) {
+    browser.sleep(longDelay);
     this.enterUserName(param1);
     this.enterPassword(param2);
     this.clickLoginButton();
-    browser.sleep(longDelay);
   },
 
   //LAST ONE

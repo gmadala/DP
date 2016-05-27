@@ -1,7 +1,5 @@
 'use strict';
 
-// var longDelay = 1000;
-var delay = 500;
 var receiptObjects = {
 
   //Locators
@@ -18,15 +16,14 @@ var receiptObjects = {
   },
   //End of locators. Locators need to go before this
   clickExportReceipts: function () {
-
+    browser.params.shortDelay;
     this.exportReceipts().get(0).click();
-    browser.sleep(delay);
 
   },
   clickFirstReceipt: function () {
-
+    browser.params.shortDelay;
     this.firstReceipt().get(0).click();
-    browser.sleep(delay);
+
 
   },
 
