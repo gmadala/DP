@@ -5,9 +5,9 @@
     .module('nextgearWebApp')
     .factory('BusinessHours', BusinessHours);
 
-  BusinessHours.$inject = ['$rootScope', 'api', 'moment', '$timeout'];
+  BusinessHours.$inject = ['$rootScope', 'api', 'moment', '$interval'];
 
-  function BusinessHours($rootScope, api, moment, $timeout) {
+  function BusinessHours($rootScope, api, moment, $interval) {
 
     var prv = {
       cachedBusinessHours: null,
@@ -25,14 +25,14 @@
 
             // When we go from outside to inside business hours, or vice versa,
             // trigger an event and wipe the cached business hours
-            $timeout(function() {
+            $interval(function() {
               prv.cachedBusinessHours = null;
               $rootScope.$broadcast(prv.CHANGE_EVENT);
             }, prv.msToNextEdge(toReturn));
 
             return toReturn;
           }, function(/* error */) {
-            $timeout(function() {
+            $interval(function() {
               prv.cachedBusinessHours = null;
               $rootScope.$broadcast(prv.CHANGE_EVENT);
             }, prv.msToNextEdge([]));

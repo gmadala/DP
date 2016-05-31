@@ -73,7 +73,7 @@
 
     $scope.isDealer = function () {
       return User.isDealer() ;
-    }
+    };
 
     $scope.vinExit = function () {
       // on leaving VIN field, if it has a syntactically valid value that has not yet been looked up, do it now
