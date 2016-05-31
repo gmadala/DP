@@ -22,11 +22,9 @@ describe("Log In Suite  \n ", function() {
 
   });
 
+  //This test commented due to the loading the URL
   xit("1. As a new dealer I want to signup to Mynextgear", function() {
-    //Check button text
-    expect(login.textSignUpLogin()).toEqual("Sign Up");
-
-    //Click signup
+    //Clicking the SignUp hyperlink
     login.clickSignUpLogin();
     //Validate correct URL
     expect(browser.getCurrentUrl()).toEqual("http://www.nextgearcapital.com/apply-for-credit/");
@@ -35,6 +33,8 @@ describe("Log In Suite  \n ", function() {
 
   });
   it("2. As a dealer I forgot my user name. My email is correct and no problems", function() {
+    //Check button text
+    expect(login.textSignUpLogin()).toEqual("Sign Up");
     //Check Forgot username or password link
     expect(login.textForgotUsernamePassword()).toEqual("Forgot your username or password?");
     login.clickForgotUsernamePassword();
