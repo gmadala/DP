@@ -24,7 +24,7 @@ describe('Testing Resources Page', function() {
     browser.getAllWindowHandles().then(function(handles) {
       browser.switchTo().window(handles[1]).then(function() {
         browser.ignoreSynchronization = true;
-        expect(browser.getCurrentUrl()).toEqual("https://test.nextgearcapital.com/mobileservice/api/dealer/feeschedule/FeeSchedule?AuthToken=65415B3C-C684-433D-80FD-3387EAB95043");
+        expect(browser.getCurrentUrl()).toContain("https://test.nextgearcapital.com/mobileservice/api/dealer/feeschedule/FeeSchedule?AuthToken=");
         browser.ignoreSynchronization = false;
         browser.close();
         browser.driver.switchTo().window(handles[0]);
