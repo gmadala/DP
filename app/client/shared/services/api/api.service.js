@@ -10,7 +10,7 @@
     '$q',
     '$http',
     '$filter',
-    '$timeout',
+    '$interval',
     'nxgConfig',
     'messages',
     '$cookieStore',
@@ -23,7 +23,7 @@
     $q,
     $http,
     $filter,
-    $timeout,
+    $interval,
     nxgConfig,
     messages,
     $cookieStore,
@@ -70,16 +70,16 @@
         // before the event listener cancelling the second "escape" press gets bound.
         // This delays it until that event listener is bound, so a second "escape"
         // press can be supressed.
-        $timeout(function() {
+        $interval(function() {
           $rootScope.$emit('event:forceLogout');
         });
       });
     }
 
     function resetSessionTimeout(debug) {
-      if (sessionTimeout) { $timeout.cancel(sessionTimeout); }
-      sessionTimeout = $timeout(function(){
-        $timeout.cancel(sessionTimeout);
+      if (sessionTimeout) { $interval.cancel(sessionTimeout); }
+      sessionTimeout = $interval(function(){
+        $interval.cancel(sessionTimeout);
         if (!!authToken) { onSessionTimeout(debug); }
       }, nxgConfig.sessionTimeoutMs);
     }

@@ -1,6 +1,6 @@
 'use strict';
 
- var longDelay = 1000;
+var longDelay = 1000;
 var modalObjects = {
 
   //Locators
