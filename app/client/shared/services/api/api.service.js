@@ -10,6 +10,7 @@
     '$q',
     '$http',
     '$filter',
+    '$timeout',
     '$interval',
     'nxgConfig',
     'messages',
@@ -23,6 +24,7 @@
     $q,
     $http,
     $filter,
+    $timeout,
     $interval,
     nxgConfig,
     messages,
@@ -70,7 +72,7 @@
         // before the event listener cancelling the second "escape" press gets bound.
         // This delays it until that event listener is bound, so a second "escape"
         // press can be supressed.
-        $interval(function() {
+        $timeout(function() {
           $rootScope.$emit('event:forceLogout');
         });
       });
