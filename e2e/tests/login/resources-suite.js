@@ -2,9 +2,9 @@
 
 // var loginRecover = require('../../framework/login-recover-objects.js');
 var login = require('../../framework/login.js');
-var modal = require('../../framework/modal-objects.js');
+//var modal = require('../../framework/modal-objects.js');
 var dashboard = require('../../framework/dashboard-objects.js');
-var receipts = require('../../framework/receipts-objects.js');
+//var receipts = require('../../framework/receipts-objects.js');
 var resources = require('../../framework/resources-objects');
 var homepageUrl="https://test.nextgearcapital.com/test/#/login";
 describe("Log In Suite  \n ", function () {
