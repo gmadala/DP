@@ -8,21 +8,23 @@ describe('Service: BusinessHours', function () {
   var $rootScope,
       BusinessHours,
       $q,
-      $timeout,
+      $interval,
       moment,
       clock,
       api;
 
+  var intervalTick = 4 * 60 * 60 * 1000;
+
   beforeEach(module(function($provide) {
-    $provide.decorator('$timeout', function($delegate) {
-      var $timeoutSpy = jasmine.createSpy('$timeout').and.callFake(function() {
+    $provide.decorator('$interval', function($delegate) {
+      var $intervalSpy = jasmine.createSpy('$interval').and.callFake(function() {
         $delegate.apply(this, arguments);
       });
-      $timeoutSpy.flush = function() {
-        $delegate.flush();
+      $intervalSpy.flush = function(millis) {
+        $delegate.flush(millis);
       };
-      $timeout = $timeoutSpy;
-      return $timeoutSpy;
+      $interval = $intervalSpy;
+      return $intervalSpy;
     });
   }));
 
@@ -49,8 +51,6 @@ describe('Service: BusinessHours', function () {
   }));
 
   describe('insideBusinessHours function', function() {
-    var rootScope;
-
     beforeEach(function(done) {
       // Start javascript date at 4 hours before start of first business hours,
       // 8pm previous night eastern time
@@ -111,7 +111,7 @@ describe('Service: BusinessHours', function () {
       BusinessHours.insideBusinessHours();
       $rootScope.$digest();
       expect(api.request).toHaveBeenCalled();
-      expect($timeout).toHaveBeenCalledWith(jasmine.any(Function), 4 * 60 * 60 * 1000); // 4 hours, time from 8pm to midnight
+      expect($interval).toHaveBeenCalledWith(jasmine.any(Function), intervalTick); // 4 hours, time from 8pm to midnight
       api.request.calls.reset();
 
       BusinessHours.insideBusinessHours();
@@ -119,8 +119,7 @@ describe('Service: BusinessHours', function () {
       api.request.calls.reset();
       expect(api.request).not.toHaveBeenCalled();
 
-
-      $timeout.flush();
+      $interval.flush(intervalTick);
       BusinessHours.insideBusinessHours();
       expect(api.request).toHaveBeenCalled();
     });
@@ -130,23 +129,25 @@ describe('Service: BusinessHours', function () {
       BusinessHours.insideBusinessHours();
       $rootScope.$digest();
       expect(api.request).toHaveBeenCalled();
-      expect($timeout).toHaveBeenCalledWith(jasmine.any(Function), 4 * 60 * 60 * 1000); // 4 hours, time from 8pm to midnight
+      expect($interval).toHaveBeenCalledWith(jasmine.any(Function), intervalTick); // 4 hours, time from 8pm to midnight
       api.request.calls.reset();
 
-      $timeout.flush();
+      $interval.flush(intervalTick);
       expect($rootScope.$broadcast).toHaveBeenCalledWith(BusinessHours.CHANGE_EVENT);
     });
 
     it('should broadcast a change event when we go from inside to outside business hours', function() {
+      var tick = 18 * 60 * 60 * 1000;
       clock.tick(6 * 60 * 60 * 1000); // plus 6 hours, to 2am
+
       spyOn($rootScope, '$broadcast').and.callThrough();
       BusinessHours.insideBusinessHours();
       $rootScope.$digest();
       expect(api.request).toHaveBeenCalled();
-      expect($timeout).toHaveBeenCalledWith(jasmine.any(Function), 18 * 60 * 60 * 1000); // 4 hours, time from 8pm to midnight
+      expect($interval).toHaveBeenCalledWith(jasmine.any(Function), tick); // 4 hours, time from 8pm to midnight
       api.request.calls.reset();
 
-      $timeout.flush();
+      $interval.flush(tick);
       expect($rootScope.$broadcast).toHaveBeenCalledWith(BusinessHours.CHANGE_EVENT);
     });
   });
