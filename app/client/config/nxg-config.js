@@ -81,7 +81,7 @@
           config = prv.generateConfig(apiDomain, ngenDomain, SEGMENT_KEY_TRAINING, FIFTEEN_MINUTES, isDemo, masheryKey);
           break;
         case prv.profile.CARMAXUAT:
-          apiDomain = 'https://exp1xmngws01.nextgearcapital.com';
+          apiDomain = 'http://exp1xmngws01.nextgearcapital.com';
           ngenDomain = 'https://ngen-api4.uat.nextgearcapital.com';
           masheryKey = null;
           config = prv.generateConfig(apiDomain, ngenDomain, SEGMENT_KEY_CARMAX, SIXTY_MINUTES, isDemo, masheryKey);
