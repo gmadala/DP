@@ -25,17 +25,14 @@ describe("Login as Dealer\n ", function () {
   xit("1. New Dealer - Sign Up to My Next Gear", function() {
     //Validating the SignUp Button label
     expect(newLogin.getTextSignUpLogin()).toEqual("Sign Up");
-
-    //Click signup
-    login.clickSignUpLogin();
-    //Validate correct URL
+    newLogin.doSignUpLogin();
+    //Validating the Current URL
     expect(browser.getCurrentUrl()).toEqual("http://www.nextgearcapital.com/apply-for-credit/");
     browser.sleep(3000);
     browser.close();
-
   });
 
-  it("2. Dealer - Forgot User name. My email is correct and no problems", function () {
+  xit("2. Dealer - Forgot User name. My email is correct and no problems", function () {
     expect(browser.getCurrentUrl()).toEqual(homepageUrl);
     //Validating the SignUp Button label
     expect(newLogin.getTextSignUpLogin()).toEqual("Sign Up");
