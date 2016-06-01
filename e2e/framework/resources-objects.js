@@ -1,130 +1,76 @@
 'use strict';
 
+var resourcesLink = element(by.className('link_documents'));
+var ratesAndFees = element(by.id('ratesandfees'));
+var dealerFunding = element(by.linkText('Dealer Funding Checklist'));
+var welcomePacket = element(by.linkText('Welcome Packet'));
+var titleManagement = element(by.linkText('Title Management Frequently Asked Questions'));
+var instructionsBuyers = element(by.linkText('Instructions for Buyers'));
+var welcomeLetter = element(by.linkText('Welcome Letter'));
+var guidelines = element(by.linkText('Guidelines'));
+var informationSheets = element(by.linkText('Information Sheet'));
+var claimForm = element(by.linkText('Claim Form'));
+var myNextGearMobileIOS = element(by.linkText('Download myNextGear mobile iOS'));
+var myNextGearMobileAndroid = element(by.linkText('Download myNextGear mobile Android'));
+var resources = {
 
-var resourcesObjects = {
-
-  //Locators
-  ratesAndFees: function () {
-
-    return element(by.linkText('Rates and Fees'));
-
+  clickResources: function() {
+    resourcesLink.click();
+    browser.waitForAngular();
   },
-
-  welcomePacket: function () {
-
-    return element(by.linkText('Welcome Packet'));
-
+  clickRatesAndFees: function() {
+    ratesAndFees.click();
+    browser.waitForAngular();
   },
-  dealerFundingChecklist: function () {
-
-    return element(by.linkText('Dealer Funding Checklist'));
-
+  clickDealerFundingChecklist: function() {
+    browser.sleep(500);
+    browser.waitForAngular();
+    dealerFunding.click();
   },
-  titleManagement: function () {
-
-    return element(by.linkText('Title Management Frequently Asked Questions'));
-
+  clickWelcomePacket: function() {
+    browser.sleep(500);
+    browser.waitForAngular();
+    welcomePacket.click();
   },
-  instructionsBuyers: function () {
-
-    return element(by.linkText('Instructions for Buyers'));
-
+  clickTitleManagement: function() {
+    browser.sleep(500);
+    browser.waitForAngular();
+    titleManagement.click();
   },
-  welcomeLetter: function () {
-
-    return element(by.linkText('Welcome Letter'));
-
+  clickInstructionsForBuyers: function() {
+    browser.sleep(500);
+    browser.waitForAngular();
+    instructionsBuyers.click();
   },
-  guidelines: function () {
-
-    return element(by.linkText('Guidelines'));
-
+  clickWelcomeLetter: function() {
+    browser.sleep(500);
+    browser.waitForAngular();
+    welcomeLetter.click();
   },
-  informationSheet: function () {
-
-    return element(by.linkText('Information Sheet'));
-
+  clickGuidelines: function() {
+    browser.sleep(500);
+    browser.waitForAngular();
+    guidelines.click();
   },
-  claimForm: function () {
-
-    return element(by.linkText('Claim Form'));
-
+  clickInformationSheet: function() {
+    browser.sleep(500);
+    browser.waitForAngular();
+    informationSheets.click();
   },
-  iosApp: function () {
-
-    return element(by.css('a[nxg-track="Dealer Resources - iOS Apps"]'));
-
+  clickClaimForm: function() {
+    browser.sleep(500);
+    browser.waitForAngular();
+    claimForm.click();
   },
-  androidApp: function () {
-
-    return element(by.css('a[nxg-track="Dealer Resources - Android Apps"]'));
-
+  clickMobileIOS: function() {
+    browser.sleep(500);
+    browser.waitForAngular();
+    myNextGearMobileIOS.click();
   },
-  //End of locators. Locators need to go before this
-  //Click
-  clickAndroid: function () {
-    browser.sleep(browser.params.shortDelay);
-    this.androidApp().click();
-  },
-  clickIosApp: function () {
-    browser.sleep(browser.params.shortDelay);
-    this.iosApp().click();
-  },
-  clickWelcomePacket: function () {
-    browser.sleep(browser.params.shortDelay);
-    this.welcomePacket().click();
-  },
-  clickRatesAndFees: function () {
-    browser.sleep(browser.params.shortDelay);
-    this.ratesAndFees().click();
-  },
-  clickDealerFunding: function () {
-    browser.sleep(browser.params.shortDelay);
-    this.dealerFundingChecklist().click();
-  },
-  clickTitleManagement: function () {
-    browser.sleep(browser.params.shortDelay);
-    this.titleManagement().click();
-  },
-  clickInstructionsForBuyers: function () {
-    browser.sleep(browser.params.shortDelay);
-    this.instructionsBuyers().click();
-  },
-  clickWelcomeLetter: function () {
-    browser.sleep(browser.params.shortDelay);
-    this.welcomeLetter().click();
-  },
-  clickGuidelines: function () {
-    browser.sleep(browser.params.shortDelay);
-    this.guidelines().click();
-  },
-  clickInformationSheet: function () {
-    browser.sleep(browser.params.shortDelay);
-    this.informationSheet().click();
-  },
-  clickClaimForm: function () {
-    browser.sleep(browser.params.shortDelay);
-    this.claimForm().click();
-  },
-
-  //Functions can go below
-
-  checkNewTab: function (url) {
-    browser.sleep(browser.params.mediumDelay);
-    browser.getAllWindowHandles().then(function (handles) {
-      browser.switchTo().window(handles[1]).then(function () {
-        expect(browser.getCurrentUrl()).toContain(url);
-      });
-    });
-  },
-
-  //LAST ONE
-  clickOkButton: function () {
-
-    return this.okButton().click();
-
+  clickMobileAndroid: function() {
+    browser.sleep(500);
+    browser.waitForAngular();
+    myNextGearMobileAndroid.click();
   }
 };
-
-
-module.exports = resourcesObjects;
+module.exports = resources;
