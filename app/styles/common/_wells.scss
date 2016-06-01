@@ -266,8 +266,34 @@ p.no-results {
     color: #3496c7;
     cursor: pointer;
   }
+  .detail-link {
+    text-align: right;
+  }
 }
-.promo-header{
+
+@media only screen and (max-width: 767px) {
+
+  .promo-item {
+    &:first-child {
+      margin-top: 0;
+    }
+    &.empty-promos:first-child {
+      margin-top: 0 !important;
+    }
+    .detail-link {
+      text-align: center !important;
+      padding-top: 10px;
+    }
+  }
+
+  .accordion-button {
+    width: 65%;
+    max-width: 300px;
+    min-width: 180px;
+  }
+}
+
+.promo-header {
   padding-left: 10px !important;
   padding-right: 10px !important;
   .promo-header-item span{

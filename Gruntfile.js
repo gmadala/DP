@@ -121,7 +121,8 @@ module.exports = function(grunt) {
     },
     jshint: {
       options: {
-        jshintrc: '.jshintrc'
+        jshintrc: '.jshintrc',
+        reporter: 'checkstyle'
       },
       all: [
         //'Gruntfile.js',
@@ -526,7 +527,7 @@ module.exports = function(grunt) {
         command: 'start iexplore.exe "http://localhost:<%= connect.options.port %>'
       },
       webdriverUpdate: {
-        command: ' ./node_modules/protractor/bin/webdriver-manager update'
+        command: 'node_modules/protractor/bin/webdriver-manager update'
       },
       msgmerge: {
         command: function (filename) {
