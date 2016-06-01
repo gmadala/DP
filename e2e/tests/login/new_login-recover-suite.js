@@ -32,7 +32,7 @@ describe("Login as Dealer\n ", function () {
     browser.close();
   });
 
-  xit("2. Dealer - Forgot User name. My email is correct and no problems", function () {
+  it("2. Dealer - Forgot User name. My email is correct and no problems", function () {
     expect(browser.getCurrentUrl()).toEqual(homepageUrl);
     //Validating the SignUp Button label
     expect(newLogin.getTextSignUpLogin()).toEqual("Sign Up");
@@ -42,7 +42,7 @@ describe("Login as Dealer\n ", function () {
     expect(browser.getCurrentUrl()).toEqual(forgotUrl);
     expect(newLogin.elEmail.isDisplayed()).toBe(true);
     newLogin.setEmail(validEmail);
-    browser.sleep(5000);
+
     //Validating the Submit Button label
     // expect(newLogin.getTextSubmitBtn()).toEqual("Submit");
     newLogin.doUsernameSubmit();
@@ -54,48 +54,54 @@ describe("Login as Dealer\n ", function () {
   });
 
   xit("3. Dealer - Forgot User name. My email is NOT correct and have to reenter email", function () {
+    browser.sleep(5000);
     //Login with incorrect password
-    login.login2('53190md', 'incorrect');
-    expect(login.getInvalidLoginText1()).toEqual("We're sorry, but you used a username or password that doesn't match our records.");
-    expect(login.getInvalidLoginText2()).toEqual('If you are experiencing an issue logging in, click "Forgot your username or password?" below, or contact:');
-    //Check button text
-    expect(login.textForgotUsernamePassword()).toEqual("Forgot your username or password?");
-    //Click to login
-    login.clickForgotUsernamePassword();
-    expect(browser.getCurrentUrl()).toEqual(forgotUrl);
+    expect(newLogin.elUserName.isDisplayed()).toBe(true);
+    expect(newLogin.elPassWord.isDisplayed()).toBe(true);
 
-    //Enter invalid email
-    loginRecover.enterEmail(invalidEmail);
-    //Check username box is disabled and submit
-    expect(loginRecover.disabledCount()).toEqual(1);
-    expect(element(by.model('passwordRecovery.username')).isEnabled()).toBe(false);
-    //THis is a better way of determining enabled or disabled. THe above line works but the line below does not..not sure why. Below is hte preferred way to do it
-    //expect(loginRecover.userName.isDisabled()).toBe(true); ///Work on an alternate way of checking this field
-    expect(loginRecover.getSubmitButtonText()).toEqual("Submit");
-    loginRecover.clickUsernameSubmit();
-
-    //Verify error message text
-    expect(loginRecover.getemailNotFoundText()).toEqual("We were unable to locate this email address. If you need assistance, please call NextGear Capital Support at:");
-    expect(loginRecover.getemailNotFoundNumbers()).toContain("United States 1.888.969.3721");
-    expect(loginRecover.getemailNotFoundNumbers()).toContain("Canada - Quebec 1.855.864.9291");
-    expect(loginRecover.getemailNotFoundNumbers()).toContain("Canada - National 1.877.864.9291");
-
-    //Enter incorrect email and submit
-    loginRecover.enterEmail(invalidFormatEmail);
-    loginRecover.clickUsernameSubmit();
-    expect(loginRecover.getIncorrectEmailFormat()).toContain("is not a valid email address. If you need assistance, please call NextGear Capital Support at:");
-
-    //Enter correct email and submit
-    loginRecover.enterEmail(validEmail);
-    loginRecover.clickUsernameSubmit();
-
-    //Verify Success Modal
-
-    expect(modal.header()).toEqual("Success");
-    expect(modal.body()).toEqual("Thank you, check your email for the requested account information.");
-    //Exit out and verify back to main
-    modal.clickOkButton();
-    expect(browser.getCurrentUrl()).toEqual(homepageUrl);
+    newLogin.setLogin();
+    //newLogin.setLogin('53190md', 'incorrect');
+    browser.sleep(15000);
+    // expect(login.getInvalidLoginText1()).toEqual("We're sorry, but you used a username or password that doesn't match our records.");
+    // expect(login.getInvalidLoginText2()).toEqual('If you are experiencing an issue logging in, click "Forgot your username or password?" below, or contact:');
+    // //Check button text
+    // expect(login.textForgotUsernamePassword()).toEqual("Forgot your username or password?");
+    // //Click to login
+    // login.clickForgotUsernamePassword();
+    // expect(browser.getCurrentUrl()).toEqual(forgotUrl);
+    //
+    // //Enter invalid email
+    // loginRecover.enterEmail(invalidEmail);
+    // //Check username box is disabled and submit
+    // expect(loginRecover.disabledCount()).toEqual(1);
+    // expect(element(by.model('passwordRecovery.username')).isEnabled()).toBe(false);
+    // //THis is a better way of determining enabled or disabled. THe above line works but the line below does not..not sure why. Below is hte preferred way to do it
+    // //expect(loginRecover.userName.isDisabled()).toBe(true); ///Work on an alternate way of checking this field
+    // expect(loginRecover.getSubmitButtonText()).toEqual("Submit");
+    // loginRecover.clickUsernameSubmit();
+    //
+    // //Verify error message text
+    // expect(loginRecover.getemailNotFoundText()).toEqual("We were unable to locate this email address. If you need assistance, please call NextGear Capital Support at:");
+    // expect(loginRecover.getemailNotFoundNumbers()).toContain("United States 1.888.969.3721");
+    // expect(loginRecover.getemailNotFoundNumbers()).toContain("Canada - Quebec 1.855.864.9291");
+    // expect(loginRecover.getemailNotFoundNumbers()).toContain("Canada - National 1.877.864.9291");
+    //
+    // //Enter incorrect email and submit
+    // loginRecover.enterEmail(invalidFormatEmail);
+    // loginRecover.clickUsernameSubmit();
+    // expect(loginRecover.getIncorrectEmailFormat()).toContain("is not a valid email address. If you need assistance, please call NextGear Capital Support at:");
+    //
+    // //Enter correct email and submit
+    // loginRecover.enterEmail(validEmail);
+    // loginRecover.clickUsernameSubmit();
+    //
+    // //Verify Success Modal
+    //
+    // expect(modal.header()).toEqual("Success");
+    // expect(modal.body()).toEqual("Thank you, check your email for the requested account information.");
+    // //Exit out and verify back to main
+    // modal.clickOkButton();
+    // expect(browser.getCurrentUrl()).toEqual(homepageUrl);
 
   });
   xit("4. As a dealer I forgot my password. All my answers are correct", function () {
