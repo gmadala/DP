@@ -277,6 +277,9 @@ p.no-results {
     &:first-child {
       margin-top: 0;
     }
+    &.empty-promos:first-child {
+      margin-top: 0 !important;
+    }
     .detail-link {
       text-align: center !important;
       padding-top: 10px;
