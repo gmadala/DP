@@ -30,9 +30,6 @@ describe("Log In Suite  \n ", function () {
     expect(modal.header()).toEqual("Request a Credit Increase");
     expect(modal.body()).toEqual("Your request has been submitted. Credit requests typically take 3-5 business days to process. You will be notified as soon as your request has been processed.");
     modal.clickOkButton();
-
-
-
   });
   it("2. As a dealer I want to request a permanent credit increase", function () {
     //Click Credit increase
