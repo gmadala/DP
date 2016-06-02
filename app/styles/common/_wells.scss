@@ -222,7 +222,6 @@ p.no-results {
   }
 }
 
-
 .settings-well {
   padding-bottom: 20px;
 
@@ -274,28 +273,6 @@ p.no-results {
   }
 }
 
-@media only screen and (max-width: 767px) {
-
-  .promo-item {
-    &:first-child {
-      margin-top: 0;
-    }
-    &.empty-promos:first-child {
-      margin-top: 0 !important;
-    }
-    .detail-link {
-      text-align: center !important;
-      padding-top: 10px;
-    }
-  }
-
-  .accordion-button {
-    width: 65%;
-    max-width: 300px;
-    min-width: 180px;
-  }
-}
-
 .promo-header {
   padding-left: 10px !important;
   padding-right: 10px !important;
@@ -326,4 +303,37 @@ p.no-results {
 
 .cancel {
   margin: 0 15px 0 0;
+}
+
+@media only screen and (max-width: 767px) {
+
+  .promo-item {
+    &:first-child {
+      margin-top: 0;
+    }
+    &.empty-promos:first-child {
+      margin-top: 0 !important;
+    }
+    .detail-link {
+      text-align: center !important;
+      padding-top: 10px;
+    }
+  }
+
+  .accordion-button {
+    width: 65%;
+    max-width: 300px;
+    min-width: 180px;
+  }
+
+  .panel {
+    &.empty-promos {
+      padding-bottom: 0;
+      border-bottom: none;
+      .well-title {
+        border-bottom-right-radius: 5px;
+        border-bottom-left-radius: 5px;
+      }
+    }
+  }
 }
