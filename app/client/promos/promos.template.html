@@ -13,7 +13,7 @@
       <h2 class="well-title">
         <span translate>Promotions / Event Sales</span>
       </h2>
-      <div class="well-column-header promo-header col-sm-12 hidden-xs">
+      <div class="well-column-header promo-header col-sm-12 hidden-xs" ng-hide="promosCurrent.length === 0 && isCollapsed">
         <h6 class="col-sm-3 promo-header-item" translate>Location</h6>
         <h6 class="col-sm-3 promo-header-item" translate>Description</h6>
         <h6 class="col-sm-3 promo-header-item" translate>Sale Type</h6>
