@@ -10,19 +10,25 @@ var invalidEmail = 'asdas@gmail.com';
 var invalidFormatEmail = 'sadsadas';
 var homepageUrl = "https://test.nextgearcapital.com/test/#/login";
 var forgotUrl = "https://test.nextgearcapital.com/test/#/login/recover";
-
+var username = ' ';
+var password = ' ';
 //var login = new login();
 var newLogin = new loginRecover.newLogin();
 
 describe("Login as Dealer\n ", function () {
-
   beforeEach(function () {
     browser.sleep(browser.params.shortDelay);
     browser.driver.manage().window().maximize();
     browser.get(homepageUrl);
     browser.ignoreSynchronization = true;
   });
-  xit("1. New Dealer - Sign Up to My Next Gear", function() {
+  afterEach(function () {
+    browser.executeScript('window.sessionStorage.clear();'); //clear session
+    browser.executeScript('window.localStorage.clear();'); //clear local storage
+  });
+
+
+  xit("1. New Dealer - Sign Up to My Next Gear", function () {
     //Validating the SignUp Button label
     expect(newLogin.getTextSignUpLogin()).toEqual("Sign Up");
     newLogin.doSignUpLogin();
@@ -32,7 +38,8 @@ describe("Login as Dealer\n ", function () {
     browser.close();
   });
 
-  it("2. Dealer - Forgot User name. My email is correct and no problems", function () {
+  xit("2. Dealer - Forgot User name. My email is correct and no problems", function () {
+    browser.get(homepageUrl);
     expect(browser.getCurrentUrl()).toEqual(homepageUrl);
     //Validating the SignUp Button label
     expect(newLogin.getTextSignUpLogin()).toEqual("Sign Up");
@@ -42,7 +49,6 @@ describe("Login as Dealer\n ", function () {
     expect(browser.getCurrentUrl()).toEqual(forgotUrl);
     expect(newLogin.elEmail.isDisplayed()).toBe(true);
     newLogin.setEmail(validEmail);
-
     //Validating the Submit Button label
     // expect(newLogin.getTextSubmitBtn()).toEqual("Submit");
     newLogin.doUsernameSubmit();
@@ -52,24 +58,26 @@ describe("Login as Dealer\n ", function () {
     modal.clickOkButton();
     expect(browser.getCurrentUrl()).toEqual(homepageUrl);
   });
-
-  xit("3. Dealer - Forgot User name. My email is NOT correct and have to reenter email", function () {
-    browser.sleep(5000);
+  xit("3. Dealer - Good Login", function () {
     //Login with incorrect password
-    expect(newLogin.elUserName.isDisplayed()).toBe(true);
-    expect(newLogin.elPassWord.isDisplayed()).toBe(true);
+    browser.sleep(5000);
+    newLogin.doLogin();
+    browser.sleep(10000);
+    browser.driver.quit();
 
-    newLogin.setLogin();
-    //newLogin.setLogin('53190md', 'incorrect');
+  });
+  it("3. Dealer - Login with Incorrect Password", function () {
+    //Login with incorrect password
+    newLogin.setUserName('53190md');
+    newLogin.setPassWord('incorrect');
+    newLogin.doLogin();
     browser.sleep(15000);
-    // expect(login.getInvalidLoginText1()).toEqual("We're sorry, but you used a username or password that doesn't match our records.");
-    // expect(login.getInvalidLoginText2()).toEqual('If you are experiencing an issue logging in, click "Forgot your username or password?" below, or contact:');
-    // //Check button text
-    // expect(login.textForgotUsernamePassword()).toEqual("Forgot your username or password?");
-    // //Click to login
-    // login.clickForgotUsernamePassword();
-    // expect(browser.getCurrentUrl()).toEqual(forgotUrl);
-    //
+    // expect(newLogin.getTextLoginError1()).toEqual("We're sorry, but you used a username or password that doesn't match our records.");
+    // expect(newLogin.getTextLoginError2()).toEqual('If you are experiencing an issue logging in, click "Forgot your username or password?" below, or contact:');
+
+  });
+  it("Dealer - Forgot User name. invalid email id no problems ", function (){
+
     // //Enter invalid email
     // loginRecover.enterEmail(invalidEmail);
     // //Check username box is disabled and submit
@@ -102,6 +110,7 @@ describe("Login as Dealer\n ", function () {
     // //Exit out and verify back to main
     // modal.clickOkButton();
     // expect(browser.getCurrentUrl()).toEqual(homepageUrl);
+
 
   });
   xit("4. As a dealer I forgot my password. All my answers are correct", function () {
@@ -166,4 +175,5 @@ describe("Login as Dealer\n ", function () {
     modal.clickOkButton();
     expect(browser.getCurrentUrl()).toEqual(homepageUrl);
   });
-});
+})
+;

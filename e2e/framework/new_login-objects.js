@@ -13,7 +13,11 @@ function newLogin() {
   this.elUserName = browser.element(by.id("credUsername"));
   this.elPassWord = browser.element(by.id("credPassword"));
   this.elLogin = browser.element(by.id("loginButton"));
+  this.elMyAccount = browser.element(by.css("div.dropdown"));
+  this.elLoginError1 = browser.element.all(by.css('p[ng-show="showLoginError"]')).get(0);
+  this.elLoginError2 = browser.element.all(by.css('p[ng-show="showLoginError"]')).get(1);
 
+ 
   //Doers
   this.doForgotUsernamePassword = function () {
     return this.elForgotUsernamePassword.click();
@@ -35,9 +39,15 @@ function newLogin() {
     browser.sleep(delay);
   };
   this.doLogin = function (){
+    // this.doClearLogin();
+    // this.setUserName('53190md');
+    // this.setPassWord('ngcpass!0');
     return this.elLogin.click();
-
   };
+  this.doMyAccount = function (){
+    return this.elMyAccount.click();
+  };
+  
   //Getters
   this.getTextForgotUsernamePassword = function () {
     return this.elForgotUsernamePassword.getText();
@@ -51,6 +61,15 @@ function newLogin() {
   this.getTextSubmitBtn = function () {
         return this.elSubmitUsername().getText();
   };
+  this.getTextLoginError1 = function () {
+    browser.sleep(delay);
+    return this.element.elLoginError1().getText();
+
+  };
+  this.getTextLoginError2 = function () {
+    browser.sleep(delay);
+    return this.elLoginError2().getText();
+  };
 
 
   //Setters
@@ -59,12 +78,17 @@ function newLogin() {
     this.elEmail.sendKeys(param);
   };
 
-  this.setLogin = function (username, password) {
-    this.doClearLogin();
+  this.setUserName = function (username) {
     this.elUserName.sendKeys(username);
-    this.elPassWord.sendKeys(password);
-    this.doLogin();
   };
+
+  this.setPassWord = function (password) {
+    this.elPassWord.sendKeys(password);
+  };
+
+  this.setLogin = function (username, password) {
+
+  }
 }
 
 module.exports.newLogin = newLogin;
