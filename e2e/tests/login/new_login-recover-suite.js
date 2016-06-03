@@ -12,7 +12,7 @@ var homepageUrl = "https://test.nextgearcapital.com/test/#/login";
 var forgotUrl = "https://test.nextgearcapital.com/test/#/login/recover";
 var username = ' ';
 var password = ' ';
-//var login = new login();
+
 var newLogin = new loginRecover.newLogin();
 
 describe("Login as Dealer\n ", function () {
