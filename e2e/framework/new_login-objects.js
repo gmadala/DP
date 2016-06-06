@@ -16,8 +16,9 @@ function newLogin() {
   this.elMyAccount = browser.element(by.css("div.dropdown"));
   this.elLoginError1 = browser.element.all(by.css('p[ng-show="showLoginError"]')).get(0);
   this.elLoginError2 = browser.element.all(by.css('p[ng-show="showLoginError"]')).get(1);
+  this.elUserName_FUNPW =
+//FUNPW = Forgot username password page
 
- 
   //Doers
   this.doForgotUsernamePassword = function () {
     return this.elForgotUsernamePassword.click();
@@ -38,16 +39,18 @@ function newLogin() {
     return this.elPassWord.clear();
     browser.sleep(delay);
   };
-  this.doLogin = function (){
+  this.doLogin = function (value1, value2){
     // this.doClearLogin();
-    // this.setUserName('53190md');
-    // this.setPassWord('ngcpass!0');
+    // this.setUserName(value1);
+    // this.setPassWord(value2);
+    // // this.setUserName('53190md');
+    // // this.setPassWord('ngcpass!0');
     return this.elLogin.click();
   };
   this.doMyAccount = function (){
     return this.elMyAccount.click();
   };
-  
+
   //Getters
   this.getTextForgotUsernamePassword = function () {
     return this.elForgotUsernamePassword.getText();
@@ -87,6 +90,8 @@ function newLogin() {
   };
 
   this.setLogin = function (username, password) {
+    this.elUserName.sendKeys(username);
+    this.elPassWord.sendKeys(password);
 
   }
 }

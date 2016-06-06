@@ -37,9 +37,9 @@
           </div>
 
           <br />
-          <p class="text-error" ng-show="showLoginError">{{ errorMsg }}</p>
-          <p class="text-error" ng-show="showLoginError" translate>If you are experiencing an issue logging in, click "Forgot your username or password?" below, or contact:</p>
-          <span ng-show="showLoginError"><nxg-customer-support-phone></nxg-customer-support-phone></span>
+          <p class="text-error" id = "error1" ng-show="showLoginError">{{ errorMsg }}</p>
+          <p class="text-error" id = "error2" ng-show="showLoginError" translate>If you are experiencing an issue logging in, click "Forgot your username or password?" below, or contact:</p>
+          <span ng-show="showLoginError" id = "PhoneNumber"><nxg-customer-support-phone></nxg-customer-support-phone></span>
 
           <button type="submit" class="btn-cta cta-primary right" ng-click="authenticate()" id="loginButton" translate>Log In</button>
         </form>

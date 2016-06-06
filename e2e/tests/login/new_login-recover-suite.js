@@ -22,9 +22,27 @@ describe("Login as Dealer\n ", function () {
     browser.get(homepageUrl);
     browser.ignoreSynchronization = true;
   });
-  afterEach(function () {
-    browser.executeScript('window.sessionStorage.clear();'); //clear session
-    browser.executeScript('window.localStorage.clear();'); //clear local storage
+  afterEach(function(scenario) {
+
+    function getWindowLocation() {
+      return window.location;
+    }
+
+    function clearStorage() {
+      window.sessionStorage.clear();
+      window.localStorage.clear();
+    }
+
+    return browser.executeScript(getWindowLocation).then(function(location) {
+      // NB If no page is loaded in the scneario then calling clearStorage will cause exception
+      // so guard against this by checking hostname (If no page loaded then hostname == '')
+      if (location.hostname.length > 0) {
+        return browser.executeScript(clearStorage);
+      }
+      else {
+        return Promise.resolve();
+      }
+    });
   });
 
 
@@ -58,25 +76,29 @@ describe("Login as Dealer\n ", function () {
     modal.clickOkButton();
     expect(browser.getCurrentUrl()).toEqual(homepageUrl);
   });
-  xit("3. Dealer - Good Login", function () {
-    //Login with incorrect password
-    browser.sleep(5000);
-    newLogin.doLogin();
-    browser.sleep(10000);
-    browser.driver.quit();
 
-  });
-  it("3. Dealer - Login with Incorrect Password", function () {
-    //Login with incorrect password
-    newLogin.setUserName('53190md');
-    newLogin.setPassWord('incorrect');
+  it("3. Dealer - Good Login", function () {
+    newLogin.doClearLogin();
+    newLogin.setLogin('53190md','ngcpass!0');
     newLogin.doLogin();
+    expect(browser.getCurrentUrl()).toEqual(homepageUrl);
+  });
+
+  xit("3. Dealer - Login with Incorrect Password", function () {
+
+    newLogin.doClearLogin();
+    newLogin.setLogin('53190md','ngcpass!0');
     browser.sleep(15000);
+    //Login with incorrect password
+    // newLogin.setUserName('53190md');
+    // newLogin.setPassWord('incorrect');
+    newLogin.doLogin();
+    browser.sleep(1500);
     // expect(newLogin.getTextLoginError1()).toEqual("We're sorry, but you used a username or password that doesn't match our records.");
     // expect(newLogin.getTextLoginError2()).toEqual('If you are experiencing an issue logging in, click "Forgot your username or password?" below, or contact:');
 
   });
-  it("Dealer - Forgot User name. invalid email id no problems ", function (){
+  xit("Dealer - Forgot User name. invalid email id no problems ", function (){
 
     // //Enter invalid email
     // loginRecover.enterEmail(invalidEmail);
@@ -115,10 +137,10 @@ describe("Login as Dealer\n ", function () {
   });
   xit("4. As a dealer I forgot my password. All my answers are correct", function () {
     //Check button text
-    expect(login.textForgotUsernamePassword()).toEqual("Forgot your username or password?");
     login.clickForgotUsernamePassword();
     expect(browser.getCurrentUrl()).toEqual(forgotUrl);
     //Enter Username
+    newLogin.setUserName('36017RDT');
     loginRecover.enterUsername('36017RDT');
     //Validate email address field is disabled and click
     expect(loginRecover.disabledCount()).toEqual(1);
