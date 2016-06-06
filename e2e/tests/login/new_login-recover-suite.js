@@ -6,9 +6,10 @@ var modal = require('../../framework/modal-objects.js');
 var incorrectAnswer = 'f';
 var correctAnswer = 'a';
 var validEmail = 'test@gmail.com';
-var invalidEmail = 'asdas@gmail.com';
+var inValidEmail = 'asdas@gmail.com';
 var invalidFormatEmail = 'sadsadas';
 var homepageUrl = "https://test.nextgearcapital.com/test/#/login";
+var homeUrl = "https://test.nextgearcapital.com/test/#/home";
 var forgotUrl = "https://test.nextgearcapital.com/test/#/login/recover";
 var username = ' ';
 var password = ' ';
@@ -22,29 +23,10 @@ describe("Login as Dealer\n ", function () {
     browser.get(homepageUrl);
     browser.ignoreSynchronization = true;
   });
-  afterEach(function(scenario) {
-
-    function getWindowLocation() {
-      return window.location;
-    }
-
-    function clearStorage() {
-      window.sessionStorage.clear();
-      window.localStorage.clear();
-    }
-
-    return browser.executeScript(getWindowLocation).then(function(location) {
-      // NB If no page is loaded in the scneario then calling clearStorage will cause exception
-      // so guard against this by checking hostname (If no page loaded then hostname == '')
-      if (location.hostname.length > 0) {
-        return browser.executeScript(clearStorage);
-      }
-      else {
-        return Promise.resolve();
-      }
-    });
+  afterEach(function () {
+    browser.executeScript('window.sessionStorage.clear();');
+    browser.executeScript('window.localStorage.clear();');
   });
-
 
   xit("1. New Dealer - Sign Up to My Next Gear", function () {
     //Validating the SignUp Button label
@@ -57,7 +39,7 @@ describe("Login as Dealer\n ", function () {
   });
 
   xit("2. Dealer - Forgot User name. My email is correct and no problems", function () {
-    browser.get(homepageUrl);
+    //browser.get(homepageUrl);
     expect(browser.getCurrentUrl()).toEqual(homepageUrl);
     //Validating the SignUp Button label
     expect(newLogin.getTextSignUpLogin()).toEqual("Sign Up");
@@ -68,7 +50,7 @@ describe("Login as Dealer\n ", function () {
     expect(newLogin.elEmail.isDisplayed()).toBe(true);
     newLogin.setEmail(validEmail);
     //Validating the Submit Button label
-    // expect(newLogin.getTextSubmitBtn()).toEqual("Submit");
+    expect(newLogin.getTextSubmitUsername()).toEqual("Submit");
     newLogin.doUsernameSubmit();
     expect(modal.header()).toEqual("Success");
     expect(modal.body()).toEqual("Thank you, check your email for the requested account information.");
@@ -76,83 +58,118 @@ describe("Login as Dealer\n ", function () {
     modal.clickOkButton();
     expect(browser.getCurrentUrl()).toEqual(homepageUrl);
   });
-
-  it("3. Dealer - Good Login", function () {
+  xit("3. Dealer - Good Login", function () {
+    // browser.get(homepageUrl);
     newLogin.doClearLogin();
-    newLogin.setLogin('53190md','ngcpass!0');
+    newLogin.setLogin('53190md', 'ngcpass!0');
+    newLogin.doLogin();
+    browser.sleep(3000);
+    expect(browser.getCurrentUrl()).toEqual(homeUrl);
+  });
+  xit("4. Dealer - Login with Null values", function () {
+    newLogin.doClearLogin();
+    newLogin.setLogin('', '');
+    newLogin.doLogin();
+    expect(browser.getCurrentUrl()).toEqual(homepageUrl);
+  });
+  xit("5. Dealer - Login with Incorrect Username and Password", function () {
+    newLogin.doClearLogin();
+    newLogin.setLogin('test', 'test');
+    newLogin.doLogin();
+    expect(browser.getCurrentUrl()).toEqual(homepageUrl);
+  });
+  xit("6. Dealer - Login with Null Password value", function () {
+    newLogin.doClearLogin();
+    newLogin.setLogin('53190md', '');
+    newLogin.doLogin();
+    expect(browser.getCurrentUrl()).toEqual(homepageUrl);
+  });
+  xit("7. Dealer - Login with Null Username value", function () {
+    newLogin.doClearLogin();
+    newLogin.setLogin('', 'ngcpass!0');
     newLogin.doLogin();
     expect(browser.getCurrentUrl()).toEqual(homepageUrl);
   });
 
-  xit("3. Dealer - Login with Incorrect Password", function () {
+  xit("8. Dealer - Login with Incorrect Password", function () {
 
     newLogin.doClearLogin();
-    newLogin.setLogin('53190md','ngcpass!0');
-    browser.sleep(15000);
-    //Login with incorrect password
-    // newLogin.setUserName('53190md');
-    // newLogin.setPassWord('incorrect');
+    newLogin.setLogin('53190md', 'incorrect');
     newLogin.doLogin();
-    browser.sleep(1500);
+    browser.sleep(15000);
     // expect(newLogin.getTextLoginError1()).toEqual("We're sorry, but you used a username or password that doesn't match our records.");
     // expect(newLogin.getTextLoginError2()).toEqual('If you are experiencing an issue logging in, click "Forgot your username or password?" below, or contact:');
 
   });
-  xit("Dealer - Forgot User name. invalid email id no problems ", function (){
+  xit("Dealer - Forgot User name. invalid email id no problems ", function () {
+    newLogin.setLogin('53190md', 'incorrect');
+    browser.sleep(500);
+    // expect(newLogin.getTextLoginError1()).toEqual("We're sorry, but you used a username or password that doesn't match our records.");
+    // expect(newLogin.getTextLoginError2()).toEqual('If you are experiencing an issue logging in, click "Forgot your username or password?" below, or contact:');
+    // expect(login.getInvalidLoginText1()).toEqual("We're sorry, but you used a username or password that doesn't match our records.");
+    // expect(login.getInvalidLoginText2()).toEqual('If you are experiencing an issue logging in, click "Forgot your username or password?" below, or contact:');
 
-    // //Enter invalid email
-    // loginRecover.enterEmail(invalidEmail);
-    // //Check username box is disabled and submit
-    // expect(loginRecover.disabledCount()).toEqual(1);
-    // expect(element(by.model('passwordRecovery.username')).isEnabled()).toBe(false);
-    // //THis is a better way of determining enabled or disabled. THe above line works but the line below does not..not sure why. Below is hte preferred way to do it
-    // //expect(loginRecover.userName.isDisabled()).toBe(true); ///Work on an alternate way of checking this field
-    // expect(loginRecover.getSubmitButtonText()).toEqual("Submit");
-    // loginRecover.clickUsernameSubmit();
-    //
-    // //Verify error message text
+    //Click to login
+    newLogin.doForgotUsernamePassword();
+    expect(browser.getCurrentUrl()).toEqual(forgotUrl);
+    //Enter invalid email
+    newLogin.setEmail(inValidEmail);
+    browser.sleep(5000);
+    //loginRecover.enterEmail(invalidEmail);
+    //Check username box is disabled and submit
+    //expect(loginRecover.disabledCount()).toEqual(1);
+    // expect(newLogin.doDisabledCount()).toEqual(1);
+    //  expect(element(by.model('passwordRecovery.username')).isEnabled()).toBe(false);
+    expect(newLogin.elPasswordRecoveryModal.isEnabled()).toBe(false);
+    expect(newLogin.getTextSubmitUsername()).toEqual("Submit");
+    newLogin.doUsernameSubmit();
+
+    //Verify error message text
     // expect(loginRecover.getemailNotFoundText()).toEqual("We were unable to locate this email address. If you need assistance, please call NextGear Capital Support at:");
     // expect(loginRecover.getemailNotFoundNumbers()).toContain("United States 1.888.969.3721");
     // expect(loginRecover.getemailNotFoundNumbers()).toContain("Canada - Quebec 1.855.864.9291");
     // expect(loginRecover.getemailNotFoundNumbers()).toContain("Canada - National 1.877.864.9291");
-    //
-    // //Enter incorrect email and submit
-    // loginRecover.enterEmail(invalidFormatEmail);
-    // loginRecover.clickUsernameSubmit();
-    // expect(loginRecover.getIncorrectEmailFormat()).toContain("is not a valid email address. If you need assistance, please call NextGear Capital Support at:");
-    //
-    // //Enter correct email and submit
-    // loginRecover.enterEmail(validEmail);
-    // loginRecover.clickUsernameSubmit();
-    //
-    // //Verify Success Modal
-    //
-    // expect(modal.header()).toEqual("Success");
-    // expect(modal.body()).toEqual("Thank you, check your email for the requested account information.");
-    // //Exit out and verify back to main
-    // modal.clickOkButton();
-    // expect(browser.getCurrentUrl()).toEqual(homepageUrl);
 
+    //Enter incorrect email and submit
+    newLogin.elEmail.clear();
+    newLogin.setEmail(invalidFormatEmail);
+    newLogin.doUsernameSubmit();
 
+    //loginRecover.clickUsernameSubmit();
+    //expect(loginRecover.getIncorrectEmailFormat()).toContain("is not a valid email address. If you need assistance, please call NextGear Capital Support at:");
+
+    //Enter correct email and submit
+    newLogin.elEmail.clear();
+    newLogin.setEmail(validEmail);
+    newLogin.doUsernameSubmit();
+
+    //Verify Success Modal
+    expect(modal.header()).toEqual("Success");
+    expect(modal.body()).toEqual("Thank you, check your email for the requested account information.");
+    //Exit out and verify back to main
+    modal.clickOkButton();
+    expect(browser.getCurrentUrl()).toEqual(homepageUrl);
   });
-  xit("4. As a dealer I forgot my password. All my answers are correct", function () {
+  it("4. As a dealer I forgot my password. All my answers are correct", function () {
     //Check button text
-    login.clickForgotUsernamePassword();
+    newLogin.doForgotUsernamePassword();
     expect(browser.getCurrentUrl()).toEqual(forgotUrl);
     //Enter Username
-    newLogin.setUserName('36017RDT');
-    loginRecover.enterUsername('36017RDT');
-    //Validate email address field is disabled and click
-    expect(loginRecover.disabledCount()).toEqual(1);
-    loginRecover.clickPasswordSubmit();
+    newLogin.elFUPWUsername.sendKeys('36017RDT');
+    newLogin.doSubmitPassword();
+
+    // loginRecover.clickPasswordSubmit();
     //Answer Security Questions and validate
-    expect(loginRecover.getSecurityQuestion10Text()).toEqual("What is the name of a college you applied to but didn't attend?");
-    loginRecover.enterQuestion10(correctAnswer);
-    expect(loginRecover.getSecurityQuestion6Text()).toEqual("In what city or town was your first job?");
-    loginRecover.enterQuestion6(correctAnswer);
-    expect(loginRecover.getSecurityQuestion9Text()).toEqual("What is your maternal grandmother's maiden name?");
-    loginRecover.enterQuestion9(correctAnswer);
-    loginRecover.clickPasswordSubmit();
+    newLogin.setSecQuestions(correctAnswer);
+    browser.sleep(15000);
+    // expect(loginRecover.getSecurityQuestion10Text()).toEqual("What is the name of a college you applied to but didn't attend?");
+    // loginRecover.enterQuestion10(correctAnswer);
+    // expect(loginRecover.getSecurityQuestion6Text()).toEqual("In what city or town was your first job?");
+    // loginRecover.enterQuestion6(correctAnswer);
+    // expect(loginRecover.getSecurityQuestion9Text()).toEqual("What is your maternal grandmother's maiden name?");
+    // loginRecover.enterQuestion9(correctAnswer);
+    newLogin.doSubmitPassword();
+    //loginRecover.clickPasswordSubmit();
     //Verify Success Modal
     expect(modal.header()).toEqual("Success");
     expect(modal.body()).toEqual("Thank you, check your email for the requested account information.");

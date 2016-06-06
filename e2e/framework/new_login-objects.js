@@ -9,6 +9,7 @@ function newLogin() {
   this.elForgotUsernamePassword = browser.element(by.id("forgotUsernamePassword"));
   this.elEmail = browser.element(by.id("email"));
   this.elSubmitUsername = browser.element(by.id("forgotUsernameSubmit"));
+  this.elSubmitPassword = browser.element(by.id("forgotPasswordSubmit"));
   this.elSignUpLogin = browser.element(by.id("signUpLogin"));
   this.elUserName = browser.element(by.id("credUsername"));
   this.elPassWord = browser.element(by.id("credPassword"));
@@ -16,8 +17,12 @@ function newLogin() {
   this.elMyAccount = browser.element(by.css("div.dropdown"));
   this.elLoginError1 = browser.element.all(by.css('p[ng-show="showLoginError"]')).get(0);
   this.elLoginError2 = browser.element.all(by.css('p[ng-show="showLoginError"]')).get(1);
-  this.elUserName_FUNPW =
-//FUNPW = Forgot username password page
+  this.elDisabledFields = browser.element.all(by.css('input[disabled="disabled"]'));
+  this.elPasswordRecoveryModal = browser.element(by.model('passwordRecovery.username'));
+  this.elFUPWUsername = browser.element(by.id("userName"));
+  this.elSecQues10 = browser.element(by.id('question10'));
+  this.elSecQues6 = browser.element.all(by.id('question6'));
+  this.elSecQues9 = browser.element.all(by.id('question6'));
 
   //Doers
   this.doForgotUsernamePassword = function () {
@@ -40,16 +45,25 @@ function newLogin() {
     browser.sleep(delay);
   };
   this.doLogin = function (value1, value2){
-    // this.doClearLogin();
-    // this.setUserName(value1);
-    // this.setPassWord(value2);
-    // // this.setUserName('53190md');
-    // // this.setPassWord('ngcpass!0');
     return this.elLogin.click();
+    browser.waitForAngular();
+    browser.sleep(500);
+
   };
+  this.doDisabledCount = function () {
+    return this.disabledFields().count();
+  };
+
   this.doMyAccount = function (){
     return this.elMyAccount.click();
   };
+  this.doSubmitUsername = function () {
+    return this.elSubmitUsername.click();
+  };
+  this.doSubmitPassword = function () {
+    return this.elSubmitPassword.click();
+  };
+
 
   //Getters
   this.getTextForgotUsernamePassword = function () {
@@ -65,13 +79,18 @@ function newLogin() {
         return this.elSubmitUsername().getText();
   };
   this.getTextLoginError1 = function () {
-    browser.sleep(delay);
+   //browser.sleep(delay);
     return this.element.elLoginError1().getText();
 
   };
   this.getTextLoginError2 = function () {
     browser.sleep(delay);
     return this.elLoginError2().getText();
+  };
+
+  this.getTextSubmitUsername = function (){
+    browser.sleep(delay);
+    return this.elSubmitUsername.getText();
   };
 
 
@@ -93,7 +112,16 @@ function newLogin() {
     this.elUserName.sendKeys(username);
     this.elPassWord.sendKeys(password);
 
+  };
+  this.setSecQuestions = function (param) {
+    this.elSecQues10.sendKeys(param);
+    this.elSecQues10.sendKeys(protractor.Key.TAB);
+    this.elSecQues6.sendKeys(param);
+    this.elSecQues6.sendKeys(protractor.Key.TAB);
+    this.elSecQues9.sendKeys(param);
+    this.elSecQues9.sendKeys(protractor.Key.TAB);
   }
+
 }
 
 module.exports.newLogin = newLogin;
