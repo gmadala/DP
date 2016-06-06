@@ -5,6 +5,7 @@ function newLogin() {
   var password = 'ngcpass!0';
   var delay = 200;
   var longDelay = 2000;
+  var modal = require('/modal-objects.js');
 
   this.elForgotUsernamePassword = browser.element(by.id("forgotUsernamePassword"));
   this.elEmail = browser.element(by.id("email"));
@@ -133,6 +134,12 @@ function newLogin() {
     this.elSecQues10.sendKeys(protractor.Key.TAB);
     this.elSecQues9.clear().sendKeys(param);
   };
+  this.successModalWindow = function (){
+    expect(modal.header()).toEqual("Success");
+    expect(modal.body()).toEqual("Thank you, check your email for the requested account information.");
+    //Exit out and verify back to main
+    modal.clickOkButton();
+  }
 }
 
 module.exports.newLogin = newLogin;

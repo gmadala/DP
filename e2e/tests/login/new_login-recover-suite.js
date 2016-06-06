@@ -165,10 +165,11 @@ describe("Login as Dealer\n ", function () {
     newLogin.doSubmitPassword();
     browser.sleep(1000);
     //Verify Success Modal
-    expect(modal.header()).toEqual("Success");
-    expect(modal.body()).toEqual("Thank you, check your email for the requested account information.");
-    //Exit out and verify back to main
-    modal.clickOkButton();
+    newLogin.successModalWindow();
+    // expect(modal.header()).toEqual("Success");
+    // expect(modal.body()).toEqual("Thank you, check your email for the requested account information.");
+    // //Exit out and verify back to main
+    // modal.clickOkButton();
     expect(browser.getCurrentUrl()).toEqual(homepageUrl);
 
   });
