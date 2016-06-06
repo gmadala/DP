@@ -157,19 +157,13 @@ describe("Login as Dealer\n ", function () {
     //Enter Username
     newLogin.elFUPWUsername.sendKeys('36017RDT');
     newLogin.doSubmitPassword();
-
-    // loginRecover.clickPasswordSubmit();
     //Answer Security Questions and validate
+    expect(newLogin.getTextSecuQues10()).toEqual("What is the name of a college you applied to but didn't attend?");
+    expect(newLogin.getTextSecuQues6()).toEqual("In what city or town was your first job?");
+    expect(newLogin.getTextSecuQues9()).toEqual("What is your maternal grandmother's maiden name?");
     newLogin.setSecQuestions(correctAnswer);
-    browser.sleep(15000);
-    // expect(loginRecover.getSecurityQuestion10Text()).toEqual("What is the name of a college you applied to but didn't attend?");
-    // loginRecover.enterQuestion10(correctAnswer);
-    // expect(loginRecover.getSecurityQuestion6Text()).toEqual("In what city or town was your first job?");
-    // loginRecover.enterQuestion6(correctAnswer);
-    // expect(loginRecover.getSecurityQuestion9Text()).toEqual("What is your maternal grandmother's maiden name?");
-    // loginRecover.enterQuestion9(correctAnswer);
     newLogin.doSubmitPassword();
-    //loginRecover.clickPasswordSubmit();
+    browser.sleep(1000);
     //Verify Success Modal
     expect(modal.header()).toEqual("Success");
     expect(modal.body()).toEqual("Thank you, check your email for the requested account information.");
@@ -180,33 +174,30 @@ describe("Login as Dealer\n ", function () {
   });
 
   xit("5. As a dealer I forgot my password. All my answers are NOT correct", function () {
-    //Check button text
-    expect(login.textForgotUsernamePassword()).toEqual("Forgot your username or password?");
-    login.clickForgotUsernamePassword();
+    newLogin.doForgotUsernamePassword();
     expect(browser.getCurrentUrl()).toEqual(forgotUrl);
     //Enter Username
-    loginRecover.enterUsername(browser.params.userName2);
+    newLogin.elFUPWUsername.sendKeys('36017RDT');
     //Validate email address field is disabled and click
-    expect(loginRecover.disabledCount()).toEqual(1);
-    loginRecover.clickPasswordSubmit();
+    //expect(loginRecover.disabledCount()).toEqual(1);
+    newLogin.doSubmitPassword();
     //Answer Security Questions and validate
-    expect(loginRecover.getSecurityQuestion10Text()).toEqual("What is the name of a college you applied to but didn't attend?");
-    loginRecover.enterQuestion10(incorrectAnswer);
-    expect(loginRecover.getSecurityQuestion6Text()).toEqual("In what city or town was your first job?");
-    loginRecover.enterQuestion6(incorrectAnswer);
-    expect(loginRecover.getSecurityQuestion9Text()).toEqual("What is your maternal grandmother's maiden name?");
-    loginRecover.enterQuestion9(incorrectAnswer);
-    loginRecover.clickPasswordSubmit();
+    expect(newLogin.getTextSecuQues10()).toEqual("What is the name of a college you applied to but didn't attend?");
+    expect(newLogin.getTextSecuQues6()).toEqual("In what city or town was your first job?");
+    expect(newLogin.getTextSecuQues9()).toEqual("What is your maternal grandmother's maiden name?");
+    newLogin.setSecQuestions(incorrectAnswer);
+    browser.sleep(1000);
+    newLogin.doSubmitPassword();
+    browser.sleep(1000);
     //Verify Success Modal
-    expect(loginRecover.getPasswordErrorText()).toEqual("We were unable verify one or more of your answers. If you need assistance, please call NextGear Capital Support at:");
-    expect(loginRecover.getPasswordErrorTextPhoneNumber()).toContain("United States 1.888.969.3721");
-    expect(loginRecover.getPasswordErrorTextPhoneNumber()).toContain("Canada - Quebec 1.855.864.9291");
-    expect(loginRecover.getPasswordErrorTextPhoneNumber()).toContain("Canada - National 1.877.864.9291");
+    // expect(loginRecover.getPasswordErrorText()).toEqual("We were unable verify one or more of your answers. If you need assistance, please call NextGear Capital Support at:");
+    // expect(loginRecover.getPasswordErrorTextPhoneNumber()).toContain("United States 1.888.969.3721");
+    // expect(loginRecover.getPasswordErrorTextPhoneNumber()).toContain("Canada - Quebec 1.855.864.9291");
+    // expect(loginRecover.getPasswordErrorTextPhoneNumber()).toContain("Canada - National 1.877.864.9291");
     //Exit out and verify back to main
-    loginRecover.enterQuestion10(correctAnswer);
-    loginRecover.enterQuestion6(correctAnswer);
-    loginRecover.enterQuestion9(correctAnswer);
-    loginRecover.clickPasswordSubmit();
+    newLogin.setSecQuestions(correctAnswer);
+    newLogin.doSubmitPassword();
+    browser.sleep(500);
     //Verify Success Modal
     expect(modal.header()).toEqual("Success");
     expect(modal.body()).toEqual("Thank you, check your email for the requested account information.");

@@ -22,7 +22,7 @@ function newLogin() {
   this.elFUPWUsername = browser.element(by.id("userName"));
   this.elSecQues10 = browser.element(by.id('question10'));
   this.elSecQues6 = browser.element.all(by.id('question6'));
-  this.elSecQues9 = browser.element.all(by.id('question6'));
+  this.elSecQues9 = browser.element.all(by.id('question9'));
 
   //Doers
   this.doForgotUsernamePassword = function () {
@@ -92,6 +92,19 @@ function newLogin() {
     browser.sleep(delay);
     return this.elSubmitUsername.getText();
   };
+  this.getTextSecuQues10 = function (){
+    browser.sleep(delay);
+    return this.elSecQues10.getText();
+  };
+
+  this.getTextSecuQues6 = function (){
+    browser.sleep(delay);
+    return this.elSecQues6.getText();
+  };
+  this.getTextSecuQues9 = function (){
+    browser.sleep(delay);
+    return this.elSecQues9.getText();
+  };
 
 
   //Setters
@@ -114,14 +127,12 @@ function newLogin() {
 
   };
   this.setSecQuestions = function (param) {
-    this.elSecQues10.sendKeys(param);
+    this.elSecQues10.clear().sendKeys(param);
     this.elSecQues10.sendKeys(protractor.Key.TAB);
-    this.elSecQues6.sendKeys(param);
-    this.elSecQues6.sendKeys(protractor.Key.TAB);
-    this.elSecQues9.sendKeys(param);
-    this.elSecQues9.sendKeys(protractor.Key.TAB);
-  }
-
+    this.elSecQues6.clear().sendKeys(param);
+    this.elSecQues10.sendKeys(protractor.Key.TAB);
+    this.elSecQues9.clear().sendKeys(param);
+  };
 }
 
 module.exports.newLogin = newLogin;
