@@ -9,19 +9,18 @@ var correctAnswer = 'a';
 var validEmail = 'test@gmail.com';
 var inValidEmail = 'asdas@gmail.com';
 var invalidFormatEmail = 'sadsadas';
-var homepageUrl = "https://test.nextgearcapital.com/test/#/login";
+var loginUrl = "https://test.nextgearcapital.com/test/#/login";
 var homeUrl = "https://test.nextgearcapital.com/test/#/home";
 var forgotUrl = "https://test.nextgearcapital.com/test/#/login/recover";
-var username = ' ';
-var password = ' ';
 
 var loginObjects = new loginObjects.loginObjects();
 
 describe("Login as Dealer\n ", function () {
+
   beforeEach(function () {
     browser.sleep(browser.params.shortDelay);
     browser.driver.manage().window().maximize();
-    browser.get(homepageUrl);
+    browser.get(loginUrl);
     browser.ignoreSynchronization = true;
   });
   afterEach(function () {
@@ -40,8 +39,7 @@ describe("Login as Dealer\n ", function () {
   });
 
   it("2. Dealer - Forgot User name. My email is correct and no problems", function () {
-    //browser.get(homepageUrl);
-    expect(browser.getCurrentUrl()).toEqual(homepageUrl);
+    expect(browser.getCurrentUrl()).toEqual(loginUrl);
     //Validating the SignUp Button label
     expect(loginObjects.getTextSignUpLogin()).toEqual("Sign Up");
     //Validating the ForgotUsernamePassword Label
@@ -57,8 +55,9 @@ describe("Login as Dealer\n ", function () {
     expect(modal.body()).toEqual("Thank you, check your email for the requested account information.");
     //Clicking OK button on Modal Window
     modal.clickOkButton();
-    expect(browser.getCurrentUrl()).toEqual(homepageUrl);
+    expect(browser.getCurrentUrl()).toEqual(loginUrl);
   });
+
   it("3. Dealer - Forgot User name. invalid email id no problems ", function () {
     loginObjects.setLogin('53190md', 'incorrect');
     loginObjects.doLogin();
@@ -85,6 +84,7 @@ describe("Login as Dealer\n ", function () {
     loginObjects.setEmail(invalidFormatEmail);
     loginObjects.doUsernameSubmit();
     expect(recoverErrorMessage.getIncorrectEmailFormat()).toContain("is not a valid email address. If you need assistance, please call NextGear Capital Support at:");
+
     //Enter correct email and submit
     loginObjects.elEmail.clear();
     loginObjects.setEmail(validEmail);
@@ -95,7 +95,8 @@ describe("Login as Dealer\n ", function () {
     expect(modal.body()).toEqual("Thank you, check your email for the requested account information.");
     //Exit out and verify back to main
     modal.clickOkButton();
-    expect(browser.getCurrentUrl()).toEqual(homepageUrl);
+    browser.sleep(500);
+    expect(browser.getCurrentUrl()).toEqual(loginUrl);
   });
 
   it("4. As a dealer I forgot my password. All my answers are correct", function () {
@@ -105,6 +106,7 @@ describe("Login as Dealer\n ", function () {
     //Enter Username
     loginObjects.elFUPWUsername.sendKeys('36017RDT');
     loginObjects.doSubmitPassword();
+    browser.sleep(500);
     //Answer Security Questions and validate
     expect(recoverErrorMessage.getSecurityQuestion10Text()).toEqual("What is the name of a college you applied to but didn't attend?");
     expect(recoverErrorMessage.getSecurityQuestion6Text()).toEqual("In what city or town was your first job?");
@@ -125,31 +127,35 @@ describe("Login as Dealer\n ", function () {
     expect(modal.body()).toEqual("Thank you, check your email for the requested account information.");
     modal.clickOkButton();
     //Exit out and verify back to main
-    expect(browser.getCurrentUrl()).toEqual(homepageUrl);
+    expect(browser.getCurrentUrl()).toEqual(loginUrl);
   });
+
   it("5. Dealer - Login with Null values", function () {
     loginObjects.doClearLogin();
     loginObjects.setLogin(' ', ' ');
     loginObjects.doLogin();
-    expect(browser.getCurrentUrl()).toEqual(homepageUrl);
+    expect(browser.getCurrentUrl()).toEqual(loginUrl);
   });
+
   it("6. Dealer - Login with Incorrect Username and Password", function () {
     loginObjects.doClearLogin();
     loginObjects.setLogin('test', 'test');
     loginObjects.doLogin();
-    expect(browser.getCurrentUrl()).toEqual(homepageUrl);
+    expect(browser.getCurrentUrl()).toEqual(loginUrl);
   });
+
   it("7. Dealer - Login with Null Password value", function () {
     loginObjects.doClearLogin();
     loginObjects.setLogin('53190md', '');
     loginObjects.doLogin();
-    expect(browser.getCurrentUrl()).toEqual(homepageUrl);
+    expect(browser.getCurrentUrl()).toEqual(loginUrl);
   });
+
   it("8. Dealer - Login with Null Username value", function () {
     loginObjects.doClearLogin();
     loginObjects.setLogin('', 'ngcpass!0');
     loginObjects.doLogin();
-    expect(browser.getCurrentUrl()).toEqual(homepageUrl);
+    expect(browser.getCurrentUrl()).toEqual(loginUrl);
   });
 
   it("9. Dealer - Good Login", function () {
@@ -158,6 +164,5 @@ describe("Login as Dealer\n ", function () {
     loginObjects.doLogin();
     browser.sleep(1000);
     expect(browser.getCurrentUrl()).toEqual(homeUrl);
-
   });
 });
