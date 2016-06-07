@@ -16,7 +16,7 @@ exports.config = {
   specs: ['tests/login/login-recover-suite.js'],
   //specs: ['tests/login/resources-suite.js'],
   // untrackOutstandingTimeouts: true,
-  restartBrowserBetweenTests: true,
+  restartBrowserBetweenTests: false,
 
   // Options to be passed to Jasmine.
   jasmineNodeOpts: {

@@ -1,6 +1,6 @@
 'use strict';
 
-var loginObjects= require('../../framework/login-objects.js');
+var loginObjects = require('../../framework/login-objects.js');
 var recoverErrorMessage = require('../../framework/login-recover-objects.js');
 var login = require('../../framework/login.js');
 var modal = require('../../framework/modal-objects.js');
@@ -39,7 +39,7 @@ describe("Login as Dealer\n ", function () {
     browser.close();
   });
 
-  xit("2. Dealer - Forgot User name. My email is correct and no problems", function () {
+  it("2. Dealer - Forgot User name. My email is correct and no problems", function () {
     //browser.get(homepageUrl);
     expect(browser.getCurrentUrl()).toEqual(homepageUrl);
     //Validating the SignUp Button label
@@ -59,39 +59,7 @@ describe("Login as Dealer\n ", function () {
     modal.clickOkButton();
     expect(browser.getCurrentUrl()).toEqual(homepageUrl);
   });
-  xit("3. Dealer - Good Login", function () {
-    loginObjects.doClearLogin();
-    loginObjects.setLogin('53190md', 'ngcpass!0');
-    loginObjects.doLogin();
-    browser.sleep(1000);
-    expect(browser.getCurrentUrl()).toEqual(homeUrl);
-  });
-  xit("4. Dealer - Login with Null values", function () {
-    loginObjects.doClearLogin();
-    loginObjects.setLogin(' ', ' ');
-    loginObjects.doLogin();
-    expect(browser.getCurrentUrl()).toEqual(homepageUrl);
-  });
-  xit("5. Dealer - Login with Incorrect Username and Password", function () {
-    loginObjects.doClearLogin();
-    loginObjects.setLogin('test', 'test');
-    loginObjects.doLogin();
-    expect(browser.getCurrentUrl()).toEqual(homepageUrl);
-  });
-  xit("6. Dealer - Login with Null Password value", function () {
-    loginObjects.doClearLogin();
-    loginObjects.setLogin('53190md', '');
-    loginObjects.doLogin();
-    expect(browser.getCurrentUrl()).toEqual(homepageUrl);
-  });
-  xit("7. Dealer - Login with Null Username value", function () {
-    loginObjects.doClearLogin();
-    loginObjects.setLogin('', 'ngcpass!0');
-    loginObjects.doLogin();
-    expect(browser.getCurrentUrl()).toEqual(homepageUrl);
-  });
-
-  xit("Dealer - Forgot User name. invalid email id no problems ", function () {
+  it("3. Dealer - Forgot User name. invalid email id no problems ", function () {
     loginObjects.setLogin('53190md', 'incorrect');
     loginObjects.doLogin();
     expect(login.getInvalidLoginText1()).toEqual("We're sorry, but you used a username or password that doesn't match our records.");
@@ -159,5 +127,37 @@ describe("Login as Dealer\n ", function () {
     //Exit out and verify back to main
     expect(browser.getCurrentUrl()).toEqual(homepageUrl);
   });
+  it("5. Dealer - Login with Null values", function () {
+    loginObjects.doClearLogin();
+    loginObjects.setLogin(' ', ' ');
+    loginObjects.doLogin();
+    expect(browser.getCurrentUrl()).toEqual(homepageUrl);
+  });
+  it("6. Dealer - Login with Incorrect Username and Password", function () {
+    loginObjects.doClearLogin();
+    loginObjects.setLogin('test', 'test');
+    loginObjects.doLogin();
+    expect(browser.getCurrentUrl()).toEqual(homepageUrl);
+  });
+  it("7. Dealer - Login with Null Password value", function () {
+    loginObjects.doClearLogin();
+    loginObjects.setLogin('53190md', '');
+    loginObjects.doLogin();
+    expect(browser.getCurrentUrl()).toEqual(homepageUrl);
+  });
+  it("8. Dealer - Login with Null Username value", function () {
+    loginObjects.doClearLogin();
+    loginObjects.setLogin('', 'ngcpass!0');
+    loginObjects.doLogin();
+    expect(browser.getCurrentUrl()).toEqual(homepageUrl);
+  });
 
+  it("9. Dealer - Good Login", function () {
+    loginObjects.doClearLogin();
+    loginObjects.setLogin('53190md', 'ngcpass!0');
+    loginObjects.doLogin();
+    browser.sleep(1000);
+    expect(browser.getCurrentUrl()).toEqual(homeUrl);
+
+  });
 });
