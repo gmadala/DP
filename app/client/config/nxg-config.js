@@ -82,8 +82,8 @@
           break;
         case prv.profile.CARMAXUAT:
           apiDomain = 'http://exp1xmngws01.nextgearcapital.com';
-          ngenDomain = 'https://ngen-api4.uat.nextgearcapital.com';
-          masheryKey = null;
+          ngenDomain = 'https://uat.api.nextgearcapital.com/carmax';
+          masheryKey = 'fbymcqgckrvh7a2h8eavek7e';
           config = prv.generateConfig(apiDomain, ngenDomain, SEGMENT_KEY_CARMAX, SIXTY_MINUTES, isDemo, masheryKey);
           break;
         case prv.profile.PRODUCTION:
