@@ -38,7 +38,7 @@ describe("Login as Dealer\n ", function () {
     browser.close();
   });
 
-  xit("2. Dealer - Forgot User name. My email is correct and no problems", function () {
+  it("2. Dealer - Forgot User name. My email is correct and no problems", function () {
     //browser.get(homepageUrl);
     expect(browser.getCurrentUrl()).toEqual(homepageUrl);
     //Validating the SignUp Button label
@@ -58,33 +58,38 @@ describe("Login as Dealer\n ", function () {
     modal.clickOkButton();
     expect(browser.getCurrentUrl()).toEqual(homepageUrl);
   });
-  xit("3. Dealer - Good Login", function () {
+  it("3. Dealer - Good Login", function () {
     // browser.get(homepageUrl);
+    browser.sleep(5000);
     newLogin.doClearLogin();
     newLogin.setLogin('53190md', 'ngcpass!0');
     newLogin.doLogin();
     browser.sleep(3000);
     expect(browser.getCurrentUrl()).toEqual(homeUrl);
   });
-  xit("4. Dealer - Login with Null values", function () {
+  it("4. Dealer - Login with Null values", function () {
+    browser.sleep(5000);
     newLogin.doClearLogin();
     newLogin.setLogin('', '');
     newLogin.doLogin();
     expect(browser.getCurrentUrl()).toEqual(homepageUrl);
   });
-  xit("5. Dealer - Login with Incorrect Username and Password", function () {
+  it("5. Dealer - Login with Incorrect Username and Password", function () {
+    browser.sleep(5000);
     newLogin.doClearLogin();
     newLogin.setLogin('test', 'test');
     newLogin.doLogin();
     expect(browser.getCurrentUrl()).toEqual(homepageUrl);
   });
-  xit("6. Dealer - Login with Null Password value", function () {
+  it("6. Dealer - Login with Null Password value", function () {
+    browser.sleep(5000);
     newLogin.doClearLogin();
     newLogin.setLogin('53190md', '');
     newLogin.doLogin();
     expect(browser.getCurrentUrl()).toEqual(homepageUrl);
   });
-  xit("7. Dealer - Login with Null Username value", function () {
+  it("7. Dealer - Login with Null Username value", function () {
+    browser.sleep(5000);
     newLogin.doClearLogin();
     newLogin.setLogin('', 'ngcpass!0');
     newLogin.doLogin();
@@ -155,6 +160,7 @@ describe("Login as Dealer\n ", function () {
     newLogin.doForgotUsernamePassword();
     expect(browser.getCurrentUrl()).toEqual(forgotUrl);
     //Enter Username
+    browser.sleep(1000);
     newLogin.elFUPWUsername.sendKeys('36017RDT');
     newLogin.doSubmitPassword();
     //Answer Security Questions and validate
@@ -164,12 +170,11 @@ describe("Login as Dealer\n ", function () {
     newLogin.setSecQuestions(correctAnswer);
     newLogin.doSubmitPassword();
     browser.sleep(1000);
-    //Verify Success Modal
-    newLogin.successModalWindow();
-    // expect(modal.header()).toEqual("Success");
-    // expect(modal.body()).toEqual("Thank you, check your email for the requested account information.");
-    // //Exit out and verify back to main
-    // modal.clickOkButton();
+    //Validating Success Modal window
+    expect(modal.header()).toEqual("Success");
+    expect(modal.body()).toEqual("Thank you, check your email for the requested account information.");
+    modal.clickOkButton();
+    //Exit out and verify back to main
     expect(browser.getCurrentUrl()).toEqual(homepageUrl);
 
   });
