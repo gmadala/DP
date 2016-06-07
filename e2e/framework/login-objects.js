@@ -1,9 +1,9 @@
 'use strict';
 
-function newLogin() {
+function loginObjects() {
   var username = '53190md';
   var password = 'ngcpass!0';
-  var delay = 200;
+  var delay = 1000;
   var longDelay = 2000;
 
   this.elForgotUsernamePassword = browser.element(by.id("forgotUsernamePassword"));
@@ -15,9 +15,6 @@ function newLogin() {
   this.elPassWord = browser.element(by.id("credPassword"));
   this.elLogin = browser.element(by.id("loginButton"));
   this.elMyAccount = browser.element(by.css("div.dropdown"));
-  this.elLoginError1 = browser.element.all(by.css('p[ng-show="showLoginError"]')).get(0);
-  this.elLoginError2 = browser.element.all(by.css('p[ng-show="showLoginError"]')).get(1);
-  this.elDisabledFields = browser.element.all(by.css('input[disabled="disabled"]'));
   this.elPasswordRecoveryModal = browser.element(by.model('passwordRecovery.username'));
   this.elFUPWUsername = browser.element(by.id("userName"));
   this.elSecQues10 = browser.element(by.id('question10'));
@@ -44,16 +41,11 @@ function newLogin() {
     return this.elPassWord.clear();
     browser.sleep(delay);
   };
-  this.doLogin = function (value1, value2){
+  this.doLogin = function (){
     return this.elLogin.click();
     browser.waitForAngular();
-    browser.sleep(500);
-
+    browser.sleep(delay);
   };
-  this.doDisabledCount = function () {
-    return this.disabledFields().count();
-  };
-
   this.doMyAccount = function (){
     return this.elMyAccount.click();
   };
@@ -62,6 +54,7 @@ function newLogin() {
   };
   this.doSubmitPassword = function () {
     return this.elSubmitPassword.click();
+    browser.sleep(delay);
   };
 
 
@@ -69,41 +62,12 @@ function newLogin() {
   this.getTextForgotUsernamePassword = function () {
     return this.elForgotUsernamePassword.getText();
   };
-
   this.getTextSignUpLogin = function () {
-    // return this.elGetTextSignUpLogin.getText();
     return this.elSignUpLogin.getText();
   };
-
-  this.getTextSubmitBtn = function () {
-        return this.elSubmitUsername().getText();
-  };
-  this.getTextLoginError1 = function () {
-   //browser.sleep(delay);
-    return this.elLoginError1().getText();
-
-  };
-  this.getTextLoginError2 = function () {
-    browser.sleep(delay);
-    return this.elLoginError2().getText();
-  };
-
   this.getTextSubmitUsername = function (){
     browser.sleep(delay);
     return this.elSubmitUsername.getText();
-  };
-  this.getTextSecuQues10 = function (){
-    browser.sleep(delay);
-    return this.elSecQues10.getText();
-  };
-
-  this.getTextSecuQues6 = function (){
-    browser.sleep(delay);
-    return this.elSecQues6.getText();
-  };
-  this.getTextSecuQues9 = function (){
-    browser.sleep(delay);
-    return this.elSecQues9.getText();
   };
 
 
@@ -123,7 +87,9 @@ function newLogin() {
 
   this.setLogin = function (username, password) {
     this.elUserName.sendKeys(username);
+    browser.sleep(delay);
     this.elPassWord.sendKeys(password);
+    browser.sleep(delay);
 
   };
   this.setSecQuestions = function (param) {
@@ -135,4 +101,4 @@ function newLogin() {
   }
 }
 
-module.exports.newLogin = newLogin;
+module.exports.loginObjects = loginObjects;

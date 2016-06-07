@@ -13,7 +13,7 @@ exports.config = {
   // Spec patterns are relative to the current working directly when
   // protractor is called.
   //specs: ['tests/login/login-recover-suite.js','tests/login/credit-increase-request.js','tests/login/resources-suite.js'],
-  specs: ['tests/login/new_login-recover-suite.js'],
+  specs: ['tests/login/login-recover-suite.js'],
   //specs: ['tests/login/resources-suite.js'],
   // untrackOutstandingTimeouts: true,
   restartBrowserBetweenTests: true,
