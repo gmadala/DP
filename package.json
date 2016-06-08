@@ -5,7 +5,8 @@
     "type": "git",
     "url": "https://git.assembla.com/nextgear-desktop-and-mobile.desktop.git"
   },
-  "dependencies": {},
+  "dependencies": {
+  },
   "devDependencies": {
     "frisby": "^0.8.5",
     "grunt": "~0.4.2",
@@ -13,6 +14,7 @@
     "grunt-autoprefixer": "~3.0.3",
     "grunt-bless": "^0.2.0",
     "grunt-bower-requirejs": "~2.0.0",
+    "grunt-cli": "^1.2.0",
     "grunt-contrib-clean": "~0.6.0",
     "grunt-contrib-compass": "~1.0.3",
     "grunt-contrib-concat": "~0.5.1",
@@ -61,6 +63,7 @@
     "node": ">=0.8.0"
   },
   "scripts": {
-    "ci-build": "grunt ci-build --target=test"
+    "ci-build": "grunt ci-build --target=test",
+    "windows": "grunt server-ie"
   }
 }
