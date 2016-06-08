@@ -13,6 +13,9 @@
     'User',
     'routingNumberFilter',
     'moment',
+    'segmentio',
+    'metric',
+    'kissMetricInfo',
     'api'
   ];
   /**
@@ -26,6 +29,9 @@
     User,
     routingNumberFilter,
     moment,
+    segmentio,
+    metric,
+    kissMetricInfo,
     api) {
 
     var directive;
@@ -117,6 +123,10 @@
             return AccountManagement.updateBankAccount(bankAccount);
           })
           .then(function () {
+            kissMetricInfo.getKissMetricInfo().then(
+              function(result){
+                segmentio.track(metric.DEALER_EDIT_BANK_ACCOUNT, result);
+            });
             scope.refreshActiveAchAccounts({});
             setStatus(scope.dirtyStatus);
             setBankName(scope.dirtyBankName);
