@@ -1,4 +1,9 @@
 'use strict';
+/**
+ * @class login_objects
+ * @author Balanithiya Krishnamoorthy
+ * @description Page objects for login page elements
+ * */
 
 function loginObjects() {
   var username = '53190md';
