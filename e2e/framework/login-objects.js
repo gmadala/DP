@@ -43,7 +43,6 @@ function loginObjects() {
   };
   this.doLogin = function (){
     return this.elLogin.click();
-    browser.waitForAngular();
     browser.sleep(delay);
   };
   this.doMyAccount = function (){
@@ -54,6 +53,13 @@ function loginObjects() {
   };
   this.doSubmitPassword = function () {
     return this.elSubmitPassword.click();
+    browser.sleep(delay);
+  };
+  this.doGoodLogin = function () {
+    this.doClearLogin();
+    this.setUserName('53190md');
+    this.setPassWord('ngcpass!0');
+    this.doLogin();
     browser.sleep(delay);
   };
 
@@ -86,6 +92,7 @@ function loginObjects() {
   };
 
   this.setLogin = function (username, password) {
+    this.doClearLogin();
     this.elUserName.sendKeys(username);
     browser.sleep(delay);
     this.elPassWord.sendKeys(password);

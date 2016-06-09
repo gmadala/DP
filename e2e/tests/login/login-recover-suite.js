@@ -7,7 +7,7 @@ var modal = require('../../framework/modal-objects.js');
 var incorrectAnswer = 'f';
 var correctAnswer = 'a';
 var validEmail = 'test@gmail.com';
-var inValidEmail = 'asdas@gmail.com';
+var invalidEmail = 'asdas@gmail.com';
 var invalidFormatEmail = 'sadsadas';
 var loginUrl = "https://test.nextgearcapital.com/test/#/login";
 var homeUrl = "https://test.nextgearcapital.com/test/#/home";
@@ -28,7 +28,7 @@ describe("Login as Dealer\n ", function () {
     browser.executeScript('window.localStorage.clear();');
   });
 
-  xit("1. New Dealer - Sign Up to My Next Gear", function () {
+  xit("1. Dealer - Sign Up for My Next Gear", function () {
     //Validating the SignUp Button label
     expect(loginObjects.getTextSignUpLogin()).toEqual("Sign Up");
     loginObjects.doSignUpLogin();
@@ -46,7 +46,6 @@ describe("Login as Dealer\n ", function () {
     expect(loginObjects.getTextForgotUsernamePassword()).toEqual("Forgot your username or password?");
     loginObjects.doForgotUsernamePassword();
     expect(browser.getCurrentUrl()).toEqual(forgotUrl);
-    expect(loginObjects.elEmail.isDisplayed()).toBe(true);
     loginObjects.setEmail(validEmail);
     //Validating the Submit Button label
     expect(loginObjects.getTextSubmitUsername()).toEqual("Submit");
@@ -66,8 +65,8 @@ describe("Login as Dealer\n ", function () {
     loginObjects.doForgotUsernamePassword();
     expect(browser.getCurrentUrl()).toEqual(forgotUrl);
 
-    //Enter invalid email
-    loginObjects.setEmail(inValidEmail);
+    //Enter invalid email id
+    loginObjects.setEmail(invalidEmail);
 
     //Check username box is disabled and submit
     expect(recoverErrorMessage.disabledCount()).toEqual(1);
@@ -79,13 +78,13 @@ describe("Login as Dealer\n ", function () {
     // //Verify error message text
     // expect(recoverErrorMessage.getemailNotFoundText()).toEqual("We were unable to locate this email address. If you need assistance, please call NextGear Capital Support at:");
 
-    //Enter incorrect email and submit
+    //Enter incorrect email id and submit
     loginObjects.elEmail.clear();
     loginObjects.setEmail(invalidFormatEmail);
     loginObjects.doUsernameSubmit();
     expect(recoverErrorMessage.getIncorrectEmailFormat()).toContain("is not a valid email address. If you need assistance, please call NextGear Capital Support at:");
 
-    //Enter correct email and submit
+    //Enter valid email id and submit
     loginObjects.elEmail.clear();
     loginObjects.setEmail(validEmail);
     loginObjects.doUsernameSubmit();
@@ -99,7 +98,7 @@ describe("Login as Dealer\n ", function () {
     expect(browser.getCurrentUrl()).toEqual(loginUrl);
   });
 
-  it("4. As a dealer I forgot my password. All my answers are correct", function () {
+  it("4. As a dealer I forgot my password. All my answers", function () {
     //Check button text
     loginObjects.doForgotUsernamePassword();
     expect(browser.getCurrentUrl()).toEqual(forgotUrl);
@@ -131,38 +130,31 @@ describe("Login as Dealer\n ", function () {
   });
 
   it("5. Dealer - Login with Null values", function () {
-    loginObjects.doClearLogin();
     loginObjects.setLogin(' ', ' ');
     loginObjects.doLogin();
     expect(browser.getCurrentUrl()).toEqual(loginUrl);
   });
 
   it("6. Dealer - Login with Incorrect Username and Password", function () {
-    loginObjects.doClearLogin();
     loginObjects.setLogin('test', 'test');
     loginObjects.doLogin();
     expect(browser.getCurrentUrl()).toEqual(loginUrl);
   });
 
   it("7. Dealer - Login with Null Password value", function () {
-    loginObjects.doClearLogin();
     loginObjects.setLogin('53190md', '');
     loginObjects.doLogin();
     expect(browser.getCurrentUrl()).toEqual(loginUrl);
   });
 
   it("8. Dealer - Login with Null Username value", function () {
-    loginObjects.doClearLogin();
     loginObjects.setLogin('', 'ngcpass!0');
     loginObjects.doLogin();
     expect(browser.getCurrentUrl()).toEqual(loginUrl);
   });
 
   it("9. Dealer - Good Login", function () {
-    loginObjects.doClearLogin();
-    loginObjects.setLogin('53190md', 'ngcpass!0');
-    loginObjects.doLogin();
-    browser.sleep(1000);
+    loginObjects.doGoodLogin();
     expect(browser.getCurrentUrl()).toEqual(homeUrl);
   });
 });
