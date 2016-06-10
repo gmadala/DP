@@ -11,6 +11,7 @@
     '$http',
     '$filter',
     '$timeout',
+    '$interval',
     'nxgConfig',
     'messages',
     '$cookieStore',
@@ -24,6 +25,7 @@
     $http,
     $filter,
     $timeout,
+    $interval,
     nxgConfig,
     messages,
     $cookieStore,
@@ -77,9 +79,9 @@
     }
 
     function resetSessionTimeout(debug) {
-      if (sessionTimeout) { $timeout.cancel(sessionTimeout); }
-      sessionTimeout = $timeout(function(){
-        $timeout.cancel(sessionTimeout);
+      if (sessionTimeout) { $interval.cancel(sessionTimeout); }
+      sessionTimeout = $interval(function(){
+        $interval.cancel(sessionTimeout);
         if (!!authToken) { onSessionTimeout(debug); }
       }, nxgConfig.sessionTimeoutMs);
     }

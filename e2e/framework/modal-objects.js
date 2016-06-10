@@ -1,6 +1,6 @@
 'use strict';
 
-// var longDelay = 1000;
+var longDelay = 1000;
 var modalObjects = {
 
   //Locators
@@ -26,7 +26,7 @@ var modalObjects = {
 
   //Functions can go below
   header: function () {
-
+    browser.sleep(longDelay);
     return this.modalHeader().getText();
 
   },
