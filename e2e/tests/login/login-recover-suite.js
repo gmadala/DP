@@ -12,6 +12,9 @@ var invalidFormatEmail = 'sadsadas';
 var loginUrl = "https://test.nextgearcapital.com/test/#/login";
 var homeUrl = "https://test.nextgearcapital.com/test/#/home";
 var forgotUrl = "https://test.nextgearcapital.com/test/#/login/recover";
+var username = '53190md';
+var password = 'ngcpass!0';
+var delay = browser.sleep(500);
 
 var loginObjects = new loginObjects.loginObjects();
 
@@ -94,7 +97,7 @@ describe("Login as Dealer\n ", function () {
     expect(modal.body()).toEqual("Thank you, check your email for the requested account information.");
     //Exit out and verify back to main
     modal.clickOkButton();
-    browser.sleep(500);
+    delay;
     expect(browser.getCurrentUrl()).toEqual(loginUrl);
   });
 
@@ -105,7 +108,7 @@ describe("Login as Dealer\n ", function () {
     //Enter Username
     loginObjects.elFUPWUsername.sendKeys('36017RDT');
     loginObjects.doSubmitPassword();
-    browser.sleep(500);
+    delay;
     //Answer Security Questions and validate
     expect(recoverErrorMessage.getSecurityQuestion10Text()).toEqual("What is the name of a college you applied to but didn't attend?");
     expect(recoverErrorMessage.getSecurityQuestion6Text()).toEqual("In what city or town was your first job?");
@@ -142,13 +145,13 @@ describe("Login as Dealer\n ", function () {
   });
 
   it("7. Dealer - Login with Null Password value", function () {
-    loginObjects.setLogin('53190md', '');
+    loginObjects.setLogin(username, '');
     loginObjects.doLogin();
     expect(browser.getCurrentUrl()).toEqual(loginUrl);
   });
 
   it("8. Dealer - Login with Null Username value", function () {
-    loginObjects.setLogin('', 'ngcpass!0');
+    loginObjects.setLogin('', password);
     loginObjects.doLogin();
     expect(browser.getCurrentUrl()).toEqual(loginUrl);
   });
