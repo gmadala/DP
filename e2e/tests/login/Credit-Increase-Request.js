@@ -8,6 +8,9 @@ var creditIncrease = require('../../framework/credit-increase-request-objects.js
 var receipts = require('../../framework/receipts-objects.js');
 var homepageUrl="https://test.nextgearcapital.com/test/#/login";
 var tempIncrease= 1000;
+
+var CredIncrease = new creditIncrease.creditIncrease();
+
 describe("Log In Suite  \n ", function () {
 
   beforeEach(function () {
@@ -22,28 +25,26 @@ describe("Log In Suite  \n ", function () {
     //Login and go to request credit increase
     dashboard.clickRequestCreditIncrease();
     //Select Credit line and click on temp
-    //creditIncrease.clickFirstLineOfCredit();
-    creditIncrease.clickTemporaryIncrease();
-    creditIncrease.enterIncreaseAmount('1000');
-    creditIncrease.clickRequestButton();
-    //Check success modal
-    expect(modal.header()).toEqual("Request a Credit Increase");
-    expect(modal.body()).toEqual("Your request has been submitted. Credit requests typically take 3-5 business days to process. You will be notified as soon as your request has been processed.");
-    modal.clickOkButton();
-  });
-  it("2. As a dealer I want to request a permanent credit increase", function () {
-    //Click Credit increase
-    dashboard.clickRequestCreditIncrease();
-    //Select Credit line and click on temp
-    //creditIncrease.clickFirstLineOfCredit();
-    creditIncrease.clickPermanentIncrease();
-    creditIncrease.enterIncreaseAmount(tempIncrease);
-    creditIncrease.clickRequestButton();
+    CredIncrease.doTemporaryIncrease();
+    CredIncrease.enterIncreaseAmount('1000');
+    CredIncrease.doSubmitRequest();
     //Check success modal
     expect(modal.header()).toEqual("Request a Credit Increase");
     expect(modal.body()).toEqual("Your request has been submitted. Credit requests typically take 3-5 business days to process. You will be notified as soon as your request has been processed.");
     modal.clickOkButton();
 
+  });
+  it("2. As a dealer I want to request a permanent credit increase", function () {
+    //Click Credit increase
+    dashboard.clickRequestCreditIncrease();
+    //Select Credit line and click on temp
+    CredIncrease.doPermanentIncrease();
+    CredIncrease.enterIncreaseAmount(tempIncrease);
+    CredIncrease.doSubmitRequest();
+    //Check success modal
+    expect(modal.header()).toEqual("Request a Credit Increase");
+    expect(modal.body()).toEqual("Your request has been submitted. Credit requests typically take 3-5 business days to process. You will be notified as soon as your request has been processed.");
+    modal.clickOkButton();
 
   });
   it("3. As a dealer I want to print a receipt by grouped VIN", function () {

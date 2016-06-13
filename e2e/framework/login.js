@@ -18,6 +18,7 @@ var login = {
       return element.all(by.css('p[ng-show="showLoginError"]')).get(1);
 
     },
+   
     forgotUsernamePassword: function () {
 
       return element(by.id("forgotUsernamePassword"));
@@ -43,8 +44,12 @@ var login = {
 
       return element(by.id("loginButton"));
 
-    }
+    },
+    incorrectEmailFormat: function () {
 
+      return element(by.css('p[ng-show="forgotUserNameValidity.email.$error.email"]'));
+
+    }
 
   }, //Locator End
 
@@ -97,7 +102,9 @@ var login = {
     return this.elements.forgotUsernamePassword().getText();
 
   },
-
+  getIncorrectEmailFormat: function () {
+    return this.incorrectEmailFormat().getText();
+  },
   //Sending
   enterUserName: function (test) {
 
@@ -120,6 +127,12 @@ var login = {
     this.enterUserName(param1);
     this.enterPassword(param2);
     this.clickLoginButton();
+  },
+  //Count
+  disabledCount: function () {
+
+    return this.disabledFields().count();
+
   },
 
   //LAST ONE
