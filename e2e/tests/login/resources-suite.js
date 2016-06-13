@@ -4,24 +4,31 @@
 var login = require('../../framework/login.js');
 var dashboard = require('../../framework/dashboard-objects.js');
 var resources = require('../../framework/resources-objects');
-var homepageUrl = "https://test.nextgearcapital.com/test/#/login";
-
+var execSettings = require('../../framework/e2e_execSettings.js');
+var newWindowHandle;
 var resourcesLink = new resources.resources();
 describe("Log In Suite  \n ", function() {
 
   beforeEach(function() {
     browser.sleep(browser.params.shortDelay);
     browser.driver.manage().window().maximize();
-    browser.get(homepageUrl);
     browser.ignoreSynchronization = true;
+    browser.get(execSettings.loginPage());
     //Login and go to request credit increase
     login.login2(browser.params.userName, browser.params.password);
+    expect(browser.getCurrentUrl() === execSettings.homePage());
     dashboard.clickResources();
+    expect(browser.getCurrentUrl() === execSettings.resourcesPage());
   });
 
   it("1. As a dealer I want to view rates in fees in resources", function() {
     resourcesLink.doRatesAndFees();
-    resources.checkNewTab('https://test.nextgearcapital.com/MobileService/api/dealer/feeschedule/FeeSchedule?AuthToken');
+    browser.getAllWindowHandles().then(function (handles) {
+      newWindowHandle = handles[1];
+      browser.switchTo().window(newWindowHandle).then(function () {
+        expect(browser.getCurrentUrl()).toEqual('https://test.nextgearcapital.com/MobileService/api/dealer/feeschedule/FeeSchedule?AuthToken=61DF5855-0839-499E-B04C-AC08CA6AD2F3');
+      });
+    });
   });
   it("2. As a dealer I want to view welcome packet", function() {
     resourcesLink.doWelcomePacket();
