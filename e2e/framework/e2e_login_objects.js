@@ -63,8 +63,8 @@ function loginObjects() {
   };
   this.doGoodLogin = function () {
     this.doClearLogin();
-    this.setUserName('53190md');
-    this.setPassWord('ngcpass!0');
+    this.setUserName(username);
+    this.setPassWord(password);
     this.doLogin();
     browser.sleep(delay);
   };
