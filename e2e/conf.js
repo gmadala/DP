@@ -9,10 +9,10 @@ exports.config = {
     //'browserName': 'chrome', 'chromeOptions': { 'args': ['incognito'] }
   },
   framework: 'jasmine2',
-
   // Spec patterns are relative to the current working directly when
   // protractor is called.
-  specs: ['tests/login/resources_spec.js'],
+  //specs: ['tests/login/login-recover-suite.js','tests/login/credit-increase-request.js','tests/login/resources-suite.js'],
+  specs: ['tests/login/login-recover-suite.js'],
   // untrackOutstandingTimeouts: true,
   restartBrowserBetweenTests: false,
 
@@ -32,5 +32,4 @@ exports.config = {
     mediumDelay:'3000',
     longDelay:'5000'
   }
-
 };
