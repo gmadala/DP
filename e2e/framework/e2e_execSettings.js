@@ -28,10 +28,6 @@ exports.homePage = function () {
   return baseUrl + 'home';
 };
 
-exports.loginPage = function () {
-  return baseUrl + 'login';
-};
-
 exports.forgotPage = function () {
   return baseUrl + 'login/recover';
 };
