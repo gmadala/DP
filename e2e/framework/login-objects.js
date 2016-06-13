@@ -9,7 +9,7 @@ function loginObjects() {
   var username = '53190md';
   var password = 'ngcpass!0';
   var delay = 1000;
-  var longDelay = 2000;
+  var longDelay = 4000;
 
   this.elForgotUsernamePassword = browser.element(by.id("forgotUsernamePassword"));
   this.elEmail = browser.element(by.id("email"));
@@ -38,7 +38,7 @@ function loginObjects() {
   };
   this.doSignUpLogin = function () {
     return this.elSignUpLogin.click();
-    browser.sleep(delay);
+    browser.sleep(longDelay);
   };
 
   this.doClearLogin = function (){

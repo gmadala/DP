@@ -37,7 +37,6 @@ describe("Login as Dealer\n ", function () {
     loginObjects.doSignUpLogin();
     //Validating the Current URL
     expect(browser.getCurrentUrl()).toEqual("http://www.nextgearcapital.com/apply-for-credit/");
-    browser.sleep(3000);
     browser.close();
   });
 
