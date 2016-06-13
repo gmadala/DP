@@ -59,6 +59,7 @@ function loginObjects() {
   this.doSubmitPassword = function () {
     return this.elSubmitPassword.click();
     browser.sleep(delay);
+    browser.sleep(delay);
   };
   this.doGoodLogin = function () {
     this.doClearLogin();

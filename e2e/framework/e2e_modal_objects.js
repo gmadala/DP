@@ -1,5 +1,5 @@
 'use strict';
-
+var delay = 500;
 var longDelay = 1000;
 var modalObjects = {
 
@@ -40,6 +40,7 @@ var modalObjects = {
   clickOkButton: function () {
 
     return this.okButton().click();
+    browser.sleep(delay);
 
   }
 };
