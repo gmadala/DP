@@ -9,7 +9,7 @@ var incorrectAnswer = 'f';
 var correctAnswer = 'a';
 var validEmail = 'test@gmail.com';
 var invalidEmail = 'asdas@gmail.com';
-var invalidFormatEmail = 'sadsadas';
+var invalidFormatEmail = 'testtesttest';
 var username = '53190md';
 var password = 'ngcpass!0';
 
@@ -21,7 +21,6 @@ describe("Login as Dealer\n ", function () {
     browser.sleep(browser.params.shortDelay);
     browser.driver.manage().window().maximize();
     browser.get(execSettings.loginPage());
-    //browser.get(loginUrl);
     browser.ignoreSynchronization = true;
   });
   afterEach(function () {
