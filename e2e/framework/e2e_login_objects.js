@@ -59,7 +59,7 @@ function loginObjects() {
   this.doSubmitPassword = function () {
     return this.elSubmitPassword.click();
     browser.sleep(delay);
-    browser.sleep(delay);
+   //browser.sleep(delay);
   };
   this.doGoodLogin = function () {
     this.doClearLogin();
@@ -106,6 +106,7 @@ function loginObjects() {
 
   };
   this.setSecQuestions = function (param) {
+    browser.sleep(delay);
     this.elSecQues10.clear().sendKeys(param);
     this.elSecQues10.sendKeys(protractor.Key.TAB);
     this.elSecQues6.clear().sendKeys(param);

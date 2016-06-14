@@ -28,6 +28,9 @@ exports.homePage = function () {
   return baseUrl + 'home';
 };
 
+exports.forgotPage = function () {
+  return baseUrl + 'login/recover';
+};
 exports.resourcesPage = function () {
   return baseUrl + 'documents';
 };
