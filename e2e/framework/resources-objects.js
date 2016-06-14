@@ -22,16 +22,16 @@ this.elMyNextGearMobileAndroid = element(by.linkText('Download myNextGear mobile
     this.elRatesAndFees.click();
     browser.waitForAngular();
   };
-  this.doWelcomePacket = function() {
-    this.elWelcomePacket.click();
-    browser.waitForAngular();
-  };
   this.doDealerFunding = function() {
     browser.sleep(500);
     browser.waitForAngular();
     this.elDealerFunding.click();
   };
-
+  this.doWelcomePacket = function() {
+    browser.sleep(500);
+    browser.waitForAngular();
+    this.elWelcomePacket.click();
+  };
   this.doTitleManagement = function() {
     browser.sleep(500);
     browser.waitForAngular();
