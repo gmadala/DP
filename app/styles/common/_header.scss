@@ -271,3 +271,238 @@
     }
   }
 }
+
+@media only screen and (max-width: 767px) {
+  body {
+    padding-top: 70px !important;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .nxg-logo-mobile {
+    background: url(../img/Logo-myNextGear-Mobile-sm.svg);
+    //background: url(../img/nxg_logo_blue.png);
+    //background: url(../img/nxg_logo_blue_mobile.png);
+    background-repeat: no-repeat;
+    background-size: 200px 55px;
+    height: 55px;
+    //background-size: 200px 64px;
+    //height: 70px;
+    margin: 0 auto;
+    width: 50%;
+    z-index: 5;
+    top: -3px;
+    left: 30%;
+    position: absolute;
+  }
+
+  .nav-language-chooser {
+    float: none;
+    width: 100%;
+
+    .cta {
+      float: none;
+    }
+  }
+
+  .navbar {
+    background-color: $highlight;
+  }
+
+  .mobile-navbar {
+    position: fixed; // This is causing issues with the navbar width
+    right: 0;
+    left: 0;
+    top: 0;
+    z-index: 1030;
+  }
+
+  .navbar-default {
+    .navbar-toggle {
+      position: absolute;
+      right: -10px;
+      border: none;
+      z-index: 10;
+      &:hover,
+      &:focus {
+        background: none !important;
+      }
+    }
+    .navbar-brand {
+      color: white;
+      position: fixed;
+      width: 100%;
+      left: 0;
+      top: 0;
+      text-align: center;
+      margin: auto;
+      z-index: 0;
+      //padding: 0;
+      &:hover {
+        color: white;
+      }
+    }
+  }
+  .logo-center {
+    position: fixed;
+    text-align: center;
+    float: none;
+    //margin-left: auto;
+    //margin-right: auto;
+    //width: 60%;
+    //position:absolute;
+  }
+
+  .hamburger {
+    background-color: white;
+    -webkit-transition: all 1s ease;
+    transition: all 1s ease;
+    height: 2px;
+    width: 21.5px;
+    position: absolute;
+    left: -12px;
+    top: 15px;
+    border-radius: 1px;
+  }
+
+  .hamburger::before {
+    @extend .hamburger;
+    top: -6px;
+    content: '';
+    left: 0px;
+  }
+
+  .hamburger::after {
+    @extend .hamburger;
+    top: 6px;
+    content: '';
+    left: 0px;
+  }
+
+  .button-x {
+    .hamburger {
+      //background: 0 0;
+      background-color: transparent;
+    }
+    .hamburger::before {
+      background-color: white;
+      transform: rotate3d(0, 0, 1, 45deg);
+      transform-origin: 2px center;
+    }
+    .hamburger::after {
+      background-color: white;
+      transform: rotate3d(0, 0, 1, -45deg);
+      transform-origin: 2px center;
+    }
+
+  }
+
+  /* Reset responsive Bootstrap elements */
+  #navbar .navbar-header {
+    float: none;
+  }
+
+  #navbar .navbar-toggle {
+    display: block;
+  }
+
+  #navbar .navbar-nav {
+    float: none !important;
+    margin: 7.5px -15px;
+  }
+
+  #navbar .navbar-nav .open .dropdown-menu {
+    position: static;
+    float: none;
+    background-color: transparent;
+    border: 0;
+    box-shadow: none;
+  }
+
+  #navbar .navbar-form {
+    float: none !important;
+    padding: 0;
+  }
+
+  #navbar .navbar-nav > ul {
+    padding-left: 15px;
+  }
+  #navbar .navbar-nav > li {
+    float: none;
+    width: 100%;
+    border-bottom: 1px solid white;
+    padding: 0;
+
+    .mobile-nav-list {
+      padding: 0;
+      li {
+        border-bottom: 1px solid white;
+        padding: 0;
+        &:last-child {
+          border-bottom: none;
+        }
+        a {
+          text-decoration: none;
+        }
+      }
+    }
+
+    a {
+      width: 100%;
+      background-color: grey;
+      text-decoration: none;
+      padding-left: 8px;
+      &.active {
+        border-bottom: none;
+      }
+    }
+
+  }
+
+  /* Reposition elements affected by the sliding menu */
+  #wrapper {
+    position: relative;
+    right: 0;
+    transition: right 0.35s ease;
+  }
+
+  .navbar {
+    right: 0;
+    transition: right 0.35s ease;
+  }
+
+  #navbar .navbar-collapse {
+    position: fixed;
+    top: 0;
+    right: -80%;
+    display: block;
+    width: 80%;
+    height: 100% !important;
+    max-height: 100%;
+    margin: 0;
+    //background-color: #f8f8f8;
+    background-color: grey;
+    transition: right 0.35s ease;
+    border-top: 0;
+  }
+
+  #navbar .navbar-collapse.collapsing {
+    transition: right 0.35s ease;
+  }
+
+  #navbar .navbar-collapse.in {
+    right: 0;
+  }
+
+  body.menu-open.in, body.menu-open {
+    overflow: hidden;
+  }
+
+  body.menu-open #wrapper, body.menu-open.in .navbar {
+    transition: right 0.35s ease;
+  }
+
+  body.menu-open.in #wrapper, body.menu-open.in .navbar {
+    right: 80%;
+  }
+
+}

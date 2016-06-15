@@ -1,5 +1,5 @@
 <header class="app-header" ng-class="{ login: !navState.current.data.showNavBar, auctions: !user.isDealer() }">
-  <div class="container">
+  <div class="container hidden-xs">
     <div class="header">
       <a ng-href="{{user.homeLink()}}" class="col-xs-4 custom ng-binding">
         <div class="nxg-logo" nxg-debug-title></div>
@@ -77,40 +77,67 @@
     </div>
   </div>
 
-  <nav class="navbar navbar-default mng-navbar" ng-show="navState.current.data.showNavBar">
-    <div class="container">
-      <div class="navbar-header">
-        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse" aria-expanded="false">
-          <span class="sr-only">Toggle navigation</span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-        </button>
+  <div ng-if="navState.current.data.showNavBar">
+    <nav id="navbar" class="navbar navbar-default mng-navbar main-navbar mobile-navbar " ng-class="{'menu-open in' : navState.current.data.showMenu }">
+      <div class="container">
+        <div class="navbar-header">
+          <!--<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse" aria-expanded="false">-->
+          <!--<span class="sr-only">Toggle navigation</span>-->
+          <!--<span class="icon-bar"></span>-->
+          <!--<span class="icon-bar"></span>-->
+          <!--<span class="icon-bar"></span>-->
+          <!--</button>-->
+          <button type="button" class="navbar-toggle collapsed mobile-menu-button"
+                  ng-class="{'button-x': navState.current.data.showMenu}"
+                  ng-click="toggleMenu()">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="hamburger"></span>
+          </button>
+        </div>
+        <div class="logo-center navbar-brand visible-xs">
+          <div ng-if="isDashboard()">
+            <div class="nxg-logo-mobile" nxg-debug-title></div>
+            <!--<div class="nxg-logo" nxg-debug-title></div>-->
+          </div>
+          <div ng-if="!isDashboard()">
+            {{getPageTitle()|uppercase}}
+          </div>
+        </div>
+
+        <div class="collapse navbar-collapse" id="navbar" ng-class="{'in': navState.current.data.showMenu}">
+          <ul class="nav navbar-nav ">
+            <li class="visible-xs">
+              <a href="#" ng-href="#/checkout" ng-click="setPageTitle('checkout')">checkout</a>
+            </li>
+            <li ng-repeat="link in user.navLinks().primary" class="link_{{ link.activeWhen }}" ng-class="{'dropdown': link.subMenu, 'hover': link.hasHover}">
+              <a ng-href="{{link.href}}" ng-class="{ active: isActive(link.activeWhen) }" ng-if="!link.subMenu"
+                 ng-click="setPageTitle(link.name)">{{link.name}}</a>
+              <a class="sub-menu dropdown-toggle hidden-xs" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"
+                 ng-class="{ active: isActiveGroup(link.subMenu) }"
+                 ng-if="link.subMenu"
+                 ng-click="gotoPageIf(link.href, link.activeWhen); setPageTitle(link.name); removeHover()"
+                 ng-mouseenter="addHover()"
+                 ng-mouseleave="removeHover()"
+              >
+                {{link.name}} <span class="caret"></span></a>
+              <ul class="dropdown-menu" ng-if="link.subMenu" ng-mouseenter="addHover()"
+                  ng-mouseleave="removeHover()">
+                <li ng-repeat="item in link.subMenu" ng-class="{ active: isActive(item.activeWhen) }" ng-click="removeHover()">
+                  <a href="#" ng-href="{{item.href}}" ng-click="setPageTitle(item.name)">{{item.name}}</a>
+                </li>
+              </ul>
+              <ul class="visible-xs mobile-nav-list">
+                <li class="visible-xs" ng-repeat="item in link.subMenu" ng-class="{ active: isActive(item.activeWhen) }" ng-click="removeHover()">
+                  <a href="#" ng-href="{{item.href}}" ng-click="setPageTitle(item.name)">{{item.name}}</a>
+                </li>
+              </ul>
+            </li>
+            <li class="visible-xs">
+              <a href="javascript:void(0)" ng-click="user.logout()">Sign Out</a>
+            </li>
+          </ul>
+        </div>
       </div>
-
-
-      <div class="collapse navbar-collapse" id="navbar-collapse">
-        <ul class="nav navbar-nav ">
-          <li ng-repeat="link in user.navLinks().primary" class="link_{{ link.activeWhen }}" ng-class="{'dropdown': link.subMenu, 'hover': link.hasHover}">
-            <a ng-href="{{link.href}}" ng-class="{ active: isActive(link.activeWhen) }" ng-if="!link.subMenu">{{link.name}}</a>
-            <a class="sub-menu dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"
-               ng-class="{ active: isActiveGroup(link.subMenu) }"
-               ng-if="link.subMenu"
-               ng-click="gotoPageIf(link.href, link.activeWhen); removeHover()"
-               ng-mouseenter="addHover()"
-               ng-mouseleave="removeHover()"
-            >
-              {{link.name}} <span class="caret"></span></a>
-            <ul class="dropdown-menu" ng-if="link.subMenu" ng-mouseenter="addHover()"
-                ng-mouseleave="removeHover()">
-              <li ng-repeat="item in link.subMenu" ng-class="{ active: isActive(item.activeWhen) }" ng-click="removeHover()">
-                <a href="#" ng-href="{{item.href}}">{{item.name}}</a>
-              </li>
-            </ul>
-          </li>
-        </ul>
-      </div>
-    </div>
-  </nav>
-
+    </nav>
+  </div>
 </header>

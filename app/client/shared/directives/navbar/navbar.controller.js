@@ -63,14 +63,16 @@
         ]
       };
 
-    $scope.$watch(function() { return User.isLoggedIn(); }, function(isLoggedIn) {
+    $scope.$watch(function() {
+      return User.isLoggedIn();
+    }, function(isLoggedIn) {
       if (isLoggedIn) {
 
-        kissMetricInfo.getKissMetricInfo().then(function(result){
+        kissMetricInfo.getKissMetricInfo().then(function(result) {
           $scope.kissMetricData = result;
         });
 
-        User.getInfo().then(function (info) {
+        User.getInfo().then(function(info) {
           $scope.isUnitedStates = User.isUnitedStates();
           $scope.displayTitleRelease = info.DisplayTitleReleaseProgram;
           $scope.eventSalesEnabled = User.getFeatures().hasOwnProperty('eventSales') ? User.getFeatures().eventSales.enabled : true;
@@ -94,13 +96,13 @@
             BusinessNumber: info.BusinessNumber,
             BusinessName: info.BusinessName,
             isDealer: User.isDealer,
-            logout: function () {
+            logout: function() {
               $rootScope.$emit('event:userRequestedLogout');
             },
-            navLinks: function () {
+            navLinks: function() {
               return User.isDealer() ? dealerLinks : auctionLinks;
             },
-            homeLink: function () {
+            homeLink: function() {
               return User.isDealer() ? '#/home' : '#/act/home';
             }
           };
@@ -116,17 +118,17 @@
     });
 
     // Enable chat only when we are using English
-    $scope.$watch(function () {
+    $scope.$watch(function() {
       return gettextCatalog.currentLanguage;
-    }, function (lang) {
+    }, function(lang) {
       $scope.chatEnabled = lang === 'en';
     });
 
-    $scope.isCurrentLanguage = function (lang) {
+    $scope.isCurrentLanguage = function(lang) {
       return gettextCatalog.currentLanguage === lang;
     };
 
-    $scope.updateLanguage = function (lang) {
+    $scope.updateLanguage = function(lang) {
 
       language.setCurrentLanguage(lang);
 
@@ -135,7 +137,7 @@
       window.location.reload();
     };
 
-    $scope.getQueueCount = function () {
+    $scope.getQueueCount = function() {
       var queue = Payments.getPaymentQueue(),
         count = 0;
 
@@ -180,6 +182,31 @@
         }, 0);
       }
     };
+    $scope.pageTitle = "";
+    $scope.setPageTitle = function(page) {
+      $scope.pageTitle = page;
+    };
+
+    $scope.getPageTitle = function() {
+      if ($scope.pageTitle === "") {
+        //$scope.setPageTitle($state.current.name);//Need to set the page title on inital load or refresh use arrays above
+      }
+      return $scope.pageTitle;
+    };
+
+    $scope.isDashboard = function() {
+      return $state.current.name === "dashboard" || $scope.pageTitle === "";
+    };
+
+    $scope.toggleMenu = function() {
+      console.log("TOGGLE MENU", $state);
+      $state.current.data.showMenu = !$state.current.data.showMenu;
+      //$scope.showMenu = !$scope.showMenu;
+    };
+
+    $scope.closeMenu = function() {
+      $state.current.data.showMenu = false;
+    };
 
     $scope.addHover = function() {
       this.link.hasHover = true;
@@ -187,9 +214,10 @@
 
     $scope.removeHover = function() {
       this.link.hasHover = false;
+      $scope.closeMenu();
     };
 
-    $rootScope.$on('$stateChangeSuccess', function () {
+    $rootScope.$on('$stateChangeSuccess', function() {
       $scope.isCollapsed = true;
     });
 
