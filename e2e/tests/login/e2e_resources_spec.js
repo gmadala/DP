@@ -2,29 +2,14 @@
 
 
 var resources = require('../../framework/e2e_resources_objects.js');
-var loginObjects = require('../../framework/e2e_login_objects.js');
-var recoverErrorMessage = require('../../framework/login-recover-objects.js');
 var login = require('../../framework/login.js');
-var modalObjects = require('../../framework/e2e_modal_objects.js');
 var execSettings = require('../../framework/e2e_execSettings.js');
-var incorrectAnswer = 'f';
-var correctAnswer = 'a';
-var validEmail = 'test@gmail.com';
-var invalidEmail = 'asdas@gmail.com';
-var invalidFormatEmail = 'testtesttest';
-var username = '53190md';
-var password = 'ngcpass!0';
 
 var resources = new resources.resources();
 
-var loginObjects = new loginObjects.loginObjects();
-var modalObjects = new modalObjects.modalObjects();
-
-var homepageUrl = "http://localhost:9000/#/login";
 var delay = 2000;
 
 describe('Testing Resources Page', function() {
-
 
   beforeEach(function() {
     browser.driver.manage().window().maximize();
@@ -37,7 +22,7 @@ describe('Testing Resources Page', function() {
     browser.sleep(delay);
   });
 
-  it('click on the Rates and Fees link', function() {
+  it('Validating  the Rates and Fees link', function() {
     resources.doRatesAndFees();
     browser.getAllWindowHandles().then(function(handles) {
       browser.switchTo().window(handles[1]).then(function() {
@@ -52,7 +37,7 @@ describe('Testing Resources Page', function() {
 
   //Welcome packet is taking too much time to load that causes other test cases fail.
   //So for time being excluding this test case, this needs little bit research on this.
-  xit('click on the Welcome Packet', function() {
+  xit('Validating the Welcome Packet', function() {
     resources.doWelcomePacket();
     browser.getAllWindowHandles().then(function(handles) {
       browser.switchTo().window(handles[1]).then(function() {
@@ -66,7 +51,7 @@ describe('Testing Resources Page', function() {
     });
   });
 
-  it('click on the Dealer Funding Checklist', function() {
+  it('Validating the Dealer Funding Checklist', function() {
     resources.doDealerFunding();
     browser.getAllWindowHandles().then(function(handles) {
       browser.switchTo().window(handles[1]).then(function() {
@@ -79,7 +64,7 @@ describe('Testing Resources Page', function() {
     });
   });
 
-  it('click on the Title Management link', function() {
+  it('Validating the Title Management link', function() {
     resources.doTitleManagement();
     browser.getAllWindowHandles().then(function(handles) {
       browser.switchTo().window(handles[1]).then(function() {
@@ -92,7 +77,7 @@ describe('Testing Resources Page', function() {
     });
   });
 
-  it('click on the Instrunctions For Buyers', function() {
+  it('Validating the Instrunctions For Buyers', function() {
     resources.doInstructionsForBuyers();
     browser.getAllWindowHandles().then(function(handles) {
       browser.switchTo().window(handles[1]).then(function() {
@@ -104,7 +89,7 @@ describe('Testing Resources Page', function() {
       });
     });
   });
-  it('click on the Welcome Letter', function() {
+  it('Validating the Welcome Letter', function() {
     resources.doWelcomeLetter();
     browser.getAllWindowHandles().then(function(handles) {
       browser.switchTo().window(handles[1]).then(function() {
@@ -117,7 +102,7 @@ describe('Testing Resources Page', function() {
     });
   });
 
-  it('click on the Guidelines', function() {
+  it('Validating the Guidelines', function() {
     resources.doGuidelines();
     browser.getAllWindowHandles().then(function(handles) {
       browser.switchTo().window(handles[1]).then(function() {
@@ -130,7 +115,7 @@ describe('Testing Resources Page', function() {
     });
   });
 
-  it('click on the Information Sheet', function() {
+  it('Validating the Information Sheet', function() {
     resources.doInformationSheet();
     browser.getAllWindowHandles().then(function(handles) {
       browser.switchTo().window(handles[1]).then(function() {
@@ -143,7 +128,7 @@ describe('Testing Resources Page', function() {
     });
   });
 
-  it('click on the Claim Form', function() {
+  it('Validating the Claim Form', function() {
     resources.doClaimForm();
     browser.getAllWindowHandles().then(function(handles) {
       browser.switchTo().window(handles[1]).then(function() {
@@ -156,7 +141,7 @@ describe('Testing Resources Page', function() {
     });
   });
 
-  it('click on the myNextGear Mobile IOS', function() {
+  it('Validating the myNextGear Mobile IOS', function() {
     resources.doMobileIOS();
     browser.getAllWindowHandles().then(function(handles) {
       browser.switchTo().window(handles[1]).then(function() {
@@ -169,7 +154,7 @@ describe('Testing Resources Page', function() {
     });
   });
 
-  it('click on the myNextGear Mobile Android', function() {
+  it('Validating the myNextGear Mobile Android', function() {
     resources.doMobileAndroid();
     browser.getAllWindowHandles().then(function(handles) {
       browser.switchTo().window(handles[1]).then(function() {
