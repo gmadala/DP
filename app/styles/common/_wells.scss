@@ -315,8 +315,13 @@ p.no-results {
       margin-top: 0 !important;
     }
     .detail-link {
-      text-align: center !important;
+      text-align: left !important;
       padding-top: 10px;
+
+      .paired-media {
+        width: 12px;
+        height: 12px;
+      }
     }
   }
 
