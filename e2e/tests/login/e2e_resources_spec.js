@@ -71,7 +71,7 @@ describe('Testing Resources Page', function() {
     browser.getAllWindowHandles().then(function(handles) {
       browser.switchTo().window(handles[1]).then(function() {
         browser.ignoreSynchronization = true;
-        expect(browser.getCurrentUrl()).toEqual("http://test.nextgearcapital.com/test/documents/Dealer%20Funding%20Checklist.pdf");
+        expect(browser.getCurrentUrl()).toEqual("https://test.nextgearcapital.com/test/documents/Dealer%20Funding%20Checklist.pdf");
         browser.ignoreSynchronization = false;
         browser.close();
         browser.driver.switchTo().window(handles[0]);
