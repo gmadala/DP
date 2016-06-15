@@ -1,6 +1,6 @@
 'use strict';
 
-function creditIncrease() {
+function CreditIncrease() {
 
   //Locators
   this.elPermanentIncrease = element(by.id('isNotTemp'));
@@ -27,4 +27,4 @@ function creditIncrease() {
   };
 }
 
-module.exports.creditIncrease = creditIncrease;
+module.exports.creditIncrease = CreditIncrease;
