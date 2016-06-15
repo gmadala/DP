@@ -113,7 +113,18 @@ body {
 .zeroLeftPadding
 {
   padding-left:0;
+
 }
+
+.zeroLeftPaddingNotif {
+  padding-left:0;
+}
+
+ul.zeroLeftPaddingNotif {
+  margin-top: 16px;
+  margin-bottom: 0;
+}
+
 .zeroRightPadding
 {
   padding-right:0;
