@@ -1,17 +1,18 @@
 'use strict';
-function resources() {
-  resources.this.elResourcesLink = element(by.className('link_documents'));
-  resources.this.elRatesAndFees = element(by.id('ratesandfees'));
-  resources.this.elDealerFunding = element(by.linkText('Dealer Funding Checklist'));
-  resources.this.elWelcomePacket = element(by.linkText('Welcome Packet'));
-  resources.this.elTitleManagement = element(by.linkText('Title Management Frequently Asked Questions'));
-  resources.this.elInstructionsBuyers = element(by.linkText('Instructions for Buyers'));
-  resources.this.elWelcomeLetter = element(by.linkText('Welcome Letter'));
-  resources.this.elGuidelines = element(by.linkText('Guidelines'));
-  resources.this.elInformationSheets = element(by.linkText('Information Sheet'));
-  resources.this.elClaimForm = element(by.linkText('Claim Form'));
-  resources.this.elMyNextGearMobileIOS = element(by.linkText('Download myNextGear mobile iOS'));
-  resources.this.elMyNextGearMobileAndroid = element(by.linkText('Download myNextGear mobile Android'));
+
+function Resources() {
+  this.elResourcesLink = element(by.className('link_documents'));
+  this.elRatesAndFees = element(by.id('ratesandfees'));
+  this.elDealerFunding = element(by.linkText('Dealer Funding Checklist'));
+  this.elWelcomePacket = element(by.linkText('Welcome Packet'));
+  this.elTitleManagement = element(by.linkText('Title Management Frequently Asked Questions'));
+  this.elInstructionsBuyers = element(by.linkText('Instructions for Buyers'));
+  this.elWelcomeLetter = element(by.linkText('Welcome Letter'));
+  this.elGuidelines = element(by.linkText('Guidelines'));
+  this.elInformationSheets = element(by.linkText('Information Sheet'));
+  this.elClaimForm = element(by.linkText('Claim Form'));
+  this.elMyNextGearMobileIOS = element(by.linkText('Download myNextGear mobile iOS'));
+  this.elMyNextGearMobileAndroid = element(by.linkText('Download myNextGear mobile Android'));
 
   //Doers
   this.doResources = function() {
@@ -73,4 +74,4 @@ function resources() {
     this.elMyNextGearMobileAndroid.click();
   };
 }
-module.exports.resources = resources;
+module.exports.resources = Resources;
