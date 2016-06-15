@@ -5,11 +5,11 @@
  * @description Page objects for login page elements
  * */
 
-function loginObjects() {
-  var username = '53190md';
-  var password = 'ngcpass!0';
+function LoginObjects() {
+  //var username = '53190md';
+  //var password = 'ngcpass!0';
   var delay = 1000;
-  var longDelay = 2000;
+  //var longDelay = 2000;
 
   this.elForgotUsernamePassword = browser.element(by.id("forgotUsernamePassword"));
   this.elEmail = browser.element(by.id("email"));
@@ -29,26 +29,29 @@ function loginObjects() {
   //Doers
   this.doForgotUsernamePassword = function () {
     return this.elForgotUsernamePassword.click();
-    browser.sleep(delay);
+    //browser.sleep(delay);
   };
 
   this.doUsernameSubmit = function () {
     return this.elSubmitUsername.click();
-    browser.sleep(delay);
+    //browser.sleep(delay);
   };
   this.doSignUpLogin = function () {
     return this.elSignUpLogin.click();
-    browser.sleep(delay);
+    //browser.sleep(delay);
   };
 
-  this.doClearLogin = function (){
-    return this.elUserName.clear();
-    return this.elPassWord.clear();
-    browser.sleep(delay);
+  this.doClearLogin = function() {
+    //return this.elUserName.clear();
+    //return this.elPassWord.clear();
+    this.elUserName.clear();
+    this.elPassWord.clear();
+    return;
+    //browser.sleep(delay);
   };
-  this.doLogin = function (){
+  this.doLogin = function() {
     return this.elLogin.click();
-    browser.sleep(delay);
+    //browser.sleep(delay);
   };
   this.doMyAccount = function (){
     return this.elMyAccount.click();
@@ -58,7 +61,7 @@ function loginObjects() {
   };
   this.doSubmitPassword = function () {
     return this.elSubmitPassword.click();
-    browser.sleep(delay);
+    //browser.sleep(delay);
   };
   this.doGoodLogin = function () {
     this.doClearLogin();
@@ -110,7 +113,7 @@ function loginObjects() {
     this.elSecQues6.clear().sendKeys(param);
     this.elSecQues10.sendKeys(protractor.Key.TAB);
     this.elSecQues9.clear().sendKeys(param);
-  }
+  };
 }
 
-module.exports.loginObjects = loginObjects;
+module.exports.loginObjects = LoginObjects;
