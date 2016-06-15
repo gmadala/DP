@@ -1,76 +1,76 @@
 'use strict';
+function Resources() {
+  this.elResourcesLink = element(by.className('link_documents'));
+  this.elRatesAndFees = element(by.id('ratesandfees'));
+  this.elDealerFunding = element(by.linkText('Dealer Funding Checklist'));
+  this.elWelcomePacket = element(by.linkText('Welcome Packet'));
+  this.elTitleManagement = element(by.linkText('Title Management Frequently Asked Questions'));
+  this.elInstructionsBuyers = element(by.linkText('Instructions for Buyers'));
+  this.elWelcomeLetter = element(by.linkText('Welcome Letter'));
+  this.elGuidelines = element(by.linkText('Guidelines'));
+  this.elInformationSheets = element(by.linkText('Information Sheet'));
+  this.elClaimForm = element(by.linkText('Claim Form'));
+  this.elMyNextGearMobileIOS = element(by.linkText('Download myNextGear mobile iOS'));
+  this.elMyNextGearMobileAndroid = element(by.linkText('Download myNextGear mobile Android'));
 
-var resourcesLink = element(by.className('link_documents'));
-var ratesAndFees = element(by.id('ratesandfees'));
-var dealerFunding = element(by.linkText('Dealer Funding Checklist'));
-var welcomePacket = element(by.linkText('Welcome Packet'));
-var titleManagement = element(by.linkText('Title Management Frequently Asked Questions'));
-var instructionsBuyers = element(by.linkText('Instructions for Buyers'));
-var welcomeLetter = element(by.linkText('Welcome Letter'));
-var guidelines = element(by.linkText('Guidelines'));
-var informationSheets = element(by.linkText('Information Sheet'));
-var claimForm = element(by.linkText('Claim Form'));
-var myNextGearMobileIOS = element(by.linkText('Download myNextGear mobile iOS'));
-var myNextGearMobileAndroid = element(by.linkText('Download myNextGear mobile Android'));
-var resources = {
-
-  clickResources: function() {
-    resourcesLink.click();
+  //Doers
+  this.doResources = function() {
+    this.elResourcesLink.click();
     browser.waitForAngular();
-  },
-  clickRatesAndFees: function() {
-    ratesAndFees.click();
+  };
+  this.doRatesAndFees = function() {
+    this.elRatesAndFees.click();
     browser.waitForAngular();
-  },
-  clickDealerFundingChecklist: function() {
+  };
+  this.doDealerFunding = function() {
     browser.sleep(500);
     browser.waitForAngular();
-    dealerFunding.click();
-  },
-  clickWelcomePacket: function() {
+    this.elDealerFunding.click();
+  };
+  this.doWelcomePacket = function() {
     browser.sleep(500);
     browser.waitForAngular();
-    welcomePacket.click();
-  },
-  clickTitleManagement: function() {
+    this.elWelcomePacket.click();
+  };
+  this.doTitleManagement = function() {
     browser.sleep(500);
     browser.waitForAngular();
-    titleManagement.click();
-  },
-  clickInstructionsForBuyers: function() {
+    this.elTitleManagement.click();
+  };
+  this.doInstructionsForBuyers = function() {
     browser.sleep(500);
     browser.waitForAngular();
-    instructionsBuyers.click();
-  },
-  clickWelcomeLetter: function() {
+    this.elInstructionsBuyers.click();
+  };
+  this.doWelcomeLetter = function() {
     browser.sleep(500);
     browser.waitForAngular();
-    welcomeLetter.click();
-  },
-  clickGuidelines: function() {
+    this.elWelcomeLetter.click();
+  };
+  this.doGuidelines = function() {
     browser.sleep(500);
     browser.waitForAngular();
-    guidelines.click();
-  },
-  clickInformationSheet: function() {
+    this.elGuidelines.click();
+  };
+  this.doInformationSheet = function() {
     browser.sleep(500);
     browser.waitForAngular();
-    informationSheets.click();
-  },
-  clickClaimForm: function() {
+    this.elInformationSheets.click();
+  };
+  this.doClaimForm = function() {
     browser.sleep(500);
     browser.waitForAngular();
-    claimForm.click();
-  },
-  clickMobileIOS: function() {
+    this.elClaimForm.click();
+  };
+  this.doMobileIOS = function() {
     browser.sleep(500);
     browser.waitForAngular();
-    myNextGearMobileIOS.click();
-  },
-  clickMobileAndroid: function() {
+    this.elMyNextGearMobileIOS.click();
+  };
+  this.doMobileAndroid = function() {
     browser.sleep(500);
     browser.waitForAngular();
-    myNextGearMobileAndroid.click();
-  }
-};
-module.exports = resources;
+    this.elMyNextGearMobileAndroid.click();
+  };
+}
+module.exports.resources = Resources;
