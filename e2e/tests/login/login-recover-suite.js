@@ -1,26 +1,27 @@
 'use strict';
 
-var loginObjects = require('../../framework/login-objects.js');
+var loginObjects = require('../../framework/e2e_login_objects.js');
 var recoverErrorMessage = require('../../framework/login-recover-objects.js');
 var login = require('../../framework/login.js');
-var modal = require('../../framework/modal-objects.js');
+var modalObjects = require('../../framework/e2e_modal_objects.js');
+var execSettings = require('../../framework/e2e_execSettings.js');
 var incorrectAnswer = 'f';
 var correctAnswer = 'a';
 var validEmail = 'test@gmail.com';
 var invalidEmail = 'asdas@gmail.com';
-var invalidFormatEmail = 'sadsadas';
-var loginUrl = "https://test.nextgearcapital.com/test/#/login";
-var homeUrl = "https://test.nextgearcapital.com/test/#/home";
-var forgotUrl = "https://test.nextgearcapital.com/test/#/login/recover";
+var invalidFormatEmail = 'testtesttest';
+var username = '53190md';
+var password = 'ngcpass!0';
 
 var loginObjects = new loginObjects.loginObjects();
+var modalObjects = new modalObjects.modalObjects();
 
 describe("Login as Dealer\n ", function () {
 
   beforeEach(function () {
     browser.sleep(browser.params.shortDelay);
     browser.driver.manage().window().maximize();
-    browser.get(loginUrl);
+    browser.get(execSettings.loginPage());
     browser.ignoreSynchronization = true;
   });
   afterEach(function () {
@@ -34,27 +35,26 @@ describe("Login as Dealer\n ", function () {
     loginObjects.doSignUpLogin();
     //Validating the Current URL
     expect(browser.getCurrentUrl()).toEqual("http://www.nextgearcapital.com/apply-for-credit/");
-    browser.sleep(3000);
     browser.close();
   });
 
   it("2. Dealer - Forgot User name. My email is correct and no problems", function () {
-    expect(browser.getCurrentUrl()).toEqual(loginUrl);
+    expect(browser.getCurrentUrl() === execSettings.loginPage());
     //Validating the SignUp Button label
     expect(loginObjects.getTextSignUpLogin()).toEqual("Sign Up");
     //Validating the ForgotUsernamePassword Label
     expect(loginObjects.getTextForgotUsernamePassword()).toEqual("Forgot your username or password?");
     loginObjects.doForgotUsernamePassword();
-    expect(browser.getCurrentUrl()).toEqual(forgotUrl);
+    expect(browser.getCurrentUrl() === execSettings.forgotPage());
     loginObjects.setEmail(validEmail);
     //Validating the Submit Button label
     expect(loginObjects.getTextSubmitUsername()).toEqual("Submit");
     loginObjects.doUsernameSubmit();
-    expect(modal.header()).toEqual("Success");
-    expect(modal.body()).toEqual("Thank you, check your email for the requested account information.");
-    //Clicking OK button on Modal Window
-    modal.clickOkButton();
-    expect(browser.getCurrentUrl()).toEqual(loginUrl);
+    expect(modalObjects.getTextHeader()).toEqual("Success");
+    expect(modalObjects.getTextBody()).toEqual("Thank you, check your email for the requested account information.");
+    //Clicking OK button on modalObjects Window
+    modalObjects.doOKBtn();
+    expect(browser.getCurrentUrl() === execSettings.loginPage());
   });
 
   it("3. Dealer - Forgot User name. invalid email id no problems ", function () {
@@ -63,7 +63,7 @@ describe("Login as Dealer\n ", function () {
     expect(login.getInvalidLoginText1()).toEqual("We're sorry, but you used a username or password that doesn't match our records.");
     expect(login.getInvalidLoginText2()).toEqual('If you are experiencing an issue logging in, click "Forgot your username or password?" below, or contact:');
     loginObjects.doForgotUsernamePassword();
-    expect(browser.getCurrentUrl()).toEqual(forgotUrl);
+    expect(browser.getCurrentUrl() === execSettings.forgotPage());
 
     //Enter invalid email id
     loginObjects.setEmail(invalidEmail);
@@ -90,22 +90,20 @@ describe("Login as Dealer\n ", function () {
     loginObjects.doUsernameSubmit();
 
     //Verify Success Modal
-    expect(modal.header()).toEqual("Success");
-    expect(modal.body()).toEqual("Thank you, check your email for the requested account information.");
+    expect(modalObjects.getTextHeader()).toEqual("Success");
+    expect(modalObjects.getTextBody()).toEqual("Thank you, check your email for the requested account information.");
     //Exit out and verify back to main
-    modal.clickOkButton();
-    browser.sleep(500);
-    expect(browser.getCurrentUrl()).toEqual(loginUrl);
+    modalObjects.doOKBtn();
+    expect(browser.getCurrentUrl() === execSettings.loginPage());
   });
 
   it("4. As a dealer I forgot my password. All my answers", function () {
     //Check button text
     loginObjects.doForgotUsernamePassword();
-    expect(browser.getCurrentUrl()).toEqual(forgotUrl);
+    expect(browser.getCurrentUrl() === execSettings.forgotPage());
     //Enter Username
     loginObjects.elFUPWUsername.sendKeys('36017RDT');
     loginObjects.doSubmitPassword();
-    browser.sleep(500);
     //Answer Security Questions and validate
     expect(recoverErrorMessage.getSecurityQuestion10Text()).toEqual("What is the name of a college you applied to but didn't attend?");
     expect(recoverErrorMessage.getSecurityQuestion6Text()).toEqual("In what city or town was your first job?");
@@ -122,39 +120,39 @@ describe("Login as Dealer\n ", function () {
     loginObjects.setSecQuestions(correctAnswer);
     loginObjects.doSubmitPassword();
     //Validating Success Modal window
-    expect(modal.header()).toEqual("Success");
-    expect(modal.body()).toEqual("Thank you, check your email for the requested account information.");
-    modal.clickOkButton();
+    expect(modalObjects.getTextHeader()).toEqual("Success");
+    expect(modalObjects.getTextBody()).toEqual("Thank you, check your email for the requested account information.");
+    modalObjects.doOKBtn();
     //Exit out and verify back to main
-    expect(browser.getCurrentUrl()).toEqual(loginUrl);
+    expect(browser.getCurrentUrl() === execSettings.loginPage());
   });
 
   it("5. Dealer - Login with Null values", function () {
     loginObjects.setLogin(' ', ' ');
     loginObjects.doLogin();
-    expect(browser.getCurrentUrl()).toEqual(loginUrl);
+    expect(browser.getCurrentUrl() === execSettings.loginPage());
   });
 
   it("6. Dealer - Login with Incorrect Username and Password", function () {
     loginObjects.setLogin('test', 'test');
     loginObjects.doLogin();
-    expect(browser.getCurrentUrl()).toEqual(loginUrl);
+    expect(browser.getCurrentUrl() === execSettings.loginPage());
   });
 
   it("7. Dealer - Login with Null Password value", function () {
-    loginObjects.setLogin('53190md', '');
+    loginObjects.setLogin(username, '');
     loginObjects.doLogin();
-    expect(browser.getCurrentUrl()).toEqual(loginUrl);
+    expect(browser.getCurrentUrl() === execSettings.loginPage());
   });
 
   it("8. Dealer - Login with Null Username value", function () {
-    loginObjects.setLogin('', 'ngcpass!0');
+    loginObjects.setLogin('', password);
     loginObjects.doLogin();
-    expect(browser.getCurrentUrl()).toEqual(loginUrl);
+    expect(browser.getCurrentUrl() === execSettings.loginPage());
   });
 
   it("9. Dealer - Good Login", function () {
     loginObjects.doGoodLogin();
-    expect(browser.getCurrentUrl()).toEqual(homeUrl);
+    expect(browser.getCurrentUrl() === execSettings.homePage());
   });
 });

@@ -1,48 +1,29 @@
 'use strict';
 
-var longDelay = 1000;
-var modalObjects = {
+function ModalObjects() {
+  var delay = 500;
+  var longDelay = 1000;
 
   //Locators
+  this.elModalHeader = browser.element(by.css('.modal-header'));
+  this.elModalBody = browser.element(by.css('.modal-body'));
+  this.elModalOKBtn = browser.element(by.css('button[type="submit"]'));
 
-  modalHeader: function () {
-
-    return element(by.css('.modal-header'));
-
-  },
-  modalBody: function () {
-
-    return element(by.css('.modal-body'));
-
-  },
-  //Text on button will change but still same button(Ok, Close Window etc....)
-  okButton: function () {
-
-    return element(by.css('button[type="submit"]'));
-
-  },
-
-  //End of locators. Locators need to go before this
-
-  //Functions can go below
-  header: function () {
+  //Getters
+  this.getTextHeader = function () {
     browser.sleep(longDelay);
-    return this.modalHeader().getText();
+    return this.elModalHeader.getText();
+  };
+  this.getTextBody = function () {
+    return this.elModalBody.getText();
+  };
 
-  },
-  body: function () {
+  //Doers
+  this.doOKBtn = function () {
+    return this.elModalOKBtn.click();
+    browser.sleep(delay);
+  };
 
-    return this.modalBody().getText();
+}
 
-  },
-
-  //LAST ONE
-  clickOkButton: function () {
-
-    return this.okButton().click();
-
-  }
-};
-
-
-module.exports = modalObjects;
+module.exports.modalObjects = ModalObjects;
