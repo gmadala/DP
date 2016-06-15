@@ -6,10 +6,10 @@
  * */
 
 function LoginObjects() {
-  //var username = '53190md';
-  //var password = 'ngcpass!0';
+  var username = '53190md';
+  var password = 'ngcpass!0';
   var delay = 1000;
-  //var longDelay = 2000;
+  var longDelay = 2000;
 
   this.elForgotUsernamePassword = browser.element(by.id("forgotUsernamePassword"));
   this.elEmail = browser.element(by.id("email"));
@@ -38,7 +38,7 @@ function LoginObjects() {
   };
   this.doSignUpLogin = function () {
     return this.elSignUpLogin.click();
-    //browser.sleep(delay);
+    browser.sleep(longDelay);
   };
 
   this.doClearLogin = function() {
@@ -65,8 +65,8 @@ function LoginObjects() {
   };
   this.doGoodLogin = function () {
     this.doClearLogin();
-    this.setUserName('53190md');
-    this.setPassWord('ngcpass!0');
+    this.setUserName(username);
+    this.setPassWord(password);
     this.doLogin();
     browser.sleep(delay);
   };
@@ -108,6 +108,7 @@ function LoginObjects() {
 
   };
   this.setSecQuestions = function (param) {
+    browser.sleep(delay);
     this.elSecQues10.clear().sendKeys(param);
     this.elSecQues10.sendKeys(protractor.Key.TAB);
     this.elSecQues6.clear().sendKeys(param);
