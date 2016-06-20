@@ -1,4 +1,9 @@
 'use strict';
+/**
+ * @class login_objects
+ * @author Balanithiya Krishnamoorthy
+ * @description Modal Objects
+ * */
 
 function ModalObjects() {
   var delay = 500;

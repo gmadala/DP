@@ -2,7 +2,7 @@
 
 // var loginRecover = require('../../framework/login-recover-objects.js');
 var login = require('../../framework/login.js');
-var modal = require('../../framework/modal-objects.js');
+var modal = require('../../framework/e2e_modal_objects.js');
 var dashboard = require('../../framework/dashboard-objects.js');
 var creditIncrease = require('../../framework/credit-increase-request-objects.js');
 var receipts = require('../../framework/receipts-objects.js');
