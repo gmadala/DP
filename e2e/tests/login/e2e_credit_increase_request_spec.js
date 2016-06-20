@@ -1,6 +1,5 @@
 'use strict';
 
-// var loginRecover = require('../../framework/login-recover-objects.js');
 var login = require('../../framework/login.js');
 var modalObjects = require('../../framework/e2e_modal_objects.js');
 var dashboard = require('../../framework/dashboard-objects.js');
@@ -8,10 +7,11 @@ var creditIncrease = require('../../framework/e2e_credit_increase_requ_objects.j
 var receipts = require('../../framework/receipts-objects.js');
 var execSettings = require('../../framework/e2e_execSettings.js');
 var increaseAmount = 1000;
-var CredIncrease = new creditIncrease.creditIncrease();
 
+var CredIncrease = new creditIncrease.creditIncrease();
 var modalObjects = new modalObjects.modalObjects();
-describe("Log In Suite  \n ", function () {
+
+describe("Credit Increase Request \n ", function () {
 
   beforeEach(function () {
     browser.ignoreSynchronization = true;
@@ -26,7 +26,7 @@ describe("Log In Suite  \n ", function () {
 
   });
 
-  it("1. Dealer - Request a Temporary Credit Increase", function () {
+  it("2. Dealer - Request a Temporary Credit Increase", function () {
     dashboard.clickRequestCreditIncrease();
     //Select the Values in Request a Credit Increase POP UP window
     CredIncrease.doTemporaryIncrease();
@@ -38,7 +38,7 @@ describe("Log In Suite  \n ", function () {
     modalObjects.doOKBtn();
     expect(browser.getCurrentUrl() === execSettings.homePage());
   });
-  it("2. Dealer - Request a Permanent Credit Increase", function () {
+  it("3. Dealer - Request a Permanent Credit Increase", function () {
     dashboard.clickRequestCreditIncrease();
     //Select the Values in Request a Credit Increase POP UP window
     CredIncrease.doPermanentIncrease();
@@ -50,7 +50,7 @@ describe("Log In Suite  \n ", function () {
     modalObjects.doOKBtn();
     expect(browser.getCurrentUrl() === execSettings.homePage());
   });
-  it("3. As a dealer I want to print a receipt by grouped VIN", function () {
+  it("4. Dealer - Print a Receipt by Grouped VIN", function () {
     //Click Credit increase
     dashboard.clickReceiptsLink();
     browser.sleep(browser.params.mediumDelay);
