@@ -2,10 +2,10 @@
 
 function CreditIncrease() {
 
+  var delay = 500;
   //Locators
   this.elPermanentIncrease = element(by.id('isNotTemp'));
   this.elFirstLineOfCredit = element(by.id('lineOfCredit0'));
-  //this.elFirstLineOfCredit = element(by.css('div.input#lineOfCredit0.ng-pristine.ng-invalid.ng-invalid-required.ng-touched'));
   this.elTemporaryIncrease = element(by.id('isTemp'));
   this.elIncreaseAmount = element(by.id('increaseAmt'));
   this.elConfirmRequest = element(by.id('confirmRequestButton'));
@@ -15,24 +15,28 @@ function CreditIncrease() {
   //Doers
   this.doPermanentIncrease = function () {
     this.elPermanentIncrease.click();
-    browser.sleep(500);
+    browser.sleep(delay);
   };
   this.doTemporaryIncrease = function () {
     this.elTemporaryIncrease.click();
-    browser.sleep(500);
+    browser.sleep(delay);
   };
   this.doConfirmRequest = function () {
     this.elConfirmRequest.click();
-    browser.sleep(500);
+    browser.sleep(delay);
   };
   this.doLineOfCredit = function () {
     this.elFirstLineOfCredit.click();
-    browser.sleep(500);
+    browser.sleep(delay);
   };
   this.doCloseWindow = function () {
     this.elCloseWindow.click();
-    browser.sleep(500);
+    browser.sleep(delay);
   };
+  this.doCancelRequest = function () {
+    this.elCancelRequest.click();
+    browser.sleep(delay);
+  }
 
   //Setters
   this.enterIncreaseAmount = function (param) {
