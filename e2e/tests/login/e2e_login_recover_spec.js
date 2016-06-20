@@ -1,8 +1,8 @@
 'use strict';
 
 var loginObjects = require('../../framework/e2e_login_objects.js');
-var recoverErrorMessage = require('../../framework/login-recover-objects.js');
-var login = require('../../framework/login.js');
+var recoverErrorMessage = require('../../framework/e2e_login_recover_objects.js');
+var login = require('../../framework/e2e_login.js');
 var modalObjects = require('../../framework/e2e_modal_objects.js');
 var execSettings = require('../../framework/e2e_execSettings.js');
 var incorrectAnswer = 'f';
