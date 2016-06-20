@@ -41,7 +41,7 @@ function LoginObjects() {
     browser.sleep(longDelay);
   };
 
-  this.doClearLogin = function() {
+  this.doClearLogin = function () {
     //return this.elUserName.clear();
     //return this.elPassWord.clear();
     this.elUserName.clear();
@@ -49,11 +49,11 @@ function LoginObjects() {
     return;
     //browser.sleep(delay);
   };
-  this.doLogin = function() {
+  this.doLogin = function () {
     return this.elLogin.click();
     //browser.sleep(delay);
   };
-  this.doMyAccount = function (){
+  this.doMyAccount = function () {
     return this.elMyAccount.click();
   };
   this.doSubmitUsername = function () {
@@ -61,7 +61,7 @@ function LoginObjects() {
   };
   this.doSubmitPassword = function () {
     return this.elSubmitPassword.click();
-    //browser.sleep(delay);
+    browser.sleep(longDelay);
   };
   this.doGoodLogin = function () {
     this.doClearLogin();
@@ -79,7 +79,7 @@ function LoginObjects() {
   this.getTextSignUpLogin = function () {
     return this.elSignUpLogin.getText();
   };
-  this.getTextSubmitUsername = function (){
+  this.getTextSubmitUsername = function () {
     browser.sleep(delay);
     return this.elSubmitUsername.getText();
   };

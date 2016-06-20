@@ -12,8 +12,9 @@ exports.config = {
   // Spec patterns are relative to the current working directly when
   // protractor is called.
   //specs: ['tests/login/login-recover-suite.js','tests/login/credit-increase-request.js','tests/login/resources-suite.js'],
-  // specs: ['tests/login/e2e_login_recover_spec.js', 'tests/login/e2e_resources_spec.js', 'e2e_credit_increase_request_spec'],
-  specs: ['tests/login/e2e_credit_increase_request_spec.js'],
+  //specs: ['tests/login/e2e_login_recover_spec.js', 'tests/login/e2e_resources_spec.js', 'e2e_credit_increase_request_spec'],
+  //specs: ['tests/login/e2e_credit_increase_request_spec.js'],
+  specs: ['tests/login/*_spec.js'],
   // untrackOutstandingTimeouts: true,
   restartBrowserBetweenTests: false,
 
@@ -26,11 +27,11 @@ exports.config = {
     realtimeFailure: true
   },
   params: {
-    userName:'97421EH',
-    userName2:'36017RDT',
-    password:'ngcpass!0',
+    userName: '97421EH',
+    userName2: '36017RDT',
+    password: 'ngcpass!0',
     shortDelay: '1000',
-    mediumDelay:'3000',
-    longDelay:'5000'
+    mediumDelay: '3000',
+    longDelay: '5000'
   }
 };
