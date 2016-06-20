@@ -1,21 +1,4 @@
 'use strict';
-/**
- * @class login_objects
- * @author Balanithiya Krishnamoorthy
- * @description Page objects for Dashboard page elements
- * */
-
-//function DashboardObjects() {
-
-
-
-
-
-
-
-
-
-
 
 var dashboard = {
   receiptsLink: function () {
@@ -51,8 +34,9 @@ var dashboard = {
 
   },
   clickRequestCreditIncrease: function () {
-    browser.sleep(browser.sleep(browser.params.longDelay));
+    browser.sleep(5000);
     this.requestCreditIncrease().click();
+    browser.sleep(3000);
 
 
   },
@@ -87,5 +71,5 @@ var dashboard = {
 
   }
 };
-  //module.exports.dashbardObjects = DashboardObjects;
-//module.exports = dashboard;
+
+module.exports = dashboard;

@@ -12,7 +12,7 @@ exports.config = {
   // Spec patterns are relative to the current working directly when
   // protractor is called.
   //specs: ['tests/login/login-recover-suite.js','tests/login/credit-increase-request.js','tests/login/resources-suite.js'],
-  // specs: ['tests/login/e2e_login_recover_spec.js', 'tests/login/e2e_resources_spec.js'],
+  // specs: ['tests/login/e2e_login_recover_spec.js', 'tests/login/e2e_resources_spec.js', 'e2e_credit_increase_request_spec'],
   specs: ['tests/login/e2e_credit_increase_request_spec.js'],
   // untrackOutstandingTimeouts: true,
   restartBrowserBetweenTests: false,

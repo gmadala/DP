@@ -2,50 +2,53 @@
 
 // var loginRecover = require('../../framework/login-recover-objects.js');
 var login = require('../../framework/login.js');
-var modal = require('../../framework/e2e_modal_objects.js');
+var modalObjects = require('../../framework/e2e_modal_objects.js');
 var dashboard = require('../../framework/dashboard-objects.js');
 var creditIncrease = require('../../framework/credit-increase-request-objects.js');
 var receipts = require('../../framework/receipts-objects.js');
-var homepageUrl="https://test.nextgearcapital.com/test/#/login";
-var tempIncrease= 1000;
-
+var execSettings = require('../../framework/e2e_execSettings.js');
+var increaseAmount = 1000;
 var CredIncrease = new creditIncrease.creditIncrease();
 
+var modalObjects = new modalObjects.modalObjects();
 describe("Log In Suite  \n ", function () {
 
   beforeEach(function () {
-    browser.get(homepageUrl);
     browser.ignoreSynchronization = true;
+  });
+
+  it("1. Dealer - Login as 97421eh ", function () {
+    browser.get(execSettings.loginPage());
+    expect(browser.getCurrentUrl() === execSettings.loginPage());
     browser.sleep(browser.params.shortDelay);
-    login.login2(browser.params.userName,browser.params.password);
+    login.login2(browser.params.userName, browser.params.password);
+    expect(browser.getCurrentUrl() === execSettings.homePage());
 
   });
 
-  it("1. As a dealer I want to request a temporary credit increase", function () {
-    //Login and go to request credit increase
+  it("1. Dealer - Request a Temporary Credit Increase", function () {
     dashboard.clickRequestCreditIncrease();
-    //Select Credit line and click on temp
+    //Select the Values in Request a Credit Increase POP UP window
     CredIncrease.doTemporaryIncrease();
-    CredIncrease.enterIncreaseAmount('1000');
-    CredIncrease.doSubmitRequest();
+    CredIncrease.enterIncreaseAmount(increaseAmount);
+    CredIncrease.doConfirmRequest();
     //Check success modal
-    expect(modal.header()).toEqual("Request a Credit Increase");
-    expect(modal.body()).toEqual("Your request has been submitted. Credit requests typically take 3-5 business days to process. You will be notified as soon as your request has been processed.");
-    modal.clickOkButton();
-
+    expect(modalObjects.getTextHeader()).toEqual("Request a Credit Increase");
+    expect(modalObjects.getTextBody()).toEqual("Your request has been submitted. Credit requests typically take 3-5 business days to process. You will be notified as soon as your request has been processed.");
+    modalObjects.doOKBtn();
+    expect(browser.getCurrentUrl() === execSettings.homePage());
   });
-  it("2. As a dealer I want to request a permanent credit increase", function () {
-    //Click Credit increase
+  it("2. Dealer - Request a Permanent Credit Increase", function () {
     dashboard.clickRequestCreditIncrease();
-    //Select Credit line and click on temp
+    //Select the Values in Request a Credit Increase POP UP window
     CredIncrease.doPermanentIncrease();
-    CredIncrease.enterIncreaseAmount(tempIncrease);
-    CredIncrease.doSubmitRequest();
+    CredIncrease.enterIncreaseAmount(increaseAmount);
+    CredIncrease.doConfirmRequest();
     //Check success modal
-    expect(modal.header()).toEqual("Request a Credit Increase");
-    expect(modal.body()).toEqual("Your request has been submitted. Credit requests typically take 3-5 business days to process. You will be notified as soon as your request has been processed.");
-    modal.clickOkButton();
-
+    expect(modalObjects.getTextHeader()).toEqual("Request a Credit Increase");
+    expect(modalObjects.getTextBody()).toEqual("Your request has been submitted. Credit requests typically take 3-5 business days to process. You will be notified as soon as your request has been processed.");
+    modalObjects.doOKBtn();
+    expect(browser.getCurrentUrl() === execSettings.homePage());
   });
   it("3. As a dealer I want to print a receipt by grouped VIN", function () {
     //Click Credit increase
@@ -60,7 +63,6 @@ describe("Log In Suite  \n ", function () {
       });
     });
   });
-
 
 
 });
