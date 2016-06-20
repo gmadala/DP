@@ -2,12 +2,13 @@
 
 var login = require('../../framework/login.js');
 var modalObjects = require('../../framework/e2e_modal_objects.js');
-var dashboard = require('../../framework/dashboard-objects.js');
+var dashboard = require('../../framework/e2e_dashboard_objects.js');
 var creditIncrease = require('../../framework/e2e_credit_increase_requ_objects.js');
 var receipts = require('../../framework/receipts-objects.js');
 var execSettings = require('../../framework/e2e_execSettings.js');
 var increaseAmount = 1000;
 
+var dashboard = new dashboard.dashboardObjects();
 var CredIncrease = new creditIncrease.creditIncrease();
 var modalObjects = new modalObjects.modalObjects();
 
@@ -27,7 +28,7 @@ describe("Credit Increase Request \n ", function () {
   });
 
   it("2. Dealer - Request a Temporary Credit Increase", function () {
-    dashboard.clickRequestCreditIncrease();
+    dashboard.doRequestCreditIncrease();
     //Select the Values in Request a Credit Increase POP UP window
     CredIncrease.doTemporaryIncrease();
     CredIncrease.enterIncreaseAmount(increaseAmount);
@@ -39,7 +40,7 @@ describe("Credit Increase Request \n ", function () {
     expect(browser.getCurrentUrl() === execSettings.homePage());
   });
   it("3. Dealer - Request a Permanent Credit Increase", function () {
-    dashboard.clickRequestCreditIncrease();
+    dashboard.doRequestCreditIncrease();
     //Select the Values in Request a Credit Increase POP UP window
     CredIncrease.doPermanentIncrease();
     CredIncrease.enterIncreaseAmount(increaseAmount);
@@ -52,7 +53,7 @@ describe("Credit Increase Request \n ", function () {
   });
   it("4. Dealer - Print a Receipt by Grouped VIN", function () {
     //Click Credit increase
-    dashboard.clickReceiptsLink();
+    dashboard.doReceipts();
     browser.sleep(browser.params.mediumDelay);
     receipts.clickFirstReceipt();
     receipts.clickExportReceipts();
