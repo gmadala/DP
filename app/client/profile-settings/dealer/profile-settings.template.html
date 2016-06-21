@@ -35,7 +35,7 @@
                 <div ng-show="profile.editable">
                   <input type="password" name="setPassword" class="xsmallInput" ng-model="profile.dirtyData.password" ng-class="{ 'nxg-invalid': profile.validation.setPassword.$error.pattern }" />
                   <button class="btn-help"
-                          tooltip-placement="right"
+                          tooltip-placement="left"
                           tooltip-trigger="mouseenter"
                           uib-tooltip-html='passwordTooltip | translate'
                           tooltip-animation="true"><span nxg-icon="icon-help"></span></button>
