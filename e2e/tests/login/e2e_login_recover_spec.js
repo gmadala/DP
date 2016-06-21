@@ -37,7 +37,7 @@ describe("Login as Dealer\n ", function () {
     expect(browser.getCurrentUrl()).toEqual("http://www.nextgearcapital.com/apply-for-credit/");
     browser.close();
   });
-  
+
   it("2. Dealer - Forgot User name. My email is correct and no problems", function () {
     expect(browser.getCurrentUrl() === execSettings.loginPage());
     //Validating the SignUp Button label
@@ -56,7 +56,7 @@ describe("Login as Dealer\n ", function () {
     modalObjects.doOKBtn();
     expect(browser.getCurrentUrl() === execSettings.loginPage());
   });
-  
+
   it("3. Dealer - Forgot User name. invalid email id no problems ", function () {
     loginObjects.setLogin('53190md', 'incorrect');
     loginObjects.doLogin();
@@ -64,31 +64,31 @@ describe("Login as Dealer\n ", function () {
     expect(login.getInvalidLoginText2()).toEqual('If you are experiencing an issue logging in, click "Forgot your username or password?" below, or contact:');
     loginObjects.doForgotUsernamePassword();
     expect(browser.getCurrentUrl() === execSettings.forgotPage());
-  
+
     //Enter invalid email id
     loginObjects.setEmail(invalidEmail);
-  
+
     //Check username box is disabled and submit
     expect(recoverErrorMessage.disabledCount()).toEqual(1);
     expect(element(by.model('passwordRecovery.username')).isEnabled()).toBe(false);
     expect(loginObjects.elPasswordRecoveryModal.isEnabled()).toBe(false);
     expect(loginObjects.getTextSubmitUsername()).toEqual("Submit");
     loginObjects.doUsernameSubmit();
-  
+
     // //Verify error message text
     // expect(recoverErrorMessage.getemailNotFoundText()).toEqual("We were unable to locate this email address. If you need assistance, please call NextGear Capital Support at:");
-  
+
     //Enter incorrect email id and submit
     loginObjects.elEmail.clear();
     loginObjects.setEmail(invalidFormatEmail);
     loginObjects.doUsernameSubmit();
     expect(recoverErrorMessage.getIncorrectEmailFormat()).toContain("is not a valid email address. If you need assistance, please call NextGear Capital Support at:");
-  
+
     //Enter valid email id and submit
     loginObjects.elEmail.clear();
     loginObjects.setEmail(validEmail);
     loginObjects.doUsernameSubmit();
-  
+
     //Verify Success Modal
     expect(modalObjects.getTextHeader()).toEqual("Success");
     expect(modalObjects.getTextBody()).toEqual("Thank you, check your email for the requested account information.");
@@ -96,7 +96,7 @@ describe("Login as Dealer\n ", function () {
     modalObjects.doOKBtn();
     expect(browser.getCurrentUrl() === execSettings.loginPage());
   });
-  
+
   it("4. As a dealer I forgot my password. All my answers", function () {
     //Check button text
     loginObjects.doForgotUsernamePassword();
@@ -126,34 +126,34 @@ describe("Login as Dealer\n ", function () {
     //Exit out and verify back to main
     expect(browser.getCurrentUrl() === execSettings.loginPage());
   });
-  
+
   it("5. Dealer - Login with Null values", function () {
     loginObjects.setLogin(' ', ' ');
     loginObjects.doLogin();
     expect(browser.getCurrentUrl() === execSettings.loginPage());
   });
-  
+
   it("6. Dealer - Login with Incorrect Username and Password", function () {
     loginObjects.setLogin('test', 'test');
     loginObjects.doLogin();
     expect(browser.getCurrentUrl() === execSettings.loginPage());
   });
-  
+
   it("7. Dealer - Login with Null Password value", function () {
     loginObjects.setLogin(username, '');
     loginObjects.doLogin();
     expect(browser.getCurrentUrl() === execSettings.loginPage());
   });
-  
+
   it("8. Dealer - Login with Null Username value", function () {
     loginObjects.setLogin('', password);
     loginObjects.doLogin();
     expect(browser.getCurrentUrl() === execSettings.loginPage());
   });
 
-  it("9. Dealer - Good Login", function () {
-    loginObjects.doGoodLogin();
-    expect(browser.getCurrentUrl() === execSettings.homePage());
-  });
+  // it("9. Dealer - Good Login", function () {
+  //   loginObjects.doGoodLogin();
+  //   expect(browser.getCurrentUrl() === execSettings.homePage());
+  // });
 
 });
