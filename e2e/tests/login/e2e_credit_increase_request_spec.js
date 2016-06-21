@@ -40,6 +40,7 @@ describe("Credit Increase Request \n ", function () {
     modalObjects.doOKBtn();
     expect(browser.getCurrentUrl() === execSettings.homePage());
   });
+
   xit("3. Dealer - Request a Permanent Credit Increase", function () {
     dashboard.doRequestCreditIncrease();
     //Select the Values in Request a Credit Increase POP UP window
@@ -52,6 +53,7 @@ describe("Credit Increase Request \n ", function () {
     modalObjects.doOKBtn();
     expect(browser.getCurrentUrl() === execSettings.homePage());
   });
+
   it("4. Dealer - Print a Receipt by Grouped VIN", function () {
     //Click Credit increase
     dashboard.doReceipts();

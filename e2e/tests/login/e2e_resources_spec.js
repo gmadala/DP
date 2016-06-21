@@ -36,7 +36,6 @@ describe('Testing Resources Page', function() {
   });
 
   //Welcome packet is taking too much time to load that causes other test cases fail.
-  //So for time being excluding this test case, this needs little bit research on this.
   xit('Validating the Welcome Packet', function() {
     resources.doWelcomePacket();
     browser.getAllWindowHandles().then(function(handles) {
