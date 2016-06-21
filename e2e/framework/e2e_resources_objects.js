@@ -1,9 +1,4 @@
 'use strict';
-/**
- * @class login_objects
- * @author Balanithiya Krishnamoorthy
- * @description Page objects for Resources page elements
- * */
 
 function Resources() {
   this.elResourcesLink = element(by.className('link_documents'));

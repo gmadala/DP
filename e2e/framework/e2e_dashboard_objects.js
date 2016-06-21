@@ -1,9 +1,4 @@
 'use strict';
-/**
- * @class login_objects
- * @author Balanithiya Krishnamoorthy
- * @description Page objects for Dashboard page elements
- * */
 
 function DashboardObjects() {
 

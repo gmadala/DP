@@ -8,6 +8,7 @@ var receipts = require('../../framework/e2e_receipts_objects.js');
 var execSettings = require('../../framework/e2e_execSettings.js');
 var increaseAmount = 1000;
 
+//var Receipts = new receipts.ReceiptsObjects();
 var dashboard = new dashboard.dashboardObjects();
 var CredIncrease = new creditIncrease.creditIncrease();
 var modalObjects = new modalObjects.modalObjects();
@@ -27,7 +28,7 @@ describe("Credit Increase Request \n ", function () {
 
   });
 
-  it("2. Dealer - Request a Temporary Credit Increase", function () {
+  xit("2. Dealer - Request a Temporary Credit Increase", function () {
     dashboard.doRequestCreditIncrease();
     //Select the Values in Request a Credit Increase POP UP window
     CredIncrease.doTemporaryIncrease();
@@ -39,7 +40,7 @@ describe("Credit Increase Request \n ", function () {
     modalObjects.doOKBtn();
     expect(browser.getCurrentUrl() === execSettings.homePage());
   });
-  it("3. Dealer - Request a Permanent Credit Increase", function () {
+  xit("3. Dealer - Request a Permanent Credit Increase", function () {
     dashboard.doRequestCreditIncrease();
     //Select the Values in Request a Credit Increase POP UP window
     CredIncrease.doPermanentIncrease();
@@ -57,6 +58,8 @@ describe("Credit Increase Request \n ", function () {
     browser.sleep(browser.params.mediumDelay);
     receipts.clickFirstReceipt();
     receipts.clickExportReceipts();
+    // Receipts.doFirstReceipt();
+    // Receipts.doExportReceipts();
     browser.sleep(browser.params.mediumDelay);
     browser.getAllWindowHandles().then(function (handles) {
       browser.switchTo().window(handles[1]).then(function () {
