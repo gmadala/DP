@@ -28,7 +28,7 @@ describe("Credit Increase Request \n ", function () {
 
   });
 
-  xit("2. Dealer - Request a Temporary Credit Increase", function () {
+  it("2. Dealer - Request a Temporary Credit Increase", function () {
     dashboard.doRequestCreditIncrease();
     //Select the Values in Request a Credit Increase POP UP window
     CredIncrease.doTemporaryIncrease();
@@ -41,7 +41,7 @@ describe("Credit Increase Request \n ", function () {
     expect(browser.getCurrentUrl() === execSettings.homePage());
   });
 
-  xit("3. Dealer - Request a Permanent Credit Increase", function () {
+  it("3. Dealer - Request a Permanent Credit Increase", function () {
     dashboard.doRequestCreditIncrease();
     //Select the Values in Request a Credit Increase POP UP window
     CredIncrease.doPermanentIncrease();
