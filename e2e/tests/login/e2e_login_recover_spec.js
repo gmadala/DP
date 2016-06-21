@@ -154,8 +154,6 @@ describe("Login as Dealer\n ", function () {
   it("9. Dealer - Good Login", function () {
     loginObjects.doGoodLogin();
     expect(browser.getCurrentUrl() === execSettings.homePage());
-    // loginObjects.doSignOut();
-    // browser.sleep(5000);
-    // browser.closeAll();
   });
+
 });
