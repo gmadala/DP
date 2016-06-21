@@ -27,13 +27,11 @@ function LoginObjects() {
   this.elSecQues9 = browser.element.all(by.id('question9'));
   this.elSignOut = browser.element(by.css('a'));
 
-
   //Doers
   this.doForgotUsernamePassword = function () {
     return this.elForgotUsernamePassword.click();
     browser.sleep(delay);
   };
-
   this.doUsernameSubmit = function () {
     return this.elSubmitUsername.click();
     browser.sleep(delay);
@@ -42,7 +40,6 @@ function LoginObjects() {
     return this.elSignUpLogin.click();
     browser.sleep(longDelay);
   };
-
   this.doClearLogin = function () {
     this.elUserName.clear();
     this.elPassWord.clear();
@@ -72,9 +69,7 @@ function LoginObjects() {
   this.doSignOut = function () {
     this.doMyAccount();
     return this.elSignOut.click();
-
   };
-
 
   //Getters
   this.getTextForgotUsernamePassword = function () {
@@ -88,28 +83,23 @@ function LoginObjects() {
     return this.elSubmitUsername.getText();
   };
 
-
   //Setters
   this.setEmail = function (param) {
     browser.sleep(browser.params.shortDelay);
     this.elEmail.sendKeys(param);
   };
-
   this.setUserName = function (username) {
     this.elUserName.sendKeys(username);
   };
-
   this.setPassWord = function (password) {
     this.elPassWord.sendKeys(password);
   };
-
   this.setLogin = function (username, password) {
     this.doClearLogin();
     this.elUserName.sendKeys(username);
     browser.sleep(delay);
     this.elPassWord.sendKeys(password);
     browser.sleep(delay);
-
   };
   this.setSecQuestions = function (param) {
     browser.sleep(delay);
@@ -119,6 +109,6 @@ function LoginObjects() {
     this.elSecQues10.sendKeys(protractor.Key.TAB);
     this.elSecQues9.clear().sendKeys(param);
   };
-}
 
+}
 module.exports.loginObjects = LoginObjects;
