@@ -3,7 +3,7 @@
 var loginObjects = require('../../framework/e2e_login_objects.js');
 var recoverErrorMessage = require('../../framework/login-recover-objects.js');
 var login = require('../../framework/login.js');
-var modal = require('../../framework/e2e_modal_objects.js');
+var modalObjects = require('../../framework/e2e_modal_objects.js');
 var execSettings = require('../../framework/e2e_execSettings.js');
 var incorrectAnswer = 'f';
 var correctAnswer = 'a';
@@ -14,6 +14,7 @@ var username = '53190md';
 var password = 'ngcpass!0';
 
 var loginObjects = new loginObjects.loginObjects();
+var modalObjects = new modalObjects.modalObjects();
 
 describe("Login as Dealer\n ", function () {
 
@@ -49,10 +50,10 @@ describe("Login as Dealer\n ", function () {
     //Validating the Submit Button label
     expect(loginObjects.getTextSubmitUsername()).toEqual("Submit");
     loginObjects.doUsernameSubmit();
-    expect(modal.header()).toEqual("Success");
-    expect(modal.body()).toEqual("Thank you, check your email for the requested account information.");
-    //Clicking OK button on Modal Window
-    modal.clickOkButton();
+    expect(modalObjects.getTextHeader()).toEqual("Success");
+    expect(modalObjects.getTextBody()).toEqual("Thank you, check your email for the requested account information.");
+    //Clicking OK button on modalObjects Window
+    modalObjects.doOKBtn();
     expect(browser.getCurrentUrl() === execSettings.loginPage());
   });
 
@@ -89,10 +90,10 @@ describe("Login as Dealer\n ", function () {
     loginObjects.doUsernameSubmit();
 
     //Verify Success Modal
-    expect(modal.header()).toEqual("Success");
-    expect(modal.body()).toEqual("Thank you, check your email for the requested account information.");
+    expect(modalObjects.getTextHeader()).toEqual("Success");
+    expect(modalObjects.getTextBody()).toEqual("Thank you, check your email for the requested account information.");
     //Exit out and verify back to main
-    modal.clickOkButton();
+    modalObjects.doOKBtn();
     expect(browser.getCurrentUrl() === execSettings.loginPage());
   });
 
@@ -104,9 +105,9 @@ describe("Login as Dealer\n ", function () {
     loginObjects.elFUPWUsername.sendKeys('36017RDT');
     loginObjects.doSubmitPassword();
     //Answer Security Questions and validate
-    // expect(recoverErrorMessage.getSecurityQuestion10Text()).toEqual("What is the name of a college you applied to but didn't attend?");
-    // expect(recoverErrorMessage.getSecurityQuestion6Text()).toEqual("In what city or town was your first job?");
-    // expect(recoverErrorMessage.getSecurityQuestion9Text()).toEqual("What is your maternal grandmother's maiden name?");
+    expect(recoverErrorMessage.getSecurityQuestion10Text()).toEqual("What is the name of a college you applied to but didn't attend?");
+    expect(recoverErrorMessage.getSecurityQuestion6Text()).toEqual("In what city or town was your first job?");
+    expect(recoverErrorMessage.getSecurityQuestion9Text()).toEqual("What is your maternal grandmother's maiden name?");
     //Entering incorrect Answer
     loginObjects.setSecQuestions(incorrectAnswer);
     loginObjects.doSubmitPassword();
@@ -119,9 +120,9 @@ describe("Login as Dealer\n ", function () {
     loginObjects.setSecQuestions(correctAnswer);
     loginObjects.doSubmitPassword();
     //Validating Success Modal window
-    expect(modal.header()).toEqual("Success");
-    expect(modal.body()).toEqual("Thank you, check your email for the requested account information.");
-    modal.clickOkButton();
+    expect(modalObjects.getTextHeader()).toEqual("Success");
+    expect(modalObjects.getTextBody()).toEqual("Thank you, check your email for the requested account information.");
+    modalObjects.doOKBtn();
     //Exit out and verify back to main
     expect(browser.getCurrentUrl() === execSettings.loginPage());
   });
