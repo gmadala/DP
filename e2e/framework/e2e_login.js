@@ -32,20 +32,11 @@ var login = {
     incorrectEmailFormat: function () {
       return element(by.css('p[ng-show="forgotUserNameValidity.email.$error.email"]'));
     }
-  }, 
+  },
 
   //Doers
   clickLoginButton: function () {
     return this.elements.loginButton().click();
-  },
-  clickForgotUsernamePassword: function () {
-    this.elements.forgotUsernamePassword().click();
-    browser.sleep(delay);
-  },
-  clickSignUpLogin: function () {
-    this.elements.signUpLogin().click();
-    //put the waits in the page objects when actions are taken so that it is ready for the test to do what you need it to. It creates cleaner tests too
-    browser.sleep(delay);
   },
 
   //Getters
@@ -56,15 +47,7 @@ var login = {
   getInvalidLoginText2: function () {
     return this.elements.invalidLoginError2().getText();
   },
-  getLoginButtonText: function () {
-    return this.elements.loginButton().getText();
-  },
-  textSignUpLogin: function () {
-    return this.elements.signUpLogin().getText();
-  },
-  textForgotUsernamePassword: function () {
-    return this.elements.forgotUsernamePassword().getText();
-  },
+
   getIncorrectEmailFormat: function () {
     return this.incorrectEmailFormat().getText();
   },

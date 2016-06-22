@@ -105,8 +105,10 @@ function LoginObjects() {
     browser.sleep(delay);
     this.elSecQues10.clear().sendKeys(param);
     this.elSecQues10.sendKeys(protractor.Key.TAB);
+    browser.sleep(delay);
     this.elSecQues6.clear().sendKeys(param);
     this.elSecQues10.sendKeys(protractor.Key.TAB);
+    browser.sleep(delay);
     this.elSecQues9.clear().sendKeys(param);
   };
 
