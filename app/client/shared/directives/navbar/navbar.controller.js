@@ -57,8 +57,8 @@
           {name: gettextCatalog.getString('Dashboard'), href: '#/act/home', activeWhen: 'auction_dashboard'},
           {name: gettextCatalog.getString('Dealer Search'), href: '#/act/dealersearch', activeWhen: 'auction_dealersearch'},
           {name: gettextCatalog.getString('Floor a Vehicle'), href: '#/act/bulkflooring', activeWhen: 'auction_bulkflooring'},
-          {name: gettextCatalog.getString('Seller Floor Plan Search'), href: '#/act/sellerfloorplan', activeWhen: 'auction_sellerfloorplan'},
-          {name: gettextCatalog.getString('View a Report'), href: '#/act/reports', activeWhen: 'auction_reports'},
+          {name: gettextCatalog.getString('Floor Plan Search'), href: '#/act/sellerfloorplan', activeWhen: 'auction_sellerfloorplan'},
+          {name: gettextCatalog.getString('Reports'), href: '#/act/reports', activeWhen: 'auction_reports'},
           {name: gettextCatalog.getString('Resources'), href: '#/act/documents', activeWhen: 'auction_documents'}
         ]
       };
