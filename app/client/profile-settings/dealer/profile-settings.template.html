@@ -16,8 +16,12 @@
             <div class="row">
               <label class="col-xs-6 no-right-padding" for="setUsername" translate>Username</label>
               <div class="col-xs-6 zeroLeftPadding" nxg-input model="profile.data.username" editable="profile.editable">
+                <section class="flexboxForm">
+                  <div class="stretch">
                 <input type="text" name="setUsername" class="xsmallInput" ng-model="profile.dirtyData.username" value="profile.dirtyData.username" ng-maxlength="40" ng-class="{ 'nxg-invalid': profile.validation.setUsername.$error.required || profile.validation.setUsername.$error.maxlength }" required/>
-                <label for="setUsername" class="text-error"
+                  </div>
+                  </section>
+                    <label for="setUsername" class="text-error"
                        ng-show="profile.validation.setUsername.$error.required" translate>
                   Please enter a Username.
                 </label>
@@ -96,7 +100,13 @@
             </div>
             <div class="row">
               <label class="col-xs-6 no-right-padding" for="email" translate>Email</label>
-              <div class="col-xs-6  zeroLeftPadding" nxg-input model="profile.data.email" editable="profile.editable">
+              <div class="col-lg-6 zeroLeftPadding no-right-padding visible-lg visible-md visible-xl" nxg-input model="profile.data.email" editable="profile.editable">
+                <input type="email" name="email" class="xsmallInput" ng-model="profile.dirtyData.email" value="profile.dirtyData.email" ng-class="{ 'nxg-invalid': profile.validation.email.$invalid }" required/>
+                <label class="text-error" ng-show="profile.validation.email.$invalid" translate>
+                  Please enter a valid email address.
+                </label>th
+              </div>
+              <div class="col-lg-6 no-right-padding visible-sm visible-xs" nxg-input model="profile.data.email" editable="profile.editable">
                 <input type="email" name="email" class="xsmallInput" ng-model="profile.dirtyData.email" value="profile.dirtyData.email" ng-class="{ 'nxg-invalid': profile.validation.email.$invalid }" required/>
                 <label class="text-error" ng-show="profile.validation.email.$invalid" translate>
                   Please enter a valid email address.
