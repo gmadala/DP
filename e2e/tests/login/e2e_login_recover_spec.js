@@ -151,9 +151,9 @@ describe("Login as Dealer\n ", function () {
     expect(browser.getCurrentUrl() === execSettings.loginPage());
   });
 
-  // it("9. Dealer - Good Login", function () {
-  //   loginObjects.doGoodLogin();
-  //   expect(browser.getCurrentUrl() === execSettings.homePage());
-  // });
+  it("9. Dealer - Good Login", function () {
+    loginObjects.doGoodLogin();
+    expect(browser.getCurrentUrl() === execSettings.homePage());
+  });
 
 });
