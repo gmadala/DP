@@ -1,6 +1,9 @@
 'use strict';
 
 function Resources() {
+
+  var delay = 1000;
+
   this.elResourcesLink = element(by.className('link_documents'));
   this.elRatesAndFees = element(by.id('ratesandfees'));
   this.elDealerFunding = element(by.linkText('Dealer Funding Checklist'));
@@ -16,62 +19,64 @@ function Resources() {
 
   //Doers
   this.doResources = function() {
-    this.elResourcesLink.click();
     browser.waitForAngular();
+    this.elResourcesLink.click();
+    browser.sleep(delay);
   };
   this.doRatesAndFees = function() {
-    this.elRatesAndFees.click();
     browser.waitForAngular();
+    this.elRatesAndFees.click();
+    browser.sleep(delay);
   };
   this.doDealerFunding = function() {
-    browser.sleep(500);
     browser.waitForAngular();
     this.elDealerFunding.click();
+    browser.sleep(delay);
   };
   this.doWelcomePacket = function() {
-    browser.sleep(500);
     browser.waitForAngular();
     this.elWelcomePacket.click();
+    browser.sleep(delay);
   };
   this.doTitleManagement = function() {
-    browser.sleep(500);
     browser.waitForAngular();
     this.elTitleManagement.click();
+    browser.sleep(delay);
   };
   this.doInstructionsForBuyers = function() {
-    browser.sleep(500);
     browser.waitForAngular();
     this.elInstructionsBuyers.click();
+    browser.sleep(delay);
   };
   this.doWelcomeLetter = function() {
-    browser.sleep(500);
     browser.waitForAngular();
     this.elWelcomeLetter.click();
+    browser.sleep(delay);
   };
   this.doGuidelines = function() {
-    browser.sleep(500);
     browser.waitForAngular();
     this.elGuidelines.click();
+    browser.sleep(delay);
   };
   this.doInformationSheet = function() {
-    browser.sleep(500);
     browser.waitForAngular();
     this.elInformationSheets.click();
+    browser.sleep(delay);
   };
   this.doClaimForm = function() {
-    browser.sleep(500);
     browser.waitForAngular();
     this.elClaimForm.click();
+    browser.sleep(delay);
   };
   this.doMobileIOS = function() {
-    browser.sleep(500);
     browser.waitForAngular();
     this.elMyNextGearMobileIOS.click();
+    browser.sleep(delay);
   };
   this.doMobileAndroid = function() {
-    browser.sleep(500);
     browser.waitForAngular();
     this.elMyNextGearMobileAndroid.click();
+    browser.sleep(delay);
   };
 }
 module.exports.resources = Resources;
