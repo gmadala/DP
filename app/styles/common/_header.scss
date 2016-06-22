@@ -274,25 +274,22 @@
 
 @media only screen and (max-width: 767px) {
   body {
-    padding-top: 70px !important;
+    //padding-top: 70px !important; Use this when fixing the navbar to top
     -webkit-overflow-scrolling: touch;
   }
 
-  .nxg-logo-mobile {
-    background: url(../img/Logo-myNextGear-Mobile-sm.svg);
-    //background: url(../img/nxg_logo_blue.png);
-    //background: url(../img/nxg_logo_blue_mobile.png);
-    background-repeat: no-repeat;
-    background-size: 200px 55px;
-    height: 55px;
-    //background-size: 200px 64px;
-    //height: 70px;
-    margin: 0 auto;
-    width: 50%;
-    z-index: 5;
-    top: -3px;
-    left: 30%;
-    position: absolute;
+  .mng-logo {
+    width: 200px;
+    height: 53px;
+    top: -17px;
+    position: relative;
+  }
+
+  .mng-navbar {
+    .navbar-nav {
+      padding-top: 0px;
+      margin-top: 0px !important;
+    }
   }
 
   .nav-language-chooser {
@@ -309,7 +306,9 @@
   }
 
   .mobile-navbar {
-    position: fixed; // This is causing issues with the navbar width
+    //position: fixed; // Use this to fix navbar to top
+    position: relative;
+    top: auto;
     right: 0;
     left: 0;
     top: 0;
@@ -318,8 +317,6 @@
 
   .navbar-default {
     .navbar-toggle {
-      position: absolute;
-      right: -10px;
       border: none;
       z-index: 10;
       &:hover,
@@ -327,29 +324,23 @@
         background: none !important;
       }
     }
-    .navbar-brand {
-      color: white;
-      position: fixed;
-      width: 100%;
-      left: 0;
-      top: 0;
-      text-align: center;
-      margin: auto;
-      z-index: 0;
-      //padding: 0;
-      &:hover {
-        color: white;
-      }
-    }
   }
+
   .logo-center {
-    position: fixed;
     text-align: center;
-    float: none;
-    //margin-left: auto;
-    //margin-right: auto;
-    //width: 60%;
-    //position:absolute;
+    margin-left: auto;
+    margin-right: auto;
+    width: 60%;
+    color: white;
+    left: 0;
+    top: 0;
+    padding-top: 15px;
+    font-size: 18px;
+    text-align: center;
+    z-index: 0;
+    &:hover {
+      color: white;
+    }
   }
 
   .hamburger {
@@ -380,7 +371,6 @@
 
   .button-x {
     .hamburger {
-      //background: 0 0;
       background-color: transparent;
     }
     .hamburger::before {

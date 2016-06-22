@@ -81,32 +81,25 @@
     <nav id="navbar" class="navbar navbar-default mng-navbar main-navbar mobile-navbar " ng-class="{'menu-open in' : navState.current.data.showMenu }">
       <div class="container">
         <div class="navbar-header">
-          <!--<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse" aria-expanded="false">-->
-          <!--<span class="sr-only">Toggle navigation</span>-->
-          <!--<span class="icon-bar"></span>-->
-          <!--<span class="icon-bar"></span>-->
-          <!--<span class="icon-bar"></span>-->
-          <!--</button>-->
           <button type="button" class="navbar-toggle collapsed mobile-menu-button"
                   ng-class="{'button-x': navState.current.data.showMenu}"
                   ng-click="toggleMenu()">
             <span class="sr-only">Toggle navigation</span>
             <span class="hamburger"></span>
           </button>
-        </div>
-        <div class="logo-center navbar-brand visible-xs">
-          <div ng-if="isDashboard()">
-            <div class="nxg-logo-mobile" nxg-debug-title></div>
-            <!--<div class="nxg-logo" nxg-debug-title></div>-->
-          </div>
-          <div ng-if="!isDashboard()">
-            {{getPageTitle()|uppercase}}
+          <div class="logo-center visible-xs">
+            <div ng-if="isDashboard()">
+              <img class="mng-logo" src="../img/Logo-myNextGear-Mobile-sm.svg">
+            </div>
+            <div ng-if="!isDashboard()">
+              {{getPageTitle()|uppercase}}
+            </div>
           </div>
         </div>
 
-        <div class="collapse navbar-collapse" id="navbar" ng-class="{'in': navState.current.data.showMenu}">
+        <div class="collapse navbar-collapse" ng-class="{'in': navState.current.data.showMenu}" ng-click="closeMenu()">
           <ul class="nav navbar-nav ">
-            <li class="visible-xs">
+            <li class="visible-xs" ng-if="user.isDealer()">
               <a href="#" ng-href="#/checkout" ng-click="setPageTitle('checkout')">checkout</a>
             </li>
             <li ng-repeat="link in user.navLinks().primary" class="link_{{ link.activeWhen }}" ng-class="{'dropdown': link.subMenu, 'hover': link.hasHover}">
@@ -131,6 +124,21 @@
                   <a href="#" ng-href="{{item.href}}" ng-click="setPageTitle(item.name)">{{item.name}}</a>
                 </li>
               </ul>
+            </li>
+            <li class="visible-xs" ng-show="user.isDealer()">
+              <a href="#/act/settings" ng-click="setPageTitle('Settings')">
+                <strong translate>Settings</strong>
+              </a>
+            </li>
+            <li class="visible-xs" ng-show="user.isDealer()">
+              <a href="#/profile_settings" ng-click="setPageTitle('Profile Settings')">
+                <strong translate>Profile Settings</strong>
+              </a>
+            </li>
+            <li class="visible-xs" ng-show="user.isDealer()">
+              <a ng-href="#/account_management" ng-click="setPageTitle('Account Management')">
+                <strong translate>Account Management</strong>
+              </a>
             </li>
             <li class="visible-xs">
               <a href="javascript:void(0)" ng-click="user.logout()">Sign Out</a>

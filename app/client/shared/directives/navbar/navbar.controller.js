@@ -201,7 +201,6 @@
     $scope.toggleMenu = function() {
       console.log("TOGGLE MENU", $state);
       $state.current.data.showMenu = !$state.current.data.showMenu;
-      //$scope.showMenu = !$scope.showMenu;
     };
 
     $scope.closeMenu = function() {
@@ -214,7 +213,6 @@
 
     $scope.removeHover = function() {
       this.link.hasHover = false;
-      $scope.closeMenu();
     };
 
     $rootScope.$on('$stateChangeSuccess', function() {
