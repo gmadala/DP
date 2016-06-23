@@ -66,13 +66,14 @@
           controller: 'ConfirmTitleReleaseCheckoutCtrl'
         };
 
+        kissMetricInfo.getKissMetricInfo().then(function (result) {
+          result.titles = $scope .titleQueue.contents.length;
+
+          segmentio.track(metric.DEALER_TITLE_RELEASE_REQUEST, result);
+        });
+
         uibModal.open(dialogOptions).result.then(function() {
           TitleReleases.clearQueue();
-
-          kissMetricInfo.getKissMetricInfo().then(function (result) {
-            console.log(result);
-            segmentio.track(metric.DEALER_TITLE_RELEASE_REQUEST, result);
-          });
 
           $state.transitionTo('titlereleases');
         });
