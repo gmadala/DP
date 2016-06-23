@@ -1,4 +1,4 @@
-<div class="container non-responsive">
+<div class="container">
   <div class="row">
 
     <!-- USER PROFILE -->
@@ -17,7 +17,7 @@
             <div class="row">
               <label class="col-xs-5" for="setUsername" translate>Username</label>
               <div class="col-xs-5 zeroLeftPadding" nxg-input model="profile.data.username" editable="profile.editable">
-                <input type="text" class="smallInput" name="setUsername" ng-model="profile.dirtyData.username" value="profile.dirtyData.username" ng-maxlength="40" ng-class="{ 'nxg-invalid': profile.validation.setUsername.$error.required || profile.validation.setUsername.$error.maxlength }" required/>
+                <input type="text" class="smallInputAuctionSettings" name="setUsername" ng-model="profile.dirtyData.username" value="profile.dirtyData.username" ng-maxlength="40" ng-class="{ 'nxg-invalid': profile.validation.setUsername.$error.required || profile.validation.setUsername.$error.maxlength }" required/>
                 <label for="setUsername" class="text-error"
                        ng-show="profile.validation.setUsername.$error.required" translate>
                   Please enter a Username.
@@ -34,7 +34,7 @@
               <div class="col-xs-5 zeroLeftPadding">
                 <div class="static" ng-hide="profile.editable">***********</div>
                 <div ng-show="profile.editable">
-                  <input type="password" class="smallInput" name="setPassword" ng-model="profile.dirtyData.password" ng-class="{ 'nxg-invalid': profile.validation.setPassword.$error.pattern }" />
+                  <input type="password" class="smallInputAuctionSettings" name="setPassword" ng-model="profile.dirtyData.password" ng-class="{ 'nxg-invalid': profile.validation.setPassword.$error.pattern }" />
                   <button class="btn-help"
                           id="password-help-tooltip"
                           tooltip-placement="right"
@@ -51,7 +51,7 @@
             <div class="row" ng-show="profile.editable">
               <label class="col-xs-5" for="confirmPassword" translate>Confirm Password</label>
               <div class="col-xs-5 zeroLeftPadding">
-                <input type="password" id="confirmPassword" class="smallInput" ng-model="profile.dirtyData.passwordConfirm" ng-class="{ 'nxg-invalid': profile.validation.setPassword.$error.nomatch }" />
+                <input type="password" id="confirmPassword" class="smallInputAuctionSettings" ng-model="profile.dirtyData.passwordConfirm" ng-class="{ 'nxg-invalid': profile.validation.setPassword.$error.nomatch }" />
                 <label class="text-error" ng-show="profile.validation.setPassword.$error.nomatch" translate>
                   The passwords do not match. Please re-enter the password.
                 </label>
@@ -85,7 +85,7 @@
               <div class="row" ng-show="profile.editable">
                 <label class="col-xs-5" for="secAnswer" translate>Answer</label>
                 <div class="col-xs-5 zeroLeftPadding">
-                  <input type="text" class="smallInput" name="secAnswer" ng-model="question.Answer" ng-class="{ 'nxg-invalid': question.$error.required || question.$error.maxLength }" required/>
+                  <input type="text" class="smallInputAuctionSettings" name="secAnswer" ng-model="question.Answer" ng-class="{ 'nxg-invalid': question.$error.required || question.$error.maxLength }" required/>
                   <label class="text-error" ng-show="question.$error.required" translate>
                     Please enter an Answer.
                   </label>
@@ -99,7 +99,7 @@
             <div class="row">
               <label class="col-xs-5" for="email" translate>Email</label>
               <div class="col-xs-5 zeroLeftPadding" nxg-input model="profile.data.email" editable="profile.editable">
-                <input type="email" class="smallInput" name="email" ng-model="profile.dirtyData.email" value="profile.dirtyData.email" class="styled-input" ng-class="{ 'nxg-invalid': profile.validation.email.$invalid }" required/>
+                <input type="email" class="smallInputAuctionSettings" name="email" ng-model="profile.dirtyData.email" value="profile.dirtyData.email" class="styled-input" ng-class="{ 'nxg-invalid': profile.validation.email.$invalid }" required/>
                 <label class="text-error" ng-show="profile.validation.email.$invalid" translate>
                   Please enter a valid email address.
                 </label>
@@ -111,7 +111,7 @@
               <div class="col-xs-5 zeroLeftPadding" nxg-input model="formatPhonenumber(profile.data.phone)" editable="profile.editable">
                 <input type="tel"
                        name="phone"
-                       class="smallInput"
+                       class="smallInputAuctionSettings"
                        ng-model="profile.dirtyData.phone"
                        ng-pattern="phonePattern"
                        size="10"
