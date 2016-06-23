@@ -79,7 +79,7 @@
 
   <div ng-if="navState.current.data.showNavBar">
     <nav id="navbar" class="navbar navbar-default mng-navbar main-navbar mobile-navbar " ng-class="{'menu-open in' : navState.current.data.showMenu }">
-      <div class="container">
+      <div class="container" ng-class="{'auction-nav':!user.isDealer()}">
         <div class="navbar-header">
           <button type="button" class="navbar-toggle collapsed mobile-menu-button"
                   ng-class="{'button-x': navState.current.data.showMenu}"
