@@ -55,7 +55,7 @@ describe("Credit Increase Request \n ", function () {
   });
 
   it("4. Dealer - Print a Receipt by Grouped VIN", function () {
-    //Click Credit increase
+    //Click Receipts link
     dashboard.doReceipts();
     browser.sleep(browser.params.mediumDelay);
     receipts.clickFirstReceipt();

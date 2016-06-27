@@ -30,7 +30,6 @@ function DashboardObjects() {
   //Getters
   this. getPasswordErrorTextPhoneNumber = function () {
     return this.passwordErrorPhoneNumbers().get(2).getText();
-
   };
 
   //Setters
@@ -46,6 +45,6 @@ function DashboardObjects() {
   this.placeholder = function (index) {
     return  this._thumbnail(index).click();
   }
-  
+
 }
 module.exports.dashboardObjects = DashboardObjects;

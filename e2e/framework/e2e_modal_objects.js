@@ -1,6 +1,6 @@
 'use strict';
 /**
- * @class login_objects
+ * @class modal_objects
  * @author Balanithiya Krishnamoorthy
  * @description Modal Objects
  * */

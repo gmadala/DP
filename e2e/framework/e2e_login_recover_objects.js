@@ -1,6 +1,5 @@
 'use strict';
 
-
 var loginRecover = {
 
   //Locators
@@ -19,11 +18,9 @@ var loginRecover = {
   securityQuestion6Text: function () {
     return element.all(by.css('.security-question')).get(1);
   },
- 
   securityQuestion10Text: function () {
     return element.all(by.css('.security-question')).get(0);
   },
- 
   incorrectEmailFormat: function () {
     return element(by.css('p[ng-show="forgotUserNameValidity.email.$error.email"]'));
   },
@@ -59,7 +56,7 @@ var loginRecover = {
   getIncorrectEmailFormat: function () {
     return this.incorrectEmailFormat().getText();
   },
-  
+
   //Count
   disabledCount: function () {
     return this.disabledFields().count();
