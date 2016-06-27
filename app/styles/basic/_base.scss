@@ -63,6 +63,8 @@ body {
   margin-right: 1px;
 }
 
+
+
 // we're on a public page, we need a blue background
 .container-public {
   padding-top: 30px;
@@ -79,8 +81,6 @@ body {
     z-index: -5;
   }
 }
-
-
 
 // so that our feedback tab displays beneath the modal backdrop.
 #uvTab, #ki_container{
