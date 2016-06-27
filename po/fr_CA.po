@@ -3269,8 +3269,8 @@ msgid "Seller Address"
 msgstr "Adresse du vendeur"
 
 #: app/client/shared/directives/navbar/navbar.controller.js:56
-msgid "Seller Floor Plan Search"
-msgstr "Recherche des achats au plan de financement du vendeur"
+msgid "Floor Plan Search"
+msgstr "Recherche des achats au plan de financement"
 
 #: app/client/floor-vehicle/floor-car-confirm-modal/floor-car-confirm.template.html:85
 #: app/client/floor-vehicle/floor-car.template.html:171

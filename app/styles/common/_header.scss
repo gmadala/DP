@@ -272,10 +272,53 @@
   }
 }
 
-@media only screen and (max-width: 991px) and (min-width: 768px) {
+@media only screen and (min-width: 768px) and (max-width: 991px) {
   .auction-nav {
     width: 100%;
     padding: 0;
+    li {
+      padding: 0 !important;
+    }
+    .navbar-nav {
+      width: 100%;
+      text-align: center;
+      > li {
+        float: none;
+        display: inline-block;
+      }
+    }
+    &.fr-nav {
+      font-size: 0.7em;
+    }
+    &.es-nav {
+      font-size: 0.8em;
+    }
+  }
+}
+
+@media only screen and (min-width: 992px) and (max-width: 1199px) {
+  .auction-nav {
+    width: 100%;
+    padding: 0;
+    .navbar-nav {
+      width: 100%;
+      text-align: center;
+      > li {
+        float: none;
+        display: inline-block;
+      }
+    }
+    &.fr-nav {
+      font-size: 0.83em;
+    }
+  }
+}
+
+@media only screen and (min-width: 1200px) {
+  .auction-nav {
+    &.fr-nav {
+      font-size: 0.95em;
+    }
   }
 }
 

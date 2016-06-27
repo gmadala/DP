@@ -79,7 +79,7 @@
 
   <div ng-if="navState.current.data.showNavBar">
     <nav id="navbar" class="navbar navbar-default mng-navbar main-navbar mobile-navbar " ng-class="{'menu-open in' : navState.current.data.showMenu }">
-      <div class="container" ng-class="{'auction-nav':!user.isDealer()}">
+      <div class="container" ng-class="{'auction-nav':!user.isDealer(), 'es-nav':isCurrentLanguage('es') && !user.isDealer(), 'fr-nav': isCurrentLanguage('fr_CA') && !user.isDealer()}">
         <div class="navbar-header">
           <button type="button" class="navbar-toggle collapsed mobile-menu-button"
                   ng-class="{'button-x': navState.current.data.showMenu}"
@@ -98,7 +98,7 @@
         </div>
 
         <div class="collapse navbar-collapse" ng-class="{'in': navState.current.data.showMenu}" ng-click="closeMenu()">
-          <ul class="nav navbar-nav ">
+          <ul class="nav navbar-nav">
             <li class="visible-xs" ng-if="user.isDealer()">
               <a href="#" ng-href="#/checkout" ng-click="setPageTitle('checkout')">checkout</a>
             </li>

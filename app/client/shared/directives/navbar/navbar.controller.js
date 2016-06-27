@@ -195,7 +195,7 @@
     };
 
     $scope.isDashboard = function() {
-      return $state.current.name === "dashboard" || $scope.pageTitle === "";
+      return $state.current.name === "dashboard" || $state.current.name === "auction_dashboard" || $scope.pageTitle === "";
     };
 
     $scope.toggleMenu = function() {
