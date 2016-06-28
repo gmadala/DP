@@ -15,6 +15,16 @@ body, html {
   color: $text;
 }
 
+input, select{
+  width:100%;
+  box-sizing:border-box;
+}
+
+.wrap {
+  height: 100vh;
+  display: flex;
+}
+
 body {
   font-family: $baseFontFamily;
   font-size: $baseFontSize;
@@ -99,6 +109,10 @@ body {
 .numericRightFloat
 {
   float:right;
+}
+
+.inputPasswordSettings {
+  width:105%;
 }
 
 .additionalPaymentText
