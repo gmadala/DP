@@ -107,9 +107,9 @@
                 <label class="text-error" ng-show="profile.validation.email.$invalid" translate>
                   Please enter a valid email address.
                 </label>
+                </div>
                   </span>
               </div>
-            </div>
 
             <div class="row">
               <label class="col-xs-6 no-right-padding" for="phone" translate>Cell Phone</label>
@@ -125,11 +125,13 @@
                   Please enter a valid phone number.
                 </label>
               </div>
-            </div>
+              </div>
           </form>
         </div>
       </section>
     </div>
+
+
 
     <!-- NOTIFICATIONS -->
     <div class="col-sm-6">
@@ -147,33 +149,33 @@
             <div class="row">
               <label class="col-xs-6 no-left-margin" translate>Notifications</label>
               <label class="col-xs-6 zeroLeftPadding" ng-hide="notifications.editable || notifications.data.selected.length == 0" translate>Delivery Type</label>
-            <ul class="zeroLeftPaddingNotif">
-              <li class="col-xs-12" ng-repeat="n in notifications.data.selected" ng-hide="notifications.editable || notifications.data.selected.length == 0">
-                <div class="col-xs-6 no-left-padding">{{ n.NotificationName }}</div>
-                <div class="col-xs-6 zeroLeftPadding">
-                  <p>
-                <span ng-repeat="d in n.DeliveryMethods">
-                  {{ d.DeliveryMethodName }}<span ng-show="$index < n.DeliveryMethods.length - 1">, </span>
-                </span>
-                  </p>
-
-                </div>
-              </li>
-              <li ng-show="notifications.data.selected.length == 0 && !notifications.editable" translate>No notifications are currently enabled.</li>
-              <!-- Edit -->
-              <ul class="col-xs-12 medium-left-padding" ng-repeat="n in notifications.dirtyData.available" ng-show="notifications.editable">
-                <div class="col-xs-6 zeroLeftPadding">{{ n.Name }}</div>
-                <div class="col-xs-6 cr-inline zeroLeftPadding">
+              <ul class="zeroLeftPaddingNotif">
+                <li class="col-xs-12" ng-repeat="n in notifications.data.selected" ng-hide="notifications.editable || notifications.data.selected.length == 0">
+                  <div class="col-xs-6 no-left-padding">{{ n.NotificationName }}</div>
+                  <div class="col-xs-6 zeroLeftPadding">
+                    <p>
                   <span ng-repeat="d in n.DeliveryMethods">
-                    <span style="white-space: nowrap;">
-                    <input type="checkbox" id="{{ n.NotificationId + d.DeliveryMethodId }}" name="{{ d.Name }}" ng-model="d.Enabled" />
-                    <label class="checkbox-img small" for="{{ n.NotificationId + d.DeliveryMethodId }}"></label>
-                    <label class="cr-label" for="{{ n.NotificationId + d.DeliveryMethodId }}">{{ d.Name }}</label>
-                      </span>
+                    {{ d.DeliveryMethodName }}<span ng-show="$index < n.DeliveryMethods.length - 1">, </span>
                   </span>
-                </div>
+                    </p>
+
+                  </div>
+                </li>
+                <li ng-show="notifications.data.selected.length == 0 && !notifications.editable" translate>No notifications are currently enabled.</li>
+                <!-- Edit -->
+                <ul class="col-xs-12 medium-left-padding" ng-repeat="n in notifications.dirtyData.available" ng-show="notifications.editable">
+                  <div class="col-xs-6 zeroLeftPadding">{{ n.Name }}</div>
+                  <div class="col-xs-6 cr-inline zeroLeftPadding">
+                    <span ng-repeat="d in n.DeliveryMethods">
+                      <span style="white-space: nowrap;">
+                      <input type="checkbox" id="{{ n.NotificationId + d.DeliveryMethodId }}" name="{{ d.Name }}" ng-model="d.Enabled" />
+                      <label class="checkbox-img small" for="{{ n.NotificationId + d.DeliveryMethodId }}"></label>
+                      <label class="cr-label" for="{{ n.NotificationId + d.DeliveryMethodId }}">{{ d.Name }}</label>
+                        </span>
+                    </span>
+                  </div>
+                </ul>
               </ul>
-            </ul>
             </div>
           </form>
         </div>
