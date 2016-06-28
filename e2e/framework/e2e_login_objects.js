@@ -19,19 +19,19 @@ function LoginObjects() {
   this.elUserName = browser.element(by.id("credUsername"));
   this.elPassWord = browser.element(by.id("credPassword"));
   this.elLogin = browser.element(by.id("loginButton"));
-  this.elMyAccount = browser.element(by.css("div.dropdown"));
+  this.elMyAccount = browser.element(by.id("settingsDropdown"));
   this.elPasswordRecoveryModal = browser.element(by.model('passwordRecovery.username'));
   this.elFUPWUsername = browser.element(by.id("userName"));
   this.elSecQues10 = browser.element(by.id('question10'));
   this.elSecQues6 = browser.element.all(by.id('question6'));
   this.elSecQues9 = browser.element.all(by.id('question9'));
+  this.elSignOut = browser.element(by.css('a'));
 
   //Doers
   this.doForgotUsernamePassword = function() {
     return this.elForgotUsernamePassword.click();
     //browser.sleep(delay);
   };
-
   this.doUsernameSubmit = function() {
     return this.elSubmitUsername.click();
     //browser.sleep(delay);
@@ -40,14 +40,10 @@ function LoginObjects() {
     return this.elSignUpLogin.click();
     //browser.sleep(longDelay);
   };
-
   this.doClearLogin = function() {
-    //return this.elUserName.clear();
-    //return this.elPassWord.clear();
     this.elUserName.clear();
     this.elPassWord.clear();
-    return;
-    //browser.sleep(delay);
+    browser.sleep(delay);
   };
   this.doLogin = function() {
     return this.elLogin.click();
@@ -61,7 +57,7 @@ function LoginObjects() {
   };
   this.doSubmitPassword = function() {
     return this.elSubmitPassword.click();
-    //browser.sleep(delay);
+    //browser.sleep(longDelay);
   };
   this.doGoodLogin = function() {
     this.doClearLogin();
@@ -70,7 +66,10 @@ function LoginObjects() {
     this.doLogin();
     browser.sleep(delay);
   };
-
+  this.doSignOut = function() {
+    this.doMyAccount();
+    return this.elSignOut.click();
+  };
 
   //Getters
   this.getTextForgotUsernamePassword = function() {
@@ -84,7 +83,6 @@ function LoginObjects() {
     return this.elSubmitUsername.getText();
   };
 
-
   //Setters
   this.setEmail = function(param) {
     browser.sleep(browser.params.shortDelay);
@@ -94,27 +92,26 @@ function LoginObjects() {
   this.setUserName = function(username) {
     this.elUserName.sendKeys(username);
   };
-
   this.setPassWord = function(password) {
     this.elPassWord.sendKeys(password);
   };
-
   this.setLogin = function(username, password) {
     this.doClearLogin();
     this.elUserName.sendKeys(username);
     browser.sleep(delay);
     this.elPassWord.sendKeys(password);
     browser.sleep(delay);
-
   };
   this.setSecQuestions = function(param) {
     browser.sleep(delay);
     this.elSecQues10.clear().sendKeys(param);
     this.elSecQues10.sendKeys(protractor.Key.TAB);
+    browser.sleep(delay);
     this.elSecQues6.clear().sendKeys(param);
     this.elSecQues10.sendKeys(protractor.Key.TAB);
+    browser.sleep(delay);
     this.elSecQues9.clear().sendKeys(param);
   };
-}
 
+}
 module.exports.loginObjects = LoginObjects;
