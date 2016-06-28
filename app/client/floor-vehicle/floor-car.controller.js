@@ -25,7 +25,10 @@
     'AccountManagement',
     'Upload',
     'nxgConfig',
-    'gettext'
+    'gettext',
+    'kissMetricInfo',
+    'segmentio',
+    'metric'
   ];
 
   function FloorCarCtrl(
@@ -44,7 +47,10 @@
     AccountManagement,
     Upload,
     nxgConfig,
-    gettext) {
+    gettext,
+    kissMetricInfo,
+    segmentio,
+    metric) {
 
     // init files as empty array to avoid
     // error of undefined.length from $watcher
@@ -271,6 +277,15 @@
     };
 
     function buildDialog(canAttachDocuments, floorSuccess, uploadSuccess) {
+
+      kissMetricInfo.getKissMetricInfo().then(function (result) {
+        result.comment = $scope.comment && $scope.comment.length > 0 ? true : false;;
+        result.floorplanSuccess = floorSuccess;
+        result.uploadSuccess  = uploadSuccess;
+
+        segmentio.track(metric.FLOORPLAN_REQUEST_RESULT, result);
+      });
+
       return {
         backdrop: true,
         keyboard: true,
@@ -301,6 +316,7 @@
       }
 
       var dialogParams;
+
       $scope.submitInProgress = true;
       Floorplan.create($scope.data).then(
         function (response) { /*floorplan success*/
