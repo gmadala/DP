@@ -279,7 +279,7 @@
     function buildDialog(canAttachDocuments, floorSuccess, uploadSuccess) {
 
       kissMetricInfo.getKissMetricInfo().then(function (result) {
-        result.comment = $scope.comment && $scope.comment.length > 0 ? true : false;;
+        result.comment = $scope.comment && $scope.comment.length > 0 ? true : false;
         result.floorplanSuccess = floorSuccess;
         result.uploadSuccess  = uploadSuccess;
 
