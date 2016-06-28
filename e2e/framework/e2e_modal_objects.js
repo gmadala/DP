@@ -1,4 +1,9 @@
 'use strict';
+/**
+ * @class modal_objects
+ * @author Balanithiya Krishnamoorthy
+ * @description Modal Objects
+ * */
 
 function ModalObjects() {
   var longDelay = 1000;
