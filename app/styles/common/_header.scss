@@ -42,6 +42,7 @@
   background-size: 200px 64px;
   background-position: 0px 0;
   height: 70px;
+  width: 200px;
   position: relative;
   top: 3px;
   padding-top: 1px;
@@ -328,6 +329,10 @@
     -webkit-overflow-scrolling: touch;
   }
 
+  .header {
+    flex-direction: column;
+  }
+  
   .mng-logo {
     background: url(../img/Logo-myNextGear-Mobile-sm.svg) no-repeat center;
     height: 53px;

@@ -1,11 +1,11 @@
 <header class="app-header" ng-class="{ login: !navState.current.data.showNavBar, auctions: !user.isDealer() }">
-  <div class="container hidden-xs">
+  <div class="container" ng-class="{'hidden-xs':navState.current.data.showNavBar}">
     <div class="header">
-      <a ng-href="{{user.homeLink()}}" class="col-xs-4 custom ng-binding">
+      <a ng-href="{{user.homeLink()}}" class="col-sm-4 custom ng-binding">
         <div class="nxg-logo" nxg-debug-title></div>
       </a>
 
-      <div class="col-xs-8 user-info no-left-padding no-right-padding" ng-show="navState.current.data.showNavBar">
+      <div class="col-sm-8 user-info no-left-padding no-right-padding" ng-show="navState.current.data.showNavBar">
         <div class="user-info-list pull-right">
           <div>
             <span class="" ng-show="user.isDealer()" translate>
@@ -62,9 +62,9 @@
         </div>
       </div>
 
-      <div class="col-xs-8" ng-hide="navState.current.data.showNavBar">
+      <div class="col-sm-8" ng-hide="navState.current.data.showNavBar">
         <div class="nav-language-chooser">
-          <span class="icon-xx-large" nxg-icon="icon-globe"></span>
+          <span class="icon-xx-large hidden-xs" nxg-icon="icon-globe"></span>
           <div class="cta btn-toggle toggle-three">
             <div class="btn-slider"
                  ng-class="{ 'active-left': isCurrentLanguage('en'), 'active-center': isCurrentLanguage('es'), 'active-right': isCurrentLanguage('fr_CA') }"></div>
@@ -79,7 +79,8 @@
 
   <div ng-if="navState.current.data.showNavBar">
     <nav id="navbar" class="navbar navbar-default mng-navbar main-navbar mobile-navbar " ng-class="{'menu-open in' : navState.current.data.showMenu }">
-      <div class="container" ng-class="{'auction-nav':!user.isDealer(), 'es-nav':isCurrentLanguage('es') && !user.isDealer(), 'fr-nav': isCurrentLanguage('fr_CA') && !user.isDealer()}">
+      <div class="container"
+           ng-class="{'auction-nav':!user.isDealer(), 'es-nav':isCurrentLanguage('es') && !user.isDealer(), 'fr-nav': isCurrentLanguage('fr_CA') && !user.isDealer()}">
         <div class="navbar-header">
           <button type="button" class="navbar-toggle collapsed mobile-menu-button"
                   ng-class="{'button-x': navState.current.data.showMenu}"
