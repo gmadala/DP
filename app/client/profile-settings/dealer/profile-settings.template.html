@@ -161,7 +161,7 @@
 
                   </div>
                 </li>
-                <li ng-show="notifications.data.selected.length == 0 && !notifications.editable" translate>No notifications are currently enabled.</li>
+                <div class="col-xs-6" ng-show="notifications.data.selected.length == 0 && !notifications.editable" translate>No notifications are currently enabled.</div>
                 <!-- Edit -->
                 <ul class="col-xs-12 medium-left-padding" ng-repeat="n in notifications.dirtyData.available" ng-show="notifications.editable">
                   <div class="col-xs-6 zeroLeftPadding">{{ n.Name }}</div>
