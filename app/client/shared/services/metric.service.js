@@ -24,6 +24,9 @@
       //Checkout Events
       DEALER_REPORTS_EXPORT_PAYMENTS_SUMMARY_BUTTON: 'Dealer Reports - Export Payment Summary',//x
 
+      //Title Release Program Events
+      DEALER_TITLE_RELEASE_REQUEST: 'Dealer - Requested Title Release',//x
+
       //View a Report Events
       DEALER_REPORTS_VEHICLE_HISTORY_DETAIL:'Dealer Reports - Vehicle History Detail',
       DEALER_REPORTS_RECEIVABLE_DETAIL: 'Dealer Reports - Receivable Detail',

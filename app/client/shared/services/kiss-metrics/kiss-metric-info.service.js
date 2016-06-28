@@ -5,9 +5,9 @@
     .module('nextgearWebApp')
     .factory('kissMetricInfo', kissMetricInfo);
 
-  kissMetricInfo.$inject = [ '$window', 'BusinessHours', '$q'];
+  kissMetricInfo.$inject = [ '$window', 'BusinessHours', '$q', 'User'];
 
-  function kissMetricInfo($window, BusinessHours, $q) {
+  function kissMetricInfo($window, BusinessHours, $q, User) {
 
     return {
       getKissMetricInfoAuthenticated: getKissMetricInfoAuthenticated,
@@ -15,8 +15,11 @@
     };
 
     function getKissMetricInfoAuthenticated(authenticated) {
-
       var retObj = {};
+
+      retObj.isDealer = User.isDealer();
+      retObj.isAuction = !User.isDealer();
+      retObj.isManufacturer = User.isManufacturer();
 
       retObj.vendor = $window.navigator.vendor;
       retObj.version = getBrowserStats();
