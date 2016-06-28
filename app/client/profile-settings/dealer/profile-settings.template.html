@@ -164,17 +164,17 @@
               <ul class="col-xs-12 medium-left-padding" ng-repeat="n in notifications.dirtyData.available" ng-show="notifications.editable">
                 <div class="col-xs-6 zeroLeftPadding">{{ n.Name }}</div>
                 <div class="col-xs-6 cr-inline zeroLeftPadding">
-              <span ng-repeat="d in n.DeliveryMethods">
-                <span style="white-space: nowrap;">
-                <input type="checkbox" id="{{ n.NotificationId + d.DeliveryMethodId }}" name="{{ d.Name }}" ng-model="d.Enabled" />
-                <label class="checkbox-img small" for="{{ n.NotificationId + d.DeliveryMethodId }}"></label>
-                <label class="cr-label" for="{{ n.NotificationId + d.DeliveryMethodId }}">{{ d.Name }}</label>
+                  <span ng-repeat="d in n.DeliveryMethods">
+                    <span style="white-space: nowrap;">
+                    <input type="checkbox" id="{{ n.NotificationId + d.DeliveryMethodId }}" name="{{ d.Name }}" ng-model="d.Enabled" />
+                    <label class="checkbox-img small" for="{{ n.NotificationId + d.DeliveryMethodId }}"></label>
+                    <label class="cr-label" for="{{ n.NotificationId + d.DeliveryMethodId }}">{{ d.Name }}</label>
+                      </span>
                   </span>
-              </span>
-                </div>
                 </div>
               </ul>
             </ul>
+            </div>
           </form>
         </div>
       </section>
