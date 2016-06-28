@@ -58,6 +58,19 @@
   padding: 0;
 }
 
+.nav-language-chooser {
+  .icon-globe {
+    display: block;
+    float: left;
+    left: 40px;
+    top: 3px;
+    margin-top: -6px;
+  }
+  .cta {
+    margin-top: 16px;
+  }
+}
+
 .user-info {
   display: block;
   position: relative;
@@ -332,7 +345,7 @@
   .header {
     flex-direction: column;
   }
-  
+
   .mng-logo {
     background: url(../img/Logo-myNextGear-Mobile-sm.svg) no-repeat center;
     height: 53px;
@@ -350,9 +363,12 @@
   .nav-language-chooser {
     float: none;
     width: 100%;
-
+    .icon-globe {
+      left: 23px;
+    }
     .cta {
       float: none;
+      left: 20px;
     }
   }
 
