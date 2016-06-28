@@ -13,7 +13,10 @@
     'transactionInfo',
     'Receipts',
     '$window',
-    'api'
+    'api',
+    'kissMetricInfo',
+    'segmentio',
+    'metric'
   ];
 
   function ConfirmCheckoutCtrl(
@@ -24,7 +27,10 @@
     transactionInfo,
     Receipts,
     $window,
-    api) {
+    api,
+    kissMetricInfo,
+    segmentio,
+    metric) {
 
     $scope.today = new Date();
 
@@ -97,11 +103,21 @@
     $scope.viewReceipts = function () {
       var stringUrl;
       var transactionId = transactionInfo.FinancialTransactionId;
+      var singleVin = false;
+
       if ($scope.format === 'grouped') {
         stringUrl = api.contentLink('/receipt/viewMultiple/receipts', {financialtransactionids: transactionId});
       } else if ($scope.format === 'single') {
+        singleVin = true;
         stringUrl = api.ngenContentLink('/encodedReceipts', {transactions: transactionId});
       }
+
+      kissMetricInfo.getKissMetricInfo().then(function (result) {
+        result.singleVin = singleVin;
+
+        segmentio.track(metric.DEALER_CHECKOUT_RECEIPT_GENERATED, result);
+      });
+
       if (stringUrl !== undefined) {
         $window.open(stringUrl, '_blank');
       }

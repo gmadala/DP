@@ -23,6 +23,19 @@
 
       //Checkout Events
       DEALER_REPORTS_EXPORT_PAYMENTS_SUMMARY_BUTTON: 'Dealer Reports - Export Payment Summary',//x
+      DEALER_PAYMENT_SUBMITTED: 'Dealer - Payment Submitted',
+      DEALER_CHECKOUT_RECEIPT_GENERATED: 'Dealer - Checkout Receipt Generated',
+
+      // RECEIPT Page
+      DEALER_RECEIPT_PAGE_RECEIPT_GENERATED: 'Dealer - Receipt Page Receipt Generated',
+
+      // Vehicle details
+      DEALER_VIEW_VEHICLE_DETAILS: 'Dealer - View Vehicle Details',
+      DEALER_VEHICLE_DETAILS_ATTACHED_DOCUMENTS: 'Dealer - Vehicle Details Attached Documents',
+
+      // Promo Page
+      VIEW_PROMO_PAGE: 'View Promo Page',
+      CLICK_PROMO_DETAILS: 'Click Promo Details',
 
       //Title Release Program Events
       DEALER_TITLE_RELEASE_REQUEST: 'Dealer - Requested Title Release',//x

@@ -50,6 +50,7 @@
     // error of undefined.length from $watcher
     $scope.files = [];
     $scope.missingDocuments = false;
+    $scope.comment = '';
 
     $scope.$watch('files', function(newValue, oldValue){
       if(newValue.length !== oldValue.length){
@@ -246,6 +247,10 @@
         templateUrl: 'client/floor-vehicle/floor-car-confirm-modal/floor-car-confirm.template.html',
         controller: 'FloorCarConfirmCtrl',
         resolve: {
+          comment: function () {
+
+            return $scope.comment && $scope.comment.length > 0 ? true : false;
+          },
           formData: function () {
             return angular.copy($scope.data);
           },
