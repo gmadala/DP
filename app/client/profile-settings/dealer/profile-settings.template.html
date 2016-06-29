@@ -34,11 +34,12 @@
 
             <div class="row">
               <label class="col-xs-6 no-right-padding" for="setPassword"><span ng-show="editable" translate>New Password</span><span ng-show="!editable" translate>Password</span>
+                <span ng-show="profile.editable">
                 <button class="btn-help"
-                        tooltip-placement="right"
+                        tooltip-placement="bottom"
                         tooltip-trigger="mouseenter"
                         uib-tooltip-html='passwordTooltip | translate'
-                        tooltip-animation="true"><span nxg-icon="icon-help"></span></button>
+                        tooltip-animation="true"><span nxg-icon="icon-help"></span></button></span>
               </label>
               <div class="col-xs-6 zeroLeftPadding no-right-padding">
                 <div class="static" ng-hide="profile.editable">***********</div>
