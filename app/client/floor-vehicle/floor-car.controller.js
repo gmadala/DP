@@ -56,7 +56,7 @@
     // error of undefined.length from $watcher
     $scope.files = [];
     $scope.missingDocuments = false;
-    $scope.comment = '';
+    // $scope.comment = '';
 
     $scope.$watch('files', function(newValue, oldValue){
       if(newValue.length !== oldValue.length){
@@ -254,8 +254,7 @@
         controller: 'FloorCarConfirmCtrl',
         resolve: {
           comment: function () {
-
-            return $scope.comment && $scope.comment.length > 0 ? true : false;
+            return !!$scope.comment && $scope.comment.length > 0;
           },
           formData: function () {
             return angular.copy($scope.data);
@@ -279,7 +278,7 @@
     function buildDialog(canAttachDocuments, floorSuccess, uploadSuccess) {
 
       kissMetricInfo.getKissMetricInfo().then(function (result) {
-        result.comment = $scope.comment && $scope.comment.length > 0 ? true : false;
+        result.comment = !!$scope.comment && $scope.comment.length > 0;
         result.floorplanSuccess = floorSuccess;
         result.uploadSuccess  = uploadSuccess;
 

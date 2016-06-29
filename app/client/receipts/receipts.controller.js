@@ -156,17 +156,15 @@
     function viewReceipt(receipt) {
       var stringUrl;
       var transactionId = receipt.FinancialTransactionId;
-      var singleVin = false;
 
       if ($scope.format === 'grouped') {
         stringUrl = api.contentLink('/receipt/viewMultiple/receipts', {financialtransactionids: transactionId});
       } else if ($scope.format === 'single') {
-        singleVin = true;
         stringUrl = api.ngenContentLink('/encodedReceipts', {transactions: transactionId});
       }
 
       kissMetricInfo.getKissMetricInfo().then(function (result) {
-        result.singleVin = singleVin;
+        result.singleVin = $scope.format === 'single';
 
         segmentio.track(metric.DEALER_RECEIPT_PAGE_RECEIPT_GENERATED, result);
       });
