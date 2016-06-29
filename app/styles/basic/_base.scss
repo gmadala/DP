@@ -20,6 +20,11 @@ input, select{
   box-sizing:border-box;
 }
 
+.flexbox div input {
+  padding: .5em 1em;
+  width: 100%;
+}
+
 .wrap {
   height: 100vh;
   display: flex;
