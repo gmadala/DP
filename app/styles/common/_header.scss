@@ -59,15 +59,18 @@
 }
 
 .nav-language-chooser {
+  overflow: auto;
+  display: block;
+
   .icon-globe {
-    display: block;
+    top: 7px;
+    display: inline;
     float: left;
-    left: 40px;
-    top: 3px;
-    margin-top: -6px;
+    margin-right: 5px;
   }
   .cta {
-    margin-top: 16px;
+    display: inline;
+    float: left;
   }
 }
 
@@ -361,14 +364,19 @@
   }
 
   .nav-language-chooser {
-    float: none;
     width: 100%;
+    text-align: center;
     .icon-globe {
-      left: 23px;
+      top: -23px;
+      float: none;
+      display: inline-block;
+      margin-right: 0;
     }
     .cta {
       float: none;
-      left: 20px;
+      display: inline-block;
+      max-width: 300px;
+      width: 84%;
     }
   }
 
