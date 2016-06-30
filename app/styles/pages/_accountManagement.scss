@@ -94,3 +94,31 @@ button[disabled]{
 .modal-body h4.add-account.step-two{
   margin-top: 0px;
 }
+
+.userProfileSettingsPanel {
+  min-height: 340px;
+  max-height: 525px
+}
+
+.businessSettingsPanel {
+  min-height: 340px;
+  max-height: 340px;
+}
+
+.titleSettingsNotificationsPanel {
+  max-height: 175px;
+  min-height: 151px;
+}
+
+@media only screen and (max-width: 767px) {
+  .businessSettingsPanel {
+    min-height:initial;
+    max-height: none;
+  }
+
+  .titleSettingsNotificationsPanel {
+    min-height: 125px;
+    max-height: 125px;
+  }
+}
+
