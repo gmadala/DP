@@ -9,6 +9,7 @@
     '$scope',
     '$window',
     '$uibModalInstance',
+    'comment',
     'formData',
     'fileNames',
     'User',
@@ -21,6 +22,7 @@
     $scope,
     $window,
     $uibModalInstance,
+    comment,
     formData,
     fileNames,
     User,
@@ -33,6 +35,7 @@
     var uibModalInstance = $uibModalInstance;
     $scope.formData = formData;
     $scope.fileNames = fileNames;
+    $scope.comment = comment;
 
     // mode
     $scope.isDealer = User.isDealer();
@@ -57,8 +60,11 @@
     };
 
     $scope.confirm = function () {
+
       kissMetricInfo.getKissMetricInfo().then(
         function (result) {
+          result.comment = $scope.comment;
+
           if ($scope.isDealer) {
             segmentio.track(metric.DEALER_SUCCESSFUL_FLOORING_REQUEST_SUBMITTED, result);
           } else {
