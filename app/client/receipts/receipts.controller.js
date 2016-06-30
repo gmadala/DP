@@ -189,19 +189,17 @@
       ids = ids.slice(0, -1); // remove extra comma at end
 
       var stringUrl;
-      var singleVin = false;
 
       if ($scope.format === 'grouped') {
         // build query string
         stringUrl = api.contentLink('/receipt/viewMultiple/receipts', {financialtransactionids: ids});
       } else if ($scope.format === 'single') {
         // build query string
-        singleVin = true;
         stringUrl = api.ngenContentLink('/encodedReceipts', {transactions: ids});
       }
 
       kissMetricInfo.getKissMetricInfo().then(function (result) {
-        result.singleVin = singleVin;
+        result.singleVin = $scope.format === 'single';
 
         segmentio.track(metric.DEALER_RECEIPT_PAGE_RECEIPT_GENERATED, result);
       });
