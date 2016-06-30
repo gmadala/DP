@@ -7,6 +7,7 @@ angular.module('nextgearWebApp')
         apiBase: '/* @echo apiBase */',
         apiDomain: '/* @echo apiDomain */',
         ngenDomain: '',
+        masheryToken: '',
         // @if isDemo
         isDemo: true,
         segmentIoKey: null

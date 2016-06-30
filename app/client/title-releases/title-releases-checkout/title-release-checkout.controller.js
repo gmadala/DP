@@ -12,6 +12,9 @@
     'TitleReleases',
     'Floorplan',
     'Addresses',
+    'kissMetricInfo',
+    'segmentio',
+    'metric',
     'gettextCatalog'
   ];
 
@@ -22,6 +25,9 @@
     TitleReleases,
     Floorplan,
     Addresses,
+    kissMetricInfo,
+    segmentio,
+    metric,
     gettextCatalog) {
 
     var uibModal = $uibModal;
@@ -56,9 +62,15 @@
           backdrop: true,
           keyboard: false,
           backdropClick: false,
-          templateUrl: 'client/title-releases/title-releases-checkout/confirm-title-release/confirm-title-request.template.html',
+          templateUrl: 'client/title-releases/title-releases-checkout/confirm-title-release-modal/confirm-title-request.template.html',
           controller: 'ConfirmTitleReleaseCheckoutCtrl'
         };
+
+        kissMetricInfo.getKissMetricInfo().then(function (result) {
+          result.titles = $scope .titleQueue.contents.length;
+
+          segmentio.track(metric.DEALER_TITLE_RELEASE_REQUEST, result);
+        });
 
         uibModal.open(dialogOptions).result.then(function() {
           TitleReleases.clearQueue();

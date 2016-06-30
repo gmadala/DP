@@ -11,11 +11,11 @@
 
     return {
       urls: {
-        en: 'http://www.nextgearcapital.com/apply-for-credit/',
-        'en_CA': 'http://www.nextgearcapital.com/apply-for-credit/',
-        'fr_CA': 'http://www.nextgearcapital.com/apply-for-credit/',
+        en: 'https://www.nextgearcapital.com/apply-for-credit/',
+        'en_CA': 'https://www.nextgearcapital.com/apply-for-credit/',
+        'fr_CA': 'https://www.nextgearcapital.com/apply-for-credit/',
         // Currently redirecting Spanish to English site
-        es: 'http://www.nextgearcapital.com/apply-for-credit/'
+        es: 'https://www.nextgearcapital.com/apply-for-credit/'
       },
 
       /**

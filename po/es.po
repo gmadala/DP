@@ -414,7 +414,7 @@ msgstr ""
 msgid "an out-of-date link"
 msgstr "vínculo fuera de fecha"
 
-#: app/client/shared/directives/navbar/navbar.controller.js:38
+#: app/client/shared/directives/navbar/navbar.controller.js:41
 msgid "Analytics"
 msgstr "Analítica"
 
@@ -917,8 +917,8 @@ msgstr "Informes actuales"
 msgid "Curtailment Payment"
 msgstr "Pago con reducción"
 
-#: app/client/shared/directives/navbar/navbar.controller.js:33
-#: app/client/shared/directives/navbar/navbar.controller.js:48
+#: app/client/shared/directives/navbar/navbar.controller.js:45
+#: app/client/shared/directives/navbar/navbar.controller.js:53
 msgid "Dashboard"
 msgstr "Tablero"
 
@@ -975,7 +975,7 @@ msgstr "Lista de Verificación de Financiamiento a Proveedores"
 msgid "Dealer Information"
 msgstr "Información del distribuidor"
 
-#: app/client/shared/directives/navbar/navbar.controller.js:49
+#: app/client/shared/directives/navbar/navbar.controller.js:54
 msgid "Dealer Search"
 msgstr "Búsqueda de distribuidores"
 
@@ -1409,8 +1409,8 @@ msgstr "Encuentre a un distribuidor"
 msgid "Find a Floor Plan"
 msgstr "Encuentre un plan de piso"
 
-#: app/client/shared/directives/navbar/navbar.controller.js:41
-#: app/client/shared/directives/navbar/navbar.controller.js:50
+#: app/client/shared/directives/navbar/navbar.controller.js:35
+#: app/client/shared/directives/navbar/navbar.controller.js:55
 msgid "Floor a Vehicle"
 msgstr "Poner un vehículo en piso"
 
@@ -1422,7 +1422,7 @@ msgstr "Fecha de puesta en piso"
 #: app/client/dashboard/dealer/dashboard.template.html:278
 #: app/client/floor-plan/auction-seller-floor-plan.template.html:15
 #: app/client/floor-plan/floor-plan.template.html:17
-#: app/client/shared/directives/navbar/navbar.controller.js:35
+#: app/client/shared/directives/navbar/navbar.controller.js:47
 msgid "Floor Plan"
 msgstr "Plan de piso"
 
@@ -1759,6 +1759,10 @@ msgstr "Número de lote"
 #: app/client/vehicle-details/vehicle-details.html:256
 msgid "Make"
 msgstr "Marca"
+
+#: app/client/shared/directives/navbar/navbar.controller.js:30
+msgid "Make a Payment"
+msgstr "Para hacer un pago"
 
 #: app/client/payments/nxg-payment-summary/nxg-payment-summary.template.html:6
 msgid ""
@@ -2220,7 +2224,7 @@ msgstr "Total del pago"
 #: app/client/checkout/checkout.template.html:177
 #: app/client/dashboard/dashboard.service.js:89
 #: app/client/dashboard/dealer/dashboard.template.html:165
-#: app/client/shared/directives/navbar/navbar.controller.js:34
+#: app/client/shared/directives/navbar/navbar.controller.js:46
 msgid "Payments"
 msgstr "Pagos"
 
@@ -2864,7 +2868,7 @@ msgstr "Ajustes del perfil"
 msgid "Promo"
 msgstr "Promoción"
 
-#: app/client/shared/directives/navbar/navbar.controller.js:76
+#: app/client/shared/directives/navbar/navbar.controller.js:78
 msgid "Promos"
 msgstr "Promociones"
 
@@ -2932,7 +2936,7 @@ msgid "Receipt Total"
 msgstr "Total del recibo"
 
 #: app/client/receipts/receipts.template.html:16
-#: app/client/shared/directives/navbar/navbar.controller.js:36
+#: app/client/shared/directives/navbar/navbar.controller.js:31
 msgid "Receipts"
 msgstr "Recibos"
 
@@ -2998,7 +3002,7 @@ msgstr "Eliminar recibo"
 msgid "Remove Title"
 msgstr "Eliminar título"
 
-#: app/client/shared/directives/navbar/navbar.controller.js:37
+#: app/client/shared/directives/navbar/navbar.controller.js:40
 msgid "Reports"
 msgstr "Reportes"
 
@@ -3066,8 +3070,9 @@ msgstr "Fondos de reserva"
 msgid "Reset Values"
 msgstr "Restaure los valores"
 
-#: app/client/shared/directives/navbar/navbar.controller.js:42
-#: app/client/shared/directives/navbar/navbar.controller.js:53
+#: app/client/shared/directives/navbar/navbar.controller.js:39
+#: app/client/shared/directives/navbar/navbar.controller.js:48
+#: app/client/shared/directives/navbar/navbar.controller.js:58
 msgid "Resources"
 msgstr "Recursos"
 
@@ -3259,9 +3264,9 @@ msgstr "Vendedor"
 msgid "Seller Address"
 msgstr "Dirección del vendedor"
 
-#: app/client/shared/directives/navbar/navbar.controller.js:51
-msgid "Seller Floor Plan Search"
-msgstr "Búsqueda del plan de piso del vendedor"
+#: app/client/shared/directives/navbar/navbar.controller.js:56
+msgid "Floor Plan Search"
+msgstr "Búsqueda del plan de piso"
 
 #: app/client/floor-vehicle/floor-car-confirm-modal/floor-car-confirm.template.html:85
 #: app/client/floor-vehicle/floor-car.template.html:171
@@ -3779,7 +3784,7 @@ msgstr "La liberación de títulos no está disponible."
 msgid "Title Released on {{item.TitleReleaseDate | moment}}"
 msgstr "Liberación del títulos activada {{item.TitleReleaseDate | moment}}"
 
-#: app/client/shared/directives/navbar/navbar.controller.js:84
+#: app/client/shared/directives/navbar/navbar.controller.js:86
 msgid "Title Releases"
 msgstr "Liberación de títulos"
 
@@ -4046,7 +4051,7 @@ msgstr "Utilizado"
 msgid "valid files."
 msgstr "archivos válidos."
 
-#: app/client/shared/directives/navbar/navbar.controller.js:70
+#: app/client/shared/directives/navbar/navbar.controller.js:36
 msgid "Value Lookup"
 msgstr "Búsqueda de valor"
 
@@ -4083,7 +4088,7 @@ msgstr "Muy bien"
 msgid "Video Walkthrough"
 msgstr "Explicación en video"
 
-#: app/client/shared/directives/navbar/navbar.controller.js:52
+#: app/client/shared/directives/navbar/navbar.controller.js:57
 msgid "View a Report"
 msgstr "Ver un reporte"
 
@@ -4114,6 +4119,10 @@ msgstr "Ver todos los recibos"
 #: app/client/floor-vehicle/floor-car-confirm-modal/floor-car-confirm.template.html:104
 msgid "View Dealer Funding Checklist (PDF)"
 msgstr "Ver lista de verificación de financiamiento del distribuidor (PDF)"
+
+#: app/client/shared/directives/navbar/navbar.controller.js:34
+msgid "View Floor Plan"
+msgstr "Ver plan de piso"
 
 #: app/client/checkout/confirm-checkout-modal/confirm-checkout.template.html:107
 msgid "View Receipts"

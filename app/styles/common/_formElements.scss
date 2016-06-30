@@ -37,8 +37,12 @@
 }
 
 // Basic form element styling.
-fieldset {}
-legend {}
+fieldset {
+}
+
+legend {
+}
+
 label {
   @extend .heavy;
   display: block;
@@ -69,7 +73,7 @@ input, select {
   margin: 5px 0;
 }
 
-textarea{
+textarea {
   font-size: $inputFontSize;
   color: $text;
   height: 60px;
@@ -102,7 +106,7 @@ input[type="color"] {
   border: 1px solid $form-border;
 
   &:focus {
-    @include box-shadow(rgba(0,0,0,0) 0 0 0);
+    @include box-shadow(rgba(0, 0, 0, 0) 0 0 0);
     color: $text;
     border-color: $highlight;
     outline: none;
@@ -113,7 +117,7 @@ input[type="color"] {
   }
 
   &:focus:invalid, &:invalid {
-    @include box-shadow(rgba(0,0,0,0) 0 0 0);
+    @include box-shadow(rgba(0, 0, 0, 0) 0 0 0);
     color: $text;
     border: 1px solid $form-border;
   }
@@ -146,7 +150,7 @@ input[type="color"] {
   }
 }
 
-input[type="file"]{
+input[type="file"] {
   border: none;
   background: none;
   width: 60%;
@@ -170,13 +174,14 @@ input[type="file"]{
   padding: 0;
 }
 
-.no-margin{
+.no-margin {
   margin: 0;
 }
 
 .small-left-padding {
   padding-left: 13px;
 }
+
 .medium-right-padding {
   padding-right: 18px;
 }
@@ -190,7 +195,7 @@ input[type="file"]{
 }
 
 // Overriding Bootstrap's input-prepend class to make it work for us.
-.input-prepend.dollar .add-on{
+.input-prepend.dollar .add-on {
   top: 11px;
   padding-right: 2px;
   margin-right: 0;
@@ -199,7 +204,7 @@ input[type="file"]{
   background-color: transparent;
   border: none;
 
-  &.no-top{
+  &.no-top {
     top: 0px;
   }
 }
@@ -225,7 +230,7 @@ select {
     border-color: darken($border, 20%) !important;
 
     &:invalid, &:invalid:focus {
-      @include box-shadow(rgba(0,0,0,0) 0 0 0);
+      @include box-shadow(rgba(0, 0, 0, 0) 0 0 0);
       color: $highlight;
       border-color: $border;
     }
@@ -264,12 +269,12 @@ select {
     pointer-events: none; // allows select menu to be clickable through arrow
   }
 
-  &.auto{
+  &.auto {
     width: auto;
   }
 
   &.small {
-    width:45%;
+    width: 45%;
     min-width: 45%;
   }
 
@@ -293,9 +298,6 @@ select {
       border-color: $danger transparent transparent;
     }
   }
-
-
-
 
   select {
     @extend .truncate;
@@ -347,14 +349,14 @@ select {
  *
  */
 input[type="checkbox"] {
-  position:absolute;
-  clip: rect(0,0,0,0);
+  position: absolute;
+  clip: rect(0, 0, 0, 0);
   clip: rect(0 0 0 0);
   background: url('../img/icons/checkbox.svg');
   z-index: 20;
 
   &:active, &:focus, &:hover {
-    -webkit-tap-highlight-color: rgba(0,0,0,0);
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
   }
 
   &:checked + .checkbox-img {
@@ -394,14 +396,14 @@ input[type="checkbox"] {
  * <label class="radio-img" for="foo"></label>
  */
 input[type="radio"] {
-  position:absolute;
-  clip: rect(0,0,0,0);
+  position: absolute;
+  clip: rect(0, 0, 0, 0);
   clip: rect(0 0 0 0);
   background: url('../img/icons/radio.svg');
   z-index: 20;
 
   &:active, &:focus, &:hover {
-    -webkit-tap-highlight-color: rgba(0,0,0,0);
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
   }
 
   &:checked + .radio-img {
@@ -590,43 +592,46 @@ input[type="radio"] {
   }
 }
 
-.smallInput{
-  width:55%;
+.smallInput {
+  width: 55%;
 }
-.xsmallInput{width:206px;}
 
-  /*
-   * BUTTON INPUT
-   * Button specifically designed to be paired with an input,
-   * and positioned exactly at the right edge of the input.
-   */
-  .btn-input {
-    @include border-left-radius(0);
-    width: 10%;
-    background: $accent;
-    display: block;
-    float: left;
-    height: $cta-2-height;
-    padding: 0;
-    border: 0;
-    margin: 0 0 0 -1px;
+.xsmallInput {
+  width: 206px;
+}
 
-    &:focus {
-      background: $highlight;
-    }
+/*
+ * BUTTON INPUT
+ * Button specifically designed to be paired with an input,
+ * and positioned exactly at the right edge of the input.
+ */
+.btn-input {
+  @include border-left-radius(0);
+  width: 10%;
+  background: $accent;
+  display: block;
+  float: left;
+  height: $cta-2-height;
+  padding: 0;
+  border: 0;
+  margin: 0 0 0 -1px;
 
-    &:active, &:hover {
-      background: darken($accent, 10%);
+  &:focus {
+    background: $highlight;
+  }
 
-      .svg-icon svg {
-        fill: $white;
-      }
-    }
+  &:active, &:hover {
+    background: darken($accent, 10%);
 
     .svg-icon svg {
       fill: $white;
     }
   }
+
+  .svg-icon svg {
+    fill: $white;
+  }
+}
 
 /*
  * RANGE INPUT
@@ -706,9 +711,9 @@ input[type="radio"] {
       fill: $highlight;
     }
   }
-  .dropdown-menu thead tr:first-child{
+  .dropdown-menu thead tr:first-child {
     border-bottom: 1px solid #bbb;
-    strong{
+    strong {
       font-size: 1.75em;
     }
   }
@@ -721,7 +726,7 @@ input[type="radio"] {
  */
 .datepicker {
   &.datepicker-dropdown {
-    @include box-shadow(rgba(0,0,0,0) 0 0 0);
+    @include box-shadow(rgba(0, 0, 0, 0) 0 0 0);
     @include border-radius(0);
     padding: 5px 7px;
   }
@@ -793,7 +798,6 @@ input[type="radio"] {
   table tr td.active.disabled.active,
   table tr td.active:active,
   table tr td.active:hover:active,
-
   table tr td.day.active,
   table tr td span.month.active,
   table tr td span.year.active {
@@ -849,13 +853,13 @@ input[type="radio"] {
   }
 }
 
-.supported-files{
+.supported-files {
   font-size: 10px;
   color: #666666;
   padding-top: 10px;
 }
 
-.drop-box{
+.drop-box {
   background: #FBFBFB;
   border: 2px dashed #BBBCBE;
   width: 100%;
@@ -863,16 +867,19 @@ input[type="radio"] {
   text-align: left;
   margin: 10px 0 0 0;
 }
-.drop-box-empty{
+
+.drop-box-empty {
   padding-top: 50px;
   text-align: center;
   font-size: 14px;
   color: #BBBCBE;
 }
-.dragover{
+
+.dragover {
   border: 2px dashed #069;
 }
-ul.files-container{
+
+ul.files-container {
   height: 100%;
   width: 100%;
   overflow-y: auto;
@@ -880,7 +887,8 @@ ul.files-container{
   list-style-type: none;
   transition: all .5s;
 }
-ul.files-container li{
+
+ul.files-container li {
   width: 38%;
   height: 38%;
   padding: 1px;
@@ -888,7 +896,8 @@ ul.files-container li{
   position: relative;
   margin: 6%;
 }
-.thumb{
+
+.thumb {
   max-width: 96px;
   background-size: cover;
   background-repeat: no-repeat;
@@ -899,7 +908,8 @@ ul.files-container li{
   border: 1px solid white;
   display: block;
 }
-ul.files-container li .file-delete{
+
+ul.files-container li .file-delete {
   background-color: rgba(0, 0, 0, .25);
   width: 50px;
   height: 50px;
@@ -919,12 +929,13 @@ ul.files-container li .file-delete{
   transition: all .30s;
   transform: scale(0.5);
 }
-ul.files-container li:hover .file-delete{
+
+ul.files-container li:hover .file-delete {
   opacity: 1;
   transform: scale(1);
 }
 
-ul.files-container li .file-delete:hover{
+ul.files-container li .file-delete:hover {
   background-color: rgba(0, 0, 0, .45);
 }
 
@@ -939,12 +950,13 @@ ul.files-container li .file-delete:hover{
   background-size: contain;
   display: block !important;
 }
+
 .search-date-picker {
-   input{
-     width: 85%;
-     height: 30px;
-     line-height: 18px;
-   }
+  input {
+    width: 85%;
+    height: 30px;
+    line-height: 18px;
+  }
 }
 
 .reports-search-date-picker {
@@ -955,7 +967,7 @@ ul.files-container li .file-delete:hover{
   input {
     width: 137%;
   }
-  .dropdown-menu{
+  .dropdown-menu {
     display: block;
     top: 63px;
     left: 15px;
@@ -965,7 +977,7 @@ ul.files-container li .file-delete:hover{
 }
 
 #end-date-picker {
-  .dropdown-menu{
+  .dropdown-menu {
     left: initial !important;
     right: 15px;
   }
@@ -976,10 +988,11 @@ ul.files-container li .file-delete:hover{
     width: 97%;
   }
 }
-.end-date{
+
+.end-date {
   margin-left: -27px;
 }
 
 .margin {
-  margin:2px 88px 0;
+  margin: 2px 25px 0;
 }

@@ -14,6 +14,7 @@
     var SEGMENT_KEY_DEMO = 'u6uZuH8MgCfZEV7wBBgVheRBL67bWZkQ';
     var SEGMENT_KEY_TEST = 'rDVQ3BHgvEeS9dZEkoKMr3wW22PUrQAn';
     var SEGMENT_KEY_TRAINING = '2uofWGF1e5Bkd18gE2B7LahCnGV8PQaX';
+    var SEGMENT_KEY_CARMAX = 'will-replace-later';
     var SEGMENT_KEY_PRODUCTION = '9eaffv4cbe';
 
     var prv = {
@@ -64,20 +65,27 @@
           break;
         case prv.profile.DEMO:
           apiDomain = 'https://demo.nextgearcapital.com';
-          ngenDomain = 'https://demo.api.nextgearcapital.com';
-          masheryKey = 'bad6uvx4f7kqa7rqsxxnxwpp';
+          ngenDomain = 'https://uat.api.nextgearcapital.com/demo';
+          masheryKey = 'fbymcqgckrvh7a2h8eavek7e';
           config = prv.generateConfig(apiDomain, ngenDomain, SEGMENT_KEY_DEMO, SIXTY_MINUTES, isDemo, masheryKey);
           break;
         case prv.profile.TEST:
           apiDomain = 'https://test.nextgearcapital.com';
-          ngenDomain = 'https://ngen-api1.uat.nextgearcapital.com';
+          ngenDomain = 'https://uat.api.nextgearcapital.com/test';
+          masheryKey = 'fbymcqgckrvh7a2h8eavek7e';
           config = prv.generateConfig(apiDomain, ngenDomain, SEGMENT_KEY_TEST, SIXTY_MINUTES, isDemo, masheryKey);
           break;
         case prv.profile.TRAINING:
           apiDomain = 'https://training.nextgearcapital.com';
-          ngenDomain = 'https://training.api.nextgearcapital.com';
-          masheryKey = 'vu95mb2phq3xyp7np9gtmrx7';
+          ngenDomain = 'https://uat.api.nextgearcapital.com/training';
+          masheryKey = 'fbymcqgckrvh7a2h8eavek7e';
           config = prv.generateConfig(apiDomain, ngenDomain, SEGMENT_KEY_TRAINING, FIFTEEN_MINUTES, isDemo, masheryKey);
+          break;
+        case prv.profile.CARMAXUAT:
+          apiDomain = 'http://exp1xmngws01.nextgearcapital.com';
+          ngenDomain = 'https://uat.api.nextgearcapital.com/carmax';
+          masheryKey = 'fbymcqgckrvh7a2h8eavek7e';
+          config = prv.generateConfig(apiDomain, ngenDomain, SEGMENT_KEY_CARMAX, SIXTY_MINUTES, isDemo, masheryKey);
           break;
         case prv.profile.PRODUCTION:
           apiDomain = 'https://customer.nextgearcapital.com';
@@ -148,6 +156,10 @@
 
     // @if ENV='training'
     profile = prv.profile.TRAINING;
+    // @endif
+
+    // @if ENV='carmaxuat'
+    profile = prv.profile.CARMAXUAT;
     // @endif
 
     // @if ENV='production'
