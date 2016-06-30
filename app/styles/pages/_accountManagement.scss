@@ -120,5 +120,9 @@ button[disabled]{
     min-height: 125px;
     max-height: 125px;
   }
+
+  .noWrap {
+    word-wrap: break-word;
+  }
 }
 

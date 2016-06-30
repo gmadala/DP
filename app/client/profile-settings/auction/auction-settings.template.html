@@ -4,7 +4,7 @@
 
     <!-- USER PROFILE -->
     <div class="col-sm-6">
-      <section class="panel panel-default settings-well" style="min-height: 340px; max-height: 525px;" ng-controller="ProfileSettingsCtrl">
+      <section class="panel panel-default settings-well userProfileSettingsPanel" ng-controller="ProfileSettingsCtrl">
         <h2 class="well-title"><span translate>User Profile</span>
           <div class="well-sub-title well-sub-title-edit">
             <button ng-hide="profile.editable" class="btn-unstyle" ng-click="profile.edit()" translate>Edit Settings</button>
@@ -102,7 +102,7 @@
 
             <div class="row">
               <label class="col-xs-6" for="email" translate>Email</label>
-              <span style="word-wrap: break-word;">
+              <span class="noWrap">
               <div class="col-xs-6 no-right-padding zeroLeftPadding" nxg-input model="profile.data.email" editable="profile.editable">
 
                 <input type="email" class="smallInputAuctionSettings" name="email" ng-model="profile.dirtyData.email" value="profile.dirtyData.email" class="styled-input" ng-class="{ 'nxg-invalid': profile.validation.email.$invalid }" required/>
@@ -162,7 +162,7 @@
               </div>
               -->
               <!-- Begin temporary code -->
-               <span style="word-wrap: break-word;">
+               <span class="noWrap">
               <div class="col-xs-5 visible-sm visible-md visible-lg visible-xl zeroLeftPadding" style="margin-top: 14px" id="businessEmail" name="businessEmail" ng-cloak>{{business.data.email | truncate: 28}}</div>
               <div class="col-xs-5 zeroLeftPadding visible-xs" style="margin-top: 14px" id="businessEmail" name="businessEmail" ng-cloak>{{business.data.email | truncate: 28}}</div>
 
