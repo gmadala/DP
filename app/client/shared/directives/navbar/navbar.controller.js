@@ -199,12 +199,13 @@
     };
 
     $scope.toggleMenu = function() {
-      console.log("TOGGLE MENU", $state);
       $state.current.data.showMenu = !$state.current.data.showMenu;
     };
 
     $scope.closeMenu = function() {
-      $state.current.data.showMenu = false;
+      if ($state.current.data.showMenu) {
+        $state.current.data.showMenu = false;
+      }
     };
 
     $scope.addHover = function() {
