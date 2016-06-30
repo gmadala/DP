@@ -102,7 +102,7 @@
             </div>
             <div class="row">
               <label class="col-xs-6 no-right-padding" for="email" translate>Email</label>
-              <span style="word-wrap: break-word;">
+              <span class="noWrap">
               <div class="col-xs-6 zeroLeftPadding no-right-padding" nxg-input model="profile.data.email" editable="profile.editable">
                 <input type="email" name="email" class="xsmallInput" ng-model="profile.dirtyData.email" value="profile.dirtyData.email" ng-class="{ 'nxg-invalid': profile.validation.email.$invalid }" required/>
                 <label class="text-error" ng-show="profile.validation.email.$invalid" translate>
@@ -168,7 +168,7 @@
                   <div class="col-xs-6 zeroLeftPadding">{{ n.Name }}</div>
                   <div class="col-xs-6 cr-inline zeroLeftPadding">
                     <span ng-repeat="d in n.DeliveryMethods">
-                      <span style="white-space: nowrap;">
+                      <span class="noWrapCheckbox">
                       <input type="checkbox" id="{{ n.NotificationId + d.DeliveryMethodId }}" name="{{ d.Name }}" ng-model="d.Enabled" />
                       <label class="checkbox-img small" for="{{ n.NotificationId + d.DeliveryMethodId }}"></label>
                       <label class="cr-label" for="{{ n.NotificationId + d.DeliveryMethodId }}">{{ d.Name }}</label>
