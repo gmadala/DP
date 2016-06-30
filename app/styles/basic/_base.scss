@@ -38,22 +38,20 @@ body {
 }
 
 .container {
-  &.non-responsive{
+  &.non-responsive {
     min-width: 1020px;
   }
-  margin: 0 auto 30px;
-  padding-right: 30px;
+  //margin: 0 auto 30px;
+  //padding-right: 30px;
 }
 
-.nxg-main-view{
+.nxg-main-view {
   overflow: auto;
   -ms-overflow-style: none;
-  &::-webkit-scrollbar{
+  &::-webkit-scrollbar {
     display: none;
   }
 }
-
-
 
 .nxg-fade {
   background-color: $white;
@@ -95,25 +93,22 @@ body {
   }
 }
 
-
-
 // so that our feedback tab displays beneath the modal backdrop.
-#uvTab, #ki_container{
+#uvTab, #ki_container {
   z-index: 1000 !important;
 }
 
 //Bootstrap 3 override for margins between columns, and padding
-.RecievableDetailMargin
-{
-  margin-left:-35px;
+.RecievableDetailMargin {
+  margin-left: -35px;
 }
-.centerTextAlign
-{
-  text-align:center;
+
+.centerTextAlign {
+  text-align: center;
 }
-.numericRightFloat
-{
-  float:right;
+
+.numericRightFloat {
+  float: right;
 }
 
 .inputPasswordSettings {
@@ -125,78 +120,88 @@ body {
   margin-left:160px;
   margin-top:-30px;
 }
-.zeroPadding
-{
-  padding:0;
-}
-.zeroLeftPadding
-{
-  padding-left:0;
-}
-.zeroRightPadding
-{
-  padding-right:0;
-}
-.zeroLeftMargin
-{
-  margin-left:0;
+
+.zeroPadding {
+  padding: 0;
 }
 
-.zeroRightMargin
-{
-  margin-right:0;
-}
-.padding-left
-{
-  padding-left:15px;
+.zeroLeftPadding {
+  padding-left: 0;
 }
 
-.topMargin
-{
-  margin-top:10px;
+.zeroRightPadding {
+  padding-right: 0;
 }
-.containerLeftMargin{
-  margin-left:15px;
+
+.zeroLeftMargin {
+  margin-left: 0;
 }
+
+.zeroRightMargin {
+  margin-right: 0;
+}
+
+.padding-left {
+  padding-left: 15px;
+}
+
+.topMargin {
+  margin-top: 10px;
+}
+
+.containerLeftMargin {
+  margin-left: 15px;
+}
+
 .leftMargin {
-  margin-left:0px;
+  margin-left: 0px;
 }
-.rightMargin{
-  margin-right:0px;
+
+.rightMargin {
+  margin-right: 0px;
 }
-.leftMarginSmall{
+
+.leftMarginSmall {
   margin-left: 5px;
 }
-.leftMarginMedium
-{
-  margin-left:15px;
+
+.leftMarginMedium {
+  margin-left: 15px;
 }
+
 .leftMarginLarge {
-  margin-left:25px;
+  margin-left: 25px;
 }
-.left-margin-large{
+
+.left-margin-large {
   margin-left: 2%;
 }
+
 .left-margin-extra-large {
-  margin-left:3.5%;
+  margin-left: 3.5%;
 }
-.col-xs-15{
-  width:12.5%;
+
+.col-xs-15 {
+  width: 12.5%;
   float: left;
 }
+
 .break-wrap {
   word-wrap: break-word;
 }
+
 .divider {
   padding: 15px 15px 0 15px;
   border-bottom: 1px solid #bbb;
 }
-.column-divider{
+
+.column-divider {
   border-bottom: 1px solid #bbb;
   padding: 10px 15px 0 15px;
   margin-bottom: 10px;
 }
-.comment-box{
+
+.comment-box {
   width: 100%;
 }
 
@@ -205,4 +210,3 @@ body {
     display: none;
   }
 }
-

@@ -9,105 +9,55 @@ var login = {
   elements: {
     //Locators
     invalidLoginError1: function () {
-
       return element.all(by.css('p[ng-show="showLoginError"]')).get(0);
-
     },
     invalidLoginError2: function () {
-
       return element.all(by.css('p[ng-show="showLoginError"]')).get(1);
-
     },
     forgotUsernamePassword: function () {
-
       return element(by.id("forgotUsernamePassword"));
-
     },
-
     userName: function () {
-
       return element(by.id("credUsername"));
-
     },
     signUpLogin: function () {
-
       return element(by.id("signUpLogin"));
-
     },
     password: function () {
-
       return element(by.id("credPassword"));
-
     },
     loginButton: function () {
-
       return element(by.id("loginButton"));
-
+    },
+    incorrectEmailFormat: function () {
+      return element(by.css('p[ng-show="forgotUserNameValidity.email.$error.email"]'));
     }
+  },
 
-
-  }, //Locator End
-
-  //Clicking
+  //Doers
   clickLoginButton: function () {
-
     return this.elements.loginButton().click();
-
-  },
-  clickForgotUsernamePassword: function () {
-
-    this.elements.forgotUsernamePassword().click();
-    browser.sleep(delay);
-
-  },
-  clickSignUpLogin: function () {
-
-    this.elements.signUpLogin().click();
-    //put the waits in the page objects when actions are taken so that it is ready for the test to do what you need it to. It creates cleaner tests too
-    browser.sleep(delay);
   },
 
-  //Getting
+  //Getters
   getInvalidLoginText1: function () {
     browser.sleep(delay);
-
     return this.elements.invalidLoginError1().getText();
-
   },
   getInvalidLoginText2: function () {
-
-
     return this.elements.invalidLoginError2().getText();
-
-  },
-  getLoginButtonText: function () {
-
-
-    return this.elements.loginButton().getText();
-
-  },
-  textSignUpLogin: function () {
-
-
-    return this.elements.signUpLogin().getText();
-
-  },
-  textForgotUsernamePassword: function () {
-
-    return this.elements.forgotUsernamePassword().getText();
-
   },
 
-  //Sending
+  getIncorrectEmailFormat: function () {
+    return this.incorrectEmailFormat().getText();
+  },
+
+  //Setters
   enterUserName: function (test) {
-
     return this.elements.userName().clear().sendKeys(test);
-
   },
   enterPassword: function (test) {
-
     return this.elements.password().clear().sendKeys(test);
-
   },
   //Functions
   login: function () {
@@ -121,12 +71,13 @@ var login = {
     this.enterPassword(param2);
     this.clickLoginButton();
   },
-
+  //Count
+  disabledCount: function () {
+    return this.disabledFields().count();
+  },
   //LAST ONE
   placeholder: function (index) {
-
     this.elements._thumbnail(index).click();
-
   }
 };
 

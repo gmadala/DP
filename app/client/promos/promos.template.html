@@ -1,5 +1,5 @@
 <div class="container promos">
-  <div class="info-block">
+  <div class="info-block col-xs-12">
     <div class="info-block-image">
       <span nxg-icon="icon-info"></span>
     </div>
@@ -9,18 +9,18 @@
     </h6>
   </div>
   <div class="col-xs-12">
-    <section class="panel panel-default" ng-class="{'promo-well': !isCollapsed}">
+    <section class="panel panel-default" ng-class="{'promo-well': !isCollapsed, 'empty-promos':promosCurrent.length === 0 && isCollapsed}">
       <h2 class="well-title">
         <span translate>Promotions / Event Sales</span>
       </h2>
-      <div class="well-column-header promo-header col-sm-12 hidden-xs">
+      <div class="well-column-header promo-header col-sm-12 hidden-xs" ng-class="{'empty-promos':promosCurrent.length === 0 && isCollapsed}">
         <h6 class="col-sm-3 promo-header-item" translate>Location</h6>
         <h6 class="col-sm-3 promo-header-item" translate>Description</h6>
         <h6 class="col-sm-3 promo-header-item" translate>Sale Type</h6>
         <h6 class="col-sm-1 promo-header-item" translate>Date</h6>
       </div>
       <div class="promo-container">
-        <div class="promo-item row" ng-repeat="promo in promosCurrent">
+        <div class="promo-item row" ng-repeat="promo in promosCurrent" ng-class="{'last-item':isCollapsed && $last}">
           <div class="col-xs-6 col-sm-3">
             <div class="visible-xs"><label>Location: </label></div>
             <span ng-hide="promo.promo" class="promo-auction-name">{{promo.auctionName}}</span>

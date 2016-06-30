@@ -9,10 +9,10 @@ exports.config = {
     //'browserName': 'chrome', 'chromeOptions': { 'args': ['incognito'] }
   },
   framework: 'jasmine2',
-
   // Spec patterns are relative to the current working directly when
   // protractor is called.
-  specs: ['tests/login/resources_spec.js'],
+  //specs: ['tests/login/*_spec.js'],
+  specs: ['tests/login/e2e_login_recover_spec.js'],
   // untrackOutstandingTimeouts: true,
   restartBrowserBetweenTests: false,
 
@@ -25,12 +25,11 @@ exports.config = {
     realtimeFailure: true
   },
   params: {
-    userName:'97421EH',
-    userName2:'36017RDT',
-    password:'ngcpass!0',
+    userName: '97421EH',
+    userName2: '36017RDT',
+    password: 'ngcpass!0',
     shortDelay: '1000',
-    mediumDelay:'3000',
-    longDelay:'5000'
+    mediumDelay: '3000',
+    longDelay: '5000'
   }
-
 };
