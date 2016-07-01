@@ -78,6 +78,10 @@
   }
 }
 
+@media all and (max-width:480px) {
+  .btn-cta-expand { width: 94%; display:block; }
+}
+
 .mobile-checkout-widget{
   position: fixed;
   bottom: 3px;

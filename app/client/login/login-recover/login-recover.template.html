@@ -41,7 +41,7 @@
           </form>
 
             <div class="footer modal-footer">
-              <button class="btn-cta cta-primary"
+              <button class="btn-cta cta-primary btn-cta-expand"
                       ng-class="{disabled: !!forgotPasswordForm.userName.$viewValue || submitInProgress }"
                       ng-disabled="!!forgotPasswordForm.userName.$viewValue || submitInProgress"
                       ng-click="userNameRecovery.submit()"
@@ -106,7 +106,7 @@
           </form>
 
           <div class="footer modal-footer">
-            <button class="btn-cta cta-primary"
+            <button class="btn-cta cta-primary btn-cta-expand"
                     ng-class="{disabled: !!forgotUserNameForm.email.$viewValue || submitInProgress }"
                     ng-disabled="!!forgotUserNameForm.email.$viewValue || submitInProgress"
                     ng-click="passwordRecovery.submit()"
