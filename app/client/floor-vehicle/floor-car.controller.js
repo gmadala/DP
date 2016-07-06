@@ -71,7 +71,7 @@
     var isDealer = User.isDealer();
     var uibModal  = $uibModal;
     var attachDocsDealer = isDealer && User.getFeatures().hasOwnProperty('uploadDocuments') ? User.getFeatures().uploadDocuments.enabled : false;
-    var attachDocsAuction = !isDealer && User.getFeatures().hasOwnProperty('uploadDocuments') ? User.getFeatures().uploadDocumentsAuction.enabled : false;
+    var attachDocsAuction = !isDealer && User.getFeatures().hasOwnProperty('uploadDocumentsAuction') ? User.getFeatures().uploadDocumentsAuction.enabled : false;
 
     $scope.attachDocumentsEnabled = attachDocsDealer || attachDocsAuction;
 
@@ -227,13 +227,13 @@
 
       $scope.vinDetailsErrorFlag = true;
       if (!$scope.form.$valid) {
-        if(isDealer && $scope.attachDocumentsEnabled && $scope.files.length < 1){
+        if(isDealer && $scope.canAttachDocuments() && $scope.files.length < 1){
           $scope.missingDocuments = true;
         }
         return false;
       }
 
-      if(isDealer && $scope.attachDocumentsEnabled && $scope.files.length < 1){
+      if(isDealer && $scope.canAttachDocuments() && $scope.files.length < 1){
         $scope.missingDocuments = true;
         return false;
       }
