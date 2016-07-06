@@ -43,8 +43,9 @@
     <div id="wrapper" class="menu-wrapper">
       <div class="nxg-main-container" nxg-messages>
         <div nav-bar></div>
-        <div class="nxg-main-view" ng-class="{ 'no-left-margin': navState.current.data.margin }" class="mobile-menu-push"
-             ng-class="{'mobile-menu-push-toleft':navState.current.data.showMenu}">
+        <div class="nxg-main-view" class="mobile-menu-push"
+             ng-class="{'mobile-menu-push-toleft':navState.current.data.showMenu}"
+             ng-click="navState.current.data.showMenu ? navState.current.data.showMenu=false : false">
           <div ui-view autoscroll="true" id="{{ navState.current.data.pageId }}Page"></div>
         </div>
         <div nxg-activity></div>

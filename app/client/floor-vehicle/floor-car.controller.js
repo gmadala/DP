@@ -25,7 +25,10 @@
     'AccountManagement',
     'Upload',
     'nxgConfig',
-    'gettext'
+    'gettext',
+    'kissMetricInfo',
+    'segmentio',
+    'metric'
   ];
 
   function FloorCarCtrl($scope,
@@ -43,12 +46,16 @@
                         AccountManagement,
                         Upload,
                         nxgConfig,
-                        gettext) {
+                        gettext,
+                        kissMetricInfo,
+                        segmentio,
+                        metric) {
 
     // init files as empty array to avoid
     // error of undefined.length from $watcher
     $scope.files = [];
     $scope.missingDocuments = false;
+    // $scope.comment = '';
 
     $scope.$watch('files', function(newValue, oldValue) {
       if (newValue.length !== oldValue.length) {
@@ -246,6 +253,9 @@
         templateUrl: 'client/floor-vehicle/floor-car-confirm-modal/floor-car-confirm.template.html',
         controller: 'FloorCarConfirmCtrl',
         resolve: {
+          comment: function() {
+            return !!$scope.comment && $scope.comment.length > 0;
+          },
           formData: function() {
             return angular.copy($scope.data);
           },
@@ -266,6 +276,15 @@
     };
 
     function buildDialog(canAttachDocuments, floorSuccess, uploadSuccess) {
+
+      kissMetricInfo.getKissMetricInfo().then(function(result) {
+        result.comment = !!$scope.comment && $scope.comment.length > 0;
+        result.floorplanSuccess = floorSuccess;
+        result.uploadSuccess = uploadSuccess;
+
+        segmentio.track(metric.FLOORPLAN_REQUEST_RESULT, result);
+      });
+
       return {
         backdrop: true,
         keyboard: true,
@@ -296,6 +315,7 @@
       }
 
       var dialogParams;
+
       $scope.submitInProgress = true;
       Floorplan.create($scope.data).then(
         function(response) { /*floorplan success*/
