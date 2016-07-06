@@ -40,24 +40,24 @@ describe("Login as Dealer\n ", function () {
     browser.close();
   });
 
-  // it("2. Dealer - Forgot User name. My email is correct and no problems", function () {
-  //   expect(browser.getCurrentUrl() === execSettings.loginPage());
-  //   //Validating the SignUp Button label
-  //   expect(loginObjects.getTextSignUpLogin()).toEqual("Sign Up");
-  //   //Validating the ForgotUsernamePassword Label
-  //   expect(loginObjects.getTextForgotUsernamePassword()).toEqual("Forgot your username or password?");
-  //   loginObjects.doForgotUsernamePassword();
-  //   expect(browser.getCurrentUrl() === execSettings.forgotPage());
-  //   loginObjects.setEmail(validEmail);
-  //   //Validating the Submit Button label
-  //   expect(loginObjects.getTextSubmitUsername()).toEqual("Submit");
-  //   loginObjects.doUsernameSubmit();
-  //   expect(modalObjects.getTextHeader()).toEqual("Success");
-  //   expect(modalObjects.getTextBody()).toEqual("Thank you, check your email for the requested account information.");
-  //   //Clicking OK button on modalObjects Window
-  //   modalObjects.doOKBtn();
-  //   expect(browser.getCurrentUrl() === execSettings.loginPage());
-  // });
+  it("2. Dealer - Forgot User name. My email is correct and no problems", function () {
+    expect(browser.getCurrentUrl() === execSettings.loginPage());
+    //Validating the SignUp Button label
+    expect(loginObjects.getTextSignUpLogin()).toEqual("Sign Up");
+    //Validating the ForgotUsernamePassword Label
+    expect(loginObjects.getTextForgotUsernamePassword()).toEqual("Forgot your username or password?");
+    loginObjects.doForgotUsernamePassword();
+    expect(browser.getCurrentUrl() === execSettings.forgotPage());
+    loginObjects.setEmail(validEmail);
+    //Validating the Submit Button label
+    expect(loginObjects.getTextSubmitUsername()).toEqual("Submit");
+    loginObjects.doUsernameSubmit();
+    expect(modalObjects.getTextHeader()).toEqual("Success");
+    expect(modalObjects.getTextBody()).toEqual("Thank you, check your email for the requested account information.");
+    //Clicking OK button on modalObjects Window
+    modalObjects.doOKBtn();
+    expect(browser.getCurrentUrl() === execSettings.loginPage());
+  });
 
   it("3. Dealer - Forgot User name. invalid email id no problems ", function () {
     loginObjects.setLogin('53190md', 'incorrect');
@@ -133,33 +133,33 @@ describe("Login as Dealer\n ", function () {
     expect(browser.getCurrentUrl() === execSettings.loginPage());
   });
 
-  // it("5. Dealer - Login with Null values", function () {
-  //   loginObjects.setLogin(' ', ' ');
-  //   loginObjects.doLogin();
-  //   expect(browser.getCurrentUrl() === execSettings.loginPage());
-  // });
-  //
-  // it("6. Dealer - Login with Incorrect Username and Password", function () {
-  //   loginObjects.setLogin('test', 'test');
-  //   loginObjects.doLogin();
-  //   expect(browser.getCurrentUrl() === execSettings.loginPage());
-  // });
-  //
-  // it("7. Dealer - Login with Null Password value", function () {
-  //   loginObjects.setLogin(username, '');
-  //   loginObjects.doLogin();
-  //   expect(browser.getCurrentUrl() === execSettings.loginPage());
-  // });
-  //
-  // it("8. Dealer - Login with Null Username value", function () {
-  //   loginObjects.setLogin('', password);
-  //   loginObjects.doLogin();
-  //   expect(browser.getCurrentUrl() === execSettings.loginPage());
-  // });
-  //
-  // it("9. Dealer - Good Login", function () {
-  //   loginObjects.doGoodLogin();
-  //   expect(browser.getCurrentUrl() === execSettings.homePage());
-  // });
+  it("5. Dealer - Login with Null values", function () {
+    loginObjects.setLogin(' ', ' ');
+    loginObjects.doLogin();
+    expect(browser.getCurrentUrl() === execSettings.loginPage());
+  });
+
+  it("6. Dealer - Login with Incorrect Username and Password", function () {
+    loginObjects.setLogin('test', 'test');
+    loginObjects.doLogin();
+    expect(browser.getCurrentUrl() === execSettings.loginPage());
+  });
+
+  it("7. Dealer - Login with Null Password value", function () {
+    loginObjects.setLogin(username, '');
+    loginObjects.doLogin();
+    expect(browser.getCurrentUrl() === execSettings.loginPage());
+  });
+
+  it("8. Dealer - Login with Null Username value", function () {
+    loginObjects.setLogin('', password);
+    loginObjects.doLogin();
+    expect(browser.getCurrentUrl() === execSettings.loginPage());
+  });
+
+  it("9. Dealer - Good Login", function () {
+    loginObjects.doGoodLogin();
+    expect(browser.getCurrentUrl() === execSettings.homePage());
+  });
 
 });
