@@ -105,9 +105,14 @@ button[disabled]{
   max-height: 340px;
 }
 
-.titleSettingsNotificationsPanel {
-  max-height: 175px;
-  min-height: 151px;
+.titleSettingsPanel {
+   min-height: 151px;
+ }
+
+@media only screen and (min-width: 767px) and (max-width: 1150px) {
+  .titleSettingsPanel {
+    min-height: 142px;
+  }
 }
 
 @media only screen and (max-width: 767px) {
@@ -116,13 +121,14 @@ button[disabled]{
     max-height: none;
   }
 
-  .titleSettingsNotificationsPanel {
-    min-height: 125px;
+  .titleSettingsPanel {
     max-height: 125px;
+    min-height: 125px;
   }
 
   .noWrap {
     word-wrap: break-word;
   }
 }
+
 

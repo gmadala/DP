@@ -3,7 +3,7 @@
   <div class="row">
 
     <!-- USER PROFILE -->
-    <div class="col-sm-6">
+    <div class="col-sm-6" onclick="void(0)">
       <section class="panel panel-default settings-well userProfileSettingsPanel" ng-controller="ProfileSettingsCtrl">
         <h2 class="well-title"><span translate>User Profile</span>
           <div class="well-sub-title well-sub-title-edit">
@@ -37,7 +37,7 @@
                 <button class="btn-help"
                         id="password-help-tooltip"
                         tooltip-placement="bottom"
-                        tooltip-trigger="mouseenter"
+                        tooltrip-trigger="hover focus"
                         uib-tooltip-html='passwordTooltip | translate'
                         tooltip-animation="true"><span nxg-icon="icon-help"></span></button></span>
               </label>
@@ -135,7 +135,7 @@
     </div>
 
     <!-- BUSINESS SETTINGS -->
-    <div class="col-sm-6">
+    <div class="col-sm-6" onclick="void(0)">
       <section class="panel panel-default settings-well businessSettingsPanel" novalidate ng-controller="AccountManagementCtrl">
         <h2 class="well-title"><span translate>Business Settings</span>
           <!-- This code should be added back in as soon as contact info management goes live, and the following temporary code
@@ -175,6 +175,7 @@
                   <span nxg-icon="icon-help"></span>
                   </button>
                 </div>
+               </span>
               <!-- End temporary code -->
             </div>
 
@@ -229,8 +230,8 @@
 
   <div class="row">
     <!-- TITLE SETTINGS -->
-    <div class="col-sm-6">
-      <section class="panel panel-default settings-well titleSettingsNotificationsPanel" ng-controller="AccountManagementCtrl">
+    <div class="col-sm-6" onclick="void(0)">
+      <section class="panel panel-default settings-well titleSettingsPanel" ng-controller="AccountManagementCtrl">
         <h2 class="well-title"><span translate>Title Settings</span>
           <div class="well-sub-title well-sub-title-edit">
             <button ng-hide="title.editable || title.data.addresses.length <= 1" class="btn-unstyle" ng-click="title.edit()" translate>Edit Settings</button>
@@ -308,8 +309,8 @@
     </div>
 
     <!-- NOTIFICATIONS -->
-    <div class="col-sm-6">
-      <section class="panel panel-default settings-well titleSettingsNotificationsPanel" ng-controller="ProfileSettingsCtrl">
+    <div class="col-sm-6" onclick="void(0)">
+      <section class="panel panel-default settings-well" ng-controller="ProfileSettingsCtrl">
         <h2 class="well-title"><span translate>Notifications</span>
           <div class="well-sub-title well-sub-title-edit">
             <button ng-hide="notifications.editable" class="btn-unstyle" ng-click="notifications.edit()" translate>Edit Settings</button>
