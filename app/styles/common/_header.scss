@@ -223,8 +223,7 @@
   border-bottom: 3px solid $primary;
   margin-bottom: 0px;
   border-width: 0px 0px 3px 0px;
-  font-weight: bold;
-  text-transform: uppercase;
+  font-size: 1.4rem;
   .navbar-nav {
     padding-top: 4px;
     li, .dropdown {
@@ -272,7 +271,6 @@
           }
         }
         a {
-          font-weight: bold;
           display: block;
           padding-left: 11px;
           border-bottom: none;
