@@ -3,7 +3,7 @@
 
     <!-- USER PROFILE -->
     <div class="col-sm-6">
-      <section class="panel panel-default settings-well">
+      <section class="panel panel-default settings-well" onclick="void(0)">
         <h2 class="well-title"><span translate>User Profile</span>
           <div class="well-sub-title well-sub-title-edit">
             <button ng-hide="profile.editable" class="btn-unstyle" ng-click="profile.edit()" translate>Edit Settings</button>
@@ -16,7 +16,7 @@
             <div class="row">
               <label class="col-xs-6 no-right-padding" for="setUsername" translate>Username</label>
               <div class="col-xs-6 zeroLeftPadding no-right-padding" nxg-input model="profile.data.username" editable="profile.editable">
-                <section class="flexboxForm">
+                <section class="flexbox-form">
                   <div class="stretch">
                 <input type="text" name="setUsername" class="xsmallInput" ng-model="profile.dirtyData.username" value="profile.dirtyData.username" ng-maxlength="40" ng-class="{ 'nxg-invalid': profile.validation.setUsername.$error.required || profile.validation.setUsername.$error.maxlength }" required/>
                   </div>
