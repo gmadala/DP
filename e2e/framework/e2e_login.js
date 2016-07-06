@@ -2,7 +2,7 @@
 
 var userName = '53190md';
 var password = 'ngcpass!0';
-var delay = 200;
+var delay = 500;
 var longDelay = 2000;
 var login = {
 
@@ -31,12 +31,34 @@ var login = {
     },
     incorrectEmailFormat: function () {
       return element(by.css('p[ng-show="forgotUserNameValidity.email.$error.email"]'));
+    },
+    signout: function () {
+      return element.all(by.css('button[ng-click="user.logout()"]'));
+    },
+    signoutConfirm: function () {
+      return element.all(by.css('button[ng-click="close(true)"]'));
+    },
+    signoutCancel: function () {
+      return element.all(by.css('button[ng-click="close(false)"]'));
     }
   },
 
   //Doers
   clickLoginButton: function () {
     return this.elements.loginButton().click();
+    browser.sleep(delay);
+  },
+  clickSignoutButton: function () {
+    return this.elements.signout().click();
+    browser.sleep(delay);
+  },
+  clickSignoutConfirm: function () {
+    return this.elements.signoutConfirm().click();
+    browser.sleep(delay);
+  },
+  clickSignoutCancel: function () {
+    return this.elements.signoutCancel().click();
+    browser.sleep(delay);
   },
 
   //Getters

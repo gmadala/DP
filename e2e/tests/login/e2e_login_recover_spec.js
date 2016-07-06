@@ -127,33 +127,4 @@ describe("Login as Dealer\n ", function () {
     expect(browser.getCurrentUrl() === execSettings.loginPage());
   });
 
-  it("5. Dealer - Login with Null values", function () {
-    loginObjects.setLogin(' ', ' ');
-    loginObjects.doLogin();
-    expect(browser.getCurrentUrl() === execSettings.loginPage());
-  });
-
-  it("6. Dealer - Login with Incorrect Username and Password", function () {
-    loginObjects.setLogin('test', 'test');
-    loginObjects.doLogin();
-    expect(browser.getCurrentUrl() === execSettings.loginPage());
-  });
-
-  it("7. Dealer - Login with Null Password value", function () {
-    loginObjects.setLogin(username, '');
-    loginObjects.doLogin();
-    expect(browser.getCurrentUrl() === execSettings.loginPage());
-  });
-
-  it("8. Dealer - Login with Null Username value", function () {
-    loginObjects.setLogin('', password);
-    loginObjects.doLogin();
-    expect(browser.getCurrentUrl() === execSettings.loginPage());
-  });
-
-  it("9. Dealer - Good Login", function () {
-    loginObjects.doGoodLogin();
-    expect(browser.getCurrentUrl() === execSettings.homePage());
-  });
-
 });

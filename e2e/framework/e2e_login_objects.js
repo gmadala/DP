@@ -51,6 +51,7 @@ function LoginObjects() {
   };
   this.doMyAccount = function () {
     return this.elMyAccount.click();
+    browser.sleep(delay);
   };
   this.doSubmitUsername = function () {
     return this.elSubmitUsername.click();
