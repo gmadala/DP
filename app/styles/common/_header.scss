@@ -232,7 +232,7 @@
       a {
         display: inline-block;
         color: $white;
-        padding: 12px 8px 5px;
+        padding: 10px 8px 7px;
         border-bottom: 4px solid transparent;
         background-color: $highlight;
         .caret {
@@ -355,9 +355,16 @@
   }
 
   .mng-navbar {
-    .navbar-nav {
+    .navbar-nav, .mobile-nav-list {
       padding-top: 0px;
       margin-top: 0px !important;
+      li {
+        a {
+          padding: 10px !important;
+          border: 0 !important;
+          height: 35px;
+        }
+      }
     }
   }
 
