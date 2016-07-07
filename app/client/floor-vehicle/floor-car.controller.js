@@ -25,7 +25,10 @@
     'AccountManagement',
     'Upload',
     'nxgConfig',
-    'gettext'
+    'gettext',
+    'kissMetricInfo',
+    'segmentio',
+    'metric'
   ];
 
   function FloorCarCtrl(
@@ -44,12 +47,16 @@
     AccountManagement,
     Upload,
     nxgConfig,
-    gettext) {
+    gettext,
+    kissMetricInfo,
+    segmentio,
+    metric) {
 
     // init files as empty array to avoid
     // error of undefined.length from $watcher
     $scope.files = [];
     $scope.missingDocuments = false;
+    // $scope.comment = '';
 
     $scope.$watch('files', function(newValue, oldValue){
       if(newValue.length !== oldValue.length){
@@ -71,7 +78,7 @@
     var isDealer = User.isDealer();
     var uibModal  = $uibModal;
     var attachDocsDealer = isDealer && User.getFeatures().hasOwnProperty('uploadDocuments') ? User.getFeatures().uploadDocuments.enabled : false;
-    var attachDocsAuction = !isDealer && User.getFeatures().hasOwnProperty('uploadDocuments') ? User.getFeatures().uploadDocumentsAuction.enabled : false;
+    var attachDocsAuction = !isDealer && User.getFeatures().hasOwnProperty('uploadDocumentsAuction') ? User.getFeatures().uploadDocumentsAuction.enabled : false;
 
     $scope.attachDocumentsEnabled = attachDocsDealer || attachDocsAuction;
 
@@ -227,13 +234,13 @@
 
       $scope.vinDetailsErrorFlag = true;
       if (!$scope.form.$valid) {
-        if(isDealer && $scope.attachDocumentsEnabled && $scope.files.length < 1){
+        if(isDealer && $scope.canAttachDocuments() && $scope.files.length < 1){
           $scope.missingDocuments = true;
         }
         return false;
       }
 
-      if(isDealer && $scope.attachDocumentsEnabled && $scope.files.length < 1){
+      if(isDealer && $scope.canAttachDocuments() && $scope.files.length < 1){
         $scope.missingDocuments = true;
         return false;
       }
@@ -246,6 +253,9 @@
         templateUrl: 'client/floor-vehicle/floor-car-confirm-modal/floor-car-confirm.template.html',
         controller: 'FloorCarConfirmCtrl',
         resolve: {
+          comment: function () {
+            return !!$scope.comment && $scope.comment.length > 0;
+          },
           formData: function () {
             return angular.copy($scope.data);
           },
@@ -266,6 +276,15 @@
     };
 
     function buildDialog(canAttachDocuments, floorSuccess, uploadSuccess) {
+
+      kissMetricInfo.getKissMetricInfo().then(function (result) {
+        result.comment = !!$scope.comment && $scope.comment.length > 0;
+        result.floorplanSuccess = floorSuccess;
+        result.uploadSuccess  = uploadSuccess;
+
+        segmentio.track(metric.FLOORPLAN_REQUEST_RESULT, result);
+      });
+
       return {
         backdrop: true,
         keyboard: true,
@@ -296,6 +315,7 @@
       }
 
       var dialogParams;
+
       $scope.submitInProgress = true;
       Floorplan.create($scope.data).then(
         function (response) { /*floorplan success*/
