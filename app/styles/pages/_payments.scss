@@ -78,8 +78,16 @@
   }
 }
 
-@media all and (max-width:480px) {
+@media all and (max-width:640px) {
   .btn-cta-expand { width: 94%; display:block; }
+}
+
+@media all and (max-width:640px) {
+  .input-cta-expand { width: 132%; display:block; }
+}
+
+@media all and (max-width:640px) {
+  .input-cta-ques-expand { width: 220%; display:block; }
 }
 
 .mobile-checkout-widget{
