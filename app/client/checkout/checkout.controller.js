@@ -21,6 +21,8 @@
     'gettextCatalog',
     'gettext',
     'kissMetricInfo',
+    'segmentio',
+    'metric',
     'decimalAdjust'
   ];
 
@@ -40,6 +42,8 @@
     gettextCatalog,
     gettext,
     kissMetricInfo,
+    segmentio,
+    metric,
     decimalAdjust) {
 
     var uibModal = $uibModal;
@@ -266,6 +270,13 @@
         Payments.checkout(fees, payments, bankAccount, unapplied).then(
           function (result) {
             // confirmation dialog
+            kissMetricInfo.getKissMetricInfo().then(function (result) {
+              result.vins = _.size($scope.paymentQueue.contents.payments);
+              result.fees = _.size($scope.paymentQueue.contents.fees);
+
+              segmentio.track(metric.DEALER_PAYMENT_SUBMITTED, result);
+            });
+
             var dialogOptions = {
               backdrop: true,
               keyboard: true,

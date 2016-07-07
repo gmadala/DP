@@ -70,6 +70,7 @@ describe('Controller: FloorCarConfirmCtrl', function () {
       $uibModalInstance: dialogMock,
       formData: formDataMock,
       fileNames: [],
+      comment: '',
       User: userDealerMock,
       gettextCatalog: catalog,
       kissMetricInfo: mockKissMetricInfo
@@ -80,6 +81,7 @@ describe('Controller: FloorCarConfirmCtrl', function () {
       $uibModalInstance: dialogMock,
       formData: formDataMock,
       fileNames: [],
+      comment: '',
       User: userAuctionMock,
       gettextCatalog: catalog,
       kissMetricInfo: mockKissMetricInfo
@@ -92,6 +94,7 @@ describe('Controller: FloorCarConfirmCtrl', function () {
       $uibModalInstance: dialogMock,
       formData: formDataMock,
       fileNames: [],
+      comment: '',
       User: userDealerMock,
       gettextCatalog: catalog,
       kissMetricInfo: mockKissMetricInfo
@@ -104,6 +107,7 @@ describe('Controller: FloorCarConfirmCtrl', function () {
       dialog: dialogMock,
       formData: formDataMock,
       fileNames: [],
+      comment: '',
       User: userAuctionMock,
       gettextCatalog: catalog,
       kissMetricInfo: mockKissMetricInfo
@@ -137,7 +141,8 @@ describe('Controller: FloorCarConfirmCtrl', function () {
       isBusinessHours: true,
       vendor: 'Google Inc.',
       version: 'Chrome 44',
-      width: 1920
+      width: 1920,
+      comment: ''
     });
 
     expect(scope.kissMetricData.isBusinessHours).toBe(true);
@@ -160,7 +165,8 @@ describe('Controller: FloorCarConfirmCtrl', function () {
       isBusinessHours: true,
       vendor: 'Google Inc.',
       version: 'Chrome 44',
-      width: 1920
+      width: 1920,
+      comment: ''
     });
 
     expect(scopeAuction.kissMetricData.isBusinessHours).toBe(true);
