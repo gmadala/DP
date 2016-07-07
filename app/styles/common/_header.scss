@@ -396,10 +396,11 @@
 
   .navbar-default {
     .navbar-toggle {
+      float: left;
       border: none;
       z-index: 10;
       width: 25px;
-      left: -25px;
+      left: 25px;
       height: 25px;
       padding: 0px 0px;
       &:hover,
@@ -533,36 +534,37 @@
   /* Reposition elements affected by the sliding menu */
   #wrapper {
     position: relative;
-    right: 0;
-    transition: right 0.35s ease;
+    left: 0;
+    transition: left 0.35s ease;
   }
 
   .navbar {
-    right: 0;
-    transition: right 0.35s ease;
+    left: 0;
+    transition: left 0.35s ease;
   }
 
   #navbar .navbar-collapse {
     position: fixed;
     top: 0;
-    right: -80%;
+    left: -80vw;
     display: block;
-    width: 80%;
-    height: 100% !important;
-    max-height: 100%;
+    width: 80vw;
+    height: 120% !important;
+    max-height: 120%;
+    overflow-y: scroll;
+    -webkit-overflow-scrolling: touch;
     margin: 0;
-    //background-color: #f8f8f8;
     background-color: grey;
-    transition: right 0.35s ease;
+    transition: left 0.35s ease;
     border-top: 0;
   }
 
   #navbar .navbar-collapse.collapsing {
-    transition: right 0.35s ease;
+    transition: left 0.35s ease;
   }
 
   #navbar .navbar-collapse.in {
-    right: 0;
+    left: 0;
   }
 
   body.menu-open.in, body.menu-open {
@@ -570,11 +572,11 @@
   }
 
   body.menu-open #wrapper, body.menu-open.in .navbar {
-    transition: right 0.35s ease;
+    transition: left 0.35s ease;
   }
 
-  body.menu-open.in #wrapper, body.menu-open.in .navbar {
-    right: 80%;
+  body.menu-open.in #wrapper {
+    left: 80vw;
   }
 
 }
