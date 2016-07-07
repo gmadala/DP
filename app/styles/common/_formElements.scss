@@ -250,7 +250,7 @@ select {
   @include border-radius($borderRadius);
   position: relative;
   overflow: hidden;
-  min-width: 65%;
+  max-width: 106%;
   border: 1px solid $highlight;
   margin: 5px 0;
   background: #fff;
@@ -595,6 +595,9 @@ input[type="radio"] {
   width: 55%;
 }
 
+.smallInputAuctionSettings {
+  width:140%;
+}
 .xsmallInput {
   width: 206px;
 }
