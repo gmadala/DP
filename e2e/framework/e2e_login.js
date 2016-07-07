@@ -32,6 +32,9 @@ var login = {
     incorrectEmailFormat: function () {
       return element(by.css('p[ng-show="forgotUserNameValidity.email.$error.email"]'));
     },
+    myAccount: function () {
+      return element(by.id("settingsDropdown"));
+    },
     signout: function () {
       return element.all(by.css('button[ng-click="user.logout()"]'));
     },
@@ -46,6 +49,11 @@ var login = {
   //Doers
   clickLoginButton: function () {
     return this.elements.loginButton().click();
+    browser.sleep(delay);
+  },
+  clickMyAccount: function () {
+    browser.sleep(10000);
+    return this.elements.myAccount().click();
     browser.sleep(delay);
   },
   clickSignoutButton: function () {

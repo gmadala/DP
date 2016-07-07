@@ -12,16 +12,15 @@ describe("Login as Dealer\n ", function () {
 
   beforeEach(function () {
     browser.sleep(browser.params.shortDelay);
-    browser.driver.manage().window().maximize();
-    browser.get(execSettings.loginPage());
     browser.ignoreSynchronization = true;
   });
   afterEach(function () {
-    browser.executeScript('window.sessionStorage.clear();');
-    browser.executeScript('window.localStorage.clear();');
+    //browser.executeScript('window.sessionStorage.clear();');
+    //browser.executeScript('window.localStorage.clear();');
   });
 
   it("1. Login - Null Username and Password", function () {
+    browser.get(execSettings.loginPage());
     loginObjects.setLogin('', '');
     loginObjects.doLogin();
     expect(browser.getCurrentUrl() === execSettings.loginPage());
@@ -51,7 +50,7 @@ describe("Login as Dealer\n ", function () {
   });
 
   it("6. Login - Logout Dealer Confirm", function () {
-    loginObjects.doMyAccount();
+    login.clickMyAccount();
     login.clickSignoutButton();
     login.clickSignoutConfirm();
     expect(browser.getCurrentUrl() === execSettings.loginPage());

@@ -1,5 +1,6 @@
 'use strict';
 
+var loginObjects = require('../../framework/e2e_login_objects.js');
 var login = require('../../framework/e2e_login.js');
 var modalObjects = require('../../framework/e2e_modal_objects.js');
 var dashboard = require('../../framework/e2e_dashboard_objects.js');
@@ -12,6 +13,7 @@ var increaseAmount = 1000;
 var dashboard = new dashboard.dashboardObjects();
 var CredIncrease = new creditIncrease.creditIncrease();
 var modalObjects = new modalObjects.modalObjects();
+var loginObjects = new loginObjects.loginObjects();
 
 describe("Credit Increase Request \n ", function () {
 
@@ -70,5 +72,10 @@ describe("Credit Increase Request \n ", function () {
     });
   });
 
-
+  it("Logout Recover", function () {
+    loginObjects.doMyAccount();
+    login.clickSignoutButton();
+    login.clickSignoutConfirm();
+    expect(browser.getCurrentUrl() === execSettings.loginPage());
+  });
 });

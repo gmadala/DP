@@ -1,10 +1,11 @@
 'use strict';
 
-
+var loginObjects = require('../../framework/e2e_login_objects.js');
 var resources = require('../../framework/e2e_resources_objects.js');
 var login = require('../../framework/e2e_login.js');
 var execSettings = require('../../framework/e2e_execSettings.js');
 
+var loginObjects = new loginObjects.loginObjects();
 var resources = new resources.resources();
 
 var delay = 2000;
@@ -179,4 +180,10 @@ describe('Testing Resources Page', function() {
     });
   });
 
+  it("Logout Resources", function () {
+    loginObjects.doMyAccount();
+    login.clickSignoutButton();
+    login.clickSignoutConfirm();
+    expect(browser.getCurrentUrl() === execSettings.loginPage());
+  });
 });

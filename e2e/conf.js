@@ -11,8 +11,8 @@ exports.config = {
   framework: 'jasmine2',
   // Spec patterns are relative to the current working directly when
   // protractor is called.
-  //specs: ['tests/login/*_spec.js'],
-  specs: ['tests/login/e2e_login_spec.js'],
+  specs: ['tests/login/*_spec.js'],
+  //specs: ['tests/login/e2e_login_spec.js'],
   // untrackOutstandingTimeouts: true,
   restartBrowserBetweenTests: false,
 
