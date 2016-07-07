@@ -103,8 +103,14 @@ body {
   margin-left: -35px;
 }
 
-.centerTextAlign {
-  text-align: center;
+.flexbox-form { display: flex; }
+.flexbox .stretch { flex: 1; }
+.flexbox .normal { flex: 0; margin: 0 0 0 1rem; }
+.flexbox div input { padding: .5em 1em; width: 100%; }
+
+.centerTextAlign
+{
+  text-align:center;
 }
 
 .numericRightFloat {
@@ -125,12 +131,23 @@ body {
   padding: 0;
 }
 
-.zeroLeftPadding {
-  padding-left: 0;
+.zeroLeftPadding
+{
+  padding-left:0;
 }
 
-.zeroRightPadding {
-  padding-right: 0;
+.zeroLeftPaddingNotif {
+  padding-left:0;
+}
+
+ul.zeroLeftPaddingNotif {
+  margin-top: 16px;
+  margin-bottom: 0;
+}
+
+.zeroRightPadding
+{
+  padding-right:0;
 }
 
 .zeroLeftMargin {

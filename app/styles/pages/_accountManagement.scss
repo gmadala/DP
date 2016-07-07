@@ -95,6 +95,14 @@ button[disabled]{
   margin-top: 0px;
 }
 
+.noWrap {
+  word-wrap: break-word;
+}
+
+.noWrapCheckbox {
+  white-space: nowrap;
+}
+
 .userProfileSettingsPanel {
   min-height: 340px;
   max-height: 525px
@@ -125,10 +133,4 @@ button[disabled]{
     max-height: 125px;
     min-height: 125px;
   }
-
-  .noWrap {
-    word-wrap: break-word;
-  }
 }
-
-
