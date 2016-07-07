@@ -152,8 +152,10 @@ describe("Login as Dealer\n ", function () {
   // });
 
   it("9. Dealer - Good Login", function () {
-    browser.sleep(5000);
+
     expect(loginObjects.elLangChooser.isDisplayed()).toBe(true);
+    browser.sleep(5000);
+    loginObjects.doLangSelection();
     expect(loginObjects.getTextLogin()).toBe("Log In");
     // expect(loginObjects.elEnglish.isDisplayed()).toBe(true);
     // expect(loginObjects.elSpanish.isDisplayed()).toBe(true);

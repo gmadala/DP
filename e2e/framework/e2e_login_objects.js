@@ -28,9 +28,10 @@ function LoginObjects() {
   this.elSignOut = browser.element(by.css('a'));
   // this.elLangChooser = browser.element(by.css('div.nav-language-chooser'));
   this.elLangChooser = browser.element(by.css('div.cta.btn-toggle.toggle-three'));
-  // this.elEnglish = browser.element(by.css('div.cta.btn-toggle.toggle-three')).get(0);
-  // this.elSpanish = browser.element.all(by.id('spanish'));
-  // this.elFrench = browser.element.all(by.id('french'));
+  this.elEnglish = browser.element.all(by.css('div.cta.btn-toggle.toggle-three')).element(by.css('button.btn')).get(0);
+  this.elSpanish = browser.element.all(by.css('div.cta.btn-toggle.toggle-three')).element(by.css('button.btn')).get(1);
+  this.elFrench = browser.element.all(by.css('div.cta.btn-toggle.toggle-three')).element(by.css('button.btn')).get(2);
+
 
 
   //Doers
@@ -77,6 +78,9 @@ function LoginObjects() {
     return this.elSignOut.click();
   };
 
+  this.doLangSelection = function () {
+    return this.elSpanish.click();
+  }
   //Getters
   this.getTextForgotUsernamePassword = function () {
     return this.elForgotUsernamePassword.getText();
