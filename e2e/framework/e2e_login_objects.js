@@ -26,6 +26,12 @@ function LoginObjects() {
   this.elSecQues6 = browser.element.all(by.id('question6'));
   this.elSecQues9 = browser.element.all(by.id('question9'));
   this.elSignOut = browser.element(by.css('a'));
+  // this.elLangChooser = browser.element(by.css('div.nav-language-chooser'));
+  this.elLangChooser = browser.element(by.css('div.cta.btn-toggle.toggle-three'));
+  // this.elEnglish = browser.element(by.css('div.cta.btn-toggle.toggle-three')).get(0);
+  // this.elSpanish = browser.element.all(by.id('spanish'));
+  // this.elFrench = browser.element.all(by.id('french'));
+
 
   //Doers
   this.doForgotUsernamePassword = function () {
@@ -82,6 +88,10 @@ function LoginObjects() {
     browser.sleep(delay);
     return this.elSubmitUsername.getText();
   };
+  this.getTextLogin = function (){
+    browser.sleep(delay);
+    return this.elLogin.getText();
+  }
 
   //Setters
   this.setEmail = function (param) {
