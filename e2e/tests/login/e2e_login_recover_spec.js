@@ -166,13 +166,13 @@ describe("Login as Dealer\n ", function () {
     //Validating the default language as English
     expect(loginObjects.getTextLogin()).toBe("Log In");
     //Validating the Spanish Language button
-    loginObjects.elSpanish.click();
+    loginObjects.doSpanish();
     expect(loginObjects.getTextLogin()).toBe("Iniciar sesión");
     //Validating the French Language button
-    loginObjects.elFrench.click();
+    loginObjects.doFrench();
     expect(loginObjects.getTextLogin()).toBe("Ouverture de session");
     //Validating the English language button
-    loginObjects.elEnglish.click();
+    loginObjects.doEnglish();
     expect(loginObjects.getTextLogin()).toBe("Log In");
   });
 

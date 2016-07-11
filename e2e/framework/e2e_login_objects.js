@@ -75,7 +75,19 @@ function LoginObjects() {
     this.doMyAccount();
     return this.elSignOut.click();
   };
-
+  this.doEnglish = function () {
+    this.elEnglish.click();
+    browser.sleep(delay);
+  };
+  this.doSpanish = function () {
+    this.elSpanish.click();
+    browser.sleep(delay);
+  };
+  this.doFrench = function () {
+    this.elFrench.click();
+    browser.sleep(delay);
+  };
+  
   //Getters
   this.getTextForgotUsernamePassword = function () {
     return this.elForgotUsernamePassword.getText();
