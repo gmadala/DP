@@ -7,7 +7,7 @@
   <div class="row">
     <form name="form" novalidate>
       <!-- Vehicle Information -->
-      <div class="col-sm-4">
+      <div ng-class="canAttachDocuments()?'col-sm-4':'col-sm-6'">
         <div class="panel panel-default">
           <h2 class="well-title" translate>Vehicle Information</h2>
           <div class="well-form">
@@ -86,7 +86,7 @@
         </div>
       </div>
       <!-- Sale Information -->
-      <div class="col-sm-4">
+      <div ng-class="canAttachDocuments()?'col-sm-4':'col-sm-6'">
         <div class="panel panel-default">
           <h2 class="well-title" translate>Sale Information</h2>
 
@@ -207,7 +207,7 @@
       </div>
 
       <!-- Optional Items -->
-      <div class="col-sm-4" ng-show="canAttachDocuments()">
+      <div ng-class="canAttachDocuments()?'col-sm-4':'hidden'">
         <div class="panel panel-default">
           <h2 class="well-title" translate>3. Optional Items</h2>
           <div class="well-form">
