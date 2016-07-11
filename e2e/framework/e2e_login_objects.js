@@ -30,9 +30,7 @@ function LoginObjects() {
   this.elEnglish = browser.element(by.buttonText("English"));
   this.elSpanish = browser.element(by.buttonText("Español"));
   this.elFrench = browser.element(by.buttonText("Français"));
-
-
-
+  this.elMNGLogo = browser.element(by.css('div.nxg-logo'));
 
   //Doers
   this.doForgotUsernamePassword = function () {
@@ -76,27 +74,6 @@ function LoginObjects() {
   this.doSignOut = function () {
     this.doMyAccount();
     return this.elSignOut.click();
-  };
-
-  this.doLangSelection = function () {
-    expect(this.elLangChooser.isDisplayed()).toBe(true);
-    expect(this.elEnglish.isDisplayed()).toBe(true);
-    expect(this.elSpanish.isDisplayed()).toBe(true);
-    expect(this.elFrench.isDisplayed()).toBe(true);
-    browser.sleep(500);
-    //Checking default language
-    expect(this.getTextLogin()).toBe("Log In");
-    this.elSpanish.click();
-    browser.sleep(500);
-    expect(this.getTextLogin()).toBe("Iniciar sesión");
-    this.elFrench.click();
-    browser.sleep(500);
-    expect(this.getTextLogin()).toBe("Ouverture de session");
-    //Validating the English language button
-    this.elEnglish.click();
-    browser.sleep(500);
-    expect(this.getTextLogin()).toBe("Log In");
-    browser.sleep(500);
   };
 
   //Getters

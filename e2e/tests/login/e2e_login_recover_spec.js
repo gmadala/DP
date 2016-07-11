@@ -151,13 +151,28 @@ describe("Login as Dealer\n ", function () {
     expect(browser.getCurrentUrl() === execSettings.loginPage());
   });
 
-  it("9. Dealer - Good Login", function () {
-    loginObjects.doLangSelection();
-    loginObjects.doGoodLogin();
-    expect(browser.getCurrentUrl() === execSettings.homePage());
-
+  it("9. Dealer - Validating the Language selection", function () {
+    expect(loginObjects.elMNGLogo.isDisplayed()).toBe(true);
+    expect(loginObjects.elLangChooser.isDisplayed()).toBe(true);
+    expect(loginObjects.elEnglish.isDisplayed()).toBe(true);
+    expect(loginObjects.elSpanish.isDisplayed()).toBe(true);
+    expect(loginObjects.elFrench.isDisplayed()).toBe(true);
+    //Validating the default language as English
+    expect(loginObjects.getTextLogin()).toBe("Log In");
+    //Validating the Spanish Language button
+    loginObjects.elSpanish.click();
+    expect(loginObjects.getTextLogin()).toBe("Iniciar sesión");
+    //Validating the French Language button
+    loginObjects.elFrench.click();
+    expect(loginObjects.getTextLogin()).toBe("Ouverture de session");
+    //Validating the English language button
+    loginObjects.elEnglish.click();
+    expect(loginObjects.getTextLogin()).toBe("Log In");
   });
 
-
+  it("10. Dealer - Good Login", function () {
+    loginObjects.doGoodLogin();
+    expect(browser.getCurrentUrl() === execSettings.homePage());
+  });
 
 });
