@@ -157,7 +157,7 @@ describe("Login as Dealer\n ", function () {
     expect(browser.getCurrentUrl() === execSettings.loginPage());
   });
 
-  it("9. Dealer - Validating the Language selection", function () {
+  it("9. Dealer - Validating the NGC Logo and Language selection in Login Page", function () {
     expect(loginObjects.elMNGLogo.isDisplayed()).toBe(true);
     expect(loginObjects.elLangChooser.isDisplayed()).toBe(true);
     expect(loginObjects.elEnglish.isDisplayed()).toBe(true);
