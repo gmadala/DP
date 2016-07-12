@@ -69,6 +69,7 @@ describe("Credit Increase Request \n ", function () {
       browser.switchTo().window(handles[1]).then(function () {
         expect(browser.getCurrentUrl()).toContain("https://test.nextgearcapital.com/MobileService/api/receipt/viewMultiple/receipts?");
       });
+      browser.switchTo().window(handles[0]);
     });
   });
 

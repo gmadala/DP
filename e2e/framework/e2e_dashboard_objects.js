@@ -3,7 +3,8 @@
 function DashboardObjects() {
 
   var delay = 500;
-  var longDelay = 2000;
+  var longDelay = 5000;
+  var longerDelay = 10000;
 
   //Locators
   this.elReceiptsLink = browser.element(by.css('a[ng-href="#/receipts"]'));
@@ -22,9 +23,9 @@ function DashboardObjects() {
     browser.sleep(delay);
   };
   this.doRequestCreditIncrease = function () {
-    browser.sleep(delay);
-    this.elRequestCreditIncrease.click();
     browser.sleep(longDelay);
+    this.elRequestCreditIncrease.click();
+    browser.sleep(longerDelay);
   };
 
   //Getters

@@ -8,7 +8,8 @@
  * */
 
 var displayMode = 'Desktop';
-var baseUrl = 'https://test.nextgearcapital.com/test/#/';
+//var baseUrl = 'https://test.nextgearcapital.com/test/#/';
+var baseUrl = 'http://localhost:9000/#/';
 
 console.log('\n');
 

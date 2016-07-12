@@ -35,8 +35,8 @@ var login = {
     myAccount: function () {
       return element(by.id("settingsDropdown"));
     },
-    signout: function () {
-      return element.all(by.css('button[ng-click="user.logout()"]'));
+    signOut: function () {
+      return element(by.id("signOut"));
     },
     signoutConfirm: function () {
       return element.all(by.css('button[ng-click="close(true)"]'));
@@ -49,24 +49,18 @@ var login = {
   //Doers
   clickLoginButton: function () {
     return this.elements.loginButton().click();
-    browser.sleep(delay);
   },
   clickMyAccount: function () {
-    browser.sleep(10000);
     return this.elements.myAccount().click();
-    browser.sleep(delay);
   },
   clickSignoutButton: function () {
-    return this.elements.signout().click();
-    browser.sleep(delay);
+    return this.elements.signOut().click();
   },
   clickSignoutConfirm: function () {
     return this.elements.signoutConfirm().click();
-    browser.sleep(delay);
   },
   clickSignoutCancel: function () {
     return this.elements.signoutCancel().click();
-    browser.sleep(delay);
   },
 
   //Getters
@@ -83,31 +77,38 @@ var login = {
   },
 
   //Setters
-  enterUserName: function (test) {
-    return this.elements.userName().clear().sendKeys(test);
+  enterUserName: function (name) {
+    return this.elements.userName().clear().sendKeys(name);
   },
-  enterPassword: function (test) {
-    return this.elements.password().clear().sendKeys(test);
+  enterPassword: function (pass) {
+    return this.elements.password().clear().sendKeys(pass);
   },
+
   //Functions
   login: function () {
     this.enterUserName(userName);
+    browser.sleep(longDelay);
     this.enterPassword(password);
+    browser.sleep(longDelay);
     this.clickLoginButton();
   },
   login2: function (param1,param2) {
-    browser.sleep(longDelay);
     this.enterUserName(param1);
+    browser.sleep(longDelay);
     this.enterPassword(param2);
+    browser.sleep(longDelay);
     this.clickLoginButton();
   },
+
   //Count
   disabledCount: function () {
     return this.disabledFields().count();
   },
+
   //LAST ONE
   placeholder: function (index) {
     this.elements._thumbnail(index).click();
+    browser.sleep(longDelay);
   }
 };
 

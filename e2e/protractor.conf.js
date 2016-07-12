@@ -19,12 +19,11 @@ function mkdir(path, root) {
   return !dirs.length || mkdir(dirs.join('/'), root);
 }
 
-mkdir('target/surefire-reports/');
+//mkdir('target/surefire-reports/');
 
 exports.config = {
-  specs: [
-    'tests/{,*/}*_spec.js'
-  ],
+  //specs: ['tests/login/*_spec.js'],
+  specs: ['tests/login/e2e_login_spec.js'],
 
   // a specific suite can be run with grunt protractor:run --suite=suite_name
   // at least dealer and auction suites are needed
@@ -50,7 +49,7 @@ exports.config = {
       'args': [
         '--disable-extensions',
         '-–allow-file-access-from-files',
-        '--incognito',
+        //'--incognito',
         '--disable-web-security'
       ]
     }
@@ -65,8 +64,13 @@ exports.config = {
   // This can be changed via the command line as:
   //   --params.login.user 'Joe'
   params: {
-    user: '53190md',
-    password: 'password@1',
+    userName: '97421EH',
+    userName2: '36017RDT',
+    password: 'ngcpass!0',
+    shortDelay: '1000',
+    mediumDelay: '3000',
+    longDelay: '5000',
+    longerDelay: '10000',
     validVin: '1FADP3L92DL172226',
     invalidVin: '12345678901234567'
   },
@@ -74,26 +78,26 @@ exports.config = {
   framework: 'jasmine',
   baseUrl: 'http://localhost:9000/',
   allScriptsTimeout: 60000,
-  onPrepare: function () {
-    require('jasmine-reporters');
-    jasmine.getEnv().addReporter(
-      new jasmine.JUnitXmlReporter(null, true, true, './target/surefire-reports/')
-    );
-    browser.driver.manage().window().maximize();
-    console.log('Starting up protractor ...');
-    console.log('The following params are available inside jasmine spec: ');
-    for (var property in browser.params) {
-      if (browser.params.hasOwnProperty(property)) {
-        console.log('* ', property, ': ', browser.params[property]);
-      }
-    }
-
-  },
+  //onPrepare: function () {
+  //  require('jasmine-reporters');
+  //  jasmine.getEnv().addReporter(
+  //    new jasmine.JUnitXmlReporter(null, true, true, './target/surefire-reports/')
+  //  );
+  //  browser.driver.manage().window().maximize();
+  //  console.log('Starting up protractor ...');
+  //  console.log('The following params are available inside jasmine spec: ');
+  //  for (var property in browser.params) {
+  //    if (browser.params.hasOwnProperty(property)) {
+  //      console.log('* ', property, ': ', browser.params[property]);
+  //    }
+  //  }
+  //
+  //},
   jasmineNodeOpts: {
     isVerbose: true,
     showColors: true,
     includeStackTrace: true,
     //defaultTimeoutInterval: 30000
-    defaultTimeoutInterval: 5000
+    defaultTimeoutInterval: 15000
   }
 };
