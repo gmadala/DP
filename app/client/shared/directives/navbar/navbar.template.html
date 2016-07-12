@@ -99,7 +99,12 @@
         </div>
 
         <div class="collapse navbar-collapse" ng-class="{'in': navState.current.data.showMenu}" ng-click="closeMenu()">
-          <ul class="nav navbar-nav">
+          <ul class="nav navbar-nav"
+              popover-title="Updated myNextGear Menu"
+              popover-placement="bottom"
+              uib-popover-template="'client/shared/directives/navbar/menuTip.html'"
+              popover-is-open="!hideMenuTip"
+              popover-trigger="none">
             <li class="visible-xs" ng-if="user.isDealer()">
               <a href="#" ng-href="#/checkout" ng-click="setPageTitle('Checkout')">Checkout</a>
             </li>
