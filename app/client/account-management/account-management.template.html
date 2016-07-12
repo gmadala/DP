@@ -1,4 +1,4 @@
-<div class="container non-responsive">
+<div class="container">
   <div class="row" id="FinancialAccounts">
     <div class="col-xs-12">
       <div class="panel panel-default">
@@ -10,15 +10,6 @@
 
         <div class="well-column-header col-xs-12" ng-show="editBankAccountEnabled && business.data.isStakeholderActive && isUnitedStates">
           <h6 class="col-xs-3 left-align left-padding" translate>Bank Name</h6>
-          <h6 class="col-xs-2" translate>Account Number</h6>
-          <h6 class="col-xs-2">{{financial.data.routingNumberLabel}}</h6>
-          <h6 class="col-xs-2" ng-show="editBankAccountEnabled" translate>Recent Transaction</h6>
-          <h6 class="col-xs-1" translate>Active</h6>
-        </div>
-        <!--The following allows for the re-spacing when recent transactions is hidden.
-       This can be removed as soon as recent transactions goes live-->
-        <div class="well-column-header col-xs-12" ng-show="!editBankAccountEnabled || !business.data.isStakeholderActive || !isUnitedStates">
-          <h6 class="col-xs-4 left-align left-padding" translate>Bank Name</h6>
           <h6 class="col-xs-3" translate>Account Number</h6>
           <h6 class="col-xs-3">{{financial.data.routingNumberLabel}}</h6>
           <h6 class="col-xs-1" translate>Active</h6>
@@ -65,7 +56,7 @@
           </div>
           <div class="col-xs-1">
             <button class="btn-help btn-help-adjust inline-row"
-                    tooltip-placement="right"
+                    tooltip-placement="bottom"
                     tooltip-trigger="mouseenter"
                     uib-tooltip="{{ 'This account will be used for all system-generated deposits, including automatic payout of unapplied funds.' | translate }}"
                     tooltip-animation="true">
@@ -87,7 +78,7 @@
           </div>
           <div class="col-xs-1">
             <button class="btn-help btn-help-adjust inline-row"
-                    tooltip-placement="right"
+                    tooltip-placement="bottom"
                     tooltip-trigger="mouseenter"
                     uib-tooltip="{{ 'This account will be used for all system-generated payments.  When making or scheduling payments online, you can select any active account.' | translate }}"
                     tooltip-animation="true">
@@ -106,20 +97,20 @@
 
   <div class="row">
     <!-- BUSINESS SETTINGS -->
-    <div class="col-xs-6">
+    <div class="col-md-6">
       <div class="panel panel-default settings-well" novalidate>
         <h2 class="well-title">
           <span translate>Business Settings</span>
-            <button ng-hide="business.editable" class="btn-unstyle right no-padding no-margin" ng-click="business.edit()" translate>Edit Settings</button>
-            <button ng-show="business.editable" class="btn-unstyle right no-padding no-margin" ng-click="business.save()" translate>Save Settings</button>
-            <button ng-show="business.editable" class="btn-unstyle right no-padding cancel" ng-click="business.cancel()" translate>Cancel</button>
+          <button ng-hide="business.editable" class="btn-unstyle right no-padding no-margin" ng-click="business.edit()" translate>Edit Settings</button>
+          <button ng-show="business.editable" class="btn-unstyle right no-padding no-margin" ng-click="business.save()" translate>Save Settings</button>
+          <button ng-show="business.editable" class="btn-unstyle right no-padding cancel" ng-click="business.cancel()" translate>Cancel</button>
         </h2>
 
         <div class="well-item">
           <form class="form-block" ng-class="{ editable:business.editable }" name="busSettings">
 
             <div class="row">
-              <label class="col-xs-5" for="businessPhone"><span translate>Phone</span></label>
+              <label class="col-xs-3" for="businessPhone"><span translate>Phone</span></label>
               <!-- This code should be added back in as soon as contact info management goes live, and the following temporary code
               block should be removed
               <div class="col-xs-7" nxg-input model="business.data.phone" editable="business.editable">
@@ -131,10 +122,10 @@
                 </label>
               </div>-->
               <!-- Begin temporary code -->
-              <div class="col-xs-4" style="margin-top: 14px" id="businessPhone" name="businessPhone" ng-cloak>{{title.data.titleAddress.Phone | tel}}</div>
-              <div class="col-xs-3" style="padding-left: 30px">
+              <div class="col-xs-6" style="margin-top: 14px" id="businessPhone" name="businessPhone" ng-cloak>{{title.data.titleAddress.Phone | tel}}</div>
+              <div class="col-xs-1" style="padding-left: 30px">
                 <div class="btn-help btn-help-adjust"
-                     tooltip-placement="right"
+                     tooltip-placement="bottom"
                      tooltip-trigger="mouseenter"
                      uib-tooltip="{{ 'To change your phone number, please contact customer service for further assistance.' | translate }}"
                      tooltip-animation="true">
@@ -144,8 +135,8 @@
             </div>
 
             <div class="row"  ng-show="business.contactInfo.isDisplayed()">
-              <label class="col-xs-5" for="businessFax"><span translate>Fax</span></label>
-              <div class="col-xs-7" nxg-input model="business.data.fax" editable="business.editable">
+              <label class="col-xs-3" for="businessFax"><span translate>Fax</span></label>
+              <div class="col-xs-6" nxg-input model="business.data.fax" editable="business.editable">
                 <input type="tel" class="xsmallInput" id="businessFax" name="businessFax" ng-model="title.data.titleAddress.Fax"
                        value="business.dirtyData.fax"
                        ng-class="{ 'nxg-invalid': business.validation.businessFax.$invalid }" required/>
@@ -156,7 +147,7 @@
             </div>
 
             <div class="row small-bottom-border">
-              <label class="col-xs-5" for="businessEmail"><span translate>Email</span></label>
+              <label class="col-xs-3" for="businessEmail"><span translate>Email</span></label>
               <!-- This code should be added back in as soon as contact info management goes live, and the following temporary code
               block should be removed
 
@@ -169,10 +160,10 @@
                 </label>
               </div> -->
               <!-- Begin temporary code -->
-              <div class="col-xs-4" style="margin-top: 14px" id="businessEmail" name="businessEmail" ng-cloak>{{business.data.email | truncate: 23}}</div>
-              <div class="col-xs-3" style="padding-left: 30px">
+              <div class="col-xs-6" style="margin-top: 14px" id="businessEmail" name="businessEmail" ng-cloak>{{business.data.email | truncate: 23}}</div>
+              <div class="col-xs-1" style="padding-left: 30px">
                 <div class="btn-help btn-help-adjust"
-                     tooltip-placement="right"
+                     tooltip-placement="bottom"
                      tooltip-trigger="mouseenter"
                      uib-tooltip="{{ 'To change your email address, please contact customer service for further assistance.' | translate }}"
                      tooltip-animation="true">
@@ -187,35 +178,34 @@
 
             <div class="row" ng-show="isDealer">
               <label class="col-xs-5" for="enhanced"><span translate>Enhanced Registration Enabled</span></label>
-              <!--From develop: <label class="span5" for="enhanced"><span translate>Enhanced Registration Enabled</span>:</label>-->
-              <div class="col-xs-7">
-                <div class="row">
-                  <div class="col-xs-7">
-                    <div class="static" ng-show="business.data.enhancedRegistrationEnabled && !business.editable" translate> Yes </div>
-                    <!-- check if equal to false so "No" doesn't appear until the API call finishes -->
-                    <div class="static" ng-show="business.data.enhancedRegistrationEnabled == false && !business.editable" translate> No </div>
 
-                    <div class="cr-inline" ng-show="business.editable">
-                      <input type="radio" id="enhancedNo" name="enhanced" ng-model="business.dirtyData.enhancedRegistrationEnabled" ng-value='false' ng-click="business.confirmDisableEnhanced()"/>
-                      <label class="radio-img" for="enhancedNo"></label>
-                      <label class="cr-label" for="enhancedNo" translate>No</label>
+              <div class="col-xs-4">
+                <div class="static" ng-show="business.data.enhancedRegistrationEnabled && !business.editable" translate> Yes </div>
+                <!-- check if equal to false so "No" doesn't appear until the API call finishes -->
+                <div class="static" ng-show="business.data.enhancedRegistrationEnabled == false && !business.editable" translate> No </div>
 
-                      <input type="radio" id="enhancedYes" name="enhanced" ng-model="business.dirtyData.enhancedRegistrationEnabled" ng-value='true' />
-                      <label class="radio-img" for="enhancedYes"></label>
-                      <label class="cr-label" for="enhancedYes" translate>Yes</label>
-                    </div>
-                  </div>
-                  <div class="col-xs-5">
-                    <div class="btn-help btn-help-adjust"
-                         tooltip-placement="right"
-                         tooltip-trigger="mouseenter"
-                         uib-tooltip="{{ 'Enhanced Registration will result in all account access being restricted to users with a PIN.' | translate }}"
-                         tooltip-animation="true">
-                      <span nxg-icon="icon-help"></span>
-                    </div>
-                  </div>
+                <div class="cr-inline" ng-show="business.editable">
+                  <input type="radio" id="enhancedNo" name="enhancedx" ng-model="business.dirtyData.enhancedRegistrationEnabled" ng-value='false' ng-click="business.confirmDisableEnhanced()"/>
+                  <label class="radio-img" for="enhancedNo"></label>
+                  <label class="cr-label" style="padding: 10px 15px 0 0;" for="enhancedNo" translate>No</label>
+
+                  <input type="radio" id="enhancedYes" name="enhanced" ng-model="business.dirtyData.enhancedRegistrationEnabled" ng-value='true' />
+                  <label class="radio-img" for="enhancedYes"></label>
+                  <label class="cr-label" style="padding: 10px 15px 0 0;" for="enhancedYes" translate>Yes</label>
                 </div>
               </div>
+              <div class="col-xs-1" style="padding-left: 30px;">
+                <div class="btn-help btn-help-adjust"
+                     tooltip-placement="bottom"
+                     tooltip-trigger="mouseenter"
+                     uib-tooltip="{{ 'Enhanced Registration will result in all account access being restricted to users with a PIN.' | translate }}"
+                     tooltip-animation="true">
+                  <span nxg-icon="icon-help"></span>
+                </div>
+              </div>
+
+
+
             </div>
 
             <div ng-show="business.editable && business.dirtyData.enhancedRegistrationEnabled">
@@ -254,7 +244,6 @@
 
             </div>
 
-
           </form>
         </div>
       </div>
@@ -262,7 +251,7 @@
 
 
     <!-- ADDRESS SETTINGS (formerly Title Settings)-->
-    <div class="col-xs-6">
+    <div class="col-md-6">
       <div class="panel panel-default settings-well">
         <h2 class="well-title">
           <span translate>Address Settings</span>
@@ -274,7 +263,7 @@
         <div class="well-item">
           <form class="form-block" ng-class="{ editable:title.editable }" name="titleSettings">
             <div class="row">
-              <label class="col-xs-4" for="titleAddr"><span translate>Default Address</span></label>
+              <label class="col-xs-3" for="titleAddr"><span translate>Default Address</span></label>
 
               <div class="col-xs-8">
                 <div class="row" ng-show="title.editable">
@@ -283,14 +272,14 @@
                       <select id="titleAddr" ng-model="title.dirtyData.titleAddress"
                               ng-options="addr | address:'oneLineSelect' for addr in title.data.addresses"
                               uib-tooltip="{{ addr | address:'oneLine' }}"
-                              tooltip-placement="right"
+                              tooltip-placement="bottom"
                               tooltip-popup-delay="700">
                       </select>
                     </div>
                   </div>
                   <div class="col-xs-2">
                     <button class="btn-help btn-help-adjust"
-                            tooltip-placement="left"
+                            tooltip-placement="bottom"
                             tooltip-trigger="mouseenter"
                             uib-tooltip="{{ 'To update or add a Title Settings address, please contact NextGear Capital at:' | translate }} {{ customerSupportPhone }}"
                             tooltip-animation="true">
@@ -323,7 +312,7 @@
             </div>
 
             <div class="row alt-addr" ng-show="title.data.addresses && title.data.addresses.length > 0 && !title.editable">
-              <label class="col-xs-4"><span translate>Additional Addresses</span></label>
+              <label class="col-xs-3"><span translate>Additional Addresses</span></label>
 
               <div class="col-xs-8 static" ng-hide="title.editable">
                 <ul class="zeroLeftPadding">
@@ -400,23 +389,5 @@
       </div>
     </div>
 
-    <!-- SELF-SERVICE LINKS -->
-    <div class="col-xs-6">
-      <div class="panel panel-default settings-well">
-        <h2 class="well-title" translate>Self-Service Links</h2>
-
-        <div class="well-item">
-          <div class="row form-block">
-            <!-- CREDIT INCREASE -->
-            <div class="col-xs-6 custom static">
-              <p><a href="javascript:void(0)" ng-click="onRequestCredIncr()" translate>Request a Credit Increase</a><br/>
-            <span
-              translate>Initiate your request for a permanent or temporary increase to your current line of credit.</span>
-              </p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
   </div>
 </div>
