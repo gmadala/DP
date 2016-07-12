@@ -26,6 +26,11 @@ function LoginObjects() {
   this.elSecQues6 = browser.element.all(by.id('question6'));
   this.elSecQues9 = browser.element.all(by.id('question9'));
   this.elSignOut = browser.element(by.css('a'));
+  this.elLangChooser = browser.element(by.css('div.nav-language-chooser'));
+  this.elEnglish = browser.element(by.buttonText("English"));
+  this.elSpanish = browser.element(by.buttonText("Español"));
+  this.elFrench = browser.element(by.buttonText("Français"));
+  this.elMNGLogo = browser.element(by.css('div.nxg-logo'));
 
   //Doers
   this.doForgotUsernamePassword = function() {
@@ -70,7 +75,19 @@ function LoginObjects() {
     this.doMyAccount();
     return this.elSignOut.click();
   };
-
+  this.doEnglish = function () {
+    this.elEnglish.click();
+    browser.sleep(delay);
+  };
+  this.doSpanish = function () {
+    this.elSpanish.click();
+    browser.sleep(delay);
+  };
+  this.doFrench = function () {
+    this.elFrench.click();
+    browser.sleep(delay);
+  };
+  
   //Getters
   this.getTextForgotUsernamePassword = function() {
     return this.elForgotUsernamePassword.getText();
@@ -82,6 +99,10 @@ function LoginObjects() {
     browser.sleep(delay);
     return this.elSubmitUsername.getText();
   };
+  this.getTextLogin = function (){
+    browser.sleep(delay);
+    return this.elLogin.getText();
+  }
 
   //Setters
   this.setEmail = function(param) {
