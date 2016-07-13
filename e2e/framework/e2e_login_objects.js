@@ -6,8 +6,6 @@
  * */
 
 function LoginObjects() {
-  var username = '79714js';
-  var password = 'ngcpass!0';
 
   this.elForgotUsernamePassword = browser.element(by.id("forgotUsernamePassword"));
   this.elEmail = browser.element(by.id("email"));
@@ -63,7 +61,7 @@ function LoginObjects() {
   this.doGoodLogin = function () {
     this.doClearLogin();
     browser.sleep(browser.params.shortDelay);
-    this.setLogin(username, password);
+    this.setLogin(browser.params.userName, browser.params.password);
     this.doLogin();
   };
   this.doEnglish = function () {

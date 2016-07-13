@@ -33,6 +33,8 @@ exports.config = {
     realtimeFailure: true
   },
   params: {
+    userNameDealer: '53190md',
+    userNameAuction: 'tmsauction',
     userName: '97421EH',
     password: 'ngcpass!0',
     shortDelay: '1000',

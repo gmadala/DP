@@ -10,8 +10,6 @@ var correctAnswer = 'a';
 var validEmail = 'test@gmail.com';
 var invalidEmail = 'asdas@gmail.com';
 var invalidFormatEmail = 'testtesttest';
-var username = '79714js';
-var password = 'ngcpass!0';
 
 var loginObjects = new loginObjects.loginObjects();
 var modalObjects = new modalObjects.modalObjects();

@@ -1,7 +1,5 @@
 'use strict';
 
-var userName = '53190md';
-var password = 'ngcpass!0';
 var login = {
 
   elements: {
@@ -89,7 +87,7 @@ var login = {
 
   //Functions
   login: function () {
-    this.enterUserName(userName);
+    this.enterUserName(browser.params.userName);
     browser.sleep(browser.params.longDelay);
     this.enterPassword(password);
     browser.sleep(browser.params.longDelay);

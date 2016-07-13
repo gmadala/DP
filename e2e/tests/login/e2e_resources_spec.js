@@ -8,8 +8,6 @@ var execSettings = require('../../framework/e2e_execSettings.js');
 var loginObjects = new loginObjects.loginObjects();
 var resources = new resources.resources();
 
-var delay = 2000;
-
 describe('Testing Resources Page', function() {
 
   beforeEach(function() {
