@@ -3,6 +3,7 @@
 var loginObjects = require('../../framework/e2e_login_objects.js');
 var login = require('../../framework/e2e_login.js');
 var execSettings = require('../../framework/e2e_execSettings.js');
+var helper = require('../../framework/e2e_helper_functions.js');
 
 var loginObjects = new loginObjects.loginObjects();
 
@@ -14,7 +15,7 @@ describe("Login as Dealer\n ", function () {
   });
 
   it("1. Login - No Username and Password", function () {
-    browser.get(execSettings.loginPage());
+    helper.goToLogin();
     loginObjects.setLogin('', '');
     loginObjects.doLogin();
     expect(browser.getCurrentUrl()).toEqual(execSettings.loginPage());

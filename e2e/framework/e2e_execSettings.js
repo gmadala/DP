@@ -33,9 +33,11 @@ exports.homePage = function () {
 exports.auctionHomePage = function () {
   return baseUrl + 'act/home';
 };
+
 exports.forgotPage = function () {
   return baseUrl + 'login/recover';
 };
+
 exports.resourcesPage = function () {
   return baseUrl + 'documents';
 };

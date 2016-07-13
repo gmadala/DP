@@ -5,6 +5,7 @@ var recoverErrorMessage = require('../../framework/e2e_login_recover_objects.js'
 var login = require('../../framework/e2e_login.js');
 var modalObjects = require('../../framework/e2e_modal_objects.js');
 var execSettings = require('../../framework/e2e_execSettings.js');
+var helper = require('../../framework/e2e_helper_functions.js');
 var incorrectAnswer = 'f';
 var correctAnswer = 'a';
 var validEmail = 'test@gmail.com';
@@ -19,7 +20,7 @@ describe("Login Recovery\n ", function () {
   beforeEach(function () {
     browser.sleep(browser.params.shortDelay);
     browser.driver.manage().window().maximize();
-    browser.get(execSettings.loginPage());
+    helper.goToLogin();
     browser.ignoreSynchronization = true;
   });
   afterEach(function () {

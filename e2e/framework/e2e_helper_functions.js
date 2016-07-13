@@ -28,7 +28,7 @@ helper.prototype = Object.create({}, {
      */
     value: function () {
       browser.get(execSettings.loginPage());
-      browser.sleep(browser.params.longDelay);
+      browser.sleep(browser.params.mediumDelay);
     }
   },
   goToHome: {
@@ -42,7 +42,21 @@ helper.prototype = Object.create({}, {
      */
     value: function () {
       browser.get(execSettings.homePage());
-      browser.sleep(browser.params.longDelay);
+      browser.sleep(browser.params.mediumDelay);
+    }
+  },
+  goToResources: {
+    /**
+     * @name goToResources
+     * @memberof helper
+     * @author Derek Gibson
+     * @description This function navigates to the resources page
+     *
+     * @returns {none}
+     */
+    value: function () {
+      browser.get(execSettings.resourcesPage());
+      browser.sleep(browser.params.mediumDelay);
     }
   },
 
@@ -63,7 +77,7 @@ helper.prototype = Object.create({}, {
 
 
       var isVisible = EC.visibilityOf(elementId);
-      browser.wait(isVisible, browser.params.longDelay);
+      browser.wait(isVisible, browser.params.mediumDelay);
     }
   },
   waitForClickable: {
@@ -84,8 +98,8 @@ helper.prototype = Object.create({}, {
 
       //doing this twice makes the tests stable, protractor has issues, man
       //still better than a static sleep()
-      browser.wait(isClickable, browser.params.longDelay);
-      browser.wait(isClickable, browser.params.longDelay);
+      browser.wait(isClickable, browser.params.mediumDelay);
+      browser.wait(isClickable, browser.params.mediumDelay);
     }
   },
   takeSnapshot: {
