@@ -100,7 +100,7 @@ describe("Login Recovery\n ", function () {
     expect(browser.getCurrentUrl() === execSettings.loginPage());
   });
 
-  it("4. As a dealer I forgot my password. All my answers", function () {
+  it("4. Dealer - Forgot password and provide answers", function () {
     //Check button text
     loginObjects.doForgotUsernamePassword();
     expect(browser.getCurrentUrl() === execSettings.forgotPage());
@@ -131,6 +131,25 @@ describe("Login Recovery\n ", function () {
     modalObjects.doOKBtn();
     //Exit out and verify back to main
     expect(browser.getCurrentUrl() === execSettings.loginPage());
+  });
+
+  it("5. Dealer - Validating the NGC Logo and Language selection in Login Page", function () {
+    expect(loginObjects.elMNGLogo.isDisplayed()).toBe(true);
+    expect(loginObjects.elLangChooser.isDisplayed()).toBe(true);
+    expect(loginObjects.elEnglish.isDisplayed()).toBe(true);
+    expect(loginObjects.elSpanish.isDisplayed()).toBe(true);
+    expect(loginObjects.elFrench.isDisplayed()).toBe(true);
+    //Validating the default language as English
+    expect(loginObjects.getTextLogin()).toBe("Log In");
+    //Validating the Spanish Language button
+    loginObjects.doSpanish();
+    expect(loginObjects.getTextLogin()).toBe("Iniciar sesión");
+    //Validating the French Language button
+    loginObjects.doFrench();
+    expect(loginObjects.getTextLogin()).toBe("Ouverture de session");
+    //Validating the English language button
+    loginObjects.doEnglish();
+    expect(loginObjects.getTextLogin()).toBe("Log In");
   });
 
 });
