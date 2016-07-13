@@ -37,12 +37,7 @@ describe("Login as Dealer\n ", function () {
   });
 
   it("4. Login - Logout Dealer Confirm", function () {
-    login.clickMyAccount();
-    browser.sleep(longDelay);
-    login.clickSignoutButton();
-    browser.sleep(longDelay);
-    login.clickSignoutConfirm();
-    browser.sleep(longDelay);
+    login.logout();
     expect(browser.getCurrentUrl()).toEqual(execSettings.loginPage());
   });
 
@@ -67,12 +62,7 @@ describe("Login as Auction\n ", function () {
   });
 
   it("7. Login - Logout Auction Confirm", function () {
-    loginObjects.doMyAccount();
-    browser.sleep(longDelay);
-    login.clickSignoutButton();
-    browser.sleep(longDelay);
-    login.clickSignoutConfirm();
-    browser.sleep(longerDelay);
+    login.logout();
     expect(browser.getCurrentUrl()).toEqual(execSettings.loginPage());
   });
 

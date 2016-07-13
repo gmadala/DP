@@ -104,6 +104,14 @@ var login = {
     browser.sleep(longDelay);
     this.clickLoginButton();
   },
+  logout: function () {
+    this.doMyAccount();
+    browser.sleep(longDelay);
+    this.clickSignoutButton();
+    browser.sleep(longDelay);
+    this.clickSignoutConfirm();
+    browser.sleep(longDelay);
+  },
 
   //Count
   disabledCount: function () {

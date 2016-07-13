@@ -181,9 +181,7 @@ describe('Testing Resources Page', function() {
 
   it("Logout Resources", function () {
     browser.sleep(delay);
-    loginObjects.doMyAccount();
-    login.clickSignoutButton();
-    login.clickSignoutConfirm();
+    login.logout();
     expect(browser.getCurrentUrl()).toEqual(execSettings.loginPage());
   });
 });

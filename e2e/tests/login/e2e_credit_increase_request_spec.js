@@ -77,9 +77,7 @@ describe("Credit Increase Request \n ", function () {
   });
 
   it("5. Logout Recover", function () {
-    loginObjects.doMyAccount();
-    login.clickSignoutButton();
-    login.clickSignoutConfirm();
+    login.logout();
     expect(browser.getCurrentUrl()).toEqual(execSettings.loginPage());
   });
 });
