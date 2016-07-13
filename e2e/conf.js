@@ -4,15 +4,23 @@ exports.config = {
 
   // Capabilities to be passed to the webdriver instance.
   capabilities: {
-    'browserName': 'chrome'
-    //incognito mode
-    //'browserName': 'chrome', 'chromeOptions': { 'args': ['incognito'] }
+    'browserName': 'chrome',
+    'chromeOptions': {
+      'args': [
+        '--disable-extensions',
+        '-–allow-file-access-from-files',
+        //'--incognito',
+        '--disable-web-security'
+      ]
+    }
   },
-  framework: 'jasmine2',
-  // Spec patterns are relative to the current working directly when
-  // protractor is called.
+
+  framework: 'jasmine',
+
+  // Spec patterns are relative to the current working directly when protractor is called.
   specs: ['tests/login/*_spec.js'],
-  //specs: ['tests/login/e2e_login_spec.js'],
+  //specs: ['tests/login/e2e_resources_spec.js'],
+
   // untrackOutstandingTimeouts: true,
   restartBrowserBetweenTests: false,
 
@@ -26,10 +34,10 @@ exports.config = {
   },
   params: {
     userName: '97421EH',
-    userName2: '36017RDT',
     password: 'ngcpass!0',
     shortDelay: '1000',
     mediumDelay: '3000',
-    longDelay: '5000'
+    longDelay: '5000',
+    longerDelay: '10000'
   }
 };
