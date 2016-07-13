@@ -202,6 +202,7 @@
 
     $scope.toggleMenu = function() {
       $state.current.data.showMenu = !$state.current.data.showMenu;
+      $scope.closeMenuTip();
     };
 
     $scope.closeMenu = function() {
@@ -227,8 +228,10 @@
     $scope.hideMenuTip = localStorageService.get('hideMenuTip') || false;
     $scope.templateUrl = "/app/client/shared/directives/navbar/menuTip.html";
     $scope.closeMenuTip = function() {
-      localStorageService.set('hideMenuTip', true);
-      $scope.hideMenuTip = true;
+      if (!$scope.hideMenuTip) {
+        localStorageService.set('hideMenuTip', true);
+        $scope.hideMenuTip = true;
+      }
     };
   }
 })();

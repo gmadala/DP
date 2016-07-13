@@ -102,7 +102,7 @@ function LoginObjects() {
   this.getTextLogin = function (){
     browser.sleep(delay);
     return this.elLogin.getText();
-  }
+  };
 
   //Setters
   this.setEmail = function(param) {

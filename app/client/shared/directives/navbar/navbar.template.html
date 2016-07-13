@@ -77,7 +77,13 @@
     </div>
   </div>
 
-  <div ng-if="navState.current.data.showNavBar">
+  <div ng-if="navState.current.data.showNavBar"
+       popover-title="Updated myNextGear Menu"
+       popover-placement="bottom"
+       uib-popover-template="'client/shared/directives/navbar/menuTip.html'"
+       popover-is-open="!hideMenuTip "
+       popover-trigger="none"
+  >
     <nav id="navbar" class="navbar navbar-default mng-navbar main-navbar mobile-navbar " ng-class="{'menu-open in' : navState.current.data.showMenu }">
       <div class="container"
            ng-class="{'auction-nav':!user.isDealer(), 'es-nav':isCurrentLanguage('es') && !user.isDealer(), 'fr-nav': isCurrentLanguage('fr_CA') && !user.isDealer()}">
@@ -99,12 +105,7 @@
         </div>
 
         <div class="collapse navbar-collapse" ng-class="{'in': navState.current.data.showMenu}" ng-click="closeMenu()">
-          <ul class="nav navbar-nav"
-              popover-title="Updated myNextGear Menu"
-              popover-placement="bottom"
-              uib-popover-template="'client/shared/directives/navbar/menuTip.html'"
-              popover-is-open="!hideMenuTip"
-              popover-trigger="none">
+          <ul class="nav navbar-nav">
             <li class="visible-xs" ng-if="user.isDealer()">
               <a href="#" ng-href="#/checkout" ng-click="setPageTitle('Checkout')">Checkout</a>
             </li>
