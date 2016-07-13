@@ -68,13 +68,15 @@ body {
   position: relative;
 
   &::after {
-    background-color: $primary;
+    //background-color: $primary;
     @extend %full-width;
     content: '';
     position: fixed;
     top: 0;
     height: 100%;
     z-index: -5;
+    background-image: url(../img/dashboardTest.jpeg);
+    background-size: cover;
   }
 }
 
