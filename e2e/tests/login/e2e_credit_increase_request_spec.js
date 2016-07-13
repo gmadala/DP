@@ -23,10 +23,10 @@ describe("Credit Increase Request \n ", function () {
 
   it("1. Dealer - Login as 97421eh ", function () {
     browser.get(execSettings.loginPage());
-    expect(browser.getCurrentUrl() === execSettings.loginPage());
+    expect(browser.getCurrentUrl()).toEqual(execSettings.loginPage());
     browser.sleep(browser.params.shortDelay);
     login.login2(browser.params.userName, browser.params.password);
-    expect(browser.getCurrentUrl() === execSettings.homePage());
+    expect(browser.getCurrentUrl()).toEqual(execSettings.homePage());
 
   });
 
@@ -40,7 +40,7 @@ describe("Credit Increase Request \n ", function () {
     expect(modalObjects.getTextHeader()).toEqual("Request a Credit Increase");
     expect(modalObjects.getTextBody()).toEqual("Your request has been submitted. Credit requests typically take 3-5 business days to process. You will be notified as soon as your request has been processed.");
     modalObjects.doOKBtn();
-    expect(browser.getCurrentUrl() === execSettings.homePage());
+    expect(browser.getCurrentUrl()).toEqual(execSettings.homePage());
   });
 
   it("3. Dealer - Request a Permanent Credit Increase", function () {
@@ -53,7 +53,7 @@ describe("Credit Increase Request \n ", function () {
     expect(modalObjects.getTextHeader()).toEqual("Request a Credit Increase");
     expect(modalObjects.getTextBody()).toEqual("Your request has been submitted. Credit requests typically take 3-5 business days to process. You will be notified as soon as your request has been processed.");
     modalObjects.doOKBtn();
-    expect(browser.getCurrentUrl() === execSettings.homePage());
+    expect(browser.getCurrentUrl()).toEqual(execSettings.homePage());
   });
 
   it("4. Dealer - Print a Receipt by Grouped VIN", function () {
@@ -80,6 +80,6 @@ describe("Credit Increase Request \n ", function () {
     loginObjects.doMyAccount();
     login.clickSignoutButton();
     login.clickSignoutConfirm();
-    expect(browser.getCurrentUrl() === execSettings.loginPage());
+    expect(browser.getCurrentUrl()).toEqual(execSettings.loginPage());
   });
 });

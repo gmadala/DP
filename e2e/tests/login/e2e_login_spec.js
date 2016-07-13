@@ -22,18 +22,18 @@ describe("Login as Dealer\n ", function () {
     browser.get(execSettings.loginPage());
     loginObjects.setLogin('', '');
     loginObjects.doLogin();
-    expect(browser.getCurrentUrl()).toBe(execSettings.loginPage());
+    expect(browser.getCurrentUrl()).toEqual(execSettings.loginPage());
   });
 
   it("2. Login - Incorrect Username and Password", function () {
     loginObjects.setLogin('test', 'test');
     loginObjects.doLogin();
-    expect(browser.getCurrentUrl()).toBe(execSettings.loginPage());
+    expect(browser.getCurrentUrl()).toEqual(execSettings.loginPage());
   });
 
   it("3. Login - Good Dealer Login", function () {
     loginObjects.doGoodLogin();
-    expect(browser.getCurrentUrl()).toBe(execSettings.homePage());
+    expect(browser.getCurrentUrl()).toEqual(execSettings.homePage());
   });
 
   it("4. Login - Logout Dealer Confirm", function () {
@@ -43,7 +43,7 @@ describe("Login as Dealer\n ", function () {
     browser.sleep(longDelay);
     login.clickSignoutConfirm();
     browser.sleep(longDelay);
-    expect(browser.getCurrentUrl()).toBe(execSettings.loginPage());
+    expect(browser.getCurrentUrl()).toEqual(execSettings.loginPage());
   });
 
 });
@@ -53,7 +53,7 @@ describe("Login as Auction\n ", function () {
   it("5. Login - Good Auction Login", function () {
     loginObjects.setLogin(auctionUsername, auctionPassword);
     loginObjects.doLogin();
-    expect(browser.getCurrentUrl()).toBe(execSettings.auctionHomePage());
+    expect(browser.getCurrentUrl()).toEqual(execSettings.auctionHomePage());
   });
 
   it("6. Login - Logout Auction Cancel", function () {
@@ -63,7 +63,7 @@ describe("Login as Auction\n ", function () {
     browser.sleep(longDelay);
     login.clickSignoutCancel();
     browser.sleep(longDelay);
-    expect(browser.getCurrentUrl()).toBe(execSettings.auctionHomePage());
+    expect(browser.getCurrentUrl()).toEqual(execSettings.auctionHomePage());
   });
 
   it("7. Login - Logout Auction Confirm", function () {
@@ -73,7 +73,7 @@ describe("Login as Auction\n ", function () {
     browser.sleep(longDelay);
     login.clickSignoutConfirm();
     browser.sleep(longerDelay);
-    expect(browser.getCurrentUrl()).toBe(execSettings.loginPage());
+    expect(browser.getCurrentUrl()).toEqual(execSettings.loginPage());
   });
 
 });

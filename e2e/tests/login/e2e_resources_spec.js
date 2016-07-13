@@ -184,6 +184,6 @@ describe('Testing Resources Page', function() {
     loginObjects.doMyAccount();
     login.clickSignoutButton();
     login.clickSignoutConfirm();
-    expect(browser.getCurrentUrl() === execSettings.loginPage());
+    expect(browser.getCurrentUrl()).toEqual(execSettings.loginPage());
   });
 });
