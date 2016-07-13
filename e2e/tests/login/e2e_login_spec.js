@@ -17,10 +17,6 @@ describe("Login as Dealer\n ", function () {
     browser.sleep(browser.params.shortDelay);
     browser.ignoreSynchronization = true;
   });
-  afterEach(function () {
-    //browser.executeScript('window.sessionStorage.clear();');
-    //browser.executeScript('window.localStorage.clear();');
-  });
 
   it("1. Login - No Username and Password", function () {
     browser.get(execSettings.loginPage());
