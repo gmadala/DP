@@ -12,8 +12,6 @@ var invalidEmail = 'asdas@gmail.com';
 var invalidFormatEmail = 'testtesttest';
 var username = '79714js';
 var password = 'ngcpass!0';
-var longDelay = 6000;
-var mediumDelay = 3000;
 
 var loginObjects = new loginObjects.loginObjects();
 var modalObjects = new modalObjects.modalObjects();
@@ -62,7 +60,7 @@ describe("Login Recovery\n ", function () {
   it("3. Dealer - Forgot User name. invalid email id no problems ", function () {
     loginObjects.setLogin('53190md', 'incorrect');
     loginObjects.doLogin();
-    browser.sleep(longDelay);
+    browser.sleep(browser.params.longDelay);
     expect(login.getInvalidLoginText1()).toEqual("We're sorry, but you used a username or password that doesn't match our records.");
     expect(login.getInvalidLoginText2()).toEqual('If you are experiencing an issue logging in, click "Forgot your username or password?" below, or contact:');
     loginObjects.doForgotUsernamePassword();
@@ -107,7 +105,7 @@ describe("Login Recovery\n ", function () {
     //Enter Username
     loginObjects.elFUPWUsername.sendKeys('36017RDT');
     loginObjects.doSubmitPassword();
-    browser.sleep(mediumDelay);
+    browser.sleep(browser.params.mediumDelay);
     //Answer Security Questions and validate
     expect(recoverErrorMessage.getSecurityQuestion10Text()).toEqual("What is the name of a college you applied to but didn't attend?");
     expect(recoverErrorMessage.getSecurityQuestion6Text()).toEqual("In what city or town was your first job?");
@@ -115,7 +113,7 @@ describe("Login Recovery\n ", function () {
     //Entering incorrect Answer
     loginObjects.setSecQuestions(incorrectAnswer);
     loginObjects.doSubmitPassword();
-    browser.sleep(mediumDelay);
+    browser.sleep(browser.params.mediumDelay);
     //Verify Success Modal
     expect(recoverErrorMessage.getPasswordErrorText()).toEqual("We were unable verify one or more of your answers. If you need assistance, please call NextGear Capital Support at:");
     expect(recoverErrorMessage.getPasswordErrorTextPhoneNumber()).toContain("United States 1.888.969.3721");
@@ -124,7 +122,7 @@ describe("Login Recovery\n ", function () {
     //Entering correct Answer
     loginObjects.setSecQuestions(correctAnswer);
     loginObjects.doSubmitPassword();
-    browser.sleep(mediumDelay);
+    browser.sleep(browser.params.mediumDelay);
     //Validating Success Modal window
     expect(modalObjects.getTextHeader()).toEqual("Success");
     expect(modalObjects.getTextBody()).toEqual("Thank you, check your email for the requested account information.");

@@ -13,7 +13,6 @@ var helper = function () {
 };
 
 var EC = protractor.ExpectedConditions;
-var longDelay = 5000;
 
 helper.prototype = Object.create({}, {
 
@@ -29,7 +28,7 @@ helper.prototype = Object.create({}, {
      */
     value: function () {
       browser.get(execSettings.loginPage());
-      browser.sleep(longDelay);
+      browser.sleep(browser.params.longDelay);
     }
   },
   goToHome: {
@@ -43,7 +42,7 @@ helper.prototype = Object.create({}, {
      */
     value: function () {
       browser.get(execSettings.homePage());
-      browser.sleep(longDelay);
+      browser.sleep(browser.params.longDelay);
     }
   },
 
@@ -64,7 +63,7 @@ helper.prototype = Object.create({}, {
 
 
       var isVisible = EC.visibilityOf(elementId);
-      browser.wait(isVisible, longDelay);
+      browser.wait(isVisible, browser.params.longDelay);
     }
   },
   waitForClickable: {
@@ -85,8 +84,8 @@ helper.prototype = Object.create({}, {
 
       //doing this twice makes the tests stable, protractor has issues, man
       //still better than a static sleep()
-      browser.wait(isClickable, longDelay);
-      browser.wait(isClickable, longDelay);
+      browser.wait(isClickable, browser.params.longDelay);
+      browser.wait(isClickable, browser.params.longDelay);
     }
   },
   takeSnapshot: {

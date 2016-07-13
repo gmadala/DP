@@ -8,9 +8,6 @@
 function LoginObjects() {
   var username = '79714js';
   var password = 'ngcpass!0';
-  var delay = 1000;
-  var longDelay = 2000;
-  var longerDelay = 5000;
 
   this.elForgotUsernamePassword = browser.element(by.id("forgotUsernamePassword"));
   this.elEmail = browser.element(by.id("email"));
@@ -35,51 +32,51 @@ function LoginObjects() {
   //Doers
   this.doForgotUsernamePassword = function () {
     this.elForgotUsernamePassword.click();
-    browser.sleep(delay);
+    browser.sleep(browser.params.shortDelay);
   };
   this.doUsernameSubmit = function () {
     this.elSubmitUsername.click();
-    browser.sleep(delay);
+    browser.sleep(browser.params.shortDelay);
   };
   this.doSignUpLogin = function () {
     this.elSignUpLogin.click();
-    browser.sleep(longDelay);
+    browser.sleep(browser.params.longDelay);
   };
   this.doClearLogin = function () {
     this.elUserName.clear();
-    browser.sleep(longDelay);
+    browser.sleep(browser.params.longDelay);
     this.elPassWord.clear();
-    browser.sleep(longDelay);
+    browser.sleep(browser.params.longDelay);
   };
   this.doLogin = function () {
     this.elLogin.click();
-    browser.sleep(longerDelay);
+    browser.sleep(browser.params.longerDelay);
   };
   this.doMyAccount = function () {
     this.elMyAccount.click();
-    browser.sleep(longDelay);
+    browser.sleep(browser.params.longDelay);
   };
   this.doSubmitPassword = function () {
     this.elSubmitPassword.click();
-    browser.sleep(longDelay);
+    browser.sleep(browser.params.longDelay);
   };
   this.doGoodLogin = function () {
     this.doClearLogin();
-    browser.sleep(delay);
+    browser.sleep(browser.params.shortDelay);
     this.setLogin(username, password);
     this.doLogin();
   };
   this.doEnglish = function () {
     this.elEnglish.click();
-    browser.sleep(delay);
+    browser.sleep(browser.params.shortDelay);
   };
   this.doSpanish = function () {
     this.elSpanish.click();
-    browser.sleep(delay);
+    browser.sleep(browser.params.shortDelay);
   };
   this.doFrench = function () {
     this.elFrench.click();
-    browser.sleep(delay);
+    browser.sleep(browser.params.shortDelay);
   };
 
   //Getters
@@ -93,7 +90,7 @@ function LoginObjects() {
     return this.elSubmitUsername.getText();
   };
   this.getTextLogin = function (){
-    browser.sleep(delay);
+    browser.sleep(browser.params.shortDelay);
     return this.elLogin.getText();
   }
 
@@ -104,19 +101,19 @@ function LoginObjects() {
   this.setLogin = function (username, password) {
     this.doClearLogin();
     this.elUserName.sendKeys(username);
-    browser.sleep(delay);
+    browser.sleep(browser.params.shortDelay);
     this.elPassWord.sendKeys(password);
-    browser.sleep(delay);
+    browser.sleep(browser.params.shortDelay);
   };
   this.setSecQuestions = function (param) {
     this.elSecQues10.clear().sendKeys(param);
     this.elSecQues10.sendKeys(protractor.Key.TAB);
-    browser.sleep(delay);
+    browser.sleep(browser.params.shortDelay);
     this.elSecQues6.clear().sendKeys(param);
     this.elSecQues10.sendKeys(protractor.Key.TAB);
-    browser.sleep(delay);
+    browser.sleep(browser.params.shortDelay);
     this.elSecQues9.clear().sendKeys(param);
-    browser.sleep(delay);
+    browser.sleep(browser.params.shortDelay);
   };
 
 }

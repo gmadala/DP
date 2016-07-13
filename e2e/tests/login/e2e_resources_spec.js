@@ -18,10 +18,10 @@ describe('Testing Resources Page', function() {
 
   it('Dealer - Login', function() {
     browser.get(execSettings.loginPage());
-    browser.sleep(delay);
+    browser.sleep(browser.params.shortDelay);
     login.login();
     resources.doResources();
-    browser.sleep(delay);
+    browser.sleep(browser.params.shortDelay);
     expect(browser.getCurrentUrl() === execSettings.resourcesPage());
   });
 
@@ -180,7 +180,7 @@ describe('Testing Resources Page', function() {
   });
 
   it("Logout Resources", function () {
-    browser.sleep(delay);
+    browser.sleep(browser.params.shortDelay);
     login.logout();
     expect(browser.getCurrentUrl()).toEqual(execSettings.loginPage());
   });

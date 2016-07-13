@@ -53,11 +53,11 @@ describe("Login as Auction\n ", function () {
 
   it("6. Login - Logout Auction Cancel", function () {
     loginObjects.doMyAccount();
-    browser.sleep(longDelay);
+    browser.sleep(browser.params.mediumDelay);
     login.clickSignoutButton();
-    browser.sleep(longDelay);
+    browser.sleep(browser.params.mediumDelay);
     login.clickSignoutCancel();
-    browser.sleep(longDelay);
+    browser.sleep(browser.params.mediumDelay);
     expect(browser.getCurrentUrl()).toEqual(execSettings.auctionHomePage());
   });
 

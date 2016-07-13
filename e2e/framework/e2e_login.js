@@ -2,8 +2,6 @@
 
 var userName = '53190md';
 var password = 'ngcpass!0';
-var delay = 500;
-var longDelay = 2000;
 var login = {
 
   elements: {
@@ -49,28 +47,28 @@ var login = {
   //Doers
   clickLoginButton: function () {
     this.elements.loginButton().click();
-    browser.sleep(longDelay);
+    browser.sleep(browser.params.longDelay);
   },
   clickMyAccount: function () {
     this.elements.myAccount().click();
-    browser.sleep(longDelay);
+    browser.sleep(browser.params.longDelay);
   },
   clickSignoutButton: function () {
     this.elements.signOut().click();
-    browser.sleep(longDelay);
+    browser.sleep(browser.params.longDelay);
   },
   clickSignoutConfirm: function () {
     this.elements.signoutConfirm().click();
-    browser.sleep(longDelay);
+    browser.sleep(browser.params.longDelay);
   },
   clickSignoutCancel: function () {
     this.elements.signoutCancel().click();
-    browser.sleep(longDelay);
+    browser.sleep(browser.params.longDelay);
   },
 
   //Getters
   getInvalidLoginText1: function () {
-    browser.sleep(delay);
+    browser.sleep(browser.params.shortDelay);
     return this.elements.invalidLoginError1().getText();
   },
   getInvalidLoginText2: function () {
@@ -92,25 +90,25 @@ var login = {
   //Functions
   login: function () {
     this.enterUserName(userName);
-    browser.sleep(longDelay);
+    browser.sleep(browser.params.longDelay);
     this.enterPassword(password);
-    browser.sleep(longDelay);
+    browser.sleep(browser.params.longDelay);
     this.clickLoginButton();
   },
   login2: function (param1,param2) {
     this.enterUserName(param1);
-    browser.sleep(longDelay);
+    browser.sleep(browser.params.longDelay);
     this.enterPassword(param2);
-    browser.sleep(longDelay);
+    browser.sleep(browser.params.longDelay);
     this.clickLoginButton();
   },
   logout: function () {
     this.doMyAccount();
-    browser.sleep(longDelay);
+    browser.sleep(browser.params.longDelay);
     this.clickSignoutButton();
-    browser.sleep(longDelay);
+    browser.sleep(browser.params.longDelay);
     this.clickSignoutConfirm();
-    browser.sleep(longDelay);
+    browser.sleep(browser.params.longDelay);
   },
 
   //Count
@@ -121,7 +119,7 @@ var login = {
   //LAST ONE
   placeholder: function (index) {
     this.elements._thumbnail(index).click();
-    browser.sleep(longDelay);
+    browser.sleep(browser.params.longDelay);
   }
 };
 
