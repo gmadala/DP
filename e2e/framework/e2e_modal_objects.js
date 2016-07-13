@@ -7,7 +7,7 @@
 
 function ModalObjects() {
   var delay = 500;
-  var longDelay = 1000;
+  var longDelay = 2000;
 
   //Locators
   this.elModalHeader = browser.element(by.css('.modal-header'));
@@ -26,7 +26,7 @@ function ModalObjects() {
   //Doers
   this.doOKBtn = function () {
     return this.elModalOKBtn.click();
-    browser.sleep(delay);
+    browser.sleep(longDelay);
   };
 
 }

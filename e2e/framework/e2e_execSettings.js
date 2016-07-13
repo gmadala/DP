@@ -8,8 +8,9 @@
  * */
 
 var displayMode = 'Desktop';
-//var baseUrl = 'https://test.nextgearcapital.com/test/#/';
-var baseUrl = 'http://localhost:9000/#/';
+var baseUrl = 'https://test.nextgearcapital.com/test/#/';
+//var baseUrl = 'http://localhost:9000/#/';
+//var baseUrl = 'https://test.nextgearcapital.com/feature/MNGNF-253/#/';
 
 console.log('\n');
 
@@ -29,6 +30,9 @@ exports.homePage = function () {
   return baseUrl + 'home';
 };
 
+exports.auctionHomePage = function () {
+  return baseUrl + 'act/home';
+};
 exports.forgotPage = function () {
   return baseUrl + 'login/recover';
 };

@@ -3,9 +3,11 @@
 var loginObjects = require('../../framework/e2e_login_objects.js');
 var login = require('../../framework/e2e_login.js');
 var execSettings = require('../../framework/e2e_execSettings.js');
-var username = '53190md';
-var password = 'ngcpass!0';
+var auctionUsername = 'tmsauction';
+var auctionPassword = 'ngcpass!0';
+var delay = 1000;
 var longDelay = 2000;
+var longerDelay = 5000;
 
 var loginObjects = new loginObjects.loginObjects();
 
@@ -48,10 +50,14 @@ describe("Login as Dealer\n ", function () {
     expect(browser.getCurrentUrl()).toBe(execSettings.loginPage());
   });
 
+});
+
+describe("Login as Auction\n ", function () {
+
   it("5. Login - Good Auction Login", function () {
-    loginObjects.setLogin('tmsauction', 'ngcpass!0');
+    loginObjects.setLogin(auctionUsername, auctionPassword);
     loginObjects.doLogin();
-    expect(browser.getCurrentUrl()).toBe(execSettings.homePage());
+    expect(browser.getCurrentUrl()).toBe(execSettings.auctionHomePage());
   });
 
   it("6. Login - Logout Auction Cancel", function () {
@@ -61,7 +67,7 @@ describe("Login as Dealer\n ", function () {
     browser.sleep(longDelay);
     login.clickSignoutCancel();
     browser.sleep(longDelay);
-    expect(browser.getCurrentUrl()).toBe(execSettings.homePage());
+    expect(browser.getCurrentUrl()).toBe(execSettings.auctionHomePage());
   });
 
   it("7. Login - Logout Auction Confirm", function () {
@@ -70,7 +76,7 @@ describe("Login as Dealer\n ", function () {
     login.clickSignoutButton();
     browser.sleep(longDelay);
     login.clickSignoutConfirm();
-    browser.sleep(longDelay);
+    browser.sleep(longerDelay);
     expect(browser.getCurrentUrl()).toBe(execSettings.loginPage());
   });
 

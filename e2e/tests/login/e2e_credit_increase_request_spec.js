@@ -69,11 +69,14 @@ describe("Credit Increase Request \n ", function () {
       browser.switchTo().window(handles[1]).then(function () {
         expect(browser.getCurrentUrl()).toContain("https://test.nextgearcapital.com/MobileService/api/receipt/viewMultiple/receipts?");
       });
+      browser.sleep(2000);
+      browser.close();
       browser.switchTo().window(handles[0]);
+      browser.sleep(2000);
     });
   });
 
-  it("Logout Recover", function () {
+  it("5. Logout Recover", function () {
     loginObjects.doMyAccount();
     login.clickSignoutButton();
     login.clickSignoutConfirm();

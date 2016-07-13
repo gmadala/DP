@@ -10,7 +10,7 @@ var correctAnswer = 'a';
 var validEmail = 'test@gmail.com';
 var invalidEmail = 'asdas@gmail.com';
 var invalidFormatEmail = 'testtesttest';
-var username = '53190md';
+var username = '79714js';
 var password = 'ngcpass!0';
 var longDelay = 6000;
 var mediumDelay = 3000;
@@ -18,7 +18,7 @@ var mediumDelay = 3000;
 var loginObjects = new loginObjects.loginObjects();
 var modalObjects = new modalObjects.modalObjects();
 
-describe("Login as Dealer\n ", function () {
+describe("Login Recovery\n ", function () {
 
   beforeEach(function () {
     browser.sleep(browser.params.shortDelay);

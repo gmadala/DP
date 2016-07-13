@@ -23,20 +23,11 @@ function mkdir(path, root) {
 
 exports.config = {
   //specs: ['tests/login/*_spec.js'],
-  specs: ['tests/login/e2e_login_spec.js'],
+  specs: ['tests/login/e2e_resources_spec.js'],
 
   // a specific suite can be run with grunt protractor:run --suite=suite_name
   // at least dealer and auction suites are needed
-  suites: {
-    // suite for the auction
-    'auction': 'tests/auction/*spec.js',
-    // suites for the dealer
-    'dealer': 'tests/dealer/*spec.js',
-    'dashboard': 'tests/dealer/*dashboard_spec.js',
-    'floorplan': 'tests/dealer/*floorplan_spec.js',
-    'payments': 'tests/dealer/*payments_spec.js',
-    'receipts': 'tests/dealer/*receipts_spec.js'
-  },
+  suites: {},
 
   //multiCapabilities: [{
   //  'browserName': 'firefox'
@@ -98,6 +89,6 @@ exports.config = {
     showColors: true,
     includeStackTrace: true,
     //defaultTimeoutInterval: 30000
-    defaultTimeoutInterval: 15000
+    defaultTimeoutInterval: 30000
   }
 };

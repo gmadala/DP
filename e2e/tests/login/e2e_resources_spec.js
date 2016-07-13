@@ -47,7 +47,6 @@ describe('Testing Resources Page', function() {
       browser.switchTo().window(handles[1]).then(function() {
         browser.ignoreSynchronization = true;
         expect(browser.getCurrentUrl()).toEqual("http://www.nextgearcapital.com/welcome-packet/");
-        browser.wait(250000);
         browser.close();
         browser.ignoreSynchronization = false;
         browser.driver.switchTo().window(handles[0]);
@@ -181,6 +180,7 @@ describe('Testing Resources Page', function() {
   });
 
   it("Logout Resources", function () {
+    browser.sleep(delay);
     loginObjects.doMyAccount();
     login.clickSignoutButton();
     login.clickSignoutConfirm();

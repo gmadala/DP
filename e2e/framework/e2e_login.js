@@ -48,19 +48,24 @@ var login = {
 
   //Doers
   clickLoginButton: function () {
-    return this.elements.loginButton().click();
+    this.elements.loginButton().click();
+    browser.sleep(longDelay);
   },
   clickMyAccount: function () {
-    return this.elements.myAccount().click();
+    this.elements.myAccount().click();
+    browser.sleep(longDelay);
   },
   clickSignoutButton: function () {
-    return this.elements.signOut().click();
+    this.elements.signOut().click();
+    browser.sleep(longDelay);
   },
   clickSignoutConfirm: function () {
-    return this.elements.signoutConfirm().click();
+    this.elements.signoutConfirm().click();
+    browser.sleep(longDelay);
   },
   clickSignoutCancel: function () {
-    return this.elements.signoutCancel().click();
+    this.elements.signoutCancel().click();
+    browser.sleep(longDelay);
   },
 
   //Getters
@@ -78,10 +83,10 @@ var login = {
 
   //Setters
   enterUserName: function (name) {
-    return this.elements.userName().clear().sendKeys(name);
+    this.elements.userName().clear().sendKeys(name);
   },
   enterPassword: function (pass) {
-    return this.elements.password().clear().sendKeys(pass);
+    this.elements.password().clear().sendKeys(pass);
   },
 
   //Functions

@@ -3,6 +3,7 @@
 function CreditIncrease() {
 
   var delay = 500;
+  var longDelay = 2000;
   //Locators
   this.elPermanentIncrease = element(by.id('isNotTemp'));
   this.elFirstLineOfCredit = element(by.id('lineOfCredit0'));
@@ -23,7 +24,7 @@ function CreditIncrease() {
   };
   this.doConfirmRequest = function () {
     this.elConfirmRequest.click();
-    browser.sleep(delay);
+    browser.sleep(longDelay);
   };
   this.doLineOfCredit = function () {
     this.elFirstLineOfCredit.click();
