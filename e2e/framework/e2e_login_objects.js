@@ -15,7 +15,6 @@ function LoginObjects() {
   this.elUserName = browser.element(by.id("credUsername"));
   this.elPassWord = browser.element(by.id("credPassword"));
   this.elLogin = browser.element(by.id("loginButton"));
-  this.elMyAccount = browser.element(by.id("settingsDropdown"));
   this.elPasswordRecoveryModal = browser.element(by.model('passwordRecovery.username'));
   this.elFUPWUsername = browser.element(by.id("userName"));
   this.elSecQues10 = browser.element(by.id('question10'));
@@ -49,10 +48,6 @@ function LoginObjects() {
   this.doLogin = function () {
     this.elLogin.click();
     browser.sleep(browser.params.longerDelay);
-  };
-  this.doMyAccount = function () {
-    this.elMyAccount.click();
-    browser.sleep(browser.params.longDelay);
   };
   this.doSubmitPassword = function () {
     this.elSubmitPassword.click();

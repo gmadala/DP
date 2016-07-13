@@ -101,7 +101,7 @@ var login = {
     this.clickLoginButton();
   },
   logout: function () {
-    this.doMyAccount();
+    this.clickMyAccount();
     browser.sleep(browser.params.longDelay);
     this.clickSignoutButton();
     browser.sleep(browser.params.longDelay);

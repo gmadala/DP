@@ -48,7 +48,7 @@ describe("Login as Auction\n ", function () {
   });
 
   it("6. Login - Logout Auction Cancel", function () {
-    loginObjects.doMyAccount();
+    login.clickMyAccount();
     browser.sleep(browser.params.mediumDelay);
     login.clickSignoutButton();
     browser.sleep(browser.params.mediumDelay);

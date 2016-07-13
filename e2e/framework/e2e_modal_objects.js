@@ -14,7 +14,7 @@ function ModalObjects() {
 
   //Getters
   this.getTextHeader = function () {
-    browser.sleep(longDelay);
+    browser.sleep(browser.params.longDelay);
     return this.elModalHeader.getText();
   };
   this.getTextBody = function () {
