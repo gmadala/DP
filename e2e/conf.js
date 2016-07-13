@@ -1,8 +1,6 @@
-// An example configuration file.
+//An example configuration file.
 exports.config = {
-  directConnect: true,
-
-  // Capabilities to be passed to the webdriver instance.
+  //Capabilities to be passed to the webdriver instance.
   capabilities: {
     'browserName': 'chrome',
     'chromeOptions': {
@@ -15,14 +13,17 @@ exports.config = {
     }
   },
 
-  framework: 'jasmine',
-
-  // Spec patterns are relative to the current working directly when protractor is called.
+  //Spec patterns are relative to the current working directly when protractor is called.
   specs: ['tests/login/*_spec.js'],
   //specs: ['tests/login/e2e_resources_spec.js'],
 
-  // untrackOutstandingTimeouts: true,
+  //More miscellaneous configuration options
+  directConnect: true,
+  untrackOutstandingTimeouts: false,
   restartBrowserBetweenTests: false,
+
+  //Framework selection
+  framework: 'jasmine',
 
   // Options to be passed to Jasmine.
   jasmineNodeOpts: {
@@ -32,6 +33,8 @@ exports.config = {
     defaultTimeoutInterval: 30000,
     realtimeFailure: true
   },
+
+  //Project global parameters
   params: {
     userNameDealer: '53190md',
     userNameAuction: 'tmsauction',
