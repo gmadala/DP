@@ -2,8 +2,8 @@
   <div class="container login-contents">
     <p class="notice" ng-show="showBanner" id="showBannerLogin" ng-bind-html="bannerText"></p>
 
-    <div class="row mask">
-      <div class="col-md-4 col-sm-6 login-margin visible-sm visible-md visible-lg visible-xl">
+    <div class="row">
+      <div class="col-md-4 col-sm-6 hidden-xs">
         <span class="login-title">Bacon Ipsum Dolor </span>
         <br>
         <span class="login-tagline">Tri-tip corned beef spare ribs, strip steak salami jowl ham tail pastraimi.</span>
@@ -11,12 +11,7 @@
         <button type="submit" class="btn-learn-more btn-lg">Learn More</button>
       </div>
 
-      <div class="col-md-4">
-        <!-- Gap bewteen columns for md/lg view -->
-      </div>
-
-
-      <div class="col-md-4 col-sm-6 login-margin">
+      <div class="col-md-4 col-md-offset-4 col-sm-6 login-margin">
         <div class="login-panel panel-default">
           <form class="login-form clearfix" name="loginForm">
             <label for="credUsername"><span translate>Username</span><a class="forgot" href="#/login/recover" translate>I forgot</a></label>
@@ -32,7 +27,7 @@
             <p for="credUsername" class="text-error" ng-show="validity.credUsername.$error.required" translate>Please enter a username.</p>
 
             <div class="cr-inline">
-              <input class="login-text" type="checkbox" name="rememberUsername" id="rememberUsername" ng-model="credentials.remember" />
+              <input type="checkbox" name="rememberUsername" id="rememberUsername" ng-model="credentials.remember" />
               <label for="rememberUsername" class="checkbox-img"></label>
               <label for="rememberUsername" class="cr-label" translate>Remember Username</label>
             </div>
@@ -52,7 +47,7 @@
             <p class="text-error" ng-show="showLoginError" translate>If you are experiencing an issue logging in, click "Forgot your username or password?" below, or contact:</p>
             <span ng-show="showLoginError"><nxg-customer-support-phone></nxg-customer-support-phone></span>
 
-            <button type="submit" class="btn-login btn-default btn-lg btn-block" ng-click="authenticate()" id="loginButton" translate>Sign In</button>
+            <button type="submit" class="btn-login btn-default btn-lg btn-block" ng-click="authenticate()" id="loginButton" translate>Login</button>
           </form>
           <br>
 

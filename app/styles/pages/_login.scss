@@ -4,8 +4,6 @@
 
 .login-panel {
   min-height: 325px;
-  //min-width: 400px;
-  //margin-top: -385px;
   background-color: rgba(77, 75, 75, 0.88);
   border: 1px solid transparent;
   border-radius: 4px;
@@ -32,12 +30,6 @@ a.forgot:link {
   &:hover {
     color: #99CE64;
   }
-}
-
-.login-text {
-  font-size: medium;
-  font-weight: lighter;
-  color: #76b73f;
 }
 
 .login-margin {
@@ -132,7 +124,6 @@ a.forgot:link {
   }
 
   label {
-    font-size: 20px;
     margin-bottom: 2px;
     color: ghostwhite;
     font-weight: normal;
