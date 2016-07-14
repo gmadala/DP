@@ -2,7 +2,6 @@
 
 function CreditIncrease() {
 
-  var delay = 500;
   //Locators
   this.elPermanentIncrease = element(by.id('isNotTemp'));
   this.elFirstLineOfCredit = element(by.id('lineOfCredit0'));
@@ -15,27 +14,27 @@ function CreditIncrease() {
   //Doers
   this.doPermanentIncrease = function () {
     this.elPermanentIncrease.click();
-    browser.sleep(delay);
+    browser.sleep(browser.params.shortDelay);
   };
   this.doTemporaryIncrease = function () {
     this.elTemporaryIncrease.click();
-    browser.sleep(delay);
+    browser.sleep(browser.params.shortDelay);
   };
   this.doConfirmRequest = function () {
     this.elConfirmRequest.click();
-    browser.sleep(delay);
+    browser.sleep(browser.params.longDelay);
   };
   this.doLineOfCredit = function () {
     this.elFirstLineOfCredit.click();
-    browser.sleep(delay);
+    browser.sleep(browser.params.shortDelay);
   };
   this.doCloseWindow = function () {
     this.elCloseWindow.click();
-    browser.sleep(delay);
+    browser.sleep(browser.params.shortDelay);
   };
   this.doCancelRequest = function () {
     this.elCancelRequest.click();
-    browser.sleep(delay);
+    browser.sleep(browser.params.shortDelay);
   }
 
   //Setters

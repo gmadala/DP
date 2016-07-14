@@ -1,9 +1,5 @@
 'use strict';
 
-var userName = '53190md';
-var password = 'ngcpass!0';
-var delay = 200;
-var longDelay = 2000;
 var login = {
 
   elements: {
@@ -31,17 +27,46 @@ var login = {
     },
     incorrectEmailFormat: function () {
       return element(by.css('p[ng-show="forgotUserNameValidity.email.$error.email"]'));
+    },
+    myAccount: function () {
+      return element(by.id("settingsDropdown"));
+    },
+    signOut: function () {
+      return element(by.id("signOut"));
+    },
+    signoutConfirm: function () {
+      return element.all(by.css('button[ng-click="close(true)"]'));
+    },
+    signoutCancel: function () {
+      return element.all(by.css('button[ng-click="close(false)"]'));
     }
   },
 
   //Doers
   clickLoginButton: function () {
-    return this.elements.loginButton().click();
+    this.elements.loginButton().click();
+    browser.sleep(browser.params.longDelay);
+  },
+  clickMyAccount: function () {
+    this.elements.myAccount().click();
+    browser.sleep(browser.params.longDelay);
+  },
+  clickSignoutButton: function () {
+    this.elements.signOut().click();
+    browser.sleep(browser.params.longDelay);
+  },
+  clickSignoutConfirm: function () {
+    this.elements.signoutConfirm().click();
+    browser.sleep(browser.params.longDelay);
+  },
+  clickSignoutCancel: function () {
+    this.elements.signoutCancel().click();
+    browser.sleep(browser.params.longDelay);
   },
 
   //Getters
   getInvalidLoginText1: function () {
-    browser.sleep(delay);
+    browser.sleep(browser.params.shortDelay);
     return this.elements.invalidLoginError1().getText();
   },
   getInvalidLoginText2: function () {
@@ -53,31 +78,46 @@ var login = {
   },
 
   //Setters
-  enterUserName: function (test) {
-    return this.elements.userName().clear().sendKeys(test);
+  enterUserName: function (name) {
+    this.elements.userName().clear().sendKeys(name);
   },
-  enterPassword: function (test) {
-    return this.elements.password().clear().sendKeys(test);
+  enterPassword: function (pass) {
+    this.elements.password().clear().sendKeys(pass);
   },
+
   //Functions
   login: function () {
-    this.enterUserName(userName);
+    this.enterUserName(browser.params.userName);
+    browser.sleep(browser.params.longDelay);
     this.enterPassword(password);
+    browser.sleep(browser.params.longDelay);
     this.clickLoginButton();
   },
   login2: function (param1,param2) {
-    browser.sleep(longDelay);
     this.enterUserName(param1);
+    browser.sleep(browser.params.longDelay);
     this.enterPassword(param2);
+    browser.sleep(browser.params.longDelay);
     this.clickLoginButton();
   },
+  logout: function () {
+    this.clickMyAccount();
+    browser.sleep(browser.params.longDelay);
+    this.clickSignoutButton();
+    browser.sleep(browser.params.longDelay);
+    this.clickSignoutConfirm();
+    browser.sleep(browser.params.longDelay);
+  },
+
   //Count
   disabledCount: function () {
     return this.disabledFields().count();
   },
+
   //LAST ONE
   placeholder: function (index) {
     this.elements._thumbnail(index).click();
+    browser.sleep(browser.params.longDelay);
   }
 };
 
