@@ -226,6 +226,7 @@
     $scope.navState = $state;
 
     $scope.hideMenuTip = localStorageService.get('hideMenuTip') || false;
+    $scope.isMobile = window.innerWidth < 768;
     $scope.templateUrl = "/app/client/shared/directives/navbar/menuTip.html";
     $scope.closeMenuTip = function() {
       if (!$scope.hideMenuTip) {
