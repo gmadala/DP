@@ -47,7 +47,7 @@ function LoginObjects() {
   };
   this.doLogin = function () {
     this.elLogin.click();
-    browser.sleep(browser.params.longerDelay);
+    browser.sleep(browser.params.longDelay);
   };
   this.doSubmitPassword = function () {
     this.elSubmitPassword.click();

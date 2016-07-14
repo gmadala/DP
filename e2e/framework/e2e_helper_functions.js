@@ -8,16 +8,12 @@
 
 var execSettings = require('./e2e_execSettings.js');
 var fs = require('fs');
-
-var helper = function () {
-};
-
 var EC = protractor.ExpectedConditions;
 
-helper.prototype = Object.create({}, {
+function Helper() {
 
   //Navigation functions
-  goToLogin: {
+  this.goToLogin = function () {
     /**
      * @name goToLogin
      * @memberof helper
@@ -26,12 +22,11 @@ helper.prototype = Object.create({}, {
      *
      * @returns {none}
      */
-    value: function () {
-      browser.get(execSettings.loginPage());
-      browser.sleep(browser.params.mediumDelay);
-    }
-  },
-  goToHome: {
+    browser.get(execSettings.loginPage());
+    browser.sleep(browser.params.longDelay);
+  };
+
+  this.goToHome = function () {
     /**
      * @name goToHome
      * @memberof helper
@@ -40,12 +35,11 @@ helper.prototype = Object.create({}, {
      *
      * @returns {none}
      */
-    value: function () {
-      browser.get(execSettings.homePage());
-      browser.sleep(browser.params.mediumDelay);
-    }
-  },
-  goToResources: {
+    browser.get(execSettings.homePage());
+    browser.sleep(browser.params.longDelay);
+  };
+
+  this.goToResources = function () {
     /**
      * @name goToResources
      * @memberof helper
@@ -54,85 +48,62 @@ helper.prototype = Object.create({}, {
      *
      * @returns {none}
      */
-    value: function () {
-      browser.get(execSettings.resourcesPage());
-      browser.sleep(browser.params.mediumDelay);
-    }
-  },
+    browser.get(execSettings.resourcesPage());
+    browser.sleep(browser.params.longDelay);
+  };
 
   //Generic functions
-  waitForVisible: {
-    value: function (elementId) {
-      /**
-       * @name waitForVisible
-       * @memberof HelperObject
-       * @author Bryan Noland
-       * @description This helper function uses Expected Conditions and a check to make sure that
-       *              the element passed in to the function is visible.  This function can be
-       *              used to select 'X', Cancel or any other element, just pass in the element id.
-       *
-       * @param {string} elementId - Id of the element expected to be checked
-       * @returns {none}
-       */
+  this.waitForVisible = function () {
+    /**
+     * @name waitForVisible
+     * @memberof HelperObject
+     * @author Bryan Noland
+     * @description This helper function uses Expected Conditions and a check to make sure that
+     *              the element passed in to the function is visible.  This function can be
+     *              used to select 'X', Cancel or any other element, just pass in the element id.
+     *
+     * @param {string} elementId - Id of the element expected to be checked
+     * @returns {none}
+     */
+    var isVisible = EC.visibilityOf(elementId);
+    browser.wait(isVisible, browser.params.mediumDelay);
+  };
 
+  this.waitForClickable = function () {
+    /**
+     * @name waitForClickable
+     * @memberof HelperObject
+     * @author Bryan Noland
+     * @description This helper function uses Expected Conditions and a check to make sure that
+     *              the element passed in to the function is clickable.  This function can be
+     *              used to select 'X', Cancel or any other element, just pass in the element id.
+     *
+     * @param {string} elementId - Id of the element expected to be checked
+     * @returns {none}
+     */
+    var isClickable = EC.elementToBeClickable(elementId);
+    //doing this twice makes the tests stable, protractor has issues, man
+    //still better than a static sleep()
+    browser.wait(isClickable, browser.params.mediumDelay);
+    browser.wait(isClickable, browser.params.mediumDelay);
+  };
 
-      var isVisible = EC.visibilityOf(elementId);
-      browser.wait(isVisible, browser.params.mediumDelay);
-    }
-  },
-  waitForClickable: {
-    value: function (elementId) {
-      /**
-       * @name waitForClickable
-       * @memberof HelperObject
-       * @author Bryan Noland
-       * @description This helper function uses Expected Conditions and a check to make sure that
-       *              the element passed in to the function is clickable.  This function can be
-       *              used to select 'X', Cancel or any other element, just pass in the element id.
-       *
-       * @param {string} elementId - Id of the element expected to be checked
-       * @returns {none}
-       */
+  this.takeSnapshot = function () {
+    /**
+     * @name takeSnapshot
+     * @memberof HelperObject
+     * @author Derek Gibson
+     * @description This helper function takes a snapshot of the UI at the moment it is called
+     *              and saves it as a .png in client/target/protractor_screenshots with the name given
+     * @param {string} snapshotFileName
+     */
+    browser.takeScreenshot().then(function (png) {
+      var buf = new Buffer(png, 'base64');
+      var stream = fs.createWriteStream('target/protractor_screenshots/' + snapshotFileName + '.png');
+      stream.write(buf);
+      stream.end();
+    });
+  };
+}
 
-      var isClickable = EC.elementToBeClickable(elementId);
-
-      //doing this twice makes the tests stable, protractor has issues, man
-      //still better than a static sleep()
-      browser.wait(isClickable, browser.params.mediumDelay);
-      browser.wait(isClickable, browser.params.mediumDelay);
-    }
-  },
-  takeSnapshot: {
-    value: function (snapshotFileName) {
-      /**
-       * @name takeSnapshot
-       * @memberof HelperObject
-       * @author Derek Gibson
-       * @description This helper function takes a snapshot of the UI at the moment it is called
-       *              and saves it as a .png in client/target/protractor_screenshots with the name given
-       * @param {string} snapshotFileName
-       */
-
-      browser.takeScreenshot().then(function (png) {
-        var buf = new Buffer(png, 'base64');
-        var stream = fs.createWriteStream('target/protractor_screenshots/' + snapshotFileName + '.png');
-        stream.write(buf);
-        stream.end();
-      });
-    }
-  },
-  waitForAlert: {
-    value: function () {
-      try {
-        browser.wait(protractor.ExpectedConditions.alertIsPresent(), 1000);
-      }
-      catch
-        (err) {
-        console.error("No Alert Detected! " + err);
-      }
-    }
-  }
-
-});
-
-module.exports = helper;
+module.exports.helper = Helper;

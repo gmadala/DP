@@ -1,11 +1,11 @@
 'use strict';
 
 var loginObjects = require('../../framework/e2e_login_objects.js');
+var modalObjects = require('../../framework/e2e_modal_objects.js');
+var helper = require('../../framework/e2e_helper_functions.js');
 var recoverErrorMessage = require('../../framework/e2e_login_recover_objects.js');
 var login = require('../../framework/e2e_login.js');
-var modalObjects = require('../../framework/e2e_modal_objects.js');
 var execSettings = require('../../framework/e2e_execSettings.js');
-var helper = require('../../framework/e2e_helper_functions.js');
 var incorrectAnswer = 'f';
 var correctAnswer = 'a';
 var validEmail = 'test@gmail.com';
@@ -14,20 +14,17 @@ var invalidFormatEmail = 'testtesttest';
 
 var loginObjects = new loginObjects.loginObjects();
 var modalObjects = new modalObjects.modalObjects();
+var helper = new helper.helper();
 
 describe("Login Recovery\n ", function () {
 
   beforeEach(function () {
     browser.sleep(browser.params.shortDelay);
-    browser.driver.manage().window().maximize();
-    helper.goToLogin();
     browser.ignoreSynchronization = true;
   });
-  afterEach(function () {
-    browser.executeScript('window.sessionStorage.clear();');
-    browser.executeScript('window.localStorage.clear();');
-  });
 
+  //When enabling the first test be sure to move the helper.goToLogin()
+  //function call from the second test into the first test
   xit("1. Dealer - Sign Up for My Next Gear", function () {
     //Validating the SignUp Button label
     expect(loginObjects.getTextSignUpLogin()).toEqual("Sign Up");
@@ -38,6 +35,7 @@ describe("Login Recovery\n ", function () {
   });
 
   it("2. Dealer - Forgot User name. My email is correct and no problems", function () {
+    helper.goToLogin();
     expect(browser.getCurrentUrl()).toEqual(execSettings.loginPage());
     //Validating the SignUp Button label
     expect(loginObjects.getTextSignUpLogin()).toEqual("Sign Up");
@@ -59,7 +57,6 @@ describe("Login Recovery\n ", function () {
   it("3. Dealer - Forgot User name. invalid email id no problems ", function () {
     loginObjects.setLogin('53190md', 'incorrect');
     loginObjects.doLogin();
-    browser.sleep(browser.params.longDelay);
     expect(login.getInvalidLoginText1()).toEqual("We're sorry, but you used a username or password that doesn't match our records.");
     expect(login.getInvalidLoginText2()).toEqual('If you are experiencing an issue logging in, click "Forgot your username or password?" below, or contact:');
     loginObjects.doForgotUsernamePassword();
@@ -131,6 +128,7 @@ describe("Login Recovery\n ", function () {
   });
 
   it("5. Dealer - Validating the NGC Logo and Language selection in Login Page", function () {
+    helper.goToLogin();
     expect(loginObjects.elMNGLogo.isDisplayed()).toBe(true);
     expect(loginObjects.elLangChooser.isDisplayed()).toBe(true);
     expect(loginObjects.elEnglish.isDisplayed()).toBe(true);

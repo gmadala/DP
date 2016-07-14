@@ -6,6 +6,7 @@ var execSettings = require('../../framework/e2e_execSettings.js');
 var helper = require('../../framework/e2e_helper_functions.js');
 
 var loginObjects = new loginObjects.loginObjects();
+var helper = new helper.helper();
 
 describe("Login as Dealer\n ", function () {
 

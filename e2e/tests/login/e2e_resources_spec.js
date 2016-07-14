@@ -8,18 +8,19 @@ var helper = require('../../framework/e2e_helper_functions.js');
 
 var loginObjects = new loginObjects.loginObjects();
 var resources = new resources.resources();
+var helper = new helper.helper();
 
 describe('Testing Resources Page', function() {
 
   beforeEach(function() {
-    browser.driver.manage().window().maximize();
+    browser.sleep(browser.params.shortDelay);
   });
 
   it('Dealer - Login', function() {
     helper.goToLogin();
     browser.sleep(browser.params.shortDelay);
-    login.login();
-    resources.doResources();
+    loginObjects.doGoodLogin();
+    helper.goToResources();
     browser.sleep(browser.params.shortDelay);
     expect(browser.getCurrentUrl() === execSettings.resourcesPage());
   });
@@ -30,7 +31,7 @@ describe('Testing Resources Page', function() {
     browser.getAllWindowHandles().then(function(handles) {
       browser.switchTo().window(handles[1]).then(function() {
         browser.ignoreSynchronization = true;
-        expect(browser.getCurrentUrl()).toContain("https://test.nextgearcapital.com/MobileService/api/dealer/feeschedule/FeeSchedule?AuthToken=65415B3C-C684-433D-80FD-3387EAB95043");
+        expect(browser.getCurrentUrl()).toContain("https://test.nextgearcapital.com/MobileService/api/dealer/feeschedule/FeeSchedule?AuthToken=");
         browser.ignoreSynchronization = false;
         browser.close();
         browser.driver.switchTo().window(handles[0]);

@@ -1,6 +1,7 @@
 'use strict';
 
 var loginObjects = require('../../framework/e2e_login_objects.js');
+var helper = require('../../framework/e2e_helper_functions.js');
 var login = require('../../framework/e2e_login.js');
 var modalObjects = require('../../framework/e2e_modal_objects.js');
 var dashboard = require('../../framework/e2e_dashboard_objects.js');
@@ -14,15 +15,17 @@ var dashboard = new dashboard.dashboardObjects();
 var CredIncrease = new creditIncrease.creditIncrease();
 var modalObjects = new modalObjects.modalObjects();
 var loginObjects = new loginObjects.loginObjects();
+var helper = new helper.helper();
 
 describe("Credit Increase Request \n ", function () {
 
   beforeEach(function () {
+    browser.sleep(browser.params.shortDelay);
     browser.ignoreSynchronization = true;
   });
 
   it("1. Dealer - Login as 97421eh ", function () {
-    browser.get(execSettings.loginPage());
+    helper.goToLogin();
     expect(browser.getCurrentUrl()).toEqual(execSettings.loginPage());
     browser.sleep(browser.params.shortDelay);
     login.login2(browser.params.userName, browser.params.password);
