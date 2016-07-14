@@ -1,114 +1,122 @@
-<div class="login container-line">
+<div class="login container-fluid">
   <div class="container login-contents">
 
     <div class="row forgot">
-      <h3 translate>Forgot Your Username or Password?</h3>
-
+      <div class="hidden-xs">
+        <h3>xxx</h3>
+      </div>
       <!-- USER NAME RECOVERY -->
-      <div class="well col-xs-4 col-xs-offset-2 forgot-uname"
-           ng-class="{'nxg-fade' : !!forgotPasswordForm.userName.$viewValue}">
-        <h2 class="well-title" translate>Forgot Your Username?</h2>
+      <div class="col-sm-4 col-sm-offset-2" ng-class="{'nxg-fade' : !!forgotPasswordForm.userName.$viewValue}">
+        <div class="well  forgot-uname">
+          <h2 class="well-title" translate>Forgot Your Username?</h2>
 
-        <p class="well-item instructions" translate>
-          Enter the email address associated with your account to receive your username via email.
-        </p>
-
-        <form class="form-block" name="forgotUserNameForm">
-          <label for="email" translate>Email Address</label>
-          <input type="email" id="email" name="email"
-                ng-model="userNameRecovery.email" required
-                ng-disabled="!!forgotPasswordForm.userName.$viewValue"
-                ng-class="{ 'nxg-invalid': forgotUserNameValidity.email.$error.required  || forgotUserNameValidity.email.$error.email }" />
-
-          <p class="text-error" ng-show="forgotUserNameValidity.email.$error.required" translate>
-            Please enter your email address. If you need assistance, please call
-            NextGear Capital Support at:
+          <p class="well-item instructions" translate>
+            Enter the email address associated with your account to receive your username via email.
           </p>
 
-          <p class="text-error" ng-show="forgotUserNameValidity.email.$error.email" translate>
-            {{ forgotUserNameValidity.email.$viewValue }} is not a valid email address. If you need assistance,
-            please call NextGear Capital Support at:
-          </p>
+          <form class="form-block" name="forgotUserNameForm">
+            <label for="email" translate>Email Address</label>
+            <div class="input-cta-expand">
+            <input type="email" id="email" name="email"
+                  ng-model="userNameRecovery.email" required
+                  ng-disabled="!!forgotPasswordForm.userName.$viewValue"
+                  ng-class="{ 'nxg-invalid': forgotUserNameValidity.email.$error.required  || forgotUserNameValidity.email.$error.email }" />
+            </div>
+            <p class="text-error" ng-show="forgotUserNameValidity.email.$error.required" translate>
+              Please enter your email address. If you need assistance, please call
+              NextGear Capital Support at:
+            </p>
 
-          <p class="text-error" ng-show="userNameRecovery.failed" translate>
-            We were unable to locate this email address. If you need assistance, please call
-            NextGear Capital Support at:
-          </p>
-          <span ng-show="userNameRecovery.failed || forgotUserNameValidity.email.$error.required  || forgotUserNameValidity.email.$error.email">
-            <nxg-customer-support-phone></nxg-customer-support-phone>
-          </span>
+            <p class="text-error" ng-show="forgotUserNameValidity.email.$error.email" translate>
+              {{ forgotUserNameValidity.email.$viewValue }} is not a valid email address. If you need assistance,
+              please call NextGear Capital Support at:
+            </p>
 
-        </form>
+            <p class="text-error" ng-show="userNameRecovery.failed" translate>
+              We were unable to locate this email address. If you need assistance, please call
+              NextGear Capital Support at:
+            </p>
+            <span ng-show="userNameRecovery.failed || forgotUserNameValidity.email.$error.required  || forgotUserNameValidity.email.$error.email">
+              <nxg-customer-support-phone></nxg-customer-support-phone>
+            </span>
 
-          <div class="footer modal-footer">
-            <button class="btn-cta cta-primary"
-                    ng-class="{disabled: !!forgotPasswordForm.userName.$viewValue || submitInProgress }"
-                    ng-disabled="!!forgotPasswordForm.userName.$viewValue || submitInProgress"
-                    ng-click="userNameRecovery.submit()"
-                    id="forgotUsernameSubmit"translate>
-              Submit
-            </button>
-          </div>
+          </form>
+
+            <div class="footer modal-footer">
+              <button class="btn-cta cta-primary btn-cta-expand"
+                      ng-class="{disabled: !!forgotPasswordForm.userName.$viewValue || submitInProgress }"
+                      ng-disabled="!!forgotPasswordForm.userName.$viewValue || submitInProgress"
+                      ng-click="userNameRecovery.submit()"
+                      id="forgotUsernameSubmit"translate>
+                Submit
+              </button>
+            </div>
+        </div>
       </div>
 
       <!-- PASSWORD RECOVERY -->
-      <div class="well col-xs-4 forgot-pword containerLeftMargin" ng-class="{'nxg-fade' : !!forgotUserNameForm.email.$viewValue}">
-        <h2 class="well-title" translate>Forgot Your Password?</h2>
-        <p class="well-item instructions" translate>Enter your username to receive a new password via email.</p>
+      <div class="col-sm-4" ng-class="{'nxg-fade' : !!forgotUserNameForm.email.$viewValue}">
+        <div class="well">
+          <h2 class="well-title" translate>Forgot Your Password?</h2>
+          <p class="well-item instructions" translate>Enter your username to receive a new password via email.</p>
 
-        <form class="form-block" name="forgotPasswordForm">
-          <label for="userName" translate>Username</label>
-          <input type="text" id="userName" name="userName" ng-model="passwordRecovery.username" required
-                 ng-disabled="!!forgotUserNameForm.email.$viewValue"
-                 ng-change="passwordRecovery.questions = null; passwordRecovery.questionsFailed = false"
-                 ng-class="{ 'nxg-invalid': forgotPasswordValidity.userName.$error.required }" />
-
-          <p class="text-error" ng-show="forgotPasswordValidity.userName.$error.required" translate>
-            Please enter your username. If you need assistance, please call
-            NextGear Capital Support at:
-          </p>
-
-          <p class="text-error" ng-show="passwordRecovery.usernameFailed" translate>
-            We were unable to locate this username. If you need assistance, please call
-            NextGear Capital Support at:
-          </p>
-          <span ng-show="passwordRecovery.usernameFailed || forgotPasswordValidity.userName.$error.required">
-            <nxg-customer-support-phone></nxg-customer-support-phone>
-          </span>
-
-          <div class="question-section"
-               ng-form name="questionForm"
-               ng-repeat="question in passwordRecovery.questions"
-               ng-init="question.$form = questionForm">
-            <label translate>Security Question {{$index + 1}}</label>
-            <p class="security-question">{{ question.QuestionText }}</p>
-            <label class="answer-label" for="{{ passwordRecovery.getInputId(question) }}" translate>
-              Security Question Answer
-            </label>
-            <input type="text" name="questionInput" id="{{ passwordRecovery.getInputId(question) }}"
-                   ng-model="question.Answer" ng-class="{ 'nxg-invalid': question.$invalid }" required />
-            <p class="text-error" ng-show="question.$invalid" translate>
-              Please answer this question.
+          <form class="form-block" name="forgotPasswordForm">
+            <label for="userName" translate>Username</label>
+            <div class="input-cta-expand">
+              <input type="text" id="userName" name="userName" ng-model="passwordRecovery.username" required
+                     ng-disabled="!!forgotUserNameForm.email.$viewValue"
+                     ng-change="passwordRecovery.questions = null; passwordRecovery.questionsFailed = false"
+                     ng-class="{ 'nxg-invalid': forgotPasswordValidity.userName.$error.required }" />
+            </div>
+            <p class="text-error" ng-show="forgotPasswordValidity.userName.$error.required" translate>
+              Please enter your username. If you need assistance, please call
+              NextGear Capital Support at:
             </p>
 
+            <p class="text-error" ng-show="passwordRecovery.usernameFailed" translate>
+              We were unable to locate this username. If you need assistance, please call
+              NextGear Capital Support at:
+            </p>
+            <span ng-show="passwordRecovery.usernameFailed || forgotPasswordValidity.userName.$error.required">
+              <nxg-customer-support-phone></nxg-customer-support-phone>
+            </span>
+
+            <div class="question-section"
+                 ng-form name="questionForm"
+                 ng-repeat="question in passwordRecovery.questions"
+                 ng-init="question.$form = questionForm">
+              <label translate>Security Question {{$index + 1}}</label>
+              <p class="security-question">{{ question.QuestionText }}</p>
+              <label class="answer-label" for="{{ passwordRecovery.getInputId(question) }}" translate>
+                Security Question Answers
+              </label>
+              <div class="input-cta-ques-expand">
+                <input type="text" name="questionInput" id="{{ passwordRecovery.getInputId(question) }}"
+                       ng-model="question.Answer" ng-class="{ 'nxg-invalid': question.$invalid }" required />
+                </div>
+              <p class="text-error" ng-show="question.$invalid" translate>
+                Please answer this question.
+              </p>
+
+            </div>
+
+            <p class="text-error" ng-show="passwordRecovery.questionsFailed" translate>
+              We were unable verify one or more of your answers. If you need assistance, please call
+              NextGear Capital Support at:
+            </p>
+            <span ng-show="passwordRecovery.questionsFailed">
+              <nxg-customer-support-phone></nxg-customer-support-phone>
+            </span>
+
+          </form>
+
+          <div class="footer modal-footer">
+            <button class="btn-cta cta-primary btn-cta-expand"
+                    ng-class="{disabled: !!forgotUserNameForm.email.$viewValue || submitInProgress }"
+                    ng-disabled="!!forgotUserNameForm.email.$viewValue || submitInProgress"
+                    ng-click="passwordRecovery.submit()"
+                    id="forgotPasswordSubmit" translate>Submit</button>
           </div>
-
-          <p class="text-error" ng-show="passwordRecovery.questionsFailed" translate>
-            We were unable verify one or more of your answers. If you need assistance, please call
-            NextGear Capital Support at:
-          </p>
-          <span ng-show="passwordRecovery.questionsFailed">
-            <nxg-customer-support-phone></nxg-customer-support-phone>
-          </span>
-
-        </form>
-
-        <div class="footer modal-footer">
-          <button class="btn-cta cta-primary"
-                  ng-class="{disabled: !!forgotUserNameForm.email.$viewValue || submitInProgress }"
-                  ng-disabled="!!forgotUserNameForm.email.$viewValue || submitInProgress"
-                  ng-click="passwordRecovery.submit()"
-                  id="forgotPasswordSubmit" translate>Submit</button>
         </div>
       </div>
     </div>
