@@ -108,7 +108,7 @@
               popover-title="Check out your new myNextGear Menu!"
               popover-placement="bottom"
               uib-popover-template="'client/shared/directives/navbar/menuTip.html'"
-              popover-is-open="!hideMenuTip && !isMobile"
+              popover-is-open="!hideMenuTip && !isMobile && user.isDealer()"
               popover-trigger="none">
             <li class="visible-xs" ng-if="user.isDealer()">
               <a href="#" ng-href="#/checkout" ng-click="setPageTitle('Checkout')">Checkout</a>
