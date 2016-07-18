@@ -2,9 +2,6 @@
 
 function DashboardObjects() {
 
-  var delay = 500;
-  //var longDelay = 2000;
-
   //Locators
   this.elReceiptsLink = browser.element(by.css('a[ng-href="#/receipts"]'));
   this.elResourcesLink = browser.element(by.css('a[ng-href="#/documents"]'));
@@ -13,15 +10,18 @@ function DashboardObjects() {
   //Doers
   this.doResources = function() {
     browser.sleep(browser.sleep(browser.params.longDelay));
-    return this.elResourcesLink.click();
+    this.elResourcesLink.click();
+    browser.sleep(browser.params.shortDelay);
   };
   this.doReceipts = function() {
     browser.sleep(browser.sleep(browser.params.longDelay));
-    return this.elReceiptsLink.click();
+    this.elReceiptsLink.click();
+    browser.sleep(browser.params.shortDelay);
   };
   this.doRequestCreditIncrease = function() {
-    browser.sleep(delay);
+    browser.sleep(browser.params.longDelay);
     this.elRequestCreditIncrease.click();
+    browser.sleep(browser.params.longerDelay);
   };
 
   //Getters
