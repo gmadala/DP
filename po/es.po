@@ -730,6 +730,11 @@ msgstr "Cheque #"
 msgid "Checkout"
 msgstr "Verificación"
 
+#:app/client/shared/directives/navbar/navbar.template.html: 88
+#:app/client/shared/directives/navbar/navbar.template.html: 109
+msgid "Check out the new myNextGear menu!"
+msgstr "¡Echa un vistazo a el nuevo menú myNextGear!"
+
 #: app/client/dealer-search/auction-dealer-search.template.html:62
 #: app/client/dealer-search/business-search-modal/business-search.template.html:62
 #: app/client/dealer-search/dealer-name-search-modal/dealer-name-search.template.html:16
@@ -2065,6 +2070,10 @@ msgstr "Odómetro"
 #: app/client/shared/modals/financial-account/financial-account.controller.js:159
 msgid "OK"
 msgstr "De acuerdo"
+
+#: app/client/shared/directives/navbar/menuTip.html:4
+msgid "OK, I got it!"
+msgstr "Ok, lo tengo!"
 
 #: app/client/floor-vehicle/floor-car.template.html:288
 #: app/client/vehicle-details/vehicle-details.html:530
@@ -3573,6 +3582,10 @@ msgstr "Los siguientes valores se basan en el archive Zip proporcionado."
 #: app/client/value-lookup/value-lookup.html:520
 msgid "The following values represent a national average."
 msgstr "Los siguientes valores representan un promedio nacional."
+
+#: app/client/shared/directives/navbar/menuTip.html:2
+msgid "The new menu is redesigned both for mobile view and so all your selections are available in one place."
+msgstr "El nuevo menú se ha rediseñado tanto para la vista móvil y así todas las selecciones están disponibles en un solo lugar."
 
 #: app/client/profile-settings/auction/auction-settings.template.html:53
 #: app/client/profile-settings/dealer/profile-settings.template.html:52

@@ -218,7 +218,13 @@
 .mng-navbar {
   .popover {
     max-width: 300px;
-    width: 290px;
+    width: 300px;
+    .popover-title-custom {
+      position: relative;
+      left: -15px;
+      top: -10px;
+      width: 298px;
+    }
   }
   @include box-shadow(rgba(black, 0.25) 0px 2px 3px);
   background-color: $highlight;

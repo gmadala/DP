@@ -85,7 +85,6 @@
           <button type="button" class="navbar-toggle collapsed mobile-menu-button"
                   ng-class="{'button-x': navState.current.data.showMenu}"
                   ng-click="toggleMenu()"
-                  popover-title="Check out the new myNextGear menu!"
                   popover-placement="bottom"
                   uib-popover-template="'client/shared/directives/navbar/menuTip.html'"
                   popover-is-open="!hideMenuTip && isMobile"
@@ -105,7 +104,6 @@
 
         <div class="collapse navbar-collapse" ng-class="{'in': navState.current.data.showMenu}" ng-click="closeMenu()">
           <ul class="nav navbar-nav"
-              popover-title="Check out the new myNextGear menu!"
               popover-placement="bottom"
               uib-popover-template="'client/shared/directives/navbar/menuTip.html'"
               popover-is-open="!hideMenuTip && !isMobile && user.isDealer()"
