@@ -53,7 +53,7 @@
               </li>
               <li class="menu-divider"></li>
               <li>
-                <a href="javascript:void(0)" ng-click="user.logout()">
+                <a href="javascript:void(0)" ng-click="user.logout()" id="signOut">
                   <strong translate>Sign Out</strong>
                 </a>
               </li>
@@ -84,7 +84,11 @@
         <div class="navbar-header">
           <button type="button" class="navbar-toggle collapsed mobile-menu-button"
                   ng-class="{'button-x': navState.current.data.showMenu}"
-                  ng-click="toggleMenu()">
+                  ng-click="toggleMenu()"
+                  popover-placement="bottom"
+                  uib-popover-template="'client/shared/directives/navbar/menuTip.html'"
+                  popover-is-open="!hideMenuTip && isMobile"
+                  popover-trigger="none">
             <span class="sr-only">Toggle navigation</span>
             <span class="hamburger"></span>
           </button>
@@ -99,7 +103,11 @@
         </div>
 
         <div class="collapse navbar-collapse" ng-class="{'in': navState.current.data.showMenu}" ng-click="closeMenu()">
-          <ul class="nav navbar-nav">
+          <ul class="nav navbar-nav"
+              popover-placement="bottom"
+              uib-popover-template="'client/shared/directives/navbar/menuTip.html'"
+              popover-is-open="!hideMenuTip && !isMobile && user.isDealer()"
+              popover-trigger="none">
             <li class="visible-xs" ng-if="user.isDealer()">
               <a href="#" ng-href="#/checkout" ng-click="setPageTitle('Checkout')">Checkout</a>
             </li>

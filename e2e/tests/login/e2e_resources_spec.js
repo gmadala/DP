@@ -1,36 +1,37 @@
 'use strict';
 
-
+var loginObjects = require('../../framework/e2e_login_objects.js');
 var resources = require('../../framework/e2e_resources_objects.js');
 var login = require('../../framework/e2e_login.js');
 var execSettings = require('../../framework/e2e_execSettings.js');
+var helper = require('../../framework/e2e_helper_functions.js');
 
+var loginObjects = new loginObjects.loginObjects();
 var resources = new resources.resources();
-
-var delay = 2000;
+var helper = new helper.helper();
 
 describe('Testing Resources Page', function() {
 
   beforeEach(function() {
-    browser.driver.manage().window().maximize();
+    browser.sleep(browser.params.shortDelay);
   });
 
   it('Dealer - Login', function() {
-    browser.get(execSettings.loginPage());
-    browser.sleep(delay);
-    login.login();
-    resources.doResources();
-    browser.sleep(delay);
+    helper.goToLogin();
+    browser.sleep(browser.params.shortDelay);
+    loginObjects.doGoodLogin();
+    helper.goToResources();
+    browser.sleep(browser.params.shortDelay);
     expect(browser.getCurrentUrl() === execSettings.resourcesPage());
   });
 
   it('Validating  the Rates and Fees link', function() {
-    browser.get(execSettings.resourcesPage());
+    helper.goToResources();
     resources.doRatesAndFees();
     browser.getAllWindowHandles().then(function(handles) {
       browser.switchTo().window(handles[1]).then(function() {
         browser.ignoreSynchronization = true;
-        expect(browser.getCurrentUrl()).toContain("https://test.nextgearcapital.com/MobileService/api/dealer/feeschedule/FeeSchedule?AuthToken=65415B3C-C684-433D-80FD-3387EAB95043");
+        expect(browser.getCurrentUrl()).toContain("https://test.nextgearcapital.com/MobileService/api/dealer/feeschedule/FeeSchedule?AuthToken=");
         browser.ignoreSynchronization = false;
         browser.close();
         browser.driver.switchTo().window(handles[0]);
@@ -40,13 +41,12 @@ describe('Testing Resources Page', function() {
 
   //Welcome packet is taking too much time to load that causes other test cases fail.
   xit('Validating the Welcome Packet', function() {
-    browser.get(execSettings.resourcesPage());
+    helper.goToResources();
     resources.doWelcomePacket();
     browser.getAllWindowHandles().then(function(handles) {
       browser.switchTo().window(handles[1]).then(function() {
         browser.ignoreSynchronization = true;
         expect(browser.getCurrentUrl()).toEqual("http://www.nextgearcapital.com/welcome-packet/");
-        browser.wait(250000);
         browser.close();
         browser.ignoreSynchronization = false;
         browser.driver.switchTo().window(handles[0]);
@@ -55,7 +55,7 @@ describe('Testing Resources Page', function() {
   });
 
   it('Validating the Dealer Funding Checklist', function() {
-    browser.get(execSettings.resourcesPage());
+    helper.goToResources();
     resources.doDealerFunding();
     browser.getAllWindowHandles().then(function(handles) {
       browser.switchTo().window(handles[1]).then(function() {
@@ -69,7 +69,7 @@ describe('Testing Resources Page', function() {
   });
 
   it('Validating the Title Management link', function() {
-    browser.get(execSettings.resourcesPage());
+    helper.goToResources();
     resources.doTitleManagement();
     browser.getAllWindowHandles().then(function(handles) {
       browser.switchTo().window(handles[1]).then(function() {
@@ -83,7 +83,7 @@ describe('Testing Resources Page', function() {
   });
 
   it('Validating the Instrunctions For Buyers', function() {
-    browser.get(execSettings.resourcesPage());
+    helper.goToResources();
     resources.doInstructionsForBuyers();
     browser.getAllWindowHandles().then(function(handles) {
       browser.switchTo().window(handles[1]).then(function() {
@@ -96,7 +96,7 @@ describe('Testing Resources Page', function() {
     });
   });
   it('Validating the Welcome Letter', function() {
-    browser.get(execSettings.resourcesPage());
+    helper.goToResources();
     resources.doWelcomeLetter();
     browser.getAllWindowHandles().then(function(handles) {
       browser.switchTo().window(handles[1]).then(function() {
@@ -110,7 +110,7 @@ describe('Testing Resources Page', function() {
   });
 
   it('Validating the Guidelines', function() {
-    browser.get(execSettings.resourcesPage());
+    helper.goToResources();
     resources.doGuidelines();
     browser.getAllWindowHandles().then(function(handles) {
       browser.switchTo().window(handles[1]).then(function() {
@@ -124,7 +124,7 @@ describe('Testing Resources Page', function() {
   });
 
   it('Validating the Information Sheet', function() {
-    browser.get(execSettings.resourcesPage());
+    helper.goToResources();
     resources.doInformationSheet();
     browser.getAllWindowHandles().then(function(handles) {
       browser.switchTo().window(handles[1]).then(function() {
@@ -138,7 +138,7 @@ describe('Testing Resources Page', function() {
   });
 
   it('Validating the Claim Form', function() {
-    browser.get(execSettings.resourcesPage());
+    helper.goToResources();
     resources.doClaimForm();
     browser.getAllWindowHandles().then(function(handles) {
       browser.switchTo().window(handles[1]).then(function() {
@@ -152,7 +152,7 @@ describe('Testing Resources Page', function() {
   });
 
   it('Validating the myNextGear Mobile IOS', function() {
-    browser.get(execSettings.resourcesPage());
+    helper.goToResources();
     resources.doMobileIOS();
     browser.getAllWindowHandles().then(function(handles) {
       browser.switchTo().window(handles[1]).then(function() {
@@ -166,7 +166,7 @@ describe('Testing Resources Page', function() {
   });
 
   it('Validating the myNextGear Mobile Android', function() {
-    browser.get(execSettings.resourcesPage());
+    helper.goToResources();
     resources.doMobileAndroid();
     browser.getAllWindowHandles().then(function(handles) {
       browser.switchTo().window(handles[1]).then(function() {
@@ -179,4 +179,9 @@ describe('Testing Resources Page', function() {
     });
   });
 
+  it("Logout Resources", function () {
+    browser.sleep(browser.params.shortDelay);
+    login.logout();
+    expect(browser.getCurrentUrl()).toEqual(execSettings.loginPage());
+  });
 });
