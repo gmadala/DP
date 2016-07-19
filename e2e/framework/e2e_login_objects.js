@@ -6,10 +6,6 @@
  * */
 
 function LoginObjects() {
-  var username = '53190md';
-  var password = 'ngcpass!0';
-  var delay = 1000;
-  //var longDelay = 2000;
 
   this.elForgotUsernamePassword = browser.element(by.id("forgotUsernamePassword"));
   this.elEmail = browser.element(by.id("email"));
@@ -19,13 +15,11 @@ function LoginObjects() {
   this.elUserName = browser.element(by.id("credUsername"));
   this.elPassWord = browser.element(by.id("credPassword"));
   this.elLogin = browser.element(by.id("loginButton"));
-  this.elMyAccount = browser.element(by.id("settingsDropdown"));
   this.elPasswordRecoveryModal = browser.element(by.model('passwordRecovery.username'));
   this.elFUPWUsername = browser.element(by.id("userName"));
   this.elSecQues10 = browser.element(by.id('question10'));
   this.elSecQues6 = browser.element.all(by.id('question6'));
   this.elSecQues9 = browser.element.all(by.id('question9'));
-  this.elSignOut = browser.element(by.css('a'));
   this.elLangChooser = browser.element(by.css('div.nav-language-chooser'));
   this.elEnglish = browser.element(by.buttonText("English"));
   this.elSpanish = browser.element(by.buttonText("Español"));
@@ -33,61 +27,51 @@ function LoginObjects() {
   this.elMNGLogo = browser.element(by.css('div.nxg-logo'));
 
   //Doers
-  this.doForgotUsernamePassword = function() {
-    return this.elForgotUsernamePassword.click();
-    //browser.sleep(delay);
+  this.doForgotUsernamePassword = function () {
+    this.elForgotUsernamePassword.click();
+    browser.sleep(browser.params.shortDelay);
   };
-  this.doUsernameSubmit = function() {
-    return this.elSubmitUsername.click();
-    //browser.sleep(delay);
+  this.doUsernameSubmit = function () {
+    this.elSubmitUsername.click();
+    browser.sleep(browser.params.shortDelay);
   };
-  this.doSignUpLogin = function() {
-    return this.elSignUpLogin.click();
-    //browser.sleep(longDelay);
+  this.doSignUpLogin = function () {
+    this.elSignUpLogin.click();
+    browser.sleep(browser.params.longDelay);
   };
   this.doClearLogin = function() {
     this.elUserName.clear();
+    browser.sleep(browser.params.longDelay);
     this.elPassWord.clear();
-    browser.sleep(delay);
+    browser.sleep(browser.params.longDelay);
   };
-  this.doLogin = function() {
-    return this.elLogin.click();
-    //browser.sleep(delay);
+  this.doLogin = function () {
+    this.elLogin.click();
+    browser.sleep(browser.params.longDelay);
   };
-  this.doMyAccount = function() {
-    return this.elMyAccount.click();
-  };
-  this.doSubmitUsername = function() {
-    return this.elSubmitUsername.click();
-  };
-  this.doSubmitPassword = function() {
-    return this.elSubmitPassword.click();
-    //browser.sleep(longDelay);
+  this.doSubmitPassword = function () {
+    this.elSubmitPassword.click();
+    browser.sleep(browser.params.longDelay);
   };
   this.doGoodLogin = function() {
     this.doClearLogin();
-    this.setUserName(username);
-    this.setPassWord(password);
+    browser.sleep(browser.params.shortDelay);
+    this.setLogin(browser.params.userName, browser.params.password);
     this.doLogin();
-    browser.sleep(delay);
-  };
-  this.doSignOut = function() {
-    this.doMyAccount();
-    return this.elSignOut.click();
   };
   this.doEnglish = function () {
     this.elEnglish.click();
-    browser.sleep(delay);
+    browser.sleep(browser.params.shortDelay);
   };
   this.doSpanish = function () {
     this.elSpanish.click();
-    browser.sleep(delay);
+    browser.sleep(browser.params.shortDelay);
   };
   this.doFrench = function () {
     this.elFrench.click();
-    browser.sleep(delay);
+    browser.sleep(browser.params.shortDelay);
   };
-  
+
   //Getters
   this.getTextForgotUsernamePassword = function() {
     return this.elForgotUsernamePassword.getText();
@@ -95,43 +79,34 @@ function LoginObjects() {
   this.getTextSignUpLogin = function() {
     return this.elSignUpLogin.getText();
   };
-  this.getTextSubmitUsername = function() {
-    browser.sleep(delay);
+  this.getTextSubmitUsername = function () {
     return this.elSubmitUsername.getText();
   };
   this.getTextLogin = function (){
-    browser.sleep(delay);
+    browser.sleep(browser.params.shortDelay);
     return this.elLogin.getText();
   };
 
   //Setters
-  this.setEmail = function(param) {
-    browser.sleep(browser.params.shortDelay);
+  this.setEmail = function (param) {
     this.elEmail.sendKeys(param);
   };
-
-  this.setUserName = function(username) {
-    this.elUserName.sendKeys(username);
-  };
-  this.setPassWord = function(password) {
-    this.elPassWord.sendKeys(password);
-  };
-  this.setLogin = function(username, password) {
+  this.setLogin = function (username, password) {
     this.doClearLogin();
     this.elUserName.sendKeys(username);
-    browser.sleep(delay);
+    browser.sleep(browser.params.shortDelay);
     this.elPassWord.sendKeys(password);
-    browser.sleep(delay);
+    browser.sleep(browser.params.shortDelay);
   };
-  this.setSecQuestions = function(param) {
-    browser.sleep(delay);
+  this.setSecQuestions = function (param) {
     this.elSecQues10.clear().sendKeys(param);
     this.elSecQues10.sendKeys(protractor.Key.TAB);
-    browser.sleep(delay);
+    browser.sleep(browser.params.shortDelay);
     this.elSecQues6.clear().sendKeys(param);
     this.elSecQues10.sendKeys(protractor.Key.TAB);
-    browser.sleep(delay);
+    browser.sleep(browser.params.shortDelay);
     this.elSecQues9.clear().sendKeys(param);
+    browser.sleep(browser.params.shortDelay);
   };
 
 }
