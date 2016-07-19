@@ -13,7 +13,8 @@
     'Payments',
     'gettextCatalog',
     'language',
-    'kissMetricInfo'
+    'kissMetricInfo',
+    'fedex'
   ];
 
   function NavBarCtrl(
@@ -24,7 +25,8 @@
     Payments,
     gettextCatalog,
     language,
-    kissMetricInfo) {
+    kissMetricInfo,
+    fedex) {
 
     $scope.isCollapsed = true;
 
@@ -160,6 +162,8 @@
     $rootScope.$on('$stateChangeSuccess', function () {
       $scope.isCollapsed = true;
     });
+
+    $scope.fedExWaybillEnabled = fedex.wayBillPrintingEnabled();
 
     $scope.navState = $state;
   }
