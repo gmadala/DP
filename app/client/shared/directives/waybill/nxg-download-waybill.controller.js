@@ -15,7 +15,7 @@
             saveAs(blob, "Waybill.pdf");
           }
         });
-    }
+    };
 
     function b64toBlob(b64Data, contentType, sliceSize) {
       contentType = contentType || '';

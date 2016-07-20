@@ -23,7 +23,7 @@
           return {
             waybill: response.waybill,
             trackingnumber: response.trackingNumber
-          }
+          };
         });
       }
     };
@@ -37,7 +37,7 @@
       api.resetSessionTimeout();
 
       kissMetricInfo.getKissMetricInfo().then(function (result) {
-        results.FedExTrackingNumber = response.trackingNumber;
+        result.FedExTrackingNumber = response.trackingNumber;
         segmentio.track(metric.WAYBILL_PRINTED, result);
       });
 
