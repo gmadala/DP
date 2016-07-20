@@ -4,11 +4,9 @@
     .module('nextgearWebApp')
     .controller('NxgDownloadWaybillCtrl', NxgDownloadWaybillCtrl);
 
-  NxgDownloadWaybillCtrl.$inject = ['$scope', 'fedex', 'User'];
+  NxgDownloadWaybillCtrl.$inject = ['$scope', 'fedex'];
 
-  function NxgDownloadWaybillCtrl($scope, fedex, User) {
-    $scope.fedExWaybillEnabled = fedex.wayBillPrintingEnabled();
-
+  function NxgDownloadWaybillCtrl($scope, fedex) {
     $scope.getWaybill = function () {
       fedex.getWaybill()
         .then(function (data) {

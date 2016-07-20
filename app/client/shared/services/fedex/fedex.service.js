@@ -5,19 +5,18 @@
     .module('nextgearWebApp')
     .factory('fedex', fedex);
 
-  fedex.$inject = ['api', 'User', 'kissMetricInfo'];
+  fedex.$inject = ['api', 'User', 'kissMetricInfo', 'metric', 'segmentio'];
 
-  function fedex(api, User, kissMetricInfo) {
+  function fedex(api, User, kissMetricInfo, metric, segmentio) {
     return {
-      wayBillPrintingEnabled : function () {
-        return true;
-        // if(User.isUnitedStates()) {
-        //   if (User.isDealer()) {
-        //     return (User.getFeatures().hasOwnProperty('printFedExWaybillDealer') ? User.getFeature().printFedExWaybillDealer.enabled : false);
-        //   } else {
-        //     return (User.getFeatures().hasOwnProperty('printFedExWaybillNonDealer') ? User.getFeature().printFedExWaybillNonDealer.enabled : false);
-        //   }
-        // }
+      wayBillPrintingEnabled: function () {
+        if (User.isUnitedStates()) {
+          if (User.isDealer()) {
+            return (User.getFeatures().hasOwnProperty('printFedExWaybillDealer') ? User.getFeature().printFedExWaybillDealer.enabled : false);
+          } else {
+            return (User.getFeatures().hasOwnProperty('printFedExWaybillNonDealer') ? User.getFeature().printFedExWaybillNonDealer.enabled : false);
+          }
+        }
       },
       getWaybill: function (businessId) {
         return api.request('GET', api.ngenContentLink('/fedex/waybill'), {id: businessId}, null, true, handleNgenSucessRequest, handleNgenError).then(function (response) {
@@ -30,12 +29,18 @@
     };
 
     function handleNgenError() {
-      //Add Kiss Metric - Error
+      api.resetSessionTimeout();
+      return false;
     }
 
     function handleNgenSucessRequest(response) {
       api.resetSessionTimeout();
-      //Add Kiss Metric - Success
+
+      kissMetricInfo.getKissMetricInfo().then(function (result) {
+        results.FedExTrackingNumber = response.trackingNumber;
+        segmentio.track(metric.WAYBILL_PRINTED, result);
+      });
+
       return response;
     }
   }
