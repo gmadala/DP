@@ -16,7 +16,7 @@ describe('Testing Resources Page', function() {
     browser.sleep(browser.params.shortDelay);
   });
 
-  it('Dealer - Login', function() {
+  it('Resources - Login as 97421eh', function() {
     helper.goToLogin();
     browser.sleep(browser.params.shortDelay);
     loginObjects.doGoodLogin();
@@ -25,7 +25,7 @@ describe('Testing Resources Page', function() {
     expect(browser.getCurrentUrl() === execSettings.resourcesPage());
   });
 
-  it('Validating  the Rates and Fees link', function() {
+  it('Resources - Validating the Rates and Fees link', function() {
     helper.goToResources();
     resources.doRatesAndFees();
     browser.getAllWindowHandles().then(function(handles) {
@@ -40,7 +40,7 @@ describe('Testing Resources Page', function() {
   });
 
   //Welcome packet is taking too much time to load that causes other test cases fail.
-  xit('Validating the Welcome Packet', function() {
+  xit('Resources - Validating the Welcome Packet', function() {
     helper.goToResources();
     resources.doWelcomePacket();
     browser.getAllWindowHandles().then(function(handles) {
@@ -54,7 +54,7 @@ describe('Testing Resources Page', function() {
     });
   });
 
-  it('Validating the Dealer Funding Checklist', function() {
+  it('Resources - Validating the Dealer Funding Checklist', function() {
     helper.goToResources();
     resources.doDealerFunding();
     browser.getAllWindowHandles().then(function(handles) {
@@ -68,7 +68,7 @@ describe('Testing Resources Page', function() {
     });
   });
 
-  it('Validating the Title Management link', function() {
+  it('Resources - Validating the Title Management link', function() {
     helper.goToResources();
     resources.doTitleManagement();
     browser.getAllWindowHandles().then(function(handles) {
@@ -82,7 +82,7 @@ describe('Testing Resources Page', function() {
     });
   });
 
-  it('Validating the Instrunctions For Buyers', function() {
+  it('Resources - Validating the Instrunctions For Buyers', function() {
     helper.goToResources();
     resources.doInstructionsForBuyers();
     browser.getAllWindowHandles().then(function(handles) {
@@ -95,7 +95,7 @@ describe('Testing Resources Page', function() {
       });
     });
   });
-  it('Validating the Welcome Letter', function() {
+  it('Resources - Validating the Welcome Letter', function() {
     helper.goToResources();
     resources.doWelcomeLetter();
     browser.getAllWindowHandles().then(function(handles) {
@@ -109,7 +109,7 @@ describe('Testing Resources Page', function() {
     });
   });
 
-  it('Validating the Guidelines', function() {
+  it('Resources - Validating the Guidelines', function() {
     helper.goToResources();
     resources.doGuidelines();
     browser.getAllWindowHandles().then(function(handles) {
@@ -123,7 +123,7 @@ describe('Testing Resources Page', function() {
     });
   });
 
-  it('Validating the Information Sheet', function() {
+  it('Resources - Validating the Information Sheet', function() {
     helper.goToResources();
     resources.doInformationSheet();
     browser.getAllWindowHandles().then(function(handles) {
@@ -137,7 +137,7 @@ describe('Testing Resources Page', function() {
     });
   });
 
-  it('Validating the Claim Form', function() {
+  it('Resources - Validating the Claim Form', function() {
     helper.goToResources();
     resources.doClaimForm();
     browser.getAllWindowHandles().then(function(handles) {
@@ -151,7 +151,7 @@ describe('Testing Resources Page', function() {
     });
   });
 
-  it('Validating the myNextGear Mobile IOS', function() {
+  it('Resources - Validating the myNextGear Mobile IOS', function() {
     helper.goToResources();
     resources.doMobileIOS();
     browser.getAllWindowHandles().then(function(handles) {
@@ -165,7 +165,7 @@ describe('Testing Resources Page', function() {
     });
   });
 
-  it('Validating the myNextGear Mobile Android', function() {
+  it('Resources - Validating the myNextGear Mobile Android', function() {
     helper.goToResources();
     resources.doMobileAndroid();
     browser.getAllWindowHandles().then(function(handles) {
@@ -179,7 +179,7 @@ describe('Testing Resources Page', function() {
     });
   });
 
-  it("Logout Resources", function () {
+  it("Resources - Logout", function () {
     browser.sleep(browser.params.shortDelay);
     login.logout();
     expect(browser.getCurrentUrl()).toEqual(execSettings.loginPage());

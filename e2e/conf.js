@@ -15,7 +15,7 @@ exports.config = {
 
   //Spec patterns are relative to the current working directly when protractor is called.
   specs: ['tests/login/*_spec.js'],
-  //specs: ['tests/login/e2e_resources_spec.js'],
+  //specs: ['tests/login/e2e_promos_spec.js'],
 
   //More miscellaneous configuration options
   directConnect: true,
@@ -40,9 +40,11 @@ exports.config = {
     userNameAuction: 'tmsauction',
     userName: '97421EH',
     password: 'ngcpass!0',
+    delay: '500',
     shortDelay: '1000',
     mediumDelay: '3000',
     longDelay: '5000',
     longerDelay: '10000'
+
   }
 };
