@@ -25,12 +25,13 @@
 
 .save-edit{
   font-weight: bold;
+  text-align: left;
 }
 
 .cancel-edit{
   font-size: 12px;
-  line-height: 42px;
-  text-align: right;
+  line-height: 12px;
+  text-align: left;
 }
 
 .checkbox-img.small{
@@ -39,8 +40,8 @@
 }
 
 .edit-column{
-  text-align: center;
-  line-height: 42px;
+  text-align: left;
+  line-height: 12px;
   .edit-text{
     padding-left: 5px;
   }

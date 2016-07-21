@@ -1,18 +1,112 @@
+
 <div class="container">
   <div class="row" id="FinancialAccounts">
-    <div class="col-xs-12">
+    <div class="col-md-12">
       <div class="panel panel-default">
         <h2 class="well-title">
           <span translate>Financial Accounts</span>
-          <button class="btn-unstyle right no-padding no-margin" ng-show="financial.isAddBankAccountEditable()"
-                  ng-click="financial.addFinancialAccount()" translate>Add Account</button>
         </h2>
+        <!--Default accounts display-->
+        <div class="row" >
 
-        <div class="well-column-header col-xs-12" ng-show="editBankAccountEnabled && business.data.isStakeholderActive && isUnitedStates">
-          <h6 class="col-xs-3 left-align left-padding" translate>Bank Name</h6>
-          <h6 class="col-xs-3" translate>Account Number</h6>
-          <h6 class="col-xs-3">{{financial.data.routingNumberLabel}}</h6>
-          <h6 class="col-xs-1" translate>Active</h6>
+          <div class="well-item col-md-6">
+            <div class="col-xs-1">
+
+              <button class="btn-help btn-help-adjust inline-row"
+                      tooltip-placement="right"
+                      tooltip-trigger="mouseenter"
+                      uib-tooltip="{{ 'This account will be used for all system-generated deposits, including automatic payout of unapplied funds.' | translate }}"
+                      tooltip-animation="true">
+                <span nxg-icon="icon-help"></span>
+              </button>
+            </div>
+            <div class="col-xs-4"><label for="defaultDeposit" translate>Deposit Account: </label></div>
+            <div class="col-xs-6">
+              <p class="static-option inline-row" ng-show="!editDefaultDAccount">
+                {{ defaultDeposit.AchBankName + " (..." + defaultDeposit.AchAccountNumberLast4 + ")" }}
+              </p>
+
+              <div class="style-select" ng-show="editDefaultDAccount">
+                <select id="defaultDeposit"
+                        ng-model="defaultDeposit"
+                        ng-options="account as [account.AchAccountNumberLast4, account.AchBankName].join(' - ') for account in financial.data.activeBankAccounts | orderBy:'AchBankName'"
+                        required>
+                </select>
+              </div>
+              <div class="edit-column"
+                   ng-show="editBankAccountEnabled && business.data.isStakeholderActive && isUnitedStates">
+                <button ng-hide="editDefaultDAccount" class="btn-unstyle" ng-click="financial.editD()"><span
+                  class="glyphicon glyphicon-pencil"></span><span class="edit-text" translate>Edit</span></button>
+                <button ng-show="editDefaultDAccount" class="col-md-3 custom btn-unstyle cancel-edit"
+                        ng-click="financial.cancel()" translate>Cancel
+                </button>
+                <button ng-show="editDefaultDAccount" class="col-md-3 custom btn-unstyle save-edit"
+                        ng-click="financial.save()" translate>Save
+                </button>
+              </div>
+
+            </div>
+
+          </div>
+          <div class="well-item col-md-6 bordered-left" >
+            <div class="col-xs-1">
+              <button class="btn-help btn-help-adjust inline-row"
+                      tooltip-placement="right"
+                      tooltip-trigger="mouseenter"
+                      uib-tooltip="{{ 'This account will be used for all system-generated payments.  When making or scheduling payments online, you can select any active account.' | translate }}"
+                      tooltip-animation="true">
+                <span nxg-icon="icon-help"></span>
+              </button>
+            </div>
+            <div class="col-xs-4"><label for="defaultPayment" translate>Payment Account:</label></div>
+            <div class="col-xs-6">
+              <p class="static-option inline-row" ng-show="!editDefaultPAccount">
+                {{ defaultPayment.AchBankName + " (..." + defaultPayment.AchAccountNumberLast4 + ")" }}
+              </p>
+
+              <div class="style-select" ng-show="editDefaultPAccount">
+                <select id="defaultPayment"
+                        ng-model="defaultPayment"
+                        ng-options="account as [account.AchAccountNumberLast4, account.AchBankName].join(' - ') for account in financial.data.activeBankAccounts | orderBy:'AchBankName'"
+                        required>
+                </select>
+              </div>
+              <div class="edit-column"
+                   ng-show="editBankAccountEnabled && business.data.isStakeholderActive && isUnitedStates">
+                <button ng-hide="editDefaultPAccount" class="btn-unstyle" ng-click="financial.editP()"><span
+                  class="glyphicon glyphicon-pencil"></span><span class="edit-text" translate>Edit</span></button>
+                <button ng-show="editDefaultPAccount" class="col-md-3 custom btn-unstyle cancel-edit"
+                        ng-click="financial.cancel()" translate>Cancel
+                </button>
+                <button ng-show="editDefaultPAccount" class="col-md-3 custom btn-unstyle save-edit"
+                        ng-click="financial.save()" translate>Save
+                </button>
+              </div>
+            </div>
+
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12">
+            <button class="btn-cta cta-primary" ng-show="financial.isAddBankAccountEditable()"
+                    ng-click="financial.addFinancialAccount()" translate>Add Account
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-12">
+      <div class="panel panel-default">
+        <div class="well-column-header col-md-12 hidden-xs"
+             ng-show="business.data.isStakeholderActive && isUnitedStates">
+          <h6 class="col-xs-2 left-align left-padding" translate>Bank Name</h6>
+          <h6 class="col-xs-2" translate>Account Number</h6>
+          <h6 class="col-xs-2">{{financial.data.routingNumberLabel}}</h6>
+          <h6 class="col-xs-2">Last Transaction</h6>
+          <h6 class="col-xs-2" translate>Active</h6>
         </div>
 
         <!--Financial Account information display-->
@@ -24,7 +118,7 @@
                                    is-stakeholder-active="business.data.isStakeholderActive"
                                    is-united-states="isUnitedStates"
                                    refresh-active-ach-accounts="refreshActiveAchAccounts()"
-                                   recent-transaction="getLatestTransaction(account.BankAccountId)" >
+                                   recent-transaction="getLatestTransaction(account.BankAccountId)">
             </nxg-financial-account>
           </div>
           <div ng-repeat="account in financial.data.inactiveBankAccounts | orderBy:'AchBankName'">
@@ -37,63 +131,13 @@
                                    recent-transaction="getLatestTransaction(account.BankAccountId)">
             </nxg-financial-account>
           </div>
+
         </div>
 
-        <!--Default accounts display-->
-        <div class="well-default-header col-xs-12">
-          <div class="col-xs-2"><label for="defaultDeposit" translate>Default Deposit Account: </label></div>
-          <div class="col-xs-2">
-            <p class="static-option inline-row" ng-show="!editDefaultAccount">
-              {{ defaultDeposit.AchAccountNumberLast4 + " - " + defaultDeposit.AchBankName | truncate:23 }}
-            </p>
-            <div class="style-select" ng-show="editDefaultAccount">
-              <select id="defaultDeposit"
-                      ng-model="defaultDeposit"
-                      ng-options="account as [account.AchAccountNumberLast4, account.AchBankName].join(' - ') for account in financial.data.activeBankAccounts | orderBy:'AchBankName'"
-                      required>
-              </select>
-            </div>
-          </div>
-          <div class="col-xs-1">
-            <button class="btn-help btn-help-adjust inline-row"
-                    tooltip-placement="bottom"
-                    tooltip-trigger="mouseenter"
-                    uib-tooltip="{{ 'This account will be used for all system-generated deposits, including automatic payout of unapplied funds.' | translate }}"
-                    tooltip-animation="true">
-              <span nxg-icon="icon-help"></span>
-            </button>
-          </div>
-          <div class="col-xs-2"><label for="defaultPayment" translate>Default Payment Account: </label></div>
-          <div class="col-xs-2">
-            <p class="static-option inline-row" ng-show="!editDefaultAccount">
-              {{ defaultPayment.AchAccountNumberLast4 + " - " + defaultPayment.AchBankName | truncate:23 }}
-            </p>
-            <div class="style-select" ng-show="editDefaultAccount">
-              <select id="defaultPayment"
-                      ng-model="defaultPayment"
-                      ng-options="account as [account.AchAccountNumberLast4, account.AchBankName].join(' - ') for account in financial.data.activeBankAccounts | orderBy:'AchBankName'"
-                      required>
-              </select>
-            </div>
-          </div>
-          <div class="col-xs-1">
-            <button class="btn-help btn-help-adjust inline-row"
-                    tooltip-placement="bottom"
-                    tooltip-trigger="mouseenter"
-                    uib-tooltip="{{ 'This account will be used for all system-generated payments.  When making or scheduling payments online, you can select any active account.' | translate }}"
-                    tooltip-animation="true">
-              <span nxg-icon="icon-help"></span>
-            </button>
-          </div>
-          <div class="col-xs-2 icon-padding-right edit-column" ng-show="editBankAccountEnabled && business.data.isStakeholderActive && isUnitedStates">
-            <button ng-hide="editDefaultAccount" class="btn-unstyle" ng-click="financial.edit()"><span class="glyphicon glyphicon-pencil"></span><span class="edit-text" translate>Edit</span></button>
-            <button ng-show="editDefaultAccount" class="col-xs-6 custom btn-unstyle cancel-edit" ng-click="financial.cancel()" translate>Cancel</button>
-            <button ng-show="editDefaultAccount" class="col-xs-6 custom btn-unstyle save-edit" ng-click="financial.save()" translate>Save</button>
-          </div>
-        </div>
       </div>
     </div>
   </div>
+
 
   <div class="row">
     <!-- BUSINESS SETTINGS -->
@@ -101,9 +145,15 @@
       <div class="panel panel-default settings-well" novalidate>
         <h2 class="well-title">
           <span translate>Business Settings</span>
-          <button ng-hide="business.editable" class="btn-unstyle right no-padding no-margin" ng-click="business.edit()" translate>Edit Settings</button>
-          <button ng-show="business.editable" class="btn-unstyle right no-padding no-margin" ng-click="business.save()" translate>Save Settings</button>
-          <button ng-show="business.editable" class="btn-unstyle right no-padding cancel" ng-click="business.cancel()" translate>Cancel</button>
+          <button ng-hide="business.editable" class="btn-unstyle right no-padding no-margin" ng-click="business.edit()"
+                  translate>Edit Settings
+          </button>
+          <button ng-show="business.editable" class="btn-unstyle right no-padding no-margin" ng-click="business.save()"
+                  translate>Save Settings
+          </button>
+          <button ng-show="business.editable" class="btn-unstyle right no-padding cancel" ng-click="business.cancel()"
+                  translate>Cancel
+          </button>
         </h2>
 
         <div class="well-item">
@@ -122,7 +172,9 @@
                 </label>
               </div>-->
               <!-- Begin temporary code -->
-              <div class="col-xs-6" style="margin-top: 14px" id="businessPhone" name="businessPhone" ng-cloak>{{title.data.titleAddress.Phone | tel}}</div>
+              <div class="col-xs-6" style="margin-top: 14px" id="businessPhone" name="businessPhone" ng-cloak>
+                {{title.data.titleAddress.Phone | tel}}
+              </div>
               <div class="col-xs-1" style="padding-left: 30px">
                 <div class="btn-help btn-help-adjust"
                      tooltip-placement="bottom"
@@ -134,10 +186,12 @@
               </div>
             </div>
 
-            <div class="row"  ng-show="business.contactInfo.isDisplayed()">
+            <div class="row" ng-show="business.contactInfo.isDisplayed()">
               <label class="col-xs-3" for="businessFax"><span translate>Fax</span></label>
+
               <div class="col-xs-6" nxg-input model="business.data.fax" editable="business.editable">
-                <input type="tel" class="xsmallInput" id="businessFax" name="businessFax" ng-model="title.data.titleAddress.Fax"
+                <input type="tel" class="xsmallInput" id="businessFax" name="businessFax"
+                       ng-model="title.data.titleAddress.Fax"
                        value="business.dirtyData.fax"
                        ng-class="{ 'nxg-invalid': business.validation.businessFax.$invalid }" required/>
                 <label class="text-error" ng-show="business.validation.businessFax.$invalid" translate>
@@ -146,7 +200,7 @@
               </div>
             </div>
 
-            <div class="row small-bottom-border">
+            <div class="row">
               <label class="col-xs-3" for="businessEmail"><span translate>Email</span></label>
               <!-- This code should be added back in as soon as contact info management goes live, and the following temporary code
               block should be removed
@@ -160,7 +214,9 @@
                 </label>
               </div> -->
               <!-- Begin temporary code -->
-              <div class="col-xs-6" style="margin-top: 14px" id="businessEmail" name="businessEmail" ng-cloak>{{business.data.email | truncate: 23}}</div>
+              <div class="col-xs-6" style="margin-top: 14px" id="businessEmail" name="businessEmail" ng-cloak>
+                {{business.data.email | truncate: 23}}
+              </div>
               <div class="col-xs-1" style="padding-left: 30px">
                 <div class="btn-help btn-help-adjust"
                      tooltip-placement="bottom"
@@ -180,16 +236,23 @@
               <label class="col-xs-5" for="enhanced"><span translate>Enhanced Registration Enabled</span></label>
 
               <div class="col-xs-4">
-                <div class="static" ng-show="business.data.enhancedRegistrationEnabled && !business.editable" translate> Yes </div>
+                <div class="static" ng-show="business.data.enhancedRegistrationEnabled && !business.editable" translate>
+                  Yes
+                </div>
                 <!-- check if equal to false so "No" doesn't appear until the API call finishes -->
-                <div class="static" ng-show="business.data.enhancedRegistrationEnabled == false && !business.editable" translate> No </div>
+                <div class="static" ng-show="business.data.enhancedRegistrationEnabled == false && !business.editable"
+                     translate> No
+                </div>
 
                 <div class="cr-inline" ng-show="business.editable">
-                  <input type="radio" id="enhancedNo" name="enhancedx" ng-model="business.dirtyData.enhancedRegistrationEnabled" ng-value='false' ng-click="business.confirmDisableEnhanced()"/>
+                  <input type="radio" id="enhancedNo" name="enhancedx"
+                         ng-model="business.dirtyData.enhancedRegistrationEnabled" ng-value='false'
+                         ng-click="business.confirmDisableEnhanced()"/>
                   <label class="radio-img" for="enhancedNo"></label>
                   <label class="cr-label" style="padding: 10px 15px 0 0;" for="enhancedNo" translate>No</label>
 
-                  <input type="radio" id="enhancedYes" name="enhanced" ng-model="business.dirtyData.enhancedRegistrationEnabled" ng-value='true' />
+                  <input type="radio" id="enhancedYes" name="enhanced"
+                         ng-model="business.dirtyData.enhancedRegistrationEnabled" ng-value='true'/>
                   <label class="radio-img" for="enhancedYes"></label>
                   <label class="cr-label" style="padding: 10px 15px 0 0;" for="enhancedYes" translate>Yes</label>
                 </div>
@@ -203,7 +266,6 @@
                   <span nxg-icon="icon-help"></span>
                 </div>
               </div>
-
 
 
             </div>
@@ -255,9 +317,16 @@
       <div class="panel panel-default settings-well">
         <h2 class="well-title">
           <span translate>Address Settings</span>
-          <button ng-show="!title.editable && title.data.addressCount > 1" class="btn-unstyle right no-padding no-margin" ng-click="title.edit()" translate>Edit Settings</button>
-          <button ng-show="title.editable" class="btn-unstyle right no-padding no-margin" ng-click="title.save()" translate>Save Settings</button>
-          <button ng-show="title.editable" class="btn-unstyle  right no-padding cancel" ng-click="title.cancel()" translate>Cancel</button>
+          <button ng-show="!title.editable && title.data.addressCount > 1"
+                  class="btn-unstyle right no-padding no-margin"
+                  ng-click="title.edit()" translate>Edit Settings
+          </button>
+          <button ng-show="title.editable" class="btn-unstyle right no-padding no-margin" ng-click="title.save()"
+                  translate>Save Settings
+          </button>
+          <button ng-show="title.editable" class="btn-unstyle  right no-padding cancel" ng-click="title.cancel()"
+                  translate>Cancel
+          </button>
         </h2>
 
         <div class="well-item">
@@ -311,7 +380,8 @@
               </div>
             </div>
 
-            <div class="row alt-addr" ng-show="title.data.addresses && title.data.addresses.length > 0 && !title.editable">
+            <div class="row alt-addr"
+                 ng-show="title.data.addresses && title.data.addresses.length > 0 && !title.editable">
               <label class="col-xs-3"><span translate>Additional Addresses</span></label>
 
               <div class="col-xs-8 static" ng-hide="title.editable">
@@ -340,9 +410,15 @@
       <div class="panel panel-default settings-well" ng-show="brand.autoPay.isDisplayed()">
         <h2 class="well-title">
           <span translate>[New Label Here]</span>
-          <button ng-hide="brand.editable" class="btn-unstyle  right no-padding no-margin" ng-click="brand.edit()" translate>Edit Settings</button>
-          <button ng-show="brand.editable" class="btn-unstyle  right no-padding no-margin" ng-click="brand.save()" translate>Save Settings</button>
-          <button ng-show="brand.editable" class="btn-unstyle  right no-padding cancel" ng-click="brand.cancel()" translate>Cancel</button>
+          <button ng-hide="brand.editable" class="btn-unstyle  right no-padding no-margin" ng-click="brand.edit()"
+                  translate>Edit Settings
+          </button>
+          <button ng-show="brand.editable" class="btn-unstyle  right no-padding no-margin" ng-click="brand.save()"
+                  translate>Save Settings
+          </button>
+          <button ng-show="brand.editable" class="btn-unstyle  right no-padding cancel" ng-click="brand.cancel()"
+                  translate>Cancel
+          </button>
         </h2>
 
         <div class="well-item">
@@ -353,11 +429,15 @@
               </div>
               <div class="col-xs-10" ng-show="brand.autoPay.isDisplayed()">
 
-                <label class="col-xs-7 no-left-padding" for="autoPay"><span translate>Enrolled in Automated Payments</span></label>
+                <label class="col-xs-7 no-left-padding" for="autoPay"><span
+                  translate>Enrolled in Automated Payments</span></label>
+
                 <div class="col-xs-1"></div>
                 <div class="col-xs-4 no-left-padding">
                   <div class="row">
-                    <div class="static" ng-show="brand.data.autoPayEnabled && !brand.autoPay.isEditable()" translate> Yes </div>
+                    <div class="static" ng-show="brand.data.autoPayEnabled && !brand.autoPay.isEditable()" translate>
+                      Yes
+                    </div>
                     <!-- check if equal to false so "No" doesn't appear until the API call finishes -->
                     <div class="static" ng-show="brand.data.autoPayEnabled == false && !brand.autoPay.isEditable()"
                          translate>
@@ -365,11 +445,13 @@
                     </div>
 
                     <div class="cr-inline" ng-show="brand.autoPay.isEditable()">
-                      <input type="radio" id="autoPayNo" name="autoPay" ng-model="brand.dirtyData.autoPayEnabled" ng-value='false' ng-click="brand.autoPay.confirmDisable()"/>
+                      <input type="radio" id="autoPayNo" name="autoPay" ng-model="brand.dirtyData.autoPayEnabled"
+                             ng-value='false' ng-click="brand.autoPay.confirmDisable()"/>
                       <label class="radio-img" for="autoPayNo"></label>
                       <label class="cr-label" for="autoPayNo" translate>No</label>
 
-                      <input type="radio" id="autoPayYes" name="autoPay" ng-model="brand.dirtyData.autoPayEnabled" ng-value='true' ng-click="brand.autoPay.confirmEnable()"/>
+                      <input type="radio" id="autoPayYes" name="autoPay" ng-model="brand.dirtyData.autoPayEnabled"
+                             ng-value='true' ng-click="brand.autoPay.confirmEnable()"/>
                       <label class="radio-img" for="autoPayYes"></label>
                       <label class="cr-label" for="autoPayYes" translate>Yes</label>
                     </div>
@@ -388,6 +470,6 @@
         </div>
       </div>
     </div>
-
   </div>
 </div>
+
