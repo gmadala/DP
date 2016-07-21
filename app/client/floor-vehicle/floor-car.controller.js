@@ -260,8 +260,10 @@
             return angular.copy($scope.data);
           },
           fileNames: function() {
+            var index = 0;
             return _.map($scope.files, function(file) {
-              return file.name;
+              index++;
+              return $scope.renameFile(file.name, index - 1);
             });
           }
         }
@@ -377,13 +379,6 @@
         $scope.validity.documents = angular.copy($scope.form.documents);
       }
     };
-
-    $scope.removeFile = function(file) {
-      $scope.files = $scope.files.filter(function(f) {
-        return f.name !== file.name;
-      });
-    };
-
     //Checking for United States Dealer
 
     if (User.isUnitedStates()) {
