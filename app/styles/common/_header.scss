@@ -216,6 +216,16 @@
 }
 
 .mng-navbar {
+  .popover {
+    max-width: 300px;
+    width: 300px;
+    .popover-title-custom {
+      position: relative;
+      left: -15px;
+      top: -10px;
+      width: 298px;
+    }
+  }
   @include box-shadow(rgba(black, 0.25) 0px 2px 3px);
   background-color: $highlight;
   height: 48px;
@@ -432,6 +442,14 @@
     }
   }
 
+  .popover.bottom {
+    margin-top: 10px;
+    left: 30px !important;
+    .arrow {
+      left: 6px !important;
+      margin-left: 0px !important;
+    }
+  }
   .hamburger {
     background-color: white;
     -webkit-transition: all 1s ease;
