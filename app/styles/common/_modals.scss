@@ -24,7 +24,12 @@
   //z-index:2000;
   overflow: visible;
 
-  &.modal-long{
+  .modal-dialog {
+    overflow-y: scroll;
+    height: 100%;
+  }
+
+  &.modal-long {
     height: 60%;
     max-height: 545px;
     .modal-body{
@@ -99,6 +104,11 @@
 
   .list-table {
     padding: 10px 50px 10px 30px;
+  }
+  @media only screen and (max-width: 767px) {
+    .list-table {
+      padding-left: 0px;
+    }
   }
 
   .table-secondary {

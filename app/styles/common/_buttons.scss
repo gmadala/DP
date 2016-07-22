@@ -195,34 +195,40 @@
   height: 35px;
 }
 
-  .cta-half {
-    @extend %float-l;
-    width: 48%;
-    margin: 10px 0;
+.cta-half {
+  @extend %float-l;
+  width: 48%;
+  margin: 10px 0;
 
-    & + .cta-half {
-      @extend %float-r;
-    }
+  & + .cta-half {
+    @extend %float-r;
   }
+}
 
-  .cta-full {
-    @include border-top-radius(0);
-    @extend %full-width;
-    height: 40px;
-    margin: 0;
-  }
+.cta-full {
+  @include border-top-radius(0);
+  @extend %full-width;
+  height: 40px;
+  margin: 0;
+}
 
-  .cta-primary {
-    color: $cta-primary-text;
-    background: $cta-primary-bkgd;
-    border: 0;
-  }
+.cta-full-width {
+  @extend %full-width;
+  height: 40px;
+  margin: 0;
+}
 
-  .cta-secondary {
-    background: $cta-secondary-bkgd;
-    color: $cta-secondary-text;
-    border: 1px solid $border;
-  }
+.cta-primary {
+  color: $cta-primary-text;
+  background: $cta-primary-bkgd;
+  border: 0;
+}
+
+.cta-secondary {
+  background: $cta-secondary-bkgd;
+  color: $cta-secondary-text;
+  border: 1px solid $border;
+}
 
 /*
  * CTA BUTTON
@@ -268,7 +274,7 @@
     }
   }
 
-  &.cta-full {
+  &.cta-full, &.cta-full-width {
     padding: 10px 5px;
   }
 }
@@ -478,8 +484,6 @@
     font-size: 0.85em;
   }
 }
-
-
 
 // IE9-SPECIFIC
 .ie9 {

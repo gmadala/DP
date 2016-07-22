@@ -15,7 +15,8 @@
     'language',
     'kissMetricInfo',
     '$location',
-    '$timeout'
+    '$timeout',
+    'localStorageService'
   ];
 
   function NavBarCtrl($rootScope,
@@ -27,7 +28,8 @@
                       language,
                       kissMetricInfo,
                       $location,
-                      $timeout) {
+                      $timeout,
+                      localStorageService) {
 
     $scope.isCollapsed = true;
     var paymentsSubMenu = [
@@ -199,12 +201,14 @@
     };
 
     $scope.toggleMenu = function() {
-      console.log("TOGGLE MENU", $state);
       $state.current.data.showMenu = !$state.current.data.showMenu;
+      $scope.closeMenuTip();
     };
 
     $scope.closeMenu = function() {
-      $state.current.data.showMenu = false;
+      if ($state.current.data.showMenu) {
+        $state.current.data.showMenu = false;
+      }
     };
 
     $scope.addHover = function() {
@@ -220,5 +224,15 @@
     });
 
     $scope.navState = $state;
+
+    $scope.hideMenuTip = localStorageService.get('hideMenuTip') || false;
+    $scope.isMobile = window.innerWidth < 768;
+    $scope.templateUrl = "/app/client/shared/directives/navbar/menuTip.html";
+    $scope.closeMenuTip = function() {
+      if (!$scope.hideMenuTip) {
+        localStorageService.set('hideMenuTip', true);
+        $scope.hideMenuTip = true;
+      }
+    };
   }
 })();

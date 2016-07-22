@@ -23,7 +23,9 @@
     'gettextCatalog',
     'Upload',
     'nxgConfig',
-    'kissMetricInfo'
+    'kissMetricInfo',
+    'segmentio',
+    'metric'
   ];
 
   function VehicleDetailsCtrl(
@@ -44,7 +46,9 @@
     gettextCatalog,
     Upload,
     nxgConfig,
-    kissMetricInfo) {
+    kissMetricInfo,
+    segmentio,
+    metric) {
 
     var uibModal = $uibModal;
 
@@ -60,13 +64,15 @@
 
     kissMetricInfo.getKissMetricInfo().then(function(result){
       $scope.kissMetricData = result;
+
+      segmentio.track(metric.DEALER_VIEW_VEHICLE_DETAILS, result);
     });
 
     $scope.historyReportUrl = api.contentLink('/report/vehiclehistorydetail/' + $stateParams.stockNumber + '/VehicleHistory');
     $scope.isCollapsed = true;
     var isDealer = User.isDealer();
     var attachDocsDealer = isDealer && User.getFeatures().hasOwnProperty('uploadDocuments') ? User.getFeatures().uploadDocuments.enabled : false;
-    var attachDocsAuction = !isDealer && User.getFeatures().hasOwnProperty('uploadDocuments') ? User.getFeatures().uploadDocumentsAuction.enabled : false;
+    var attachDocsAuction = !isDealer && User.getFeatures().hasOwnProperty('uploadDocumentsAuction') ? User.getFeatures().uploadDocumentsAuction.enabled : false;
 
     $scope.attachDocumentsEnabled = attachDocsDealer || attachDocsAuction;
 
@@ -117,6 +123,8 @@
 
       upload.then(function(reponse) {
         if (reponse.data.Success) {
+          segmentio.track(metric.DEALER_VEHICLE_DETAILS_ATTACHED_DOCUMENTS,  $scope.kissMetricData);
+
           angular.extend(dialogParams.resolve, {
             uploadSuccess: function () {
               return true;
