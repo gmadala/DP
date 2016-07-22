@@ -93,7 +93,7 @@
               <div class="mng-logo"></div>
             </div>
             <div ng-if="!isDashboard()">
-              {{getPageTitle()|uppercase}}
+              {{getPageTitle()}}
             </div>
           </div>
         </div>
@@ -101,7 +101,7 @@
         <div class="collapse navbar-collapse" ng-class="{'in': navState.current.data.showMenu}" ng-click="closeMenu()">
           <ul class="nav navbar-nav">
             <li class="visible-xs" ng-if="user.isDealer()">
-              <a href="#" ng-href="#/checkout" ng-click="setPageTitle('checkout')">checkout</a>
+              <a href="#" ng-href="#/checkout" ng-click="setPageTitle('Checkout')">Checkout</a>
             </li>
             <li ng-repeat="link in user.navLinks().primary" class="link_{{ link.activeWhen }}" ng-class="{'dropdown': link.subMenu, 'hover': link.hasHover}">
               <a ng-href="{{link.href}}" ng-class="{ active: isActive(link.activeWhen) }" ng-if="!link.subMenu"
@@ -128,17 +128,17 @@
             </li>
             <li class="visible-xs" ng-hide="user.isDealer()">
               <a href="#/act/settings" ng-click="setPageTitle('Settings')">
-                <strong translate>Settings</strong>
+                <span translate>Settings</span>
               </a>
             </li>
             <li class="visible-xs" ng-show="user.isDealer()">
               <a href="#/profile_settings" ng-click="setPageTitle('Profile Settings')">
-                <strong translate>Profile Settings</strong>
+                <span translate>Profile Settings</span>
               </a>
             </li>
             <li class="visible-xs" ng-show="user.isDealer()">
               <a ng-href="#/account_management" ng-click="setPageTitle('Account Management')">
-                <strong translate>Account Management</strong>
+                <span translate>Account Management</span>
               </a>
             </li>
             <li class="visible-xs">
