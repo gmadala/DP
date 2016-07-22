@@ -12,17 +12,19 @@
       wayBillPrintingEnabled: function () {
         if (User.isUnitedStates()) {
           if (User.isDealer()) {
-            return (User.getFeatures().hasOwnProperty('printFedExWaybillDealer') ? User.getFeature().printFedExWaybillDealer.enabled : false);
+             return (User.getFeatures().hasOwnProperty('printFedExWaybillDealer') ? User.getFeatures().printFedExWaybillDealer.enabled : false);
           } else {
-            return (User.getFeatures().hasOwnProperty('printFedExWaybillNonDealer') ? User.getFeature().printFedExWaybillNonDealer.enabled : false);
+            return (User.getFeatures().hasOwnProperty('printFedExWaybillNonDealer') ? User.getFeatures().printFedExWaybillNonDealer.enabled : false);
           }
         }
+
+        return false;
       },
       getWaybill: function (businessId) {
         return api.request('GET', api.ngenContentLink('/fedex/waybill'), {id: businessId}, null, true, handleNgenSucessRequest, handleNgenError).then(function (response) {
           return {
             waybill: response.waybill,
-            trackingnumber: response.trackingNumber
+            trackingNumber: response.trackingNumber
           };
         });
       }

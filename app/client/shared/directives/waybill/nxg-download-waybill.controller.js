@@ -11,13 +11,13 @@
       fedex.getWaybill()
         .then(function (data) {
           if (data.waybill !== null) {
-            var blob = b64toBlob(data.waybill, 'application/pdf');
-            saveAs(blob, "Waybill.pdf");
+            var blob = $scope.base64ToBlob(data.waybill, 'application/pdf');
+            saveAs(blob, "FedEx-" + data.trackingNumber + ".pdf");
           }
         });
     };
 
-    function b64toBlob(b64Data, contentType, sliceSize) {
+    $scope.base64ToBlob = function (b64Data, contentType, sliceSize, processByteArray) {
       contentType = contentType || '';
       sliceSize = sliceSize || 512;
 
@@ -35,6 +35,10 @@
         var byteArray = new Uint8Array(byteNumbers);
 
         byteArrays.push(byteArray);
+      }
+
+      if (processByteArray !== undefined) {
+        processByteArray(byteArrays);
       }
 
       var blob = new Blob(byteArrays, {type: contentType});
