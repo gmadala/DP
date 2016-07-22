@@ -10,7 +10,7 @@ var loginObjects = new loginObjects.loginObjects();
 var resources = new resources.resources();
 var helper = new helper.helper();
 
-describe('Testing Resources Page', function() {
+describe('\n Resources Page', function() {
 
   beforeEach(function() {
     browser.sleep(browser.params.shortDelay);

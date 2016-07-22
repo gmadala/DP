@@ -10,7 +10,7 @@ var loginObjects = new loginObjects.loginObjects();
 var promos = new promos.promos();
 var helper = new helper.helper();
 
-describe('Testing Promos Page', function () {
+describe('\n Promos Page', function () {
 
   beforeEach(function () {
     browser.sleep(browser.params.delay);
@@ -43,4 +43,5 @@ describe('Testing Promos Page', function () {
     login.logout();
     expect(browser.getCurrentUrl()).toEqual(execSettings.loginPage());
   });
+
 });
