@@ -24,7 +24,7 @@ describe('\n Promos Page', function () {
     expect(browser.getCurrentUrl() === execSettings.promosPage());
   });
 
-  it('Promos - Validating the Labels', function () {
+  it('Promos - Validating the Labels and Show Old Promos', function () {
     expect(promos.elIimage.isDisplayed()).toBe(true);
     expect(promos.getTextTitle()).toEqual("Please contact your local representative for details about the Promotions and Event Sales listed below.");
     expect(promos.getTextHeader()).toEqual("Promotions / Event Sales");
