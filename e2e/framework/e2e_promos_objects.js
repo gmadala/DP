@@ -1,7 +1,14 @@
 'use strict';
 
+/**
+ * @class promos_objects
+ * @author Balanithiya Krishnamoorthy
+ * @description Promos Page Objects
+ * */
+
 function Promos() {
 
+  //Locators
   this.elIimage = element(by.css('div.info-block-image'));
   this.elTitle = element(by.css('h6.info-block-text'));
   this.elHeader = element(by.css('h2.well-title'));
@@ -11,7 +18,7 @@ function Promos() {
   //Doers
   this.doShowOldPromos = function () {
     return this.elShowOldPromos.click();
-    browser.sleep(browser.params.shortDelay);
+    browser.sleep(browser.params.delay);
   };
 
   //Getters
