@@ -5,9 +5,9 @@
     .module('nextgearWebApp')
     .controller('ReceiptsCtrl', ReceiptsCtrl);
 
-  ReceiptsCtrl.$inject = ['$scope', '$stateParams', '$window', 'Receipts', 'User', 'api', 'gettextCatalog'];
+  ReceiptsCtrl.$inject = ['$scope', '$stateParams', '$window', 'Receipts', 'User', 'api', 'gettextCatalog', 'kissMetricInfo', 'segmentio', 'metric'];
 
-  function ReceiptsCtrl($scope, $stateParams, $window, Receipts, User, api, gettextCatalog) {
+  function ReceiptsCtrl($scope, $stateParams, $window, Receipts, User, api, gettextCatalog, kissMetricInfo, segmentio, metric) {
 
     var lastPromise;
     var maxReceipts = 20;
@@ -156,11 +156,19 @@
     function viewReceipt(receipt) {
       var stringUrl;
       var transactionId = receipt.FinancialTransactionId;
+
       if ($scope.format === 'grouped') {
         stringUrl = api.contentLink('/receipt/viewMultiple/receipts', {financialtransactionids: transactionId});
       } else if ($scope.format === 'single') {
         stringUrl = api.ngenContentLink('/encodedReceipts', {transactions: transactionId});
       }
+
+      kissMetricInfo.getKissMetricInfo().then(function (result) {
+        result.singleVin = $scope.format === 'single';
+
+        segmentio.track(metric.DEALER_RECEIPT_PAGE_RECEIPT_GENERATED, result);
+      });
+
 
       if (stringUrl !== undefined) {
         $window.open(stringUrl, '_blank');
@@ -181,6 +189,7 @@
       ids = ids.slice(0, -1); // remove extra comma at end
 
       var stringUrl;
+
       if ($scope.format === 'grouped') {
         // build query string
         stringUrl = api.contentLink('/receipt/viewMultiple/receipts', {financialtransactionids: ids});
@@ -188,6 +197,12 @@
         // build query string
         stringUrl = api.ngenContentLink('/encodedReceipts', {transactions: ids});
       }
+
+      kissMetricInfo.getKissMetricInfo().then(function (result) {
+        result.singleVin = $scope.format === 'single';
+
+        segmentio.track(metric.DEALER_RECEIPT_PAGE_RECEIPT_GENERATED, result);
+      });
 
       if (stringUrl !== undefined) {
         $window.open(stringUrl, '_blank');

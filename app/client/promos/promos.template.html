@@ -35,7 +35,7 @@
           <div class="promo-date">{{promo.salesDate | moment}}</div>
         </div>
         <div class="col-xs-2" style="text-align: right;">
-          <div ng-click="tcCollapsed = !tcCollapsed"
+          <div ng-click="tcCollapsed = !tcCollapsed; viewDetails(promo)"
                ng-show="promo.termsAndConditions">
             <span class="promo-details" translate>Details</span>
             <span class="paired-media"
@@ -64,7 +64,7 @@
             <div class="promo-date">{{promo.salesDate | moment}}</div>
           </div>
           <div class="col-xs-2 text-right">
-            <div ng-click="tcCollapsed = !tcCollapsed"
+            <div ng-click="tcCollapsed = !tcCollapsed; viewDetails(promo)"
                  ng-show="promo.termsAndConditions">
               <span class="promo-details" translate>Details</span>
             <span class="paired-media"
