@@ -7,7 +7,7 @@
   background-color: rgba(77, 75, 75, 0.88);
   border: 1px solid transparent;
   border-radius: 4px;
-  @include box-shadow(0 1px 1px rgba(0,0,0,.05));
+  @include box-shadow(0 1px 1px rgba(0, 0, 0, .05));
 }
 
 a.not-enrolled:link {
@@ -25,7 +25,7 @@ a.forgot:link {
   font-weight: lighter;
   color: #76b73f;
   text-align: right;
-  float:right;
+  float: right;
 
   &:hover {
     color: #99CE64;
@@ -49,7 +49,7 @@ a.forgot:link {
 }
 
 .btn-learn-more {
-  box-shadow:none;
+  box-shadow: none;
   background-color: transparent;
   border: solid;
   border-color: ghostwhite;
@@ -70,14 +70,12 @@ a.forgot:link {
 .nxg-login-container {
   min-height: 650px;
   overflow: hidden;
-  /* equal to footer height plus some extra spacing */
-  margin-bottom: -1px;
-  background:
-    linear-gradient(
-        rgba(0, 0, 0, 0.5),
-        rgba(0, 0, 0, 0.3)
-    ),
-    url(../img/login-mockup.jpg);
+  margin-bottom: -10px;
+  background: linear-gradient(
+                  rgba(0, 0, 0, 0.5),
+                  rgba(0, 0, 0, 0.3)
+  ),
+  url(../img/login-mockup.jpg);
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
@@ -107,17 +105,6 @@ a.forgot:link {
     padding: 10px 20px 0;
   }
 
-  //.col-md-4 {
-  //  width:33.33333%;
-  //  margin:0;
-  //
-  //}
-  //.col-md-offset-4
-  //{
-  //  margin-left:33.33333%;
-  //}
-
-
   .error-table {
     padding: 5px;
     background-color: $wellBackground;
@@ -138,7 +125,7 @@ a.forgot:link {
   .login-help-link {
     @extend %center;
     margin: 10px auto;
-    color:#7eb75d;
+    color: #7eb75d;
   }
 
   .notice, .login-help {
@@ -268,5 +255,4 @@ a.forgot:link {
   form {
     padding: 10px 20px 0;
   }
-
 }
