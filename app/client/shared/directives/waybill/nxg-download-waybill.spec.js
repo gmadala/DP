@@ -13,7 +13,7 @@ describe("Directive: nxgDownloadWaybill", function () {
       })
     }));
 
-    fit("test", function () {
+    it("test", function () {
       var contentType = "text/plain";
       var base64String = "VGVzdFN0cmluZw==";
       var resultByteArray = [];
@@ -25,26 +25,7 @@ describe("Directive: nxgDownloadWaybill", function () {
         resultByteArray = byteArray.slice(0);
       });
 
-      console.log("Testing Array Lengths");
-      console.log(expectedByteArray.length);
-      console.log(resultByteArray.length);
-      expect(expectedByteArray.length).toBe(resultByteArray[0].length);
-      console.log("************************************");
-      console.log("********    Expected   *************");
-      console.log("************************************");
-      console.log(expectedByteArray);
-
-      console.log("************************************");
-      console.log("********     Actual    *************");
-      console.log("************************************");
-      console.log(resultByteArray[0]);
-
-      // expect(resultByteArray[0]).toBe(expectedByteArray);
       expect(resultByteArray[0]).toEqual(expectedByteArray);
-
-      // angular.forEach(resultByteArray[0], function (i, o) {
-      //    expect(o).toBe(expectedByteArray[i]);
-      // });
     });
   });
 });

@@ -4,11 +4,16 @@
     .module('nextgearWebApp')
     .controller('NxgDownloadWaybillCtrl', NxgDownloadWaybillCtrl);
 
-  NxgDownloadWaybillCtrl.$inject = ['$scope', 'fedex'];
+  NxgDownloadWaybillCtrl.$inject = ['$scope', 'fedex', 'User'];
 
-  function NxgDownloadWaybillCtrl($scope, fedex) {
+  function NxgDownloadWaybillCtrl($scope, fedex, User) {
     $scope.getWaybill = function () {
-      fedex.getWaybill()
+      var businessId = null;
+      User.getInfo().then(function (info) {
+        businessId = info.BusinessId;
+      });
+
+      fedex.getWaybill(businessId)
         .then(function (data) {
           if (data.waybill !== null) {
             var blob = $scope.base64ToBlob(data.waybill, 'application/pdf');

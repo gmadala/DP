@@ -23,7 +23,7 @@
       getWaybill: function (businessId) {
         return api.request('GET', api.ngenContentLink('/fedex/waybill'), {id: businessId}, null, true, handleNgenSucessRequest, handleNgenError).then(function (response) {
           return {
-            waybill: response.waybill,
+            waybill: response.labelImage,
             trackingNumber: response.trackingNumber
           };
         });
