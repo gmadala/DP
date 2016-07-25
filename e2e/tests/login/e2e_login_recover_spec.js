@@ -16,7 +16,7 @@ var loginObjects = new loginObjects.loginObjects();
 var modalObjects = new modalObjects.modalObjects();
 var helper = new helper.helper();
 
-describe("\n Login Recovery Page", function () {
+describe('\n Login Recovery Page', function () {
 
   beforeEach(function () {
     browser.sleep(browser.params.shortDelay);

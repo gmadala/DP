@@ -24,7 +24,7 @@ describe('\n Dashboard Page', function () {
     browser.ignoreSynchronization = true;
   });
 
-  it('1. Dashboard - Login as 97421eh ', function () {
+  it("1. Dashboard - Login as 97421eh ", function () {
     helper.goToLogin();
     expect(browser.getCurrentUrl()).toEqual(execSettings.loginPage());
     browser.sleep(browser.params.mediumDelay);
@@ -33,7 +33,7 @@ describe('\n Dashboard Page', function () {
 
   });
 
-  it('2. Dashboard - Request a Temporary Credit Increase', function () {
+  it("2. Dashboard - Request a Temporary Credit Increase", function () {
     dashboard.doRequestCreditIncrease();
     //Select the Values in Request a Credit Increase POP UP window
     CredIncrease.doTemporaryIncrease();
@@ -46,7 +46,7 @@ describe('\n Dashboard Page', function () {
     expect(browser.getCurrentUrl()).toEqual(execSettings.homePage());
   });
 
-  it('3. Dashboard - Request a Permanent Credit Increase', function () {
+  it("3. Dashboard - Request a Permanent Credit Increase", function () {
     dashboard.doRequestCreditIncrease();
     //Select the Values in Request a Credit Increase POP UP window
     CredIncrease.doPermanentIncrease();
@@ -59,7 +59,7 @@ describe('\n Dashboard Page', function () {
     expect(browser.getCurrentUrl()).toEqual(execSettings.homePage());
   });
 
-  it('4. Dashboard - Print a Receipt by Grouped VIN', function () {
+  it("4. Dashboard - Print a Receipt by Grouped VIN", function () {
     //Click Receipts link
     dashboard.doReceipts();
     browser.sleep(browser.params.mediumDelay);
@@ -79,7 +79,7 @@ describe('\n Dashboard Page', function () {
     });
   });
 
-  it('5. Dashboard - Logout', function () {
+  it("5. Dashboard - Logout", function () {
     login.logout();
     expect(browser.getCurrentUrl()).toEqual(execSettings.loginPage());
   });
