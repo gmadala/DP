@@ -27,7 +27,7 @@ describe('\n Dashboard Page', function () {
   it('1. Dashboard - Login as 97421eh ', function () {
     helper.goToLogin();
     expect(browser.getCurrentUrl()).toEqual(execSettings.loginPage());
-    browser.sleep(browser.params.shortDelay);
+    browser.sleep(browser.params.mediumDelay);
     login.login2(browser.params.userName, browser.params.password);
     expect(browser.getCurrentUrl()).toEqual(execSettings.homePage());
 
