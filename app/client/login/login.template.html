@@ -3,15 +3,16 @@
     <p class="notice" ng-show="showBanner" id="showBannerLogin" ng-bind-html="bannerText"></p>
 
     <div class="row">
-      <div class="col-md-4 col-sm-6 hidden-xs">
-        <span class="login-title">Bacon Ipsum Dolor </span>
+      <div class="col-md-6 col-sm-6 login-margin hidden-xs">
+        <span class="login-title" translate>Check availability, update your bank account information or floor a unit.</span>
         <br>
-        <span class="login-tagline">Tri-tip corned beef spare ribs, strip steak salami jowl ham tail pastraimi.</span>
+        <div class="login-tagline" translate>All from your myNextGear account!</div>
         <br />
-        <button type="submit" class="btn-learn-more btn-lg">Learn More</button>
+        <!--This button will be enabled once a link has been designated-->
+        <!--<button type="submit" class="btn-learn-more btn-lg">Learn More</button>-->
       </div>
 
-      <div class="col-md-4 col-md-offset-4 col-sm-6 login-margin">
+      <div class="col-md-4 col-md-offset-2 col-sm-6 login-margin">
         <div class="login-panel panel-default">
           <form class="login-form clearfix" name="loginForm">
             <label for="credUsername"><span translate>Username</span><a class="forgot" href="#/login/recover" translate>I forgot</a></label>
