@@ -15,11 +15,15 @@
               <a nxg-chat-with-us nxg-track="{{metric.CLICK_CHAT_NOW_LINK}}"
                  track-properties="{{ kissMetricData }}" translate>Chat</a>
             </li>
+            <li ng-show="fedExWaybillEnabled">
+              <nxg-download-waybill class="navLink"></nxg-download-waybill>
+            </li>
           </ul>
           <button class="cart-btn" ng-disabled="getQueueCount() < 1" ng-click="onCartClicked()" ng-class="{ 'has-items': getQueueCount() > 0 }">
             {{ getQueueCount() }}
             <span nxg-icon="icon-cart" class="icon-small"></span>
           </button>
+
         </div>
       </div>
 
@@ -35,11 +39,13 @@
             {{ user.BusinessNumber }}
           </span></div>
         <div uib-dropdown>
-          <div class="align-right dropdown-toggle dropdown-spaced"  uib-dropdown-toggle data-toggle="dropdown" id="settingsDropdown" aria-haspopup="true" aria-expanded="false">
+          <div class="align-right dropdown-toggle dropdown-spaced" uib-dropdown-toggle data-toggle="dropdown" id="settingsDropdown" aria-haspopup="true"
+               aria-expanded="false">
             <a>
               <span translate>My Account</span>
               <span style="border-top: 4px solid #069" class="caret"></span>
             </a>
+            <br/>
           </div>
           <ul class="dropdown-menu margin dropdown-bold text-right" uib-dropdown-menu role="menu" aria-labelledby="settingsDropdown">
             <li>
@@ -69,7 +75,8 @@
         <div class="nav-language-chooser">
           <span class="icon-xx-large" nxg-icon="icon-globe"></span>
           <div class="cta btn-toggle toggle-three">
-            <div class="btn-slider" ng-class="{ 'active-left': isCurrentLanguage('en'), 'active-center': isCurrentLanguage('es'), 'active-right': isCurrentLanguage('fr_CA') }"></div>
+            <div class="btn-slider"
+                 ng-class="{ 'active-left': isCurrentLanguage('en'), 'active-center': isCurrentLanguage('es'), 'active-right': isCurrentLanguage('fr_CA') }"></div>
             <button class="btn" ng-click="updateLanguage('en')">English</button>
             <button class="btn" ng-click="updateLanguage('es')">Espa&ntilde;ol</button>
             <button class="btn" ng-click="updateLanguage('fr_CA')">Fran&ccedil;ais</button>
