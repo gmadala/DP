@@ -11,15 +11,15 @@
       var businessId = null;
       User.getInfo().then(function (info) {
         businessId = info.BusinessId;
-      });
 
-      fedex.getWaybill(businessId)
-        .then(function (data) {
-          if (data.waybill !== null) {
-            var blob = $scope.base64ToBlob(data.waybill, 'application/pdf');
-            saveAs(blob, "FedEx-" + data.trackingNumber + ".pdf");
-          }
-        });
+        fedex.getWaybill(businessId)
+          .then(function (data) {
+            if (data.waybill !== null) {
+              var blob = $scope.base64ToBlob(data.waybill, 'application/pdf');
+              saveAs(blob, "FedEx-" + data.trackingNumber + ".pdf");
+            }
+          });
+      });
     };
 
     $scope.base64ToBlob = function (b64Data, contentType, sliceSize, processByteArray) {
@@ -53,5 +53,6 @@
   }
 
 
-})();
+})
+();
 
