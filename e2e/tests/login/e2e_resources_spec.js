@@ -179,7 +179,7 @@ describe('\n Resources Page', function () {
     });
   });
 
-  it('12. Resources - Logout', function () {
+  it('13. Resources - Logout', function () {
     browser.sleep(browser.params.shortDelay);
     login.logout();
     expect(browser.getCurrentUrl()).toEqual(execSettings.loginPage());
