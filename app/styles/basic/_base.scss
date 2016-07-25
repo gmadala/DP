@@ -15,6 +15,21 @@ body, html {
   color: $text;
 }
 
+input, select{
+  width:100%;
+  box-sizing:border-box;
+}
+
+.flexbox div input {
+  padding: .5em 1em;
+  width: 100%;
+}
+
+.wrap {
+  height: 100vh;
+  display: flex;
+}
+
 body {
   font-family: $baseFontFamily;
   font-size: $baseFontSize;
@@ -87,29 +102,51 @@ body {
   margin-left: -35px;
 }
 
-.centerTextAlign {
-  text-align: center;
+.flexbox-form { display: flex; }
+.flexbox .stretch { flex: 1; }
+.flexbox .normal { flex: 0; margin: 0 0 0 1rem; }
+.flexbox div input { padding: .5em 1em; width: 100%; }
+
+.centerTextAlign
+{
+  text-align:center;
 }
 
 .numericRightFloat {
   float: right;
 }
 
-.additionalPaymentText {
-  margin-left: 160px;
-  margin-top: -30px;
+.inputPasswordSettings {
+  width:105%;
+}
+
+.additionalPaymentText
+{
+  margin-left:160px;
+  margin-top:-30px;
 }
 
 .zeroPadding {
   padding: 0;
 }
 
-.zeroLeftPadding {
-  padding-left: 0;
+.zeroLeftPadding
+{
+  padding-left:0;
 }
 
-.zeroRightPadding {
-  padding-right: 0;
+.zeroLeftPaddingNotif {
+  padding-left:0;
+}
+
+ul.zeroLeftPaddingNotif {
+  margin-top: 16px;
+  margin-bottom: 0;
+}
+
+.zeroRightPadding
+{
+  padding-right:0;
 }
 
 .zeroLeftMargin {
@@ -188,5 +225,4 @@ body {
   .uv-tab {
     display: none;
   }
-
 }

@@ -7,7 +7,7 @@
   <div class="row">
     <form name="form" novalidate>
       <!-- Vehicle Information -->
-      <div class="col-sm-4">
+      <div ng-class="canAttachDocuments()?'col-sm-4':'col-sm-6'">
         <div class="panel panel-default">
           <h2 class="well-title" translate>Vehicle Information</h2>
           <div class="well-form">
@@ -86,7 +86,7 @@
         </div>
       </div>
       <!-- Sale Information -->
-      <div class="col-sm-4">
+      <div ng-class="canAttachDocuments()?'col-sm-4':'col-sm-6'">
         <div class="panel panel-default">
           <h2 class="well-title" translate>Sale Information</h2>
 
@@ -207,98 +207,12 @@
       </div>
 
       <!-- Optional Items -->
-      <div class="col-sm-4" ng-show="canAttachDocuments()">
+      <div ng-class="canAttachDocuments()?'col-sm-4':'hidden'">
         <div class="panel panel-default">
           <h2 class="well-title" translate>3. Optional Items</h2>
           <div class="well-form">
-            <h4 translate>Document Upload</h4>
-            <div class="column-divider"></div>
-            <p class="spaced" translate>
-              Optional document upload may include:
-            </p>
-            <ul class="document-list">
-              <li><span class="glyphicon glyphicon-ok icon-spacing"></span><span translate>Invoice/Bill of Sale</span></li>
-              <li><span class="glyphicon glyphicon-ok icon-spacing"></span><span translate>Title/MSO</span></li>
-              <li><span class="glyphicon glyphicon-ok icon-spacing"></span><span translate>Other Documents</span></li>
-            </ul>
 
-            <p class="supported-files" translate>Supported formats: image, word, excel and pdf. 5MB max per file.</p>
-
-            <!-- Upload file code -->
-            <div ngf-drop
-                 name="boxDocuments"
-                 class="drop-box"
-                 ng-class="{ 'file-error': (form.documents.$error.pattern || form.boxDocuments.$error.pattern) && invalidFiles.length > 0 }"
-                 ng-model="files"
-                 ngf-model-invalid="invalidFiles"
-                 ngf-fix-orientation="false"
-                 ngf-drag-over-class="'dragover'"
-                 ngf-allow-dir="true"
-                 ngf-pattern="'image/*,application/pdf,application/vnd.ms*,application/vnd.open*,application/ms*'"
-                 ngf-multiple="true"
-                 ngf-keep="true"
-                 ngf-max-size="'5MB'">
-              <div ng-hide="files.length > 0" class="drop-box-empty" translate>Drag files here...</div>
-              <div ng-show="files.length > 0">
-                <ul class="files-container">
-                  <li ng-repeat="file in files">
-                    <img ngf-thumbnail="file" class="thumb">
-                    <div class="file-delete" ng-click="removeFile(file)">&times;</div>
-                    <div>{{ file.name | truncate:18 }}</div>
-                  </li>
-                </ul>
-              </div>
-            </div>
-
-            <div class="row">
-              <div class="col-xs-5 paragraph">
-          <span ng-show="files.length > 0">
-            <span class="glyphicon glyphicon-ok icon-spacing"></span>
-            <span>{{ files.length }} <span translate>valid files.</span></span>
-          </span>
-              </div>
-              <div class="col-xs-7 paragraph" ng-show="invalidFiles.length > 0">
-                <span class="glyphicon glyphicon-ban-circle icon-spacing"></span>
-                <span>{{ invalidFiles.length }} <span translate>invalid files.</span></span>
-                <button class="btn-unstyle btn-link" ng-click="removeInvalidFiles()">clear</button>
-              </div>
-            </div>
-
-            <span translate>Can't drag &amp; drop?</span>
-            <input type="file"
-                   id="documents"
-                   name="documents"
-                   ng-class="{ 'nxg-invalid': validity.documents.$error.pattern || validity.documents.$error.maxSize }"
-                   ngf-select
-                   ng-model="files"
-                   ngf-model-invalid="invalidFiles"
-                   ngf-multiple="true"
-                   ngf-pattern="'image/*,application/pdf,application/vnd.ms*,application/vnd.open*,application/ms*'"
-                   ngf-keep="true"
-                   ngf-fix-orientation="false"
-                   ngf-max-size="'5MB'">
-            <label for="documents" class="text-error"
-                   ng-show="(form.documents.$error.pattern || form.boxDocuments.$error.pattern)"
-                   translate>
-              Unsupported file found in selection.
-            </label>
-            <label for="documents" class="text-error"
-                   ng-show="form.documents.$error.maxSize || form.boxDocuments.$error.maxSize" translate>
-              One or more files exceeded the 5MB limit.
-            </label>
-            <!--IE9 workaround -->
-            <div ngf-no-file-drop>
-              <div ng-show="files">
-                <ul class="files-container" style="border-style: solid">
-                  <li ng-repeat="file in files">
-                    <img ngf-thumbnail="file" class="thumb">
-                    <div class="file-delete" ng-click="removeFile(file)">&times;</div>
-                    <div>{{file.name}}</div>
-                  </li>
-                </ul>
-              </div>
-            </div>
-            <!-- End upload file code -->
+            <div document-upload></div>
 
             <!-- Floor Plan Comments -->
             <h4 style="padding-top:15px" translate>Floor Plan Comments</h4>
