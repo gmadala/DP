@@ -22,7 +22,7 @@
             </div>
             <div class="col-xs-4"><label for="defaultDeposit" translate>Deposit Account: </label></div>
             <div class="col-xs-6">
-              <p class="static-option inline-row" ng-show="!editDefaultDAccount">
+              <p class=" inline-row" ng-show="!editDefaultDAccount">
                 {{ defaultDeposit.AchBankName + " (..." + defaultDeposit.AchAccountNumberLast4 + ")" }}
               </p>
 
@@ -60,7 +60,7 @@
             </div>
             <div class="col-xs-4"><label for="defaultPayment" translate>Payment Account:</label></div>
             <div class="col-xs-6">
-              <p class="static-option inline-row" ng-show="!editDefaultPAccount">
+              <p class=" inline-row" ng-show="!editDefaultPAccount">
                 {{ defaultPayment.AchBankName + " (..." + defaultPayment.AchAccountNumberLast4 + ")" }}
               </p>
 
@@ -172,10 +172,10 @@
                 </label>
               </div>-->
               <!-- Begin temporary code -->
-              <div class="col-xs-6" style="margin-top: 14px" id="businessPhone" name="businessPhone" ng-cloak>
+              <div class="col-xs-6" style="margin-top: 14px;" id="businessPhone" name="businessPhone" ng-cloak>
                 {{title.data.titleAddress.Phone | tel}}
               </div>
-              <div class="col-xs-1" style="padding-left: 30px">
+              <div class="col-xs-1" style="padding-left: 30px;">
                 <div class="btn-help btn-help-adjust"
                      tooltip-placement="bottom"
                      tooltip-trigger="mouseenter"

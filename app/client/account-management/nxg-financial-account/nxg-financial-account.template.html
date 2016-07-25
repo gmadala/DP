@@ -17,7 +17,7 @@
               Bank names are limited to 43 characters.
             </label>
 
-            <div class=" edit-column" ng-show="isEditable()">
+            <div class="edit-column" style="margin-top: -12px;" ng-show="isEditable()">
               <button ng-hide="editMode" class="btn-unstyle" ng-click="editAccount()">
                 <span class="glyphicon glyphicon-pencil"></span>
                 <span class="edit-text" translate>Edit</span>
@@ -34,14 +34,14 @@
       </div>
       <div class="row">
         <label class="col-xs-5" for="hidAccountNumber"><span translate>Account Number</span>:</label>
-        <span class="col-xs-5" style="padding-top:14px;" id="hidAccountNumber" name="hidAccountNumber">
+        <span class="col-xs-5 pull-right" style="padding-top:14px;" id="hidAccountNumber" name="hidAccountNumber">
           ....{{account.AchAccountNumberLast4}}
         </span>
       </div>
       <div class="row">
         <label class="col-xs-5" for="hidRoutingNumber"><span translate>Routing Number</span>:</label>
-        <span class="col-xs-5" style="padding-top:14px;" id="hidRoutingNumber" name="hidRoutingNumber">
-          ....{{routingNumberDisplay}}
+        <span class="col-xs-5 pull-right" style="padding-top:14px;" id="hidRoutingNumber" name="hidRoutingNumber">
+          {{routingNumberDisplay}}
         </span>
       </div>
       <div class="row">
@@ -81,7 +81,7 @@
       <!--Bank Name-->
       <form class="col-md-2 text-left no-left-padding text-vertical-center" name="bankName"
             style="padding-left: 15px">
-        <div class="display-bank-name" ng-show="!editMode">{{ account.AchBankName }}</div>
+        <span class="display-bank-name" ng-show="!editMode">{{ account.AchBankName }}</span>
         <input ng-show="editMode" class="inline-edit-select" type="text" ng-model="dirtyBankName"
                id="editBankName" name="editBankName" placeholder="Bank Name" maxlength="43" ng-maxlength="43"
                ng-required/>
@@ -91,8 +91,7 @@
         <label for="editBankName" class="text-error" ng-show="bankName.editBankName.$error.maxlength" translate>
           Bank names are limited to 43 characters.
         </label>
-
-        <div class="icon-padding-right edit-column" ng-show="isEditable()">
+        <div class="edit-column" style="padding-bottom: 12px; margin-top: -12px;" ng-show="isEditable()">
           <button ng-hide="editMode" class="btn-unstyle" ng-click="editAccount()">
             <span class="glyphicon glyphicon-pencil"></span>
             <span class="edit-text" translate>Edit</span>
