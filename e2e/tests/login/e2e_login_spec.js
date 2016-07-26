@@ -46,23 +46,18 @@ describe('\n Login Page - Auction', function () {
     helper.goToLogin();
     loginObjects.setLogin(browser.params.userNameAuction, browser.params.password);
     loginObjects.doLogin();
-    browser.sleep(browser.params.shortDelay);
     expect(browser.getCurrentUrl()).toEqual(execSettings.auctionHomePage());
   });
 
   it("6. Auction Login - Logout Auction Cancel", function () {
     login.clickMyAccount();
-    browser.sleep(browser.params.mediumDelay);
     login.clickSignoutButton();
-    browser.sleep(browser.params.mediumDelay);
     login.clickSignoutCancel();
-    browser.sleep(browser.params.mediumDelay);
     expect(browser.getCurrentUrl()).toEqual(execSettings.auctionHomePage());
   });
 
   it("7. Auction Login - Logout Auction Confirm", function () {
     login.logout();
-    browser.sleep(browser.params.mediumDelay);
     expect(browser.getCurrentUrl()).toEqual(execSettings.loginPage());
   });
 
