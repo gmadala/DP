@@ -19,19 +19,23 @@
         $scope.renameFile = function(file, index) {
           var filename = "";
           var dotPos = 0;
-          // Rename all iphone images with the index
-          if (file === "image.jpeg") {
+          // Get all files before the current file
+          var firstXFiles = _.first($scope.files, index);
+          // Get all files that have same name as file
+          var fileList = _.map(_.where(firstXFiles, {'name': file}), 'name');
+          // If there are other files with the same name need to add index to file name
+          var fileIndex = fileList.length;
+
+          if (fileIndex > 0) {
             dotPos = file.lastIndexOf(".");
-            filename = file.substring(0, dotPos) + index + file.substring(dotPos);
+            filename = file.substring(0, dotPos) + fileIndex + file.substring(dotPos);
             return filename;
           }
           else {
             return file;
           }
         };
-
       }
     };
-
   }
 })();
