@@ -43,6 +43,7 @@ describe('\n Login Page - Dealer', function () {
 describe('\n Login Page - Auction', function () {
 
   it("5. Auction Login - Good Auction Login", function () {
+    helper.goToLogin();
     loginObjects.setLogin(browser.params.userNameAuction, browser.params.password);
     loginObjects.doLogin();
     browser.sleep(browser.params.shortDelay);
