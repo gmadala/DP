@@ -4,7 +4,6 @@
       <a ng-href="{{user.homeLink()}}" class="col-sm-4 custom ng-binding">
         <div class="nxg-logo" nxg-debug-title></div>
       </a>
-
       <div class="col-sm-8 user-info no-left-padding no-right-padding" ng-show="navState.current.data.showNavBar">
         <div class="user-info-list pull-right">
           <div>
@@ -21,12 +20,16 @@
               {{ getQueueCount() }}
               <span class="glyphicon glyphicon-shopping-cart"></span>
             </a>
+            <br/>
           </div>
           <div class="spacer" ng-show="chatEnabled && user.isDealer()">
             <a nxg-chat-with-us nxg-track="{{metric.CLICK_CHAT_NOW_LINK}}"
                track-properties="{{ kissMetricData }}" translate>Chat
               <span class="glyphicon glyphicon-comment"></span>
             </a>
+          </div>
+          <div class="spacer" ng-show="fedExWaybillEnabled">
+            <nxg-download-waybill class="navLink"></nxg-download-waybill>
           </div>
           <div uib-dropdown class="spacer">
             <span class="dropdown-toggle" uib-dropdown-toggle
