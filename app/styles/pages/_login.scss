@@ -10,7 +10,7 @@
   @include box-shadow(0 1px 1px rgba(0, 0, 0, .05));
 }
 
-a.not-enrolled:link {
+a.not-enrolled:link, a.not-enrolled:visited {
   font-size: medium;
   font-weight: lighter;
   color: #76b73f;
@@ -20,7 +20,7 @@ a.not-enrolled:link {
   }
 }
 
-a.forgot:link {
+a.forgot:link, a.forgot:visited {
   font-size: 15px;
   font-weight: lighter;
   color: #76b73f;
@@ -36,17 +36,60 @@ a.forgot:link {
   margin-top: 50px;
 }
 
+.text-margin {
+  margin-top: 62px;
+}
+
 .login-title {
   color: ghostwhite;
   font-weight: bold;
-  font-size: 38px;
+  font-size: 40px;
 }
 
 .login-tagline {
-  color: ghostwhite;
+  color: #e1e1e1;
   font-weight: normal;
-  font-size: 30px;
+  font-size: 36px;
   margin-top: 40px;
+}
+
+@media only screen and (min-width: 768px) and (max-width: 991px) {
+  .row {
+    position: relative;
+  }
+
+  .top-align-panel {
+    position: absolute;
+    top: -13px;
+    right: 169px;
+  }
+
+  .bottom-align-text {
+    position: absolute;
+    top: 284px;
+    right: 170px;
+  }
+
+  .bottom-align-button {
+    position: absolute;
+    top: 140px;
+    right: 113px;
+  }
+
+  .login-title {
+    font-size: 27px;
+    text-align: center;
+  }
+
+  .login-tagline {
+    font-size: 24px;
+    text-align: center;
+    margin-top: 0px;
+  }
+
+  .login-panel {
+    min-height: 294px;
+  }
 }
 
 .btn-learn-more {
@@ -202,7 +245,7 @@ a.forgot:link {
 
   .security-question {
     font-size: $large-font-size;
-    color: $highlight;
+    color: #76b73f;
     margin: 0;
   }
 
