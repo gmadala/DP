@@ -37,7 +37,6 @@ describe('\n Promos Page', function () {
   });
 
   it("3. Promos - Logout", function () {
-    browser.sleep(browser.params.delay);
     login.logout();
     expect(browser.getCurrentUrl()).toEqual(execSettings.loginPage());
   });
