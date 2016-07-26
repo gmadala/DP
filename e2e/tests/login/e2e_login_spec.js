@@ -40,11 +40,12 @@ describe('\n Login Page - Dealer', function () {
 
 });
 
-describe("\n Login Page - Auction", function () {
+describe('\n Login Page - Auction', function () {
 
   it("5. Auction Login - Good Auction Login", function () {
     loginObjects.setLogin(browser.params.userNameAuction, browser.params.password);
     loginObjects.doLogin();
+    browser.sleep(browser.params.shortDelay);
     expect(browser.getCurrentUrl()).toEqual(execSettings.auctionHomePage());
   });
 
@@ -60,6 +61,7 @@ describe("\n Login Page - Auction", function () {
 
   it("7. Auction Login - Logout Auction Confirm", function () {
     login.logout();
+    browser.sleep(browser.params.mediumDelay);
     expect(browser.getCurrentUrl()).toEqual(execSettings.loginPage());
   });
 
