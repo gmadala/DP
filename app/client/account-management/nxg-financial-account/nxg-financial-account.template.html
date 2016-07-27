@@ -1,7 +1,7 @@
 <div>
   <div class="hidden-lg">
     <div class="well-item bordered financial-account hidden-lg">
-      <div class="row" ng-show="isEditable()" ng-class="{'is-not-active': !account.IsActive}">
+      <div class="row"  ng-class="{'is-not-active': !account.IsActive}">
         <form class="" name="bankName">
           <label class="col-xs-5" for="editBankNamed"><span translate>Bank Name</span>:</label>
 
@@ -34,13 +34,13 @@
       </div>
       <div class="row">
         <label class="col-xs-5" for="hidAccountNumber"><span translate>Account Number</span>:</label>
-        <span class="col-xs-5 pull-right" style="padding-top:14px;" id="hidAccountNumber" name="hidAccountNumber">
+        <span class="col-xs-5" style="padding-top:14px;" id="hidAccountNumber" name="hidAccountNumber">
           ....{{account.AchAccountNumberLast4}}
         </span>
       </div>
       <div class="row">
         <label class="col-xs-5" for="hidRoutingNumber"><span translate>Routing Number</span>:</label>
-        <span class="col-xs-5 pull-right" style="padding-top:14px;" id="hidRoutingNumber" name="hidRoutingNumber">
+        <span class="col-xs-5" style="padding-top:14px;" id="hidRoutingNumber" name="hidRoutingNumber">
           {{routingNumberDisplay}}
         </span>
       </div>
@@ -155,21 +155,23 @@
     <!--The following allows for the re-spacing when recent transactions is hidden.
     This can be removed as soon as recent transactions goes live-->
     <div class="row" ng-show="!isEditable()" ng-class="{'is-not-active': !account.IsActive}">
-      <div class="col-xs-4 text-left no-left-padding text-vertical-center"
+      <div class="col-xs-2 text-left no-left-padding text-vertical-center"
            style="padding-left: 15px">
         <div>{{ account.AchBankName }}</div>
       </div>
-
-      <div class="col-xs-3 text-center text-vertical-center">
-        <div>******{{account.AchAccountNumberLast4}}</div>
+      <div class="col-xs-2 text-center text-vertical-center">
+        <div>....{{account.AchAccountNumberLast4}}</div>
       </div>
-      <div class="col-xs-3 text-center text-vertical-center">
-        <div>not around {{routingNumberDisplay}}</div>
+      <div class="col-xs-2 text-center text-vertical-center">
+        <div>{{routingNumberDisplay}}</div>
       </div>
-      <div class="col-xs-1 text-center text-vertical-center">
+      <div class="col-md-2 text-center text-vertical-center" >
+        n/a
+      </div>
+      <div class="col-xs-2 text-center text-vertical-center">
         <div class="glyphicon glyphicon-ok" ng-show="status"></div>
       </div>
-      <div class="col-xs-1 icon-padding-right" ng-show="isEditable()">
+      <div class="col-xs-2 icon-padding-right" ng-show="isEditable()">
         <button class="btn-unstyle pull-right" ng-click="editFinancialAccount()">
           <span class="glyphicon glyphicon-pencil"></span>
         </button>

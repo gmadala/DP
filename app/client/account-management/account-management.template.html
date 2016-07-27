@@ -235,7 +235,7 @@
             <div class="row" ng-show="isDealer">
               <label class="col-xs-5" for="enhanced"><span translate>Enhanced Registration Enabled</span></label>
 
-              <div class="col-xs-4">
+              <div class="col-xs-4 pull-left">
                 <div class="static" ng-show="business.data.enhancedRegistrationEnabled && !business.editable" translate>
                   Yes
                 </div>
@@ -336,7 +336,7 @@
 
               <div class="col-xs-8">
                 <div class="row" ng-show="title.editable">
-                  <div class="col-xs-10">
+                  <div class="col-xs-6">
                     <div class="style-select">
                       <select id="titleAddr" ng-model="title.dirtyData.titleAddress"
                               ng-options="addr | address:'oneLineSelect' for addr in title.data.addresses"
@@ -359,10 +359,10 @@
 
                 <!-- Saved Address -->
                 <div class="row static" ng-hide="title.editable">
-                  <div class="col-xs-10 noLeftMargin">
+                  <div class="col-xs-6 noLeftMargin">
                     <div nxg-address-inline="title.data.titleAddress"></div>
                   </div>
-                  <div class="col-xs-2">
+                  <div class="col-xs-2 pull-right">
                     <button class="btn-help"
                             tooltip-placement="left"
                             tooltip-trigger="mouseenter"
