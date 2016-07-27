@@ -1,35 +1,50 @@
-// An example configuration file.
+//An example configuration file.
 exports.config = {
-  directConnect: true,
-
-  // Capabilities to be passed to the webdriver instance.
+  //Capabilities to be passed to the webdriver instance.
   capabilities: {
-    'browserName': 'chrome'
-    //incognito mode
-    //'browserName': 'chrome', 'chromeOptions': { 'args': ['incognito'] }
+    'browserName': 'chrome',
+    'chromeOptions': {
+      'args': [
+        '--disable-extensions',
+        '-–allow-file-access-from-files',
+        //'--incognito',
+        '--disable-web-security'
+      ]
+    }
   },
-  framework: 'jasmine2',
-  // Spec patterns are relative to the current working directly when
-  // protractor is called.
-  //specs: ['tests/login/*_spec.js'],
-  specs: ['tests/login/e2e_login_recover_spec.js'],
-  // untrackOutstandingTimeouts: true,
+
+  //Spec patterns are relative to the current working directly when protractor is called.
+  specs: ['tests/login/*_spec.js'],
+  //specs: ['tests/login/e2e_resources_spec.js'],
+
+  //More miscellaneous configuration options
+  directConnect: true,
+  untrackOutstandingTimeouts: false,
   restartBrowserBetweenTests: false,
+
+  //Framework selection
+  framework: 'jasmine',
 
   // Options to be passed to Jasmine.
   jasmineNodeOpts: {
     isVerbose: true,
     includeStackTrace: true,
     showColors: true,
-    defaultTimeoutInterval: 30000,
+    defaultTimeoutInterval: 60000,
     realtimeFailure: true
   },
+
+  //Project global parameters
   params: {
+    userNameDealer: '53190md',
+    userNameAuction: 'tmsauction',
     userName: '97421EH',
-    userName2: '36017RDT',
     password: 'ngcpass!0',
+    delay: '500',
     shortDelay: '1000',
     mediumDelay: '3000',
-    longDelay: '5000'
+    longDelay: '5000',
+    longerDelay: '10000'
   }
+
 };

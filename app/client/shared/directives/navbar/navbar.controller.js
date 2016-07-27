@@ -13,7 +13,8 @@
     'Payments',
     'gettextCatalog',
     'language',
-    'kissMetricInfo'
+    'kissMetricInfo',
+    'fedex'
   ];
 
   function NavBarCtrl(
@@ -24,7 +25,8 @@
     Payments,
     gettextCatalog,
     language,
-    kissMetricInfo) {
+    kissMetricInfo,
+    fedex) {
 
     $scope.isCollapsed = true;
 
@@ -54,6 +56,8 @@
         ]
       };
 
+
+
     $scope.$watch(function() { return User.isLoggedIn(); }, function(isLoggedIn) {
       if (isLoggedIn) {
 
@@ -65,6 +69,7 @@
           $scope.isUnitedStates = User.isUnitedStates();
           $scope.displayTitleRelease = info.DisplayTitleReleaseProgram;
           $scope.eventSalesEnabled = User.getFeatures().hasOwnProperty('eventSales') ? User.getFeatures().eventSales.enabled : true;
+          $scope.fedExWaybillEnabled = fedex.wayBillPrintingEnabled();
           if ($scope.isUnitedStates) {
             dealerLinks.secondary.splice(1, 0, {
               name: gettextCatalog.getString('Value Lookup'),

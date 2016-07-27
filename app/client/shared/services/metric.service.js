@@ -1,4 +1,4 @@
-(function() {
+(function () {
   'use strict';
 
   angular
@@ -42,7 +42,7 @@
       DEALER_TITLE_RELEASE_REQUEST: 'Dealer - Requested Title Release',//x
 
       //View a Report Events
-      DEALER_REPORTS_VEHICLE_HISTORY_DETAIL:'Dealer Reports - Vehicle History Detail',
+      DEALER_REPORTS_VEHICLE_HISTORY_DETAIL: 'Dealer Reports - Vehicle History Detail',
       DEALER_REPORTS_RECEIVABLE_DETAIL: 'Dealer Reports - Receivable Detail',
       DEALER_REPORTS_UPCOMING_CURTAILMENT_PAYOFF_QUOTE: 'Dealer Reports - Upcoming Curtailment/Payoff Quote',//x
       DEALER_REPORTS_EXPORTABLE_INVENTORY: 'Dealer Reports - Exportable Inventory',//x
@@ -82,7 +82,6 @@
       AUCTION_INDIVIDUAL_DEALER_LOC_QUERY_PAGE: 'Auction - Individual Dealer LOC Query',//X
 
 
-
       //Value Lookup Events
       CLICK_VALUE_LOOKUP_VIN_WITH_ZIP_LOOKUP_BUTTON: 'Click Value Lookup VIN With Zip Lookup Button',
       CLICK_VALUE_LOOKUP_VIN_WITHOUT_ZIP_LOOKUP_BUTTON: 'Click Value Lookup VIN Without Zip Lookup Button',
@@ -106,7 +105,10 @@
       MANHEIM_INDEX: 'Manheim Partner Link',
       READYAUTO_INDEX: 'Ready Auto Transport Partner Link',
       VAUTO_INDEX: 'vAuto Partner Link',
-      VINSOLUTIONS_INDEX: 'Vin Solutions Partner Link'
+      VINSOLUTIONS_INDEX: 'Vin Solutions Partner Link',
+
+      //FedEx
+      WAYBILL_PRINTED: 'FedEx Waybill Printed Success'
 
     });
 })();
