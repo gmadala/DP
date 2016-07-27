@@ -330,7 +330,7 @@
 
 
           if ($scope.files && $scope.files.length > 0) {
-            // Rename duplicte files with an index so they are all uploaded
+            // Rename duplicate files with an index so they are all uploaded
             $scope.files = _.map($scope.files, function(file, index) {
               var newName = $scope.renameFile(file.name, index);
               if (newName !== file) {
@@ -338,7 +338,7 @@
               }
               return file;
             });
-            console.log("$scope.files B: ", $scope.files);
+
             var upload = Upload.upload({
               url: nxgConfig.apiBase + '/floorplan/upload/' + response.FloorplanId,
               method: 'POST',
