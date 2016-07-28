@@ -137,6 +137,9 @@
                 </li>
               </ul>
             </li>
+            <li class="visible-xs" ng-show="fedExWaybillEnabled">
+              <nxg-download-waybill></nxg-download-waybill>
+            </li>
             <li class="visible-xs" ng-hide="user.isDealer()">
               <a href="#/act/settings" ng-click="setPageTitle('Settings')">
                 <span translate>Settings</span>
