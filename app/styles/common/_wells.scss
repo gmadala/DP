@@ -140,6 +140,10 @@
     border-top: 1px solid $wellBorder;
   }
 
+  &.fill {
+    padding: 0;
+  }
+
   &.inset {
     padding: 10px 20px;
   }

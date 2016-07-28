@@ -154,13 +154,13 @@
         this.zipcode = null;
         resetResults();
       },
-      lookup: function() {
+      lookup: function (form) {
         // make sure we reset the other search, in case we had already run that one.
         $scope.manualLookup.resetSearch();
 
         var which = this;
 
-        if (!this.validate()) {
+        if (!this.validate(form)) {
           return false;
         }
 
@@ -273,9 +273,9 @@
         this.searchComplete = true;
         $scope.searchInProgress = false;
       },
-      validate: function() {
-        this.validity = angular.copy($scope.vinLookupForm);
-        return $scope.vinLookupForm.$valid;
+      validate: function (form) {
+          this.validity = angular.copy(form);
+          return form.$valid;
       }
     };
 
@@ -363,13 +363,13 @@
         },
         mileage: null,
         validity: {},
-        lookup: function() {
+        lookup: function (form) {
           // make sure we reset the other search, in case we've already run it.
           $scope.vinLookup.resetSearch();
 
           var which = this;
 
-          if(!which.validate()) {
+          if (!which.validate(form)) {
             return false;
           }
 
@@ -396,9 +396,9 @@
           $scope.searchInProgress = false;
           $scope.manualLookup.searchComplete = true;
         },
-        validate: function() {
-          this.validity = angular.copy($scope.manualLookupForm);
-          return $scope.manualLookupForm.$valid;
+        validate: function (form) {
+            this.validity = angular.copy(form);
+            return form.$valid;
         }
       },
       mmr: {
@@ -469,12 +469,12 @@
         },
         mileage: null,
         validity: {},
-        lookup: function() {
+        lookup: function (form) {
           // make sure we reset the other search, in case we've already run it.
           $scope.vinLookup.resetSearch();
 
           var which = this;
-          if(!which.validate()) {
+          if (!which.validate(form)) {
             return false;
           }
 
@@ -503,12 +503,11 @@
           $scope.searchInProgress = false;
           $scope.manualLookup.searchComplete = true;
         },
-        validate: function() {
-          this.validity = angular.copy($scope.manualLookupForm);
-          return $scope.manualLookupForm.$valid;
+        validate: function (form) {
+            this.validity = angular.copy(form);
+            return form.$valid;
         }
       },
-
       kbb: {
         version: null,
         fields: ['years', 'makes', 'models', 'styles'],
@@ -589,12 +588,12 @@
         mileage: null,
         zipcode: null,
         validity: {},
-        lookup: function() {
+        lookup: function (form) {
           // make sure we reset the other search, in case we've already run it.
           $scope.vinLookup.resetSearch();
 
           var which = this;
-          if(!which.validate()) {
+          if (!which.validate(form)) {
             return false;
           }
 
@@ -646,9 +645,9 @@
           $scope.searchInProgress = false;
           $scope.manualLookup.searchComplete = true;
         },
-        validate: function() {
-          this.validity = angular.copy($scope.manualLookupForm);
-          return $scope.manualLookupForm.$valid;
+        validate: function (form) {
+            this.validity = angular.copy(form);
+            return form.$valid;
         }
       },
       resetSearch: function() {
@@ -683,19 +682,19 @@
 
         resetResults();
       },
-      lookup: function () {
+      lookup: function (form) {
         switch ($scope.lookupValues.id) {
           case 'bb':
-            this.blackbook.lookup();
+              this.blackbook.lookup(form);
             break;
           case 'mmr':
-            this.mmr.lookup();
+              this.mmr.lookup(form);
             break;
           case 'kbb':
-            this.kbb.lookup();
+              this.kbb.lookup(form);
             break;
           default:
-            $scope.manualLookupForm.lookupValues.$setValidity('required', false);
+            form.lookupValues.$setValidity('required', false);
         }
       }
     };
@@ -716,6 +715,9 @@
       { id:'mmr', name: gettextCatalog.getString('MMR Wholesale Values')}
     ];
     $scope.lookupValues = $scope.manualLookupValues[0];
+    $scope.updateLookupValues = function (selectedValues) {
+        $scope.lookupValues = selectedValues;
+    };
 
     if ($scope.kbbEnabled){
       $scope.manualLookupValues.push({ id:'kbb', name: gettextCatalog.getString('Kelley Blue Book® Auction Values')});
