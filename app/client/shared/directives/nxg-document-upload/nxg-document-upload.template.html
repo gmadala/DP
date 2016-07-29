@@ -50,8 +50,8 @@
     <ul class="files-container">
       <li ng-repeat="file in files">
         <img ngf-thumbnail="file" class="thumb">
-        <div class="file-delete" ng-click="removeFile(file)">&times;</div>
-        <div ng-bind="file.name | truncate:18"></div>
+        <div class="file-delete" ng-click="removeFile($index)">&times;</div>
+        <div ng-bind="renameFile(file.name,$index) | truncate:18"></div>
       </li>
     </ul>
   </div>
@@ -107,8 +107,8 @@
     <ul class="files-container" style="border-style: solid">
       <li ng-repeat="file in files">
         <img ngf-thumbnail="file" class="thumb">
-        <div class="file-delete" ng-click="removeFile(file)">&times;</div>
-        <div ng-bind="file.name"></div>
+        <div class="file-delete" ng-click="removeFile($index)">&times;</div>
+        <div ng-bind="renameFile(file.name,$index)"></div>
       </li>
     </ul>
   </div>
