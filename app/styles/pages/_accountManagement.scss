@@ -118,6 +118,21 @@ button[disabled]{
    min-height: 151px;
  }
 
+.forAddButton {
+  background: $white;
+
+  line-height: 1.8;
+  width: calc(100% - 2px);
+  margin-left:1px;
+}
+
+.forColumn {
+  border-left: 0px;
+  border-right: 0px;
+  border-bottom: 0px;
+  margin-bottom: 0px;
+}
+
 @media only screen and (min-width: 767px) and (max-width: 1150px) {
   .titleSettingsPanel {
     min-height: 142px;
