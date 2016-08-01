@@ -89,8 +89,8 @@
         </div>
         <div class="row forAddButton">
           <div class="col-md-12 ">
-            <button class="btn-cta cta-primary" ng-show="financial.isAddBankAccountEditable()"
-                    ng-click="financial.addFinancialAccount()" translate><span class="glyphicon glyphicon-plus-sign" aria-hidden="true" style="font-weight: bold;"></span> Add Account
+            <button class="btn-cta cta-primary" ng-show="financial.isAddBankAccountEditable()" ng-disabled="editDefaultPAccount  || editDefaultDAccount"
+                    ng-click="financial.addFinancialAccount()" translate><span class="glyphicon glyphicon-plus-sign" aria-hidden="true" style="font-weight: bold;"  ></span> Add Account
 
             </button>
           </div>
