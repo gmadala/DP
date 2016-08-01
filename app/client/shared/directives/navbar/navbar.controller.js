@@ -16,7 +16,8 @@
     'kissMetricInfo',
     '$location',
     '$timeout',
-    'localStorageService'
+    'localStorageService',
+      'fedex'
   ];
 
   function NavBarCtrl($rootScope,
@@ -29,7 +30,9 @@
                       kissMetricInfo,
                       $location,
                       $timeout,
-                      localStorageService) {
+                      localStorageService,
+  fedex) {
+
 
     $scope.isCollapsed = true;
     var paymentsSubMenu = [
@@ -65,9 +68,7 @@
         ]
       };
 
-    $scope.$watch(function() {
-      return User.isLoggedIn();
-    }, function(isLoggedIn) {
+    $scope.$watch(function() { return User.isLoggedIn(); }, function(isLoggedIn) {
       if (isLoggedIn) {
 
         kissMetricInfo.getKissMetricInfo().then(function(result) {
@@ -78,6 +79,7 @@
           $scope.isUnitedStates = User.isUnitedStates();
           $scope.displayTitleRelease = info.DisplayTitleReleaseProgram;
           $scope.eventSalesEnabled = User.getFeatures().hasOwnProperty('eventSales') ? User.getFeatures().eventSales.enabled : true;
+          $scope.fedExWaybillEnabled = fedex.wayBillPrintingEnabled();
           if ($scope.isUnitedStates) {
             if ($scope.eventSalesEnabled) {
               resourcesSubMenu.push({
