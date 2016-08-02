@@ -250,16 +250,19 @@
                 </div>
 
                 <div class="cr-inline" ng-show="business.editable">
+                  <div class="col-xs-2">
                   <input type="radio" id="enhancedNo" name="enhancedx"
                          ng-model="business.dirtyData.enhancedRegistrationEnabled" ng-value='false'
                          ng-click="business.confirmDisableEnhanced()"/>
                   <label class="radio-img" for="enhancedNo"></label>
                   <label class="cr-label" style="padding: 10px 15px 0 0;" for="enhancedNo" translate>No</label>
-
+                  </div>
+                  <div class="col-xs-2">
                   <input type="radio" id="enhancedYes" name="enhanced"
                          ng-model="business.dirtyData.enhancedRegistrationEnabled" ng-value='true'/>
                   <label class="radio-img" for="enhancedYes"></label>
                   <label class="cr-label" style="padding: 10px 15px 0 0;" for="enhancedYes" translate>Yes</label>
+                </div>
                 </div>
               </div>
               <div class="col-xs-1" style="padding-left: 30px;">
