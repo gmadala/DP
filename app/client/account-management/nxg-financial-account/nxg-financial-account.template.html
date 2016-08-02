@@ -1,6 +1,6 @@
 <div>
   <div class="hidden-lg">
-    <div class="well-item bordered financial-account hidden-lg">
+    <div class="well-item bordered financial-account hidden-md hidden-lg">
       <div class="row"  ng-class="{'is-not-active': !account.IsActive}">
         <form class="" name="bankName">
           <label class="col-xs-5" for="editBankNamed"><span translate>Bank Name</span>:</label>
@@ -47,27 +47,43 @@
       <div class="row">
         <label class="col-xs-5" for="hidActive"><span translate>Active</span>:</label>
         <span class="col-xs-5" style="padding-top:14px;" id="hidActive" name="hidActive">
-          <div class="col-md-2  text-vertical-center">
-            <div class="glyphicon glyphicon-ok" ng-show="account.IsActive && !editMode"></div>
+          <div class="col-md-2" style="padding-left:0px;">
+            <div class="" ng-show="account.IsActive && !editMode">
+              <div class="checkbox checkbox-slider--b" style="line-height: 1.5;">
+                <label>
+                  <input type="checkbox" checked disabled><span></span>
+                </label>
+              </div>
+            </div>
+            <div class="" ng-show="!account.IsActive && !editMode">
+              <div class="checkbox checkbox-slider--b" style="line-height: 1.5;">
+                <label>
+                  <input type="checkbox"  disabled><span></span>
+                </label>
+              </div>
+            </div>
             <div ng-show="editMode">
               <div ng-show="defaultForDisbursement() || defaultForBilling()">
-                <input type="checkbox" id="hid{{ account.BankAccountId }}" name="hid{{ account.BankAccountId }}"
-                       ng-model="account.IsActive" disabled/>
-                <label class="checkbox-img small" for="hid{{ account.BankAccountId }}"
-                       tooltip-placement="right"
-                       tooltip-trigger="mouseenter"
-                       uib-tooltip="{{ 'Before deactivating, select a different account below for your default deposits or payments.' | translate }}"
-                       tooltip-animation="true">
-                </label>
+                <div class="checkbox checkbox-slider--b" style="line-height: 1.5;">
+                    <label for="hid{{ account.BankAccountId }}"
+                           tooltip-placement="top"
+                           tooltip-trigger="mouseenter"
+                           uib-tooltip="{{ 'Before deactivating, select a different account below for your default deposits or payments.' | translate }}"
+                           tooltip-animation="true">
+                    <input type="checkbox"  id="hid{{ account.BankAccountId }}" name="hid{{ account.BankAccountId }}"
+                           ng-model="account.IsActive" disabled><span></span>
+                    </label>
+                </div>
               </div>
               <div ng-hide="defaultForDisbursement() || defaultForBilling()">
-                <input type="checkbox" id="regular.hid{{ account.BankAccountId }}"
-                       name="regular.hid{{ account.BankAccountId }}"
-                       ng-model="dirtyStatus"/>
-                <label class="checkbox-img small" for="regular.hid{{ account.BankAccountId }}">
-                </label>
+                <div class="checkbox checkbox-slider--b" style="line-height: 1.5;">
+                    <label>
+                      <input type="checkbox" id="regular.hid{{ account.BankAccountId }}"
+                             name="regular.hid{{ account.BankAccountId }}"
+                             ng-model="dirtyStatus"/><span></span>
+                    </label>
+                </div>
               </div>
-
             </div>
           </div>
         </span>
@@ -75,7 +91,7 @@
     </div>
   </div>
 
-  <div class="well-item bordered financial-account visible-lg">
+  <div class="well-item bordered financial-account visible-md visible-lg">
     <!--Add/Edit Enabled, view mode-->
     <div class="row" ng-show="isEditable()" ng-class="{'is-not-active': !account.IsActive}">
       <!--Bank Name-->
@@ -125,24 +141,42 @@
         </span>
       </div>
       <!--Active-->
-      <div class="col-md-2 text-center text-vertical-center">
-        <div class="glyphicon glyphicon-ok" ng-show="account.IsActive && !editMode"></div>
-        <div ng-show="editMode">
-          <div ng-show="defaultForDisbursement() || defaultForBilling()">
-            <input type="checkbox" id="{{ account.BankAccountId }}" name="{{ account.BankAccountId }}"
-                   ng-model="account.IsActive" disabled/>
-            <label class="checkbox-img small" for="{{ account.BankAccountId }}"
-                   tooltip-placement="right"
-                   tooltip-trigger="mouseenter"
-                   uib-tooltip="{{ 'Before deactivating, select a different account below for your default deposits or payments.' | translate }}"
-                   tooltip-animation="true">
+      <div class="col-md-2" style="padding-left:60px;">
+        <div ng-show="account.IsActive && !editMode">
+          <div class="checkbox checkbox-slider--b" style="line-height: 1.5;">
+            <label>
+              <input type="checkbox" checked="" disabled><span></span>
             </label>
           </div>
-          <div ng-hide="defaultForDisbursement() || defaultForBilling()">
-            <input type="checkbox" id="regular.{{ account.BankAccountId }}" name="regular.{{ account.BankAccountId }}"
-                   ng-model="dirtyStatus"/>
-            <label class="checkbox-img small" for="regular.{{ account.BankAccountId }}">
+        </div>
+        <div ng-show="!account.IsActive && !editMode">
+          <div class="checkbox checkbox-slider--b" style="line-height: 1.5;">
+            <label>
+              <input type="checkbox"  disabled><span></span>
             </label>
+          </div>
+        </div>
+        <div ng-show="editMode">
+          <div ng-show="defaultForDisbursement() || defaultForBilling()">
+            <div class="checkbox checkbox-slider--b" style="line-height: 1.5;">
+              <label for="{{ account.BankAccountId }}"
+                     tooltip-placement="right"
+                     tooltip-trigger="mouseenter"
+                     uib-tooltip="{{ 'Before deactivating, select a different account below for your default deposits or payments.' | translate }}"
+                     tooltip-animation="true">
+                <input type="checkbox" id="{{ account.BankAccountId }}" name="{{ account.BankAccountId }}"
+                       ng-model="account.IsActive" disabled><span></span>
+              </label>
+            </div>
+
+          </div>
+          <div ng-hide="defaultForDisbursement() || defaultForBilling()">
+            <div class="checkbox checkbox-slider--b" style="line-height: 1.5;">
+              <label>
+                <input type="checkbox" checked="" id="regular.{{ account.BankAccountId }}" name="regular.{{ account.BankAccountId }}"
+                       ng-model="dirtyStatus"/><span></span>
+              </label>
+            </div>
           </div>
 
         </div>
