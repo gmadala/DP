@@ -25,6 +25,7 @@
     "angular-bootstrap": "0.14.3",
     "ui.bootstrap": "~1.0.3",
     "sass-bootstrap": "3.0.2",
+    "file-saver": "^1.3.2",
     "titatoggle": "~1.2.9"
   },
   "devDependencies": {
