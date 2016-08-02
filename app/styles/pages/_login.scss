@@ -33,11 +33,11 @@ a.forgot:link, a.forgot:visited {
 }
 
 .login-margin {
-  margin-top: 50px;
+  margin-top: 90px;
 }
 
 .text-margin {
-  margin-top: 62px;
+  margin-top: 110px;
 }
 
 .login-title {
@@ -92,6 +92,16 @@ a.forgot:link, a.forgot:visited {
   }
 }
 
+@media only screen and (max-width: 767px) {
+  .nxg-main-container {
+    height: 85vh;
+  }
+
+  .login-margin {
+    margin-top: 50px;
+  }
+}
+
 .btn-learn-more {
   box-shadow: none;
   background-color: transparent;
@@ -112,7 +122,7 @@ a.forgot:link, a.forgot:visited {
 }
 
 .nxg-login-container {
-  min-height: 650px;
+  min-height: 84vh;
   overflow: hidden;
   margin-bottom: -10px;
   background: linear-gradient(
@@ -120,9 +130,8 @@ a.forgot:link, a.forgot:visited {
                   rgba(0, 0, 0, 0.3)
   ),
   url(../img/login-mockup.jpg);
-  background-repeat: no-repeat;
-  background-size: cover;
   background-position: center;
+  background-size: cover;
 }
 
 .btn-login {
