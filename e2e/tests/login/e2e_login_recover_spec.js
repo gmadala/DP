@@ -16,7 +16,7 @@ var loginObjects = new loginObjects.loginObjects();
 var modalObjects = new modalObjects.modalObjects();
 var helper = new helper.helper();
 
-describe("Login Recovery\n ", function () {
+describe('\n Login Recovery Page', function () {
 
   beforeEach(function () {
     browser.sleep(browser.params.shortDelay);
@@ -25,7 +25,7 @@ describe("Login Recovery\n ", function () {
 
   //When enabling the first test be sure to move the helper.goToLogin()
   //function call from the second test into the first test
-  xit("1. Dealer - Sign Up for My Next Gear", function () {
+  xit("1. Login Recovery - Sign Up for My Next Gear", function () {
     //Validating the SignUp Button label
     expect(loginObjects.getTextSignUpLogin()).toEqual("Sign Up");
     loginObjects.doSignUpLogin();
@@ -34,7 +34,7 @@ describe("Login Recovery\n ", function () {
     browser.close();
   });
 
-  it("2. Dealer - Forgot User name. My email is correct and no problems", function () {
+  it("2. Login Recovery - Forgot User name. My email is correct and no problems", function () {
     helper.goToLogin();
     expect(browser.getCurrentUrl()).toEqual(execSettings.loginPage());
     //Validating the SignUp Button label
@@ -54,7 +54,7 @@ describe("Login Recovery\n ", function () {
     expect(browser.getCurrentUrl()).toEqual(execSettings.loginPage());
   });
 
-  it("3. Dealer - Forgot User name. invalid email id no problems ", function () {
+  it("3. Login Recovery - Forgot User name. invalid email id no problems ", function () {
     loginObjects.setLogin('53190md', 'incorrect');
     loginObjects.doLogin();
     expect(login.getInvalidLoginText1()).toEqual("We're sorry, but you used a username or password that doesn't match our records.");
@@ -94,7 +94,7 @@ describe("Login Recovery\n ", function () {
     expect(browser.getCurrentUrl()).toEqual(execSettings.loginPage());
   });
 
-  it("4. Dealer - Forgot password and provide answers", function () {
+  it("4. Login Recovery - Forgot password and provide answers", function () {
     //Check button text
     loginObjects.doForgotUsernamePassword();
     expect(browser.getCurrentUrl()).toEqual(execSettings.forgotPage());
@@ -127,7 +127,7 @@ describe("Login Recovery\n ", function () {
     expect(browser.getCurrentUrl()).toEqual(execSettings.loginPage());
   });
 
-  it("5. Dealer - Validating the NGC Logo and Language selection in Login Page", function () {
+  it("5. Login Recovery - Validating the NGC Logo and Language selection in Login Page", function () {
     helper.goToLogin();
     expect(loginObjects.elMNGLogo.isDisplayed()).toBe(true);
     expect(loginObjects.elLangChooser.isDisplayed()).toBe(true);

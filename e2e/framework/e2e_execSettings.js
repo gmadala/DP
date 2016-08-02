@@ -41,3 +41,7 @@ exports.forgotPage = function () {
 exports.resourcesPage = function () {
   return baseUrl + 'documents';
 };
+
+exports.promosPage = function () {
+  return baseUrl + 'promos';
+};

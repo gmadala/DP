@@ -40,9 +40,11 @@ exports.config = {
     userNameAuction: 'tmsauction',
     userName: '97421EH',
     password: 'ngcpass!0',
+    delay: '500',
     shortDelay: '1000',
     mediumDelay: '3000',
     longDelay: '5000',
     longerDelay: '10000'
   }
+
 };
