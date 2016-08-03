@@ -131,7 +131,7 @@ function Helper() {
     });
   };
 
-  this.getTodayDate = function () {
+  this.getTodaysDate = function () {
     var todays_date;
     var month;
     var date;
@@ -145,10 +145,10 @@ function Helper() {
       date = '0' + date;//ensure leading 0
     }
     //mm/dd/yyyy
-    var formatted_date = month + '/' + date + '/' + todays_date.getFullYear();
-    return (formatted_date);
-  }
-
+    var todaysDate = month + '/' + date + '/' + todays_date.getFullYear();
+    return (todaysDate);
+  };
+  
 }
 
 module.exports.helper = Helper;

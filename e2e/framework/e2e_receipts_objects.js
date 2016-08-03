@@ -68,7 +68,7 @@ function Receipts() {
   this.setDates = function () {
     this.elStartDate.sendKeys('03/27/2014');
     browser.sleep(browser.params.shortDelay);
-    this.elEndDate.sendKeys(helper.getTodayDate());
+    this.elEndDate.sendKeys(helper.getTodaysDate());
     browser.sleep(browser.params.shortDelay);
   };
 
