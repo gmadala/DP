@@ -16,7 +16,7 @@ function DashboardObjects() {
   this.doReceipts = function () {
     browser.sleep(browser.sleep(browser.params.longDelay));
     return this.elReceiptsLink.click();
-    browser.sleep(browser.params.shortDelay);
+    browser.sleep(browser.params.mediumDelay);
   };
   this.doRequestCreditIncrease = function () {
     browser.sleep(browser.params.longDelay);

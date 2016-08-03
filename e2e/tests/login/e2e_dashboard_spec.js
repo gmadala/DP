@@ -59,24 +59,10 @@ describe('\n Dashboard Page', function () {
     expect(browser.getCurrentUrl()).toEqual(execSettings.homePage());
   });
 
-  it("4. Dashboard - Print a Receipt by Grouped VIN", function () {
+  it("4. Dashboard - Navigating to Receipts Page", function () {
     //Click Receipts link
     dashboard.doReceipts();
-    browser.sleep(browser.params.mediumDelay);
-    receipts.clickFirstReceipt();
-    receipts.clickExportReceipts();
-    // Receipts.doFirstReceipt();
-    // Receipts.doExportReceipts();
-    browser.sleep(browser.params.mediumDelay);
-    browser.getAllWindowHandles().then(function (handles) {
-      browser.switchTo().window(handles[1]).then(function () {
-        expect(browser.getCurrentUrl()).toContain("https://test.nextgearcapital.com/MobileService/api/receipt/viewMultiple/receipts?");
-      });
-      browser.sleep(browser.params.mediumDelay);
-      browser.close();
-      browser.switchTo().window(handles[0]);
-      browser.sleep(browser.params.mediumDelay);
-    });
+    expect(browser.getCurrentUrl()).toEqual(execSettings.receiptsPage());
   });
 
   it("5. Dashboard - Logout", function () {

@@ -1,47 +1,30 @@
 'use strict';
 
-var receiptObjects = {
+function Receipts() {
 
   //Locators
-  exportReceipts: function () {
-    return element.all(by.css('button[ng-click="onExport()"]'));
-  },
+  this.elReceiptsLabel = browser.element(by.css('div.search-form'));
+  this.elClearSearch = browser.element(by.css('button#clearSearch.btn-unstyle.right.clear-search'));
+  this.elExportReceipts = browser.element.all(by.css('button[ng-click="onExport()"]'));
+  this.elFirstReceipt = browser.element.all(by.css('button[ng-click="toggleInQueue(receipt)"]'));
 
-  firstReceipt: function () {
-    return element.all(by.css('button[ng-click="toggleInQueue(receipt)"]'));
-  },
+  //Getters
+
+  this.getTestClearSearch = function () {
+    browser.sleep(browser.params.shortDelay);
+    return this.elClearSearch.getText();
+  };
 
   //Doers
-  clickExportReceipts: function () {
+  this.doExportReceipts = function () {
     browser.sleep(browser.params.shortDelay);
-    this.exportReceipts().get(0).click();
-  },
-  clickFirstReceipt: function () {
+    this.elExportReceipts.get(0).click();
+  };
+  this.doFirstReceipt = function () {
+    browser.sleep(2000);
     browser.sleep(browser.params.shortDelay);
-    this.firstReceipt().get(0).click();
-  }
+    this.elFirstReceipt.get(0).click();
+  };
 
-};
-
-module.exports = receiptObjects;
-
-
-// function ReceiptsObjects() {
-//
-//   //Locators
-//   this.elExportReceipts = browser.element.all(by.css('button[ng-click="onExport()"]'));
-//   this.elFirstReceipt = browser.element.all(by.css('button[ng-click="toggleInQueue(receipt)"]'));
-//
-//   //Doers
-//   this.doExportReceipts = function () {
-//     browser.sleep(browser.params.shortDelay);
-//     this.elExportReceipts().get(0).click();
-//   };
-//   this.doFirstReceipt = function () {
-//     browser.sleep(2000);
-//     browser.sleep(browser.params.shortDelay);
-//     this.elFirstReceipt().get(0).click();
-//   };
-//
-// }
-// module.exports.ReceiptsObjects = ReceiptsObjects;
+}
+module.exports.receipts = Receipts;

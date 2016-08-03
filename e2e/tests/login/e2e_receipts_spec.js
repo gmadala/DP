@@ -15,6 +15,7 @@ var dashboard = new dashboard.dashboardObjects();
 var CredIncrease = new creditIncrease.creditIncrease();
 var modalObjects = new modalObjects.modalObjects();
 var loginObjects = new loginObjects.loginObjects();
+var receipts = new receipts.receipts();
 var helper = new helper.helper();
 
 describe('\n Dashboard Page', function () {
@@ -32,15 +33,16 @@ describe('\n Dashboard Page', function () {
     expect(browser.getCurrentUrl()).toEqual(execSettings.receiptsPage());
   });
 
+  it("2. Receipts - Validating the labels and text boxes ", function () {
+    expect(receipts.elReceiptsLabel.isDisplayed()).toBe(true);
+    expect(receipts.getTestClearSearch()).toEqual('Clear Search');
+  });
 
-  xit("2. Receipts - Print a Receipt by Grouped VIN", function () {
-    //Click Receipts link
-    dashboard.doReceipts();
-    browser.sleep(browser.params.mediumDelay);
-    receipts.clickFirstReceipt();
-    receipts.clickExportReceipts();
-    // Receipts.doFirstReceipt();
-    // Receipts.doExportReceipts();
+
+  it("2. Receipts - Print a Receipt by Grouped VIN", function () {
+    //Click First Receipt link
+    receipts.doFirstReceipt();
+    receipts.doExportReceipts();
     browser.sleep(browser.params.mediumDelay);
     browser.getAllWindowHandles().then(function (handles) {
       browser.switchTo().window(handles[1]).then(function () {
