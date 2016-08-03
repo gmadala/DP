@@ -361,8 +361,6 @@
                 .then(function (responses) {
                   accounts = responses;
                   accounts[0].IsDefaultDisbursement = true;
-                  accounts[0].IsDefaultPayment = false;
-                  accounts[1].IsDefaultDisbursement = false;
                   accounts[1].IsDefaultPayment = true;
                 })
                 .then(function () {
