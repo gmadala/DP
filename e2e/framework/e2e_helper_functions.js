@@ -52,6 +52,19 @@ function Helper() {
     browser.sleep(browser.params.longDelay);
   };
 
+  this.goToPromos = function () {
+    /**
+     * @name goToPromos
+     * @memberof helper
+     * @author Bala Nithiya
+     * @description This function navigates to the promos page
+     *
+     * @returns {none}
+     */
+    browser.get(execSettings.promosPage());
+    browser.sleep(browser.params.longDelay);
+  };
+
   //Generic functions
   this.waitForVisible = function (elementId) {
     /**
