@@ -65,6 +65,19 @@ function Helper() {
     browser.sleep(browser.params.longDelay);
   };
 
+  this.goToReceipts = function () {
+    /**
+     * @name goToReceipts
+     * @memberof helper
+     * @author Bala Nithiya
+     * @description This function navigates to the receipts page
+     *
+     * @returns {none}
+     */
+    browser.get(execSettings.receiptsPage());
+    browser.sleep(browser.params.longDelay);
+  };
+
   //Generic functions
   this.waitForVisible = function () {
     /**
