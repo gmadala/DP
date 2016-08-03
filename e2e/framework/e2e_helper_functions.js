@@ -130,6 +130,25 @@ function Helper() {
       stream.end();
     });
   };
+
+  this.getTodayDate = function () {
+    var todays_date;
+    var month;
+    var date;
+    todays_date = new Date();
+    month = todays_date.getMonth() + 1;
+    date = todays_date.getDate();
+    if (month < 10) {
+      month = '0' + month; //ensure leading 0
+    }
+    if (date < 10) {
+      date = '0' + date;//ensure leading 0
+    }
+    //mm/dd/yyyy
+    var formatted_date = month + '/' + date + '/' + todays_date.getFullYear();
+    return (formatted_date);
+  }
+
 }
 
 module.exports.helper = Helper;

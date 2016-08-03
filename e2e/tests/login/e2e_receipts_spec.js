@@ -3,17 +3,9 @@
 var loginObjects = require('../../framework/e2e_login_objects.js');
 var helper = require('../../framework/e2e_helper_functions.js');
 var login = require('../../framework/e2e_login.js');
-var modalObjects = require('../../framework/e2e_modal_objects.js');
-var dashboard = require('../../framework/e2e_dashboard_objects.js');
-var creditIncrease = require('../../framework/e2e_credit_increase_requ_objects.js');
 var receipts = require('../../framework/e2e_receipts_objects.js');
 var execSettings = require('../../framework/e2e_execSettings.js');
-var increaseAmount = 1000;
 
-//var Receipts = new receipts.ReceiptsObjects();
-var dashboard = new dashboard.dashboardObjects();
-var CredIncrease = new creditIncrease.creditIncrease();
-var modalObjects = new modalObjects.modalObjects();
 var loginObjects = new loginObjects.loginObjects();
 var receipts = new receipts.receipts();
 var helper = new helper.helper();
@@ -33,12 +25,6 @@ describe('\n Dashboard Page', function () {
     expect(browser.getCurrentUrl()).toEqual(execSettings.receiptsPage());
   });
 
-  it("2. Receipts - Validating the labels and text boxes ", function () {
-    expect(receipts.elReceiptsLabel.isDisplayed()).toBe(true);
-    expect(receipts.getTestClearSearch()).toEqual('Clear Search');
-  });
-
-
   it("2. Receipts - Print a Receipt by Grouped VIN", function () {
     //Click First Receipt link
     receipts.doFirstReceipt();
@@ -54,6 +40,22 @@ describe('\n Dashboard Page', function () {
       browser.sleep(browser.params.mediumDelay);
     });
   });
+
+  it("3. Receipts - Validating the labels and text boxes ", function () {
+    expect(receipts.elReceiptsLabel.isDisplayed()).toBe(true);
+    expect(receipts.getTestClearSearch()).toEqual('Clear Search');
+  });
+
+  it("4. Receipts - Receipts Search ", function () {
+    receipts.setVIN();
+    receipts.doFloorPlanSearch();
+    expect(browser.getCurrentUrl()).toEqual(execSettings.receiptsPage());
+    receipts.doPaymentMethod();
+    expect(browser.getCurrentUrl()).toEqual(execSettings.receiptsPage());
+    receipts.doDatesSearch();
+    expect(browser.getCurrentUrl()).toEqual(execSettings.receiptsPage());
+  });
+
 
   it("5. Receipts - Logout", function () {
     login.logout();
