@@ -13,7 +13,8 @@ describe('Directive: navBar', function() {
       mockKissMetricInfo,
       shouldShowTRP,
       dMock,
-      aMock;
+      aMock,
+      mockCustomerSupportPhone;
 
     beforeEach(inject(function(_$rootScope_, _$controller_, $state, $q) {
       $controller = _$controller_;
@@ -100,22 +101,30 @@ describe('Directive: navBar', function() {
         }
       };
 
+      mockCustomerSupportPhone = $q.when({
+        value: '1234567890',
+        formatted: '123-456-7890'
+      });
+
       $controller('NavBarCtrl', {
         $scope: scope,
         $state: stateMock,
         User: dMock,
-        kissMetricInfo: mockKissMetricInfo
+        kissMetricInfo: mockKissMetricInfo,
+        dealerCustomerSupportPhone: mockCustomerSupportPhone
       });
 
       aScope = $rootScope.$new();
+
       $controller('NavBarCtrl', {
         $scope: aScope,
         User: aMock,
-        kissMetricInfo: mockKissMetricInfo
+        kissMetricInfo: mockKissMetricInfo,
+        dealerCustomerSupportPhone: mockCustomerSupportPhone
       });
     }));
 
-    it('should call to get core properties from kissmetric info service', function() {
+    fit('should call to get core properties from kissmetric info service', function() {
       scope.$apply();
       expect(mockKissMetricInfo.getKissMetricInfo).toHaveBeenCalled();
       expect(scope.kissMetricData).toEqual(kissMetricData);

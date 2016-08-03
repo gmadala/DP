@@ -86,7 +86,7 @@
         <div class="navbar-header">
           <button type="button" class="navbar-toggle collapsed mobile-menu-button"
                   ng-class="{'button-x': navState.current.data.showMenu}"
-                  ng-click="toggleMenu()"
+                  ng-click="toggleMenu(); closeSupport()"
                   popover-placement="bottom"
                   uib-popover-template="'client/shared/directives/navbar/menuTip.html'"
                   popover-is-open="!hideMenuTip && isMobile"
@@ -152,6 +152,49 @@
             <li class="visible-xs" ng-show="user.isDealer()">
               <a ng-href="#/account_management" ng-click="setPageTitle('Account Management')">
                 <span translate>Account Management</span>
+              </a>
+            </li>
+            <li class="visible-xs" ng-show="user.isDealer()" ng-click="$event.stopPropagation()">
+                <a ng-click="toggleSupport()">
+                <span translate>Support</span>
+                 <span class="paired-media icon-chevron support-chevron"
+                   ng-class="{ 'point-up':showSupport, 'point-down':!showSupport }"
+                   nxg-icon="icon-chevron">
+                   </span>
+              </a>
+            </li>
+            <li class="visible-xs" ng-show="user.isDealer() && showSupport">
+              <span class="spacer" ng-show="chatEnabled && user.isDealer()">
+                <a nxg-chat-with-us nxg-track="{{metric.CLICK_CHAT_NOW_LINK}}"
+                   track-properties="{{ kissMetricData }}" translate>Chat
+                  <span class="glyphicon"></span>
+                </a>
+              </span>
+            </li>
+            <li class="visible-xs" ng-show="user.isDealer() && showSupport">
+              <a href="tel:+{{support.phone}}">
+                Call Account Executive
+              </a>
+            </li>
+            <li class="visible-xs" ng-show="user.isDealer() && showSupport">
+              <a href= "tel:+{{ support.customerSupportPhone }}">
+                Call Customer Service
+              </a>
+            </li>
+            <li class="visible-xs" ng-show="user.isDealer() && showSupport">
+              <a href="mailto:{{ support.email }}">
+                Send Email
+              </a>
+            </li>
+            <li class="visible-xs" ng-show="user.isDealer() && showSupport">
+              <a href="javascript:void(0)"
+                 data-uv-lightbox="classic_widget"
+                 data-uv-mode="full"
+                 data-uv-primary-color="#135889"
+                 data-uv-link-color="#1864A1" data-uv-default-mode="support"
+                 data-uv-forum-id="{forumId}"
+                 data-uv-custom-template-id="{customTemplateId}">
+                <span translate>Feedback</span>
               </a>
             </li>
             <li class="visible-xs">
