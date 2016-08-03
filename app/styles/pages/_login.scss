@@ -95,6 +95,7 @@ a.forgot:link, a.forgot:visited {
 @media only screen and (max-width: 767px) {
   .nxg-main-container {
     height: 85vh;
+    overflow-y: scroll;
   }
 
   .login-margin {
