@@ -83,7 +83,6 @@ body {
   position: relative;
 
   &::after {
-    background-color: $primary;
     @extend %full-width;
     content: '';
     position: fixed;
