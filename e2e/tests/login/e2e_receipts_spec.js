@@ -10,7 +10,7 @@ var loginObjects = new loginObjects.loginObjects();
 var receipts = new receipts.receipts();
 var helper = new helper.helper();
 
-describe('\n Dashboard Page', function () {
+describe('\n Receipts Page', function () {
 
   beforeEach(function () {
     browser.sleep(browser.params.shortDelay);
