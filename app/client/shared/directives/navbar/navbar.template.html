@@ -115,7 +115,7 @@
             </li>
             <li ng-repeat="link in user.navLinks().primary" class="link_{{ link.activeWhen }}" ng-class="{'dropdown': link.subMenu, 'hover': link.hasHover}">
               <a ng-href="{{link.href}}" ng-class="{ active: isActive(link.activeWhen) }" ng-if="!link.subMenu"
-                 ng-click="setPageTitle(link.name)">{{link.name}}</a>
+                 ng-click="setPageTitle(link.name)" translate>{{link.name}}</a>
               <a class="sub-menu dropdown-toggle hidden-xs" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"
                  ng-class="{ active: isActiveGroup(link.subMenu) }"
                  ng-if="link.subMenu"
