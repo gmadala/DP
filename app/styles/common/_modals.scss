@@ -2,26 +2,7 @@
 //  MODALS
 // ========
 
-//.modal-backdrop {
-//  @include opacity(.50);
-//  z-index: 1050;
-//
-//  // Modal to go over all other modals
-//  // backdrop for the topmost modal should cover non-topmost modals
-//  &.topmost {
-//    z-index: 1090;
-//  }
-//}
-
 .modal {
-  //@extend %small;
-  //@include border-radius(0);
-  //display: block;
-  //height: 0;
-  //background: #F2F2F2;
-  //border: 0;
-  //margin-top:60px;
-  //z-index:2000;
   overflow: visible;
 
   //Scroll the modal body if taller than the screen
