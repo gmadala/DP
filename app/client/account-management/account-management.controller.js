@@ -362,6 +362,7 @@
                   accounts = responses;
                   accounts[0].IsDefaultDisbursement = true;
                   accounts[1].IsDefaultPayment = true;
+                  accounts[1].IsDefaultPayment = true;
                 })
                 .then(function () {
                   return AccountManagement.updateBankAccount(accounts[0]);
