@@ -24,9 +24,9 @@
               NextGear Capital Support at:
             </p>
 
-            <p class="text-error" ng-show="forgotUserNameValidity.email.$error.email" translate>
-              {{ forgotUserNameValidity.email.$viewValue }} is not a valid email address. If you need assistance,
-              please call NextGear Capital Support at:
+            <p class="text-error" ng-show="forgotUserNameValidity.email.$error.email">
+              {{ forgotUserNameValidity.email.$viewValue }} <span translate>is not a valid email address. If you need assistance,
+              please call NextGear Capital Support at:</span>
             </p>
 
             <p class="text-error" ng-show="userNameRecovery.failed" translate>
