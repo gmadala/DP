@@ -159,16 +159,15 @@ describe('Directive: navBar', function() {
         expect(typeof scope.user.navLinks).toBe('function');
 
         var myLinks = scope.user.navLinks();
-        // TODO need to rework this for the new navbar
-        //// dealers have 7 primary links and 3 secondary links (excluding conditional TRP link)
-        //// have to exclude reports and resources
-        //expect(myLinks.primary.length).toBe(7);
-        //expect(myLinks.secondary.length).toBe(3);
-        //
-        //myLinks = aScope.user.navLinks();
-        //// auctions have 6 primary links and no secondary links
-        //expect(myLinks.primary.length).toBe(6);
-        //expect(myLinks.secondary).not.toBeDefined();
+        // dealers have 4 primary links
+        expect(myLinks.primary.length).toBe(4);
+        expect(myLinks.primary[1].subMenu.length).toBe(2);
+        expect(myLinks.primary[2].subMenu.length).toBe(3);
+        expect(myLinks.primary[3].subMenu.length).toBe(4);
+
+        myLinks = aScope.user.navLinks();
+        // auctions have 6 primary links and no secondary links
+        expect(myLinks.primary.length).toBe(6);
       });
 
       it('should hide the Value Lookup tab for the canadian users', function() {
@@ -184,9 +183,7 @@ describe('Directive: navBar', function() {
           kissMetricInfo: mockKissMetricInfo
         });
         $rootScope.$digest();
-        // TODO need to rework this for the new navbar
-        //expect(scope.user.navLinks().primary.length).toBe(6);
-        //expect(scope.user.navLinks().secondary.length).toBe(2);
+        expect(scope.user.navLinks().primary[2].subMenu.length).toBe(3);
       });
 
       it('should include a title release link only if the user has DisplayTitleReleaseProgram set to true', function() {
@@ -199,31 +196,27 @@ describe('Directive: navBar', function() {
           kissMetricInfo: mockKissMetricInfo
         });
         scope.$apply();
-        // TODO need to rework this for the new navbar
-        //expect(scope.user.navLinks().primary.length).toBe(8);
+        expect(scope.user.navLinks().primary[2].subMenu.length).toBe(4);
       });
 
       it('should refresh if showing title release address if user goes from being logged out to logged in', function() {
-        // TODO need to rework this for the new navbar
-        //var loggedIn = false;
-        //spyOn(dMock, 'isLoggedIn').and.callFake(function() {
-        //  return loggedIn;
-        //});
-        //shouldShowTRP = true;
-        //
-        //$controller('NavBarCtrl', {
-        //  $scope: scope,
-        //  $state: stateMock,
-        //  User: dMock,
-        //  kissMetricInfo: mockKissMetricInfo
-        //});
-        //$rootScope.$digest();
-        // TODO need to rework this for the new navbar
-        //expect(scope.user.navLinks().primary.length).toBe(7);
-        //loggedIn = true;
-        //$rootScope.$digest();
-        // TODO need to rework this for the new navbar
-        //expect(scope.user.navLinks().primary.length).toBe(8);
+        var loggedIn = false;
+        spyOn(dMock, 'isLoggedIn').and.callFake(function() {
+          return loggedIn;
+        });
+        shouldShowTRP = true;
+
+        $controller('NavBarCtrl', {
+          $scope: scope,
+          $state: stateMock,
+          User: dMock,
+          kissMetricInfo: mockKissMetricInfo
+        });
+        $rootScope.$digest();
+        expect(scope.user.navLinks().primary[2].subMenu.length).toBe(3);
+        loggedIn = true;
+        $rootScope.$digest();
+        expect(scope.user.navLinks().primary[2].subMenu.length).toBe(4);
       });
 
       it('should change the homelink based on user type', function() {
