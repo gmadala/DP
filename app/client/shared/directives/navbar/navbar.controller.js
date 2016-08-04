@@ -117,7 +117,7 @@
           };
           dealerCustomerSupportPhone.then(function(phoneNumber) {
             $scope.support = {
-              email: info.MarketEMail,
+              email: 'mynextgearsupport@nextgearcapital.com',
               phone: info.MarketPhoneNumber,
               customerSupportPhone: phoneNumber.value
             };
@@ -248,9 +248,8 @@
     $scope.toggleSupport= function () {
       $scope.showSupport = !$scope.showSupport;
     };
-
+    
     $scope.navState = $state;
-
     $scope.hideMenuTip = localStorageService.get('hideMenuTip') || false;
     $scope.isMobile = window.innerWidth < 768;
     $scope.templateUrl = "/app/client/shared/directives/navbar/menuTip.html";
