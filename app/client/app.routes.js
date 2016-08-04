@@ -17,6 +17,47 @@
   function routeConfig($stateProvider, $urlRouterProvider) {
     $urlRouterProvider.otherwise(otherwiseRouteConfig);
     $stateProvider
+      .state('flooringWizard', {
+        abstract: true,
+        url: '/flooring-wizard',
+        controller: 'WizardFloorCtrl',
+        controllerAs: 'wizardFloor',
+        templateUrl: 'client/floor-vehicle/wizard/wizard-floor.template.html',
+        data: {
+          pageId: 'Floorplan',
+          showNavBar: true
+        }
+      })
+      .state('flooringWizard.car', {
+        url: '/car',
+        controller: 'CarInfoCtrl',
+        controllerAs: 'carInfo',
+        templateUrl: 'client/floor-vehicle/wizard/car-info.template.html',
+        data: {
+          pageId: 'Floorplan',
+          showNavBar: true
+        }
+      })
+      .state('flooringWizard.sales', {
+        url: '/sales',
+        controller: 'SalesInfoCtrl',
+        controllerAs: 'salesInfo',
+        templateUrl: 'client/floor-vehicle/wizard/sales-info.template.html',
+        data: {
+          pageId: 'Floorplan',
+          showNavBar: true
+        }
+      })
+      .state('flooringWizard.document', {
+        url: '/document',
+        controller: 'DocumentInfoCtrl',
+        controllerAs: 'documentInfo',
+        templateUrl: 'client/floor-vehicle/wizard/document-info.template.html',
+        data: {
+          pageId: 'Floorplan',
+          showNavBar: true
+        }
+      })
       .state('login', {
         url: '/login',
         templateUrl: 'client/login/login.template.html',
