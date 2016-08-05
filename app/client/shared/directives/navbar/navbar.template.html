@@ -165,37 +165,30 @@
               </a>
             </li>
             <li class="visible-xs" ng-show="user.isDealer() && showSupport">
-              <span class="spacer indent-text" ng-show="chatEnabled && user.isDealer()">
-                <a nxg-chat-with-us nxg-track="{{metric.CLICK_CHAT_NOW_LINK}}"
+              <span class="spacer" ng-show="chatEnabled && user.isDealer()">
+                <a class="support-text" nxg-chat-with-us nxg-track="{{metric.CLICK_CHAT_NOW_LINK}}"
                    track-properties="{{ kissMetricData }}" translate>Chat
                   <span class="glyphicon"></span>
                 </a>
                 </span>
             </li>
             <li class="visible-xs" ng-show="user.isDealer() && showSupport">
-              <span class="indent-text">
-              <a href="tel:+{{support.phone}}">
+              <a class="support-text" href="tel:+{{support.phone}}">
                 Call Account Executive
               </a>
-              </span>
             </li>
             <li class="visible-xs" ng-show="user.isDealer() && showSupport">
-               <span class="indent-text">
-              <a href= "tel:+{{ support.customerSupportPhone }}">
+              <a class="support-text" href= "tel:+{{ support.customerSupportPhone }}">
                 Call Customer Service
               </a>
-                </span>
             </li>
             <li class="visible-xs" ng-show="user.isDealer() && showSupport">
-               <span class="indent-text">
-              <a href="mailto:{{ support.email }}">
+              <a class="support-text" href="mailto:{{ support.email }}">
                 Send Email
               </a>
-               </span>
             </li>
             <li class="visible-xs" ng-show="user.isDealer() && showSupport">
-               <span class="indent-text">
-              <a href="javascript:void(0)"
+              <a class="support-text" href="javascript:void(0)"
                  data-uv-lightbox="classic_widget"
                  data-uv-mode="full"
                  data-uv-primary-color="#135889"
@@ -204,7 +197,6 @@
                  data-uv-custom-template-id="{customTemplateId}">
                 <span translate>Feedback</span>
               </a>
-               </span>
             </li>
             <li class="visible-xs">
               <a href="javascript:void(0)" ng-click="user.logout()">Sign Out</a>

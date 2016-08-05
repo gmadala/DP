@@ -113,6 +113,11 @@
   margin-bottom: 5px;
 }
 
+.support-text {
+  text-indent: 20px;
+  background: linear-gradient( rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.1) );
+}
+
 .nxg-dropdown {
   @extend %align-right;
   @include border-bottom-radius($borderRadius);
@@ -133,10 +138,6 @@
       border-top: transparent;
       border-bottom: 8px solid $highlight;
     }
-  }
-
-  .indent-text {
-    text-indent: 25px;
   }
 
   ul {
