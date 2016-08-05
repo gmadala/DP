@@ -19,11 +19,6 @@ input, select {
   box-sizing: border-box;
 }
 
-.flexbox div input {
-  padding: .5em 1em;
-  width: 100%;
-}
-
 .wrap {
   height: 100vh;
   display: flex;
@@ -97,24 +92,6 @@ body {
 //Bootstrap 3 override for margins between columns, and padding
 .RecievableDetailMargin {
   margin-left: -35px;
-}
-
-.flexbox-form {
-  display: flex;
-}
-
-.flexbox .stretch {
-  flex: 1;
-}
-
-.flexbox .normal {
-  flex: 0;
-  margin: 0 0 0 1rem;
-}
-
-.flexbox div input {
-  padding: .5em 1em;
-  width: 100%;
 }
 
 .centerTextAlign {
