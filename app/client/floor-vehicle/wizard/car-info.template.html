@@ -1,2 +1,78 @@
-<h2>Car Info</h2>
-<p>{{carInfo.sample}}</p>
+<form class="row" name="form" novalidate ng-submit="wizardFloor.next(form, 'flooringWizard.sales')">
+  <section class="col-xs-4 well first left-margin-large">
+    <h2 class="well-title" translate>1. Vehicle Information</h2>
+    <p class="required-text">* <span translate>required</span></p>
+    <div class="well-form" style="padding-top: 0">
+      <div nxg-vin-details floor-model="wizardFloor.data" validity="wizardFloor.validity" form="form" error-flag="carInfo.vinDetailsErrorFlag" nxg-autofocus="reset"></div>
+
+      <label for="inputColor" class="input-title" ><span translate>Color</span> *</label>
+      <div class="style-select full-width" ng-class="{ 'nxg-invalid': form.inputColor.$error.required && form.$submitted }">
+        <select id="inputColor" name="inputColor" ng-model="wizardFloor.data.UnitColorId"
+                ng-options="color.ColorName for color in wizardFloor.options.colors" required>
+          <option value="" translate>Make Selection</option>
+        </select>
+      </div>
+      <label for="inputColor"
+             class="text-error"
+             ng-show="form.inputColor.$error.required && form.$submitted" translate>
+        Please select a Color.
+      </label>
+
+      <label for="inputMileage" class="input-title" ><span translate>Odometer</span> *</label>
+      <input type="text" id="inputMileage"
+             name="inputMileage"
+             ng-model="wizardFloor.data.UnitMileage"
+             ng-pattern="/^[0-9]{1,3}(?:,?[0-9]{3})*$/"
+             nxg-min="1"
+             required
+             nxg-validate-int="6"
+             ng-class="{ 'nxg-invalid': (form.inputMileage.$error.required || form.inputMileage.$error.pattern || form.inputMileage.$error.maxlength || form.inputMileage.$error.nxgMin) && form.$submitted }"
+        />
+      <label for="inputMileage" class="text-error" ng-show="form.inputMileage.$error.required && form.$submitted">
+        <span translate translate-comment="This will be followed by 'odometer'">Please enter the</span>
+        <span>{{ mileageOrOdometer}}.</span>
+      </label>
+      <label for="inputMileage"
+             class="text-error"
+             ng-show="form.inputMileage.$error.pattern || form.inputMileage.$error.nxgMin && form.$submitted" translate>
+        Please enter a positive integer value with no decimals.
+      </label>
+      <label for="inputMileage"
+             class="text-error"
+             ng-show="form.inputMileage.$error.maxlength && form.$submitted" translate>
+        Please enter a value less than 1,000,000.
+      </label>
+
+      <label for="inputTitleHolder" class="input-title" ><span translate>Who has the Title?</span> *</label>
+      <div class="style-select full-width" ng-class="{ 'nxg-invalid': form.inputTitleHolder.$error.required && form.$submitted }">
+        <select id="inputTitleHolder"
+                name="inputTitleHolder" ng-model="wizardFloor.data.TitleLocationId"
+                ng-options="location.Name for location in wizardFloor.options.titleLocationOptions"
+                required >
+          <option value="" translate>Make Selection</option>
+        </select>
+      </div>
+      <label for="inputTitleHolder"
+             class="text-error"
+             ng-show="form.inputTitleHolder.$error.required && form.$submitted" translate>
+        Please select who has the title.
+      </label>
+
+      <label for="inputInvLoc" class="input-title"><span translate>Inventory Location</span> *</label>
+      <div class="style-select full-width" ng-class="{ 'nxg-invalid': form.inputInvLoc.$error.required && form.$submitted }">
+        <select id="inputInvLoc" name="inputInvLoc" ng-model="wizardFloor.data.PhysicalInventoryAddressId"
+                ng-options="(location | address:'oneLineSelect') for location in wizardFloor.options.locations"
+                required>
+          <option value="" translate>Make Selection</option>
+        </select>
+      </div>
+      <label for="inputInvLoc"
+             class="text-error"
+             ng-show="form.inputInvLoc.$error.required && form.$submitted" translate>
+        Please select an Inventory Location.
+      </label>
+    </div>
+  </section>
+  <button type="submit">btn</button>
+  <button type="button" ng-click="carInfo.setDefaults()">reset</button>
+</form>
