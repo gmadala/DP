@@ -1,3 +1,23 @@
-<h1>Flooring Page</h1>
-<p>{{wizardFloor.sample}}</p>
 <div ui-view></div>
+<div>
+  <button type="button"
+          class="btn-cta cta-secondary" translate
+          ng-disabled="!wizardFloor.previousAvailable()"
+          ng-click="wizardFloor.previous()">
+    Previous
+  </button>
+  <button type="button"
+          class="btn-cta cta-primary" translate
+          ng-show="wizardFloor.nextAvailable()"
+          ng-disabled="!wizardFloor.validForm"
+          ng-click="wizardFloor.next()">
+    Next
+  </button>
+  <button type="button"
+          class="btn-cta cta-primary" translate
+          ng-show="!wizardFloor.nextAvailable()"
+          ng-disabled="!wizardFloor.validForm"
+          ng-click="wizardFloor.submit()">
+    Submit
+  </button>
+</div>
