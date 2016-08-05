@@ -17,6 +17,8 @@ function Receipts() {
   this.elFirstReceipt = browser.element.all(by.css('button[ng-click="toggleInQueue(receipt)"]'));
   this.elStartDate = browser.element(by.id('startDate'));
   this.elEndDate = browser.element(by.id('endDate'));
+  this.elReceipts = browser.element(by.css('table.table.table-striped.table-primary'));
+
 
   //Getters
   this.getTestClearSearch = function () {

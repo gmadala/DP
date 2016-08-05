@@ -44,6 +44,8 @@ describe('\n Receipts Page', function () {
   it("3. Receipts - Validating the labels and text boxes ", function () {
     expect(receipts.elReceiptsLabel.isDisplayed()).toBe(true);
     expect(receipts.getTestClearSearch()).toEqual('Clear Search');
+    //Validating receipts table
+    expect(receipts.elReceipts.isDisplayed()).toBe(true);
   });
 
   it("4. Receipts - Receipts Search ", function () {
