@@ -22,13 +22,13 @@
 
     switchState();
 
-    $q.all([User.getStatics(), User.getInfo(), AccountManagement.getDealerSummary()]).then(function (result) {
+    $q.all([User.getStatics(), User.getInfo(), AccountManagement.getDealerSummary()]).then(function(result) {
       vm.options = angular.extend({}, result[0], result[1]);
 
       vm.options.locations = Addresses.getActivePhysical();
     });
 
-    vm.tabClick = function (count) {
+    vm.tabClick = function(count) {
       if (canTransition(count)) {
         vm.counter = count;
 
@@ -36,11 +36,11 @@
       }
     };
 
-    vm.nextAvailable = function () {
+    vm.nextAvailable = function() {
       return vm.counter < vm.pageCount;
     };
 
-    vm.next = function () {
+    vm.next = function() {
       var nextCount = vm.counter + 1;
 
       if (vm.nextAvailable() && canTransition(nextCount)) {
@@ -50,11 +50,11 @@
       }
     };
 
-    vm.previousAvailable = function () {
+    vm.previousAvailable = function() {
       return vm.counter > 1;
     };
 
-    vm.previous = function () {
+    vm.previous = function() {
       if (vm.previousAvailable()) {
         vm.counter--;
         switchState();

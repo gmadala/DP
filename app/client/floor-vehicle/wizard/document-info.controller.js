@@ -11,7 +11,8 @@
     var vm = this;
     vm.sample = 'This document info is coming from the controller';
 
-    $scope.$parent.wizardFloor.formParts.oneValidation = function() {
+    $scope.$parent.wizardFloor.transitionValidation = function() {
+      $scope.$parent.wizardFloor.formParts.three = true;
       return true;
     };
 

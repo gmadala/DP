@@ -6,10 +6,12 @@
     .controller('CarInfoCtrl', CarInfoCtrl);
 
   CarInfoCtrl.$inject = [
-    '$scope'
+    '$scope',
+    'User',
+    'gettextCatalog'
   ];
 
-  function CarInfoCtrl($scope) {
+  function CarInfoCtrl($scope, User, gettextCatalog) {
     var vm = this;
 
     vm.sample = 'This car info is coming from the controller';
@@ -34,11 +36,13 @@
       TitleTypeId: null // null locally, int extracted from TitleLocationOption object above for API tx
     };
 
-    vm.setDefaults = function () {
+    vm.setDefaults = function() {
       _.assign($scope.$parent.wizardFloor.data, vm.defaultData);
     }
 
-    $scope.$parent.wizardFloor.transitionValidation = function () {
+    vm.mileageOrOdometer = User.isUnitedStates() ? gettextCatalog.getString('Mileage') : gettextCatalog.getString('Odometer');
+
+    $scope.$parent.wizardFloor.transitionValidation = function() {
       $scope.form.$submitted = true;
       $scope.$parent.wizardFloor.validity = angular.copy($scope.form);
       $scope.$parent.wizardFloor.formParts.one = $scope.form.$valid;
