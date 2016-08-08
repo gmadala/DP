@@ -16,7 +16,7 @@ describe('\n Promos Page', function () {
     browser.sleep(browser.params.delay);
   });
 
-  it("1. Promos - Login as 97421eh ", function () {
+  it("1. Promos - Login as 62434AM ", function () {
     helper.goToLogin();
     loginObjects.doGoodLogin();
     helper.goToPromos();

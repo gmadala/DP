@@ -17,7 +17,7 @@ describe('\n Receipts Page', function () {
     browser.ignoreSynchronization = true;
   });
 
-  it("1. Receipts - Login as 97421eh ", function () {
+  it("1. Receipts - Login as 62434AM ", function () {
     helper.goToLogin();
     loginObjects.doGoodLogin();
     helper.goToReceipts();

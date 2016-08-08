@@ -14,8 +14,8 @@ exports.config = {
   },
 
   //Spec patterns are relative to the current working directly when protractor is called.
-  specs: ['tests/login/*_spec.js'],
-  //specs: ['tests/login/e2e_dashboard_spec.js'],
+  //specs: ['tests/login/*_spec.js'],
+  specs: ['tests/login/e2e_login_spec.js'],
 
   //More miscellaneous configuration options
   directConnect: true,
@@ -36,9 +36,9 @@ exports.config = {
 
   //Project global parameters
   params: {
-    userNameDealer: '53190md',
-    userNameAuction: 'tmsauction',
-    userName: '97421EH',
+    userNameDealer: '57694AC',
+    userNameAuction: '10298KB',
+    userName: '62434AM',
     password: 'ngcpass!0',
     delay: '500',
     shortDelay: '1000',

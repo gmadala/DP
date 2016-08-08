@@ -24,7 +24,7 @@ describe('\n Dashboard Page', function () {
     browser.ignoreSynchronization = true;
   });
 
-  it("1. Dashboard - Login as 97421eh ", function () {
+  it("1. Dashboard - Login as 62434AM ", function () {
     helper.goToLogin();
     expect(browser.getCurrentUrl()).toEqual(execSettings.loginPage());
     browser.sleep(browser.params.mediumDelay);
