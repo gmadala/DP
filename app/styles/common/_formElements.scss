@@ -518,6 +518,14 @@ input[type="radio"] {
   }
 }
 
+@media only screen and (max-width: 372px) {
+  .cr-inline {
+    .cr-label {
+      max-width: 85%;
+    }
+  }
+}
+
 .cr-inline-label {
   position: relative;
   top: 6px;
@@ -594,8 +602,9 @@ input[type="radio"] {
 }
 
 .smallInputAuctionSettings {
-  width:140%;
+  width: 140%;
 }
+
 .xsmallInput {
   width: 206px;
 }
