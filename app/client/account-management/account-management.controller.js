@@ -50,7 +50,7 @@
     $scope.editDefaultDAccount = false;
     $scope.editDefaultPAccount = false;
     $scope.refreshActiveAchAccounts = refreshActiveAchAccounts;
-
+    $scope.isAddAccountButtonDisable = isAddAccountButtonDisable;
 
     //to retreive the latest transaction date
     if ($scope.isDealer) {
@@ -120,6 +120,10 @@
 
     $scope.editDefaultDAccount = false;
     $scope.editDefaultPAccount = false;
+
+    function isAddAccountButtonDisable() {
+      return $scope.editDefaultDAccount || $scope.editDefaultPAccount || AccountManagement.getAccountButtonState();
+    }
 
     function refreshActiveAchAccounts() {
       AccountManagement.getFinancialAccountData()
@@ -362,7 +366,6 @@
                   accounts = responses;
                   accounts[0].IsDefaultDisbursement = true;
                   accounts[1].IsDefaultPayment = true;
-                  accounts[1].IsDefaultPayment = true;
                 })
                 .then(function () {
                   return AccountManagement.updateBankAccount(accounts[0]);
@@ -533,4 +536,6 @@
     );
 
   }
+
+
 })();

@@ -76,9 +76,10 @@
       scope.editMode = false;
 
       scope.dirtyBankName = null;
-      scope.dirtyStatus = null;
+      scope.dirtyStatus =  getStatus();
 
       scope.editAccount = editAccount;
+      scope.editStatus = editStatus;
       scope.cancelAccount = cancelAccount;
       scope.saveAccount = saveAccount;
 
@@ -93,16 +94,25 @@
 
       scope.generateReceipt = generateReceipt;
 
+
       /**
        * Switch bank account row to inline edit mode and keep the original value for status and bank name which can be
        * used when the user cancel the edit.
        */
       function editAccount() {
         scope.editMode = true;
+        AccountManagement.setAccountButtonState(true);
         scope.dirtyStatus = getStatus();
         scope.dirtyBankName = getBankName();
       }
 
+      /**
+       * Slider control for edit status is always active.  When clicked, save state of bank name
+       */
+      function editStatus() {
+        scope.dirtyBankName = getBankName();
+        saveAccount(true);
+      }
       /**
        * Switch to view mode from inline edit mode and restore the original status and bank name value.
        */
@@ -110,12 +120,13 @@
         scope.editMode = false;
         scope.dirtyStatus = getStatus();
         scope.dirtyBankName = getBankName();
+        AccountManagement.setAccountButtonState(false);
       }
 
       /**
        * Save changes made in the inline edit.
        */
-      function saveAccount() {
+      function saveAccount(isActive) {
         AccountManagement.getBankAccount(scope.account.BankAccountId)
           .then(function (bankAccount) {
             bankAccount.IsActive = scope.dirtyStatus;
@@ -127,7 +138,9 @@
               function(result){
                 segmentio.track(metric.DEALER_EDIT_BANK_ACCOUNT, result);
               });
-            scope.refreshActiveAchAccounts({});
+            if (isActive !== true) {
+              scope.refreshActiveAchAccounts({});
+            }
             setStatus(scope.dirtyStatus);
             setBankName(scope.dirtyBankName);
           })
@@ -203,6 +216,7 @@
         var strUrl =  api.contentLink('/receipt/view/' + scope.recentTransactionId + '/receipt');
         window.open(strUrl, '_blank');
       }
+
     }
 
   }

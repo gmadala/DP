@@ -1,4 +1,3 @@
-
 <div class="container">
   <div class="row" id="FinancialAccounts">
     <div class="col-md-12">
@@ -88,9 +87,10 @@
 
           </div>
         </div>
+        <div class="" style="border-top: 1px solid #bbbcbe;"></div>
         <div class="row forAddButton">
           <div class="col-md-12 ">
-            <button class="btn-cta cta-primary" ng-show="financial.isAddBankAccountEditable()" ng-disabled="editDefaultPAccount  || editDefaultDAccount"
+            <button class="btn-cta cta-primary" ng-show="financial.isAddBankAccountEditable()" ng-disabled="isAddAccountButtonDisable()"
                     ng-click="financial.addFinancialAccount()" translate><span class="glyphicon glyphicon-plus-sign" aria-hidden="true" style="font-weight: bold;"  ></span> Add Account
 
             </button>
@@ -480,6 +480,3 @@
     </div>
   </div>
 </div>
-
-
-
