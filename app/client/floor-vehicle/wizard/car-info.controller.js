@@ -38,49 +38,13 @@
       _.assign($scope.$parent.wizardFloor.data, vm.defaultData);
     }
 
-    console.log($scope);
-    // $scope.$watch('form', function(newVal) {
-    //   $scope.$parent.wizardFloor.currentForm = newVal;
-    // });
-
-    $scope.$parent.wizardFloor.formParts.oneValidation = function () {
-      // console.log('validation from child newVal');
-      // // if (newVal === true) {
+    $scope.$parent.wizardFloor.transitionValidation = function () {
       $scope.form.$submitted = true;
       $scope.$parent.wizardFloor.validity = angular.copy($scope.form);
+      $scope.$parent.wizardFloor.formParts.one = $scope.form.$valid;
       return $scope.form.$valid;
-      // }
     };
 
-    // $scope.$watch('$parent.wizardFloor.transition', function(newVal) {
-    //   console.log('watch newVal: ', newVal);
-    //   if (newVal === true) {
-    //     $scope.form.$submitted = true;
-    //     $scope.$parent.wizardFloor.validity = angular.copy($scope.form);
-    //     $scope.$parent.wizardFloor.formParts.one = $scope.form.$valid;
-    //   }
-    // });
-
-    // $scope.$parent.wizardFloor.currentForm = $scope.form;
-
-    // $scope.$on('wizard.next', function() {
-    //   $scope.$parent.wizardFloor.currentForm = $scope.form;
-    // });
-    console.log($scope.$parent.wizardFloor);
-
-    // User.getStatics().then(function(res) {
-    //   vm.options = res;
-    // });
-    //
-    // User.getInfo().then(function(res) {
-    //   console.log(res);
-    //   vm.options = angular.extend({}, res);
-    // });
-
-    // vm.validate = function(form) {
-    //   $scope.validity = angular.copy(form);
-    //   $scope.$parent.wizardFloor.carInfoValid = form.$valid ? true : false;
-    // };
   }
 
 })();

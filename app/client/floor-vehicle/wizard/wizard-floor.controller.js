@@ -12,7 +12,6 @@
     vm.counter = 1;
     vm.validForm = true;
     vm.data = null;
-    vm.transition = false;
     vm.formParts = {
       one: false,
       two: false,
@@ -21,6 +20,8 @@
 
     vm.pageCount = 3;
 
+    switchState();
+
     $q.all([User.getStatics(), User.getInfo(), AccountManagement.getDealerSummary()]).then(function (result) {
       vm.options = angular.extend({}, result[0], result[1]);
 
@@ -28,14 +29,11 @@
     });
 
     vm.tabClick = function (count) {
-      vm.transition = true;
-
       if (canTransition(count)) {
-        vm.transition = false;
         vm.counter = count;
+
         switchState();
       }
-      vm.transition = false;
     };
 
     vm.nextAvailable = function () {
@@ -43,17 +41,13 @@
     };
 
     vm.next = function () {
-      console.log('next transition: ', vm.transition);
       var nextCount = vm.counter + 1;
-      vm.transition = true;
-      setTimeout(function() {
-        if (vm.nextAvailable() && canTransition(nextCount)) {
-          vm.counter++;
-          // vm.transition = false;
-          switchState();
-        }
-        // vm.transition = false;
-      }, 3000);
+
+      if (vm.nextAvailable() && canTransition(nextCount)) {
+        vm.counter++;
+
+        switchState();
+      }
     };
 
     vm.previousAvailable = function () {
@@ -89,22 +83,17 @@
     }
 
     function canTransition(count) {
-      console.log('Can Transition: ', count);
+      vm.transitionValidation();
+
       switch (count) {
         case 1:
-          return true
+          return true;
           break;
         case 2:
-          console.log('Can Transition; ', vm.formParts.one);
-          if (vm.formParts.oneValidation()) {
-            vm.formParts.one = true;
-            return vm.formParts.one
-          } else {
-            return false;
-          }
+          return vm.formParts.one;
           break;
         case 3:
-          return vm.formParts.one && vm.formParts.two
+          return vm.formParts.one && vm.formParts.two;
           break;
       }
     }

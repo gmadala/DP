@@ -5,11 +5,17 @@
     .module('nextgearWebApp')
     .controller('SalesInfoCtrl', SalesInfoCtrl);
 
-  SalesInfoCtrl.$inject = [];
+  SalesInfoCtrl.$inject = ['$scope'];
 
-  function SalesInfoCtrl() {
+  function SalesInfoCtrl($scope) {
     var vm = this;
     vm.sample = 'This sales info is coming from the controller';
+
+    $scope.$parent.wizardFloor.transitionValidation = function() {
+      $scope.$parent.wizardFloor.formParts.two = true;
+      return true;
+    };
+
   }
 
 })();
