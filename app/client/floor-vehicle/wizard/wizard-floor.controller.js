@@ -1,4 +1,4 @@
-(function() {
+(function () {
   'use strict';
 
   angular
@@ -21,13 +21,13 @@
 
     vm.pageCount = 3;
 
-    $q.all([User.getStatics(), User.getInfo(), AccountManagement.getDealerSummary()]).then(function(result) {
+    $q.all([User.getStatics(), User.getInfo(), AccountManagement.getDealerSummary()]).then(function (result) {
       vm.options = angular.extend({}, result[0], result[1]);
 
       vm.options.locations = Addresses.getActivePhysical();
     });
 
-    vm.tabClick = function(count) {
+    vm.tabClick = function (count) {
       vm.transition = true;
 
       if (canTransition(count)) {
@@ -38,11 +38,11 @@
       vm.transition = false;
     };
 
-    vm.nextAvailable = function() {
+    vm.nextAvailable = function () {
       return vm.counter < vm.pageCount;
     };
 
-    vm.next = function() {
+    vm.next = function () {
       console.log('next transition: ', vm.transition);
       var nextCount = vm.counter + 1;
       vm.transition = true;
@@ -55,11 +55,11 @@
       // vm.transition = false;
     };
 
-    vm.previousAvailable = function() {
+    vm.previousAvailable = function () {
       return vm.counter > 1;
     };
 
-    vm.previous = function() {
+    vm.previous = function () {
       if (vm.previousAvailable()) {
         vm.counter--;
         switchState();
@@ -95,7 +95,12 @@
           break;
         case 2:
           console.log('Can Transition; ', vm.formParts.one);
-          return vm.formParts.one
+          if (vm.formParts.oneValidation()) {
+            vm.formParts.one = true;
+            return vm.formParts.one
+          } else {
+            return false;
+          }
           break;
         case 3:
           return vm.formParts.one && vm.formParts.two
