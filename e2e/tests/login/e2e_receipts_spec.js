@@ -63,4 +63,5 @@ describe('\n Receipts Page', function () {
     login.logout();
     expect(browser.getCurrentUrl()).toEqual(execSettings.loginPage());
   });
+
 });
