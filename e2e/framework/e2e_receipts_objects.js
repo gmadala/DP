@@ -74,6 +74,5 @@ function Receipts() {
     browser.sleep(browser.params.shortDelay);
   };
 
-
 }
 module.exports.receipts = Receipts;
