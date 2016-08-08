@@ -1,4 +1,4 @@
-(function() {
+(function () {
   'use strict';
 
   angular
@@ -9,9 +9,7 @@
     '$scope'
   ];
 
-  function CarInfoCtrl(
-    $scope
-  ) {
+  function CarInfoCtrl($scope) {
     var vm = this;
 
     vm.sample = 'This car info is coming from the controller';
@@ -36,7 +34,7 @@
       TitleTypeId: null // null locally, int extracted from TitleLocationOption object above for API tx
     };
 
-    vm.setDefaults = function() {
+    vm.setDefaults = function () {
       _.assign($scope.$parent.wizardFloor.data, vm.defaultData);
     }
 
@@ -45,14 +43,23 @@
     //   $scope.$parent.wizardFloor.currentForm = newVal;
     // });
 
-    $scope.$watch('$parent.wizardFloor.transition', function(newVal) {
-      console.log('watch newVal: ', newVal);
-      if (newVal === true) {
-        $scope.form.$submitted = true;
-        $scope.$parent.wizardFloor.validity = angular.copy($scope.form);
-        $scope.$parent.wizardFloor.formParts.one = $scope.form.$valid;
-      }
-    });
+    $scope.$parent.wizardFloor.formParts.oneValidation = function () {
+      // console.log('validation from child newVal');
+      // // if (newVal === true) {
+      $scope.form.$submitted = true;
+      $scope.$parent.wizardFloor.validity = angular.copy($scope.form);
+      return $scope.form.$valid;
+      // }
+    };
+
+    // $scope.$watch('$parent.wizardFloor.transition', function(newVal) {
+    //   console.log('watch newVal: ', newVal);
+    //   if (newVal === true) {
+    //     $scope.form.$submitted = true;
+    //     $scope.$parent.wizardFloor.validity = angular.copy($scope.form);
+    //     $scope.$parent.wizardFloor.formParts.one = $scope.form.$valid;
+    //   }
+    // });
 
     // $scope.$parent.wizardFloor.currentForm = $scope.form;
 
