@@ -5,45 +5,103 @@
     .module('nextgearWebApp')
     .controller('WizardFloorCtrl', WizardFloorCtrl);
 
-  WizardFloorCtrl.$inject = [
-    'moment',
-    '$scope',
-    '$state',
-    '$q',
-    'User',
-    'Addresses'
-  ];
+  WizardFloorCtrl.$inject = ['$state', '$scope', '$q', 'User', 'AccountManagement', 'Addresses'];
 
-  function WizardFloorCtrl(
-    moment,
-    $scope,
-    $state,
-    $q,
-    User,
-    Addresses
-  ) {
+  function WizardFloorCtrl($state, $scope, $q, User, AccountManagement, Addresses) {
     var vm = this;
-    vm.sample = 'This wizard info is coming from the controller';
-
-    var today = new Date();
-    vm.today = moment([today.getFullYear(), today.getMonth(), today.getDate()]).toDate();
-
+    vm.counter = 1;
+    vm.validForm = true;
     vm.data = null;
+    vm.transition = false;
+    vm.formParts = {
+      one: false,
+      two: false,
+      three: false
+    };
 
-    $q.all([User.getStatics(), User.getInfo()]).then(function(res) {
-      vm.options = angular.extend({}, res[0], res[1]);
+    vm.pageCount = 3;
+
+    $q.all([User.getStatics(), User.getInfo(), AccountManagement.getDealerSummary()]).then(function(result) {
+      vm.options = angular.extend({}, result[0], result[1]);
 
       vm.options.locations = Addresses.getActivePhysical();
     });
 
-    vm.next = function(form, nextState) {
-      vm.validity = angular.copy(form);
+    vm.tabClick = function(count) {
+      vm.transition = true;
 
-      if (form.$valid) {
-        $state.go(nextState);
+      if (canTransition(count)) {
+        vm.transition = false;
+        vm.counter = count;
+        switchState();
+      }
+      vm.transition = false;
+    };
+
+    vm.nextAvailable = function() {
+      return vm.counter < vm.pageCount;
+    };
+
+    vm.next = function() {
+      console.log('next transition: ', vm.transition);
+      var nextCount = vm.counter + 1;
+      vm.transition = true;
+
+      if (vm.nextAvailable() && canTransition(nextCount)) {
+        vm.counter++;
+        // vm.transition = false;
+        switchState();
+      }
+      // vm.transition = false;
+    };
+
+    vm.previousAvailable = function() {
+      return vm.counter > 1;
+    };
+
+    vm.previous = function() {
+      if (vm.previousAvailable()) {
+        vm.counter--;
+        switchState();
       }
     };
 
+    function switchState() {
+      switch (vm.counter) {
+        case 1:
+          $state.go('flooringWizard.car');
+
+          break;
+        case 2:
+          if (vm.formParts.one) {
+            $state.go('flooringWizard.sales');
+          }
+
+          break;
+        case 3:
+          if (vm.formParts.one && vm.formParts.two) {
+            $state.go('flooringWizard.document');
+          }
+
+          break;
+      }
+    }
+
+    function canTransition(count) {
+      console.log('Can Transition: ', count);
+      switch (count) {
+        case 1:
+          return true
+          break;
+        case 2:
+          console.log('Can Transition; ', vm.formParts.one);
+          return vm.formParts.one
+          break;
+        case 3:
+          return vm.formParts.one && vm.formParts.two
+          break;
+      }
+    }
   }
 
 })();

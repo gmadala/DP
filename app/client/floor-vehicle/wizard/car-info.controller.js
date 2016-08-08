@@ -40,6 +40,27 @@
       _.assign($scope.$parent.wizardFloor.data, vm.defaultData);
     }
 
+    console.log($scope);
+    // $scope.$watch('form', function(newVal) {
+    //   $scope.$parent.wizardFloor.currentForm = newVal;
+    // });
+
+    $scope.$watch('$parent.wizardFloor.transition', function(newVal) {
+      console.log('watch newVal: ', newVal);
+      if (newVal === true) {
+        $scope.form.$submitted = true;
+        $scope.$parent.wizardFloor.validity = angular.copy($scope.form);
+        $scope.$parent.wizardFloor.formParts.one = $scope.form.$valid;
+      }
+    });
+
+    // $scope.$parent.wizardFloor.currentForm = $scope.form;
+
+    // $scope.$on('wizard.next', function() {
+    //   $scope.$parent.wizardFloor.currentForm = $scope.form;
+    // });
+    console.log($scope.$parent.wizardFloor);
+
     // User.getStatics().then(function(res) {
     //   vm.options = res;
     // });

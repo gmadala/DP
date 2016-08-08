@@ -1,5 +1,5 @@
-<form class="row" name="form" novalidate ng-submit="wizardFloor.next(form, 'flooringWizard.sales')">
-  <section class="col-xs-4 well first left-margin-large">
+<form name="form" novalidate ng-submit="wizardFloor.next(form, 'flooringWizard.sales')">
+  <section class="col-xs-12 well first">
     <h2 class="well-title" translate>1. Vehicle Information</h2>
     <p class="required-text">* <span translate>required</span></p>
     <div class="well-form" style="padding-top: 0">
@@ -73,6 +73,4 @@
       </label>
     </div>
   </section>
-  <button type="submit">btn</button>
-  <button type="button" ng-click="carInfo.setDefaults()">reset</button>
 </form>
