@@ -46,13 +46,14 @@
       console.log('next transition: ', vm.transition);
       var nextCount = vm.counter + 1;
       vm.transition = true;
-
-      if (vm.nextAvailable() && canTransition(nextCount)) {
-        vm.counter++;
+      setTimeout(function() {
+        if (vm.nextAvailable() && canTransition(nextCount)) {
+          vm.counter++;
+          // vm.transition = false;
+          switchState();
+        }
         // vm.transition = false;
-        switchState();
-      }
-      // vm.transition = false;
+      }, 3000);
     };
 
     vm.previousAvailable = function() {
