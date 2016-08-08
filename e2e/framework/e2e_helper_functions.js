@@ -132,12 +132,12 @@ function Helper() {
   };
 
   this.getTodaysDate = function () {
-    var todays_date;
+    var todaysDate;
     var month;
     var date;
-    todays_date = new Date();
-    month = todays_date.getMonth() + 1;
-    date = todays_date.getDate();
+    todaysDate = new Date();
+    month = todaysDate.getMonth() + 1;
+    date = todaysDate.getDate();
     if (month < 10) {
       month = '0' + month; //ensure leading 0
     }
@@ -145,10 +145,10 @@ function Helper() {
       date = '0' + date;//ensure leading 0
     }
     //mm/dd/yyyy
-    var todaysDate = month + '/' + date + '/' + todays_date.getFullYear();
-    return (todaysDate);
+    var currentDate = month + '/' + date + '/' + todaysDate.getFullYear();
+    return (currentDate);
   };
-  
+
 }
 
 module.exports.helper = Helper;
