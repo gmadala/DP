@@ -262,8 +262,8 @@
     };
 
     // disallow scrolling on mobile inside the pushed wrapper when the menu is open, could not get the same functionality to work with pure JS via attaching event handlers
-    $("#wrapper").on('touchstart, touchmove', function() {
-      if ($scope.isMobile && $state.current.data.showMenu) {
+    $(document).on('touchmove', function(e) {
+      if ($(e.target).closest('#navbarContainer').length <= 0 && $scope.isMobile && $state.current.data.showMenu) {
         return false;
       }
     });

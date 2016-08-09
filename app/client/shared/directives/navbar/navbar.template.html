@@ -103,7 +103,7 @@
           </div>
         </div>
 
-        <div class="navbar-collapse" ng-class="{'open': navState.current.data.showMenu, 'closed': (!navState.current.data.showMenu && navState.current.data.menuToggled)}" ng-click="closeMenu()">
+        <div id="navbarContainer" class="navbar-collapse" ng-class="{'open': navState.current.data.showMenu, 'closed': (!navState.current.data.showMenu && navState.current.data.menuToggled)}" ng-click="closeMenu()">
           <ul class="nav navbar-nav"
               popover-placement="bottom"
               uib-popover-template="'client/shared/directives/navbar/menuTip.html'"
@@ -193,7 +193,8 @@
                  data-uv-primary-color="#135889"
                  data-uv-link-color="#1864A1" data-uv-default-mode="support"
                  data-uv-forum-id="{forumId}"
-                 data-uv-custom-template-id="{customTemplateId}">
+                 data-uv-custom-template-id="{customTemplateId}"
+                 data-uv-trigger>
                 <span translate>Feedback</span>
               </a>
             </li>
