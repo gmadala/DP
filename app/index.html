@@ -34,16 +34,16 @@
     <![endif]-->
 
   </head>
-  <body ng-class="{'menu-open in' : navState.current.data.showMenu }">
+  <body ng-class="{'menu-open' : navState.current.data.showMenu, 'menu-closed': (!navState.current.data.showMenu && navState.current.data.menuToggled) }">
     <!-- htmlmin:ignore -->
     <!-- processhtml:include:svgDist,server /img/icons/icon_defs.svg -->
     This will pull in the content of our svg file for use across the app.
     <!-- /processhtml -->
     <!-- htmlmin:ignore -->
+    <div nav-bar></div>
     <div id="wrapper" class="menu-wrapper">
-      <div id="main-container" class="nxg-main-container" nxg-messages>
-        <div nav-bar></div>
-        <div class="nxg-main-view" class="mobile-menu-push"
+      <div id="main-container" class="nxg-main-container" nxg-messages>        
+        <div class="nxg-main-view"
              ng-class="{'mobile-menu-push-toleft':navState.current.data.showMenu}"
              ng-click="navState.current.data.showMenu ? navState.current.data.showMenu=false : false">
           <div ui-view autoscroll="true" id="{{ navState.current.data.pageId }}Page"></div>

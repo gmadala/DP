@@ -3,7 +3,7 @@
 // ========
 
 .app-header {
-  @extend .row;
+  //@extend .row;
   background: $white;
   margin-bottom: 20px;
 
@@ -402,22 +402,12 @@
     background-color: $highlight;
   }
 
-  .mobile-navbar {
-    position: relative;
-    top: auto;
-    right: 0;
-    left: 0;
-    top: 0;
-    z-index: 1030;
-  }
-
   .navbar-default {
     .navbar-toggle {
       float: left;
       border: none;
       z-index: 10;
       width: 25px;
-      left: 25px;
       height: 25px;
       padding: 0px 0px;
       &:hover,
@@ -425,6 +415,15 @@
         background: none !important;
       }
     }
+  }
+
+  .mobile-navbar {
+    position: relative;
+    top: auto;
+    right: 0;
+    left: 0;
+    top: 0;
+    z-index: 1030;
   }
 
   .logo-center {
@@ -556,22 +555,104 @@
 
   }
 
+  // Setup animations for mobile navbar
+
+  @mixin animation($animate...) {
+      $max: length($animate);
+      $animations: '';
+
+      @for $i from 1 through $max {
+          $animations: #{$animations + nth($animate, $i)};
+
+          @if $i < $max {
+              $animations: #{$animations + ", "};
+          }
+      }
+      -webkit-animation: $animations;
+      -moz-animation:    $animations;
+      -o-animation:      $animations;
+      animation:         $animations;
+
+      animation-fill-mode: forwards;
+      -webkit-animation-fill-mode: forwards;
+      -o-animation-fill-mode: forwards;
+  }
+
+  @mixin keyframes($animationName) {
+      @-webkit-keyframes #{$animationName} {
+          @content;
+      }
+      @-moz-keyframes #{$animationName} {
+          @content;
+      }
+      @-o-keyframes #{$animationName} {
+          @content;
+      }
+      @keyframes #{$animationName} {
+          @content;
+      }
+  }
+
+  @include keyframes(open-nav) {
+    0% {
+      -webkit-transform: translate3d(0, 0, 0);
+      -moz-transform: translate3d(0, 0, 0);
+      -ms-transform: translate3d(0, 0, 0);
+      transform: translate3d(0, 0, 0);
+      -webkit-transform: translateX(0vw);
+      -moz-transform: translateX(0vw);
+      -ms-transform: translateX(0vw);
+      -o-transform: translateX(0vw);
+      transform: translateX(0vw);
+    }
+    100% {
+      -webkit-transform: translate3d(0, 0, 0);
+      -moz-transform: translate3d(0, 0, 0);
+      -ms-transform: translate3d(0, 0, 0);
+      transform: translate3d(0, 0, 0);
+      -webkit-transform: translateX(80vw);
+      -moz-transform: translateX(80vw);
+      -ms-transform: translateX(80vw);
+      -o-transform: translateX(80vw);
+      transform: translateX(80vw);
+    }
+  }
+
+  @include keyframes(close-nav) {
+    0% {      
+      -webkit-transform: translate3d(0, 0, 0);
+      -moz-transform: translate3d(0, 0, 0);
+      -ms-transform: translate3d(0, 0, 0);
+      transform: translate3d(0, 0, 0);
+      -webkit-transform: translateX(80vw);
+      -moz-transform: translateX(80vw);
+      -ms-transform: translateX(80vw);
+      -o-transform: translateX(80vw);
+      transform: translateX(80vw);
+    }
+    100% {
+      -webkit-transform: translate3d(0, 0, 0);
+      -moz-transform: translate3d(0, 0, 0);
+      -ms-transform: translate3d(0, 0, 0);
+      transform: translate3d(0, 0, 0);
+      -webkit-transform: translateX(0vw);
+      -moz-transform: translateX(0vw);
+      -ms-transform: translateX(0vw);
+      -o-transform: translateX(0vw);
+      transform: translateX(0vw);
+    }
+  }
+
   /* Reposition elements affected by the sliding menu */
   #wrapper {
     position: relative;
+    top: 0;
     left: 0;
-    transition: left 0.35s ease;
-  }
-
-  .navbar {
-    left: 0;
-    transition: left 0.35s ease;
-  }
+  }  
 
   #navbar .navbar-collapse {
     position: fixed;
     top: 0;
-    left: -80vw;
     display: block;
     width: 80vw;
     height: 100vh !important;
@@ -580,27 +661,48 @@
     -webkit-overflow-scrolling: touch;
     margin: 0;
     background-color: grey;
-    transition: left 0.35s ease;
-    border-top: 0;
+    border-top: 0;    
+    left: -80vw;
+    ul {
+      padding-bottom: 80px;
+    }
+
+    &.closed {
+      @include animation('close-nav 1s 1');
+    }
+
+    &.open {
+      @include animation('open-nav 1s 1');
+    }
   }
 
-  #navbar .navbar-collapse.collapsing {
-    transition: left 0.35s ease;
+  body.menu-closed {
+    #main-container,
+    footer {
+      position: relative;
+      @include animation('close-nav 1s 1');
+    }
+
+    .mobile-navbar .navbar-header {
+      @include animation('close-nav 1s 1');
+    }
   }
 
-  #navbar .navbar-collapse.in {
-    left: 0;
-  }
-
-  body.menu-open.in, body.menu-open {
+  body.menu-open {
     overflow: hidden;
-  }
 
-  body.menu-open #wrapper, body.menu-open.in .navbar {
-    transition: left 0.35s ease;
-  }
+    #wrapper {
+      overflow: hidden;
+    }
 
-  body.menu-open.in #wrapper {
-    left: 80vw;
+    #main-container,
+    footer {
+      position: relative;
+      @include animation('open-nav 1s 1');
+    }
+
+    .mobile-navbar .navbar-header {
+      @include animation('open-nav 1s 1');
+    }
   }
 }
