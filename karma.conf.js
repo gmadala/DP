@@ -42,6 +42,8 @@ module.exports = function(karma) {
       'app/components/ng-file-upload/ng-file-upload-shim.js',
       'app/components/angular-bootstrap/ui-bootstrap.js',
       'app/components/angular-bootstrap/ui-bootstrap-tpls.js',
+      'app/components/bootstrap-switch/dist/js/bootstrap-switch.min.js',
+      'app/components/angular-bootstrap-switch/dist/angular-bootstrap-switch.js',
 
       'app/components/sinon/lib/sinon/util/fake_timers.js',
       'app/components/lodash/lodash.js',
