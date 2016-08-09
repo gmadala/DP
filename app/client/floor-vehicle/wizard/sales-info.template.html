@@ -1,2 +1,125 @@
-<h2>Sales Info</h2>
-<p>{{salesInfo.sample}}</p>
+<form class="col-xs-12 well left-margin-large" name="form" novalidate>
+  <h2 class="well-title" translate>2. Sale Information</h2>
+  <p class="required-text">* <span translate>required</span></p>
+  <div class="well-form" style="padding-top: 0">
+    <label><span translate>Trade in</span> *</label>
+    <div class="form-inline">
+      <div class="cr-inline">
+        <input type="radio" id="yes" name="inputTradeIn" ng-value="true" ng-model="wizardFloor.data.SaleTradeIn" ng-change="wizardFloor.data.PaySeller = !wizardFloor.data.SaleTradeIn" ng-disabled="!wizardFloor.canPayBuyer">
+        <label class="radio-img" for="yes"></label>
+        <label class="cr-label" for="yes" translate>Yes</label>
+
+        <input type="radio" id="no" name="inputTradeIn" ng-value="false" ng-model="wizardFloor.data.SaleTradeIn" ng-disabled="!wizardFloor.canPayBuyer">
+        <label class="radio-img" for="no"></label>
+        <label class="cr-label" for="no" translate>No</label>
+      </div>
+    </div>
+    <div class="date-field date-picker" style="width: 120px;">
+      <label for="purchaseDate" class="input-title"  ><span translate>Purchase Date</span> *</label>
+      <input type="text" uib-datepicker-popup="{{salesInfo.dateFormat}}"
+             placeholder="mm/dd/yyyy" nxg-date
+             ng-model="wizardFloor.data.UnitPurchaseDate"
+             min-date="salesInfo.dealerMinDate"
+             max-date="salesInfo.maxDate"
+             form="form"
+             show-weeks="false"
+             show-button-bar="false"
+             is-open="salesInfo.datePicker.opened"
+             id="purchaseDate"
+             name="purchaseDate"
+             required
+             ng-class="{ 'nxg-invalid': (form.purchaseDate.$error.required || form.purchaseDate.$error.past || form.purchaseDate.$error.date) && form.$submitted }"/>
+      <button tabindex="-1" type="button" class="btn-unstyle disbursement-btn-calendar" ng-click="salesInfo.openDatePicker()">
+        <span nxg-icon="icon-calendar"></span></button>
+        <button class="btn-alert"
+                ng-show="(form.purchaseDate.$error.future || form.purchaseDate.$error.past) && form.$submitted"
+                tooltip-placement="right"
+                tooltip-trigger="mouseenter"
+                uib-tooltip-html="salesInfo.purchaseDateDisclaimer"
+                tooltip-animation="true">
+          <span nxg-icon="icon-alert"></span>
+        </button>
+
+    </div>
+
+    <label for="purchaseDate" class="text-error"
+           ng-show="(form.purchaseDate.$error.required || form.purchaseDate.$error.date || form.purchaseDate.$error.past || form.purchaseDate.$error.future) && form.$submitted" translate>
+      Please enter a Valid Purchase Date.
+    </label>
+    <label for="inputBiz" class="input-title"  ><span translate>Seller</span> *</label>
+    <span class="nxg-business-field" ng-class="{ 'nxg-invalid': (form.inputBiz.$error.nxgRequires || form.inputBiz.$error.minlength) && form.$submitted }">
+      <input nxg-business-field="sellers"
+             id="inputBiz"
+             name="inputBiz"
+             form="form"
+             ng-disabled="wizardFloor.data.SaleTradeIn"
+             ng-required="!wizardFloor.data.SaleTradeIn"
+             selected-business="wizardFloor.data.BusinessId"
+             validity="validity" />
+    </span>
+    <label for="inputPurchaseAmt" class="input-title"><span translate>Purchase Amount</span> *</label>
+    <div class="input-prepend dollar">
+      <span class="add-on no-top" translate>$</span>
+      <input type="text" id="inputPurchaseAmt" name="inputPurchaseAmt" ng-model="wizardFloor.data.UnitPurchasePrice"
+             required
+             nxg-input-currency="1000000000000"
+             nxg-min="1"
+             ng-class="{ 'nxg-invalid': (form.inputPurchaseAmt.$error.required || form.inputPurchaseAmt.$error.max || form.inputPurchaseAmt.$error.pattern || form.inputPurchaseAmt.$error.maxlength || form.inputPurchaseAmt.$error.nxgMin) && form.$submitted }" />
+      <label for="inputPurchaseAmt" class="text-error"
+             ng-show="form.inputPurchaseAmt.$error.required && form.$submitted" translate>
+        Please enter the Purchase Amount.
+      </label>
+      <label for="inputPurchaseAmt"
+             class="text-error"
+             ng-show="!form.inputPurchaseAmt.$error.required && (form.inputPurchaseAmt.$error.pattern || form.inputPurchaseAmt.$error.nxgMin) && form.$submitted" translate>
+        Please enter a positive numeric value with no <br> special characters, such as a dollar sign.
+      </label>
+      <label for="inputPurchaseAmt" class="text-error"
+             ng-show="!form.inputPurchaseAmt.$error.required && !form.inputPurchaseAmt.$error.pattern && form.inputPurchaseAmt.$error.max && form.$submitted" translate>
+        Please enter a value less than $1,000,000,000,000.
+      </label>
+    </div>
+
+    <label for="inputCreditLine" class="input-title"><span translate>Line of Credit</span> *</label>
+    <div class="style-select full-width" ng-class="{ 'nxg-invalid': form.inputCreditLine.$error.required && form.$submitted }">
+      <select id="inputCreditLine"
+              name="inputCreditLine"
+              ng-model="wizardFloor.data.LineOfCreditId"
+              ng-options="line.LineOfCreditName for line in wizardFloor.options.LinesOfCredit"
+              required>
+        <option value="" translate>Make Selection</option>
+      </select>
+    </div>
+    <label for="inputCreditLine" class="text-error"
+           ng-show="form.inputCreditLine.$error.required && form.$submitted"
+           translate>
+      Please select a Line of Credit.
+    </label>
+
+    <label for="inputSendPay" class="input-title"><span translate>Send Payment To</span>: *</label>
+    <div class="style-select full-width">
+      <select id="inputSendPay" name="inputSendPay" ng-model="wizardFloor.data.PaySeller"
+              ng-options="value && 'Seller' || 'Buyer' | translate for value in wizardFloor.paySellerOptions"
+              ng-change="wizardFloor.data.BankAccountId = null"
+              ng-disabled="wizardFloor.data.SaleTradeIn">
+        <option value="" translate>Make Selection</option>
+      </select>
+    </div>
+
+    <label for="inputDisburseAcct"><span translate>Bank Account for Deposit (when applicable)</span> *</label>
+    <div class="style-select full-width" ng-class="{ 'nxg-invalid': form.inputDisburseAcct.$error.required && form.$submitted, 'disabled': wizardFloor.data.PaySeller }">
+      <select id="inputDisburseAcct"
+              name="inputDisburseAcct"
+              ng-model="wizardFloor.data.BankAccountId"
+              ng-disabled="wizardFloor.data.PaySeller"
+              ng-required="!wizardFloor.data.PaySeller"
+              ng-options="account as [account.AchAccountNumberLast4, account.AchBankName].join(' - ') for account in wizardFloor.options.BankAccounts">
+        <option value="" translate>Make Selection</option>
+      </select>
+    </div>
+    <label for="inputDisburseAcct" class="text-error"
+           ng-show="form.inputDisburseAcct.$error.required && form.$submitted" translate>
+      Please select a Bank Account for Deposit.
+    </label>
+  </div>
+</form>
