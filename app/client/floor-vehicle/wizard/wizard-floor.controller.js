@@ -46,6 +46,8 @@
       three: false
     };
 
+    vm.floorPlanSubmitted = false;
+
     vm.pageCount = 3;
 
     switchState();
@@ -203,6 +205,13 @@
           break;
       }
     }
-  }
 
+    vm.submit = function () {
+      if(!vm.floorPlanSubmitted) {
+        vm.floorPlanSubmitted = true;
+        console.log("VM Output: ");
+        console.log(vm.data);
+      }
+    }
+  }
 })();
