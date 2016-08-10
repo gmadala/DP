@@ -50,6 +50,11 @@
 
     switchState();
 
+    var attachDocsDealer = isDealer && User.getFeatures().hasOwnProperty('uploadDocuments') ? User.getFeatures().uploadDocuments.enabled : false;
+    var attachDocsAuction = !isDealer && User.getFeatures().hasOwnProperty('uploadDocumentsAuction') ? User.getFeatures().uploadDocumentsAuction.enabled : false;
+
+    vm.attachDocumentsEnabled = User.isUnitedStates() && (attachDocsDealer || attachDocsAuction);
+
     $q.all([User.getStatics(), User.getInfo(), AccountManagement.getDealerSummary()]).then(function (result) {
       vm.options = angular.extend({}, result[0], result[1]);
 
@@ -126,7 +131,7 @@
       comment: ''
     };
 
-    vm.reset = function () {
+    vm.reset = function() {
       vm.data = angular.copy(vm.defaultData);
       vm.optionsHelper.applyDefaults($scope, vm.data);
       vm.validity = undefined;
@@ -134,7 +139,7 @@
     };
 
     // Wizard Nav functions ---------------------------------------------------
-    vm.tabClick = function (count) {
+    vm.tabClick = function(count) {
       if (canTransition(count)) {
         vm.counter = count;
 
@@ -142,11 +147,11 @@
       }
     };
 
-    vm.nextAvailable = function () {
+    vm.nextAvailable = function() {
       return vm.counter < vm.pageCount;
     };
 
-    vm.next = function () {
+    vm.next = function() {
       var nextCount = vm.counter + 1;
 
       if (vm.nextAvailable() && canTransition(nextCount)) {
@@ -156,11 +161,11 @@
       }
     };
 
-    vm.previousAvailable = function () {
+    vm.previousAvailable = function() {
       return vm.counter > 1;
     };
 
-    vm.previous = function () {
+    vm.previous = function() {
       if (vm.previousAvailable()) {
         vm.counter--;
         switchState();
