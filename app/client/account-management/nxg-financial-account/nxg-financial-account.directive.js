@@ -111,6 +111,7 @@
        */
       function editStatus() {
         scope.dirtyBankName = getBankName();
+        AccountManagement.setAccountButtonState(false);
         saveAccount(true);
       }
       /**
