@@ -3,7 +3,7 @@
 
 <div class="nxg-sticky-scroll">
   <div class="well-item ">
-    <p translate >Make payments today or schedule your payments when you checkout.<br/><br/></p>
+    <p translate >Items selected on the left will be added to your cart. Make payments today or schedule them for later during checkout.<br/><br/></p>
     <div ng-show="autoPayEnabled">
       <div class="info-block-image col-xs-2 no-left-padding">
         <span nxg-icon="icon-info"></span>
@@ -65,10 +65,10 @@
 
 <div class="well-footer">
   <div class="well-item row">
-    <div class="col-xs-4">
+    <div class="col-md-4">
       <h4 class="subtotal"><span translate>Subtotal</span>:</h4>
     </div>
-    <div class="col-xs-8">
+    <div class="col-md-8">
       <h3 class="numeric"><strong>{{ getSubtotal() | currency }}</strong></h3>
     </div>
   </div>
@@ -76,6 +76,6 @@
           ng-disabled="paymentQueue.isEmpty()"
           ng-click="navigate('checkout')">
     <span translate>Checkout</span> ({{ getCount() }})
-    <span nxg-icon="icon-cart"></span>
+    <span class="glyphicon glyphicon-shopping-cart"></span>
   </button>
 </div>

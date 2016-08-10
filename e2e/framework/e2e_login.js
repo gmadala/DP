@@ -86,7 +86,7 @@ var login = {
   },
 
   //Functions
-  login: function () {
+  login: function (password) {
     this.enterUserName(browser.params.userName);
     browser.sleep(browser.params.longDelay);
     this.enterPassword(password);

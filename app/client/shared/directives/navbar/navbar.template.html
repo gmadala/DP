@@ -1,79 +1,72 @@
 <header class="app-header" ng-class="{ login: !navState.current.data.showNavBar, auctions: !user.isDealer() }">
-  <div class="container">
+  <div class="container" ng-class="{'hidden-xs':navState.current.data.showNavBar}">
     <div class="header">
-      <a ng-href="{{user.homeLink()}}" class="col-xs-3 custom ng-binding">
+      <a ng-href="{{user.homeLink()}}" class="col-sm-4 col-md-8 custom ng-binding">
         <div class="nxg-logo" nxg-debug-title></div>
       </a>
-
-      <div class="col-xs-7" ng-show="navState.current.data.showNavBar">
-        <div class="nav-secondary" ng-show="user.isDealer()">
-          <ul>
-            <li ng-repeat="link in user.navLinks().secondary" class="link link_{{ link.activeWhen }}">
-              <a ng-href="{{link.href}}" class="navLink" ng-class="{ active: isActive(link.activeWhen) }">{{link.name}}</a>
-            </li>
-            <li ng-show="chatEnabled">
-              <a nxg-chat-with-us nxg-track="{{metric.CLICK_CHAT_NOW_LINK}}"
-                 track-properties="{{ kissMetricData }}" translate>Chat</a>
-            </li>
-            <li ng-show="fedExWaybillEnabled">
-              <nxg-download-waybill class="navLink"></nxg-download-waybill>
-            </li>
-          </ul>
-          <button class="cart-btn" ng-disabled="getQueueCount() < 1" ng-click="onCartClicked()" ng-class="{ 'has-items': getQueueCount() > 0 }">
-            {{ getQueueCount() }}
-            <span nxg-icon="icon-cart" class="icon-small"></span>
-          </button>
-
-        </div>
-      </div>
-
-      <div class="col-xs-3 user-info pull-right no-right-padding" ng-show="navState.current.data.showNavBar">
-        <div class="align-right">{{ user.BusinessName | uppercase |truncate:20 }}
-          <span>
-            <span class="dealer-number" ng-show="user.isDealer()" translate>
+      <div class="col-sm-8 user-info no-left-padding no-right-padding" ng-show="navState.current.data.showNavBar">
+        <div class="user-info-list pull-right">
+          <div>
+            <span class="" ng-show="user.isDealer()" translate>
               Dealer #
             </span>
-            <span class="dealer-number" ng-show="!user.isDealer()" translate>
-              Auction #
+            <span class="" ng-show="!user.isDealer()" translate>
+              NGC #
             </span>
             {{ user.BusinessNumber }}
-          </span></div>
-        <div uib-dropdown>
-          <div class="align-right dropdown-toggle dropdown-spaced" uib-dropdown-toggle data-toggle="dropdown" id="settingsDropdown" aria-haspopup="true"
-               aria-expanded="false">
-            <a>
-              <span translate>My Account</span>
-              <span style="border-top: 4px solid #069" class="caret"></span>
+          </div>
+          <div class="spacer" ng-show="user.isDealer()">
+            <a class="cart-btn" ng-disabled="getQueueCount() < 1" ng-click="onCartClicked()" ng-class="{ 'has-items': getQueueCount() > 0 }">
+              {{ getQueueCount() }}
+              <span class="glyphicon glyphicon-shopping-cart"></span>
             </a>
             <br/>
           </div>
-          <ul class="dropdown-menu margin dropdown-bold text-right" uib-dropdown-menu role="menu" aria-labelledby="settingsDropdown">
-            <li>
-              <a href="#/act/settings" ng-show="!user.isDealer()">
-                <strong translate>Settings</strong>
+          <div class="spacer" ng-show="chatEnabled && user.isDealer()">
+            <a nxg-chat-with-us nxg-track="{{metric.CLICK_CHAT_NOW_LINK}}"
+               track-properties="{{ kissMetricData }}" translate>Chat
+              <span class="glyphicon glyphicon-comment"></span>
+            </a>
+          </div>
+          <div class="spacer" ng-show="fedExWaybillEnabled">
+            <nxg-download-waybill class="navLink"></nxg-download-waybill>
+          </div>
+          <div uib-dropdown class="spacer">
+            <span class="dropdown-toggle" uib-dropdown-toggle
+                  id="settingsDropdown"
+                  aria-haspopup="true" aria-expanded="false">
+              <a>
+                <span translate>My Account</span>
+                <span style="border-top: 4px solid #069" class="caret"></span>
               </a>
-              <a href="#/profile_settings" ng-show="user.isDealer()">
-                <strong translate>Profile Settings</strong>
-              </a>
-            </li>
-            <li>
-              <a ng-href="#/account_management" ng-show="user.isDealer()">
-                <strong translate>Account Management</strong>
-              </a>
-            </li>
-            <li class="menu-divider"></li>
-            <li>
-              <a href="javascript:void(0)" ng-click="user.logout()" id="signOut">
-                <strong translate>Sign Out</strong>
-              </a>
-            </li>
-          </ul>
+            </span>
+            <ul class="dropdown-menu dropdown-bold text-right" uib-dropdown-menu role="menu" aria-labelledby="settingsDropdown">
+              <li>
+                <a href="#/act/settings" ng-show="!user.isDealer()">
+                  <strong translate>Settings</strong>
+                </a>
+                <a href="#/profile_settings" ng-show="user.isDealer()">
+                  <strong translate>Profile Settings</strong>
+                </a>
+              </li>
+              <li>
+                <a ng-href="#/account_management" ng-show="user.isDealer()">
+                  <strong translate>Account Management</strong>
+                </a>
+              </li>
+              <li class="menu-divider"></li>
+              <li>
+                <a href="javascript:void(0)" ng-click="user.logout()" id="signOut">
+                  <strong translate>Sign Out</strong>
+                </a>
+              </li>
+            </ul>
+          </div>
         </div>
       </div>
-
-      <div class="col-xs-5 col-xs-offset-4" ng-hide="navState.current.data.showNavBar">
+      <div class="col-sm-6 col-sm-offset-2 col-md-6 col-md-offset-4 col-xs-12" ng-hide="navState.current.data.showNavBar">
         <div class="nav-language-chooser">
-          <span class="icon-xx-large" nxg-icon="icon-globe"></span>
+          <span class="icon-xx-large hidden-xs" nxg-icon="icon-globe"></span>
           <div class="cta btn-toggle toggle-three">
             <div class="btn-slider"
                  ng-class="{ 'active-left': isCurrentLanguage('en'), 'active-center': isCurrentLanguage('es'), 'active-right': isCurrentLanguage('fr_CA') }"></div>
@@ -86,15 +79,88 @@
     </div>
   </div>
 
-  <div class="nav-bkgd" ng-show="navState.current.data.showNavBar">
-    <div class="container">
-      <div class="header">
-        <ul class="nav-primary">
-          <li ng-repeat="link in user.navLinks().primary" class="link_{{ link.activeWhen }}">
-            <a ng-href="{{link.href}}" class="navLink" ng-class="{ active: isActive(link.activeWhen) }">{{link.name}}</a>
-          </li>
-        </ul>
+  <div ng-if="navState.current.data.showNavBar">
+    <nav id="navbar" class="navbar navbar-default mng-navbar main-navbar mobile-navbar " ng-class="{'menu-open in' : navState.current.data.showMenu }">
+      <div class="container"
+           ng-class="{'auction-nav':!user.isDealer(), 'es-nav':isCurrentLanguage('es') && !user.isDealer(), 'fr-nav': isCurrentLanguage('fr_CA') && !user.isDealer()}">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed mobile-menu-button"
+                  ng-class="{'button-x': navState.current.data.showMenu}"
+                  ng-click="toggleMenu()"
+                  popover-placement="bottom"
+                  uib-popover-template="'client/shared/directives/navbar/menuTip.html'"
+                  popover-is-open="!hideMenuTip && isMobile"
+                  popover-trigger="none">
+            <span class="sr-only" translate>Toggle navigation</span>
+            <span class="hamburger"></span>
+          </button>
+          <div class="logo-center visible-xs">
+            <div ng-if="isDashboard()">
+              <div class="mng-logo"></div>
+            </div>
+            <div ng-if="!isDashboard()" translate>
+              {{getPageTitle()}}
+            </div>
+          </div>
+        </div>
+
+        <div class="collapse navbar-collapse" ng-class="{'in': navState.current.data.showMenu}" ng-click="closeMenu()">
+          <ul class="nav navbar-nav"
+              popover-placement="bottom"
+              uib-popover-template="'client/shared/directives/navbar/menuTip.html'"
+              popover-is-open="!hideMenuTip && !isMobile && user.isDealer()"
+              popover-trigger="none">
+            <li class="visible-xs" ng-if="user.isDealer()">
+              <a href="#" ng-href="#/checkout" ng-click="setPageTitle('Checkout')" translate>Checkout</a>
+            </li>
+            <li ng-repeat="link in user.navLinks().primary" class="link_{{ link.activeWhen }}" ng-class="{'dropdown': link.subMenu, 'hover': link.hasHover}">
+              <a ng-href="{{link.href}}" ng-class="{ active: isActive(link.activeWhen) }" ng-if="!link.subMenu"
+                 ng-click="setPageTitle(link.name)" translate>{{link.name}}</a>
+              <a class="sub-menu dropdown-toggle hidden-xs" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"
+                 ng-class="{ active: isActiveGroup(link.subMenu) }"
+                 ng-if="link.subMenu"
+                 ng-click="gotoPageIf(link.href, link.activeWhen); setPageTitle(link.name); removeHover()"
+                 ng-mouseenter="addHover()"
+                 ng-mouseleave="removeHover()"
+                 translate
+              >
+                {{link.name}} <span class="caret"></span></a>
+              <ul class="dropdown-menu" ng-if="link.subMenu" ng-mouseenter="addHover()"
+                  ng-mouseleave="removeHover()">
+                <li ng-repeat="item in link.subMenu" ng-class="{ active: isActive(item.activeWhen) }" ng-click="removeHover()">
+                  <a href="#" ng-href="{{item.href}}" ng-click="setPageTitle(item.name)" translate>{{item.name}}</a>
+                </li>
+              </ul>
+              <ul class="visible-xs mobile-nav-list">
+                <li class="visible-xs" ng-repeat="item in link.subMenu" ng-class="{ active: isActive(item.activeWhen) }" ng-click="removeHover()">
+                  <a href="#" ng-href="{{item.href}}" ng-click="setPageTitle(item.name)" translate>{{item.name}}</a>
+                </li>
+              </ul>
+            </li>
+            <li class="visible-xs" ng-show="fedExWaybillEnabled">
+              <nxg-download-waybill></nxg-download-waybill>
+            </li>
+            <li class="visible-xs" ng-hide="user.isDealer()">
+              <a href="#/act/settings" ng-click="setPageTitle('Settings')">
+                <span translate>Settings</span>
+              </a>
+            </li>
+            <li class="visible-xs" ng-show="user.isDealer()">
+              <a href="#/profile_settings" ng-click="setPageTitle('Profile Settings')">
+                <span translate>Profile Settings</span>
+              </a>
+            </li>
+            <li class="visible-xs" ng-show="user.isDealer()">
+              <a ng-href="#/account_management" ng-click="setPageTitle('Account Management')">
+                <span translate>Account Management</span>
+              </a>
+            </li>
+            <li class="visible-xs">
+              <a href="javascript:void(0)" ng-click="user.logout()">Sign Out</a>
+            </li>
+          </ul>
+        </div>
       </div>
-    </div>
+    </nav>
   </div>
 </header>

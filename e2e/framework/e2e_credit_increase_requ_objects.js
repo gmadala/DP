@@ -12,33 +12,33 @@ function CreditIncrease() {
   this.elCloseWindow = element(by.css('div.button.btn-cta.cta-secondary'));
 
   //Doers
-  this.doPermanentIncrease = function () {
+  this.doPermanentIncrease = function() {
     this.elPermanentIncrease.click();
     browser.sleep(browser.params.shortDelay);
   };
-  this.doTemporaryIncrease = function () {
+  this.doTemporaryIncrease = function() {
     this.elTemporaryIncrease.click();
     browser.sleep(browser.params.shortDelay);
   };
-  this.doConfirmRequest = function () {
+  this.doConfirmRequest = function() {
     this.elConfirmRequest.click();
     browser.sleep(browser.params.longDelay);
   };
-  this.doLineOfCredit = function () {
+  this.doLineOfCredit = function() {
     this.elFirstLineOfCredit.click();
     browser.sleep(browser.params.shortDelay);
   };
-  this.doCloseWindow = function () {
+  this.doCloseWindow = function() {
     this.elCloseWindow.click();
     browser.sleep(browser.params.shortDelay);
   };
-  this.doCancelRequest = function () {
+  this.doCancelRequest = function() {
     this.elCancelRequest.click();
     browser.sleep(browser.params.shortDelay);
-  }
+  };
 
   //Setters
-  this.enterIncreaseAmount = function (param) {
+  this.enterIncreaseAmount = function(param) {
     this.elIncreaseAmount.sendKeys(param);
   };
 }

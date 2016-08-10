@@ -51,9 +51,6 @@
     }
 
     &.paired {
-      min-width: 120px;
-      padding: 10px;
-
       .paired-media, .paired-body {
         vertical-align: top;
       }
@@ -96,7 +93,7 @@
   }
 
   // Classes for data types within table cells
-  .lockup-major,  {
+  .lockup-major  {
     font-size: 14px;
     color: $text;
     display: block;
@@ -136,7 +133,6 @@
   }
 
   th, td {
-    min-width: 100px;
     vertical-align: middle;
     padding: 8px 15px;
 
@@ -272,11 +268,6 @@
     max-width: 300px;
   }
 
-  &.description-narrow {
-    min-width: 225px;
-    max-width: 225px;
-  }
-
   &.buyer {
     //max-width: 150px;
     min-width: 225px;
@@ -286,30 +277,8 @@
   &.description-no-vin {
     max-width: 210px;
   }
-
-  &.has-btns {
-    padding: 10px;
-    min-width: 120px;
-  }
 }
 
-.row.ng-scope .col-xs-6{
-  &:first-child{
-    margin-left: 0;
-    margin-right: 2%;
-    &.no-right-margin{
-      margin-right: 0;
-    }
-  }
-
-  &:last-child{
-    margin-left: 2%;
-    margin-right: 0;
-    &.no-left-margin{
-      margin-left: 0;
-    }
-  }
-}
 
 .row .col-xs-2 ul{
   padding: 7px;

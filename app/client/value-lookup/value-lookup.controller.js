@@ -66,6 +66,7 @@
     $scope.searchInProgress = false;
     $scope.isUnitedStates = User.isUnitedStates();
     $scope.kbbEnabled = (User.getFeatures().hasOwnProperty('kbb') ? User.getFeatures().kbb.enabled  : true) && $scope.isUnitedStates;
+    $scope.lookupOption = 'vin';
 
     var buildDescription = function(obj) {
       return obj.Year + ' ' + obj.Make + ' ' + obj.Model;

@@ -1,11 +1,11 @@
-(function () {
+(function() {
   'use strict';
 
   angular
     .module('nextgearWebApp')
     .config(routeConfig);
 
-  routeConfig.$inject = ['$stateProvider', '$urlRouterProvider'];
+  routeConfig.$inject = ['$stateProvider', '$urlRouterProvider', '$uiViewScrollProvider'];
 
   otherwiseRouteConfig.$inject = ['$injector'];
 
@@ -14,7 +14,8 @@
     return !User.isLoggedIn() ? '/login' : User.isDealer() ? '/home' : '/act/home';
   }
 
-  function routeConfig($stateProvider, $urlRouterProvider) {
+  function routeConfig($stateProvider, $urlRouterProvider, $uiViewScrollProvider) {
+    $uiViewScrollProvider.useAnchorScroll();
     $urlRouterProvider.otherwise(otherwiseRouteConfig);
     $stateProvider
       .state('flooringWizard', {
@@ -112,7 +113,8 @@
         controller: 'DashboardCtrl',
         data: {
           pageId: 'Dashboard',
-          showNavBar: true
+          showNavBar: true,
+          showMenu: false
         }
       })
       .state('payments', {
@@ -121,7 +123,8 @@
         controller: 'PaymentsCtrl',
         data: {
           pageId: 'Payments',
-          showNavBar: true
+          showNavBar: true,
+          showMenu: false
         }
       })
       .state('checkout', {
@@ -130,7 +133,8 @@
         controller: 'CheckoutCtrl',
         data: {
           pageId: 'Checkout',
-          showNavBar: true
+          showNavBar: true,
+          showMenu: false
         }
       })
       .state('receipts', {
@@ -139,7 +143,8 @@
         controller: 'ReceiptsCtrl',
         data: {
           pageId: 'Receipts',
-          showNavBar: true
+          showNavBar: true,
+          showMenu: false
         }
       })
       .state('floorplan', {
@@ -148,7 +153,8 @@
         controller: 'FloorplanCtrl',
         data: {
           pageId: 'Floorplan',
-          showNavBar: true
+          showNavBar: true,
+          showMenu: false
         }
       })
       .state('titlereleases', {
@@ -157,7 +163,8 @@
         controller: 'TitleReleasesCtrl',
         data: {
           pageId: 'TitleReleases',
-          showNavBar: true
+          showNavBar: true,
+          showMenu: false
         }
       })
       .state('titleReleaseCheckout', {
@@ -166,7 +173,8 @@
         controller: 'TitleReleaseCheckoutCtrl',
         data: {
           pageId: 'TitleReleasesCheckout',
-          showNavBar: true
+          showNavBar: true,
+          showMenu: false
         }
       })
       .state('vehicledetails', {
@@ -175,7 +183,8 @@
         controller: 'VehicleDetailsCtrl',
         data: {
           pageId: 'VehicleDetails',
-          showNavBar: true
+          showNavBar: true,
+          showMenu: false
         }
       })
       .state('floorcar', {
@@ -184,7 +193,8 @@
         controller: 'FloorCarCtrl',
         data: {
           pageId: 'FloorCar',
-          showNavBar: true
+          showNavBar: true,
+          showMenu: false
         }
       })
       .state('reports', {
@@ -193,7 +203,8 @@
         controller: 'ReportsCtrl',
         data: {
           pageId: 'Reports',
-          showNavBar: true
+          showNavBar: true,
+          showMenu: false
         }
       })
       .state('analytics', {
@@ -202,7 +213,8 @@
         controller: 'AnalyticsCtrl',
         data: {
           pageId: 'Analytics',
-          showNavBar: true
+          showNavBar: true,
+          showMenu: false
         }
       })
       .state('documents', {
@@ -211,7 +223,8 @@
         controller: 'DocumentsCtrl',
         data: {
           pageId: 'Documents',
-          showNavBar: true
+          showNavBar: true,
+          showMenu: false
         }
       })
       .state('profile_settings', {
@@ -220,7 +233,8 @@
         controller: 'ProfileSettingsCtrl',
         data: {
           pageId: 'ProfileSettings',
-          showNavBar: true
+          showNavBar: true,
+          showMenu: false
         }
       })
       .state('account_management', {
@@ -229,16 +243,18 @@
         controller: 'AccountManagementCtrl',
         data: {
           pageId: 'AccountManagement',
-          showNavBar: true
+          showNavBar: true,
+          showMenu: false
         }
       })
       .state('promos', {
         url: '/promos',
         templateUrl: 'client/promos/promos.template.html',
         controller: 'PromosCtrl',
-        data:{
+        data: {
           pageId: 'Promos',
-          showNavBar: true
+          showNavBar: true,
+          showMenu: false
         }
       })
       .state('valueLookup', {
@@ -247,7 +263,8 @@
         controller: 'ValueLookupCtrl',
         data: {
           pageId: 'ValueLookup',
-          showNavBar: true
+          showNavBar: true,
+          showMenu: false
         }
       })
       // AUCTION STATES
@@ -258,7 +275,8 @@
         data: {
           pageId: 'AuctionDashboard',
           isAuctionState: true,
-          showNavBar: true
+          showNavBar: true,
+          showMenu: false
         }
       })
       .state('auction_dealersearch', {
@@ -268,7 +286,8 @@
         data: {
           pageId: 'AuctionDealerSearch',
           isAuctionState: true,
-          showNavBar: true
+          showNavBar: true,
+          showMenu: false
         }
       })
       .state('auction_bulkflooring', {
@@ -278,7 +297,8 @@
         data: {
           pageId: 'AuctionFloorCar',
           isAuctionState: true,
-          showNavBar: true
+          showNavBar: true,
+          showMenu: false
         }
       })
       .state('auction_sellerfloorplan', {
@@ -288,7 +308,8 @@
         data: {
           pageId: 'AuctionFloorplan',
           isAuctionState: true,
-          showNavBar: true
+          showNavBar: true,
+          showMenu: false
         }
       })
       .state('auction_reports', {
@@ -298,7 +319,8 @@
         data: {
           pageId: 'AuctionReports',
           isAuctionState: true,
-          showNavBar: true
+          showNavBar: true,
+          showMenu: false
         }
       })
       .state('auction_documents', {
@@ -308,7 +330,8 @@
         data: {
           pageId: 'AuctionDocuments',
           isAuctionState: true,
-          showNavBar: true
+          showNavBar: true,
+          showMenu: false
         }
       })
       .state('auction_settings', {
@@ -318,7 +341,8 @@
         data: {
           pageId: 'AuctionSettings',
           isAuctionState: true,
-          showNavBar: true
+          showNavBar: true,
+          showMenu: false
         }
       });
 
