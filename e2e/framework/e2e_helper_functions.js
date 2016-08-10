@@ -149,6 +149,23 @@ function Helper() {
     return (currentDate);
   };
 
+  this.popOver = function () {
+    /**
+     * @name Popover
+     * @memberof helper
+     * @author Bala Nithiya
+     * @description This function helps to close the popover message
+     *
+     * @returns {none}
+     */
+    this.elOkButton = browser.element(by.buttonText("OK, I got it!"));
+    var elPopOver = element(by.css('div.popover-content'));
+    if (elPopOver) {
+      browser.actions().mouseMove(element(by.css('.popover'))).perform();
+      expect(elPopOver.isDisplayed()).toBe(true);
+      this.elOkButton.click();
+    }
+  };
 }
 
 module.exports.helper = Helper;

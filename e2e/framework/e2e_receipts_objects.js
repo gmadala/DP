@@ -18,9 +18,8 @@ function Receipts() {
   this.elStartDate = browser.element(by.id('startDate'));
   this.elEndDate = browser.element(by.id('endDate'));
   this.elReceipts = browser.element(by.css('table.table.table-striped.table-primary'));
-
-
-  //Getters
+ 
+   //Getters
   this.getTestClearSearch = function () {
     browser.sleep(browser.params.shortDelay);
     return this.elClearSearch.getText();

@@ -23,6 +23,7 @@ describe('\n Receipts Page', function () {
     helper.goToReceipts();
     browser.sleep(browser.params.delay);
     expect(browser.getCurrentUrl()).toEqual(execSettings.receiptsPage());
+    helper.popOver();
   });
 
   it("2. Receipts - Print a Receipt by Grouped VIN", function () {
@@ -43,7 +44,7 @@ describe('\n Receipts Page', function () {
 
   it("3. Receipts - Validating the labels and text boxes ", function () {
     expect(receipts.elReceiptsLabel.isDisplayed()).toBe(true);
-    expect(receipts.getTestClearSearch()).toEqual('Clear Search');
+    expect(receipts.getTestClearSearch()).toEqual('Clear');
     //Validating receipts table
     expect(receipts.elReceipts.isDisplayed()).toBe(true);
   });
@@ -57,7 +58,6 @@ describe('\n Receipts Page', function () {
     receipts.doDatesSearch();
     expect(browser.getCurrentUrl()).toEqual(execSettings.receiptsPage());
   });
-
 
   it("5. Receipts - Logout", function () {
     login.logout();
