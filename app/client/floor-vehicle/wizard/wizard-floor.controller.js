@@ -19,19 +19,17 @@
     'moment'
   ];
 
-  function WizardFloorCtrl(
-    $state,
-    $scope,
-    $q,
-    User,
-    AccountManagement,
-    Addresses,
-    OptionDefaultHelper,
-    kissMetricInfo,
-    segmentio,
-    metric,
-    moment
-  ) {
+  function WizardFloorCtrl($state,
+                           $scope,
+                           $q,
+                           User,
+                           AccountManagement,
+                           Addresses,
+                           OptionDefaultHelper,
+                           kissMetricInfo,
+                           segmentio,
+                           metric,
+                           moment) {
     var vm = this;
     var isDealer = User.isDealer();
 
@@ -52,10 +50,10 @@
 
     switchState();
 
-    $q.all([User.getStatics(), User.getInfo(), AccountManagement.getDealerSummary()]).then(function(result) {
+    $q.all([User.getStatics(), User.getInfo(), AccountManagement.getDealerSummary()]).then(function (result) {
       vm.options = angular.extend({}, result[0], result[1]);
 
-      var activeBankAccounts = _.filter(result[2].BankAccounts, function(bankAccount) {
+      var activeBankAccounts = _.filter(result[2].BankAccounts, function (bankAccount) {
         return bankAccount.IsActive === true;
       });
 
@@ -89,11 +87,11 @@
       vm.reset();
     });
 
-    User.getPaySellerOptions().then(function(opts) {
+    User.getPaySellerOptions().then(function (opts) {
       vm.paySellerOptions = opts;
     });
 
-    User.canPayBuyer().then(function(canPay) {
+    User.canPayBuyer().then(function (canPay) {
       vm.canPayBuyer = canPay;
     });
 
@@ -122,21 +120,21 @@
       LotNumber: null, // string (AUCTION ONLY)
       // transient local values
       $selectedVehicle: null, // Object returned from VIN lookup, populates BlackBookGroupNumber & BlackBookUvc on tx
-      $blackbookMileage: null // cache most recent mileage value used to get updated blackbook data
+      $blackbookMileage: null, // cache most recent mileage value used to get updated blackbook data
+      files: [],
+      invalidFiles: [],
+      comment: ''
     };
 
     vm.reset = function () {
       vm.data = angular.copy(vm.defaultData);
-      vm.files = [];
-      vm.invalidFiles = [];
-      vm.comment = '';
       vm.optionsHelper.applyDefaults($scope, vm.data);
       vm.validity = undefined;
       $scope.$broadcast('reset');
     };
 
     // Wizard Nav functions ---------------------------------------------------
-    vm.tabClick = function(count) {
+    vm.tabClick = function (count) {
       if (canTransition(count)) {
         vm.counter = count;
 
@@ -144,11 +142,11 @@
       }
     };
 
-    vm.nextAvailable = function() {
+    vm.nextAvailable = function () {
       return vm.counter < vm.pageCount;
     };
 
-    vm.next = function() {
+    vm.next = function () {
       var nextCount = vm.counter + 1;
 
       if (vm.nextAvailable() && canTransition(nextCount)) {
@@ -158,11 +156,11 @@
       }
     };
 
-    vm.previousAvailable = function() {
+    vm.previousAvailable = function () {
       return vm.counter > 1;
     };
 
-    vm.previous = function() {
+    vm.previous = function () {
       if (vm.previousAvailable()) {
         vm.counter--;
         switchState();
