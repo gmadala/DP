@@ -258,43 +258,21 @@
     </div>
   </div>
 </div>
-<div class="footer">
-  <ul class="horizontal-list">
-    <li><a href="https://www.coxautoinc.com/" target="_blank">A COX Automotive Company</a></li>
-  </ul>
-  <ul class="horizontal-list">
-    <li><a href="http://www.autotrader.com/" target="_blank" nxg_track="{{metric.AUTOTRADER_INDEX}}">Autotrader</a></li>
-    <li><a href="http://www.dealshield.com/" class="footer-element" target="_blank" nxg_track="{{metric.DEALSHIELD_INDEX}}">DealShield</a></li>
-    <li><a href="http://goautoexchange.com/" class="footer-element" target="_blank" nxg_track="{{metric.GOAUTOEXCHANGE_INDEX}}">Go Auto Exchange</a></li>
-    <li><a href="https://www.gofinancial.com/" class="footer-element" target="_blank" nxg_track="{{metric.GOFINANCIAL_INDEX}}">Go Financial</a></li>
-    <li><a href="http://www.haystak.com/"  class="footer-element"  target="_blank" nxg_track="{{metric.HAYSTACK_INDEX}}">Haystak Digital Marketing</a></li>
-  </ul>
-  <ul class="horizontal-list">
-    <li><a href="http://www.homenetauto.com/" target="_blank" nxg_track="{{metric.HOMENET_INDEX}}">HomeNet Automotive</a></li>
-    <li><a href="http://www.kbb.com/" class="footer-element" target="_blank" nxg_track="{{metric.KELLYBLUEBOOK_INDEX}}">Kelley Blue Book</a></li>
-    <li><a href="https://www.manheim.com/"  class="footer-element" target="_blank" nxg_track="{{metric.MANHEIM_INDEX}}">Manheim</a></li>
-    <li><a href="http://www.readyautotransport.com/"  class="footer-element" target="_blank" nxg_track="{{metric.READYAUTO_INDEX}}">Ready Auto Transport</a></li>
-    <li><a href="http://www.vauto.com/home/"  class="footer-element" target="_blank" nxg_track="{{metric.VAUTO_INDEX}}">vAuto</a></li>
-    <li><a href="http://www.vinsolutions.com/" target="_blank" nxg_track="{{metric.VINSOLUTIONS_INDEX}}">VinSolutions</a></li>
-  </ul>
-  <ul class="horizontal-list" style="margin: 12px 0 11px 0;padding-bottom:5px;">
-    <li>&copy; 2013-2015 NextGear Capital, Inc. All Rights Reserved.</li>
-    <li><a href="http://www.nextgearcapital.com/privacy-statement/" target="_blank">Privacy Statement</a></li>
-    <li><a href="http://www.nextgearcapital.com/contact/" target="_blank">Contact Us</a></li>
-  </ul>
-  <div id="footer_sp">
-    <ul class="horizontal-list" style="margin: 12px 0 11px 0;padding-bottom:5px;">
-      <li>&copy; 2013-2015 NextGear Capital, Inc. All Rights Reserved.</li>
-      <li><a href="http://www.nextgearcapital.com/privacy-statement/" target="_blank">Declaraci&oacute;n de privacidad</a></li>
-      <li><a href="http://www.nextgearcapital.com/contact/" target="_blank">P&oacute;ngase en contacto con nosotros</a></li>
-    </ul>
-  </div>
-  <div id="footer_fr">
-    <ul class="horizontal-list" style="margin: 12px 0 11px 0;padding-bottom:5px;">
-      <li>&copy; 2013-2015 NextGear Capital, Inc. All Rights Reserved.</li>
-      <li><a href="http://www.nextgearcapital.com/privacy-statement/" target="_blank">D&eacute;claration de confidentialit&eacute;</a></li>
-      <li><a href="http://www.nextgearcapital.com/contact" target="_blank">Nous contacter</a></li>
-    </ul>
+    <footer class="row-footer">
+      <div>
+        <a class="col-sm-12 nxg-cox-logo img-responsive" href="https://www.coxautoinc.com/" target="_blank"></a>
+      </div>
+      <ul class="horizontal-list" style="margin: 12px 0 11px 0;padding-bottom:5px;">
+        <li>&copy; 2013-2016 NextGear Capital, Inc. All Rights Reserved.</li>
+        <li><a href="http://www.nextgearcapital.com/privacy-statement" target="_blank" translate>Privacy Statement</a></li>
+        <li>
+          <a href="http://www.nextgearcapital.com/contact-us" target="_blank" translate>Contact Us</a>
+        </li>
+        <!-- @if ENV != 'production' !><li>Revision &nbsp;<!-- @endif -->
+        <!-- @if ENV != 'production' --><!-- @echo GIT_SHA --><!-- @endif -->
+        <!-- @if ENV != 'production' !></li><!-- @endif -->
+      </ul>
+    </footer>
   </div>
 </div>
 </body>

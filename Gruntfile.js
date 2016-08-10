@@ -54,7 +54,7 @@ module.exports = function(grunt) {
     connect: {
       options: {
         port: 9000,
-        hostname: 'localhost',
+        hostname: '0.0.0.0',
         livereload: true
       },
       livereload: {
@@ -570,6 +570,12 @@ module.exports = function(grunt) {
     'dev-setup',
     'connect:livereload',
     'shell:chrome',
+    'watch'
+  ]);
+
+  grunt.registerTask('server-np', [
+    'dev-setup',
+    'connect:livereload',
     'watch'
   ]);
 

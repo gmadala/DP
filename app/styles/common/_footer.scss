@@ -2,7 +2,7 @@
 //  FOOTER
 // ========
 
-footer.row-footer{
+footer.row-footer {
   @extend %center;
   @extend %full-width;
   background: #FFF;
@@ -10,15 +10,12 @@ footer.row-footer{
   font-size: $tiny-font-size;
   color: $highlight;
   border-top: 1px solid $border;
-  margin-top: 10px;
-  margin-bottom: -50px;
   padding-top: 14px;
-  padding-bottom:11px;
+  padding-bottom: 11px;
 }
 
-
 .nxg-main-view {
-  margin-bottom: 50px;
+  padding-bottom: 10px;
 }
 
 html, body {
@@ -34,12 +31,10 @@ body {
 .nxg-main-container {
   min-height: 100%;
   overflow: hidden;
-  /* equal to footer height plus some extra spacing */
-  margin-bottom: -50px;
 }
 
 .no-left-margin {
-  margin-left:0px;
+  margin-left: 0px;
 }
 
 .no-right-margin {
@@ -51,18 +46,13 @@ body {
   display: block;
 }
 
-footer, .nxg-main:after {
-  /* .push must be the same height as footer */
-  height: 120px;
-}
-
 .nxg-phone {
   display: inline-block;
   margin: 0 2px;
 }
 
 .nxg-cox-logo {
-  background: url(../img/Logo-CoxAutomotive.png);
+  background: url(../img/Cox_Logo.png);
   background-repeat: no-repeat;
   background-size: 250px;
   background-position: center;

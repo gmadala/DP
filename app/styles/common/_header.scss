@@ -12,17 +12,11 @@
   }
 }
 
-.dropdown-spaced {
-  margin-top: 4px;
-  text-transform: uppercase;
-}
-
 .dropdown-bold {
   a {
     color: $accent;
     font-size: 11px;
     font-weight: bold;
-    text-transform: uppercase;
 
     &:hover {
       color: #999;
@@ -33,11 +27,13 @@
 
 .header {
   @extend .row;
-  //position: relative;
 
   .col-md-6 {
     @extend %center;
   }
+  display: flex;
+  align-items: center;
+  flex-direction: row;
 }
 
 .nxg-logo {
@@ -46,12 +42,14 @@
   background-size: 200px 64px;
   background-position: 0px 0;
   height: 70px;
+  width: 200px;
   position: relative;
-  top: 10px;
+  top: 3px;
   padding-top: 1px;
   z-index: 5;
 }
-.nxg-small-logo{
+
+.nxg-small-logo {
   background: url(../img/nxg_logo.png);
   background-repeat: no-repeat;
   background-size: 65px 65px;
@@ -60,7 +58,22 @@
   padding: 0;
 }
 
-.user-info{
+.nav-language-chooser {
+  display: inline-flex;
+
+  .icon-globe {
+    top: 7px;
+    display: inline;
+    float: left;
+    margin-right: 5px;
+  }
+  .cta {
+    display: inline;
+    float: left;
+  }
+}
+
+.user-info {
   display: block;
   position: relative;
   font-weight: bold;
@@ -70,24 +83,32 @@
     text-decoration: none;
   }
 
-  :hover, :hover{
+  :hover, :hover {
     text-decoration: none;
   }
 
-  .dealer-number{
-    text-transform: uppercase;
-    border-left: 1px solid black;
-    padding-left: 5px;
-    margin-left: 5px;
+  .align-right {
+    text-align: right;
   }
 
-  .align-right{
-    text-align: right;
+  .spacer {
+    border-left: 1px solid black;
+    padding-left: 10px;
+    margin-left: 10px;
+  }
+
+  .user-info-list {
+    display: inline-flex;
+  }
+
+  .dropdown-menu {
+    right: 0;
+    left: inherit;
   }
 
 }
 
-.menu-divider{
+.menu-divider {
   border-bottom: 1px solid #bbb;
   padding-top: 5px;
   margin-bottom: 5px;
@@ -103,11 +124,11 @@
   padding: 10px 20px;
   border: 1px solid $border;
   z-index: 100;
-  min-width:225px;
+  min-width: 225px;
   max-width: 23.40426%; // same as col-xs-3, which is the width of the parent element
 
   &.expanded {
-    @include box-shadow(rgba(0,0,0,0.25) 0 3px 3px);
+    @include box-shadow(rgba(0, 0, 0, 0.25) 0 3px 3px);
 
     .user-info:after {
       border-top: transparent;
@@ -168,154 +189,415 @@
   }
 }
 
-.nav-primary, .nav-secondary {
-  @extend .inline-list;
-  margin: 0;
+// Only hover on no touch devices
+.no-touch {
+  .hover .dropdown-menu {
+    display: block;
+  }
+}
 
-  li a {
-    font-weight: bold;
-    text-transform: uppercase;
-    &:hover, &:focus {
-      text-decoration: none;
+.cart-btn {
+  color: #AAAAAA;
+  cursor: default;
+  pointer-events: none;
+
+  &.has-items {
+    color: $highlight;
+    cursor: pointer !important;
+    pointer-events: auto;
+
+    &:hover {
+      cursor: pointer !important;
+      pointer-events: auto;
+      color: darken($highlight, 10%);
     }
   }
 }
 
-.nav-primary {
-  padding: 10px 0;
+.mng-navbar {
+  .popover {
+    max-width: 300px;
+    width: 300px;
+    .popover-title-custom {
+      position: relative;
+      left: -15px;
+      top: -10px;
+      width: 298px;
+    }
+  }
+  @include box-shadow(rgba(black, 0.25) 0px 2px 3px);
+  background-color: $highlight;
+  height: 48px;
+  min-height: 48px;
+  border-bottom: 3px solid $primary;
+  margin-bottom: 0px;
+  border-width: 0px 0px 3px 0px;
+  font-size: 1.4rem;
+  .navbar-nav {
+    padding-top: 4px;
+    li, .dropdown {
+      padding: 0 8px;
+      display: inline-block;
+      a {
+        display: inline-block;
+        color: $white;
+        padding: 10px 8px 7px;
+        border-bottom: 4px solid transparent;
+        background-color: $highlight;
+        .caret {
+          border-top-color: $white;
+        }
+        &.active {
+          border-bottom: 4px solid $primary;
+        }
+        &:hover {
+          color: #CCCCCC;
+          background-color: $highlight;
+          .caret {
+            border-top-color: #CCCCCC;
+          }
+        }
+        &:focus {
+          color: $white;
+        }
+      }
+    }
 
-  li {
-    padding: 0 8px;
+    .dropdown-menu {
+      color: white;
+      top: 40px;
+      background-color: $highlight;
+      font-size: $baseFontSize;
+      li {
+        width: 100%;
+        border-left: 4px solid transparent;
+        padding: 0;
+        &.active {
+          border-left: 4px solid $primary;
+          border-bottom: none;
+          a {
+            background-color: inherit;
+          }
+        }
+        a {
+          display: block;
+          padding-left: 11px;
+          border-bottom: none;
+          &:focus {
+            color: white;
+            background-color: $highlight;
+          }
+          &:hover {
+            background-color: $highlight;
+          }
+        }
+      }
+    }
+  }
+}
+
+@media only screen and (min-width: 768px) and (max-width: 991px) {
+  .auction-nav {
+    width: 100%;
+    padding: 0;
+    li {
+      padding: 0 !important;
+    }
+    .navbar-nav {
+      width: 100%;
+      text-align: center;
+      > li {
+        float: none;
+        display: inline-block;
+      }
+    }
+    &.fr-nav {
+      font-size: 0.7em;
+    }
+    &.es-nav {
+      font-size: 0.8em;
+    }
+  }
+}
+
+@media only screen and (min-width: 992px) and (max-width: 1199px) {
+  .auction-nav {
+    width: 100%;
+    padding: 0;
+    .navbar-nav {
+      width: 100%;
+      text-align: center;
+      > li {
+        float: none;
+        display: inline-block;
+      }
+    }
+    &.fr-nav {
+      font-size: 0.83em;
+    }
+  }
+}
+
+@media only screen and (min-width: 1200px) {
+  .auction-nav {
+    &.fr-nav {
+      font-size: 0.95em;
+    }
+  }
+}
+
+@media only screen and (max-width: 767px) {
+  body {
+    //padding-top: 70px !important; Use this when fixing the navbar to top
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .header {
+    flex-direction: column;
+  }
+
+  .mng-logo {
+    background: url(../img/Logo-myNextGear-Mobile-sm.svg) no-repeat center;
+    height: 53px;
+    top: -17px;
+    position: relative;
+  }
+
+  .mng-navbar {
+    .navbar-nav, .mobile-nav-list {
+      padding-top: 0px;
+      margin-top: 0px !important;
+      li {
+        a {
+          padding: 10px !important;
+          border: 0 !important;
+          height: 35px;
+        }
+      }
+    }
+  }
+
+  .nav-language-chooser {
+    width: 100%;
+    text-align: center;
+    .icon-globe {
+      top: -23px;
+      float: none;
+      display: inline-block;
+      margin-right: 0;
+    }
+    .cta {
+      float: none;
+      display: inline-block;
+      max-width: 300px;
+      width: 84%;
+    }
+  }
+
+  .navbar {
+    background-color: $highlight;
+  }
+
+  .mobile-navbar {
+    position: relative;
+    top: auto;
+    right: 0;
+    left: 0;
+    top: 0;
+    z-index: 1030;
+  }
+
+  .navbar-default {
+    .navbar-toggle {
+      float: left;
+      border: none;
+      z-index: 10;
+      width: 25px;
+      left: 25px;
+      height: 25px;
+      padding: 0px 0px;
+      &:hover,
+      &:focus {
+        background: none !important;
+      }
+    }
+  }
+
+  .logo-center {
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+    width: 60%;
+    color: white;
+    left: 0;
+    top: 0;
+    padding-top: 15px;
+    font-size: 18px;
+    text-align: center;
+    z-index: 0;
+    &:hover {
+      color: white;
+    }
+  }
+
+  .popover.bottom {
+    margin-top: 10px;
+    left: 30px !important;
+    .arrow {
+      left: 6px !important;
+      margin-left: 0px !important;
+    }
+  }
+  .hamburger {
+    background-color: white;
+    -webkit-transition: all 1s ease;
+    transition: all 1s ease;
+    height: 2px;
+    width: 21.5px;
+    position: absolute;
+    top: 15px;
+    border-radius: 1px;
+  }
+
+  .hamburger::before {
+    @extend .hamburger;
+    top: -6px;
+    content: '';
+    left: 0px;
+  }
+
+  .hamburger::after {
+    @extend .hamburger;
+    top: 6px;
+    content: '';
+    left: 0px;
+  }
+
+  .button-x {
+    .hamburger {
+      background-color: transparent;
+    }
+    .hamburger::before {
+      background-color: white;
+      transform: rotate3d(0, 0, 1, 45deg);
+      transform-origin: 2px center;
+    }
+    .hamburger::after {
+      background-color: white;
+      transform: rotate3d(0, 0, 1, -45deg);
+      transform-origin: 2px center;
+    }
+
+  }
+
+  /* Reset responsive Bootstrap elements */
+  #navbar .navbar-header {
+    float: none;
+  }
+
+  #navbar .navbar-toggle {
+    display: block;
+  }
+
+  #navbar .navbar-nav {
+    float: none !important;
+    margin: 7.5px -15px;
+  }
+
+  #navbar .navbar-nav .open .dropdown-menu {
+    position: static;
+    float: none;
+    background-color: transparent;
+    border: 0;
+    box-shadow: none;
+  }
+
+  #navbar .navbar-form {
+    float: none !important;
+    padding: 0;
+  }
+
+  #navbar .navbar-nav > ul {
+    padding-left: 15px;
+  }
+  #navbar .navbar-nav > li {
+    float: none;
+    width: 100%;
+    border-bottom: 1px solid white;
+    padding: 0;
+
+    .mobile-nav-list {
+      padding: 0;
+      li {
+        border-bottom: 1px solid white;
+        padding: 0;
+        &:last-child {
+          border-bottom: none;
+        }
+        a {
+          text-decoration: none;
+        }
+      }
+    }
 
     a {
-      color: $white;
-      display: inline-block;
-      padding: 8px 8px 9px;
-
+      width: 100%;
+      background-color: grey;
+      text-decoration: none;
+      padding-left: 8px;
       &.active {
-        border-bottom: 4px solid $primary;
-      }
-
-      &:hover {
-        color: #CCCCCC;
+        border-bottom: none;
       }
     }
-  }
-}
 
-.nav-secondary {
-  @include border-bottom-radius($borderRadius);
-  display: inline-block;
-  background-color: #ECECEC;
-  height: 40px;
-  width: auto;
-  position: relative;
-  top: -1px;
-  border: 1px solid $border;
-
-  ul {
-    float: left;
-    height: 40px;
-    padding: 8px 0 8px;
-    margin: 0 auto;
-
-    li {
-      padding: 5px 10px 7px;
-      border-right: 1px solid $border;
-
-      a {
-        color: $accent;
-        font-size: 11px;
-        display: inline-block;
-        position: relative;
-
-        &:hover {
-          color: #999;
-        }
-
-        &.active:after {
-          content: '';
-          display: block;
-          position: absolute;
-          bottom: -11px;
-          left: -5%;
-          width: 110%;
-          margin: 0 auto;
-          height: 4px;
-          background-color: $secondary;
-        }
-      }
-    }
   }
 
+  /* Reposition elements affected by the sliding menu */
+  #wrapper {
+    position: relative;
+    left: 0;
+    transition: left 0.35s ease;
+  }
 
+  .navbar {
+    left: 0;
+    transition: left 0.35s ease;
+  }
 
-  .cart-btn {
-    @include border-bottom-right-radius($borderRadius);
+  #navbar .navbar-collapse {
+    position: fixed;
+    top: 0;
+    left: -80vw;
     display: block;
-    float: right;
-    height: 38px; // to account for gray border on bottom
-    color: $btn-text-disabled;
-    background-color: darken($btn-bkgd-disabled, 2%);
-    font-size: 14px;
-    font-weight: bold;
-    padding: 12px 10px 10px;
-    border: 0;
-    border-left: 1px solid $border;
-    margin: 0 0 0 -1px;
-
-    .svg-icon svg {
-      fill: $btn-text-disabled;
-      position: relative;
-      top: -2px;
-      margin-left: 2px;
-    }
-
-    &.has-items {
-      color: $white;
-      background: $primary;
-
-      &:hover {
-        text-decoration: none;
-        background-color: $highlight;
-
-        .svg-icon svg {
-          fill: $white;
-        }
-      }
-
-      .svg-icon svg {
-        fill: $white;
-      }
-    }
-  }
-}
-
-.nav-bkgd {
-  @include box-shadow(rgba(black, 0.25) 0px 2px 3px);
-  height: 48px;
-  background-color: $highlight;
-  border-bottom: 3px solid $primary;
-}
-
-.nav-language-chooser {
-  margin: 0 auto;
-  width: 390px;
-
-  .icon-globe {
-    display: block;
-    float: left;
-    margin-top: -6px;
+    width: 80vw;
+    height: 120% !important;
+    max-height: 120%;
+    overflow-y: scroll;
+    -webkit-overflow-scrolling: touch;
+    margin: 0;
+    background-color: grey;
+    transition: left 0.35s ease;
+    border-top: 0;
   }
 
-  .cta {
-    margin-top: 16px;
+  #navbar .navbar-collapse.collapsing {
+    transition: left 0.35s ease;
   }
-}
-@media (max-width: 1200px) {
-  .cart-btn {
-    width: 45px;
-    font-size:9px !important;
+
+  #navbar .navbar-collapse.in {
+    left: 0;
+  }
+
+  body.menu-open.in, body.menu-open {
+    overflow: hidden;
+  }
+
+  body.menu-open #wrapper, body.menu-open.in .navbar {
+    transition: left 0.35s ease;
+  }
+
+  body.menu-open.in #wrapper {
+    left: 80vw;
   }
 
 }

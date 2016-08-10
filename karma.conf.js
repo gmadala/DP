@@ -1,6 +1,6 @@
 // Karma configuration
-module.exports = function (karma) {
-  karma.set({ 
+module.exports = function(karma) {
+  karma.set({
 
     // base path, that will be used to resolve files and exclude
     basePath: '',
@@ -17,8 +17,8 @@ module.exports = function (karma) {
       'karma-junit-reporter'
     ],
 
-		// list of files / patterns to load in the browser
-		files: [
+    // list of files / patterns to load in the browser
+    files: [
       'app/components/jquery/dist/jquery.js',
       'app/components/angular/angular.js',
       'app/components/angular-sanitize/angular-sanitize.js',
