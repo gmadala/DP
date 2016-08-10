@@ -22,7 +22,7 @@ describe('\n Resources Page', function () {
     loginObjects.doGoodLogin();
     helper.goToResources();
     browser.sleep(browser.params.shortDelay);
-    expect(browser.getCurrentUrl() === execSettings.resourcesPage());
+    expect(browser.getCurrentUrl()).toEqual(execSettings.resourcesPage());
   });
 
   it("2. Resources - Validating the Rates and Fees link", function () {

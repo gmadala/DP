@@ -9,7 +9,7 @@ function Receipts() {
 
   //Locators
   this.elReceiptsLabel = browser.element(by.css('div.search-form'));
-  this.elClearSearch = browser.element(by.css('button#clearSearch.btn-unstyle.right.clear-search'));
+  this.elClearSearch = browser.element(by.id('clearSearch'));
   this.elFindFloorPlan = browser.element(by.id('keyword'));
   this.elFloorPlanSearch = browser.element(by.id('floorPlanSearch'));
   this.elPaymentMethod = browser.element(by.id('filterSelect'));
