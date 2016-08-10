@@ -4,7 +4,7 @@
 function Receipts() {
 
   var helper = require('../framework/e2e_helper_functions.js');
-  var helper = new helper.helper();
+  var Helper = new helper.helper();
 
 
   //Locators
@@ -18,8 +18,8 @@ function Receipts() {
   this.elStartDate = browser.element(by.id('startDate'));
   this.elEndDate = browser.element(by.id('endDate'));
   this.elReceipts = browser.element(by.css('table.table.table-striped.table-primary'));
- 
-   //Getters
+
+  //Getters
   this.getTestClearSearch = function () {
     browser.sleep(browser.params.shortDelay);
     return this.elClearSearch.getText();
@@ -69,7 +69,7 @@ function Receipts() {
   this.setDates = function () {
     this.elStartDate.sendKeys('03/27/2014');
     browser.sleep(browser.params.shortDelay);
-    this.elEndDate.sendKeys(helper.getTodaysDate());
+    this.elEndDate.sendKeys(Helper.getTodaysDate());
     browser.sleep(browser.params.shortDelay);
   };
 

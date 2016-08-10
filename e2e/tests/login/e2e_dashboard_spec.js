@@ -6,11 +6,9 @@ var login = require('../../framework/e2e_login.js');
 var modalObjects = require('../../framework/e2e_modal_objects.js');
 var dashboard = require('../../framework/e2e_dashboard_objects.js');
 var creditIncrease = require('../../framework/e2e_credit_increase_requ_objects.js');
-var receipts = require('../../framework/e2e_receipts_objects.js');
 var execSettings = require('../../framework/e2e_execSettings.js');
 var increaseAmount = 1000;
 
-//var Receipts = new receipts.ReceiptsObjects();
 var dashboard = new dashboard.dashboardObjects();
 var CredIncrease = new creditIncrease.creditIncrease();
 var modalObjects = new modalObjects.modalObjects();
