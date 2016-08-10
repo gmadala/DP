@@ -1,4 +1,4 @@
-(function () {
+(function() {
   'use strict';
   angular
     .module('nextgearWebApp')
@@ -7,22 +7,23 @@
   NxgDownloadWaybillCtrl.$inject = ['$scope', 'fedex', 'User'];
 
   function NxgDownloadWaybillCtrl($scope, fedex, User) {
-    $scope.getWaybill = function () {
+    $scope.getWaybill = function() {
       var businessId = null;
-      User.getInfo().then(function (info) {
+      User.getInfo().then(function(info) {
         businessId = info.BusinessId;
 
         fedex.getWaybill(businessId)
-          .then(function (data) {
+          .then(function(data) {
             if (data.waybill !== null) {
               var blob = $scope.base64ToBlob(data.waybill, 'application/pdf');
+              /*global saveAs */
               saveAs(blob, "FedEx-" + data.trackingNumber + ".pdf");
             }
           });
       });
     };
 
-    $scope.base64ToBlob = function (b64Data, contentType, sliceSize, processByteArray) {
+    $scope.base64ToBlob = function(b64Data, contentType, sliceSize, processByteArray) {
       contentType = contentType || '';
       sliceSize = sliceSize || 512;
 
@@ -48,10 +49,9 @@
 
       var blob = new Blob(byteArrays, {type: contentType});
       return blob;
-    }
+    };
 
   }
-
 
 })
 ();

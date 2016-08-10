@@ -66,7 +66,7 @@ function Helper() {
   };
 
   //Generic functions
-  this.waitForVisible = function () {
+  this.waitForVisible = function (elementId) {
     /**
      * @name waitForVisible
      * @memberof HelperObject
@@ -82,7 +82,7 @@ function Helper() {
     browser.wait(isVisible, browser.params.mediumDelay);
   };
 
-  this.waitForClickable = function () {
+  this.waitForClickable = function (elementId) {
     /**
      * @name waitForClickable
      * @memberof HelperObject
@@ -101,7 +101,7 @@ function Helper() {
     browser.wait(isClickable, browser.params.mediumDelay);
   };
 
-  this.takeSnapshot = function () {
+  this.takeSnapshot = function (snapshotFileName) {
     /**
      * @name takeSnapshot
      * @memberof HelperObject

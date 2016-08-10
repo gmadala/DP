@@ -16,24 +16,23 @@ function Promos() {
   this.elPromotionsDetails = element(by.css('div.promo-item.inactive.row.empty-promos'));
 
   //Doers
-  this.doPromos = function () {
+  this.doPromos = function() {
     return this.elPromos.click();
-    browser.sleep(browser.params.shortDelay);
   };
 
   //Getters
-  this.getTextTitle = function () {
+  this.getTextTitle = function() {
     browser.sleep(browser.params.shortDelay);
     return this.elTitle.getText();
   };
-  this.getTextPromos = function () {
+  this.getTextPromos = function() {
     browser.sleep(browser.params.shortDelay);
     return this.elPromos.getText();
   };
-  this.getTextHeader = function () {
+  this.getTextHeader = function() {
     browser.sleep(browser.params.shortDelay);
     return this.elHeader.getText();
-  }
+  };
 
 }
 module.exports.promos = Promos;

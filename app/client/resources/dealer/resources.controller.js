@@ -12,6 +12,7 @@
     var languagePrefix = '';
     var isUnitedStates = User.isUnitedStates();
     var currentLanguage = gettextCatalog.currentLanguage;
+    $scope.currLang = currentLanguage;
 
     if (!isUnitedStates) {
       if (currentLanguage === 'fr_CA') {

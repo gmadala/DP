@@ -14,70 +14,77 @@
     'gettextCatalog',
     'language',
     'kissMetricInfo',
+    '$location',
+    '$timeout',
+    'localStorageService',
     'fedex'
   ];
 
-  function NavBarCtrl(
-    $rootScope,
-    $scope,
-    $state,
-    User,
-    Payments,
-    gettextCatalog,
-    language,
-    kissMetricInfo,
-    fedex) {
+  function NavBarCtrl($rootScope,
+                      $scope,
+                      $state,
+                      User,
+                      Payments,
+                      gettextCatalog,
+                      language,
+                      kissMetricInfo,
+                      $location,
+                      $timeout,
+                      localStorageService,
+                      fedex) {
+
 
     $scope.isCollapsed = true;
-
+    var paymentsSubMenu = [
+        {name: gettextCatalog.getString('Make a Payment'), href: '#/payments', activeWhen: 'payments', subMenu: paymentsSubMenu},
+        {name: gettextCatalog.getString('Receipts'), href: '#/receipts', activeWhen: 'receipts'},
+      ],
+      floorplansSubMenu = [
+        {name: gettextCatalog.getString('View Floor Plan'), href: '#/floorplan', activeWhen: 'floorplan', subMenu: floorplansSubMenu},
+        {name: gettextCatalog.getString('Floor a Vehicle'), href: '#/floorcar', activeWhen: 'floorcar'},
+        {name: gettextCatalog.getString('Value Lookup'), href: '#/valueLookup', activeWhen: 'valueLookup'},
+      ],
+      resourcesSubMenu = [
+        {name: gettextCatalog.getString('Resources'), href: '#/documents', activeWhen: 'documents'},
+        {name: gettextCatalog.getString('Reports'), href: '#/reports', activeWhen: 'reports'},
+        {name: gettextCatalog.getString('Analytics'), href: '#/analytics', activeWhen: 'analytics'},
+      ];
     var dealerLinks = {
         primary: [
-          { name: gettextCatalog.getString('Dashboard'), href: '#/home', activeWhen: 'dashboard'},
-          { name: gettextCatalog.getString('Payments'), href: '#/payments', activeWhen: 'payments'},
-          { name: gettextCatalog.getString('Floor Plan'), href: '#/floorplan', activeWhen: 'floorplan'},
-          { name: gettextCatalog.getString('Receipts'), href: '#/receipts', activeWhen: 'receipts'},
-          { name: gettextCatalog.getString('Reports'), href: '#/reports', activeWhen: 'reports'},
-          { name: gettextCatalog.getString('Analytics'), href: '#/analytics', activeWhen: 'analytics'}
-        ],
-        secondary: [
-          { name: gettextCatalog.getString('Floor a Vehicle'), href: '#/floorcar', activeWhen: 'floorcar'},
-          { name: gettextCatalog.getString('Resources'), href: '#/documents', activeWhen: 'documents'}
-
+          {name: gettextCatalog.getString('Dashboard'), href: '#/home', activeWhen: 'dashboard'},
+          {name: gettextCatalog.getString('Payments'), href: '#/payments', activeWhen: 'payments', subMenu: paymentsSubMenu},
+          {name: gettextCatalog.getString('Floor Plan'), href: '#/floorplan', activeWhen: 'floorplan', subMenu: floorplansSubMenu},
+          {name: gettextCatalog.getString('Resources'), href: '#/documents', activeWhen: 'documents', subMenu: resourcesSubMenu}
         ]
       },
       auctionLinks = {
         primary: [
-          { name: gettextCatalog.getString('Dashboard'), href: '#/act/home', activeWhen: 'auction_dashboard'},
-          { name: gettextCatalog.getString('Dealer Search'), href: '#/act/dealersearch', activeWhen: 'auction_dealersearch'},
-          { name: gettextCatalog.getString('Floor a Vehicle'), href: '#/act/bulkflooring', activeWhen: 'auction_bulkflooring'},
-          { name: gettextCatalog.getString('Seller Floor Plan Search'), href: '#/act/sellerfloorplan', activeWhen: 'auction_sellerfloorplan'},
-          { name: gettextCatalog.getString('View a Report'), href: '#/act/reports', activeWhen: 'auction_reports'},
-          { name: gettextCatalog.getString('Resources'), href: '#/act/documents', activeWhen: 'auction_documents'}
+          {name: gettextCatalog.getString('Dashboard'), href: '#/act/home', activeWhen: 'auction_dashboard'},
+          {name: gettextCatalog.getString('Dealer Search'), href: '#/act/dealersearch', activeWhen: 'auction_dealersearch'},
+          {name: gettextCatalog.getString('Floor a Vehicle'), href: '#/act/bulkflooring', activeWhen: 'auction_bulkflooring'},
+          {name: gettextCatalog.getString('Floor Plan Search'), href: '#/act/sellerfloorplan', activeWhen: 'auction_sellerfloorplan'},
+          {name: gettextCatalog.getString('Reports'), href: '#/act/reports', activeWhen: 'auction_reports'},
+          {name: gettextCatalog.getString('Resources'), href: '#/act/documents', activeWhen: 'auction_documents'}
         ]
       };
 
-
-
-    $scope.$watch(function() { return User.isLoggedIn(); }, function(isLoggedIn) {
+    $scope.$watch(function() {
+      return User.isLoggedIn();
+    }, function(isLoggedIn) {
       if (isLoggedIn) {
 
-        kissMetricInfo.getKissMetricInfo().then(function(result){
+        kissMetricInfo.getKissMetricInfo().then(function(result) {
           $scope.kissMetricData = result;
         });
 
-        User.getInfo().then(function (info) {
+        User.getInfo().then(function(info) {
           $scope.isUnitedStates = User.isUnitedStates();
           $scope.displayTitleRelease = info.DisplayTitleReleaseProgram;
           $scope.eventSalesEnabled = User.getFeatures().hasOwnProperty('eventSales') ? User.getFeatures().eventSales.enabled : true;
           $scope.fedExWaybillEnabled = fedex.wayBillPrintingEnabled();
           if ($scope.isUnitedStates) {
-            dealerLinks.secondary.splice(1, 0, {
-              name: gettextCatalog.getString('Value Lookup'),
-              href: '#/valueLookup',
-              activeWhen: 'valueLookup'
-            });
-            if($scope.eventSalesEnabled){
-              dealerLinks.primary.push({
+            if ($scope.eventSalesEnabled) {
+              resourcesSubMenu.push({
                 name: gettextCatalog.getString('Promos'),
                 href: '#/promos',
                 activeWhen: 'promos'
@@ -85,7 +92,7 @@
             }
           }
           if ($scope.displayTitleRelease) {
-            dealerLinks.primary.splice(3, 0, {
+            floorplansSubMenu.push({
               name: gettextCatalog.getString('Title Releases'),
               href: '#/titlereleases',
               activeWhen: 'titlereleases'
@@ -95,13 +102,13 @@
             BusinessNumber: info.BusinessNumber,
             BusinessName: info.BusinessName,
             isDealer: User.isDealer,
-            logout: function () {
+            logout: function() {
               $rootScope.$emit('event:userRequestedLogout');
             },
-            navLinks: function () {
+            navLinks: function() {
               return User.isDealer() ? dealerLinks : auctionLinks;
             },
-            homeLink: function () {
+            homeLink: function() {
               return User.isDealer() ? '#/home' : '#/act/home';
             }
           };
@@ -110,24 +117,21 @@
         if ($scope.displayTitleRelease) {
           dealerLinks.primary.splice(3, 1);
         }
-        if ($scope.isUnitedStates) {
-          dealerLinks.secondary.splice(1, 1);
-        }
       }
     });
 
     // Enable chat only when we are using English
-    $scope.$watch(function () {
+    $scope.$watch(function() {
       return gettextCatalog.currentLanguage;
-    }, function (lang) {
+    }, function(lang) {
       $scope.chatEnabled = lang === 'en';
     });
 
-    $scope.isCurrentLanguage = function (lang) {
+    $scope.isCurrentLanguage = function(lang) {
       return gettextCatalog.currentLanguage === lang;
     };
 
-    $scope.updateLanguage = function (lang) {
+    $scope.updateLanguage = function(lang) {
 
       language.setCurrentLanguage(lang);
 
@@ -136,7 +140,7 @@
       window.location.reload();
     };
 
-    $scope.getQueueCount = function () {
+    $scope.getQueueCount = function() {
       var queue = Payments.getPaymentQueue(),
         count = 0;
 
@@ -162,10 +166,74 @@
       return $state.includes(activeWhen);
     };
 
-    $rootScope.$on('$stateChangeSuccess', function () {
+    $scope.isActiveGroup = function(subMenu) {
+      for (var link in subMenu) {
+        if ($state.includes(subMenu[link].activeWhen)) {
+          return true;
+        }
+      }
+      return false;
+    };
+
+    $scope.gotoPageIf = function(page) {
+      var desktop = document.getElementsByClassName('no-touch');
+      if (desktop.length > 0) {
+        $location.path(page.substring(1));
+        //remove open class
+        $timeout(function() {
+          document.getElementsByClassName('dropdown open')[0].classList.remove('open');
+        }, 0);
+      }
+    };
+    $scope.pageTitle = "";
+    $scope.setPageTitle = function(page) {
+      $scope.pageTitle = page;
+    };
+
+    $scope.getPageTitle = function() {
+      if ($scope.pageTitle === "") {
+        //$scope.setPageTitle($state.current.name);//Need to set the page title on inital load or refresh use arrays above
+      }
+      return $scope.pageTitle;
+    };
+
+    $scope.isDashboard = function() {
+      return $state.current.name === "dashboard" || $state.current.name === "auction_dashboard" || $scope.pageTitle === "";
+    };
+
+    $scope.toggleMenu = function() {
+      $state.current.data.showMenu = !$state.current.data.showMenu;
+      $scope.closeMenuTip();
+    };
+
+    $scope.closeMenu = function() {
+      if ($state.current.data.showMenu) {
+        $state.current.data.showMenu = false;
+      }
+    };
+
+    $scope.addHover = function() {
+      this.link.hasHover = true;
+    };
+
+    $scope.removeHover = function() {
+      this.link.hasHover = false;
+    };
+
+    $rootScope.$on('$stateChangeSuccess', function() {
       $scope.isCollapsed = true;
     });
 
     $scope.navState = $state;
+
+    $scope.hideMenuTip = localStorageService.get('hideMenuTip') || false;
+    $scope.isMobile = window.innerWidth < 768;
+    $scope.templateUrl = "/app/client/shared/directives/navbar/menuTip.html";
+    $scope.closeMenuTip = function() {
+      if (!$scope.hideMenuTip) {
+        localStorageService.set('hideMenuTip', true);
+        $scope.hideMenuTip = true;
+      }
+    };
   }
 })();

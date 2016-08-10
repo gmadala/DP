@@ -13,6 +13,7 @@
     'User',
     '$uibModal',
     'BusinessHours',
+    '$state',
     'Addresses',
     'gettextCatalog'
   ];
@@ -25,10 +26,12 @@
     User,
     $uibModal,
     BusinessHours,
+    $state,
     Addresses,
     gettextCatalog) {
 
     $scope.isCollapsed = true;
+    $scope.navigator = $state.transitionTo;
 
     var uibModal = $uibModal;
     var lastPromise;
@@ -262,6 +265,25 @@
     $scope.$on(BusinessHours.CHANGE_EVENT, function() {
       bizHours();
     });
+
+    $scope.getCounter = function() {
+      var queue = Payments.getPaymentQueue();
+      return _.size(queue.fees) + _.size(queue.payments);
+    };
+
+    $scope.getTotal = function(){
+      var total = 0,
+        queue = Payments.getPaymentQueue();
+
+      angular.forEach(queue.fees, function (fee) {
+        total += fee.getCheckoutAmount();
+      });
+
+      angular.forEach(queue.payments, function (payment) {
+        total += payment.getCheckoutAmount();
+      });
+      return total;
+    };
 
   }
 })();

@@ -2,34 +2,20 @@
 //  MODALS
 // ========
 
-.modal-backdrop {
-  @include opacity(.50);
-  z-index: 1050;
-
-  // Modal to go over all other modals
-  // backdrop for the topmost modal should cover non-topmost modals
-  &.topmost {
-    z-index: 1090;
-  }
-}
-
 .modal {
-  @extend %small;
-  @include border-radius(0);
-  display: block;
-  width: 450px;
-  height: 0;
-  background: #F2F2F2;
   overflow: visible;
-  border: 0;
-  margin-left: 30%;
-  margin-top:60px;
-  z-index:2000;
 
-  &.modal-long{
+  //Scroll the modal body if taller than the screen
+  .modal-body {
+    height: 100%;
+    max-height: 65vh;
+    overflow-y: auto;
+  }
+
+  &.modal-long {
     height: 60%;
     max-height: 545px;
-    .modal-body{
+    .modal-body {
       max-height: 100%;
       overflow: scroll;
     }
@@ -82,25 +68,30 @@
   max-height: none;
   border: 1px solid $border;
   padding: 20px;
-  overflow:visible;
+  overflow: visible;
   background: #F2F2F2;
 
   &.to-edge {
     padding: 0;
-    &.add-account{
-      border-bottom:0;
+    &.add-account {
+      border-bottom: 0;
     }
   }
 
   .modal-inner {
     padding: 20px;
-    &.add-account{
+    &.add-account {
       padding: 0 20px 20px 20px;
     }
   }
 
   .list-table {
     padding: 10px 50px 10px 30px;
+  }
+  @media only screen and (max-width: 767px) {
+    .list-table {
+      padding-left: 0px;
+    }
   }
 
   .table-secondary {
@@ -113,15 +104,16 @@
 
   h4 {
     margin: 0 0 5px;
-    &.add-account{
-      margin:15px;
+    &.add-account {
+      margin: 15px;
     }
   }
 }
 
- .wizard-navigation{
-   margin:10px;
- }
+.wizard-navigation {
+  margin: 10px;
+}
+
 .modal-header {
   background: $modalHeader;
   color: $white;
@@ -158,12 +150,12 @@
   padding: 10px;
   border: 0;
   background: #F2F2F2;
-  margin-top:0;
-  &.add-account{
+  margin-top: 0;
+  &.add-account {
     margin-top: 10px;
     border-top: 1px solid #BBC;
     border-bottom: 1px solid #BBC;
-    padding:10px 0 8px 5px;
+    padding: 10px 0 8px 5px;
   }
   .btn {
     margin: 5px 10px;
@@ -174,11 +166,17 @@
   }
 }
 
-/*
- When a modal is open, stop the body from being able to scroll
- */
-body.modal-open {
-  overflow: hidden;
+@media only screen and (max-width: 767px) {
+  // For mobile scroll the entire modal
+  .modal-dialog {
+    height: 100%;
+    overflow-y: scroll;
+  }
+  .modal-body {
+    height: 100%;
+    max-height: none !important;
+    overflow-y: visible !important;
+  }
 }
 
 @media print {
@@ -219,5 +217,5 @@ body.modal-open {
 }
 
 .modal-sm {
-   width: 500px;
+  width: 500px;
 }

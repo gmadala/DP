@@ -11,7 +11,7 @@ $text: #404040; // primary text color
 
 // override bootstrap
 $baseFontFamily: Helvetica, Arial, sans-serif;
-$baseFontSize: 12px;
+$baseFontSize: 1.4rem;
 $baseLineHeight: 1.2;
 $tableBackground: #FFFFFF;
 $tableBackgroundAccent: #F2F2F2;
@@ -19,7 +19,7 @@ $tableBorder: #BBBBBB;
 $tooltipArrowWidth: 10px;
 $tooltipArrowColor: #FFF;
 $tooltipBackground: #FFF;
-$zindexTooltip : 0;
+$zindexTooltip: 0;
 $wellBackground: #f8f8f8;
 // end bootstrap overrides
 
@@ -86,3 +86,7 @@ $inputFontSize: 11px;
 // Sorting
 $selected-color: white;
 $not-selected-color: #B3B3B3;
+
+// Panels
+$panel-bg: #f5f5f5 !default;
+$panel-default-border: #bbbcbe !default;
