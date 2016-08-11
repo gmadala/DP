@@ -26,17 +26,19 @@
         templateUrl: 'client/floor-vehicle/wizard/wizard-floor.template.html',
         data: {
           pageId: 'Floorplan',
-          showNavBar: true
+          showNavBar: true,
+          isFeature: 'responsiveFloorplanBuyer'
         }
       })
       .state('flooringWizard.car', {
-        url: '/car',
+        url: '',
         controller: 'CarInfoCtrl',
         controllerAs: 'carInfo',
         templateUrl: 'client/floor-vehicle/wizard/car-info.template.html',
         data: {
           pageId: 'Floorplan',
-          showNavBar: true
+          showNavBar: true,
+          isFeature: 'responsiveFloorplanBuyer'
         }
       })
       .state('flooringWizard.sales', {
@@ -46,7 +48,8 @@
         templateUrl: 'client/floor-vehicle/wizard/sales-info.template.html',
         data: {
           pageId: 'Floorplan',
-          showNavBar: true
+          showNavBar: true,
+          isFeature: 'responsiveFloorplanBuyer'
         }
       })
       .state('flooringWizard.document', {
@@ -56,7 +59,8 @@
         templateUrl: 'client/floor-vehicle/wizard/document-info.template.html',
         data: {
           pageId: 'Floorplan',
-          showNavBar: true
+          showNavBar: true,
+          isFeature: 'responsiveFloorplanBuyer'
         }
       })
       .state('login', {

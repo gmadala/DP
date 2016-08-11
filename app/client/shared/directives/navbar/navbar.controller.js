@@ -41,7 +41,11 @@
       ],
       floorplansSubMenu = [
         {name: gettextCatalog.getString('View Floor Plan'), href: '#/floorplan', activeWhen: 'floorplan', subMenu: floorplansSubMenu},
-        {name: gettextCatalog.getString('Floor a Vehicle'), href: '#/floorcar', activeWhen: 'floorcar'},
+        {
+          name: gettextCatalog.getString('Floor a Vehicle'),
+          href: User.getFeatures().hasOwnProperty('responsiveFloorplanBuyer') && User.getFeatures().responsiveFloorplanBuyer.enabled === true ? '#/flooring-wizard' : '#/floorcar',
+          activeWhen: User.getFeatures().hasOwnProperty('responsiveFloorplanBuyer') && User.getFeatures().responsiveFloorplanBuyer.enabled === true ? 'flooring-wizard' : 'floorcar'
+        },
         {name: gettextCatalog.getString('Value Lookup'), href: '#/valueLookup', activeWhen: 'valueLookup'},
       ],
       resourcesSubMenu = [
