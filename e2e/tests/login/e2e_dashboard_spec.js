@@ -1,6 +1,5 @@
 'use strict';
 
-var loginObjects = require('../../framework/e2e_login_objects.js');
 var helper = require('../../framework/e2e_helper_functions.js');
 var login = require('../../framework/e2e_login.js');
 var modalObjects = require('../../framework/e2e_modal_objects.js');
@@ -12,7 +11,6 @@ var increaseAmount = 1000;
 var dashboard = new dashboard.dashboardObjects();
 var CredIncrease = new creditIncrease.creditIncrease();
 var modalObjects = new modalObjects.modalObjects();
-var loginObjects = new loginObjects.loginObjects();
 var helper = new helper.helper();
 
 describe('\n Dashboard Page', function () {
