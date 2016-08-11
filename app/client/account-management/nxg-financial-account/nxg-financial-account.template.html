@@ -57,13 +57,13 @@
                        tooltip-trigger="mouseenter"
                        uib-tooltip="{{ 'Before deactivating, select a different account below for your default deposits or payments.' | translate }}"
                        tooltip-animation="true">
-                  <input bs-switch type="checkbox" id="hid{{ account.BankAccountId }}" name="hid{{ account.BankAccountId }}"
+                  <input bs-switch type="checkbox" id="hid{{ account.BankAccountId }}" name="hid{{ account.BankAccountId }}" class="noglobal"
                          ng-model="dirtyStatus" switch-active="false" checked switch-size="mini" switch-on-text="Yes" switch-off-text="No" switch-on-color="success">
                 </label>
               </div>
             </div>
             <div ng-hide="defaultForDisbursement() || defaultForBilling()">
-                  <input bs-switch type="checkbox" id="regular.hid{{ account.BankAccountId }}"
+                  <input bs-switch type="checkbox" id="regular.hid{{ account.BankAccountId }}" class="noglobal"
                          name="regular.hid{{ account.BankAccountId }}" switch-active="{{isEditable()}}" switch-checked="{{account.IsActive}}"
                          ng-model="dirtyStatus" ng-change="editStatus()" switch-size="mini" switch-on-text="Yes" switch-off-text="No" switch-on-color="success"/>
             </div>
@@ -141,7 +141,7 @@
                    tooltip-trigger="mouseenter"
                    uib-tooltip="{{ 'Before deactivating, select a different account below for your default deposits or payments.' | translate }}"
                    tooltip-animation="true">
-              <input bs-switch type="checkbox" id="{{ account.BankAccountId }}" name="{{ account.BankAccountId }}"
+              <input bs-switch type="checkbox" id="{{ account.BankAccountId }}" name="{{ account.BankAccountId }}" class="noglobal"
                      ng-model="dirtyStatus" switch-active="false" checked switch-size="mini" switch-on-text="Yes" switch-off-text="No" switch-on-color="success">
 
             </label>
@@ -150,7 +150,7 @@
         </div>
         <div ng-hide="defaultForDisbursement() || defaultForBilling()">
               <input bs-switch type="checkbox" switch-active="{{isEditable()}}" switch-checked="{{account.IsActive}}" id="regular.{{ account.BankAccountId }}"
-                     name="regular.{{ account.BankAccountId }}"
+                     name="regular.{{ account.BankAccountId }}" class="noglobal"
                      ng-model="dirtyStatus" ng-change="editStatus()" switch-size="mini" switch-on-text="Yes" switch-off-text="No" switch-on-color="success">
 
         </div>
