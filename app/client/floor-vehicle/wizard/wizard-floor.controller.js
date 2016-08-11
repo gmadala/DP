@@ -19,17 +19,19 @@
     'moment'
   ];
 
-  function WizardFloorCtrl($state,
-                           $scope,
-                           $q,
-                           User,
-                           AccountManagement,
-                           Addresses,
-                           OptionDefaultHelper,
-                           kissMetricInfo,
-                           segmentio,
-                           metric,
-                           moment) {
+  function WizardFloorCtrl(
+    $state,
+    $scope,
+    $q,
+    User,
+    AccountManagement,
+    Addresses,
+    OptionDefaultHelper,
+    kissMetricInfo,
+    segmentio,
+    metric,
+    moment
+  ) {
     var vm = this;
     var isDealer = User.isDealer();
 
