@@ -59,8 +59,7 @@
 }
 
 .nav-language-chooser {
-  overflow: auto;
-  display: block;
+  display: inline-flex;
 
   .icon-globe {
     top: 7px;
@@ -400,7 +399,6 @@
   }
 
   .mobile-navbar {
-    //position: fixed; // Use this to fix navbar to top
     position: relative;
     top: auto;
     right: 0;

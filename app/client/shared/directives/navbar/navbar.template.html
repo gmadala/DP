@@ -1,7 +1,7 @@
 <header class="app-header" ng-class="{ login: !navState.current.data.showNavBar, auctions: !user.isDealer() }">
   <div class="container" ng-class="{'hidden-xs':navState.current.data.showNavBar}">
     <div class="header">
-      <a ng-href="{{user.homeLink()}}" class="col-sm-4 custom ng-binding">
+      <a ng-href="{{user.homeLink()}}" class="col-sm-4 col-md-8 custom ng-binding">
         <div class="nxg-logo" nxg-debug-title></div>
       </a>
       <div class="col-sm-8 user-info no-left-padding no-right-padding" ng-show="navState.current.data.showNavBar">
@@ -64,10 +64,9 @@
           </div>
         </div>
       </div>
-
-      <div class="col-sm-6 col-sm-offset-2 col-xs-12" ng-hide="navState.current.data.showNavBar">
+      <div class="col-sm-6 col-sm-offset-2 col-md-6 col-md-offset-4 col-xs-12" ng-hide="navState.current.data.showNavBar">
         <div class="nav-language-chooser">
-          <span class="icon-xx-large " nxg-icon="icon-globe"></span>
+          <span class="icon-xx-large hidden-xs" nxg-icon="icon-globe"></span>
           <div class="cta btn-toggle toggle-three">
             <div class="btn-slider"
                  ng-class="{ 'active-left': isCurrentLanguage('en'), 'active-center': isCurrentLanguage('es'), 'active-right': isCurrentLanguage('fr_CA') }"></div>
@@ -92,14 +91,14 @@
                   uib-popover-template="'client/shared/directives/navbar/menuTip.html'"
                   popover-is-open="!hideMenuTip && isMobile"
                   popover-trigger="none">
-            <span class="sr-only">Toggle navigation</span>
+            <span class="sr-only" translate>Toggle navigation</span>
             <span class="hamburger"></span>
           </button>
           <div class="logo-center visible-xs">
             <div ng-if="isDashboard()">
               <div class="mng-logo"></div>
             </div>
-            <div ng-if="!isDashboard()">
+            <div ng-if="!isDashboard()" translate>
               {{getPageTitle()}}
             </div>
           </div>
@@ -112,28 +111,29 @@
               popover-is-open="!hideMenuTip && !isMobile && user.isDealer()"
               popover-trigger="none">
             <li class="visible-xs" ng-if="user.isDealer()">
-              <a href="#" ng-href="#/checkout" ng-click="setPageTitle('Checkout')">Checkout</a>
+              <a href="#" ng-href="#/checkout" ng-click="setPageTitle('Checkout')" translate>Checkout</a>
             </li>
             <li ng-repeat="link in user.navLinks().primary" class="link_{{ link.activeWhen }}" ng-class="{'dropdown': link.subMenu, 'hover': link.hasHover}">
               <a ng-href="{{link.href}}" ng-class="{ active: isActive(link.activeWhen) }" ng-if="!link.subMenu"
-                 ng-click="setPageTitle(link.name)">{{link.name}}</a>
+                 ng-click="setPageTitle(link.name)" translate>{{link.name}}</a>
               <a class="sub-menu dropdown-toggle hidden-xs" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"
                  ng-class="{ active: isActiveGroup(link.subMenu) }"
                  ng-if="link.subMenu"
                  ng-click="gotoPageIf(link.href, link.activeWhen); setPageTitle(link.name); removeHover()"
                  ng-mouseenter="addHover()"
                  ng-mouseleave="removeHover()"
+                 translate
               >
                 {{link.name}} <span class="caret"></span></a>
               <ul class="dropdown-menu" ng-if="link.subMenu" ng-mouseenter="addHover()"
                   ng-mouseleave="removeHover()">
                 <li ng-repeat="item in link.subMenu" ng-class="{ active: isActive(item.activeWhen) }" ng-click="removeHover()">
-                  <a href="#" ng-href="{{item.href}}" ng-click="setPageTitle(item.name)">{{item.name}}</a>
+                  <a href="#" ng-href="{{item.href}}" ng-click="setPageTitle(item.name)" translate>{{item.name}}</a>
                 </li>
               </ul>
               <ul class="visible-xs mobile-nav-list">
                 <li class="visible-xs" ng-repeat="item in link.subMenu" ng-class="{ active: isActive(item.activeWhen) }" ng-click="removeHover()">
-                  <a href="#" ng-href="{{item.href}}" ng-click="setPageTitle(item.name)">{{item.name}}</a>
+                  <a href="#" ng-href="{{item.href}}" ng-click="setPageTitle(item.name)" translate>{{item.name}}</a>
                 </li>
               </ul>
             </li>

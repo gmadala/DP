@@ -18,7 +18,6 @@ function Promos() {
   //Doers
   this.doPromos = function() {
     return this.elPromos.click();
-    //browser.sleep(browser.params.shortDelay);
   };
 
   //Getters
