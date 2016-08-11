@@ -7,10 +7,20 @@ exports.config = {
       'args': [
         '--disable-extensions',
         '-–allow-file-access-from-files',
-        //'--incognito',
-        '--disable-web-security'
-      ]
-    }
+        '--disable-web-security',
+        '--no-sandbox',
+        '--test-type=browser'
+      ],
+      'prefs': {
+        'download': {
+          'prompt_for_download': false,
+          'directory_upgrade': true,
+          'default_directory': '/tmp'
+        }
+      }
+    },
+    shardTestFiles: (process.env.maxInstances > 1),
+    maxInstances: process.env.maxInstances
   },
 
   //Spec patterns are relative to the current working directly when protractor is called.
