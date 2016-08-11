@@ -6,7 +6,7 @@
           <span translate>Financial Accounts</span>
         </h2>
         <!--Default accounts display-->
-        <div class="row" style="padding-bottom: 2px;">
+        <div class="row" style="padding-bottom: 2px;" ng-show="financial.isAddBankAccountEditable()">
           <div class="well-item col-md-5">
             <div class="col-xs-1">
 
@@ -46,7 +46,7 @@
             </div>
 
           </div>
-          <div class="well-item col-md-1 visible-lg visible-md" style="border-right: 1px solid #bbbcbe; line-height: 60px;">
+          <div class="well-item col-md-1 visible-lg visible-md" style="border-right: 1px solid #bbbcbe; line-height: 60px;" >
             &nbsp;
           </div>
           <div class="well-item col-md-6 bordered-left">
@@ -87,27 +87,26 @@
 
           </div>
         </div>
-        <div class="" style="border-top: 1px solid #bbbcbe;"></div>
-        <div class="row forAddButton">
+        <div class="" style="border-top: 1px solid #bbbcbe;" ng-show="financial.isAddBankAccountEditable()"></div>
+        <div class="row forAddButton" ng-show="financial.isAddBankAccountEditable()">
           <div class="col-md-12 ">
-            <button class="btn-cta cta-primary" ng-show="financial.isAddBankAccountEditable()" ng-disabled="isAddAccountButtonDisable()"
+            <button class="btn-cta cta-primary"  ng-disabled="isAddAccountButtonDisable()"
                     ng-click="financial.addFinancialAccount()" translate><span class="glyphicon glyphicon-plus-sign" aria-hidden="true" style="font-weight: bold;"  ></span> Add Account
 
             </button>
           </div>
         </div>
-        <div class="row" style="border:0px;" >
-          <div class="col-md-12 ">
-            <div class="panel panel-default forColumn">
-              <div class="well-column-header col-md-12 hidden-xs hidden-sm"
-                   ng-show="business.data.isStakeholderActive && isUnitedStates">
+        <div class="row" >
+           <div class="col-md-12 ">
+             <div class="visible-lg visible-md" style="border-top: 1px solid #bbbcbe;" ng-show="financial.isAddBankAccountEditable()"></div>
+             <div class="panel forColumn">
+              <div class="well-column-header col-md-12 hidden-xs hidden-sm">
                 <h6 class="col-xs-2 left-align left-padding" translate>Bank Name</h6>
                 <h6 class="col-xs-2" translate>Account Number</h6>
                 <h6 class="col-xs-2">{{financial.data.routingNumberLabel}}</h6>
                 <h6 class="col-xs-2">Last Transaction</h6>
                 <h6 class="col-xs-2" translate>Active</h6>
               </div>
-
               <!--Financial Account information display-->
               <div class="bank-accounts-container">
                 <div ng-repeat="account in financial.data.activeBankAccounts | orderBy:'AchBankName'">

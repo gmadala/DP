@@ -58,13 +58,13 @@
                        uib-tooltip="{{ 'Before deactivating, select a different account below for your default deposits or payments.' | translate }}"
                        tooltip-animation="true">
                   <input bs-switch type="checkbox" id="hid{{ account.BankAccountId }}" name="hid{{ account.BankAccountId }}"
-                         ng-model="account.IsActive" switch-active="false" checked switch-size="mini" switch-on-text="Yes" switch-off-text="No" switch-on-color="success">
+                         ng-model="dirtyStatus" switch-active="false" checked switch-size="mini" switch-on-text="Yes" switch-off-text="No" switch-on-color="success">
                 </label>
               </div>
             </div>
             <div ng-hide="defaultForDisbursement() || defaultForBilling()">
                   <input bs-switch type="checkbox" id="regular.hid{{ account.BankAccountId }}"
-                         name="regular.hid{{ account.BankAccountId }}"
+                         name="regular.hid{{ account.BankAccountId }}" switch-active="{{isEditable()}}" switch-checked="{{account.IsActive}}"
                          ng-model="dirtyStatus" ng-change="editStatus()" switch-size="mini" switch-on-text="Yes" switch-off-text="No" switch-on-color="success"/>
             </div>
           </div>
@@ -75,7 +75,7 @@
 
   <div class="well-item bordered financial-account visible-md visible-lg">
     <!--Add/Edit Enabled, view mode-->
-    <div class="row" ng-show="isEditable()">
+    <div class="row">
       <!--Bank Name-->
       <div ng-class="{'is-not-active': !account.IsActive}">
         <form class="col-md-2 text-left no-left-padding text-vertical-center" name="bankName"
@@ -122,9 +122,14 @@
             {{ recentTransactionDate }}
             <span class="glyphicon glyphicon-file"></span>
           </a>
-        <span ng-hide="recentTransactionExists" style="color:grey;">
-          {{ recentTransactionDate }}
-        </span>
+          <span ng-hide="recentTransactionExists" style="color:grey;">
+            {{ recentTransactionDate }}
+          </span>
+        </div>
+        <div class="col-md-2 text-center text-vertical-center" ng-show="!isEditable()">
+           <span style="color:grey;">
+            n/a
+          </span>
         </div>
       </div>
       <!--Active-->
@@ -137,15 +142,14 @@
                    uib-tooltip="{{ 'Before deactivating, select a different account below for your default deposits or payments.' | translate }}"
                    tooltip-animation="true">
               <input bs-switch type="checkbox" id="{{ account.BankAccountId }}" name="{{ account.BankAccountId }}"
-                     ng-model="account.IsActive" switch-active="false" checked switch-size="mini" switch-on-text="Yes" switch-off-text="No" switch-on-color="success">
+                     ng-model="dirtyStatus" switch-active="false" checked switch-size="mini" switch-on-text="Yes" switch-off-text="No" switch-on-color="success">
 
             </label>
           </div>
 
         </div>
         <div ng-hide="defaultForDisbursement() || defaultForBilling()">
-
-              <input bs-switch type="checkbox"  switch-active switch-checked="account.IsActive" id="regular.{{ account.BankAccountId }}"
+              <input bs-switch type="checkbox" switch-active="{{isEditable()}}" switch-checked="{{account.IsActive}}" id="regular.{{ account.BankAccountId }}"
                      name="regular.{{ account.BankAccountId }}"
                      ng-model="dirtyStatus" ng-change="editStatus()" switch-size="mini" switch-on-text="Yes" switch-off-text="No" switch-on-color="success">
 
@@ -156,30 +160,5 @@
     <div class="row">
     </div>
 
-    <!--The following allows for the re-spacing when recent transactions is hidden.
-    This can be removed as soon as recent transactions goes live-->
-    <div class="row" ng-show="!isEditable()" ng-class="{'is-not-active': !account.IsActive}">
-      <div class="col-xs-2 text-left no-left-padding text-vertical-center"
-           style="padding-left: 15px">
-        <div>{{ account.AchBankName }}</div>
-      </div>
-      <div class="col-xs-2 text-center text-vertical-center">
-        <div>....{{account.AchAccountNumberLast4}}</div>
-      </div>
-      <div class="col-xs-2 text-center text-vertical-center">
-        <div>{{routingNumberDisplay}}</div>
-      </div>
-      <div class="col-md-2 text-center text-vertical-center">
-        n/a
-      </div>
-      <div class="col-xs-2 text-center text-vertical-center">
-        <div class="glyphicon glyphicon-ok" ng-show="status"></div>
-      </div>
-      <div class="col-xs-2 icon-padding-right" ng-show="isEditable()">
-        <button class="btn-unstyle pull-right" ng-click="editFinancialAccount()">
-          <span class="glyphicon glyphicon-pencil"></span>
-        </button>
-      </div>
-    </div>
   </div>
 </div>
