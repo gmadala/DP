@@ -50,7 +50,7 @@
     $scope.editDefaultDAccount = false;
     $scope.editDefaultPAccount = false;
     $scope.refreshActiveAchAccounts = refreshActiveAchAccounts;
-
+    $scope.isAddAccountButtonDisable = isAddAccountButtonDisable;
 
     //to retreive the latest transaction date
     if ($scope.isDealer) {
@@ -120,6 +120,10 @@
 
     $scope.editDefaultDAccount = false;
     $scope.editDefaultPAccount = false;
+
+    function isAddAccountButtonDisable() {
+      return $scope.editDefaultDAccount || $scope.editDefaultPAccount || AccountManagement.getAccountButtonState();
+    }
 
     function refreshActiveAchAccounts() {
       AccountManagement.getFinancialAccountData()
@@ -532,4 +536,6 @@
     );
 
   }
+
+
 })();
