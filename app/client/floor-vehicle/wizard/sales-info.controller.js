@@ -9,7 +9,7 @@
 
   function SalesInfoCtrl($scope, gettext, gettextCatalog, moment, User) {
     var vm = this;
-    console.log($scope);
+
     // init a special version of today's date for our datepicker which only works right with dates @ midnight
     var today = new Date();
     today = moment([today.getFullYear(), today.getMonth(), today.getDate()]).toDate();
@@ -41,28 +41,12 @@
     vm.dateFormat = 'MM/dd/yyyy';
 
     $scope.$parent.wizardFloor.transitionValidation = function() {
-      console.log("2. transition", $scope);
+
       $scope.form.$submitted = true;
       $scope.$parent.wizardFloor.validity = angular.copy($scope.form);
       $scope.$parent.wizardFloor.formParts.two = $scope.form.$valid;
       return true;
     };
-
-    // vm.defaultData = {
-    //   FloorplanSourceId: User.isDealer() ? 6 : 7, // 6 for dealer in web app, 7 for auction user
-    //   SaleTradeIn: false, // Boolean, default is no (only dealers that can be paid directly may change this to true)
-    //   BankAccountId: null, // BankAccount object locally, flatten to string for API tx
-    //   UnitPurchaseDate: today, // Date locally, format to string for API transmission, default is today
-    //   UnitPurchasePrice: null, // string
-    //   LineOfCreditId: null, // LineOfCredit object locally, flatten to string for API tx
-    //   PaySeller: null, // Boolean, default is false if user is dealer and buyer payment is possible, otherwise true
-    //   LotNumber: null, // string (AUCTION ONLY)
-    //   // transient local values
-    //   $selectedVehicle: null, // Object returned from VIN lookup, populates BlackBookGroupNumber & BlackBookUvc on tx
-    //   $blackbookMileage: null // cache most recent mileage value used to get updated blackbook data
-    // };
-
-
   }
 
 })();

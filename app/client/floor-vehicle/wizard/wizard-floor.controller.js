@@ -252,7 +252,6 @@
       if (vm.formParts.one && vm.formParts.two && (!vm.attachDocumentsEnabled || vm.formParts.three)) {
 
         vm.floorPlanSubmitting = true;
-        console.log(vm.data);
 
         var confirmation = {
           backdrop: true,

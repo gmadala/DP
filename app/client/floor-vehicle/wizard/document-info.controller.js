@@ -34,7 +34,7 @@
     $scope.$watch('$scope.$parent.wizardFloor.data.files', function (newValue, oldValue) {
       if (newValue && oldValue) {
         if (newValue.length !== oldValue.length) {
-          console.log(newValue);
+
           $scope.form.documents.$setValidity('pattern', true);
           $scope.form.documents.$setValidity('maxSize', true);
         }
@@ -45,7 +45,7 @@
       $scope.form.$submitted = true;
       $scope.$parent.wizardFloor.validity = angular.copy($scope.form);
       $scope.$parent.wizardFloor.formParts.three = $scope.form.$valid;
-      console.log($scope.form);
+
       return $scope.form.$valid;
     };
 
