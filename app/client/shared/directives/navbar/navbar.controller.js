@@ -117,7 +117,7 @@
           };
           dealerCustomerSupportPhone.then(function(phoneNumber) {
             $scope.support = {
-              email: 'mynextgearsupport@nextgearcapital.com',
+              email: info.MarketEMail,
               phone: info.MarketPhoneNumber,
               customerSupportPhone: phoneNumber.value
             };
@@ -126,6 +126,8 @@
           // check user type, dealers and auctions will have different subdomains to go to
           $scope.forumId = config.dealerForumId;
           $scope.customTemplateId = config.dealerCustomTemplateId;
+          console.log(User);
+          console.log(info);
         });
       } else {
         if ($scope.displayTitleRelease) {

@@ -154,7 +154,7 @@
                 <span translate>Account Management</span>
               </a>
             </li>
-            <li class="visible-xs" ng-show="user.isDealer()" ng-click="$event.stopPropagation()">
+            <li class="visible-xs" ng-click="$event.stopPropagation()">
                 <a ng-click="toggleSupport()">
                 <span translate>Support</span>
                  <span class="paired-media icon-chevron support-chevron"
@@ -176,17 +176,17 @@
                 Call Account Executive
               </a>
             </li>
-            <li class="visible-xs" ng-show="user.isDealer() && showSupport">
+            <li class="visible-xs" ng-show="showSupport">
               <a class="support-text" href= "tel:+{{ support.customerSupportPhone }}">
                 Call Customer Service
               </a>
             </li>
-            <li class="visible-xs" ng-show="user.isDealer() && showSupport">
+            <li class="visible-xs" ng-show="showSupport">
               <a class="support-text" href="mailto:{{ support.email }}">
                 Send Email
               </a>
             </li>
-            <li class="visible-xs" ng-show="user.isDealer() && showSupport">
+            <li class="visible-xs" ng-show="showSupport">
               <a class="support-text" href="javascript:void(0)"
                  data-uv-lightbox="classic_widget"
                  data-uv-mode="full"

@@ -1,4 +1,4 @@
-@mixin animation($animate...) {
+@mixin animations($animate...) {
       $max: length($animate);
       $animations: '';
 
@@ -34,52 +34,32 @@
       }
   }
 
+  @mixin transformX($units) {
+    -webkit-transform: translate3d(0, 0, 0);
+    -moz-transform: translate3d(0, 0, 0);
+    -ms-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0);
+    -webkit-transform: translateX($units);
+    -moz-transform: translateX($units);
+    -ms-transform: translateX($units);
+    -o-transform: translateX($units);
+    transform: translateX($units);
+  }
+
   @include keyframes(open-nav) {
     0% {
-      -webkit-transform: translate3d(0, 0, 0);
-      -moz-transform: translate3d(0, 0, 0);
-      -ms-transform: translate3d(0, 0, 0);
-      transform: translate3d(0, 0, 0);
-      -webkit-transform: translateX(0vw);
-      -moz-transform: translateX(0vw);
-      -ms-transform: translateX(0vw);
-      -o-transform: translateX(0vw);
-      transform: translateX(0vw);
+        @include transformX(0vw);
     }
     100% {
-      -webkit-transform: translate3d(0, 0, 0);
-      -moz-transform: translate3d(0, 0, 0);
-      -ms-transform: translate3d(0, 0, 0);
-      transform: translate3d(0, 0, 0);
-      -webkit-transform: translateX(80vw);
-      -moz-transform: translateX(80vw);
-      -ms-transform: translateX(80vw);
-      -o-transform: translateX(80vw);
-      transform: translateX(80vw);
+        @include transformX(80vw);
     }
   }
 
   @include keyframes(close-nav) {
     0% {      
-      -webkit-transform: translate3d(0, 0, 0);
-      -moz-transform: translate3d(0, 0, 0);
-      -ms-transform: translate3d(0, 0, 0);
-      transform: translate3d(0, 0, 0);
-      -webkit-transform: translateX(80vw);
-      -moz-transform: translateX(80vw);
-      -ms-transform: translateX(80vw);
-      -o-transform: translateX(80vw);
-      transform: translateX(80vw);
+      @include transformX(80vw);
     }
     100% {
-      -webkit-transform: translate3d(0, 0, 0);
-      -moz-transform: translate3d(0, 0, 0);
-      -ms-transform: translate3d(0, 0, 0);
-      transform: translate3d(0, 0, 0);
-      -webkit-transform: translateX(0vw);
-      -moz-transform: translateX(0vw);
-      -ms-transform: translateX(0vw);
-      -o-transform: translateX(0vw);
-      transform: translateX(0vw);
+      @include transformX(0vw);
     }
   }

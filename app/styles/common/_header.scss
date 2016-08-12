@@ -580,11 +580,11 @@
     }
 
     &.closed {
-      @include animation('close-nav 1s 1');
+      @include animations('close-nav 1s 1');
     }
 
     &.open {
-      @include animation('open-nav 1s 1');
+      @include animations('open-nav 1s 1');
     }
   }
 
@@ -592,11 +592,11 @@
     #main-container,
     footer {
       position: relative;
-      @include animation('close-nav 1s 1');
+      @include animations('close-nav 1s 1');
     }
 
     .mobile-navbar .navbar-header {
-      @include animation('close-nav 1s 1');
+      @include animations('close-nav 1s 1');
     }
   }
 
@@ -610,11 +610,11 @@
     #main-container,
     footer {
       position: relative;
-      @include animation('open-nav 1s 1');
+      @include animations('open-nav 1s 1');
     }
 
     .mobile-navbar .navbar-header {
-      @include animation('open-nav 1s 1');
+      @include animations('open-nav 1s 1');
     }
   }
 }
