@@ -64,7 +64,7 @@
     <input type="file"
            id="documents"
            name="documents"
-           ng-class="{ 'nxg-invalid': validity.documents.$error.pattern || validity.documents.$error.maxSize }"
+           ng-class="{ 'nxg-invalid': (form.documents.$error.pattern || form.documents.$error.maxSize) && form.$submitted }"
            ngf-select
            ng-model="wizardFloor.data.files"
            ngf-model-invalid="wizardFloor.data.invalidFiles"
@@ -74,12 +74,12 @@
            ngf-fix-orientation="false"
            ngf-max-size="'5MB'">
     <label for="documents" class="text-error"
-           ng-show="(form.documents.$error.pattern || form.boxDocuments.$error.pattern)"
+           ng-show="(form.documents.$error.pattern || form.boxDocuments.$error.pattern) && form.$submitted"
            translate>
       Unsupported file found in selection.
     </label>
     <label for="documents" class="text-error"
-           ng-show="form.documents.$error.maxSize || form.boxDocuments.$error.maxSize" translate>
+           ng-show="(form.documents.$error.maxSize || form.boxDocuments.$error.maxSize) && form.$submitted" translate>
       One or more files exceeded the 5MB limit.
     </label>
     <label for="documents"
@@ -109,10 +109,4 @@
               ng-model="wizardFloor.data.comment"></textarea>
 
   </div>
-  <!--<button class="btn-cta cta-full cta-primary"-->
-          <!--ng-disabled="submitInProgress"-->
-          <!--ng-click="wizardFloor.submit()"-->
-          <!--translate>-->
-    <!--Review and Floor Vehicle-->
-  <!--</button>-->
 </form>

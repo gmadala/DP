@@ -16,7 +16,9 @@
     'kissMetricInfo',
     'segmentio',
     'metric',
-    'moment'
+    'moment',
+    '$uibModal',
+    'Upload'
   ];
 
   function WizardFloorCtrl($state,
@@ -29,7 +31,9 @@
                            kissMetricInfo,
                            segmentio,
                            metric,
-                           moment) {
+                           moment,
+                           $uibModal,
+                           Upload) {
     var vm = this;
     var isDealer = User.isDealer();
 
@@ -46,7 +50,7 @@
       three: false
     };
 
-    vm.floorPlanSubmitted = false;
+    vm.floorPlanSubmitting = false;
 
     vm.pageCount = 3;
 
@@ -133,7 +137,7 @@
       comment: ''
     };
 
-    vm.reset = function() {
+    vm.reset = function () {
       vm.data = angular.copy(vm.defaultData);
       vm.optionsHelper.applyDefaults($scope, vm.data);
       vm.validity = undefined;
@@ -141,7 +145,7 @@
     };
 
     // Wizard Nav functions ---------------------------------------------------
-    vm.tabClick = function(count) {
+    vm.tabClick = function (count) {
       if (canTransition(count)) {
         vm.counter = count;
 
@@ -149,11 +153,11 @@
       }
     };
 
-    vm.nextAvailable = function() {
+    vm.nextAvailable = function () {
       return vm.counter < vm.pageCount;
     };
 
-    vm.next = function() {
+    vm.next = function () {
       var nextCount = vm.counter + 1;
 
       if (vm.nextAvailable() && canTransition(nextCount)) {
@@ -163,11 +167,11 @@
       }
     };
 
-    vm.previousAvailable = function() {
+    vm.previousAvailable = function () {
       return vm.counter > 1;
     };
 
-    vm.previous = function() {
+    vm.previous = function () {
       if (vm.previousAvailable()) {
         vm.counter--;
         switchState();
@@ -211,12 +215,169 @@
       }
     }
 
+    vm.canSubmit = function () {
+
+      if (vm.floorPlanSubmitting)
+        return false;
+
+      if (!vm.formParts.one)
+        return false;
+
+      if (!vm.formParts.two)
+        return false;
+
+      if (vm.attachDocumentsEnabled || vm.formParts.three)
+        return false;
+
+      if (vm.attachDocumentsEnabled && vm.data.files.length < 1)
+        return false;
+
+      return true;
+    };
+
     vm.submit = function () {
-      if(!vm.floorPlanSubmitted) {
-        vm.floorPlanSubmitted = true;
-        console.log("VM Output: ");
-        console.log(vm.data);
+      console.log("begin submit");
+      if (!vm.floorPlanSubmitting) {
+        console.log("in submit");
+        vm.transitionValidation();
+        if (vm.formParts.one && vm.formParts.two && (!vm.attachDocumentsEnabled || vm.formParts.three)) {
+          console.log("in parts");
+
+          vm.floorPlanSubmitting = true;
+          console.log("VM Output: ");
+          console.log(vm.data);
+
+          var confirmation = {
+            backdrop: true,
+            keyboard: true,
+            backdropClick: true,
+            size: 'md',
+            templateUrl: 'client/floor-vehicle/floor-car-confirm-modal/floor-car-confirm.template.html',
+            controller: 'FloorCarConfirmCtrl',
+            resolve: {
+              comment: function () {
+                return !!vm.data.comment && vm.data.comment.length > 0;
+              },
+              formData: function () {
+                return angular.copy(vm.data);
+              },
+              fileNames: function () {
+                var index = 0;
+                return _.map(vm.data.files, function (file) {
+                  index++;
+                  return vm.renameFile(file.name, index - 1);
+                });
+              }
+            }
+          };
+          $uibModal.open(confirmation).result.then(function (result) {
+            if (result === true) {
+              // submission confirmed
+              vm.reallySubmit(protect);
+            }
+          });
+
+          vm.floorPlanSubmitting = false;
+        }
       }
+    };
+
+    $scope.reallySubmit = function (guard) {
+      if (guard !== protect) {
+        throw 'FloorCarCtrl: reallySubmit can only be called from controller upon confirmation';
+      }
+
+      var dialogParams;
+
+      vm.floorPlanSubmitting = true;
+      Floorplan.create(vm.data).then(
+        function (response) { /*floorplan success*/
+          if (vm.data.comment) {
+            Floorplan.addComment({
+              CommentText: vm.data.comment,
+              FloorplanId: response.FloorplanId
+            });
+          }
+
+          if (vm.data.files && vm.data.files.length > 0) {
+            // Rename duplicate files with an index so they are all uploaded
+            vm.data.files = _.map(vm.data.files, function (file, index) {
+              var newName = vm.renameFile(file.name, index);
+              if (newName !== file) {
+                Upload.rename(file, newName);
+              }
+              return file;
+            });
+
+            var upload = Upload.upload({
+              url: nxgConfig.apiBase + '/floorplan/upload/' + response.FloorplanId,
+              method: 'POST',
+              data: {
+                file: $scope.files
+              }
+            });
+
+            upload.then(function (response) {
+              vm.floorPlanSubmitting = false;
+              dialogParams = response.data.Success ?
+                buildDialog(vm.attachDocumentsEnabled, true, true) :
+                buildDialog(vm.attachDocumentsEnabled, true, false);
+              $uibModal.open(dialogParams).result.then(function () {
+                vm.reset();
+              });
+            }, function () {
+              vm.floorPlanSubmitting = false;
+              dialogParams = buildDialog(vm.attachDocumentsEnabled, true, false);
+              $uibModal.open(dialogParams).result.then(function () {
+                vm.reset();
+              });
+            });
+          } else {
+            vm.floorPlanSubmitting = false;
+            dialogParams = buildDialog(false, true, false);
+            $uibModal.open(dialogParams).result.then(function () {
+              vm.reset();
+            });
+          }
+        }, function (/*floorplan error*/) {
+          vm.floorPlanSubmitting = false;
+          dialogParams = buildDialog(vm.attachDocumentsEnabled, false, false);
+          $uibModal.open(dialogParams);
+        });
+    };
+
+    function buildDialog(canAttachDocuments, floorSuccess, uploadSuccess) {
+
+      kissMetricInfo.getKissMetricInfo().then(function (result) {
+        result.comment = !!vm.data.comment && vm.data.comment.length > 0;
+        result.floorplanSuccess = floorSuccess;
+        result.uploadSuccess = uploadSuccess;
+
+        segmentio.track(metric.FLOORPLAN_REQUEST_RESULT, result);
+      });
+
+      return {
+        backdrop: true,
+        keyboard: true,
+        backdropClick: true,
+        dialogClass: 'modal modal-medium',
+        templateUrl: 'client/shared/modals/floor-car-message/floor-car-message.template.html',
+        controller: 'FloorCarMessageCtrl',
+        resolve: {
+          canAttachDocuments: function () {
+            return canAttachDocuments;
+          },
+          createFloorplan: function () {
+            return true;
+          },
+          floorSuccess: function () {
+            return floorSuccess;
+          },
+          uploadSuccess: function () {
+            return uploadSuccess;
+          }
+        }
+      };
     }
   }
 })();
