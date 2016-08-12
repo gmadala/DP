@@ -8,32 +8,38 @@
   WizardFloorCtrl.$inject = [
     '$state',
     '$scope',
+    '$uibModal',
     '$q',
     'User',
-    'AccountManagement',
+    'Floorplan',
     'Addresses',
+    'protect',
     'OptionDefaultHelper',
+    'moment',
+    'AccountManagement',
+    'Upload',
+    'nxgConfig',
     'kissMetricInfo',
     'segmentio',
-    'metric',
-    'moment',
-    '$uibModal',
-    'Upload'
+    'metric'
   ];
 
   function WizardFloorCtrl($state,
                            $scope,
+                           $uibModal,
                            $q,
                            User,
-                           AccountManagement,
+                           Floorplan,
                            Addresses,
+                           protect,
                            OptionDefaultHelper,
+                           moment,
+                           AccountManagement,
+                           Upload,
+                           nxgConfig,
                            kissMetricInfo,
                            segmentio,
-                           metric,
-                           moment,
-                           $uibModal,
-                           Upload) {
+                           metric) {
     var vm = this;
     var isDealer = User.isDealer();
 
@@ -277,13 +283,14 @@
             }
           });
 
-          vm.floorPlanSubmitting = false;
+
         }
       }
     };
 
-    $scope.reallySubmit = function (guard) {
+    vm.reallySubmit = function (guard) {
       if (guard !== protect) {
+        vm.floorPlanSubmitting = false;
         throw 'FloorCarCtrl: reallySubmit can only be called from controller upon confirmation';
       }
 
@@ -313,22 +320,32 @@
               url: nxgConfig.apiBase + '/floorplan/upload/' + response.FloorplanId,
               method: 'POST',
               data: {
-                file: $scope.files
+                file: vm.data.files
               }
             });
 
             upload.then(function (response) {
               vm.floorPlanSubmitting = false;
-              dialogParams = response.data.Success ?
-                buildDialog(vm.attachDocumentsEnabled, true, true) :
+
+              if (response.data.Success) {
+                buildDialog(vm.attachDocumentsEnabled, true, true)
+              } else {
                 buildDialog(vm.attachDocumentsEnabled, true, false);
+              }
+
               $uibModal.open(dialogParams).result.then(function () {
+                vm.floorPlanSubmitting = false;
                 vm.reset();
+
+                if(response.data.Success){
+                  $state.go("dashboard");
+                }
               });
             }, function () {
               vm.floorPlanSubmitting = false;
               dialogParams = buildDialog(vm.attachDocumentsEnabled, true, false);
               $uibModal.open(dialogParams).result.then(function () {
+                vm.floorPlanSubmitting = false;
                 vm.reset();
               });
             });
@@ -336,13 +353,16 @@
             vm.floorPlanSubmitting = false;
             dialogParams = buildDialog(false, true, false);
             $uibModal.open(dialogParams).result.then(function () {
+              vm.floorPlanSubmitting = false;
               vm.reset();
             });
           }
         }, function (/*floorplan error*/) {
           vm.floorPlanSubmitting = false;
           dialogParams = buildDialog(vm.attachDocumentsEnabled, false, false);
-          $uibModal.open(dialogParams);
+          $uibModal.open(dialogParams).result.then(function () {
+            vm.floorPlanSubmitting = false;
+          });
         });
     };
 
