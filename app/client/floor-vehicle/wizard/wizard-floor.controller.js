@@ -325,11 +325,7 @@
             upload.then(function (response) {
               vm.floorPlanSubmitting = false;
 
-              if (response.data.Success) {
-                buildDialog(vm.attachDocumentsEnabled, true, true)
-              } else {
-                buildDialog(vm.attachDocumentsEnabled, true, false);
-              }
+              dialogParams = response.data.Success ? buildDialog(vm.attachDocumentsEnabled, true, true) : buildDialog(vm.attachDocumentsEnabled, true, false);
 
               $uibModal.open(dialogParams).result.then(function () {
                 vm.floorPlanSubmitting = false;
