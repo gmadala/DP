@@ -17,7 +17,7 @@
     '$location',
     '$timeout',
     'localStorageService',
-      'fedex'
+    'fedex'
   ];
 
   function NavBarCtrl($rootScope,
@@ -31,7 +31,7 @@
                       $location,
                       $timeout,
                       localStorageService,
-  fedex) {
+                      fedex) {
 
 
     $scope.isCollapsed = true;
@@ -68,7 +68,9 @@
         ]
       };
 
-    $scope.$watch(function() { return User.isLoggedIn(); }, function(isLoggedIn) {
+    $scope.$watch(function() {
+      return User.isLoggedIn();
+    }, function(isLoggedIn) {
       if (isLoggedIn) {
 
         kissMetricInfo.getKissMetricInfo().then(function(result) {
@@ -114,9 +116,6 @@
       } else {
         if ($scope.displayTitleRelease) {
           dealerLinks.primary.splice(3, 1);
-        }
-        if ($scope.isUnitedStates) {
-          dealerLinks.secondary.splice(1, 1);
         }
       }
     });

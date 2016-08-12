@@ -93,9 +93,8 @@ a.forgot:link, a.forgot:visited {
 }
 
 @media only screen and (max-width: 767px) {
-  .nxg-main-container {
-    height: 85vh;
-    overflow-y: scroll;
+  .nxg-login-container {
+    min-height: 60vh !important;
   }
 
   .login-margin {
@@ -124,13 +123,12 @@ a.forgot:link, a.forgot:visited {
 
 .nxg-login-container {
   min-height: 84vh;
-  overflow: hidden;
   margin-bottom: -10px;
   background: linear-gradient(
                   rgba(0, 0, 0, 0.5),
                   rgba(0, 0, 0, 0.3)
   ),
-  url(../img/login-mockup.jpg);
+  url(../img/login.jpg);
   background-position: center;
   background-size: cover;
 }

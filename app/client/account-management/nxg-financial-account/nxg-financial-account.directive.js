@@ -72,6 +72,8 @@
       scope.transactionId = scope.recentTransaction !== undefined ? scope.recentTransaction.FinancialTransactionId :'' ;
 
       scope.isEditable = isEditable;
+      scope.isAddButtonActive = isAddButtonActive;
+      scope.isEditButtonActive = isEditButtonActive;
       scope.generateReceipt = generateReceipt;
       scope.editMode = false;
 
@@ -102,6 +104,7 @@
       function editAccount() {
         scope.editMode = true;
         AccountManagement.setAccountButtonState(true);
+        AccountManagement.setEditButtonState(true);
         scope.dirtyStatus = getStatus();
         scope.dirtyBankName = getBankName();
       }
@@ -122,6 +125,7 @@
         scope.dirtyStatus = getStatus();
         scope.dirtyBankName = getBankName();
         AccountManagement.setAccountButtonState(false);
+        AccountManagement.setEditButtonState(false);
       }
 
       /**
@@ -144,6 +148,8 @@
             }
             setStatus(scope.dirtyStatus);
             setBankName(scope.dirtyBankName);
+            AccountManagement.setAccountButtonState(false);
+            AccountManagement.setEditButtonState(false);
           })
           .catch(function () {
             scope.dirtyStatus = getStatus();
@@ -194,9 +200,16 @@
        * @return {Boolean} Allowed to edit a bank account?
        */
       function isEditable() {
-        return scope.editBankAccountEnabled && scope.isStakeholderActive && scope.isUnitedStates;
+        return scope.editBankAccountEnabled && scope.isStakeholderActive && scope.isUnitedStates ;
       }
 
+      function isAddButtonActive() {
+        return !AccountManagement.getAccountButtonState();
+      }
+
+      function isEditButtonActive() {
+        return AccountManagement.getEditButtonState();
+      }
       /**
        * Determines if the bank account is the user's default billing account.
        * @return {Boolean} Account default billing account?

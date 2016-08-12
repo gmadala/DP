@@ -2,6 +2,7 @@
   'use strict';
 
   var addAccountButtonState = false;
+  var editBankButtonState = false;
 
   angular
     .module('nextgearWebApp')
@@ -86,7 +87,15 @@
       },
       setAccountButtonState : function(state) {
         addAccountButtonState = state;
+      },
+      getEditButtonState : function () {
+        return editBankButtonState;
+      },
+      setEditButtonState : function(state) {
+        editBankButtonState = state;
       }
+
+
     };
 
   }
