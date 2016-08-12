@@ -32,7 +32,7 @@
     <button type="button"
             class="btn-cta cta-primary" translate
             ng-show="!wizardFloor.nextAvailable() || (!wizardFloor.attachDocumentsEnabled && wizardFloor.counter == 2)"
-            ng-disabled="wizardFloor.canSubmit()"
+            ng-disabled="wizardFloor.floorPlanSubmitting"
             ng-click="wizardFloor.submit()">
       Submit
     </button>

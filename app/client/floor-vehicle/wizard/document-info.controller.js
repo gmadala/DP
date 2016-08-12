@@ -37,21 +37,15 @@
           console.log(newValue);
           $scope.form.documents.$setValidity('pattern', true);
           $scope.form.documents.$setValidity('maxSize', true);
-          // if ($scope.canAttachDocuments()) {
-          //
-          //   $scope.form.documents.$setValidity('missingDocuments', $scope.files.length > 0);
-          //   $scope.missingDocuments = $scope.files.length > 0;
-          // }
         }
       }
-
-
     });
 
     $scope.$parent.wizardFloor.transitionValidation = function () {
       $scope.form.$submitted = true;
       $scope.$parent.wizardFloor.validity = angular.copy($scope.form);
       $scope.$parent.wizardFloor.formParts.three = $scope.form.$valid;
+      console.log($scope.form);
       return $scope.form.$valid;
     };
 

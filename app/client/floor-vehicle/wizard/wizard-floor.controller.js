@@ -222,7 +222,6 @@
     }
 
     vm.canSubmit = function () {
-
       if (vm.floorPlanSubmitting)
         return false;
 
@@ -232,7 +231,7 @@
       if (!vm.formParts.two)
         return false;
 
-      if (vm.attachDocumentsEnabled || vm.formParts.three)
+      if (vm.attachDocumentsEnabled || !vm.formParts.three)
         return false;
 
       if (vm.attachDocumentsEnabled && vm.data.files.length < 1)
@@ -242,49 +241,48 @@
     };
 
     vm.submit = function () {
-      console.log("begin submit");
-      if (!vm.floorPlanSubmitting) {
-        console.log("in submit");
-        vm.transitionValidation();
-        if (vm.formParts.one && vm.formParts.two && (!vm.attachDocumentsEnabled || vm.formParts.three)) {
-          console.log("in parts");
+      if (!vm.transitionValidation()) {
+        return;
+      }
 
-          vm.floorPlanSubmitting = true;
-          console.log("VM Output: ");
-          console.log(vm.data);
+      if (vm.floorPlanSubmitting) {
+        return;
+      }
 
-          var confirmation = {
-            backdrop: true,
-            keyboard: true,
-            backdropClick: true,
-            size: 'md',
-            templateUrl: 'client/floor-vehicle/floor-car-confirm-modal/floor-car-confirm.template.html',
-            controller: 'FloorCarConfirmCtrl',
-            resolve: {
-              comment: function () {
-                return !!vm.data.comment && vm.data.comment.length > 0;
-              },
-              formData: function () {
-                return angular.copy(vm.data);
-              },
-              fileNames: function () {
-                var index = 0;
-                return _.map(vm.data.files, function (file) {
-                  index++;
-                  return vm.renameFile(file.name, index - 1);
-                });
-              }
+      if (vm.formParts.one && vm.formParts.two && (!vm.attachDocumentsEnabled || vm.formParts.three)) {
+
+        vm.floorPlanSubmitting = true;
+        console.log(vm.data);
+
+        var confirmation = {
+          backdrop: true,
+          keyboard: true,
+          backdropClick: true,
+          size: 'md',
+          templateUrl: 'client/floor-vehicle/floor-car-confirm-modal/floor-car-confirm.template.html',
+          controller: 'FloorCarConfirmCtrl',
+          resolve: {
+            comment: function () {
+              return !!vm.data.comment && vm.data.comment.length > 0;
+            },
+            formData: function () {
+              return angular.copy(vm.data);
+            },
+            fileNames: function () {
+              var index = 0;
+              return _.map(vm.data.files, function (file) {
+                index++;
+                return vm.renameFile(file.name, index - 1);
+              });
             }
-          };
-          $uibModal.open(confirmation).result.then(function (result) {
-            if (result === true) {
-              // submission confirmed
-              vm.reallySubmit(protect);
-            }
-          });
-
-
-        }
+          }
+        };
+        $uibModal.open(confirmation).result.then(function (result) {
+          if (result === true) {
+            // submission confirmed
+            vm.reallySubmit(protect);
+          }
+        });
       }
     };
 
@@ -337,7 +335,7 @@
                 vm.floorPlanSubmitting = false;
                 vm.reset();
 
-                if(response.data.Success){
+                if (response.data.Success) {
                   $state.go("dashboard");
                 }
               });
