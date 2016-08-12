@@ -64,7 +64,7 @@
             </div>
             <div ng-hide="defaultForDisbursement() || defaultForBilling()">
                   <input bs-switch type="checkbox" id="regular.hid{{ account.BankAccountId }}" class="noglobal"
-                         name="regular.hid{{ account.BankAccountId }}" switch-active="{{isEditable()}}" switch-checked="{{account.IsActive}}"
+                         name="regular.hid{{ account.BankAccountId }}" switch-active="{{isEditable() && isAddButtonActive()}}" switch-checked="{{account.IsActive}}"
                          ng-model="dirtyStatus" ng-change="editStatus()" switch-size="mini" switch-on-text="Yes" switch-off-text="No" switch-on-color="success"/>
             </div>
           </div>
@@ -92,7 +92,7 @@
           </label>
 
           <div class="edit-column" style="padding-bottom: 12px; margin-top: -12px;" ng-show="isEditable()">
-            <button ng-hide="editMode" class="btn-unstyle" ng-click="editAccount()">
+            <button ng-hide="editMode" ng-disabled="isEditButtonActive()" class="btn-unstyle" ng-click="editAccount()">
               <span class="glyphicon glyphicon-pencil"></span>
               <span class="edit-text" translate>Edit</span>
             </button>
@@ -149,7 +149,7 @@
 
         </div>
         <div ng-hide="defaultForDisbursement() || defaultForBilling()">
-              <input bs-switch type="checkbox" switch-active="{{isEditable()}}" switch-checked="{{account.IsActive}}" id="regular.{{ account.BankAccountId }}"
+              <input bs-switch type="checkbox" switch-active="{{isEditable() && isAddButtonActive()}}" switch-checked="{{account.IsActive}}" id="regular.{{ account.BankAccountId }}"
                      name="regular.{{ account.BankAccountId }}" class="noglobal"
                      ng-model="dirtyStatus" ng-change="editStatus()" switch-size="mini" switch-on-text="Yes" switch-off-text="No" switch-on-color="success">
 

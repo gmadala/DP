@@ -33,7 +33,7 @@
               </div>
               <div class="edit-column" style="padding-top:4px;"
                    ng-show="editBankAccountEnabled && business.data.isStakeholderActive && isUnitedStates">
-                <button ng-hide="editDefaultDAccount" class="btn-unstyle" ng-click="financial.editD()"><span
+                <button ng-hide="editDefaultDAccount" ng-disabled="isAddAccountButtonDisable()" class="btn-unstyle" ng-click="financial.editD()"><span
                   class="glyphicon glyphicon-pencil"></span><span class="edit-text" translate>Edit</span></button>
                 <button ng-show="editDefaultDAccount" class="col-md-3 custom btn-unstyle cancel-edit"
                         ng-click="financial.cancel()" translate>Cancel
@@ -74,7 +74,7 @@
               </div>
               <div class="edit-column" style="padding-top:4px;"
                    ng-show="editBankAccountEnabled && business.data.isStakeholderActive && isUnitedStates">
-                <button ng-hide="editDefaultPAccount" class="btn-unstyle" ng-click="financial.editP()"><span
+                <button ng-hide="editDefaultPAccount" ng-disabled="isAddAccountButtonDisable()" class="btn-unstyle" ng-click="financial.editP()"><span
                   class="glyphicon glyphicon-pencil"></span><span class="edit-text" translate>Edit</span></button>
                 <button ng-show="editDefaultPAccount" class="col-md-3 custom btn-unstyle cancel-edit"
                         ng-click="financial.cancel()" translate>Cancel

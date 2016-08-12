@@ -328,17 +328,23 @@
             $scope.editDefaultPAccount = false;
             dirtyPayment = $scope.defaultPayment;
             dirtyDeposit = $scope.defaultDeposit;
+            AccountManagement.setAccountButtonState(true);
+            AccountManagement.setEditButtonState(true);
           },
           editP: function () {
             $scope.editDefaultDAccount = false;
             $scope.editDefaultPAccount = true;
             dirtyPayment = $scope.defaultPayment;
             dirtyDeposit = $scope.defaultDeposit;
+            AccountManagement.setAccountButtonState(true);
+            AccountManagement.setEditButtonState(true);
           },          cancel: function () {
             $scope.defaultPayment = dirtyPayment;
             $scope.defaultDeposit = dirtyDeposit;
             $scope.editDefaultDAccount = false;
             $scope.editDefaultPAccount = false;
+            AccountManagement.setAccountButtonState(false);
+            AccountManagement.setEditButtonState(false);
           },
           save: function () {
             if ($scope.defaultDeposit.BankAccountId === $scope.defaultPayment.BankAccountId) {
@@ -355,6 +361,8 @@
                 .then(function () {
                   $scope.editDefaultDAccount = false;
                   $scope.editDefaultPAccount = false;
+                  AccountManagement.setAccountButtonState(false);
+                  AccountManagement.setEditButtonState(false);
                   $scope.financial.data.billingAccount = account;
                   $scope.financial.data.disbursementAccount = account;
                 });
@@ -376,6 +384,8 @@
                 .then(function () {
                   $scope.editDefaultDAccount = false;
                   $scope.editDefaultPAccount = false;
+                  AccountManagement.setAccountButtonState(false);
+                  AccountManagement.setEditButtonState(false);
                   $scope.financial.data.disbursementAccount = accounts[0];
                   $scope.financial.data.billingAccount = accounts[1];
                 });
