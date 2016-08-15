@@ -373,7 +373,7 @@ msgstr ""
 "Des frais supplémentaires peuvent s'appliquer. Veuillez vérifier votre "
 "tableau de taux et de frais."
 
-#: app/client/checkout/schedule-checkout-modal/schedule-checkout.template.html:55
+#: app/client/checkout/schedule-checkout-modal/schedule-checkout.template.html:53
 #: app/client/shared/modals/payment-options-breakdown/payment-options-breakdown.template.html:79
 #: app/client/vehicle-details/vehicle-details.html:428
 msgid "Additional Principal"
@@ -730,7 +730,7 @@ msgstr "Impossible de glisser-déposer?<br><br>"
 #: app/client/account-management/account-management.template.html:356
 #: app/client/account-management/account-management.template.html:99
 #: app/client/account-management/nxg-financial-account/nxg-financial-account.template.html:65
-#: app/client/checkout/schedule-checkout-modal/schedule-checkout.template.html:81
+#: app/client/checkout/schedule-checkout-modal/schedule-checkout.template.html:79
 #: app/client/dashboard/nxg-unapplied-funds-widget/request-payout-modal.template.html:53
 #: app/client/login/login-create-password/login-create-password.template.html:35
 #: app/client/login/login-update-security/login-update-security.template.html:40
@@ -889,7 +889,7 @@ msgstr "Terminé/Impayé"
 msgid "Completed/Paid"
 msgstr "Terminé/payé"
 
-#: app/client/checkout/schedule-checkout-modal/schedule-checkout.template.html:82
+#: app/client/checkout/schedule-checkout-modal/schedule-checkout.template.html:80
 msgid "Confirm"
 msgstr "Confirmer"
 
@@ -942,7 +942,7 @@ msgstr "Nous contacter"
 msgid "Continue"
 msgstr "Continuer"
 
-#: app/client/checkout/schedule-checkout-modal/schedule-checkout.template.html:67
+#: app/client/checkout/schedule-checkout-modal/schedule-checkout.template.html:65
 #: app/client/shared/modals/payment-options-breakdown/payment-options-breakdown.template.html:91
 #: app/client/vehicle-details/vehicle-details.controller.js:519
 #: app/client/vehicle-details/vehicle-details.controller.js:525
@@ -1428,7 +1428,7 @@ msgstr "Informations sur les frais"
 msgid "Fee Type"
 msgstr "Type de frais"
 
-#: app/client/checkout/schedule-checkout-modal/schedule-checkout.template.html:63
+#: app/client/checkout/schedule-checkout-modal/schedule-checkout.template.html:61
 #: app/client/shared/modals/payment-options-breakdown/payment-options-breakdown.template.html:87
 msgid "Fee(s)"
 msgstr "Frais"
@@ -1721,7 +1721,7 @@ msgstr "Instructions pour les vendeurs"
 msgid "Insufficient Funds"
 msgstr "Fonds insuffisants"
 
-#: app/client/checkout/schedule-checkout-modal/schedule-checkout.template.html:59
+#: app/client/checkout/schedule-checkout-modal/schedule-checkout.template.html:57
 #: app/client/shared/modals/extension-request/payment-extension.template.html:14
 #: app/client/shared/modals/payment-options-breakdown/payment-options-breakdown.template.html:83
 #: app/client/vehicle-details/payment-details-modal/payment-details.controller.js:17
@@ -2273,7 +2273,7 @@ msgstr "Paiement"
 msgid "Payment Amount"
 msgstr "Montant du paiement"
 
-#: app/client/checkout/schedule-checkout-modal/schedule-checkout.template.html:47
+#: app/client/checkout/schedule-checkout-modal/schedule-checkout.template.html:45
 #: app/client/shared/modals/payment-options-breakdown/payment-options-breakdown.template.html:71
 msgid "Payment Breakdown"
 msgstr "Ventilation du paiement"
@@ -2349,7 +2349,7 @@ msgid "Payment Summary"
 msgstr "Sommaire des Paiements"
 
 #: app/client/checkout/confirm-checkout-modal/confirm-checkout.template.html:41
-#: app/client/checkout/schedule-checkout-modal/schedule-checkout.template.html:72
+#: app/client/checkout/schedule-checkout-modal/schedule-checkout.template.html:70
 #: app/client/shared/modals/payment-options-breakdown/payment-options-breakdown.template.html:96
 msgid "Payment Total"
 msgstr "Total du paiement"
@@ -2988,7 +2988,7 @@ msgstr "Date de publication"
 msgid "Previous Disbursements"
 msgstr "Décaissements précédents"
 
-#: app/client/checkout/schedule-checkout-modal/schedule-checkout.template.html:51
+#: app/client/checkout/schedule-checkout-modal/schedule-checkout.template.html:49
 #: app/client/shared/modals/extension-request/payment-extension.template.html:10
 #: app/client/shared/modals/payment-options-breakdown/payment-options-breakdown.template.html:75
 #: app/client/vehicle-details/payment-details-modal/payment-details.controller.js:18
@@ -3338,9 +3338,11 @@ msgstr "Paiements programmés"
 #: app/client/checkout/schedule-checkout-modal/schedule-checkout.template.html:41
 msgid ""
 "Scheduled payments are not made until the scheduled date. <br> Interest and/"
-"or fees\r\n"
-"      may continue to accrue between now and your scheduled payment date."
+"or fees may continue to accrue between now and your scheduled payment date."
 msgstr ""
+"Les paiements programmés ne seront pas effectués avant la date programmée. "
+"<br> Des frais et/ou des intérêts peuvent continuer de s'accumuler d'ici la "
+"date de votre paiement programmé."
 
 #: app/client/dealer-search/business-search-modal/business-search.template.html:17
 #: app/client/dealer-search/dealer-name-search-modal/dealer-name-search.template.html:31
@@ -4871,8 +4873,7 @@ msgstr "Code postal"
 
 #~ msgid ""
 #~ "Scheduled payments are not made until the scheduled date. <br> Interest "
-#~ "and/or fees\n"
-#~ "      may continue to accrue between now and your scheduled payment date."
+#~ "and/or fees may continue to accrue between now and your scheduled payment date."
 #~ msgstr ""
 #~ "Les paiements programmés ne seront pas effectués avant la date "
 #~ "programmée. Des frais et/ou des intérêts peuvent continuer de s'accumuler "
@@ -5080,15 +5081,6 @@ msgstr "Code postal"
 
 #~ msgid "Please enter a Valid Sales Date."
 #~ msgstr "Veuillez entrer une date de vente valide."
-
-#~ msgid ""
-#~ "Scheduled payments are not made until the scheduled date. <br> Interest "
-#~ "and/or fees may continue to accrue between now and your scheduled payment "
-#~ "date."
-#~ msgstr ""
-#~ "Les paiements programmés ne seront pas effectués avant la date "
-#~ "programmée. <br> Des frais et/ou des intérêts peuvent continuer de "
-#~ "s'accumuler d'ici la date de votre paiement programmé."
 
 #~ msgid "Volume of Past NextGear Capital Floorplans"
 #~ msgstr "Volume des plans de financement antérieurs de NextGear Capital"

@@ -374,7 +374,7 @@ msgstr ""
 "Puede haber cargos adicionales. Por favor, verifique su programa de tarifas "
 "y cargos."
 
-#: app/client/checkout/schedule-checkout-modal/schedule-checkout.template.html:55
+#: app/client/checkout/schedule-checkout-modal/schedule-checkout.template.html:53
 #: app/client/shared/modals/payment-options-breakdown/payment-options-breakdown.template.html:79
 #: app/client/vehicle-details/vehicle-details.html:428
 msgid "Additional Principal"
@@ -732,7 +732,7 @@ msgstr "¿No puede arrastrar &amp y soltar?<br><br>"
 #: app/client/account-management/account-management.template.html:356
 #: app/client/account-management/account-management.template.html:99
 #: app/client/account-management/nxg-financial-account/nxg-financial-account.template.html:65
-#: app/client/checkout/schedule-checkout-modal/schedule-checkout.template.html:81
+#: app/client/checkout/schedule-checkout-modal/schedule-checkout.template.html:79
 #: app/client/dashboard/nxg-unapplied-funds-widget/request-payout-modal.template.html:53
 #: app/client/login/login-create-password/login-create-password.template.html:35
 #: app/client/login/login-update-security/login-update-security.template.html:40
@@ -890,7 +890,7 @@ msgstr "Terminado/No pagado"
 msgid "Completed/Paid"
 msgstr "Terminado/Pagado"
 
-#: app/client/checkout/schedule-checkout-modal/schedule-checkout.template.html:82
+#: app/client/checkout/schedule-checkout-modal/schedule-checkout.template.html:80
 msgid "Confirm"
 msgstr "Confirmar"
 
@@ -943,7 +943,7 @@ msgstr "Póngase en contacto con nosotros"
 msgid "Continue"
 msgstr "Continuar"
 
-#: app/client/checkout/schedule-checkout-modal/schedule-checkout.template.html:67
+#: app/client/checkout/schedule-checkout-modal/schedule-checkout.template.html:65
 #: app/client/shared/modals/payment-options-breakdown/payment-options-breakdown.template.html:91
 #: app/client/vehicle-details/vehicle-details.controller.js:519
 #: app/client/vehicle-details/vehicle-details.controller.js:525
@@ -1432,7 +1432,7 @@ msgstr "Detalles del cargo"
 msgid "Fee Type"
 msgstr "Tipo de cargo"
 
-#: app/client/checkout/schedule-checkout-modal/schedule-checkout.template.html:63
+#: app/client/checkout/schedule-checkout-modal/schedule-checkout.template.html:61
 #: app/client/shared/modals/payment-options-breakdown/payment-options-breakdown.template.html:87
 msgid "Fee(s)"
 msgstr "Cargo(s)"
@@ -1726,7 +1726,7 @@ msgstr "Instrucciones para vendedores"
 msgid "Insufficient Funds"
 msgstr "Fondos insuficientes"
 
-#: app/client/checkout/schedule-checkout-modal/schedule-checkout.template.html:59
+#: app/client/checkout/schedule-checkout-modal/schedule-checkout.template.html:57
 #: app/client/shared/modals/extension-request/payment-extension.template.html:14
 #: app/client/shared/modals/payment-options-breakdown/payment-options-breakdown.template.html:83
 #: app/client/vehicle-details/payment-details-modal/payment-details.controller.js:17
@@ -1886,7 +1886,7 @@ msgstr "Marca *"
 
 #: app/client/shared/directives/navbar/navbar.controller.js:39
 msgid "Make a Payment"
-msgstr "Para hacer un pago"
+msgstr "Hacer pago"
 
 #: app/client/dashboard/nxg-unapplied-funds-widget/request-payout-modal.template.html:44
 #: app/client/floor-vehicle/auction-bulk-flooring.template.html:107
@@ -2274,7 +2274,7 @@ msgstr "Pago"
 msgid "Payment Amount"
 msgstr "Importe del pago"
 
-#: app/client/checkout/schedule-checkout-modal/schedule-checkout.template.html:47
+#: app/client/checkout/schedule-checkout-modal/schedule-checkout.template.html:45
 #: app/client/shared/modals/payment-options-breakdown/payment-options-breakdown.template.html:71
 msgid "Payment Breakdown"
 msgstr "Desglose del pago"
@@ -2350,7 +2350,7 @@ msgid "Payment Summary"
 msgstr "Resumen del pago"
 
 #: app/client/checkout/confirm-checkout-modal/confirm-checkout.template.html:41
-#: app/client/checkout/schedule-checkout-modal/schedule-checkout.template.html:72
+#: app/client/checkout/schedule-checkout-modal/schedule-checkout.template.html:70
 #: app/client/shared/modals/payment-options-breakdown/payment-options-breakdown.template.html:96
 msgid "Payment Total"
 msgstr "Total del pago"
@@ -2986,7 +2986,7 @@ msgstr "Fecha de publicación"
 msgid "Previous Disbursements"
 msgstr "Desembolsos anteriores"
 
-#: app/client/checkout/schedule-checkout-modal/schedule-checkout.template.html:51
+#: app/client/checkout/schedule-checkout-modal/schedule-checkout.template.html:49
 #: app/client/shared/modals/extension-request/payment-extension.template.html:10
 #: app/client/shared/modals/payment-options-breakdown/payment-options-breakdown.template.html:75
 #: app/client/vehicle-details/payment-details-modal/payment-details.controller.js:18
@@ -3334,9 +3334,11 @@ msgstr "Pagos programados"
 #: app/client/checkout/schedule-checkout-modal/schedule-checkout.template.html:41
 msgid ""
 "Scheduled payments are not made until the scheduled date. <br> Interest and/"
-"or fees\r\n"
-"      may continue to accrue between now and your scheduled payment date."
+"or fees may continue to accrue between now and your scheduled payment date."
 msgstr ""
+"Los pagos programados no se realizan antes de la fecha programada. <br> Los "
+"intereses y/o cargos pueden continuar acumulándose entre hoy y su fecha de "
+"pago programada."
 
 #: app/client/dealer-search/business-search-modal/business-search.template.html:17
 #: app/client/dealer-search/dealer-name-search-modal/dealer-name-search.template.html:31
@@ -4049,13 +4051,6 @@ msgstr ""
 "con Servicios de Plan de Piso de NextGear Capital en "
 "fundingservices@nextgearcapital.com, anexe la nota de venta y proporcione el "
 "número de cliente de NextGear Capital."
-
-#: app/client/floor-vehicle/floor-car.template.html:119
-msgid ""
-"To floor plan purchases older than 365 days, please contact NextGear Capital "
-"Floorplan Services at fundingservices@nextgearcapital.com, attach the Bill "
-"of Sale, and provide the customer's NextGear Dealer Number."
-msgstr ""
 
 #: app/client/floor-vehicle/floor-car.controller.js:72
 msgid ""
@@ -4847,8 +4842,7 @@ msgstr "Código postal"
 
 #~ msgid ""
 #~ "Scheduled payments are not made until the scheduled date. <br> Interest "
-#~ "and/or fees\n"
-#~ "      may continue to accrue between now and your scheduled payment date."
+#~ "and/or fees may continue to accrue between now and your scheduled payment date."
 #~ msgstr ""
 #~ "Los pagos programados no se realizan antes de la fecha programada <br> "
 #~ "Los intereses y/u otros cargos podrán seguir acumulándose entre hoy y su "
@@ -5054,15 +5048,6 @@ msgstr "Código postal"
 
 #~ msgid "Please enter a Valid Sales Date."
 #~ msgstr "Por favor, ingrese una fecha de venta válida."
-
-#~ msgid ""
-#~ "Scheduled payments are not made until the scheduled date. <br> Interest "
-#~ "and/or fees may continue to accrue between now and your scheduled payment "
-#~ "date."
-#~ msgstr ""
-#~ "Los pagos programados no se realizan antes de la fecha programada. <br> "
-#~ "Los intereses y/o cargos pueden continuar acumulándose entre hoy y su "
-#~ "fecha de pago programada."
 
 #~ msgid "Volume of Past NextGear Capital Floorplans"
 #~ msgstr "Volumen de planes de piso pasados de NextGear Capital"
