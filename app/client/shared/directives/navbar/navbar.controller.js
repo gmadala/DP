@@ -126,8 +126,6 @@
           // check user type, dealers and auctions will have different subdomains to go to
           $scope.forumId = config.dealerForumId;
           $scope.customTemplateId = config.dealerCustomTemplateId;
-          console.log(User);
-          console.log(info);
         });
       } else {
         if ($scope.displayTitleRelease) {
