@@ -45,3 +45,6 @@ exports.resourcesPage = function () {
 exports.promosPage = function () {
   return baseUrl + 'promos';
 };
+exports.receiptsPage = function () {
+  return baseUrl + 'receipts';
+};

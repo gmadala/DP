@@ -28,7 +28,7 @@ describe('\n Login Page - Dealer', function () {
     expect(browser.getCurrentUrl()).toEqual(execSettings.loginPage());
   });
 
-  it("3. Dealer Login - Good Dealer Login", function () {
+  it("3. Dealer Login - Good Dealer Login (62434AM)", function () {
     loginObjects.doGoodLogin();
     expect(browser.getCurrentUrl()).toEqual(execSettings.homePage());
   });
@@ -42,7 +42,7 @@ describe('\n Login Page - Dealer', function () {
 
 describe('\n Login Page - Auction', function () {
 
-  it("5. Auction Login - Good Auction Login", function () {
+  it("5. Auction Login - Good Auction Login (10298KB)", function () {
     helper.goToLogin();
     loginObjects.setLogin(browser.params.userNameAuction, browser.params.password);
     loginObjects.doLogin();
