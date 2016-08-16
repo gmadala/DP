@@ -280,6 +280,8 @@
           if (result === true) {
             // submission confirmed
             vm.reallySubmit(protect);
+          } else {
+            vm.floorPlanSubmitting = false;
           }
         });
       }

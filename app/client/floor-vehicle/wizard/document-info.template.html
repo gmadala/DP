@@ -24,7 +24,7 @@
     <div ngf-drop
          name="boxDocuments"
          class="drop-box"
-         ng-class="{ 'file-error': (form.documents.$error.pattern || form.boxDocuments.$error.pattern) && wizardFloor.data.invalidFiles.length > 0 &&  docUploadAndComments.$submitted}"
+         ng-class="{ 'file-error': (form.documents.$error.pattern || form.boxDocuments.$error.pattern || wizardFloor.data.invalidFiles.length > 0 || wizardFloor.data.files.length == 0) &&  docUploadAndComments.$submitted}"
          ng-model="wizardFloor.data.files"
          ngf-model-invalid="wizardFloor.data.invalidFiles"
          ngf-fix-orientation="false"
@@ -84,7 +84,7 @@
     </label>
     <label for="documents"
            class="text-error"
-           ng-show="missingDocuments" translate>
+           ng-show="form.documents.$error.filesRequired && form.$submitted" translate>
       Please upload your floor plan documents.
     </label>
     <!--IE9 workaround -->

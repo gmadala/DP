@@ -11,6 +11,7 @@
     $scope.canAttachDocuments = false;
     $scope.submitInProgress = false;
 
+
     $scope.$parent.wizardFloor.renameFile = function (file, index) {
       var filename = "";
       var dotPos = 0;
@@ -34,15 +35,23 @@
     $scope.$watch('$scope.$parent.wizardFloor.data.files', function (newValue, oldValue) {
       if (newValue && oldValue) {
         if (newValue.length !== oldValue.length) {
-
           $scope.form.documents.$setValidity('pattern', true);
           $scope.form.documents.$setValidity('maxSize', true);
         }
       }
+
+      setFileValidity();
     });
+
+    function setFileValidity() {
+      $scope.form.documents.$setValidity('filesRequired',
+        $scope.$parent.wizardFloor.attachDocumentsEnabled
+        && $scope.$parent.wizardFloor.data.files.length > 0);
+    }
 
     $scope.$parent.wizardFloor.transitionValidation = function () {
       $scope.form.$submitted = true;
+      setFileValidity();
       $scope.$parent.wizardFloor.validity = angular.copy($scope.form);
       $scope.$parent.wizardFloor.formParts.three = $scope.form.$valid;
 
