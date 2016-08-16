@@ -1,47 +1,77 @@
 'use strict';
 
-var receiptObjects = {
+
+function Receipts() {
+
+  var helper = require('../framework/e2e_helper_functions.js');
+  var Helper = new helper.helper();
+
 
   //Locators
-  exportReceipts: function () {
-    return element.all(by.css('button[ng-click="onExport()"]'));
-  },
+  this.elReceiptsLabel = browser.element(by.css('div.search-form'));
+  this.elClearSearch = browser.element(by.id('clearSearch'));
+  this.elFindFloorPlan = browser.element(by.id('keyword'));
+  this.elFloorPlanSearch = browser.element(by.id('floorPlanSearch'));
+  this.elPaymentMethod = browser.element(by.id('filterSelect'));
+  this.elExportReceipts = browser.element.all(by.css('button[ng-click="onExport()"]'));
+  this.elFirstReceipt = browser.element.all(by.css('button[ng-click="toggleInQueue(receipt)"]'));
+  this.elStartDate = browser.element(by.id('startDate'));
+  this.elEndDate = browser.element(by.id('endDate'));
+  this.elReceipts = browser.element(by.css('table.table.table-striped.table-primary'));
 
-  firstReceipt: function () {
-    return element.all(by.css('button[ng-click="toggleInQueue(receipt)"]'));
-  },
+  //Getters
+  this.getTestClearSearch = function () {
+    browser.sleep(browser.params.shortDelay);
+    return this.elClearSearch.getText();
+  };
 
   //Doers
-  clickExportReceipts: function () {
+  this.doExportReceipts = function () {
     browser.sleep(browser.params.shortDelay);
-    this.exportReceipts().get(0).click();
-  },
-  clickFirstReceipt: function () {
+    this.elExportReceipts.get(0).click();
+  };
+  this.doFirstReceipt = function () {
+    browser.sleep(browser.params.mediumDelay);
+    this.elFirstReceipt.get(0).click();
+  };
+  this.doFloorPlanSearch = function () {
+    this.elFloorPlanSearch.click();
+    browser.sleep(browser.params.longDelay);
+  };
+  this.doClearSearch = function () {
+    this.elClearSearch.click();
+    browser.sleep(browser.params.mediumDelay);
+  };
+  this.doPaymentMethod = function () {
+    this.doClearSearch();
+    this.elPaymentMethod.click();
     browser.sleep(browser.params.shortDelay);
-    this.firstReceipt().get(0).click();
-  }
+    this.setPaymentMethod();
+    browser.sleep(browser.params.mediumDelay);
+  };
+  this.doDatesSearch = function () {
+    this.doClearSearch();
+    browser.sleep(browser.params.shortDelay);
+    this.setDates();
+    browser.sleep(browser.params.shortDelay);
+    this.doFloorPlanSearch();
+  };
 
-};
+  //Setters
+  this.setVIN = function () {
+    this.elFindFloorPlan.sendKeys('4372');
+    browser.sleep(browser.params.shortDelay);
+  };
+  this.setPaymentMethod = function () {
+    this.elPaymentMethod.sendKeys('ACH');
+    browser.sleep(browser.params.shortDelay);
+  };
+  this.setDates = function () {
+    this.elStartDate.sendKeys('03/27/2014');
+    browser.sleep(browser.params.shortDelay);
+    this.elEndDate.sendKeys(Helper.getTodaysDate());
+    browser.sleep(browser.params.shortDelay);
+  };
 
-module.exports = receiptObjects;
-
-
-// function ReceiptsObjects() {
-//
-//   //Locators
-//   this.elExportReceipts = browser.element.all(by.css('button[ng-click="onExport()"]'));
-//   this.elFirstReceipt = browser.element.all(by.css('button[ng-click="toggleInQueue(receipt)"]'));
-//
-//   //Doers
-//   this.doExportReceipts = function () {
-//     browser.sleep(browser.params.shortDelay);
-//     this.elExportReceipts().get(0).click();
-//   };
-//   this.doFirstReceipt = function () {
-//     browser.sleep(2000);
-//     browser.sleep(browser.params.shortDelay);
-//     this.elFirstReceipt().get(0).click();
-//   };
-//
-// }
-// module.exports.ReceiptsObjects = ReceiptsObjects;
+}
+module.exports.receipts = Receipts;

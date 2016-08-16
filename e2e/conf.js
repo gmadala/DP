@@ -7,15 +7,25 @@ exports.config = {
       'args': [
         '--disable-extensions',
         '-–allow-file-access-from-files',
-        //'--incognito',
-        '--disable-web-security'
-      ]
-    }
+        '--disable-web-security',
+        '--no-sandbox',
+        '--test-type=browser'
+      ],
+      'prefs': {
+        'download': {
+          'prompt_for_download': false,
+          'directory_upgrade': true,
+          'default_directory': '/tmp'
+        }
+      }
+    },
+    shardTestFiles: (process.env.maxInstances > 1),
+    maxInstances: process.env.maxInstances
   },
 
   //Spec patterns are relative to the current working directly when protractor is called.
   specs: ['tests/login/*_spec.js'],
-  //specs: ['tests/login/e2e_resources_spec.js'],
+  //specs: ['tests/login/e2e_dashboard_spec.js'],
 
   //More miscellaneous configuration options
   directConnect: true,
@@ -36,9 +46,9 @@ exports.config = {
 
   //Project global parameters
   params: {
-    userNameDealer: '53190md',
-    userNameAuction: 'tmsauction',
-    userName: '97421EH',
+    userNameDealer: '57694AC',
+    userNameAuction: '10298KB',
+    userName: '62434AM',
     password: 'ngcpass!0',
     delay: '500',
     shortDelay: '1000',
