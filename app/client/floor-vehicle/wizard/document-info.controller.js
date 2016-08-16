@@ -37,6 +37,9 @@
         if (newValue.length !== oldValue.length) {
           $scope.form.documents.$setValidity('pattern', true);
           $scope.form.documents.$setValidity('maxSize', true);
+
+          $scope.form.boxDocuments.$setValidity('pattern', true);
+          $scope.form.boxDocuments.$setValidity('maxSize', true);
         }
       }
 
@@ -70,6 +73,8 @@
       if ($scope.$parent.wizardFloor.validity.documents) {
         $scope.$parent.wizardFloor.validity.documents = angular.copy($scope.form.documents);
       }
+
+      setFileValidity();
     };
 
     $scope.removeFile = function (file) {
