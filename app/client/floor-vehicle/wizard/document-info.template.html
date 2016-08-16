@@ -72,7 +72,9 @@
            ngf-pattern="'image/*,application/pdf,application/vnd.ms*,application/vnd.open*,application/ms*'"
            ngf-keep="true"
            ngf-fix-orientation="false"
-           ngf-max-size="'5MB'">
+           ngf-max-size="'5MB'"
+           ng-disabled="wizardFloor.floorPlanSubmitting"
+    >
     <label for="documents" class="text-error"
            ng-show="(form.documents.$error.pattern || form.boxDocuments.$error.pattern) && form.$submitted"
            translate>
@@ -106,7 +108,9 @@
     <div class="column-divider"></div>
     <textarea class="comment-box"
               placeholder="(Ex. Additional instructions, etc.)"
-              ng-model="wizardFloor.data.comment"></textarea>
+              ng-model="wizardFloor.data.comment"
+              ng-disabled="wizardFloor.floorPlanSubmitting"
+    ></textarea>
 
   </div>
 </form>

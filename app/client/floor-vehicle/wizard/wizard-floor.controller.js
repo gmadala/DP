@@ -147,8 +147,14 @@
       vm.data = angular.copy(vm.defaultData);
       vm.optionsHelper.applyDefaults($scope, vm.data);
       vm.validity = undefined;
+      vm.counter = 1;
+      switchState();
       $scope.$broadcast('reset');
     };
+
+    vm.goToDashboard = function () {
+      $state.go("dashboard");
+    }
 
     // Wizard Nav functions ---------------------------------------------------
     vm.tabClick = function (count) {
@@ -331,10 +337,7 @@
               $uibModal.open(dialogParams).result.then(function () {
                 vm.floorPlanSubmitting = false;
                 vm.reset();
-
-                if (response.data.Success) {
-                  $state.go("dashboard");
-                }
+                vm.goToDashboard();
               });
             }, function () {
               vm.floorPlanSubmitting = false;
@@ -342,6 +345,7 @@
               $uibModal.open(dialogParams).result.then(function () {
                 vm.floorPlanSubmitting = false;
                 vm.reset();
+                vm.goToDashboard();
               });
             });
           } else {
@@ -350,6 +354,7 @@
             $uibModal.open(dialogParams).result.then(function () {
               vm.floorPlanSubmitting = false;
               vm.reset();
+              vm.goToDashboard();
             });
           }
         }, function (/*floorplan error*/) {
