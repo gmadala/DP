@@ -14,8 +14,6 @@
   function CarInfoCtrl($scope, User, gettextCatalog) {
     var vm = this;
 
-    vm.sample = 'This car info is coming from the controller';
-
     vm.data = null;
 
     vm.vinDetailsErrorFlag = false;
