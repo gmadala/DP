@@ -13,7 +13,8 @@
     'LocalStorageModule',
     'gettext',
     'nextgearWebCommon',
-    'ngFileUpload'
+    'ngFileUpload',
+    'frapontillo.bootstrap-switch'
   ]);
 
 })();

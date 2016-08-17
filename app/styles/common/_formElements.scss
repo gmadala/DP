@@ -73,6 +73,10 @@ input, select {
   margin: 5px 0;
 }
 
+input.noglobal {
+  height: 12px !important;
+}
+
 textarea {
   font-size: $inputFontSize;
   color: $text;
