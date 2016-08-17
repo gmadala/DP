@@ -86,7 +86,7 @@
     </label>
     <label for="documents"
            class="text-error"
-           ng-show="wizardFloor.data.files.length === 0" translate>
+           ng-show="wizardFloor.data.files.length === 0 && form.$submitted" translate>
       Please upload your floor plan documents.
     </label>
     <!--IE9 workaround -->
