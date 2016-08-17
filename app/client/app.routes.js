@@ -18,6 +18,51 @@
     $uiViewScrollProvider.useAnchorScroll();
     $urlRouterProvider.otherwise(otherwiseRouteConfig);
     $stateProvider
+      .state('flooringWizard', {
+        abstract: true,
+        url: '/flooring-wizard',
+        controller: 'WizardFloorCtrl',
+        controllerAs: 'wizardFloor',
+        templateUrl: 'client/floor-vehicle/wizard/wizard-floor.template.html',
+        data: {
+          pageId: 'Floorplan',
+          showNavBar: true,
+          isFeature: 'responsiveFloorplanBuyer'
+        }
+      })
+      .state('flooringWizard.car', {
+        url: '',
+        controller: 'CarInfoCtrl',
+        controllerAs: 'carInfo',
+        templateUrl: 'client/floor-vehicle/wizard/car-info.template.html',
+        data: {
+          pageId: 'Floorplan',
+          showNavBar: true,
+          isFeature: 'responsiveFloorplanBuyer'
+        }
+      })
+      .state('flooringWizard.sales', {
+        url: '/sales',
+        controller: 'SalesInfoCtrl',
+        controllerAs: 'salesInfo',
+        templateUrl: 'client/floor-vehicle/wizard/sales-info.template.html',
+        data: {
+          pageId: 'Floorplan',
+          showNavBar: true,
+          isFeature: 'responsiveFloorplanBuyer'
+        }
+      })
+      .state('flooringWizard.document', {
+        url: '/document',
+        controller: 'DocumentInfoCtrl',
+        controllerAs: 'documentInfo',
+        templateUrl: 'client/floor-vehicle/wizard/document-info.template.html',
+        data: {
+          pageId: 'Floorplan',
+          showNavBar: true,
+          isFeature: 'responsiveFloorplanBuyer'
+        }
+      })
       .state('login', {
         url: '/login',
         templateUrl: 'client/login/login.template.html',
