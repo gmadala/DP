@@ -504,7 +504,6 @@
 
   #navbar .navbar-nav {
     float: none !important;
-    margin: 7.5px -15px;
   }
 
   #navbar .navbar-nav .open .dropdown-menu {
@@ -563,20 +562,21 @@
   }  
 
   #navbar .navbar-collapse {
-    position: fixed;
+    position: absolute;
     top: 0;
     display: block;
     width: 80vw;
     height: 100vh !important;
-    max-height: 120%;
+    max-height: inherit;
     overflow-y: scroll;
     -webkit-overflow-scrolling: touch;
     margin: 0;
     background-color: grey;
     border-top: 0;    
     left: -80vw;
-    ul {
-      padding-bottom: 80px;
+    z-index: 1;
+    > ul {
+      margin: 0 -15px;
     }
 
     &.closed {
@@ -601,10 +601,14 @@
   }
 
   body.menu-open {
+    width: 100vw;
     overflow: hidden;
 
     #wrapper {
-      overflow: hidden;
+
+      height: -webkit-calc(100vh - 68px);
+      height:    -moz-calc(100vh - 68px);
+      height:         calc(100vh - 68px);
     }
 
     #main-container,
@@ -615,6 +619,15 @@
 
     .mobile-navbar .navbar-header {
       @include animations('open-nav 1s 1');
+    }
+
+    .navbar-scroll-fix {
+      height: 100vh;
+      width: 100vw;
+      position: absolute;
+      top: 0;
+      left: 0;
+      z-index: 0;
     }
   }
 }
