@@ -9,9 +9,13 @@
       <a>2</a>
       <div>Sale Information</div>
     </li>
-    <li ng-class="{'active': wizardFloor.counter == 3, 'hidden': !wizardFloor.attachDocumentsEnabled}" ng-click="wizardFloor.tabClick(3)">
+    <li ng-class="{'active': wizardFloor.counter == 3}" ng-click="wizardFloor.tabClick(3)">
       <a>3</a>
       <div>Documents &amp; Instructions</div>
+    </li>
+    <li ng-class="{'active': wizardFloor.counter == 4, 'hidden': !wizardFloor.attachDocumentsEnabled}" ng-click="wizardFloor.tabClick(4)">
+      <a>4</a>
+      <div>Documentation Upload</div>
     </li>
   </ul>
   <div ui-view></div>
@@ -24,14 +28,14 @@
     </button>
     <button type="button"
             class="btn-cta cta-primary" translate
-            ng-show="wizardFloor.nextAvailable() && (wizardFloor.attachDocumentsEnabled || wizardFloor.counter != 2)"
+            ng-show="wizardFloor.nextAvailable() && (wizardFloor.attachDocumentsEnabled || wizardFloor.counter != 3)"
             ng-disabled="!wizardFloor.validForm"
             ng-click="wizardFloor.next()">
       Next
     </button>
     <button type="button"
             class="btn-cta cta-primary" translate
-            ng-show="!wizardFloor.nextAvailable() || (!wizardFloor.attachDocumentsEnabled && wizardFloor.counter == 2)"
+            ng-show="!wizardFloor.nextAvailable() || (!wizardFloor.attachDocumentsEnabled && wizardFloor.counter == 3)"
             ng-disabled="wizardFloor.floorPlanSubmitting"
             ng-click="wizardFloor.submit()">
       Submit

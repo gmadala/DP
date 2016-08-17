@@ -53,12 +53,13 @@
     vm.formParts = {
       one: false,
       two: false,
-      three: false
+      three: false,
+      four: false
     };
 
     vm.floorPlanSubmitting = false;
 
-    vm.pageCount = 3;
+    vm.pageCount = 4;
 
     switchState();
 
@@ -204,6 +205,10 @@
           }
 
           break;
+        case 4:
+          if (vm.formParts.one && vm.formParts.two && vm.formParts.three) {
+            $state.go('flooringWizard.document');
+          }
       }
     }
 
@@ -219,6 +224,9 @@
           break;
         case 3:
           return vm.formParts.one && vm.formParts.two;
+          break;
+        case 4:
+          return vm.formParts.one && vm.formParts.two && vm.formParts.three;
           break;
       }
     }
