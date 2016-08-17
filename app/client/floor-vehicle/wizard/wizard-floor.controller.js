@@ -152,10 +152,6 @@
       $scope.$broadcast('reset');
     };
 
-    vm.goToDashboard = function () {
-      $state.go("dashboard");
-    }
-
     // Wizard Nav functions ---------------------------------------------------
     vm.tabClick = function (count) {
       if (canTransition(count)) {
@@ -337,7 +333,6 @@
               $uibModal.open(dialogParams).result.then(function () {
                 vm.floorPlanSubmitting = false;
                 vm.reset();
-                vm.goToDashboard();
               });
             }, function () {
               vm.floorPlanSubmitting = false;
@@ -345,7 +340,6 @@
               $uibModal.open(dialogParams).result.then(function () {
                 vm.floorPlanSubmitting = false;
                 vm.reset();
-                vm.goToDashboard();
               });
             });
           } else {
@@ -354,7 +348,6 @@
             $uibModal.open(dialogParams).result.then(function () {
               vm.floorPlanSubmitting = false;
               vm.reset();
-              vm.goToDashboard();
             });
           }
         }, function (/*floorplan error*/) {
