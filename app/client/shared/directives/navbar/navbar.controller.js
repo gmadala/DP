@@ -17,9 +17,7 @@
     '$location',
     '$timeout',
     'localStorageService',
-    'fedex',
-    'dealerCustomerSupportPhone',
-    'nxgConfig'
+    'fedex'
   ];
 
   function NavBarCtrl($rootScope,
@@ -33,9 +31,7 @@
     $location,
     $timeout,
     localStorageService,
-    fedex,
-    dealerCustomerSupportPhone,
-    nxgConfig) {
+    fedex) {
 
     $scope.isCollapsed = true;
     var paymentsSubMenu = [
@@ -45,7 +41,6 @@
       floorplansSubMenu = [
         { name: gettextCatalog.getString('View Floor Plan'), href: '#/floorplan', activeWhen: 'floorplan', subMenu: floorplansSubMenu },
         { name: gettextCatalog.getString('Floor a Vehicle'), href: '#/floorcar', activeWhen: 'floorcar' },
-        { name: gettextCatalog.getString('Value Lookup'), href: '#/valueLookup', activeWhen: 'valueLookup' },
       ],
       resourcesSubMenu = [
         { name: gettextCatalog.getString('Resources'), href: '#/documents', activeWhen: 'documents' },
@@ -71,21 +66,7 @@
         ]
       };
 
-    if (!User.isLoggedIn()) {
-      // catching auth event to trigger nav init
-      $scope.$on('event:userAuthenticated', function () {
-        initNav();
-      });
-
-      if ($scope.displayTitleRelease) {
-        dealerLinks.primary.splice(3, 1);
-      }
-    } else {
-      // catching user already logged in to trigger nav init
-      initNav();
-    }
-
-    function initNav() {
+    $scope.initNav = function () {
       kissMetricInfo.getKissMetricInfo().then(function (result) {
         $scope.kissMetricData = result;
       });
@@ -96,6 +77,11 @@
         $scope.eventSalesEnabled = User.getFeatures().hasOwnProperty('eventSales') ? User.getFeatures().eventSales.enabled : true;
         $scope.fedExWaybillEnabled = fedex.wayBillPrintingEnabled();
         if ($scope.isUnitedStates) {
+          floorplansSubMenu.splice(2, 0, {
+            name: gettextCatalog.getString('Value Lookup'),
+            href: '#/valueLookup',
+            activeWhen: 'valueLookup'
+          });
           if ($scope.eventSalesEnabled) {
             resourcesSubMenu.push({
               name: gettextCatalog.getString('Promos'),
@@ -111,6 +97,11 @@
             activeWhen: 'titlereleases'
           });
         }
+        if (User.getFeatures().hasOwnProperty('responsiveFloorplanBuyer') && User.getFeatures().responsiveFloorplanBuyer.enabled === true) {
+          floorplansSubMenu[1].href = '#/flooring-wizard';
+          floorplansSubMenu[1].activeWhen = 'flooring-wizard';
+        }
+
         $scope.user = {
           BusinessNumber: info.BusinessNumber,
           BusinessName: info.BusinessName,
@@ -125,16 +116,21 @@
             return User.isDealer() ? '#/home' : '#/act/home';
           }
         };
-        $scope.support = {
-          email: info.MarketEMail,
-          phone: info.MarketPhoneNumber,
-          customerSupportPhone: info.CSCPhoneNumber
-        };
-        var config = nxgConfig.userVoice;
-        // check user type, dealers and auctions will have different subdomains to go to
-        $scope.forumId = config.dealerForumId;
-        $scope.customTemplateId = config.dealerCustomTemplateId;
       });
+    };
+
+    if (!User.isLoggedIn()) {
+      // catching auth event to trigger nav init
+      $scope.$on('event:userAuthenticated', function () {
+        $scope.initNav();
+      });
+
+      if ($scope.displayTitleRelease) {
+        dealerLinks.primary.splice(3, 1);
+      }
+    } else {
+      // catching user already logged in to trigger nav init
+      $scope.initNav();
     }
 
     // Enable chat only when we are using English
@@ -263,12 +259,5 @@
         $scope.hideMenuTip = true;
       }
     };
-
-    // disallow scrolling on mobile inside the pushed wrapper when the menu is open, could not get the same functionality to work with pure JS via attaching event handlers
-    // $("#wrapper").on('touchmove', function(e) {
-    //   if ($(e.target).closest('#navbarContainer').length <= 0 && $scope.isMobile && $state.current.data.showMenu) {
-    //     return false;
-    //   }
-    // });
   }
 })();

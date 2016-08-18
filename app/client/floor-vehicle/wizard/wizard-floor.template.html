@@ -1,0 +1,40 @@
+<div class="container container-fluid">
+  <ul class="nav nav-pills nav-justified wizard-nav">
+    <div class="wizard-line"></div>
+    <li ng-class="{'active': wizardFloor.counter == 1}" ng-click="wizardFloor.tabClick(1)">
+      <a>1</a>
+      <div>Vehicle Information</div>
+    </li>
+    <li ng-class="{'active': wizardFloor.counter == 2}" ng-click="wizardFloor.tabClick(2)">
+      <a>2</a>
+      <div>Sale Information</div>
+    </li>
+    <li ng-class="{'active': wizardFloor.counter == 3, 'hidden': !wizardFloor.attachDocumentsEnabled}" ng-click="wizardFloor.tabClick(3)">
+      <a>3</a>
+      <div>Documents &amp; Instructions</div>
+    </li>
+  </ul>
+  <div ui-view></div>
+  <div>
+    <button type="button"
+            class="btn-cta cta-secondary" translate
+            ng-disabled="!wizardFloor.previousAvailable()"
+            ng-click="wizardFloor.previous()">
+      Previous
+    </button>
+    <button type="button"
+            class="btn-cta cta-primary" translate
+            ng-show="wizardFloor.nextAvailable() && (wizardFloor.attachDocumentsEnabled || wizardFloor.counter != 2)"
+            ng-disabled="!wizardFloor.validForm"
+            ng-click="wizardFloor.next()">
+      Next
+    </button>
+    <button type="button"
+            class="btn-cta cta-primary" translate
+            ng-show="!wizardFloor.nextAvailable() || (!wizardFloor.attachDocumentsEnabled && wizardFloor.counter == 2)"
+            ng-disabled="wizardFloor.floorPlanSubmitting"
+            ng-click="wizardFloor.submit()">
+      Submit
+    </button>
+  </div>
+</div>

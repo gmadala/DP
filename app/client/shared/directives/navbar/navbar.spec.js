@@ -183,7 +183,7 @@ describe('Directive: navBar', function() {
           kissMetricInfo: mockKissMetricInfo
         });
         $rootScope.$digest();
-        expect(scope.user.navLinks().primary[2].subMenu.length).toBe(3);
+        expect(scope.user.navLinks().primary[2].subMenu.length).toBe(2);
       });
 
       it('should include a title release link only if the user has DisplayTitleReleaseProgram set to true', function() {
