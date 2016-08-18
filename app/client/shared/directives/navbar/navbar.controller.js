@@ -17,7 +17,8 @@
     '$location',
     '$timeout',
     'localStorageService',
-    'fedex'
+    'fedex',
+    'nxgConfig'
   ];
 
   function NavBarCtrl($rootScope,
@@ -31,7 +32,8 @@
     $location,
     $timeout,
     localStorageService,
-    fedex) {
+    fedex,
+    nxgConfig) {
 
     $scope.isCollapsed = true;
     var paymentsSubMenu = [
@@ -116,6 +118,15 @@
             return User.isDealer() ? '#/home' : '#/act/home';
           }
         };
+        $scope.support = {
+          email: info.MarketEMail,
+          phone: info.MarketPhoneNumber,
+          customerSupportPhone: info.CSCPhoneNumber
+        };
+        var config = nxgConfig.userVoice;
+        // check user type, dealers and auctions will have different subdomains to go to
+        $scope.forumId = config.dealerForumId;
+        $scope.customTemplateId = config.dealerCustomTemplateId;
       });
     };
 
