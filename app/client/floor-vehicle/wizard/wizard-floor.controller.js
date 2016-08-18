@@ -201,7 +201,7 @@
           break;
         case 3:
           if (vm.formParts.one && vm.formParts.two) {
-            $state.go('flooringWizard.document');
+            $state.go('flooringWizard.payment');
           }
 
           break;

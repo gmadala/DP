@@ -52,6 +52,17 @@
           isFeature: 'responsiveFloorplanBuyer'
         }
       })
+      .state('flooringWizard.payment', {
+        url: '/payment',
+        controller: 'PaymentInfoCtrl',
+        controllerAs: 'paymentInfo',
+        templateUrl: 'client/floor-vehicle/wizard/payment-info.template.html',
+        data: {
+          pageId: 'Floorplan',
+          showNavBar: true,
+          isFeature: 'responsiveFloorplanBuyer'
+        }
+      })
       .state('flooringWizard.document', {
         url: '/document',
         controller: 'DocumentInfoCtrl',
