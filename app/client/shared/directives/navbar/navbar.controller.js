@@ -109,7 +109,14 @@
           BusinessName: info.BusinessName,
           isDealer: User.isDealer,
           logout: function () {
-            $rootScope.$emit('event:userRequestedLogout');
+            if ($scope.isMobile) {
+              // wait until animation completes before emitting logout, otherwise modal sometimes sizes incorrectly on slow phones
+              setTimeout(function () {
+                $rootScope.$emit('event:userRequestedLogout');
+              }, 510);
+            } else {
+              $rootScope.$emit('event:userRequestedLogout');
+            }
           },
           navLinks: function () {
             return User.isDealer() ? dealerLinks : auctionLinks;
