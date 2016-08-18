@@ -476,23 +476,6 @@
     left: 0px;
   }
 
-  .button-x {
-    .hamburger {
-      background-color: transparent;
-    }
-    .hamburger::before {
-      background-color: white;
-      transform: rotate3d(0, 0, 1, 45deg);
-      transform-origin: 2px center;
-    }
-    .hamburger::after {
-      background-color: white;
-      transform: rotate3d(0, 0, 1, -45deg);
-      transform-origin: 2px center;
-    }
-
-  }
-
   /* Reset responsive Bootstrap elements */
   #navbar .navbar-header {
     float: none;
@@ -580,11 +563,11 @@
     }
 
     &.closed {
-      @include animations('close-nav 1s 1');
+      @include animations('close-nav .5s 1');
     }
 
     &.open {
-      @include animations('open-nav 1s 1');
+      @include animations('open-nav .5s 1');
     }
   }
 
@@ -592,17 +575,35 @@
     #main-container,
     footer {
       position: relative;
-      @include animations('close-nav 1s 1');
+      @include animations('close-nav .5s 1');
     }
 
     .mobile-navbar .navbar-header {
-      @include animations('close-nav 1s 1');
+      @include animations('close-nav .5s 1');
+    }
+
+    .mobile-menu-button {
+      @include animations('close-menu .5s 1');
     }
   }
 
   body.menu-open {
     width: 100vw;
     overflow: hidden;
+
+    .hamburger {
+      background-color: transparent;
+    }
+    .hamburger::before {
+      background-color: white;
+      transform: rotate3d(0, 0, 1, 45deg);
+      transform-origin: 2px center;
+    }
+    .hamburger::after {
+      background-color: white;
+      transform: rotate3d(0, 0, 1, -45deg);
+      transform-origin: 2px center;
+    }
 
     #wrapper {
 
@@ -614,11 +615,11 @@
     #main-container,
     footer {
       position: relative;
-      @include animations('open-nav 1s 1');
+      @include animations('open-nav .5s 1');
     }
 
     .mobile-navbar .navbar-header {
-      @include animations('open-nav 1s 1');
+      @include animations('open-nav .5s 1');
     }
 
     .navbar-scroll-fix {
