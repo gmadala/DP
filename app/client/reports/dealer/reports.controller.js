@@ -55,6 +55,13 @@
     $scope.openPaidEndDatePicker = function() {
       $scope.paidEndDatePicker.opened = true;
     };
+
+    $scope.labelUpcomingDate = gettextCatalog.getString('Date');
+
+    $scope.updateUpcomingDate = function(newDate) {
+      $scope.data.curtailmentDate = newDate;
+    };
+
     $scope.maxDate = new Date();
 
     $scope.expInvStatus = {
@@ -199,7 +206,7 @@
 
       // take a snapshot of form state -- view can bind to this for submit-time update of validation display
       $scope.curtailmentFormValidity = angular.copy($scope.curtailmentForm);
-
+      $scope.invalidUpcomingDate = $scope.curtailmentFormValidity.curtailmentDate.$error.required || $scope.curtailmentFormValidity.curtailmentDate.$error.date;
       if (!$scope.curtailmentForm.$valid) {
         return false;
       }

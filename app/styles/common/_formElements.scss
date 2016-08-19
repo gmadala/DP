@@ -688,7 +688,7 @@ input[type="radio"] {
     top: 38px;
     right: 27px;
     margin: 0;
-    height: 17px;
+    //height: 17px;
   }
   .btn-calendar {
     position: absolute;
@@ -822,6 +822,16 @@ input[type="radio"] {
       background-color: darken($highlight, 10%);
     }
   }
+}
+
+.date-picker {
+  ul {
+    top: 48px !important;
+  }
+}
+
+.nxg-date-field {
+  width: 125px;
 }
 
 /*
@@ -993,6 +1003,10 @@ ul.files-container li .file-delete:hover {
     left: initial !important;
     right: 15px;
   }
+}
+
+.ng-react-date-picker{
+  width: 100% !important;
 }
 
 .disbursement-date-picker {

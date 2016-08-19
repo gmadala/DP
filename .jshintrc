@@ -33,6 +33,7 @@
     "by": false,
     "inject": false,
     "spyOn": false,
-    "sinon": false
+    "sinon": false,
+    "React": false
   }
 }
