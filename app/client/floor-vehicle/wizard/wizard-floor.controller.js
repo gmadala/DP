@@ -213,31 +213,23 @@
       switch (count) {
         case 1:
           return true;
-          break;
         case 2:
           return vm.formParts.one;
-          break;
         case 3:
           return vm.formParts.one && vm.formParts.two;
-          break;
       }
     }
 
     vm.canSubmit = function () {
-      if (vm.floorPlanSubmitting)
-        return false;
+      if (vm.floorPlanSubmitting) { return false; }
 
-      if (!vm.formParts.one)
-        return false;
+      if (!vm.formParts.one) { return false; }
 
-      if (!vm.formParts.two)
-        return false;
+      if (!vm.formParts.two) { return false; }
 
-      if (vm.attachDocumentsEnabled || !vm.formParts.three)
-        return false;
+      if (vm.attachDocumentsEnabled || !vm.formParts.three) { return false; }       
 
-      if (vm.attachDocumentsEnabled && vm.data.files.length < 1)
-        return false;
+      if (vm.attachDocumentsEnabled && vm.data.files.length < 1) { return false; }
 
       return true;
     };

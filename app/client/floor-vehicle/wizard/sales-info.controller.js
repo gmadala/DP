@@ -5,9 +5,9 @@
     .module('nextgearWebApp')
     .controller('SalesInfoCtrl', SalesInfoCtrl);
 
-  SalesInfoCtrl.$inject = ['$scope', 'gettext', 'gettextCatalog', 'moment', 'User'];
+  SalesInfoCtrl.$inject = ['$scope', 'gettext', 'gettextCatalog', 'moment'];
 
-  function SalesInfoCtrl($scope, gettext, gettextCatalog, moment, User) {
+  function SalesInfoCtrl($scope, gettext, gettextCatalog, moment) {
     var vm = this;
 
     // init a special version of today's date for our datepicker which only works right with dates @ midnight
