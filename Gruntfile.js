@@ -3,7 +3,7 @@
 var serveStatic = require('serve-static');
 var mockApi = require('./api/mockApi.js');
 
-module.exports = function(grunt) {
+module.exports = function (grunt) {
   // load all grunt tasks
   require('matchdep').filterDev('grunt-*').forEach(grunt.loadNpmTasks);
 
@@ -34,16 +34,16 @@ module.exports = function(grunt) {
       },
       livereload: {
         options: {
-            livereload: true
+          livereload: true
         },
         files: [
-        '<%= yeoman.app %>/**/*.html',
-        '!<%= yeoman.app %>/index.html',
-        '.tmp/index.html',
-        '{.tmp,<%= yeoman.app %>}/styles/**/*.css',
-        '{.tmp,<%= yeoman.app %>}/client/**/*.js',
-        '{.tmp,<%= yeoman.app %>}/private-components/**/*.js',
-        '<%= yeoman.app %>/styles/img/**/*.{png,jpg,jpeg,gif,webp,svg}'
+          '<%= yeoman.app %>/**/*.html',
+          '!<%= yeoman.app %>/index.html',
+          '.tmp/index.html',
+          '{.tmp,<%= yeoman.app %>}/styles/**/*.css',
+          '{.tmp,<%= yeoman.app %>}/client/**/*.js',
+          '{.tmp,<%= yeoman.app %>}/private-components/**/*.js',
+          '<%= yeoman.app %>/styles/img/**/*.{png,jpg,jpeg,gif,webp,svg}'
         ]
       },
       html: {
@@ -59,7 +59,7 @@ module.exports = function(grunt) {
       },
       livereload: {
         options: {
-          middleware: function(connect) {
+          middleware: function (connect) {
             return [
               serveStatic('.tmp'),
               serveStatic(yeomanConfig.app),
@@ -72,7 +72,7 @@ module.exports = function(grunt) {
       },
       test: {
         options: {
-          middleware: function(connect) {
+          middleware: function (connect) {
             return [
               serveStatic('.tmp'),
               serveStatic('test')
@@ -277,13 +277,13 @@ module.exports = function(grunt) {
     htmlmin: {
       dist: {
         options: {
-          collapseBooleanAttributes:      true,
-          collapseWhitespace:             false, // Breaks translations if we remove whitespace
-          removeAttributeQuotes:          true,
-          removeComments:                 true, // Only if you don't use comment directives!
-          removeEmptyAttributes:          true,
-          removeScriptTypeAttributes:     true,
-          removeStyleLinkTypeAttributes:  true
+          collapseBooleanAttributes: true,
+          collapseWhitespace: false, // Breaks translations if we remove whitespace
+          removeAttributeQuotes: true,
+          removeComments: true, // Only if you don't use comment directives!
+          removeEmptyAttributes: true,
+          removeScriptTypeAttributes: true,
+          removeStyleLinkTypeAttributes: true
         },
         files: [{
           expand: true,
@@ -393,12 +393,12 @@ module.exports = function(grunt) {
       },
       dist: {
         files: [
-          { expand: true, dot: true, flatten: true, dest: '<%= yeoman.dist %>/', src: '<%= yeoman.app %>/version.txt' },
-          { expand: true, dot: true, flatten: true, dest: '<%= yeoman.dist %>/', src: '<%= yeoman.app %>/favicon.ico' },
-          { expand: true, dot: true, flatten: true, dest: '<%= yeoman.dist %>/img/', src: '<%= yeoman.app %>/img/*' },
-          { expand: true, dot: true, flatten: true, dest: '<%= yeoman.dist %>/img/icons/', src: '<%= yeoman.app %>/img/icons/*' },
-          { expand: true, dot: true, flatten: true, dest: '<%= yeoman.dist %>/img/browsers/', src: '<%= yeoman.app %>/img/browsers/*' },
-          { expand: true, dot: true, flatten: true, dest: '<%= yeoman.dist %>/fonts/', src: '<%= yeoman.app %>/fonts/**/*' },
+          {expand: true, dot: true, flatten: true, dest: '<%= yeoman.dist %>/', src: '<%= yeoman.app %>/version.txt'},
+          {expand: true, dot: true, flatten: true, dest: '<%= yeoman.dist %>/', src: '<%= yeoman.app %>/favicon.ico'},
+          {expand: true, dot: true, flatten: true, dest: '<%= yeoman.dist %>/img/', src: '<%= yeoman.app %>/img/*'},
+          {expand: true, dot: true, flatten: true, dest: '<%= yeoman.dist %>/img/icons/', src: '<%= yeoman.app %>/img/icons/*'},
+          {expand: true, dot: true, flatten: true, dest: '<%= yeoman.dist %>/img/browsers/', src: '<%= yeoman.app %>/img/browsers/*'},
+          {expand: true, dot: true, flatten: true, dest: '<%= yeoman.dist %>/fonts/', src: '<%= yeoman.app %>/fonts/**/*'},
           {
             expand: true,
             dot: true,
@@ -443,11 +443,11 @@ module.exports = function(grunt) {
           '<%= yeoman.dist %>/version.txt': '<%= yeoman.dist %>/version.txt'
         }
       },
-      dist : {
-        src : [ '.tmp/concat/scripts/scripts.js' ],
+      dist: {
+        src: ['.tmp/concat/scripts/scripts.js'],
         options: {
-          inline : true,
-          context : {
+          inline: true,
+          context: {
             DEBUG: false
           }
         }
@@ -540,12 +540,11 @@ module.exports = function(grunt) {
     },
     protractor: { // a specific suite can be run with grunt protractor:run --suite=suite_name
       options: {
-        keepAlive: true,
+        //keepAlive: true,
         configFile: 'e2e/conf.js',
         noColor: false
       },
-      run: {
-      }
+      run: {}
     },
     githooks: {
       all: {
