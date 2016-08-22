@@ -79,7 +79,6 @@
 
       vm.options.locations = Addresses.getActivePhysical();
 
-      console.log(vm.options);
       console.log(vm);
 
       var optionListsToDefault = [

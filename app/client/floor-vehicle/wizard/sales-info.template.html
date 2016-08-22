@@ -58,7 +58,7 @@
   </div>
   <label><span translate>Trade in</span></label>
     <label class="switch">
-      <input id="cmn-toggle-1" class="cmn-toggle cmn-toggle-round" type="checkbox">
+      <input id="cmn-toggle-1" class="cmn-toggle cmn-toggle-round" type="checkbox" ng-model="wizardFloor.data.SaleTradeIn">
       <div class="slider round">
         <span class="slider-left">yes</span>
         <span class="slider-right">no</span>
@@ -103,7 +103,7 @@
 
   <h6>Title Location</h6>
   <div class="cr-inline">
-    <input type="radio" name="titleLocation" id="{{location.Id}}" ng-model="wizardFloor.data.TitleLocationId" ng-repeat-start="location in wizardFloor.options.titleLocationOptions" />
+    <input type="radio" name="titleLocation" id="{{location.Id}}" ng-init="wizardFloor.data.TitleLocationId = wizardFloor.options.titleLocationOptions[0].Id" ng-value="{{location.Id}}" ng-model="wizardFloor.data.TitleLocationId" ng-repeat-start="location in wizardFloor.options.titleLocationOptions" />
     <label class="radio-img" for="{{location.Id}}"></label>
     <label class="cr-label" for="{{location.Id}}">{{ location.Name }}</label>
     <br ng-repeat-end />
