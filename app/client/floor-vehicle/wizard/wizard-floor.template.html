@@ -1,25 +1,27 @@
-<div class="container container-fluid">
-  <ul class="nav nav-pills nav-justified wizard-nav">
-    <div class="wizard-line"></div>
-    <li ng-class="{'active': wizardFloor.counter == 1}" ng-click="wizardFloor.tabClick(1)">
-      <a>1</a>
-      <div>Vehicle Information</div>
-    </li>
-    <li ng-class="{'active': wizardFloor.counter == 2}" ng-click="wizardFloor.tabClick(2)">
-      <a>2</a>
-      <div>Sale Details</div>
-    </li>
-    <li ng-class="{'active': wizardFloor.counter == 3}" ng-click="wizardFloor.tabClick(3)">
-      <a>3</a>
-      <div>Payment Information</div>
-    </li>
-    <li ng-class="{'active': wizardFloor.counter == 4, 'hidden': !wizardFloor.attachDocumentsEnabled}" ng-click="wizardFloor.tabClick(4)">
-      <a>4</a>
-      <div>Documentation Upload</div>
-    </li>
-  </ul>
+<div class="container container-fluid wizard-container">
+  <div class="col-xs-12">
+    <ul class="nav nav-pills nav-justified wizard-nav">
+      <div class="wizard-line"></div>
+      <li ng-class="{'active': wizardFloor.counter == 1}" ng-click="wizardFloor.tabClick(1)">
+        <a>1</a>
+        <div>Vehicle Information</div>
+      </li>
+      <li ng-class="{'active': wizardFloor.counter == 2}" ng-click="wizardFloor.tabClick(2)">
+        <a>2</a>
+        <div>Sale Details</div>
+      </li>
+      <li ng-class="{'active': wizardFloor.counter == 3}" ng-click="wizardFloor.tabClick(3)">
+        <a>3</a>
+        <div>Payment Information</div>
+      </li>
+      <li ng-class="{'active': wizardFloor.counter == 4, 'hidden': !wizardFloor.attachDocumentsEnabled}" ng-click="wizardFloor.tabClick(4)">
+        <a>4</a>
+        <div>Documentation Upload</div>
+      </li>
+    </ul>
+  </div>
   <div ui-view></div>
-  <div>
+  <div class="col-xs-12">
     <button type="button"
             class="btn-cta cta-secondary" translate
             ng-disabled="!wizardFloor.previousAvailable()"

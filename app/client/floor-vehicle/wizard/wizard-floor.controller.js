@@ -79,6 +79,9 @@
 
       vm.options.locations = Addresses.getActivePhysical();
 
+      console.log(vm.options);
+      console.log(vm);
+
       var optionListsToDefault = [
         {
           scopeSrc: 'wizardFloor.options.BankAccounts',
@@ -194,7 +197,7 @@
 
           break;
         case 2:
-          if (vm.formParts.one) {
+          if (true || vm.formParts.one) {
             $state.go('flooringWizard.sales');
           }
 
@@ -220,13 +223,13 @@
           return true;
           break;
         case 2:
-          return vm.formParts.one;
+          return true; // vm.formParts.one;
           break;
         case 3:
-          return vm.formParts.one && vm.formParts.two;
+          return true; // vm.formParts.one && vm.formParts.two;
           break;
         case 4:
-          return vm.formParts.one && vm.formParts.two && vm.formParts.three;
+          return true; // vm.formParts.one && vm.formParts.two && vm.formParts.three;
           break;
       }
     }

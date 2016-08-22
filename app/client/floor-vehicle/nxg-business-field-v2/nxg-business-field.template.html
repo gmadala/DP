@@ -1,0 +1,39 @@
+<div>
+  <div class="form-inline">
+    <div class="form-group">
+      <div class="input-group input-group-sm">
+        <span class="input-group-addon">
+          <i class="glyphicon glyphicon-search"></i>
+        </span>
+        <input type="text" id="{{ inputId }}"
+               ng-model="query"
+               ng-disabled="disabled"
+               ng-change="clearSelected()"
+               ng-minlength="3"
+               class="form-control"
+               nxg-requires="!isRequired() || selection"
+               nxg-blur="handleExit($event)"
+               ng-class="{ 'nxg-invalid': validity.inputBiz.$error.minlength || (isValidLength(validity.inputBiz.$error) && validity.inputBiz.$error.nxgRequires)  }"/>
+        <!-- <button href class="btn btn-input" ng-click="disabled || openBusinessSearch()"
+         ng-class="{disabled: disabled}" type="button">
+          <span nxg-icon="icon-search"></span>
+        </button> -->
+      </div>
+    </div>
+
+    <button class="btn btn-sm btn-primary" type="button" placeholder="Seller" ng-click="disabled || openBusinessSearch()" ng-class="{disabled: disabled}">
+      SEARCH
+    </button>
+  </div>
+  <div ng-switch on="mode">
+    <label ng-switch-when="buyers" for="inputBiz" class="text-error" ng-show="!validity.inputBiz.$error.minlength && validity.inputBiz.$error.nxgRequires" translate>
+      Please look up a Buyer.
+    </label>
+    <label ng-switch-when="sellers" for="inputBiz" class="text-error" ng-show="!validity.inputBiz.$error.minlength && validity.inputBiz.$error.nxgRequires" translate>
+      Please look up a Seller.
+    </label>
+  </div>
+  <label for="inputBiz" class="text-error" ng-show="validity.inputBiz.$error.minlength" translate>
+    Please enter at least 3 characters.
+  </label>
+</div>
