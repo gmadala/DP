@@ -10,7 +10,9 @@
     '$state',
     '$uibModal',
     'Dashboard',
+    'User',
     'FloorplanUtil',
+    'Audits',
     'moment',
     '$filter',
     'gettext',
@@ -24,7 +26,9 @@
     $state,
     $uibModal,
     Dashboard,
+    User,
     FloorplanUtil,
+    Audits,
     moment,
     $filter,
     gettext,
@@ -63,6 +67,13 @@
     $scope.floorplanData = new FloorplanUtil('FlooringDate');
     // initial search
     $scope.floorplanData.resetSearch();
+
+    // Handles checking if dealer has open audits
+    $scope.auditsEnabled = User.getFeatures().hasOwnProperty('openAudits') ? User.getFeatures().openAudits.enabled : true;
+    if ($scope.auditsEnabled) {
+      $scope.audits = Audits;
+      $scope.audits.refreshAudits();
+    }
 
     $scope.changeViewMode = function(mode) {
       $scope.viewMode = mode;
