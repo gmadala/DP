@@ -48,8 +48,7 @@
 
     function setFileValidity() {
       $scope.form.documents.$setValidity('filesRequired',
-        $scope.$parent.wizardFloor.attachDocumentsEnabled
-        && $scope.$parent.wizardFloor.data.files.length > 0);
+        $scope.$parent.wizardFloor.attachDocumentsEnabled && $scope.$parent.wizardFloor.data.files.length > 0);
     }
 
     $scope.$parent.wizardFloor.transitionValidation = function () {

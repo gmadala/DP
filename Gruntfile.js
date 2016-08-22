@@ -20,10 +20,11 @@ module.exports = function(grunt) {
 
   try {
     yeomanConfig.app = require('./bower.json').appPath || yeomanConfig.app;
-  } catch (e) {
-  }
+  } catch (e) {}
 
   grunt.file.defaultEncoding = 'utf8';
+
+  grunt.loadNpmTasks('grunt-browserify');
 
   grunt.initConfig({
     yeoman: yeomanConfig,
@@ -34,21 +35,41 @@ module.exports = function(grunt) {
       },
       livereload: {
         options: {
-            livereload: true
+          livereload: true
         },
         files: [
-        '<%= yeoman.app %>/**/*.html',
-        '!<%= yeoman.app %>/index.html',
-        '.tmp/index.html',
-        '{.tmp,<%= yeoman.app %>}/styles/**/*.css',
-        '{.tmp,<%= yeoman.app %>}/client/**/*.js',
-        '{.tmp,<%= yeoman.app %>}/private-components/**/*.js',
-        '<%= yeoman.app %>/styles/img/**/*.{png,jpg,jpeg,gif,webp,svg}'
+          '<%= yeoman.app %>/**/*.html',
+          '!<%= yeoman.app %>/index.html',
+          '.tmp/index.html',
+          '{.tmp,<%= yeoman.app %>}/styles/**/*.css',
+          '{.tmp,<%= yeoman.app %>}/client/**/*.js',
+          '{.tmp,<%= yeoman.app %>}/private-components/**/*.js',
+          '<%= yeoman.app %>/styles/img/**/*.{png,jpg,jpeg,gif,webp,svg}'
         ]
       },
       html: {
         files: ['<%= yeoman.app %>/index.html'],
         tasks: ['processhtml:server']
+      },
+      browserify: {
+        files: ['app/react-components/**/*.js'],
+        tasks: ['browserify:dev']
+      }
+    },
+    browserify: {
+      dist: {
+        options: {
+           transform: [['babelify', {presets: ['es2015', 'react']}], 'uglifyify']
+        },
+        src: ['app/react-components/**/*.js'],
+        dest: 'app/react-components.js',
+      },
+      dev: {
+        options: {
+           transform: [['babelify', {presets: ['es2015', 'react']}]]
+        },
+        src: ['app/react-components/**/*.js'],
+        dest: 'app/react-components.js',
       }
     },
     connect: {
@@ -83,7 +104,7 @@ module.exports = function(grunt) {
       },
       dist: {
         options: {
-          middleware: function (connect) {
+          middleware: function(connect) {
             return [
               serveStatic(yeomanConfig.dist),
               serveStatic('api'),
@@ -91,7 +112,7 @@ module.exports = function(grunt) {
             ];
           }
         }
-      }
+      },
     },
     open: { // use shell:chrome when you need security disabled in Chrome
       server: {
@@ -100,17 +121,15 @@ module.exports = function(grunt) {
     },
     clean: {
       dist: {
-        files: [
-          {
-            dot: true,
-            src: [
-              '.tmp',
-              '<%= yeoman.dist %>/*',
-              '<%= yeoman.app %>/styles/main*.css',
-              '!<%= yeoman.dist %>/.git*'
-            ]
-          }
-        ]
+        files: [{
+          dot: true,
+          src: [
+            '.tmp',
+            '<%= yeoman.dist %>/*',
+            '<%= yeoman.app %>/styles/main*.css',
+            '!<%= yeoman.dist %>/.git*'
+          ]
+        }]
       },
       maintenance: {
         src: [
@@ -242,21 +261,23 @@ module.exports = function(grunt) {
       options: {
         assetsDirs: ['<%= yeoman.dist %>'],
         patterns: {
-          js: [[/(img\/.*?\.(?:gif|jpeg|jpg|png|webp|svg))/gm, 'Update the JS to reference our revved images']],
-          css: [[/(img\/.*?\.(?:gif|jpeg|jpg|png|webp|svg))/gm, 'Update the CSS to reference our revved images']]
+          js: [
+            [/(img\/.*?\.(?:gif|jpeg|jpg|png|webp|svg))/gm, 'Update the JS to reference our revved images']
+          ],
+          css: [
+            [/(img\/.*?\.(?:gif|jpeg|jpg|png|webp|svg))/gm, 'Update the CSS to reference our revved images']
+          ]
         }
       }
     },
     imagemin: {
       dist: {
-        files: [
-          {
-            expand: true,
-            cwd: '<%= yeoman.app %>/images',
-            src: '**/*.{png,jpg,jpeg}',
-            dest: '<%= yeoman.dist %>/images'
-          }
-        ]
+        files: [{
+          expand: true,
+          cwd: '<%= yeoman.app %>/images',
+          src: '**/*.{png,jpg,jpeg}',
+          dest: '<%= yeoman.dist %>/images'
+        }]
       }
     },
     cssmin: {
@@ -264,26 +285,24 @@ module.exports = function(grunt) {
         options: {
           keepSpecialComments: 0
         },
-        files: [
-          {
-            expand: true,
-            cwd: '<%= yeoman.dist %>',
-            src: '404.html',
-            dest: '<%= yeoman.dist %>'
-          }
-        ]
+        files: [{
+          expand: true,
+          cwd: '<%= yeoman.dist %>',
+          src: '404.html',
+          dest: '<%= yeoman.dist %>'
+        }]
       }
     },
     htmlmin: {
       dist: {
         options: {
-          collapseBooleanAttributes:      true,
-          collapseWhitespace:             false, // Breaks translations if we remove whitespace
-          removeAttributeQuotes:          true,
-          removeComments:                 true, // Only if you don't use comment directives!
-          removeEmptyAttributes:          true,
-          removeScriptTypeAttributes:     true,
-          removeStyleLinkTypeAttributes:  true
+          collapseBooleanAttributes: true,
+          collapseWhitespace: false, // Breaks translations if we remove whitespace
+          removeAttributeQuotes: true,
+          removeComments: true, // Only if you don't use comment directives!
+          removeEmptyAttributes: true,
+          removeScriptTypeAttributes: true,
+          removeStyleLinkTypeAttributes: true
         },
         files: [{
           expand: true,
@@ -306,14 +325,12 @@ module.exports = function(grunt) {
     },
     ngAnnotate: {
       dist: {
-        files: [
-          {
-            expand: true,
-            cwd: '.tmp/concat/scripts',
-            src: '*.js',
-            dest: '.tmp/concat/scripts'
-          }
-        ]
+        files: [{
+          expand: true,
+          cwd: '.tmp/concat/scripts',
+          src: '*.js',
+          dest: '.tmp/concat/scripts'
+        }]
       }
     },
     rev: {
@@ -330,103 +347,121 @@ module.exports = function(grunt) {
     },
     copy: {
       notification: {
-        files: [
-          {
-            expand: true, dot: true, flatten: true,
-            dest: '<%= yeoman.dist %>/img/email',
-            src: '<%= yeoman.app %>/img/email/*'
-          }
-        ]
+        files: [{
+          expand: true,
+          dot: true,
+          flatten: true,
+          dest: '<%= yeoman.dist %>/img/email',
+          src: '<%= yeoman.app %>/img/email/*'
+        }]
       },
       maintenance: {
-        files: [
-          {
-            expand: true,
-            dot: true,
-            flatten: true,
-            dest: 'maintenance/img/',
-            src: '<%= yeoman.app %>/img/*'
-          },
-          {
-            expand: true,
-            dot: true,
-            flatten: true,
-            dest: 'maintenance/img/icons/',
-            src: '<%= yeoman.app %>/img/icons/*'
-          },
-          {
-            expand: true,
-            dot: true,
-            flatten: true,
-            dest: 'maintenance/img/browsers/',
-            src: '<%= yeoman.app %>/img/browsers/*'
-          },
-          {
-            expand: true,
-            dot: true,
-            flatten: true,
-            dest: 'maintenance/fonts/',
-            src: '<%= yeoman.app %>/fonts/**/*'
-          },
-          {
-            expand: true,
-            dot: true,
-            flatten: true,
-            dest: 'maintenance',
-            src: '<%= yeoman.app %>/favicon.ico'
-          },
-          {
-            expand: true,
-            dot: true,
-            flatten: true,
-            dest: 'maintenance',
-            src: '<%= yeoman.app %>/maintenance.html'
-          },
-          {
-            expand: true,
-            dot: true,
-            flatten: true,
-            dest: 'maintenance/styles/',
-            src: '<%= yeoman.app %>/styles/main*.css'
-          }
-        ]
+        files: [{
+          expand: true,
+          dot: true,
+          flatten: true,
+          dest: 'maintenance/img/',
+          src: '<%= yeoman.app %>/img/*'
+        }, {
+          expand: true,
+          dot: true,
+          flatten: true,
+          dest: 'maintenance/img/icons/',
+          src: '<%= yeoman.app %>/img/icons/*'
+        }, {
+          expand: true,
+          dot: true,
+          flatten: true,
+          dest: 'maintenance/img/browsers/',
+          src: '<%= yeoman.app %>/img/browsers/*'
+        }, {
+          expand: true,
+          dot: true,
+          flatten: true,
+          dest: 'maintenance/fonts/',
+          src: '<%= yeoman.app %>/fonts/**/*'
+        }, {
+          expand: true,
+          dot: true,
+          flatten: true,
+          dest: 'maintenance',
+          src: '<%= yeoman.app %>/favicon.ico'
+        }, {
+          expand: true,
+          dot: true,
+          flatten: true,
+          dest: 'maintenance',
+          src: '<%= yeoman.app %>/maintenance.html'
+        }, {
+          expand: true,
+          dot: true,
+          flatten: true,
+          dest: 'maintenance/styles/',
+          src: '<%= yeoman.app %>/styles/main*.css'
+        }]
       },
       dist: {
-        files: [
-          { expand: true, dot: true, flatten: true, dest: '<%= yeoman.dist %>/', src: '<%= yeoman.app %>/version.txt' },
-          { expand: true, dot: true, flatten: true, dest: '<%= yeoman.dist %>/', src: '<%= yeoman.app %>/favicon.ico' },
-          { expand: true, dot: true, flatten: true, dest: '<%= yeoman.dist %>/img/', src: '<%= yeoman.app %>/img/*' },
-          { expand: true, dot: true, flatten: true, dest: '<%= yeoman.dist %>/img/icons/', src: '<%= yeoman.app %>/img/icons/*' },
-          { expand: true, dot: true, flatten: true, dest: '<%= yeoman.dist %>/img/browsers/', src: '<%= yeoman.app %>/img/browsers/*' },
-          { expand: true, dot: true, flatten: true, dest: '<%= yeoman.dist %>/fonts/', src: '<%= yeoman.app %>/fonts/**/*' },
-          {
-            expand: true,
-            dot: true,
-            flatten: true,
-            // cache bust language files using the GIT SHA - This is overly aggressive since the translations may not
-            // have changed between revisions but typically they will change between releases anyways so this
-            // approach should be good enough
-            dest: '<%= yeoman.dist %>/languages-<%= gitinfo.local.branch.current.shortSHA %>/',
-            src: '<%= yeoman.app %>/languages/*'
-          },
-          {
-            expand: true,
-            dot: true,
-            flatten: true,
-            dest: '<%= yeoman.dist %>/documents/',
-            src: '<%= yeoman.app %>/documents/*'
-          },
-          {
-            expand: true,
-            dot: true,
-            cwd: '<%= yeoman.app %>',
-            dest: '<%= yeoman.dist %>/',
-            src: [
-              '**/*.html',
-              '!components/**/*.html'
-            ]
-          }
-        ]
+        files: [{
+          expand: true,
+          dot: true,
+          flatten: true,
+          dest: '<%= yeoman.dist %>/',
+          src: '<%= yeoman.app %>/version.txt'
+        }, {
+          expand: true,
+          dot: true,
+          flatten: true,
+          dest: '<%= yeoman.dist %>/',
+          src: '<%= yeoman.app %>/favicon.ico'
+        }, {
+          expand: true,
+          dot: true,
+          flatten: true,
+          dest: '<%= yeoman.dist %>/img/',
+          src: '<%= yeoman.app %>/img/*'
+        }, {
+          expand: true,
+          dot: true,
+          flatten: true,
+          dest: '<%= yeoman.dist %>/img/icons/',
+          src: '<%= yeoman.app %>/img/icons/*'
+        }, {
+          expand: true,
+          dot: true,
+          flatten: true,
+          dest: '<%= yeoman.dist %>/img/browsers/',
+          src: '<%= yeoman.app %>/img/browsers/*'
+        }, {
+          expand: true,
+          dot: true,
+          flatten: true,
+          dest: '<%= yeoman.dist %>/fonts/',
+          src: '<%= yeoman.app %>/fonts/**/*'
+        }, {
+          expand: true,
+          dot: true,
+          flatten: true,
+          // cache bust language files using the GIT SHA - This is overly aggressive since the translations may not
+          // have changed between revisions but typically they will change between releases anyways so this
+          // approach should be good enough
+          dest: '<%= yeoman.dist %>/languages-<%= gitinfo.local.branch.current.shortSHA %>/',
+          src: '<%= yeoman.app %>/languages/*'
+        }, {
+          expand: true,
+          dot: true,
+          flatten: true,
+          dest: '<%= yeoman.dist %>/documents/',
+          src: '<%= yeoman.app %>/documents/*'
+        }, {
+          expand: true,
+          dot: true,
+          cwd: '<%= yeoman.app %>',
+          dest: '<%= yeoman.dist %>/',
+          src: [
+            '**/*.html',
+            '!components/**/*.html'
+          ]
+        }]
       }
     },
     env: {
@@ -443,11 +478,11 @@ module.exports = function(grunt) {
           '<%= yeoman.dist %>/version.txt': '<%= yeoman.dist %>/version.txt'
         }
       },
-      dist : {
-        src : [ '.tmp/concat/scripts/scripts.js' ],
+      dist: {
+        src: ['.tmp/concat/scripts/scripts.js'],
         options: {
-          inline : true,
-          context : {
+          inline: true,
+          context: {
             DEBUG: false
           }
         }
@@ -494,16 +529,14 @@ module.exports = function(grunt) {
           // work since currently the window has to be reloaded on any language change due to binding issues
           // index.html loads the correct language file as needed before bootstrapping the app
         },
-        files: [
-          {
-            expand: true,
-            dot: true,
-            cwd: 'po',
-            dest: 'app/languages',
-            src: ['*.po'],
-            ext: '.js'
-          }
-        ]
+        files: [{
+          expand: true,
+          dot: true,
+          cwd: 'po',
+          dest: 'app/languages',
+          src: ['*.po'],
+          ext: '.js'
+        }]
       }
     },
     gettext_update_po: {
@@ -520,8 +553,8 @@ module.exports = function(grunt) {
       },
       chrome: {
         command: 'open -n -a "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome" --args' +
-        ' --user-data-dir="/Users/$USER/Library/Application Support/Google/Chrome/dealer-portal-dev"' +
-        ' --disable-web-security --homepage http://localhost:<%= connect.options.port %>'
+          ' --user-data-dir="/Users/$USER/Library/Application Support/Google/Chrome/dealer-portal-dev"' +
+          ' --disable-web-security --homepage http://localhost:<%= connect.options.port %>'
       },
       ie: {
         command: 'start iexplore.exe "http://localhost:<%= connect.options.port %>'
@@ -530,7 +563,7 @@ module.exports = function(grunt) {
         command: 'node_modules/protractor/bin/webdriver-manager update'
       },
       msgmerge: {
-        command: function (filename) {
+        command: function(filename) {
           // use -N for --no-fuzzy-matching and echo how many strings are untranslated (use 'tail' to skip opening
           // comment lines which typically have an irrelevant msgid)
           return 'msgmerge -U -N -v ' + filename + ' po/extracted.pot -C ../mobile-apps/' + filename + ' && ' +
@@ -544,8 +577,7 @@ module.exports = function(grunt) {
         configFile: 'e2e/conf.js',
         noColor: false
       },
-      run: {
-      }
+      run: {}
     },
     githooks: {
       all: {
@@ -563,7 +595,8 @@ module.exports = function(grunt) {
     'compass:server',
     'preprocess:dev',
     'preprocess:debug',
-    'nggettext_compile'
+    'nggettext_compile',
+    'browserify:dev'
   ]);
 
   grunt.registerTask('server', [
@@ -613,6 +646,7 @@ module.exports = function(grunt) {
   ]);
 
   grunt.registerTask('build', [
+    'browserify:dist',
     'gitinfo',
     'env',
     'clean:dist',
@@ -640,7 +674,7 @@ module.exports = function(grunt) {
 
   // Continuous Integration build -- call with --target={test|production|training|demo|rubydal} as defined in
   // app/scripts/config/nxgConfig.js
-  grunt.registerTask('ci-build', 'Continuous Integration Build', function () {
+  grunt.registerTask('ci-build', 'Continuous Integration Build', function() {
     grunt.log.writeln('Running Continuous Integration Build --target=' + grunt.option('target'));
     grunt.task.run('test:unit');
     grunt.task.run('build');
@@ -650,9 +684,9 @@ module.exports = function(grunt) {
     grunt.task.run('jscs');
   });
 
-  grunt.registerMultiTask('gettext_update_po', 'update PO files from the POT file', function () {
+  grunt.registerMultiTask('gettext_update_po', 'update PO files from the POT file', function() {
 
-    this.filesSrc.forEach(function (filename) {
+    this.filesSrc.forEach(function(filename) {
 
       console.log(filename);
       grunt.task.run('shell:msgmerge:' + filename);
@@ -661,10 +695,10 @@ module.exports = function(grunt) {
 
   // apply validation/formatting/other post-processing as needed
   // TODO: Grunt translation tasks should be cleaned up slightly with MNGW-5568
-  grunt.registerMultiTask('po_validate', 'update PO files from the POT file', function () {
+  grunt.registerMultiTask('po_validate', 'update PO files from the POT file', function() {
 
     // Replace ’ with ' for apostrophe symbol - MNGW-5529
-    this.filesSrc.forEach(function (filename) {
+    this.filesSrc.forEach(function(filename) {
 
       var contents;
       var replace = /’/g;
