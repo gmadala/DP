@@ -126,7 +126,7 @@
           }
         };
         $scope.support = {
-          email: info.MarketEMail,
+          email: User.isDealer ? info.MarketEMail : 'auctionservices@nextgearcapital.com',
           phone: info.MarketPhoneNumber,
           customerSupportPhone: info.CSCPhoneNumber
         };
