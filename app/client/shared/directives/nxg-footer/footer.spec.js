@@ -31,8 +31,6 @@ describe('Directive: navBar', function() {
 
           describe('a canadian user', function() {
             beforeEach(function() {
-              scope.$apply(); // trigger initial $watch
-
               spyOn(user, 'isUnitedStates').and.returnValue(false);
               spyOn(gettextCatalog, 'currentLanguage').and.returnValue('en')
             });
@@ -45,8 +43,6 @@ describe('Directive: navBar', function() {
 
           describe('a french canadian user', function() {
             beforeEach(function() {
-              scope.$apply(); // trigger initial $watch
-
               spyOn(user, 'isUnitedStates').and.returnValue(false);
               spyOn(gettextCatalog, 'currentLanguage').and.returnValue('fr_CA')
             });
@@ -58,8 +54,6 @@ describe('Directive: navBar', function() {
 
           describe('a french user', function() {
             beforeEach(function() {
-              scope.$apply(); // trigger initial $watch
-
               spyOn(user, 'isUnitedStates').and.returnValue(true);
               spyOn(gettextCatalog, 'currentLanguage').and.returnValue('fr_CA')
             });
@@ -71,8 +65,6 @@ describe('Directive: navBar', function() {
 
           describe('a spanish user', function() {
             beforeEach(function() {
-              scope.$apply(); // trigger initial $watch
-
               spyOn(user, 'isUnitedStates').and.returnValue(true);
               spyOn(gettextCatalog, 'currentLanguage').and.returnValue('es')
             });
