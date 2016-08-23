@@ -1,4 +1,4 @@
-(function() {
+(function () {
   'use strict';
 
   angular
@@ -20,35 +20,36 @@
     $scope.updateContactLink = updateContactLink;
 
     // initialize contact link
-    $scope.updateContactLink(gettextCatalog.currentLanguage).then(function() {
+    $scope.updateContactLink().then(function () {
 
-      // update contact link if language changes (un-needed functionality?)
-      $scope.$watch(function() {
-        return gettextCatalog.currentLanguage;
-      }, function(lang) {
-        $scope.updateContactLink(lang);
+      $scope.$on('event:userAuthenticated', function () {
+        $scope.updateContactLink();
       });
 
     });
 
     // update contact link based on user country / language
-    function updateContactLink(lang) {
-      return User.getInfo().then(function() {
-        switch (lang) {
+    function updateContactLink() {
+      return User.getInfo().then(function () {
+        var currentLang = gettextCatalog.currentLanguage;
+
+        // redirect to 
+        if (!User.isUnitedStates()) {
+          $scope.contactLink = 'https://canada.nextgearcapital.com/';
+        } else {
+          $scope.contactLink = 'https://www.nextgearcapital.com/';
+        }
+
+        switch (currentLang) {
           // fr_CA is hard-coded in language selector, possibly should update to 'fr' since not everyone likes maple syrup eh
           case 'fr_CA':
-            if (!User.isUnitedStates()) {
-              $scope.contactLink = 'https://canada.nextgearcapital.com/nous-contacter/?lang=fr';
-              break;
-            }
-
-            $scope.contactLink = 'https://www.nextgearcapital.com/nous-contacter/?lang=fr';
+            $scope.contactLink += 'nous-contacter/?lang=fr';
             break;
           case 'es':
-            $scope.contactLink = 'https://www.nextgearcapital.com/contact-us/?lang=es';
+            $scope.contactLink += 'contact-us/?lang=es';
             break;
           default:
-            $scope.contactLink = 'http://www.nextgearcapital.com/contact-us';
+            $scope.contactLink += 'contact-us';
             break;
         }
       });
