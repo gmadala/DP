@@ -1,0 +1,82 @@
+<form class="col-sm-7" name="form" novalidate>
+  <h2>Payment Information</h2>
+  <div class="form-group">
+    <label for="inputCreditLine">Line of Credit</label>
+    <select id="inputCreditLine"
+            name="inputCreditLine"
+            class="form-control"
+            ng-model="wizardFloor.data.LineOfCreditId"
+            ng-options="line.LineOfCreditName for line in wizardFloor.options.LinesOfCredit"
+            required>
+      <option value="" translate>Make Selection</option>
+    </select>
+  </div>
+
+  <h6>Title Location</h6>
+  <div class="cr-inline">
+    <input type="radio" name="payBuyerSeller" id="payBuyer" ng-value="buyer" ng-model="wizardFloor.data.PaySeller"
+           ng-disabled="wizardFloor.data.SaleTradeIn"
+           ng-change="wizardFloor.data.BankAccountId = null" />
+    <label class="radio-img" for="payBuyer"></label>
+    <label class="cr-label" for="payBuyer">Buyer</label>
+    <br />
+    <input type="radio" name="payBuyerSeller" id="paySeller" ng-value="seller" ng-model="wizardFloor.data.PaySeller"
+           ng-disabled="wizardFloor.data.SaleTradeIn"
+           ng-change="wizardFloor.data.BankAccountId = null" />
+    <label class="radio-img" for="paySeller"></label>
+    <label class="cr-label" for="paySeller">Seller</label>
+  </div>
+
+
+  <div class="form-group">
+    <label for="inputDisburseAcct">Deposit Account</label>
+    <select id="inputDisburseAcct"
+            class="form-control"
+            name="inputDisburseAcct"
+            ng-model="wizardFloor.data.BankAccountId"
+            ng-disabled="wizardFloor.data.PaySeller"
+            ng-required="!wizardFloor.data.PaySeller"
+            ng-options="account as [account.AchAccountNumberLast4, account.AchBankName].join(' - ') for account in wizardFloor.options.BankAccounts">
+      <option value="" translate>Make Selection</option>
+    </select>
+  </div>
+
+  <label for="cmn-toggle-1"><span translate>Request additional financing</span></label>
+  <label for="cmn-toggle-1" class="switch">
+    <input id="cmn-toggle-1" class="cmn-toggle cmn-toggle-round" type="checkbox" ng-model="wizardFloor.data.AdditionalFinancing">
+    <div class="slider round">
+      <span class="slider-left">Yes</span>
+      <span class="slider-right">No</span>
+    </div>
+  </label>
+
+  <div class="form-group">
+    <div class="input-group input-group-sm">
+      <span class="input-group-addon">$</span>
+      <input type="text" id="additionalFinancingAmount" name="additionalFinancingAmount" ng-model="wizardFloor.data.AdditionalFinancingAmount"
+             nxg-input-currency="1000000000000"
+             nxg-min="1"
+             class="form-control"
+             ng-class="{ 'nxg-invalid': (form.additionalFinancingAmount.$error.required || form.additionalFinancingAmount.$error.max || form.additionalFinancingAmount.$error.pattern || form.additionalFinancingAmount.$error.maxlength || form.additionalFinancingAmount.$error.nxgMin) && form.$submitted }" />
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label for="" class="sr-only"></label>
+    <textarea class="form-control"
+              rows="3"
+              placeholder="Please provide a short explanation why you are requesting an additional financing amount"
+              ng-model="wizardFloor.data.comment"
+              ng-disabled="wizardFloor.floorPlanSubmitting"
+              ></textarea>
+  </div>
+  <!-- <label for="inputSendPay" class="input-title"><span translate>Send Payment To</span>: *</label>
+  <div class="style-select full-width">
+    <select id="inputSendPay" name="inputSendPay" ng-model="wizardFloor.data.PaySeller"
+            ng-options="value && 'Seller' || 'Buyer' | translate for value in wizardFloor.paySellerOptions"
+            ng-change="wizardFloor.data.BankAccountId = null"
+            ng-disabled="wizardFloor.data.SaleTradeIn">
+      <option value="" translate>Make Selection</option>
+    </select>
+  </div> -->
+</form>

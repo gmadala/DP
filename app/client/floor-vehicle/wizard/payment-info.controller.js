@@ -11,7 +11,7 @@
     'gettextCatalog'
   ];
 
-  function PaymentInfoCtrl($scope, User, gettextCatalog) {
+  function PaymentInfoCtrl($scope, gettextCatalog) {
     var vm = this;
 
     vm.data = null;

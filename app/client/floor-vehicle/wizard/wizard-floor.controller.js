@@ -117,6 +117,8 @@
 
     // form data model template w/ default values for a new blank form - should be considered read-only
     vm.defaultData = {
+      AdditionalFinancing: false,
+      additionalFinancingAmount: null,
       FloorplanSourceId: User.isDealer() ? 6 : 7, // 6 for dealer in web app, 7 for auction user
       BankAccountId: null, // BankAccount object locally, flatten to string for API tx
       LineOfCreditId: null, // LineOfCredit object locally, flatten to string for API tx
@@ -202,7 +204,8 @@
 
           break;
         case 3:
-          if (vm.formParts.one && vm.formParts.two) {
+
+          if (true || (vm.formParts.one && vm.formParts.two)) {
             $state.go('flooringWizard.payment');
           }
 

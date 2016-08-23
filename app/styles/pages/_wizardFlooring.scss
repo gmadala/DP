@@ -35,6 +35,7 @@
       //   right: 0;
       // }
 
+
       a {
         width: 50px;
         height: 50px;
@@ -48,6 +49,10 @@
       div {
         margin-top: 10px;
         white-space: nowrap;
+      }
+
+      &.active > a {
+        background-color: #428bca;
       }
 
     }
@@ -127,7 +132,7 @@
 
   .slider.round:before {
     border-radius: 50%;
-    border: 1px solid #000;
+    border: 1px solid #bbb;
   }
 
   .slider-left {
@@ -154,5 +159,19 @@
 
   input:not(:checked) + .slider > .slider-left {
     opacity: 0;
+  }
+
+  .input-group-addon {
+    background-color: #FFFFFF;
+    border: 1px solid #000;
+    border-right: none;
+  }
+
+  input.ng-invalid ~ .input-group-addon {
+    border-color: #C43926;
+  }
+
+  .input-group-addon + input {
+    border-left: none;
   }
 }

@@ -42,26 +42,26 @@
            nxg-min="1"
            class="form-control"
            ng-class="{ 'nxg-invalid': (form.inputPurchaseAmt.$error.required || form.inputPurchaseAmt.$error.max || form.inputPurchaseAmt.$error.pattern || form.inputPurchaseAmt.$error.maxlength || form.inputPurchaseAmt.$error.nxgMin) && form.$submitted }" />
-    <label for="inputPurchaseAmt" class="text-error"
-           ng-show="form.inputPurchaseAmt.$error.required && form.$submitted" translate>
-      Please enter the Purchase Amount.
-    </label>
-    <label for="inputPurchaseAmt"
-           class="text-error"
-           ng-show="!form.inputPurchaseAmt.$error.required && (form.inputPurchaseAmt.$error.pattern || form.inputPurchaseAmt.$error.nxgMin) && form.$submitted" translate>
-      Please enter a positive numeric value with no <br> special characters, such as a dollar sign.
-    </label>
-    <label for="inputPurchaseAmt" class="text-error"
-           ng-show="!form.inputPurchaseAmt.$error.required && !form.inputPurchaseAmt.$error.pattern && form.inputPurchaseAmt.$error.max && form.$submitted" translate>
-      Please enter a value less than $1,000,000,000,000.
-    </label>
   </div>
+  <label for="inputPurchaseAmt" class="text-error"
+         ng-show="form.inputPurchaseAmt.$error.required && form.$submitted" translate>
+    Please enter the Purchase Amount.
+  </label>
+  <label for="inputPurchaseAmt"
+         class="text-error"
+         ng-show="!form.inputPurchaseAmt.$error.required && (form.inputPurchaseAmt.$error.pattern || form.inputPurchaseAmt.$error.nxgMin) && form.$submitted" translate>
+    Please enter a positive numeric value with no <br> special characters, such as a dollar sign.
+  </label>
+  <label for="inputPurchaseAmt" class="text-error"
+         ng-show="!form.inputPurchaseAmt.$error.required && !form.inputPurchaseAmt.$error.pattern && form.inputPurchaseAmt.$error.max && form.$submitted" translate>
+    Please enter a value less than $1,000,000,000,000.
+  </label>
   <label><span translate>Trade in</span></label>
     <label class="switch">
       <input id="cmn-toggle-1" class="cmn-toggle cmn-toggle-round" type="checkbox" ng-model="wizardFloor.data.SaleTradeIn">
       <div class="slider round">
-        <span class="slider-left">yes</span>
-        <span class="slider-right">no</span>
+        <span class="slider-left">Yes</span>
+        <span class="slider-right">No</span>
       </div>
     </label>
   <!-- <div class="form-inline">
