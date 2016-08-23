@@ -125,8 +125,9 @@
             return User.isDealer() ? '#/home' : '#/act/home';
           }
         };
+
         $scope.support = {
-          email: User.isDealer ? info.MarketEMail : 'auctionservices@nextgearcapital.com',
+          email: User.isDealer() ? info.MarketEMail : 'auctionservices@nextgearcapital.com',
           phone: info.MarketPhoneNumber,
           customerSupportPhone: info.CSCPhoneNumber
         };
