@@ -102,7 +102,6 @@ input[type="url"],
 input[type="search"],
 input[type="tel"],
 input[type="color"] {
-  @include border-radius($borderRadius);
   @include box-shadow(none);
   color: $text;
   font-size: $inputFontSize;
@@ -337,6 +336,10 @@ select {
     &:disabled {
       color: #B7B7B7;
     }
+  }
+
+  &.small-width {
+    max-width: 85%;
   }
 }
 
@@ -605,6 +608,10 @@ input[type="radio"] {
   width: 55%;
 }
 
+.inputSmall {
+  width: 68%;
+}
+
 .smallInputAuctionSettings {
   width: 140%;
 }
@@ -629,6 +636,7 @@ input[type="radio"] {
   border: 0;
   margin: 0 0 0 -1px;
 
+
   &:focus {
     background: $highlight;
   }
@@ -639,6 +647,10 @@ input[type="radio"] {
     .svg-icon svg {
       fill: $white;
     }
+  }
+
+  .btn-margin {
+    margin: 0px 0px 0px 37px;
   }
 
   .svg-icon svg {

@@ -213,40 +213,43 @@
     }
 
     function canTransition(count) {
+      var result ;
       vm.transitionValidation();
 
       switch (count) {
         case 1:
-          return true;
+          result = true;
           break;
         case 2:
-          return vm.formParts.one;
+          result = vm.formParts.one;
           break;
         case 3:
-          return vm.formParts.one && vm.formParts.two;
+          result = vm.formParts.one && vm.formParts.two;
           break;
         case 4:
-          return vm.formParts.one && vm.formParts.two && vm.formParts.three;
+          result = vm.formParts.one && vm.formParts.two && vm.formParts.three;
           break;
       }
+      return result;
     }
 
     vm.canSubmit = function () {
-      if (vm.floorPlanSubmitting)
+      if (vm.floorPlanSubmitting) {
         return false;
-
-      if (!vm.formParts.one)
+      }
+      if (!vm.formParts.one) {
         return false;
+      }
 
-      if (!vm.formParts.two)
+      if (!vm.formParts.two) {
         return false;
-
-      if (vm.attachDocumentsEnabled || !vm.formParts.three)
+      }
+      if (vm.attachDocumentsEnabled || !vm.formParts.three) {
         return false;
-
-      if (vm.attachDocumentsEnabled && vm.data.files.length < 1)
+      }
+      if (vm.attachDocumentsEnabled && vm.data.files.length < 1) {
         return false;
-
+      }
       return true;
     };
 

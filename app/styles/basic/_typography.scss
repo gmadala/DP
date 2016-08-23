@@ -306,3 +306,38 @@ ul.document-list {
     }
   }
 }
+
+.main-heading {
+  font-size: 20px;
+  font-weight: normal;
+  line-height: $baseLineHeight * 1.5;
+  color: $text;
+  margin: 0;
+  padding-bottom:10px;
+}
+.sub-heading{
+  font-size: 15px;
+  font-weight: normal;
+  line-height: $baseLineHeight * 1.5;
+  color: $text;
+  margin: 0;
+}
+
+.inner-addon {
+  position: relative;
+}
+
+.left-addon {
+  left: 10px;
+  bottom: -23px;
+}
+
+.icon-addon.addon-lg .vin-focus {
+  width: 125%;
+  padding: 10px 1px 10px 35px;
+  font-size: 13px;
+}
+
+.btn-margin {
+  margin: 0px 0px 0px 37px;
+}
