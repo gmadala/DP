@@ -15,7 +15,7 @@
       <div class="col-md-4 col-md-offset-1 col-sm-6 login-margin top-align-panel">
         <div class="login-panel panel-default">
           <form class="login-form clearfix" name="loginForm">
-            <label for="credUsername"><span translate>Username</span><a class="forgot" href="#/login/recover" translate>I forgot</a></label>
+            <label for="credUsername"><span translate>Username</span><a class="forgot" href="#/login/recover" translate tabindex="5" >I forgot</a></label>
             <input type="text"
                    class="input-full"
                    ng-model="credentials.username"
@@ -24,16 +24,16 @@
                    required
                    nxg-autofocus
                    nxg-enter="authenticate()"
-                   nxg-typeahead="username for username in autocompleteUsernames | filter:$viewValue | limitTo:8" />
+                   nxg-typeahead="username for username in autocompleteUsernames | filter:$viewValue | limitTo:8" tabindex="1"/>
             <p for="credUsername" class="text-error" ng-show="validity.credUsername.$error.required" translate>Please enter a username.</p>
 
             <div class="cr-inline">
-              <input type="checkbox" name="rememberUsername" id="rememberUsername" ng-model="credentials.remember" />
+              <input type="checkbox" name="rememberUsername" id="rememberUsername" ng-model="credentials.remember" tabindex="7"  />
               <label for="rememberUsername" class="checkbox-img"></label>
               <label for="rememberUsername" class="cr-label" translate>Remember Username</label>
             </div>
 
-            <label for="credPassword"><span translate>Password</span><a class="forgot" href="#/login/recover" translate>I forgot</a></label>
+            <label for="credPassword"><span translate>Password</span><a class="forgot" href="#/login/recover" translate tabindex="6" >I forgot</a></label>
             <input type="password"
                    class="input-full"
                    ng-model="credentials.password"
@@ -41,20 +41,20 @@
                    name="credPassword"
                    required
                    nxg-auto-fill-sync
-                   nxg-enter="authenticate()" />
+                   nxg-enter="authenticate()" tabindex="2"/>
             <p for="credPassword" class="text-error" ng-show="validity.credPassword.$error.required" translate>Please enter a password.</p>
 
             <p class="text-error" ng-show="showLoginError">{{ errorMsg }}</p>
             <p class="text-error" ng-show="showLoginError" translate>If you are experiencing an issue logging in, click "Forgot your username or password?" below, or contact:</p>
             <span ng-show="showLoginError"><nxg-customer-support-phone></nxg-customer-support-phone></span>
 
-            <button type="submit" class="btn-login btn-default btn-lg btn-block" ng-click="authenticate()" id="loginButton" translate>Login</button>
+            <button type="submit" class="btn-login btn-default btn-lg btn-block" ng-click="authenticate()" id="loginButton" tabindex="3" translate>Login</button>
           </form>
           <br>
 
           <div class="row">
             <div class="login-help-link">
-              <a class="not-enrolled" ng-href="{{ signupURL }}" translate id="signUpLogin"><u>Not Enrolled? Apply for credit with us.</u></a>
+              <a class="not-enrolled" ng-href="{{ signupURL }}" translate id="signUpLogin" tabindex="4" ><u>Not Enrolled? Apply for credit with us.</u></a>
             </div>
           </div>
         </div>
