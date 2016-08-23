@@ -1,25 +1,20 @@
 'use strict';
 
-describe('Directive: navBar', function() {
-  beforeEach(module('nextgearWebApp', 'client/shared/directives/navbar/navbar.template.html'));
+describe('Controller: FooterCtrl', function() {
+  beforeEach(module('nextgearWebApp'));
 
   describe('controller', function() {
-    var scope,
-      user
-    gettextCatalog,
-    $rootScope,
-    $controller;
+    var scope, controller, httpBackend;
 
-    beforeEach(inject(function(_$rootScope_, _$controller_, User, gettextCatalog) {
-      $controller = _$controller_;
-      $rootScope = _$rootScope_;
-      user = User;
-      gettextCatalog = gettextCatalog;
+    beforeEach(inject(function($rootScope, $controller, $httpBackend) {
       scope = $rootScope.$new();
+      controller = $controller('FooterCtrl', { $scope: scope });      
+      $httpBackend.when('GET', '/Dealer/v1_2/Info').respond({});
     }));
 
     it('should have an updateContactLink function', function() {
-      scope.$apply();
+      scope.$apply();      
+
       expect(scope.updateContactLink).toBeDefined();
       expect(typeof scope.updateContactLink).toBe('function');
 
@@ -31,7 +26,7 @@ describe('Directive: navBar', function() {
 
           describe('a canadian user', function() {
             beforeEach(function() {
-              spyOn(user, 'isUnitedStates').and.returnValue(false);
+              spyOn(User, 'isUnitedStates').and.returnValue(false);
               spyOn(gettextCatalog, 'currentLanguage').and.returnValue('en')
             });
 
@@ -40,10 +35,9 @@ describe('Directive: navBar', function() {
             })
           });
 
-
           describe('a french canadian user', function() {
             beforeEach(function() {
-              spyOn(user, 'isUnitedStates').and.returnValue(false);
+              spyOn(User, 'isUnitedStates').and.returnValue(false);
               spyOn(gettextCatalog, 'currentLanguage').and.returnValue('fr_CA')
             });
 
@@ -54,7 +48,7 @@ describe('Directive: navBar', function() {
 
           describe('a french user', function() {
             beforeEach(function() {
-              spyOn(user, 'isUnitedStates').and.returnValue(true);
+              spyOn(User, 'isUnitedStates').and.returnValue(true);
               spyOn(gettextCatalog, 'currentLanguage').and.returnValue('fr_CA')
             });
 
@@ -65,7 +59,7 @@ describe('Directive: navBar', function() {
 
           describe('a spanish user', function() {
             beforeEach(function() {
-              spyOn(user, 'isUnitedStates').and.returnValue(true);
+              spyOn(User, 'isUnitedStates').and.returnValue(true);
               spyOn(gettextCatalog, 'currentLanguage').and.returnValue('es')
             });
 

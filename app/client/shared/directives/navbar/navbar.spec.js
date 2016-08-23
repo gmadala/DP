@@ -124,7 +124,7 @@ describe('Directive: navBar', function () {
       });
     }));
 
-    fit('should call to get core properties from kissmetric info service', function () {
+    it('should call to get core properties from kissmetric info service', function () {
       scope.$apply();
       expect(mockKissMetricInfo.getKissMetricInfo).toHaveBeenCalled();
       expect(scope.kissMetricData).toEqual(kissMetricData);
@@ -215,8 +215,11 @@ describe('Directive: navBar', function () {
         $rootScope.$digest();
         expect(scope.user.navLinks().primary[2].subMenu.length).toBe(3);
         loggedIn = true;
-        $rootScope.$digest();
-        expect(scope.user.navLinks().primary[2].subMenu.length).toBe(4);
+
+        scope.initNav().then(function() {          
+          $rootScope.$digest();
+          expect(scope.user.navLinks().primary[2].subMenu.length).toBe(4);
+        });
       });
 
       it('should change the homelink based on user type', function () {

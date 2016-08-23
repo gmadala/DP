@@ -73,7 +73,7 @@
         $scope.kissMetricData = result;
       });
 
-      User.getInfo().then(function (info) {
+      return User.getInfo().then(function (info) {
         $scope.isUnitedStates = User.isUnitedStates();
         $scope.displayTitleRelease = info.DisplayTitleReleaseProgram;
         $scope.eventSalesEnabled = User.getFeatures().hasOwnProperty('eventSales') ? User.getFeatures().eventSales.enabled : true;
