@@ -42,7 +42,6 @@
       floorplansSubMenu = [
         {name: gettextCatalog.getString('View Floor Plan'), href: '#/floorplan', activeWhen: 'floorplan', subMenu: floorplansSubMenu},
         {name: gettextCatalog.getString('Floor a Vehicle'), href: '#/floorcar', activeWhen: 'floorcar'},
-        {name: gettextCatalog.getString('Value Lookup'), href: '#/valueLookup', activeWhen: 'valueLookup'},
       ],
       resourcesSubMenu = [
         {name: gettextCatalog.getString('Resources'), href: '#/documents', activeWhen: 'documents'},
@@ -83,6 +82,11 @@
           $scope.eventSalesEnabled = User.getFeatures().hasOwnProperty('eventSales') ? User.getFeatures().eventSales.enabled : true;
           $scope.fedExWaybillEnabled = fedex.wayBillPrintingEnabled();
           if ($scope.isUnitedStates) {
+            floorplansSubMenu.splice(2, 0, {
+              name: gettextCatalog.getString('Value Lookup'),
+              href: '#/valueLookup',
+              activeWhen: 'valueLookup'
+            });
             if ($scope.eventSalesEnabled) {
               resourcesSubMenu.push({
                 name: gettextCatalog.getString('Promos'),
