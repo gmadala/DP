@@ -1,0 +1,10 @@
+.sass-cache/*
+.tmp/*
+api/*
+api_tests/*
+dist/*
+docs/*
+e2e/*
+po/*
+test/*
+uv_custom_code/*
