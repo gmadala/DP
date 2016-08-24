@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
     <meta charset="utf-8">
     <meta name="description" content="">
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
     <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
     <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
 
@@ -35,16 +35,16 @@
     <![endif]-->
 
   </head>
-  <body ng-class="{'menu-open in' : navState.current.data.showMenu }">
+  <body ng-class="{'menu-open' : navState.current.data.showMenu, 'menu-closed': (!navState.current.data.showMenu && navState.current.data.menuToggled) }">
     <!-- htmlmin:ignore -->
     <!-- processhtml:include:svgDist,server /img/icons/icon_defs.svg -->
     This will pull in the content of our svg file for use across the app.
     <!-- /processhtml -->
-    <!-- htmlmin:ignore -->
+    <!-- htmlmin:ignore -->    
     <div id="wrapper" class="menu-wrapper">
-      <div class="nxg-main-container" nxg-messages>
-        <div nav-bar></div>
-        <div class="nxg-main-view" class="mobile-menu-push"
+      <div nav-bar></div>
+      <div id="main-container" class="nxg-main-container" nxg-messages>        
+        <div class="nxg-main-view"
              ng-class="{'mobile-menu-push-toleft':navState.current.data.showMenu}"
              ng-click="navState.current.data.showMenu ? navState.current.data.showMenu=false : false">
           <div ui-view autoscroll="true" id="{{ navState.current.data.pageId }}Page"></div>
@@ -52,21 +52,7 @@
         <div nxg-activity></div>
       </div>
 
-      <footer class="row-footer">
-        <div>
-          <a class="col-sm-12 nxg-cox-logo img-responsive" href="https://www.coxautoinc.com/" target="_blank"></a>
-        </div>
-        <ul class="horizontal-list" style="margin: 12px 0 11px 0;padding-bottom:5px;">
-          <li>&copy; 2013-2016 NextGear Capital, Inc. All Rights Reserved.</li>
-          <li>
-            <nxg-privacy-statement></nxg-privacy-statement>
-          </li>
-          <li><a href="http://www.nextgearcapital.com/contact-us" target="_blank" translate>Contact Us</a></li>
-          <!-- @if ENV != 'production' !><li>Revision &nbsp;<!-- @endif -->
-          <!-- @if ENV != 'production' --><!-- @echo GIT_SHA --><!-- @endif -->
-          <!-- @if ENV != 'production' !></li><!-- @endif -->
-        </ul>
-      </footer>
+      <div footer></div>
     </div>
     <!-- build:js scripts/components.js -->
     <script src="components/modernizr/modernizr.js"></script>
@@ -254,10 +240,12 @@
     <script src="client/shared/directives/nxg-payment-buttons/cancel-fee-modal/cancel-fee.controller.js"></script>
     <script src="client/shared/directives/nxg-payment-buttons/cancel-payment-modal/cancel-payment.controller.js"></script>
     <script src="client/shared/directives/navbar/navbar.controller.js"></script>
+    <script src="client/shared/directives/nxg-footer/footer.controller.js"></script>
     <script src="client/shared/directives/nxg-address/nxg-address-inline.directive.js"></script>
     <script src="client/shared/directives/nxg-messages/messages-modal.controller.js"></script>
     <script src="client/shared/directives/nxg-date.directive.js"></script>
     <script src="client/shared/directives/navbar/navbar.directive.js"></script>
+    <script src="client/shared/directives/nxg-footer/footer.directive.js"></script>
     <script src="client/shared/directives/nxg-tooltip/tooltip.directive.js"></script>
     <script src="client/shared/directives/nxg-input/nxg-input.directive.js"></script>
     <script src="client/shared/directives/nxg-min/nxg-min.directive.js"></script>
