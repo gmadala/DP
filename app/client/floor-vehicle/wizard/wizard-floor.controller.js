@@ -24,22 +24,24 @@
     'metric'
   ];
 
-  function WizardFloorCtrl($state,
-                           $scope,
-                           $uibModal,
-                           $q,
-                           User,
-                           Floorplan,
-                           Addresses,
-                           protect,
-                           OptionDefaultHelper,
-                           moment,
-                           AccountManagement,
-                           Upload,
-                           nxgConfig,
-                           kissMetricInfo,
-                           segmentio,
-                           metric) {
+  function WizardFloorCtrl(
+    $state,
+    $scope,
+    $uibModal,
+    $q,
+    User,
+    Floorplan,
+    Addresses,
+    protect,
+    OptionDefaultHelper,
+    moment,
+    AccountManagement,
+    Upload,
+    nxgConfig,
+    kissMetricInfo,
+    segmentio,
+    metric
+  ) {
     var vm = this;
     var isDealer = User.isDealer();
 
@@ -78,8 +80,6 @@
       vm.options.BankAccounts = _.sortBy(activeBankAccounts, 'AchBankName');
 
       vm.options.locations = Addresses.getActivePhysical();
-
-      console.log(vm);
 
       var optionListsToDefault = [
         {

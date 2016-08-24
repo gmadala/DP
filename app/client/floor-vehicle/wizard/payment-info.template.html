@@ -12,7 +12,7 @@
     </select>
   </div>
 
-  <h6>Title Location</h6>
+  <label for="payBuyerSeller">Title Location</label>
   <div class="cr-inline">
     <input type="radio" name="payBuyerSeller" id="payBuyer" ng-value="buyer" ng-model="wizardFloor.data.PaySeller"
            ng-disabled="wizardFloor.data.SaleTradeIn"
@@ -26,7 +26,6 @@
     <label class="radio-img" for="paySeller"></label>
     <label class="cr-label" for="paySeller">Seller</label>
   </div>
-
 
   <div class="form-group">
     <label for="inputDisburseAcct">Deposit Account</label>
@@ -51,9 +50,11 @@
   </label>
 
   <div class="form-group">
+    <label for="additionalFinancingAmount" class="sr-only">Additional Financing Amount</label>
     <div class="input-group input-group-sm">
       <span class="input-group-addon">$</span>
       <input type="text" id="additionalFinancingAmount" name="additionalFinancingAmount" ng-model="wizardFloor.data.AdditionalFinancingAmount"
+            placeholder="Additional Financing Amount"
              nxg-input-currency="1000000000000"
              nxg-min="1"
              class="form-control"
@@ -62,21 +63,14 @@
   </div>
 
   <div class="form-group">
-    <label for="" class="sr-only"></label>
+    <label for="comment" class="sr-only">Comment</label>
     <textarea class="form-control"
               rows="3"
+              name="comment"
+              id="comment"
               placeholder="Please provide a short explanation why you are requesting an additional financing amount"
               ng-model="wizardFloor.data.comment"
               ng-disabled="wizardFloor.floorPlanSubmitting"
               ></textarea>
   </div>
-  <!-- <label for="inputSendPay" class="input-title"><span translate>Send Payment To</span>: *</label>
-  <div class="style-select full-width">
-    <select id="inputSendPay" name="inputSendPay" ng-model="wizardFloor.data.PaySeller"
-            ng-options="value && 'Seller' || 'Buyer' | translate for value in wizardFloor.paySellerOptions"
-            ng-change="wizardFloor.data.BankAccountId = null"
-            ng-disabled="wizardFloor.data.SaleTradeIn">
-      <option value="" translate>Make Selection</option>
-    </select>
-  </div> -->
 </form>
