@@ -2,16 +2,17 @@
 <html>
   <head>
     <title>myNextGear</title>
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
     <meta charset="utf-8">
     <meta name="description" content="">
-    <meta name="viewport" content="width=1020">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
     <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
     <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
 
     <!-- build:css styles/libraries.css -->
     <link rel="stylesheet" href="components/bootstrap-datepicker/css/datepicker.css">
     <link rel="stylesheet" href="components/fullcalendar/dist/fullcalendar.css">
+    <link rel="stylesheet" href="components/bootstrap-switch/dist/css/bootstrap3/bootstrap-switch.css"/>
     <!-- endbuild -->
 
     <!-- build:css styles/main1.css -->
@@ -34,45 +35,38 @@
     <![endif]-->
 
   </head>
-  <body>
+  <body ng-class="{'menu-open' : navState.current.data.showMenu, 'menu-closed': (!navState.current.data.showMenu && navState.current.data.menuToggled) }">
     <!-- htmlmin:ignore -->
-      <!-- processhtml:include:svgDist,server /img/icons/icon_defs.svg -->
-        This will pull in the content of our svg file for use across the app.
-      <!-- /processhtml -->
-    <!-- htmlmin:ignore -->
-
-    <div class="nxg-main-container" nxg-messages>
+    <!-- processhtml:include:svgDist,server /img/icons/icon_defs.svg -->
+    This will pull in the content of our svg file for use across the app.
+    <!-- /processhtml -->
+    <!-- htmlmin:ignore -->    
+    <div id="wrapper" class="menu-wrapper">
       <div nav-bar></div>
-      <div class="nxg-main-view" ng-class="{ 'no-left-margin': navState.current.data.margin }" nxg-fluid-container>
-        <div ui-view id="{{ navState.current.data.pageId }}Page"></div>
+      <div id="main-container" class="nxg-main-container" nxg-messages>        
+        <div class="nxg-main-view"
+             ng-class="{'mobile-menu-push-toleft':navState.current.data.showMenu}"
+             ng-click="navState.current.data.showMenu ? navState.current.data.showMenu=false : false">
+          <div ui-view autoscroll="true" id="{{ navState.current.data.pageId }}Page"></div>
+        </div>
+        <div nxg-activity></div>
       </div>
-      <div nxg-activity></div>
+
+      <div footer></div>
     </div>
-
-    <footer class="row-footer">
-     <div>
-        <a class="col-sm-12 nxg-cox-logo" href="https://www.coxautoinc.com/" target="_blank"></a>
-     </div>
-      <ul class="horizontal-list" style="margin: 12px 0 11px 0;padding-bottom:5px;">
-        <li >&copy; 2013-2015 NextGear Capital, Inc. All Rights Reserved.</li>
-        <li><nxg-privacy-statement></nxg-privacy-statement></li>
-        <li><a href="http://www.nextgearcapital.com/contact-us" target="_blank" translate>Contact Us</a></li>
-        <!-- @if ENV != 'production' !><li>Revision &nbsp;<!-- @endif -->
-        <!-- @if ENV != 'production' --><!-- @echo GIT_SHA --><!-- @endif -->
-        <!-- @if ENV != 'production' !></li><!-- @endif -->
-      </ul>
-    </footer>
-
     <!-- build:js scripts/components.js -->
     <script src="components/modernizr/modernizr.js"></script>
     <script src="components/jquery/dist/jquery.js"></script>
     <script src="components/angular/angular.js"></script>
+    <script src="components/bootstrap-switch/dist/js/bootstrap-switch.min.js"></script>
+    <script src="components/angular-bootstrap-switch/dist/angular-bootstrap-switch.js"></script>
     <script src="components/angular-cookies/angular-cookies.js"></script>
     <script src="components/angular-sanitize/angular-sanitize.js"></script>
     <script src="components/ui-router/release/angular-ui-router.js"></script>
     <script src="components/angular-ui-utils/modules/highlight/highlight.js"></script>
     <script src="components/angular-ui-utils/modules/event/event.js"></script>
     <script src="components/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
+    <script src="components/bootstrap/js/dropdown.js"></script>
     <script src="components/lodash/lodash.js"></script>
     <script src="components/numeral/numeral.js"></script>
     <script src="components/moment/moment.js"></script>
@@ -88,6 +82,8 @@
     <script src="components/ng-file-upload/ng-file-upload-shim.js"></script>
     <script src="components/angular-bootstrap/ui-bootstrap.js"></script>
     <script src="components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
+    <script src="components/file-saver/FileSaver.js"></script>
+
     <!-- Modded version without $animate -->
     <script src="private-components/angular-gettext/dist/angular-gettext.js"></script>
 
@@ -117,7 +113,7 @@
 
     <script src="client/account-management/account-management.service.js"></script>
     <script src="client/account-management/account-management.controller.js"></script>
-    <script src="client/account-management/nxg-financial-account/nxg-financial-account.directive.js" ></script>
+    <script src="client/account-management/nxg-financial-account/nxg-financial-account.directive.js"></script>
 
     <script src="client/analytics/top-auctions-modal/top-auctions.controller.js"></script>
     <script src="client/analytics/analytics.service.js"></script>
@@ -150,6 +146,11 @@
     <script src="client/floor-vehicle/floor-car-confirm-modal/floor-car-confirm.controller.js"></script>
     <script src="client/floor-vehicle/nxg-vin-details/multiple-vehicles-modal/multiple-vehicles.controller.js"></script>
     <script src="client/floor-vehicle/floor-car.controller.js"></script>
+
+    <script src="client/floor-vehicle/wizard/car-info.controller.js"></script>
+    <script src="client/floor-vehicle/wizard/document-info.controller.js"></script>
+    <script src="client/floor-vehicle/wizard/sales-info.controller.js"></script>
+    <script src="client/floor-vehicle/wizard/wizard-floor.controller.js"></script>
 
     <script src="client/floor-plan/floor-plan.service.js"></script>
     <script src="client/floor-plan/floor-plan.controller.js"></script>
@@ -188,12 +189,14 @@
 
     <script src="client/title-releases/title-releases.service.js"></script>
     <script src="client/title-releases/nxg-requests-summary/requests-summary.controller.js"></script>
-    <script src="client/title-releases/title-releases-checkout/confirm-title-release-modal/nxg-dealer-customer-support-phone/dealer-customer-support-phone.directive.js"></script>
+    <script
+      src="client/title-releases/title-releases-checkout/confirm-title-release-modal/nxg-dealer-customer-support-phone/dealer-customer-support-phone.directive.js"></script>
     <script src="client/title-releases/title-releases.controller.js"></script>
     <script src="client/title-releases/title-releases-checkout/title-release-checkout.controller.js"></script>
     <script src="client/title-releases/title-releases-checkout/confirm-title-release-modal/confirm-title-release-checkout.controller.js"></script>
     <script src="client/title-releases/nxg-requests-summary/nxg-requests-summary.directive.js"></script>
-    <script src="client/title-releases/title-releases-checkout/confirm-title-release-modal/nxg-dealer-customer-support-phone/nxg-dealer-customer-support-phone.directive.js"></script>
+    <script
+      src="client/title-releases/title-releases-checkout/confirm-title-release-modal/nxg-dealer-customer-support-phone/nxg-dealer-customer-support-phone.directive.js"></script>
 
     <script src="client/value-lookup/mmr.service.js"></script>
     <script src="client/value-lookup/kbb.service.js"></script>
@@ -204,64 +207,6 @@
     <script src="client/vehicle-details/vehicle-details.controller.js"></script>
     <script src="client/vehicle-details/fee-details-modal/fee-details.controller.js"></script>
     <script src="client/vehicle-details/payment-details-modal/payment-details.controller.js"></script>
-
-    <script src="client/shared/directives/nxg-payment-buttons/cancel-fee-modal/cancel-fee.controller.js"></script>
-    <script src="client/shared/directives/nxg-payment-buttons/cancel-payment-modal/cancel-payment.controller.js"></script>
-    <script src="client/shared/directives/navbar/navbar.controller.js"></script>
-    <script src="client/shared/directives/nxg-address/nxg-address-inline.directive.js"></script>
-    <script src="client/shared/directives/nxg-messages/messages-modal.controller.js"></script>
-    <script src="client/shared/directives/nxg-date.directive.js"></script>
-    <script src="client/shared/directives/navbar/navbar.directive.js"></script>
-    <script src="client/shared/directives/nxg-tooltip/tooltip.directive.js"></script>
-    <script src="client/shared/directives/nxg-input/nxg-input.directive.js"></script>
-    <script src="client/shared/directives/nxg-min/nxg-min.directive.js"></script>
-    <script src="client/shared/directives/nxg-max/nxg-max.directive.js"></script>
-    <script src="client/shared/directives/nxg-blur/nxg-blur.directive.js"></script>
-    <script src="client/shared/directives/nxg-focus/nxg-focus.directive.js"></script>
-    <script src="client/shared/directives/nxg-requires/nxg-requires.directive.js"></script>
-    <script src="client/shared/directives/nxg-validate-int/nxg-validate-int.directive.js"></script>
-    <script src="client/shared/directives/nxg-greater-than/nxg-greater-than.directive.js"></script>
-    <script src="client/shared/directives/nxg-input-currency/nxg-input-currency.directive.js"></script>
-    <script src="client/shared/directives/nxg-chart/nxg-chart.directive.js"></script>
-    <script src="client/shared/directives/nxg-payment-buttons/nxg-payment-buttons.directive.js"></script>
-    <script src="client/shared/directives/nxg-search/nxg-search.directive.js"></script>
-    <script src="client/shared/directives/nxg-search/nxg-search.controller.js"></script>
-    <script src="client/shared/directives/nxg-infinite-scroll.directive.js"></script>
-    <script src="client/shared/directives/nxg-fill-height.directive.js"></script>
-    <script src="client/shared/directives/nxg-alternate-address/nxg-alternate-address.directive.js"></script>
-    <script src="client/shared/directives/nxg-sortable/nxg-sortable.directive.js"></script>
-    <script src="client/shared/directives/nxg-address.directive.js"></script>
-    <script src="client/shared/directives/nxg-activity/nxg-activity.directive.js"></script>
-    <script src="client/shared/directives/nxg-messages/nxg-messages.directive.js"></script>
-    <script src="client/shared/directives/nxg-icon/nxg-icon.directive.js"></script>
-    <script src="client/shared/directives/nxg-autofocus/nxg-autofocus.directive.js"></script>
-    <script src="client/shared/directives/nxg-highlight/nxg-highlight.directive.js"></script>
-    <script src="client/shared/directives/nxg-enter.directive.js"></script>
-    <script src="client/shared/directives/nxg-chat-with-us/nxg-chat-with-us.directive.js"></script>
-    <script src="client/shared/directives/nxg-customer-support-email/nxg-customer-support-email.directive.js"></script>
-    <script src="client/shared/directives/nxg-customer-support-phone-simple/nxg-customer-support-phone-simple.directive.js"></script>
-    <script src="client/shared/directives/nxg-track/nxg-track.directive.js"></script>
-    <script src="client/shared/directives/nxg-typeahead.directive.js"></script>
-    <script src="client/shared/directives/nxg-placeholder/placeholder.directive.js"></script>
-    <script src="client/shared/directives/ie-input-patch.directive.js"></script>
-    <script src="client/shared/directives/nxg-fluid-container/nxg-fluid-container.directive.js"></script>
-    <script src="client/shared/directives/nxg-sticky/nxg-sticky.directive.js"></script>
-    <script src="client/shared/directives/nxg-privacy-statement.directive.js"></script>
-    <script src="client/shared/directives/nxg-address/nxg-address.directive.js"></script>
-    <script src="client/shared/directives/waybill/nxg-download-waybill.controller.js"></script>
-    <script src="client/shared/directives/waybill/nxg-download-waybill.directive.js"></script>
-
-    <script src="client/shared/modals/request-credit-increase/credit-increase.service.js"></script>
-    <script src="client/shared/modals/credit-query/credit-query.service.js"></script>
-    <script src="client/shared/modals/extension-request/extension-request.controller.js"></script>
-    <script src="client/shared/modals/confirm/confirm-logout/confirm-logout.controller.js"></script>
-    <script src="client/shared/modals/confirm/confirm.controller.js"></script>
-    <script src="client/shared/modals/credit-query/credit-query.controller.js"></script>
-    <script src="client/shared/modals/floor-car-message/floor-car-message.controller.js"></script>
-    <script src="client/shared/modals/payment-options-breakdown/payment-options-breakdown.controller.js"></script>
-    <script src="client/shared/modals/financial-account/financial-account.controller.js"></script>
-    <script src="client/shared/modals/message-box/message-box.controller.js"></script>
-    <script src="client/shared/modals/request-credit-increase/request-credit-increase.controller.js"></script>
 
     <script src="client/shared/services/status/status.service.js"></script>
     <script src="client/shared/services/messages/messages.service.js"></script>
@@ -291,6 +236,67 @@
     <script src="client/shared/services/user/user.service.js"></script>
     <script src="client/shared/services/blackbook/blackbook.service.js"></script>
     <script src="client/shared/services/fedex/fedex.service.js"></script>
+
+    <script src="client/shared/directives/nxg-payment-buttons/cancel-fee-modal/cancel-fee.controller.js"></script>
+    <script src="client/shared/directives/nxg-payment-buttons/cancel-payment-modal/cancel-payment.controller.js"></script>
+    <script src="client/shared/directives/navbar/navbar.controller.js"></script>
+    <script src="client/shared/directives/nxg-footer/footer.controller.js"></script>
+    <script src="client/shared/directives/nxg-address/nxg-address-inline.directive.js"></script>
+    <script src="client/shared/directives/nxg-messages/messages-modal.controller.js"></script>
+    <script src="client/shared/directives/nxg-date.directive.js"></script>
+    <script src="client/shared/directives/navbar/navbar.directive.js"></script>
+    <script src="client/shared/directives/nxg-footer/footer.directive.js"></script>
+    <script src="client/shared/directives/nxg-tooltip/tooltip.directive.js"></script>
+    <script src="client/shared/directives/nxg-input/nxg-input.directive.js"></script>
+    <script src="client/shared/directives/nxg-min/nxg-min.directive.js"></script>
+    <script src="client/shared/directives/nxg-max/nxg-max.directive.js"></script>
+    <script src="client/shared/directives/nxg-blur/nxg-blur.directive.js"></script>
+    <script src="client/shared/directives/nxg-focus/nxg-focus.directive.js"></script>
+    <script src="client/shared/directives/nxg-requires/nxg-requires.directive.js"></script>
+    <script src="client/shared/directives/nxg-validate-int/nxg-validate-int.directive.js"></script>
+    <script src="client/shared/directives/nxg-greater-than/nxg-greater-than.directive.js"></script>
+    <script src="client/shared/directives/nxg-input-currency/nxg-input-currency.directive.js"></script>
+    <script src="client/shared/directives/nxg-chart/nxg-chart.directive.js"></script>
+    <script src="client/shared/directives/nxg-payment-buttons/nxg-payment-buttons.directive.js"></script>
+    <script src="client/shared/directives/nxg-search/nxg-search.directive.js"></script>
+    <script src="client/shared/directives/nxg-search/nxg-search.controller.js"></script>
+    <script src="client/shared/directives/nxg-infinite-scroll.directive.js"></script>
+    <script src="client/shared/directives/nxg-fill-height.directive.js"></script>
+    <script src="client/shared/directives/nxg-alternate-address/nxg-alternate-address.directive.js"></script>
+    <script src="client/shared/directives/nxg-sortable/nxg-sortable.directive.js"></script>
+    <script src="client/shared/directives/nxg-address.directive.js"></script>
+    <script src="client/shared/directives/nxg-activity/nxg-activity.directive.js"></script>
+    <script src="client/shared/directives/nxg-messages/nxg-messages.directive.js"></script>
+    <script src="client/shared/directives/nxg-icon/nxg-icon.directive.js"></script>
+    <script src="client/shared/directives/nxg-autofocus/nxg-autofocus.directive.js"></script>
+    <script src="client/shared/directives/nxg-highlight/nxg-highlight.directive.js"></script>
+    <script src="client/shared/directives/nxg-enter.directive.js"></script>
+    <script src="client/shared/directives/nxg-chat-with-us/nxg-chat-with-us.directive.js"></script>
+    <script src="client/shared/directives/nxg-customer-support-email/nxg-customer-support-email.directive.js"></script>
+    <script src="client/shared/directives/nxg-customer-support-phone-simple/nxg-customer-support-phone-simple.directive.js"></script>
+    <script src="client/shared/directives/nxg-document-upload/nxg-document-upload.directive.js"></script>
+    <script src="client/shared/directives/nxg-track/nxg-track.directive.js"></script>
+    <script src="client/shared/directives/nxg-typeahead.directive.js"></script>
+    <script src="client/shared/directives/nxg-placeholder/placeholder.directive.js"></script>
+    <script src="client/shared/directives/ie-input-patch.directive.js"></script>
+    <script src="client/shared/directives/nxg-fluid-container/nxg-fluid-container.directive.js"></script>
+    <script src="client/shared/directives/nxg-sticky/nxg-sticky.directive.js"></script>
+    <script src="client/shared/directives/nxg-privacy-statement.directive.js"></script>
+    <script src="client/shared/directives/nxg-address/nxg-address.directive.js"></script>
+    <script src="client/shared/directives/waybill/nxg-download-waybill.controller.js"></script>
+    <script src="client/shared/directives/waybill/nxg-download-waybill.directive.js"></script>
+
+    <script src="client/shared/modals/request-credit-increase/credit-increase.service.js"></script>
+    <script src="client/shared/modals/credit-query/credit-query.service.js"></script>
+    <script src="client/shared/modals/extension-request/extension-request.controller.js"></script>
+    <script src="client/shared/modals/confirm/confirm-logout/confirm-logout.controller.js"></script>
+    <script src="client/shared/modals/confirm/confirm.controller.js"></script>
+    <script src="client/shared/modals/credit-query/credit-query.controller.js"></script>
+    <script src="client/shared/modals/floor-car-message/floor-car-message.controller.js"></script>
+    <script src="client/shared/modals/payment-options-breakdown/payment-options-breakdown.controller.js"></script>
+    <script src="client/shared/modals/financial-account/financial-account.controller.js"></script>
+    <script src="client/shared/modals/message-box/message-box.controller.js"></script>
+    <script src="client/shared/modals/request-credit-increase/request-credit-increase.controller.js"></script>
     <!-- endbuild -->
 
     <!-- processhtml:remove:dist -->
@@ -306,10 +312,10 @@
     <!-- /processhtml -->
 
     <script>
-      (function () {
+      (function() {
 
         function bootstrapApp() {
-          angular.element(document).ready(function () {
+          angular.element(document).ready(function() {
             angular.bootstrap(document, ['nextgearWebApp']);
           });
         }

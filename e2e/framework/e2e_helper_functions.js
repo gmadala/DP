@@ -65,8 +65,21 @@ function Helper() {
     browser.sleep(browser.params.longDelay);
   };
 
+  this.goToReceipts = function () {
+    /**
+     * @name goToReceipts
+     * @memberof helper
+     * @author Bala Nithiya
+     * @description This function navigates to the receipts page
+     *
+     * @returns {none}
+     */
+    browser.get(execSettings.receiptsPage());
+    browser.sleep(browser.params.longDelay);
+  };
+
   //Generic functions
-  this.waitForVisible = function () {
+  this.waitForVisible = function (elementId) {
     /**
      * @name waitForVisible
      * @memberof HelperObject
@@ -82,7 +95,7 @@ function Helper() {
     browser.wait(isVisible, browser.params.mediumDelay);
   };
 
-  this.waitForClickable = function () {
+  this.waitForClickable = function (elementId) {
     /**
      * @name waitForClickable
      * @memberof HelperObject
@@ -101,7 +114,7 @@ function Helper() {
     browser.wait(isClickable, browser.params.mediumDelay);
   };
 
-  this.takeSnapshot = function () {
+  this.takeSnapshot = function (snapshotFileName) {
     /**
      * @name takeSnapshot
      * @memberof HelperObject
@@ -116,6 +129,42 @@ function Helper() {
       stream.write(buf);
       stream.end();
     });
+  };
+
+  this.getTodaysDate = function () {
+    var todaysDate;
+    var month;
+    var date;
+    todaysDate = new Date();
+    month = todaysDate.getMonth() + 1;
+    date = todaysDate.getDate();
+    if (month < 10) {
+      month = '0' + month; //ensure leading 0
+    }
+    if (date < 10) {
+      date = '0' + date;//ensure leading 0
+    }
+    //mm/dd/yyyy
+    var currentDate = month + '/' + date + '/' + todaysDate.getFullYear();
+    return (currentDate);
+  };
+
+  this.popOver = function () {
+    /**
+     * @name Popover
+     * @memberof helper
+     * @author Bala Nithiya
+     * @description This function helps to close the popover message
+     *
+     * @returns {none}
+     */
+    this.elOkButton = browser.element(by.buttonText("OK, I got it!"));
+    var elPopOver = element(by.css('div.popover-content'));
+    if (elPopOver) {
+      browser.actions().mouseMove(element(by.css('.popover'))).perform();
+      expect(elPopOver.isDisplayed()).toBe(true);
+      this.elOkButton.click();
+    }
   };
 }
 

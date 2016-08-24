@@ -31,26 +31,25 @@
     'metric'
   ];
 
-  function FloorCarCtrl(
-    $scope,
-    $uibModal,
-    $location,
-    $q,
-    User,
-    Floorplan,
-    Addresses,
-    Blackbook,
-    protect,
-    OptionDefaultHelper,
-    moment,
-    gettextCatalog,
-    AccountManagement,
-    Upload,
-    nxgConfig,
-    gettext,
-    kissMetricInfo,
-    segmentio,
-    metric) {
+  function FloorCarCtrl($scope,
+                        $uibModal,
+                        $location,
+                        $q,
+                        User,
+                        Floorplan,
+                        Addresses,
+                        Blackbook,
+                        protect,
+                        OptionDefaultHelper,
+                        moment,
+                        gettextCatalog,
+                        AccountManagement,
+                        Upload,
+                        nxgConfig,
+                        gettext,
+                        kissMetricInfo,
+                        segmentio,
+                        metric) {
 
     // init files as empty array to avoid
     // error of undefined.length from $watcher
@@ -58,8 +57,8 @@
     $scope.missingDocuments = false;
     // $scope.comment = '';
 
-    $scope.$watch('files', function(newValue, oldValue){
-      if(newValue.length !== oldValue.length){
+    $scope.$watch('files', function(newValue, oldValue) {
+      if (newValue.length !== oldValue.length) {
         $scope.form.documents.$setValidity('pattern', true);
         $scope.form.documents.$setValidity('maxSize', true);
       }
@@ -75,8 +74,9 @@
       "and provide the customer's NextGear Dealer Number.");
     $scope.aucPurchaseDateDisclaimer = gettextCatalog.getString(aucPurchaseDateDisclaimer);
 
+    var uibModal = $uibModal;
+
     var isDealer = User.isDealer();
-    var uibModal  = $uibModal;
     var attachDocsDealer = isDealer && User.getFeatures().hasOwnProperty('uploadDocuments') ? User.getFeatures().uploadDocuments.enabled : false;
     var attachDocsAuction = !isDealer && User.getFeatures().hasOwnProperty('uploadDocumentsAuction') ? User.getFeatures().uploadDocumentsAuction.enabled : false;
 
@@ -191,7 +191,7 @@
       $blackbookMileage: null // cache most recent mileage value used to get updated blackbook data
     };
 
-    $scope.reset = function () {
+    $scope.reset = function() {
       $scope.data = angular.copy($scope.defaultData);
       $scope.files = [];
       $scope.invalidFiles = [];
@@ -205,10 +205,10 @@
     $scope.sellerLocations = null;
     if (!isDealer) { // If we are an auction user...
       $scope.$watch('data.BusinessId', function(biz) {
-        if(biz) { // And a business has been selected...
+        if (biz) { // And a business has been selected...
           $scope.sellerLocations = biz.ActivePhysicalInventoryLocations;
 
-          if(_.size(biz.ActivePhysicalInventoryLocations) === 1) {
+          if (_.size(biz.ActivePhysicalInventoryLocations) === 1) {
             // If there's only 1 location, auto-select it (and we disable the field in the HTML)
             $scope.data.PhysicalInventoryAddressId = $scope.sellerLocations[0];
           }
@@ -220,27 +220,27 @@
     $scope.minValidModelYear = 1900;
     $scope.isYear = (function() {
       var arr = $scope.maxValidModelYear.toString().split('').slice(2),
-        regStr = '(19[0-9][0-9]|200[0-9]|20[0-' +  arr[0] +'][0-' +  arr[1] +'])';
+        regStr = '(19[0-9][0-9]|200[0-9]|20[0-' + arr[0] + '][0-' + arr[1] + '])';
       return new RegExp(regStr);
     })();
 
-    $scope.submit = function () {
+    $scope.submit = function() {
       //take a snapshot of form state -- view can bind to this for submit-time update of validation display
       $scope.validity = angular.copy($scope.form);
-      if($scope.form.documents) {
+      if ($scope.form.documents) {
         $scope.form.documents.$setValidity('pattern', true);
         $scope.form.documents.$setValidity('maxSize', true);
       }
 
       $scope.vinDetailsErrorFlag = true;
       if (!$scope.form.$valid) {
-        if(isDealer && $scope.canAttachDocuments() && $scope.files.length < 1){
+        if (isDealer && $scope.canAttachDocuments() && $scope.files.length < 1) {
           $scope.missingDocuments = true;
         }
         return false;
       }
 
-      if(isDealer && $scope.canAttachDocuments() && $scope.files.length < 1){
+      if (isDealer && $scope.canAttachDocuments() && $scope.files.length < 1) {
         $scope.missingDocuments = true;
         return false;
       }
@@ -249,24 +249,26 @@
         backdrop: true,
         keyboard: true,
         backdropClick: true,
-        dialogClass: 'modal modal-medium',
+        size: 'md',
         templateUrl: 'client/floor-vehicle/floor-car-confirm-modal/floor-car-confirm.template.html',
         controller: 'FloorCarConfirmCtrl',
         resolve: {
-          comment: function () {
+          comment: function() {
             return !!$scope.comment && $scope.comment.length > 0;
           },
-          formData: function () {
+          formData: function() {
             return angular.copy($scope.data);
           },
-          fileNames: function(){
+          fileNames: function() {
+            var index = 0;
             return _.map($scope.files, function(file) {
-              return file.name;
+              index++;
+              return $scope.renameFile(file.name, index - 1);
             });
           }
         }
       };
-      uibModal.open(confirmation).result.then(function (result) {
+      uibModal.open(confirmation).result.then(function(result) {
         if (result === true) {
           // submission confirmed
           $scope.reallySubmit(protect);
@@ -277,10 +279,10 @@
 
     function buildDialog(canAttachDocuments, floorSuccess, uploadSuccess) {
 
-      kissMetricInfo.getKissMetricInfo().then(function (result) {
+      kissMetricInfo.getKissMetricInfo().then(function(result) {
         result.comment = !!$scope.comment && $scope.comment.length > 0;
         result.floorplanSuccess = floorSuccess;
-        result.uploadSuccess  = uploadSuccess;
+        result.uploadSuccess = uploadSuccess;
 
         segmentio.track(metric.FLOORPLAN_REQUEST_RESULT, result);
       });
@@ -309,7 +311,7 @@
       };
     }
 
-    $scope.reallySubmit = function (guard) {
+    $scope.reallySubmit = function(guard) {
       if (guard !== protect) {
         throw 'FloorCarCtrl: reallySubmit can only be called from controller upon confirmation';
       }
@@ -318,15 +320,25 @@
 
       $scope.submitInProgress = true;
       Floorplan.create($scope.data).then(
-        function (response) { /*floorplan success*/
-          if($scope.comment) {
+        function(response) { /*floorplan success*/
+          if ($scope.comment) {
             Floorplan.addComment({
               CommentText: $scope.comment,
               FloorplanId: response.FloorplanId
             });
           }
 
+
           if ($scope.files && $scope.files.length > 0) {
+            // Rename duplicate files with an index so they are all uploaded
+            $scope.files = _.map($scope.files, function(file, index) {
+              var newName = $scope.renameFile(file.name, index);
+              if (newName !== file) {
+                Upload.rename(file, newName);
+              }
+              return file;
+            });
+
             var upload = Upload.upload({
               url: nxgConfig.apiBase + '/floorplan/upload/' + response.FloorplanId,
               method: 'POST',
@@ -340,24 +352,24 @@
               dialogParams = response.data.Success ?
                 buildDialog($scope.canAttachDocuments(), true, true) :
                 buildDialog($scope.canAttachDocuments(), true, false);
-              uibModal.open(dialogParams).result.then(function(){
+              uibModal.open(dialogParams).result.then(function() {
                 $scope.reset();
               });
             }, function() {
               $scope.submitInProgress = false;
               dialogParams = buildDialog($scope.canAttachDocuments(), true, false);
-              uibModal.open(dialogParams).result.then(function(){
+              uibModal.open(dialogParams).result.then(function() {
                 $scope.reset();
               });
             });
           } else {
             $scope.submitInProgress = false;
             dialogParams = buildDialog(false, true, false);
-            uibModal.open(dialogParams).result.then(function(){
+            uibModal.open(dialogParams).result.then(function() {
               $scope.reset();
             });
           }
-        }, function (/*floorplan error*/) {
+        }, function(/*floorplan error*/) {
           $scope.submitInProgress = false;
           dialogParams = buildDialog($scope.canAttachDocuments(), false, false);
           uibModal.open(dialogParams);
@@ -377,55 +389,11 @@
         $scope.validity.documents = angular.copy($scope.form.documents);
       }
     };
-
-    $scope.removeFile = function(file) {
-      $scope.files = $scope.files.filter(function (f) {
-        return f.name !== file.name;
-      });
-    };
-
-    $scope.cancel = function () {
-      var title = gettextCatalog.getString('Cancel'),
-        message = gettextCatalog.getString('What would you like to do?'),
-        buttons = [
-          {label: gettextCatalog.getString('Go Home'), result:'home', cssClass: 'btn-cta cta-secondary btn-sm'},
-          {label: gettextCatalog.getString('Start Over'), result: 'reset', cssClass: 'btn-cta cta-secondary btn-sm'},
-          {label: gettextCatalog.getString('Keep Editing'), result: null, cssClass: 'btn-cta cta-primary btn-sm'}
-        ];
-
-      var dialogOptions = {
-        backdrop: true,
-        keyboard: true,
-        backdropClick: true,
-        templateUrl: 'client/shared/modals/message-box/message-box.template.html',
-        controller: 'MessageBoxCtrl',
-        dialogClass: 'modal modal-medium',
-        resolve: {
-          title: function () {
-            return title;
-          },
-          message : function() {
-            return message;
-          },
-          buttons: function () {
-            return buttons;
-          }
-        }
-      };
-      uibModal.open(dialogOptions).result.then(function (choice) {
-        if (choice === 'home') {
-          $location.path('');
-        } else if (choice === 'reset') {
-          $scope.reset();
-        }
-      });
-    };
-
     //Checking for United States Dealer
 
-    if(User.isUnitedStates()) {
+    if (User.isUnitedStates()) {
       $scope.mileageOrOdometer = gettextCatalog.getString('Mileage');
-    }else{
+    } else {
       $scope.mileageOrOdometer = gettextCatalog.getString('Odometer');
     }
 
@@ -433,7 +401,7 @@
      * Determines if the current user should be allowed to upload documents.
      * @return {Boolean} Is the user allowed to upload documents?
      */
-    $scope.canAttachDocuments = function () {
+    $scope.canAttachDocuments = function() {
       return ($scope.attachDocumentsEnabled && User.isUnitedStates());
     };
 

@@ -9,7 +9,7 @@
   <form name="dateForm" class="modal-inner">
     <h3 translate>Schedule Date</h3>
     <p><span translate>Select a date from the picker below</span>:</p>
-    <div class="date-field date-picker col-xs-5 custom reports-search-date-picker">
+    <div class="date-field date-picker col-xs-5 col-sm-3 custom reports-search-date-picker">
       <input id="inputScheduleDate" name="inputScheduleDate"
              uib-datepicker-popup="{{dateFormat}}"
              date-disabled="disabled(date, mode)"
@@ -38,9 +38,7 @@
 
       </div>
     </div>
-    <p class="paragraph" translate>Scheduled payments are not made until the scheduled date. <br/> Interest and/or fees
-      may continue to accrue between now and your scheduled payment date.</p>
-
+    <p class="paragraph" translate>Scheduled payments are not made until the scheduled date. <br/> Interest and/or fees may continue to accrue between now and your scheduled payment date.</p>
   </form>
 
   <div class="modal-inner aside" ng-show="isPayment">

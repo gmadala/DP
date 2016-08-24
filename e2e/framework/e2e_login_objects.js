@@ -7,7 +7,7 @@
 
 function LoginObjects() {
 
-  this.elForgotUsernamePassword = browser.element(by.id("forgotUsernamePassword"));
+  this.elForgotUsernamePassword = browser.element(by.css('a.forgot'));
   this.elEmail = browser.element(by.id("email"));
   this.elSubmitUsername = browser.element(by.id("forgotUsernameSubmit"));
   this.elSubmitPassword = browser.element(by.id("forgotPasswordSubmit"));
@@ -82,10 +82,10 @@ function LoginObjects() {
   this.getTextSubmitUsername = function () {
     return this.elSubmitUsername.getText();
   };
-  this.getTextLogin = function (){
+  this.getTextLogin = function () {
     browser.sleep(browser.params.shortDelay);
     return this.elLogin.getText();
-  }
+  };
 
   //Setters
   this.setEmail = function (param) {

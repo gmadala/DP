@@ -5,7 +5,7 @@
     .module('nextgearWebApp')
     .controller('VinDetailsCtrl', VinDetailsCtrl);
 
-  VinDetailsCtrl.$inject = ['$scope', 'moment', '$uibModal', '$q', 'Blackbook','User'];
+  VinDetailsCtrl.$inject = ['$scope', 'moment', '$uibModal', '$q', 'Blackbook', 'User'];
 
   function VinDetailsCtrl($scope, moment, $uibModal, $q, Blackbook, User) {
 
@@ -25,7 +25,7 @@
     };
 
     var USER_CANCEL = 'userCancel',
-      pickMatch = function (matchList) {
+      pickMatch = function(matchList) {
         var options = {
           backdrop: true,
           keyboard: false,
@@ -34,12 +34,12 @@
           templateUrl: 'client/floor-vehicle/nxg-vin-details/multiple-vehicles-modal/multiple-vehicles.template.html',
           controller: 'MultipleVehiclesCtrl',
           resolve: {
-            matchList: function () {
+            matchList: function() {
               return matchList;
             }
           }
         };
-        return uibModal.open(options).result.then(function (choice) {
+        return uibModal.open(options).result.then(function(choice) {
           if (!choice) {
             return $q.reject(USER_CANCEL);
           } else {
@@ -48,21 +48,19 @@
         });
       };
 
-    $scope.$on('reset', function () {
+    $scope.$on('reset', function() {
       s.vinMode = 'none';
     });
 
-    $scope.vinIsSyntacticallyValid = function (errorObj) {
+    $scope.vinIsSyntacticallyValid = function(errorObj) {
       if (!errorObj) {
         return false;
       }
 
-      return (!errorObj.required &&
-      !errorObj.minlength &&
-      !errorObj.maxlength);
+      return (!errorObj.required && !errorObj.minlength && !errorObj.maxlength);
     };
 
-    $scope.vinChange = function () {
+    $scope.vinChange = function() {
       if (s.vinMode !== 'none') {
         // if the VIN changes after lookup, clear any match state
         $scope.data.$selectedVehicle = null;
@@ -71,18 +69,18 @@
       }
     };
 
-    $scope.isDealer = function () {
-      return User.isDealer() ;
+    $scope.isDealer = function() {
+      return User.isDealer();
     };
 
-    $scope.vinExit = function () {
+    $scope.vinExit = function() {
       // on leaving VIN field, if it has a syntactically valid value that has not yet been looked up, do it now
       if ($scope.vinIsSyntacticallyValid($scope.form.inputVin.$error) && s.vinMode === 'none') {
         $scope.lookupVin();
       }
     };
 
-    $scope.lookupVin = function () {
+    $scope.lookupVin = function() {
       var mileage = null;
 
       // disable this while a lookup is already running
@@ -110,7 +108,7 @@
 
       s.vinLookupPending = true;
       Blackbook.lookupByVin($scope.data.UnitVin, mileage).then(
-        function (results) {
+        function(results) {
           if (results.length === 1) {
             $scope.data.$selectedVehicle = results[0];
           } else { // we have multiple VIN matches
@@ -122,7 +120,7 @@
           $scope.data.$blackbookMileage = mileage;
           s.vinMode = 'matched';
         },
-        function (error) {
+        function(error) {
           // treat all errors as "no match" & suppress error messages
           if (error.dismiss) {
             error.dismiss();

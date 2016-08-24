@@ -87,7 +87,7 @@ body.lang_es {
       .well-title {
         font-size: 15px;
 
-        .well-sub-title, a {
+        .well-sub-title, a, .right {
           font-size: 12px !important;
           margin-top: 4px !important;
         }
@@ -97,6 +97,16 @@ body.lang_es {
         }
       }
 
+    }
+
+    @media (max-width: 400px){
+      .well-title{
+        font-size: 14px;
+
+        .well-sub-title, a, .right{
+          font-size: 10px !important;
+        }
+      }
     }
 
     .filter-options {
@@ -148,15 +158,6 @@ body.lang_es {
           margin-top: 0;
         }
       }
-    }
-  }
-
-  #DocumentsPage {
-    .video-well {
-      display: none;
-    }
-    .documents-well {
-      width: 45%;
     }
   }
 

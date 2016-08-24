@@ -13,7 +13,8 @@ describe('Directive: navBar', function () {
       mockKissMetricInfo,
       shouldShowTRP,
       dMock,
-      aMock;
+      aMock,
+      mockCustomerSupportPhone;
 
     beforeEach(inject(function (_$rootScope_, _$controller_, $state, $q) {
       $controller = _$controller_;
@@ -29,7 +30,7 @@ describe('Directive: navBar', function () {
       };
 
       mockKissMetricInfo = {
-        getKissMetricInfo : function() {
+        getKissMetricInfo: function () {
           return $q.when(kissMetricData);
         }
       };
@@ -38,93 +39,113 @@ describe('Directive: navBar', function () {
 
       stateMock = {
         current: 'floorcar',
-        transitionTo: function(newState) {
+        transitionTo: function (newState) {
           stateMock.current = newState;
         },
-        includes: function(param) {
+        includes: function (param) {
           return stateMock.current.indexOf(param) != -1;
         }
       };
       shouldShowTRP = false;
       dMock = {
-        isDealer: function(){ return true; },
-        isUnitedStates: function(){ return true;},
-        getShowReportsAndResources: function(){return $q.when(false);},
-        getInfo: function(){
-          return $q.when({ DisplayTitleReleaseProgram: shouldShowTRP });
-        },
-        isLoggedIn: function() {
+        isDealer: function () {
           return true;
         },
-        getFeatures: function(){
+        isUnitedStates: function () {
+          return true;
+        },
+        getShowReportsAndResources: function () {
+          return $q.when(false);
+        },
+        getInfo: function () {
+          return $q.when({ DisplayTitleReleaseProgram: shouldShowTRP });
+        },
+        isLoggedIn: function () {
+          return true;
+        },
+        getFeatures: function () {
           return {
-            autoPay: {enabled: true},
-            addBankAccount: {enabled: true},
-            editBankAccount: {enabled: true},
-            uploadDocuments: {enabled: true},
-            uploadDocumentsAuction: {enabled: true}
+            autoPay: { enabled: true },
+            addBankAccount: { enabled: true },
+            editBankAccount: { enabled: true },
+            uploadDocuments: { enabled: true },
+            uploadDocumentsAuction: { enabled: true }
           };
         }
       };
       aMock = {
-        isDealer: function(){ return false; },
-        isUnitedStates: function(){ return false; },
-        getShowReportsAndResources: function(){return $q.when(false);},
-        getInfo: function() {
+        isDealer: function () {
+          return false;
+        },
+        isUnitedStates: function () {
+          return false;
+        },
+        getShowReportsAndResources: function () {
+          return $q.when(false);
+        },
+        getInfo: function () {
           return $q.when({ DisplayTitleReleaseProgram: false });
         },
-        isLoggedIn: function() {
+        isLoggedIn: function () {
           return true;
         },
-        getFeatures: function(){
+        getFeatures: function () {
           return {
-            autoPay: {enabled: true},
-            addBankAccount: {enabled: true},
-            editBankAccount: {enabled: true},
-            uploadDocuments: {enabled: true},
-            uploadDocumentsAuction: {enabled: true},
-            eventSales: {enabled: true}
+            autoPay: { enabled: true },
+            addBankAccount: { enabled: true },
+            editBankAccount: { enabled: true },
+            uploadDocuments: { enabled: true },
+            uploadDocumentsAuction: { enabled: true },
+            eventSales: { enabled: true }
           };
         }
       };
+
+      mockCustomerSupportPhone = $q.when({
+        value: '1234567890',
+        formatted: '123-456-7890'
+      });
 
       $controller('NavBarCtrl', {
         $scope: scope,
         $state: stateMock,
         User: dMock,
-        kissMetricInfo: mockKissMetricInfo
+        kissMetricInfo: mockKissMetricInfo,
+        dealerCustomerSupportPhone: mockCustomerSupportPhone
       });
 
       aScope = $rootScope.$new();
+
       $controller('NavBarCtrl', {
         $scope: aScope,
         User: aMock,
-        kissMetricInfo: mockKissMetricInfo
+        kissMetricInfo: mockKissMetricInfo,
+        dealerCustomerSupportPhone: mockCustomerSupportPhone
       });
     }));
 
-    it('should call to get core properties from kissmetric info service', function() {
+    it('should call to get core properties from kissmetric info service', function () {
       scope.$apply();
       expect(mockKissMetricInfo.getKissMetricInfo).toHaveBeenCalled();
       expect(scope.kissMetricData).toEqual(kissMetricData);
     });
 
-    it('should attach a user object to the scope', function() {
+    it('should attach a user object to the scope', function () {
       scope.$apply();
       expect(scope.user).toBeDefined();
     });
 
-    describe('user object', function() {
-      beforeEach(function() {
+    describe('user object', function () {
+      beforeEach(function () {
         scope.$apply(); // trigger initial $watch
       });
 
-      it('should have an isDealer function', function() {
+      it('should have an isDealer function', function () {
         expect(scope.user.isDealer).toBeDefined();
         expect(typeof scope.user.isDealer).toBe('function');
       });
 
-      it('should have a logout function that dispatches a userRequestedLogout event', function() {
+      it('should have a logout function that dispatches a userRequestedLogout event', function () {
         spyOn($rootScope, '$emit');
         expect(scope.user.logout).toBeDefined();
         expect(typeof scope.user.logout).toBe('function');
@@ -133,26 +154,27 @@ describe('Directive: navBar', function () {
         expect($rootScope.$emit).toHaveBeenCalledWith('event:userRequestedLogout');
       });
 
-      it('should have a navLinks function that returns appropriate dealer or auction links', function() {
+      it('should have a navLinks function that returns appropriate dealer or auction links', function () {
         expect(scope.user.navLinks).toBeDefined();
         expect(typeof scope.user.navLinks).toBe('function');
 
         var myLinks = scope.user.navLinks();
-
-        // dealers have 7 primary links and 3 secondary links (excluding conditional TRP link)
-        // have to exclude reports and resources
-        expect(myLinks.primary.length).toBe(7);
-        expect(myLinks.secondary.length).toBe(3);
+        // dealers have 4 primary links
+        expect(myLinks.primary.length).toBe(4);
+        expect(myLinks.primary[1].subMenu.length).toBe(2);
+        expect(myLinks.primary[2].subMenu.length).toBe(3);
+        expect(myLinks.primary[3].subMenu.length).toBe(4);
 
         myLinks = aScope.user.navLinks();
         // auctions have 6 primary links and no secondary links
         expect(myLinks.primary.length).toBe(6);
-        expect(myLinks.secondary).not.toBeDefined();
       });
 
-      it('should hide the Value Lookup tab for the canadian users', function(){
+      it('should hide the Value Lookup tab for the canadian users', function () {
         var isUnitedStates = false;
-        spyOn(dMock,'isUnitedStates').and.callFake(function(){ return isUnitedStates; });
+        spyOn(dMock, 'isUnitedStates').and.callFake(function () {
+          return isUnitedStates;
+        });
 
         $controller('NavBarCtrl', {
           $scope: scope,
@@ -161,11 +183,10 @@ describe('Directive: navBar', function () {
           kissMetricInfo: mockKissMetricInfo
         });
         $rootScope.$digest();
-        expect(scope.user.navLinks().primary.length).toBe(6);
-        expect(scope.user.navLinks().secondary.length).toBe(2);
+        expect(scope.user.navLinks().primary[2].subMenu.length).toBe(2);
       });
 
-      it('should include a title release link only if the user has DisplayTitleReleaseProgram set to true', function() {
+      it('should include a title release link only if the user has DisplayTitleReleaseProgram set to true', function () {
         shouldShowTRP = true;
 
         $controller('NavBarCtrl', {
@@ -175,12 +196,14 @@ describe('Directive: navBar', function () {
           kissMetricInfo: mockKissMetricInfo
         });
         scope.$apply();
-        expect(scope.user.navLinks().primary.length).toBe(8);
+        expect(scope.user.navLinks().primary[2].subMenu.length).toBe(4);
       });
 
-      it('should refresh if showing title release address if user goes from being logged out to logged in', function() {
+      it('should refresh if showing title release address if user goes from being logged out to logged in', function () {
         var loggedIn = false;
-        spyOn(dMock, 'isLoggedIn').and.callFake(function(){ return loggedIn; });
+        spyOn(dMock, 'isLoggedIn').and.callFake(function () {
+          return loggedIn;
+        });
         shouldShowTRP = true;
 
         $controller('NavBarCtrl', {
@@ -190,13 +213,16 @@ describe('Directive: navBar', function () {
           kissMetricInfo: mockKissMetricInfo
         });
         $rootScope.$digest();
-        expect(scope.user.navLinks().primary.length).toBe(7);
+        expect(scope.user.navLinks().primary[2].subMenu.length).toBe(3);
         loggedIn = true;
-        $rootScope.$digest();
-        expect(scope.user.navLinks().primary.length).toBe(8);
+
+        scope.initNav().then(function() {          
+          $rootScope.$digest();
+          expect(scope.user.navLinks().primary[2].subMenu.length).toBe(4);
+        });
       });
 
-      it('should change the homelink based on user type', function() {
+      it('should change the homelink based on user type', function () {
         expect(scope.user.homeLink).toBeDefined();
         expect(typeof scope.user.homeLink).toBe('function');
 
@@ -209,15 +235,15 @@ describe('Directive: navBar', function () {
 
     });
 
-    describe('isActive function', function() {
-      it('should exist', function(){
+    describe('isActive function', function () {
+      it('should exist', function () {
         expect(scope.isActive).toBeDefined();
         expect(typeof scope.isActive).toBe('function');
       });
 
-      it('should return true if we are on the given page', function() {
+      it('should return true if we are on the given page', function () {
         var ret = scope.isActive('floorcar'),
-            ret2 = scope.isActive('auction_reports');
+          ret2 = scope.isActive('auction_reports');
         expect(ret).toBe(true);
         expect(ret2).toBe(false);
       });

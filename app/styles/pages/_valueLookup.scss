@@ -4,4 +4,15 @@
     width: 400px;
     font-weight: normal;
   }
+  .nav-tabs{
+    background-color: #DDD;
+    .active{
+      a{
+        background-color: #F5F5F5;
+      }
+    }
+    a{
+      color: #39C;
+    }
+  }
 }
