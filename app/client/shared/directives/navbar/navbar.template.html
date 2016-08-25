@@ -80,13 +80,12 @@
   </div>
 
   <div ng-if="navState.current.data.showNavBar">
-    <nav id="navbar" class="navbar navbar-default mng-navbar main-navbar mobile-navbar " ng-class="{'menu-open in' : navState.current.data.showMenu }">
-      <div class="container"
-           ng-class="{'auction-nav':!user.isDealer(), 'es-nav':isCurrentLanguage('es') && !user.isDealer(), 'fr-nav': isCurrentLanguage('fr_CA') && !user.isDealer()}">
+    <nav id="navbar" class="navbar navbar-default mng-navbar main-navbar" ng-class="{'menu-open in' : navState.current.data.showMenu, 'mobile-navbar' : isMobile }">
+      <div
+           ng-class="{'auction-nav':!user.isDealer(), 'es-nav':isCurrentLanguage('es') && !user.isDealer(), 'fr-nav': isCurrentLanguage('fr_CA') && !user.isDealer(), 'container' : !isMobile}">
         <div class="navbar-header">
-          <button type="button" class="navbar-toggle collapsed mobile-menu-button"
-                  ng-class="{'button-x': navState.current.data.showMenu}"
-                  ng-click="toggleMenu()"
+          <button type="button" class="navbar-toggle collapsed mobile-menu-button"                  
+                  ng-click="toggleMenu(); closeSupport()"
                   popover-placement="bottom"
                   uib-popover-template="'client/shared/directives/navbar/menuTip.html'"
                   popover-is-open="!hideMenuTip && isMobile"
@@ -104,7 +103,7 @@
           </div>
         </div>
 
-        <div class="collapse navbar-collapse" ng-class="{'in': navState.current.data.showMenu}" ng-click="closeMenu()">
+        <div id="navbarContainer" class="navbar-collapse" ng-class="{'open': navState.current.data.showMenu, 'closed': (!navState.current.data.showMenu && navState.current.data.menuToggled)}" ng-click="closeMenu()">
           <ul class="nav navbar-nav"
               popover-placement="bottom"
               uib-popover-template="'client/shared/directives/navbar/menuTip.html'"
@@ -155,11 +154,58 @@
                 <span translate>Account Management</span>
               </a>
             </li>
+            <li class="visible-xs" ng-click="$event.stopPropagation()">
+                <a ng-click="toggleSupport()">
+                <span translate>Support</span>
+                 <span class="paired-media icon-chevron support-chevron"
+                   ng-class="{ 'point-up':showSupport, 'point-down':!showSupport }"
+                   nxg-icon="icon-chevron" style="float: right;">
+                   </span>
+              </a>
+            </li>
+            <li class="visible-xs" ng-show="user.isDealer() && showSupport">
+              <span class="spacer" ng-show="chatEnabled && user.isDealer()">
+                <a class="support-text" nxg-chat-with-us nxg-track="{{metric.CLICK_CHAT_NOW_LINK}}"
+                   track-properties="{{ kissMetricData }}" translate>Chat
+                  <span class="glyphicon"></span>
+                </a>
+                </span>
+            </li>
+            <li class="visible-xs" ng-show="user.isDealer() && showSupport">
+              <a class="support-text" href="tel:+{{support.phone}}">
+                Call Account Executive
+              </a>
+            </li>
+            <li class="visible-xs" ng-show="showSupport">
+              <a class="support-text" href= "tel:+{{ support.customerSupportPhone }}">
+                Call Customer Service
+              </a>
+            </li>
+            <li class="visible-xs" ng-show="showSupport">
+              <a class="support-text" href="mailto:{{ support.email }}">
+                Send Email
+              </a>
+            </li>
+            <li class="visible-xs" ng-show="showSupport">
+              <a class="support-text" href="javascript:void(0)"
+                 data-uv-lightbox="classic_widget"
+                 data-uv-mode="full"
+                 data-uv-primary-color="#135889"
+                 data-uv-link-color="#1864A1" 
+                 data-uv-default-mode="support"
+                 data-uv-forum-id="{forumId}"
+                 data-uv-custom-template-id="{customTemplateId}"
+                 data-uv-trigger>
+                <span translate>Feedback</span>
+              </a>
+            </li>
             <li class="visible-xs">
               <a href="javascript:void(0)" ng-click="user.logout()">Sign Out</a>
             </li>
           </ul>
         </div>
+
+        <div class="navbar-scroll-fix" ng-click="closeMenu()"></div>
       </div>
     </nav>
   </div>

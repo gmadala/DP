@@ -100,6 +100,11 @@ a, a:link, a:visited {
   }
 }
 
+.support-chevron svg {
+  stroke: white;
+  fill: none!important;
+}
+
 // Text groupings
 .lockup {
   text-align: center;
