@@ -1,22 +1,22 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
-<head>
+
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
   <title>myNextGear</title>
   <meta name="description" content="">
-  <meta name="viewport" content="width=1020">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
   <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
   <link rel="stylesheet" href="styles/main.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
   <script type="text/javascript">
-    $(document).ready(function () {
+    $(document).ready(function() {
       $('.en').show();
       $('.es').hide();
       $('.fr').hide();
 
-      $('.btn-en').click(function () {
+      $('.btn-en').click(function() {
         $('.btn-slider').addClass('active-left');
         $('.btn-slider').removeClass('active-center');
         $('.btn-slider').removeClass('active-right');
@@ -26,7 +26,7 @@
         $('.fr').hide();
       });
 
-      $('.btn-es').click(function () {
+      $('.btn-es').click(function() {
         $('.btn-slider').removeClass('active-left');
         $('.btn-slider').addClass('active-center');
         $('.btn-slider').removeClass('active-right');
@@ -36,7 +36,7 @@
         $('.fr').hide();
       });
 
-      $('.btn-fr').click(function () {
+      $('.btn-fr').click(function() {
         $('.btn-slider').removeClass('active-left');
         $('.btn-slider').removeClass('active-center');
         $('.btn-slider').addClass('active-right');
@@ -55,10 +55,10 @@
   </style>
   <![endif]-->
 </head>
+
 <body>
-<svg version="1.1" id="layer" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
-     x="0px" y="0px" style="display:none;" width="0" height="0" viewBox="7.985 3.374 33.975 18.179"
-     enable-background="new 7.985 3.374 33.975 18.179" xml:space="preserve" preserveAspectRatio="xMidYMid meet">
+  <svg version="1.1" id="layer" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" style="display:none;" width="0" height="0" viewBox="7.985 3.374 33.975 18.179" enable-background="new 7.985 3.374 33.975 18.179"
+    xml:space="preserve" preserveAspectRatio="xMidYMid meet">
   <symbol id="icon-globe" viewBox="0 0 35 35">
     <path fill="#3399CC" stroke="#3399CC" stroke-width="0.5" stroke-miterlimit="10" d="M17.742,4.016
       C10.444,4.016,4.5,9.96,4.5,17.258c0,7.297,5.944,13.242,13.242,13.242s13.243-5.944,13.243-13.242
@@ -78,121 +78,108 @@
       c0.971,1.736,1.529,3.737,1.529,5.885c0,2.148-0.559,4.149-1.529,5.885H24.039z"/>
   </symbol>
 </svg>
-<div class="nxg-main-container">
-  <div>
-    <header class="app-header login">
-      <div class="container">
-        <div class="header unsupported">
-          <div class="col-xs-3 nxg-logo"></div>
+  <div class="nxg-main-container">
+    <div>
+      <header class="app-header login">
+        <div class="container">
+          <div class="header unsupported row">
+            <div class="col-xs-12 col-md-5">
+              <img src="/img/nxg_logo_blue_unsupported.png" />
+            </div>
 
-          <div class="col-xs-5 col-xs-offset-4">
-            <div class="nav-language-chooser">
-              <span class="icon-xx-large svg-icon icon-globe" nxg-icon="icon-globe">
+            <div class="col-xs-12 col-md-7 text-right">
+              <div class="nav-language-chooser">
+                <span class="icon-xx-large svg-icon icon-globe hidden-xs hidden-sm" nxg-icon="icon-globe">
                 <div class="svg-fix"></div>
                 <svg width="100%" height="100%" preserveAspectRatio="xMidYMid meet">
                   <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon-globe"></use>
                 </svg>
               </span>
 
-              <div class="cta btn-toggle toggle-three">
-                <div class="btn-slider active-left"></div>
-                <button class="btn btn-en">English</button>
-                <button class="btn btn-es">Español</button>
-                <button class="btn btn-fr">Français</button>
+                <div class="cta btn-toggle toggle-three">
+                  <div class="btn-slider active-left"></div>
+                  <button class="btn btn-en">English</button>
+                  <button class="btn btn-es">Español</button>
+                  <button class="btn btn-fr">Français</button>
+                </div>
               </div>
             </div>
           </div>
         </div>
-      </div>
-    </header>
-  </div>
-  <div class="nxg-main-view container-public no-left-margin">
-    <div class="login container-line">
-      <div class="container login-contents">
+      </header>
+    </div>
+    <div class="nxg-main-view container-public no-left-margin">
+      <div class="login container-line">
+        <div class="container login-contents">
 
-        <div class="row en">
-          <div class="well col-xs-offset-4 col-xs-4">
-            <h2 class="well-title" translate>We Will Be Back Soon!</h2>
+          <div class="row">
+            <div class="col-xs-offset-1 col-xs-10">
 
-            <div class="well-item">
-              <div class="paragraph" translate>
-                myNextGear is currently unavailable while we update it with additional features and benefits. We apologize for the inconvenience and appreciate your patience while we actively work to improve our service to you. Thank you for using myNextGear!
+              <div class="well en">
+                <h2 class="well-title" translate>We Will Be Back Soon!</h2>
+
+                <div class="well-item">
+                  <div class="paragraph" translate>
+                    myNextGear is currently unavailable while we update it with additional features and benefits. We apologize for the inconvenience and appreciate your patience while we actively work to improve our service to you. Thank you for using myNextGear!
+                  </div>
+                </div>
               </div>
+
+              <div class="well es">
+                <h2 class="well-title">¡Regresaremos en breve!</h2>
+
+                <div class="well-item">
+                  <div class="paragraph">
+                    myNextGear no está disponible en estos momentos, lo estamos actualizando con características y beneficios adicionales. Lamentamos los inconvenientes y le agradecemos su paciencia mientras trabajamos diligentemente para mejorar el servicio que le prestamos.
+                    ¡Gracias por utilizar myNextGear!
+                  </div>
+                </div>
+              </div>
+
+              <div class="well fr">
+                <h2 class="well-title">Nous serons de retour bientôt!</h2>
+
+                <div class="well-item">
+                  <div class="paragraph">
+                    myNextGear n’est pas accessible pour le moment. Nous effectuons une mise à jour qui permettra d'ajouter de nouvelles fonctionnalités et de nouveaux avantages à notre site. Nous\n sommes désolés des inconvénients que cela pourrait causer et nous vous remercions
+                    pour votre patience pendant que nous améliorons les services que nous\n vous offrons. Merci d'utiliser myNextGear!
+                  </div>
+                </div>
+              </div>
+
             </div>
           </div>
+
         </div>
-
-        <div class="row es">
-          <div class="well col-xs-offset-4 col-xs-4">
-            <h2 class="well-title">¡Regresaremos en breve!</h2>
-
-            <div class="well-item">
-              <div class="paragraph">
-                myNextGear no está disponible en estos momentos, lo estamos actualizando con características y
-                beneficios adicionales. Lamentamos los inconvenientes y le agradecemos su paciencia mientras trabajamos
-                diligentemente para mejorar el servicio que le prestamos. ¡Gracias por utilizar myNextGear!
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="row fr">
-          <div class="well col-xs-offset-4 col-xs-4">
-            <h2 class="well-title">Nous serons de retour bientôt!</h2>
-
-            <div class="well-item">
-              <div class="paragraph">
-                myNextGear n’est pas accessible pour le moment. Nous effectuons une mise à jour qui permettra d'ajouter de
-                nouvelles fonctionnalités et de nouveaux avantages à notre site. Nous\n
-                sommes désolés des inconvénients que cela pourrait causer et nous vous remercions
-                pour votre patience pendant que nous améliorons les services que nous\n
-                vous offrons. Merci d'utiliser myNextGear!
-              </div>
-            </div>
-          </div>
-        </div>
-
       </div>
     </div>
   </div>
-</div>
-
-<footer class="row-footer ie-centered">
-  <div>
-    <a class="col-sm-12 nxg-cox-logo" href="https://www.coxautoinc.com/" target="_blank"></a>
-  </div>
-  <ul class="horizontal-list">
-    <li><a href="http://www.autotrader.com/" target="_blank" nxg_track="{{metric.AUTOTRADER_INDEX}}">Autotrader</a></li>
-    <li><a href="http://www.dealshield.com/" class="footer-element" target="_blank" nxg_track="{{metric.DEALSHIELD_INDEX}}">DealShield</a></li>
-    <li><a href="http://goautoexchange.com/" class="footer-element" target="_blank" nxg_track="{{metric.GOAUTOEXCHANGE_INDEX}}">Go Auto Exchange</a></li>
-    <li><a href="https://www.gofinancial.com/" class="footer-element" target="_blank" nxg_track="{{metric.GOFINANCIAL_INDEX}}">Go Financial</a></li>
-    <li><a href="http://www.haystak.com/"  class="footer-element"  target="_blank" nxg_track="{{metric.HAYSTACK_INDEX}}">Haystak Digital Marketing</a></li>
-  </ul>
-  <ul class="horizontal-list">
-    <li><a href="http://www.homenetauto.com/" target="_blank" nxg_track="{{metric.HOMENET_INDEX}}">HomeNet Automotive</a></li>
-    <li><a href="http://www.kbb.com/" class="footer-element" target="_blank" nxg_track="{{metric.KELLYBLUEBOOK_INDEX}}">Kelley Blue Book</a></li>
-    <li><a href="https://www.manheim.com/"  class="footer-element" target="_blank" nxg_track="{{metric.MANHEIM_INDEX}}">Manheim</a></li>
-    <li><a href="http://www.readyautotransport.com/"  class="footer-element" target="_blank" nxg_track="{{metric.READYAUTO_INDEX}}">Ready Auto Transport</a></li>
-    <li><a href="http://www.vauto.com/home/"  class="footer-element" target="_blank" nxg_track="{{metric.VAUTO_INDEX}}">vAuto</a></li>
-    <li><a href="http://www.vinsolutions.com/" target="_blank" nxg_track="{{metric.VINSOLUTIONS_INDEX}}">VinSolutions</a></li>
-  </ul>
-   <ul class="horizontal-list" style="margin: 12px 0 11px 0;padding-bottom:5px;">
-    <li>&copy; 2013-2015 NextGear Capital, Inc. All Rights Reserved.</li>
-    <li>
-      <a href="http://www.nextgearcapital.com/privacy-statement" target="_blank">
-        <span class="en" translate>Privacy Statement</span>
-        <span class="es">Declaración de privacidad</span>
-        <span class="fr">Déclaration de confidentialité</span>
-      </a>
-    </li>
-    <li>
-      <a href="http://www.nextgearcapital.com/contact-us" target="_blank">
-        <span class="en" translate>Contact Us</span>
-        <span class="es">Póngase en contacto con nosotros</span>
-        <span class="fr">Nous contacter</span>
-      </a>
-    </li>
-  </ul>
-</footer>
+  <footer class="row-footer ie-centered">
+    <div>
+      <a class="col-sm-12 nxg-cox-logo img-responsive" href="https://www.coxautoinc.com/" target="_blank"></a>
+    </div>
+    <ul class="horizontal-list" style="margin: 12px 0 11px 0;padding-bottom:5px;">
+      <li>&copy; 2013-2016 NextGear Capital, Inc. All Rights Reserved.</li>
+      <li>
+        <a href="http://www.nextgearcapital.com/privacy-statement" target="_blank">
+          <span class="en" translate>Privacy Statement</span>
+          <span class="es">Declaración de privacidad</span>
+          <span class="fr">Déclaration de confidentialité</span>
+        </a>
+      </li>
+      <li>
+        <a href="http://www.nextgearcapital.com/contact-us" target="_blank" class="en">
+          <span>Contact Us</span>
+        </a>
+        <a href="http://www.nextgearcapital.com/contact-us/?lang=es" target="_blank" class="es">
+          <span>Póngase en contacto con nosotros</span>
+        </a>
+        <a href="http://www.nextgearcapital.com/nous-contacter/?lang=fr" target="_blank" class="fr">
+          <span>Nous contacter</span>
+        </a>
+      </li>
+    </ul>
+  </footer>
 </body>
+
 </html>
