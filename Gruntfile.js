@@ -6,6 +6,7 @@ var mockApi = require('./api/mockApi.js');
 module.exports = function(grunt) {
   // load all grunt tasks
   require('matchdep').filterDev('grunt-*').forEach(grunt.loadNpmTasks);
+  grunt.loadNpmTasks("gruntify-eslint");
 
   // configurable paths
   var yeomanConfig = {
@@ -118,6 +119,16 @@ module.exports = function(grunt) {
         ]
       },
       server: '.tmp'
+    },
+    eslint: {
+      options: {
+        config: ".eslintrc",
+        quiet: true
+      },
+      src: [
+        "app/client/**/*.js", 
+        "app/client/react-components/**/*.js"
+      ]
     },
     jshint: {
       options: {
@@ -550,7 +561,7 @@ module.exports = function(grunt) {
     githooks: {
       all: {
         // Will run the jshint tasks at every commit
-        'pre-commit': 'jshint jscs karma'
+        'pre-commit': 'eslint karma'
       }
     }
   });
@@ -646,8 +657,7 @@ module.exports = function(grunt) {
     grunt.task.run('build');
     grunt.task.run('test:e2e:users');
     // run this last so that grunt returns an error code but doesn't abort before running the previous tasks
-    grunt.task.run('jshint');
-    grunt.task.run('jscs');
+    grunt.task.run('eslint');
   });
 
   grunt.registerMultiTask('gettext_update_po', 'update PO files from the POT file', function () {

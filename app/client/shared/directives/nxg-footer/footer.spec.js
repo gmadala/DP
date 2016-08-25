@@ -4,12 +4,14 @@ describe('Controller: FooterCtrl', function() {
   beforeEach(module('nextgearWebApp'));
 
   describe('controller', function() {
-    var scope, controller, httpBackend;
+    var scope, controller, httpBackend, _user, _gettextCatalog;
 
-    beforeEach(inject(function($rootScope, $controller, $httpBackend) {
+    beforeEach(inject(function($rootScope, $controller, $httpBackend, User, gettextCatalog) {
       scope = $rootScope.$new();
       controller = $controller('FooterCtrl', { $scope: scope });      
       $httpBackend.when('GET', '/Dealer/v1_2/Info').respond({});
+      _user = User;
+      _gettextCatalog = gettextCatalog;
     }));
 
     it('should have an updateContactLink function', function() {
@@ -26,8 +28,8 @@ describe('Controller: FooterCtrl', function() {
 
           describe('a canadian user', function() {
             beforeEach(function() {
-              spyOn(User, 'isUnitedStates').and.returnValue(false);
-              spyOn(gettextCatalog, 'currentLanguage').and.returnValue('en')
+              spyOn(_user, 'isUnitedStates').and.returnValue(false);
+              spyOn(_gettextCatalog, 'currentLanguage').and.returnValue('en')
             });
 
             it('should set a canadian contact link', function() {
@@ -37,8 +39,8 @@ describe('Controller: FooterCtrl', function() {
 
           describe('a french canadian user', function() {
             beforeEach(function() {
-              spyOn(User, 'isUnitedStates').and.returnValue(false);
-              spyOn(gettextCatalog, 'currentLanguage').and.returnValue('fr_CA')
+              spyOn(_user, 'isUnitedStates').and.returnValue(false);
+              spyOn(_gettextCatalog, 'currentLanguage').and.returnValue('fr_CA')
             });
 
             it('should set a french canadian contact link', function() {
@@ -48,8 +50,8 @@ describe('Controller: FooterCtrl', function() {
 
           describe('a french user', function() {
             beforeEach(function() {
-              spyOn(User, 'isUnitedStates').and.returnValue(true);
-              spyOn(gettextCatalog, 'currentLanguage').and.returnValue('fr_CA')
+              spyOn(_user, 'isUnitedStates').and.returnValue(true);
+              spyOn(_gettextCatalog, 'currentLanguage').and.returnValue('fr_CA')
             });
 
             it('should set a french contact link', function() {
@@ -59,8 +61,8 @@ describe('Controller: FooterCtrl', function() {
 
           describe('a spanish user', function() {
             beforeEach(function() {
-              spyOn(User, 'isUnitedStates').and.returnValue(true);
-              spyOn(gettextCatalog, 'currentLanguage').and.returnValue('es')
+              spyOn(_user, 'isUnitedStates').and.returnValue(true);
+              spyOn(_gettextCatalog, 'currentLanguage').and.returnValue('es')
             });
 
             it('should set a spanish contact link', function() {
