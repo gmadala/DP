@@ -25,21 +25,21 @@
   ];
 
   function WizardFloorCtrl($state,
-                           $scope,
-                           $uibModal,
-                           $q,
-                           User,
-                           Floorplan,
-                           Addresses,
-                           protect,
-                           OptionDefaultHelper,
-                           moment,
-                           AccountManagement,
-                           Upload,
-                           nxgConfig,
-                           kissMetricInfo,
-                           segmentio,
-                           metric) {
+    $scope,
+    $uibModal,
+    $q,
+    User,
+    Floorplan,
+    Addresses,
+    protect,
+    OptionDefaultHelper,
+    moment,
+    AccountManagement,
+    Upload,
+    nxgConfig,
+    kissMetricInfo,
+    segmentio,
+    metric) {
     var vm = this;
     var isDealer = User.isDealer();
 
@@ -95,9 +95,9 @@
           scopeSrc: 'wizardFloor.options.locations',
           modelDest: 'PhysicalInventoryAddressId'
         }, {
-          scopeSrc: 'wizardFloor.options.LinesOfCredit',
-          modelDest: 'LineOfCreditId'
-        });
+            scopeSrc: 'wizardFloor.options.LinesOfCredit',
+            modelDest: 'LineOfCreditId'
+          });
       }
 
       vm.optionsHelper = OptionDefaultHelper.create(optionListsToDefault);
@@ -213,31 +213,23 @@
       switch (count) {
         case 1:
           return true;
-          break;
         case 2:
           return vm.formParts.one;
-          break;
         case 3:
           return vm.formParts.one && vm.formParts.two;
-          break;
       }
     }
 
     vm.canSubmit = function () {
-      if (vm.floorPlanSubmitting)
-        return false;
+      if (vm.floorPlanSubmitting) { return false; }
 
-      if (!vm.formParts.one)
-        return false;
+      if (!vm.formParts.one) { return false; }
 
-      if (!vm.formParts.two)
-        return false;
+      if (!vm.formParts.two) { return false; }
 
-      if (vm.attachDocumentsEnabled || !vm.formParts.three)
-        return false;
+      if (vm.attachDocumentsEnabled || !vm.formParts.three) { return false; }
 
-      if (vm.attachDocumentsEnabled && vm.data.files.length < 1)
-        return false;
+      if (vm.attachDocumentsEnabled && vm.data.files.length < 1) { return false; }
 
       return true;
     };

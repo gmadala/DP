@@ -24,3 +24,4 @@ app/languages/
 #maintenance
 TESTS*.xml
 app/react-components.js
+.jsbeautifyrc
