@@ -130,41 +130,6 @@ module.exports = function(grunt) {
         "app/client/react-components/**/*.js"
       ]
     },
-    jshint: {
-      options: {
-        jshintrc: '.jshintrc',
-        reporter: 'checkstyle'
-      },
-      all: [
-        //'Gruntfile.js',
-        '<%= yeoman.app %>/client/**/*.js',
-        '!app/client/**/*.spec.js',
-        '!app/client/config/nxg-config.mock.processed.js',
-        '!app/scripts/translations.js',
-        '!app/client/services/base64.service.js',
-        '!app/client/shared/directives/nxg-chart/nxg-chart.directive.js',
-        '!app/client/shared/directives/tooltip.directive.js',
-        'e2e/**/*.js',
-        'api_tests/**/*.js'
-      ]
-    },
-    jscs: {
-      options: {
-        config: '.jscsrc'
-      },
-      all: [
-        //'Gruntfile.js',
-        '<%= yeoman.app %>/client/**/*.js',
-        '!app/client/config/nxg-config.mock.processed.js',
-        '!app/scripts/translations.js',
-        '!app/client/services/base64.service.js',
-        '!app/client/shared/directives/nxg-chart/nxg-chart.directive.js',
-        '!app/client/shared/directives/tooltip.directive.js',
-        // TODO JSCS could be used for all test files depending on what rules we decide on
-        'e2e/**/*.js',
-        'api_tests/**/*.js'
-      ]
-    },
     karma: {
       unit: {
         configFile: 'karma.conf.js',
@@ -560,7 +525,7 @@ module.exports = function(grunt) {
     },
     githooks: {
       all: {
-        // Will run the jshint tasks at every commit
+        // Will run the eslint tasks at every commit
         'pre-commit': 'eslint karma'
       }
     }
