@@ -223,34 +223,35 @@
       switch (count) {
         case 1:
           return true;
-          break;
         case 2:
-          return true; // vm.formParts.one;
-          break;
+          return vm.formParts.one;
         case 3:
-          return true; // vm.formParts.one && vm.formParts.two;
-          break;
+          return vm.formParts.one && vm.formParts.two;
         case 4:
           return true; // vm.formParts.one && vm.formParts.two && vm.formParts.three;
-          break;
       }
     }
 
     vm.canSubmit = function () {
-      if (vm.floorPlanSubmitting)
+      if (vm.floorPlanSubmitting) {
         return false;
+      }
 
-      if (!vm.formParts.one)
+      if (!vm.formParts.one) {
         return false;
+      }
 
-      if (!vm.formParts.two)
+      if (!vm.formParts.two) {
         return false;
+      }
 
-      if (vm.attachDocumentsEnabled || !vm.formParts.three)
+      if (vm.attachDocumentsEnabled || !vm.formParts.three){
         return false;
+      }
 
-      if (vm.attachDocumentsEnabled && vm.data.files.length < 1)
+      if (vm.attachDocumentsEnabled && vm.data.files.length < 1) {
         return false;
+      }
 
       return true;
     };

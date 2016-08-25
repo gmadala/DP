@@ -1,4 +1,4 @@
-<form class="col-sm-7" name="form" novalidate>
+<form name="form" novalidate>
   <h2 translate>Let us know the details of the sale</h2>
   <h4>Purchase Information:</h4>
   <div class="date-field date-picker" style="width: 100% !important;">
@@ -33,8 +33,9 @@
          ng-show="(form.purchaseDate.$error.required || form.purchaseDate.$error.date || form.purchaseDate.$error.past || form.purchaseDate.$error.future) && form.$submitted" translate>
     Please enter a Valid Purchase Date.
   </label>
-  <label for="inputPurchaseAmt" class="input-title"><span translate>Purchase Amount</span> *</label>
-  <div class="dollar input-group input-group-sm">
+  <label for="inputPurchaseAmt" class="input-title"><span translate>Purchase Amount</span></label>
+  <div class="dollar input-group input-group-sm"
+        ng-class="{ 'has-error': (form.inputPurchaseAmt.$error.required || form.inputPurchaseAmt.$error.max || form.inputPurchaseAmt.$error.pattern || form.inputPurchaseAmt.$error.maxlength || form.inputPurchaseAmt.$error.nxgMin) && form.$submitted }">
     <span class="input-group-addon" translate>$</span>
     <input type="text" id="inputPurchaseAmt" name="inputPurchaseAmt" ng-model="wizardFloor.data.UnitPurchasePrice"
            required
@@ -75,8 +76,8 @@
       <label class="cr-label" for="no" translate>No</label>
     </div>
   </div> -->
-  <label for="inputBiz" class="input-title"  ><span translate>Seller</span> *</label>
-  <span class="nxg-business-field" ng-class="{ 'nxg-invalid': (form.inputBiz.$error.nxgRequires || form.inputBiz.$error.minlength) && form.$submitted }">
+  <label for="inputBiz" class="input-title"><span translate>Seller</span></label>
+  <span class="nxg-business-field" ng-class="{ 'has-error': (form.inputBiz.$error.nxgRequires || form.inputBiz.$error.minlength) && form.$submitted }">
     <input nxg-business-field-v2="sellers"
            id="inputBiz"
            name="inputBiz"
@@ -84,9 +85,9 @@
            ng-disabled="wizardFloor.data.SaleTradeIn"
            ng-required="!wizardFloor.data.SaleTradeIn"
            selected-business="wizardFloor.data.BusinessId"
-           validity="validity" />
+           validity="wizardFloor.validity" />
   </span>
-  <label for="inputTitleHolder" class="input-title" ><span translate>Who has the Title?</span> *</label>
+  <!-- <label for="inputTitleHolder" class="input-title"><span translate>Who has the Title?</span></label>
   <div class="style-select full-width" ng-class="{ 'nxg-invalid': form.inputTitleHolder.$error.required && form.$submitted }">
     <select id="inputTitleHolder"
             name="inputTitleHolder" ng-model="wizardFloor.data.TitleLocationId"
@@ -99,7 +100,7 @@
          class="text-error"
          ng-show="form.inputTitleHolder.$error.required && form.$submitted" translate>
     Please select who has the title.
-  </label>
+  </label> -->
 
   <h6>Title Location</h6>
   <div class="cr-inline">
@@ -108,6 +109,9 @@
     <label class="cr-label" for="{{location.Id}}">{{ location.Name }}</label>
     <br ng-repeat-end />
   </div>
+  <label for="titleLoction" class="text-error" ng-show="form.titleLocation.$error.required && form.$submitted" translate>
+    Please select who has the title.
+  </label>
 
   <!-- <div class="switch">
     <input id="cmn-toggle-1" class="cmn-toggle cmn-toggle-round" type="checkbox">
