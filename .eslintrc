@@ -35,7 +35,7 @@
         }
     },
     "rules": {
-        "linebreak-style": ["error", "windows"],
+        "linebreak-style": "off",
         "strict": "warn",
         "padded-blocks": "warn",
         "wrap-iife": "error",
@@ -105,6 +105,7 @@
         "array-callback-return": "warn",
         "no-trailing-spaces": "warn",
         "no-nested-ternary": "warn",
+        "no-undef": "warn",
 
         "angular/controller-name": "off",
         "angular/controller-as": "off",
