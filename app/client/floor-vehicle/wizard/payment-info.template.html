@@ -11,8 +11,12 @@
       <option value="" translate>Make Selection</option>
     </select>
   </div>
+  <label for="inputCreditLine" class="text-error"
+         ng-show="form.inputCreditLine.$error.required && form.$submitted" translate>
+    Please select a Line of Credit.
+  </label>
 
-  <label for="payBuyerSeller">Title Location</label>
+  <label for="payBuyerSeller">Send payment to</label>
   <div class="cr-inline">
     <input type="radio" name="payBuyerSeller" id="payBuyer" ng-value="buyer" ng-model="wizardFloor.data.PaySeller"
            ng-disabled="wizardFloor.data.SaleTradeIn"
@@ -39,9 +43,14 @@
       <option value="" translate>Make Selection</option>
     </select>
   </div>
+  <label for="inputDisburseAcct" class="text-error"
+         ng-show="form.inputDisburseAcct.$error.required && form.$submitted" translate>
+    Please select a Bank Account for Deposit.
+  </label>
 
-  <label for="cmn-toggle-1"><span translate>Request additional financing</span></label>
-  <label for="cmn-toggle-1" class="switch">
+
+  <label for="cmn-toggle-1" class="hidden"><span translate>Request additional financing</span></label>
+  <label for="cmn-toggle-1" class="switch hidden">
     <input id="cmn-toggle-1" class="cmn-toggle cmn-toggle-round" type="checkbox" ng-model="wizardFloor.data.AdditionalFinancing">
     <div class="slider round">
       <span class="slider-left">Yes</span>
@@ -49,7 +58,7 @@
     </div>
   </label>
 
-  <div class="form-group">
+  <div class="form-group hidden">
     <label for="additionalFinancingAmount" class="sr-only">Additional Financing Amount</label>
     <div class="input-group input-group-sm">
       <span class="input-group-addon">$</span>
@@ -62,7 +71,7 @@
     </div>
   </div>
 
-  <div class="form-group">
+  <div class="form-group hidden">
     <label for="comment" class="sr-only">Comment</label>
     <textarea class="form-control"
               rows="3"

@@ -3,29 +3,20 @@
     <ul class="nav nav-pills nav-justified wizard-nav">
       <div class="wizard-line"></div>
       <li class="step-1" ng-class="{'active': wizardFloor.counter == 1}" ng-click="wizardFloor.tabClick(1)">
-        <div>
-          <a>1</a>
-          <br />
-          <span>Vehicle Information</span>
-        </div>
+        <a>1</a>
+        <div>Vehicle Information</div>
       </li>
       <li class="step-2" ng-class="{'active': wizardFloor.counter == 2}" ng-click="wizardFloor.tabClick(2)">
-
         <a>2</a>
         <div>Sale Details</div>
-
       </li>
       <li class="step-3" ng-class="{'active': wizardFloor.counter == 3}" ng-click="wizardFloor.tabClick(3)">
-        <div>
-          <a>3</a>
-          <div>Payment Information</div>
-        </div>
+        <a>3</a>
+        <div>Payment Information</div>
       </li>
       <li class="step-4" ng-class="{'active': wizardFloor.counter == 4, 'hidden': !wizardFloor.attachDocumentsEnabled}" ng-click="wizardFloor.tabClick(4)">
-        <div>
-          <a>4</a>
-          <div>Documentation Upload</div>
-        </div>
+        <a>4</a>
+        <div>Documentation Upload</div>
       </li>
     </ul>
   </div>
@@ -69,6 +60,7 @@
 
 
   <div ui-view class="col-xs-7"></div>
+  <div class="col-xs-5"></div>
   <div class="col-xs-7">
     <button type="button"
             class="btn-cta cta-primary pull-right btn-next" translate

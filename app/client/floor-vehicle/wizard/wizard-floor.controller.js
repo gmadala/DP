@@ -224,9 +224,9 @@
         case 1:
           return true;
         case 2:
-          return vm.formParts.one;
+          return true // vm.formParts.one;
         case 3:
-          return vm.formParts.one && vm.formParts.two;
+          return true // vm.formParts.one && vm.formParts.two;
         case 4:
           return true; // vm.formParts.one && vm.formParts.two && vm.formParts.three;
       }

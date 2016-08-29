@@ -284,7 +284,8 @@
     border-color: #C43926;
   }
 
-  .input-group-addon + input {
+  .input-group-addon + input,
+  .input-group-addon + input:focus {
     border-left: none;
   }
 
