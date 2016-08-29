@@ -25,6 +25,7 @@ module.exports = function(grunt) {
   grunt.file.defaultEncoding = 'utf8';
 
   grunt.loadNpmTasks('grunt-browserify');
+  grunt.loadNpmTasks('grunt-concurrent');
 
   grunt.initConfig({
     yeoman: yeomanConfig,
@@ -50,10 +51,6 @@ module.exports = function(grunt) {
       html: {
         files: ['<%= yeoman.app %>/index.html'],
         tasks: ['processhtml:server']
-      },
-      browserify: {
-        files: ['app/react-components/**/*.jsx'],
-        tasks: ['browserify:development']
       }
     },
     browserify: {
@@ -64,7 +61,9 @@ module.exports = function(grunt) {
           dest: './app/react-components/dist/common-components.js',
           options: {
               browserifyOptions: { debug: true },
-              transform: [["babelify", { "presets": ["es2015", "react"] }]]
+              transform: [["babelify", { "presets": ["es2015", "react"] }]],
+              watch: true,
+              keepAlive: true
           }
       },
       production: {
@@ -77,6 +76,12 @@ module.exports = function(grunt) {
               transform: [["babelify", { "presets": ["es2015", "react"] }]]
           }
       }
+    },
+    concurrent: {
+        options: {
+          logConcurrentOutput: true
+        },
+        development: ['watch', 'browserify:development']
     },
     connect: {
       options: {
@@ -601,28 +606,27 @@ module.exports = function(grunt) {
     'compass:server',
     'preprocess:dev',
     'preprocess:debug',
-    'nggettext_compile',
-    'browserify:development'
+    'nggettext_compile'
   ]);
 
   grunt.registerTask('server', [
     'dev-setup',
     'connect:livereload',
     'shell:chrome',
-    'watch'
+    'concurrent:development'
   ]);
 
   grunt.registerTask('server-np', [
     'dev-setup',
     'connect:livereload',
-    'watch'
+    'concurrent:development'
   ]);
 
   grunt.registerTask('server-ie', [
     'dev-setup',
     'connect:livereload',
     'shell:ie',
-    'watch'
+    'concurrent:development'
   ]);
   grunt.registerTask('server-dist', [
     'build',
