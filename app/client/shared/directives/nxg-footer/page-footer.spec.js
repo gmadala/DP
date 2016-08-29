@@ -1,6 +1,6 @@
 'use strict';
 
-describe('Controller: FooterCtrl', function() {
+describe('Controller: PageFooterCtrl', function() {
   beforeEach(module('nextgearWebApp'));
 
   describe('controller', function() {
@@ -8,7 +8,7 @@ describe('Controller: FooterCtrl', function() {
 
     beforeEach(inject(function($rootScope, $controller, $httpBackend) {
       scope = $rootScope.$new();
-      controller = $controller('FooterCtrl', { $scope: scope });      
+      controller = $controller('PageFooterCtrl', { $scope: scope });      
       $httpBackend.when('GET', '/Dealer/v1_2/Info').respond({});
     }));
 

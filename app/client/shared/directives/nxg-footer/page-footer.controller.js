@@ -3,15 +3,15 @@
 
   angular
     .module('nextgearWebApp')
-    .controller('FooterCtrl', FooterCtrl);
+    .controller('PageFooterCtrl', PageFooterCtrl);
 
-  FooterCtrl.$inject = [
+  PageFooterCtrl.$inject = [
     '$scope',
     'gettextCatalog',
     'User'
   ];
 
-  function FooterCtrl(
+  function PageFooterCtrl (
     $scope,
     gettextCatalog,
     User) {
