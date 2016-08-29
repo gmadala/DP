@@ -25,21 +25,21 @@
   ];
 
   function WizardFloorCtrl($state,
-                           $scope,
-                           $uibModal,
-                           $q,
-                           User,
-                           Floorplan,
-                           Addresses,
-                           protect,
-                           OptionDefaultHelper,
-                           moment,
-                           AccountManagement,
-                           Upload,
-                           nxgConfig,
-                           kissMetricInfo,
-                           segmentio,
-                           metric) {
+    $scope,
+    $uibModal,
+    $q,
+    User,
+    Floorplan,
+    Addresses,
+    protect,
+    OptionDefaultHelper,
+    moment,
+    AccountManagement,
+    Upload,
+    nxgConfig,
+    kissMetricInfo,
+    segmentio,
+    metric) {
     var vm = this;
     var isDealer = User.isDealer();
 
@@ -95,9 +95,9 @@
           scopeSrc: 'wizardFloor.options.locations',
           modelDest: 'PhysicalInventoryAddressId'
         }, {
-          scopeSrc: 'wizardFloor.options.LinesOfCredit',
-          modelDest: 'LineOfCreditId'
-        });
+            scopeSrc: 'wizardFloor.options.LinesOfCredit',
+            modelDest: 'LineOfCreditId'
+          });
       }
 
       vm.optionsHelper = OptionDefaultHelper.create(optionListsToDefault);

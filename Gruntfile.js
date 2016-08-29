@@ -52,7 +52,7 @@ module.exports = function(grunt) {
         tasks: ['processhtml:server']
       },
       browserify: {
-        files: ['app/react-components/**/*.js'],
+        files: ['app/react-components/**/*.jsx'],
         tasks: ['browserify:dev']
       }
     },
@@ -61,14 +61,14 @@ module.exports = function(grunt) {
         options: {
            transform: [['babelify', {presets: ['es2015', 'react']}], 'uglifyify']
         },
-        src: ['app/react-components/**/*.js'],
+        src: ['app/react-components/**/*.jsx'],
         dest: 'app/react-components.js',
       },
       dev: {
         options: {
            transform: [['babelify', {presets: ['es2015', 'react']}]]
         },
-        src: ['app/react-components/**/*.js'],
+        src: ['app/react-components/**/*.jsx'],
         dest: 'app/react-components.js',
       }
     },

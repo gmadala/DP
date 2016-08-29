@@ -1,15 +1,15 @@
-'use strict';
-var app = angular.module('nextgearWebApp');
+import React, { Component } from 'react';
 
-var DateComponent = React.createClass({
-  getInitialState(){
+class DateComponent extends Component {
+    getInitialState(){
     return {
       date: '',
       invalid: '',
       min: '',
       max: ''
     };
-  },
+  }
+
   componentWillReceiveProps(nextProps){
     if (nextProps.date !== this.props.date) {
       var date = moment(nextProps.date).format("MM/DD/YYYY");
@@ -20,11 +20,13 @@ var DateComponent = React.createClass({
     } else {
       this.setState({invalid: ''});
     }
-  },
-  handleClick: function() {
+  }
+
+  handleClick() {
     this.props.clicker();
-  },
-  handleChange: function(event) {
+  }
+
+  handleChange(event) {
 
     var date = event.target.value;
 
@@ -33,8 +35,9 @@ var DateComponent = React.createClass({
     if (moment(date, "MM/DD/YYYY", true).isValid()) {
       this.props.updateDate(new Date(date));
     }
-  },
-  render: function() {
+  }
+
+  render() {
     return (
       <div>
         <label htmlFor={this.props.labelFor}>{this.props.label}</label>
@@ -54,9 +57,6 @@ var DateComponent = React.createClass({
       </div>
     );
   }
-});
+}
 
-app.value('DateComponent', DateComponent);
-app.directive('DateComponent', function(reactDirective) {
-  return reactDirective(DateComponent);
-});
+angular.module('nextgearWebApp').directive('DateComponent', DateComponent);
