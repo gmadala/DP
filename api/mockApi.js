@@ -96,6 +96,9 @@ module.exports = {
               },
               eventSales: {
                 enabled: true
+              },
+              responsiveFloorplanBuyer: {
+                enabled: true
               }
             }
           }
