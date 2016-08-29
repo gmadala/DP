@@ -61,4 +61,4 @@ class DateComponent extends Component {
 
 angular.module('nextgearWebApp').directive('DateComponent', function(reactDirective) {
   return reactDirective('DateComponent');
-});;
+});
