@@ -3,7 +3,7 @@
 // ========
 
 .app-header {
-  @extend .row;
+  //@extend .row;
   background: $white;
   margin-bottom: 20px;
 
@@ -105,13 +105,17 @@
     right: 0;
     left: inherit;
   }
-
 }
 
 .menu-divider {
   border-bottom: 1px solid #bbb;
   padding-top: 5px;
   margin-bottom: 5px;
+}
+
+.support-text {
+  text-indent: 20px;
+  background: linear-gradient( rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.1) );
 }
 
 .nxg-dropdown {
@@ -398,22 +402,12 @@
     background-color: $highlight;
   }
 
-  .mobile-navbar {
-    position: relative;
-    top: auto;
-    right: 0;
-    left: 0;
-    top: 0;
-    z-index: 1030;
-  }
-
   .navbar-default {
     .navbar-toggle {
       float: left;
       border: none;
       z-index: 10;
       width: 25px;
-      left: 25px;
       height: 25px;
       padding: 0px 0px;
       &:hover,
@@ -421,6 +415,15 @@
         background: none !important;
       }
     }
+  }
+
+  .mobile-navbar {
+    position: relative;
+    top: auto;
+    right: 0;
+    left: 0;
+    top: 0;
+    z-index: 1030;
   }
 
   .logo-center {
@@ -473,23 +476,6 @@
     left: 0px;
   }
 
-  .button-x {
-    .hamburger {
-      background-color: transparent;
-    }
-    .hamburger::before {
-      background-color: white;
-      transform: rotate3d(0, 0, 1, 45deg);
-      transform-origin: 2px center;
-    }
-    .hamburger::after {
-      background-color: white;
-      transform: rotate3d(0, 0, 1, -45deg);
-      transform-origin: 2px center;
-    }
-
-  }
-
   /* Reset responsive Bootstrap elements */
   #navbar .navbar-header {
     float: none;
@@ -501,7 +487,6 @@
 
   #navbar .navbar-nav {
     float: none !important;
-    margin: 7.5px -15px;
   }
 
   #navbar .navbar-nav .open .dropdown-menu {
@@ -555,49 +540,95 @@
   /* Reposition elements affected by the sliding menu */
   #wrapper {
     position: relative;
+    top: 0;
     left: 0;
-    transition: left 0.35s ease;
-  }
-
-  .navbar {
-    left: 0;
-    transition: left 0.35s ease;
-  }
+  }  
 
   #navbar .navbar-collapse {
-    position: fixed;
+    position: absolute;
     top: 0;
-    left: -80vw;
     display: block;
     width: 80vw;
-    height: 120% !important;
-    max-height: 120%;
+    height: 100vh !important;
+    max-height: inherit;
     overflow-y: scroll;
     -webkit-overflow-scrolling: touch;
     margin: 0;
     background-color: grey;
-    transition: left 0.35s ease;
-    border-top: 0;
+    border-top: 0;    
+    left: -80vw;
+    z-index: 1;
+    > ul {
+      padding-bottom: 80px;
+      margin: 0 -15px;
+    }
+
+    &.closed {
+      @include animations('close-nav .5s 1');
+    }
+
+    &.open {
+      @include animations('open-nav .5s 1');
+    }
   }
 
-  #navbar .navbar-collapse.collapsing {
-    transition: left 0.35s ease;
+  body.menu-closed {
+    #main-container,
+    footer {
+      position: relative;
+      @include animations('close-nav .5s 1');
+    }
+
+    .mobile-navbar .navbar-header {
+      @include animations('close-nav .5s 1');
+    }
+
+    .mobile-menu-button {
+      @include animations('close-menu .5s 1');
+    }
   }
 
-  #navbar .navbar-collapse.in {
-    left: 0;
-  }
+  body.menu-open {
+    width: 100vw;
+    height: 100vh;    
 
-  body.menu-open.in, body.menu-open {
-    overflow: hidden;
-  }
+    .hamburger {
+      background-color: transparent;
+    }
+    .hamburger::before {
+      background-color: white;
+      transform: rotate3d(0, 0, 1, 45deg);
+      transform-origin: 2px center;
+    }
+    .hamburger::after {
+      background-color: white;
+      transform: rotate3d(0, 0, 1, -45deg);
+      transform-origin: 2px center;
+    }
 
-  body.menu-open #wrapper, body.menu-open.in .navbar {
-    transition: left 0.35s ease;
-  }
+    #wrapper {
+      height: 100vh;
+      width: 100vw;
+      overflow: hidden;
+    }
 
-  body.menu-open.in #wrapper {
-    left: 80vw;
-  }
+    #main-container,
+    footer {
+      position: relative;
+      @include animations('open-nav .5s 1');
+    }
 
+    .mobile-navbar .navbar-header {
+      @include animations('open-nav .5s 1');
+    }
+
+    .navbar-scroll-fix {
+      height: 100vh;
+      width: 100vw;
+      position: absolute;
+      top: 0;
+      left: 0;
+      z-index: 0;
+    }
+  }
 }
