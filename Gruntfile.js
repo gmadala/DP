@@ -64,9 +64,7 @@ module.exports = function(grunt) {
           dest: './app/react-components/dist/common-components.js',
           options: {
               browserifyOptions: { debug: true },
-              transform: [["babelify", { "presets": ["es2015", "react"] }]],
-              watch: true,
-              keepAlive: true
+              transform: [["babelify", { "presets": ["es2015", "react"] }]]
           }
       },
       production: {
