@@ -53,23 +53,31 @@ module.exports = function(grunt) {
       },
       browserify: {
         files: ['app/react-components/**/*.jsx'],
-        tasks: ['browserify:dev']
+        tasks: ['browserify:development']
       }
     },
     browserify: {
-      dist: {
-        options: {
-           transform: [['babelify', {presets: ['es2015', 'react']}], 'uglifyify']
-        },
-        src: ['app/react-components/**/*.jsx'],
-        dest: 'app/react-components.js',
+      development: {
+          src: [
+              "./app/react-components/src/**/*.jsx"
+          ],
+          dest: './app/react-components/dist/common-components.js',
+          options: {
+              browserifyOptions: { debug: true },
+              transform: [["babelify", { "presets": ["es2015", "react"] }]],
+              watch: true,
+              keepAlive: true
+          }
       },
-      dev: {
-        options: {
-           transform: [['babelify', {presets: ['es2015', 'react']}]]
-        },
-        src: ['app/react-components/**/*.jsx'],
-        dest: 'app/react-components.js',
+      production: {
+          src: [
+              "./app/react-components/src/**/*.jsx"
+          ],
+          dest: './app/react-components/dist/common-components.js',
+          options: {
+              browserifyOptions: { debug: false },
+              transform: [["babelify", { "presets": ["es2015", "react"] }]]
+          }
       }
     },
     connect: {
@@ -596,7 +604,7 @@ module.exports = function(grunt) {
     'preprocess:dev',
     'preprocess:debug',
     'nggettext_compile',
-    'browserify:dev'
+    'browserify:development'
   ]);
 
   grunt.registerTask('server', [
@@ -646,7 +654,7 @@ module.exports = function(grunt) {
   ]);
 
   grunt.registerTask('build', [
-    'browserify:dist',
+    'browserify:production',
     'gitinfo',
     'env',
     'clean:dist',
