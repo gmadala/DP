@@ -16,13 +16,13 @@ describe('\n Resources Page', function () {
     browser.sleep(browser.params.shortDelay);
   });
 
-  it("1. Resources - Login as 97421eh", function () {
+  it("1. Resources - Login as 62434AM", function () {
     helper.goToLogin();
     browser.sleep(browser.params.shortDelay);
     loginObjects.doGoodLogin();
     helper.goToResources();
     browser.sleep(browser.params.shortDelay);
-    expect(browser.getCurrentUrl() === execSettings.resourcesPage());
+    expect(browser.getCurrentUrl()).toEqual(execSettings.resourcesPage());
   });
 
   it("2. Resources - Validating the Rates and Fees link", function () {

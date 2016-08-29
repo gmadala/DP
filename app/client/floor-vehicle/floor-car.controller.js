@@ -260,8 +260,10 @@
             return angular.copy($scope.data);
           },
           fileNames: function() {
+            var index = 0;
             return _.map($scope.files, function(file) {
-              return file.name;
+              index++;
+              return $scope.renameFile(file.name, index - 1);
             });
           }
         }
@@ -326,7 +328,17 @@
             });
           }
 
+
           if ($scope.files && $scope.files.length > 0) {
+            // Rename duplicate files with an index so they are all uploaded
+            $scope.files = _.map($scope.files, function(file, index) {
+              var newName = $scope.renameFile(file.name, index);
+              if (newName !== file) {
+                Upload.rename(file, newName);
+              }
+              return file;
+            });
+
             var upload = Upload.upload({
               url: nxgConfig.apiBase + '/floorplan/upload/' + response.FloorplanId,
               method: 'POST',
@@ -377,13 +389,6 @@
         $scope.validity.documents = angular.copy($scope.form.documents);
       }
     };
-
-    $scope.removeFile = function(file) {
-      $scope.files = $scope.files.filter(function(f) {
-        return f.name !== file.name;
-      });
-    };
-
     //Checking for United States Dealer
 
     if (User.isUnitedStates()) {

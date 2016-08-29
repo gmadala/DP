@@ -137,6 +137,12 @@
             // If auction user, go to /act/home. On page load, isDealer is null, but assume
             // that still means it's a dealer until API call corrects this.
             $state.go(isDealer || isDealer === null ? 'dashboard' : 'auction_dashboard');
+          } else if (toState.data.isFeature) {
+            if (!User.getFeatures()[toState.data.isFeature] || User.getFeatures()[toState.data.isFeature].enabled === false) {
+              event.preventDefault();
+
+              $state.go(isDealer || isDealer === null ? 'dashboard' : 'auction_dashboard');
+            }
           }
         }
       }

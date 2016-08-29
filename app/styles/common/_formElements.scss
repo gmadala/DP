@@ -73,6 +73,10 @@ input, select {
   margin: 5px 0;
 }
 
+input.noglobal {
+  height: 12px !important;
+}
+
 textarea {
   font-size: $inputFontSize;
   color: $text;
@@ -312,7 +316,6 @@ select {
     -webkit-appearance: none;
     -moz-appearance: none;
     -o-appearance: none;
-    //padding: 4px 15% 4px 9px;
     padding: 5px 15% 5px 15px;
     border: 0;
     margin: 0;
@@ -492,7 +495,6 @@ input[type="radio"] {
 
   .checkbox-img, .radio-img {
     position: relative;
-    vertical-align: top;
     top: 5px;
   }
 
@@ -512,11 +514,18 @@ input[type="radio"] {
   }
 
   .checkbox-img {
-    top: 10px;
     margin-right: 5px;
 
     &.small {
       top: 6px;
+    }
+  }
+}
+
+@media only screen and (max-width: 372px) {
+  .cr-inline {
+    .cr-label {
+      max-width: 85%;
     }
   }
 }
@@ -597,8 +606,9 @@ input[type="radio"] {
 }
 
 .smallInputAuctionSettings {
-  width:140%;
+  width: 140%;
 }
+
 .xsmallInput {
   width: 206px;
 }
@@ -662,7 +672,6 @@ input[type="radio"] {
  */
 .date-field {
   position: relative;
-  //width: 100px;
 
   &.date-inline {
     display: inline-block;
@@ -679,7 +688,6 @@ input[type="radio"] {
     top: 38px;
     right: 27px;
     margin: 0;
-    height: 17px;
   }
   .btn-calendar {
     position: absolute;

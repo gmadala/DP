@@ -7,7 +7,7 @@
 
 function LoginObjects() {
 
-  this.elForgotUsernamePassword = browser.element(by.id("forgotUsernamePassword"));
+  this.elForgotUsernamePassword = browser.element(by.css('a.forgot'));
   this.elEmail = browser.element(by.id("email"));
   this.elSubmitUsername = browser.element(by.id("forgotUsernameSubmit"));
   this.elSubmitPassword = browser.element(by.id("forgotPasswordSubmit"));
@@ -39,7 +39,7 @@ function LoginObjects() {
     this.elSignUpLogin.click();
     browser.sleep(browser.params.longDelay);
   };
-  this.doClearLogin = function() {
+  this.doClearLogin = function () {
     this.elUserName.clear();
     browser.sleep(browser.params.longDelay);
     this.elPassWord.clear();
@@ -53,7 +53,7 @@ function LoginObjects() {
     this.elSubmitPassword.click();
     browser.sleep(browser.params.longDelay);
   };
-  this.doGoodLogin = function() {
+  this.doGoodLogin = function () {
     this.doClearLogin();
     browser.sleep(browser.params.shortDelay);
     this.setLogin(browser.params.userName, browser.params.password);
@@ -73,16 +73,16 @@ function LoginObjects() {
   };
 
   //Getters
-  this.getTextForgotUsernamePassword = function() {
+  this.getTextForgotUsernamePassword = function () {
     return this.elForgotUsernamePassword.getText();
   };
-  this.getTextSignUpLogin = function() {
+  this.getTextSignUpLogin = function () {
     return this.elSignUpLogin.getText();
   };
   this.getTextSubmitUsername = function () {
     return this.elSubmitUsername.getText();
   };
-  this.getTextLogin = function (){
+  this.getTextLogin = function () {
     browser.sleep(browser.params.shortDelay);
     return this.elLogin.getText();
   };

@@ -266,19 +266,9 @@
       bizHours();
     });
 
-    $scope.getCounter = function () {
-      var count = 0,
-        queue = Payments.getPaymentQueue();
-
-      angular.forEach(queue.fees, function() {
-        count++;
-      });
-
-      angular.forEach(queue.payments, function() {
-        count++;
-      });
-
-      return count;
+    $scope.getCounter = function() {
+      var queue = Payments.getPaymentQueue();
+      return _.size(queue.fees) + _.size(queue.payments);
     };
 
     $scope.getTotal = function(){

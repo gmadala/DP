@@ -1,95 +1,164 @@
 <div>
-  <div class="well-item bordered financial-account">
-    <!--Add/Edit Enabled, view mode-->
-    <div class="row" ng-show="isEditable()" ng-class="{'is-not-active': !account.IsActive}">
-      <!--Bank Name-->
-      <form class="col-xs-3 text-left no-left-padding text-vertical-center" name="bankName"
-           style="padding-left: 15px">
-        <div class="display-bank-name" ng-show="!editMode">{{ account.AchBankName }}</div>
-        <input ng-show="editMode" class="inline-edit-select" type="text" ng-model="dirtyBankName"
-               id="editBankName" name="editBankName" placeholder="Bank Name" maxlength="43" ng-maxlength="43" ng-required/>
-        <label for="editBankName" class="text-error" ng-show="bankName.editBankName.$error.required" translate>
-          Please enter a bank name.
-        </label>
-        <label for="editBankName" class="text-error" ng-show="bankName.editBankName.$error.maxlength" translate>
-          Bank names are limited to 43 characters.
-        </label>
-      </form>
-      <!--Account Number-->
-      <div class="col-xs-2 text-center text-vertical-center">
-          <div>******{{account.AchAccountNumberLast4}}</div>
+  <div class="hidden-lg">
+    <div class="well-item bordered financial-account hidden-md hidden-lg">
+      <div class="row" >
+        <form  name="bankName">
+          <label class="col-xs-5" for="editBankNamed"><span translate>Bank Name</span>:</label>
+
+          <div class="col-xs-5">
+            <div ng-class="{'is-not-active': !account.IsActive}" class="display-bank-name" style="padding-top:25px;" ng-show="!editMode">{{ account.AchBankName }}</div>
+            <input ng-show="editMode" class="inline-edit-select" type="text" ng-model="dirtyBankName"
+                   id="editBankNamed" name="editBankName" placeholder="Bank Name" maxlength="43" ng-maxlength="43"
+                   ng-required/>
+            <label for="editBankName" class="text-error" ng-show="bankName.editBankName.$error.required" translate>
+              Please enter a bank name.
+            </label>
+            <label for="editBankName" class="text-error" ng-show="bankName.editBankName.$error.maxlength" translate>
+              Bank names are limited to 43 characters.
+            </label>
+
+            <div class="edit-column" style="margin-top: -12px;" ng-show="isEditable()">
+              <button ng-hide="editMode" class="btn-unstyle" ng-click="editAccount()">
+                <span class="glyphicon glyphicon-pencil"></span>
+                <span class="edit-text" translate>Edit</span>
+              </button>
+              <button ng-show="editMode" style="padding-top:10px;" class="col-xs-6 custom btn-unstyle cancel-edit"
+                      ng-click="cancelAccount()"
+                      translate>Cancel
+              </button>
+              <button ng-show="editMode" style="padding-top:10px;" class="col-xs-6 custom btn-unstyle save-edit"
+                      ng-click="saveAccount()"
+                      ng-disabled="bankName.editBankName.$error.maxlength" translate>Save
+              </button>
+            </div>
+          </div>
+        </form>
       </div>
-      <!--Routing Number-->
-      <div class="col-xs-2 text-center text-vertical-center">
-          <div>{{routingNumberDisplay}}</div>
-      </div>
-      <!--Recent Transaction-->
-      <div class="col-xs-2 text-center text-vertical-center" ng-show="isEditable()">
-        <a class="recent-transaction transaction-date" ng-click="generateReceipt()" ng-show="recentTransactionExists">
-          {{ recentTransactionDate }}
-          <span class="glyphicon glyphicon-file"></span>
-        </a>
-        <span ng-hide="recentTransactionExists">
-          {{ recentTransactionDate }}
+      <div class="row">
+        <label class="col-xs-5" for="hidAccountNumber"><span translate>Account Number</span>:</label>
+        <span class="col-xs-5" ng-class="{'is-not-active': !account.IsActive}" style="padding-top:14px;" id="hidAccountNumber" name="hidAccountNumber">
+          ....{{account.AchAccountNumberLast4}}
         </span>
       </div>
+      <div class="row">
+        <label class="col-xs-5" for="hidRoutingNumber"><span translate>Routing Number</span>:</label>
+        <span class="col-xs-5" ng-class="{'is-not-active': !account.IsActive}" style="padding-top:14px;" id="hidRoutingNumber" name="hidRoutingNumber">
+          {{routingNumberDisplay}}
+        </span>
+      </div>
+      <div class="row">
+        <label class="col-xs-5" for="hidActive"><span translate>Active</span>:</label>
+        <span class="col-xs-5" style="padding-top:14px;" id="hidActive" name="hidActive">
+          <div class="col-md-2" style="padding-left:0px;">
+            <div ng-show="defaultForDisbursement() || defaultForBilling()">
+              <div class="checkbox checkbox-slider--b" style="line-height: 1.5;">
+                <label for="hid{{ account.BankAccountId }}"
+                       tooltip-placement="top"
+                       tooltip-trigger="mouseenter"
+                       uib-tooltip="{{ 'Before deactivating, select a different account below for your default deposits or payments.' | translate }}"
+                       tooltip-animation="true">
+                  <input bs-switch type="checkbox" id="hid{{ account.BankAccountId }}" name="hid{{ account.BankAccountId }}" class="noglobal"
+                         ng-model="dirtyStatus" switch-active="false" checked switch-size="mini" switch-on-text="Yes" switch-off-text="No" switch-on-color="success">
+                </label>
+              </div>
+            </div>
+            <div ng-hide="defaultForDisbursement() || defaultForBilling()">
+                  <input bs-switch type="checkbox" id="regular.hid{{ account.BankAccountId }}" class="noglobal"
+                         name="regular.hid{{ account.BankAccountId }}" switch-active="{{isEditable() && isAddButtonActive()}}" switch-checked="{{account.IsActive}}"
+                         ng-model="dirtyStatus" ng-change="editStatus()" switch-size="mini" switch-on-text="Yes" switch-off-text="No" switch-on-color="success"/>
+            </div>
+          </div>
+        </span>
+      </div>
+    </div>
+  </div>
+
+  <div class="well-item bordered financial-account visible-md visible-lg">
+    <!--Add/Edit Enabled, view mode-->
+    <div class="row">
+      <!--Bank Name-->
+      <div ng-class="{'is-not-active': !account.IsActive}">
+        <form class="col-md-2 text-left no-left-padding text-vertical-center" name="bankName"
+              style="padding-left: 15px">
+          <span class="display-bank-name" ng-show="!editMode">{{ account.AchBankName }}</span>
+          <input ng-show="editMode" class="inline-edit-select" type="text" ng-model="dirtyBankName"
+                 id="editBankName" name="editBankName" placeholder="Bank Name" maxlength="43" ng-maxlength="43"
+                 ng-required/>
+          <label for="editBankName" class="text-error" ng-show="bankName.editBankName.$error.required" translate>
+            Please enter a bank name.
+          </label>
+          <label for="editBankName" class="text-error" ng-show="bankName.editBankName.$error.maxlength" translate>
+            Bank names are limited to 43 characters.
+          </label>
+
+          <div class="edit-column" style="padding-bottom: 12px; margin-top: -12px;" ng-show="isEditable()">
+            <button ng-hide="editMode" ng-disabled="isEditButtonActive()" class="btn-unstyle" ng-click="editAccount()">
+              <span class="glyphicon glyphicon-pencil"></span>
+              <span class="edit-text" translate>Edit</span>
+            </button>
+            <button ng-show="editMode" class="col-xs-6 custom btn-unstyle cancel-edit" style="padding-top:10px;"
+                    ng-click="cancelAccount()"
+                    translate>Cancel
+            </button>
+            <button ng-show="editMode" class="col-xs-6 custom btn-unstyle save-edit" ng-click="saveAccount()"
+                    ng-disabled="bankName.editBankName.$error.maxlength" style="padding-top:10px;" translate>Save
+            </button>
+          </div>
+
+        </form>
+
+        <!--Account Number-->
+
+        <div class="col-md-2 text-center text-vertical-center">
+          <div>....{{account.AchAccountNumberLast4}}</div>
+        </div>
+        <!--Routing Number-->
+        <div class="col-md-2 col-sm-6 text-center text-vertical-center">
+          <div>{{routingNumberDisplay}}</div>
+        </div>
+        <!--Recent Transaction-->
+        <div class="col-md-2 text-center text-vertical-center" ng-show="isEditable()">
+          <a class="recent-transaction transaction-date" ng-click="generateReceipt()" ng-show="recentTransactionExists">
+            {{ recentTransactionDate }}
+            <span class="glyphicon glyphicon-file"></span>
+          </a>
+          <span ng-hide="recentTransactionExists" style="color:grey;">
+            {{ recentTransactionDate }}
+          </span>
+        </div>
+        <div class="col-md-2 text-center text-vertical-center" ng-show="!isEditable()">
+           <span style="color:grey;">
+            n/a
+          </span>
+        </div>
+      </div>
       <!--Active-->
-      <div class="col-xs-1 text-center text-vertical-center">
-        <div class="glyphicon glyphicon-ok" ng-show="account.IsActive && !editMode"></div>
-        <div ng-show="editMode">
-          <div ng-show="defaultForDisbursement() || defaultForBilling()">
-            <input type="checkbox" id="{{ account.BankAccountId }}" name="{{ account.BankAccountId }}"
-                   ng-model="account.IsActive" disabled/>
-            <label class="checkbox-img small" for="{{ account.BankAccountId }}"
+      <div class="col-md-2" style="padding-left:60px;">
+        <div ng-show="defaultForDisbursement() || defaultForBilling()">
+          <div style="line-height: 1.5;">
+            <label for="{{ account.BankAccountId }}"
                    tooltip-placement="right"
                    tooltip-trigger="mouseenter"
                    uib-tooltip="{{ 'Before deactivating, select a different account below for your default deposits or payments.' | translate }}"
                    tooltip-animation="true">
-            </label>
-          </div>
-          <div ng-hide="defaultForDisbursement() || defaultForBilling()">
-            <input type="checkbox" id="regular.{{ account.BankAccountId }}" name="regular.{{ account.BankAccountId }}"
-                   ng-model="dirtyStatus"/>
-            <label class="checkbox-img small" for="regular.{{ account.BankAccountId }}">
+              <input bs-switch type="checkbox" id="{{ account.BankAccountId }}" name="{{ account.BankAccountId }}" class="noglobal"
+                     ng-model="dirtyStatus" switch-active="false" checked switch-size="mini" switch-on-text="Yes" switch-off-text="No" switch-on-color="success">
+
             </label>
           </div>
 
         </div>
-      </div>
-      <!--Edit-->
-      <div class="col-xs-2 icon-padding-right edit-column" ng-show="isEditable()">
-        <button ng-hide="editMode" class="btn-unstyle" ng-click="editAccount()">
-          <span class="glyphicon glyphicon-pencil"></span>
-          <span class="edit-text" translate>Edit</span>
-        </button>
-        <button ng-show="editMode" class="col-xs-6 custom btn-unstyle cancel-edit" ng-click="cancelAccount()" translate>Cancel</button>
-        <button ng-show="editMode" class="col-xs-6 custom btn-unstyle save-edit" ng-click="saveAccount()"
-                ng-disabled="bankName.editBankName.$error.maxlength" translate>Save</button>
+        <div ng-hide="defaultForDisbursement() || defaultForBilling()">
+              <input bs-switch type="checkbox" switch-active="{{isEditable() && isAddButtonActive()}}" switch-checked="{{account.IsActive}}" id="regular.{{ account.BankAccountId }}"
+                     name="regular.{{ account.BankAccountId }}" class="noglobal"
+                     ng-model="dirtyStatus" ng-change="editStatus()" switch-size="mini" switch-on-text="Yes" switch-off-text="No" switch-on-color="success">
+
+        </div>
       </div>
     </div>
-
-    <!--The following allows for the re-spacing when recent transactions is hidden.
-    This can be removed as soon as recent transactions goes live-->
-    <div class="row" ng-show="!isEditable()" ng-class="{'is-not-active': !account.IsActive}">
-      <div class="col-xs-4 text-left no-left-padding text-vertical-center"
-           style="padding-left: 15px">
-        <div >{{ account.AchBankName }}</div>
-      </div>
-
-      <div class="col-xs-3 text-center text-vertical-center">
-        <div>******{{account.AchAccountNumberLast4}}</div>
-      </div>
-      <div class="col-xs-3 text-center text-vertical-center">
-        <div>{{routingNumberDisplay}}</div>
-      </div>
-      <div class="col-xs-1 text-center text-vertical-center">
-        <div class="glyphicon glyphicon-ok" ng-show="status"></div>
-      </div>
-      <div class="col-xs-1 icon-padding-right" ng-show="isEditable()">
-        <button class="btn-unstyle pull-right" ng-click="editFinancialAccount()">
-          <span class="glyphicon glyphicon-pencil"></span>
-        </button>
-      </div>
+    <!--Edit-->
+    <div class="row">
     </div>
+
   </div>
 </div>

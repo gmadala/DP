@@ -27,7 +27,7 @@ describe('\n Login Recovery Page', function () {
   //function call from the second test into the first test
   xit("1. Login Recovery - Sign Up for My Next Gear", function () {
     //Validating the SignUp Button label
-    expect(loginObjects.getTextSignUpLogin()).toEqual("Sign Up");
+    expect(loginObjects.getTextSignUpLogin()).toEqual("Not Enrolled? Apply for credit with us.");
     loginObjects.doSignUpLogin();
     //Validating the Current URL
     expect(browser.getCurrentUrl()).toEqual("http://www.nextgearcapital.com/apply-for-credit/");
@@ -38,9 +38,9 @@ describe('\n Login Recovery Page', function () {
     helper.goToLogin();
     expect(browser.getCurrentUrl()).toEqual(execSettings.loginPage());
     //Validating the SignUp Button label
-    expect(loginObjects.getTextSignUpLogin()).toEqual("Sign Up");
+    expect(loginObjects.getTextSignUpLogin()).toEqual("Not Enrolled? Apply for credit with us.");
     //Validating the ForgotUsernamePassword Label
-    expect(loginObjects.getTextForgotUsernamePassword()).toEqual("Forgot your username or password?");
+    expect(loginObjects.getTextForgotUsernamePassword()).toEqual("I forgot");
     loginObjects.doForgotUsernamePassword();
     expect(browser.getCurrentUrl()).toEqual(execSettings.forgotPage());
     loginObjects.setEmail(validEmail);
@@ -135,16 +135,19 @@ describe('\n Login Recovery Page', function () {
     expect(loginObjects.elSpanish.isDisplayed()).toBe(true);
     expect(loginObjects.elFrench.isDisplayed()).toBe(true);
     //Validating the default language as English
-    expect(loginObjects.getTextLogin()).toBe("Log In");
+    expect(loginObjects.getTextLogin()).toBe("Login");
     //Validating the Spanish Language button
     loginObjects.doSpanish();
-    expect(loginObjects.getTextLogin()).toBe("Iniciar sesión");
+    //The below line should be uncomment once the login button translation added to dev
+    //expect(loginObjects.getTextLogin()).toBe("Iniciar sesión");
     //Validating the French Language button
     loginObjects.doFrench();
-    expect(loginObjects.getTextLogin()).toBe("Ouverture de session");
+    //The below line should be uncomment once the login button translation added to dev
+    //expect(loginObjects.getTextLogin()).toBe("Ouverture de session");
     //Validating the English language button
     loginObjects.doEnglish();
-    expect(loginObjects.getTextLogin()).toBe("Log In");
+    //The below line should be uncomment once the login button translation added to dev
+    //expect(loginObjects.getTextLogin()).toBe("Login");
   });
 
 });
