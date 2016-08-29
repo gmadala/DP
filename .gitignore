@@ -26,3 +26,4 @@ TESTS*.xml
 app/react-components.js
 .jsbeautifyrc
 eslint-debug.json
+.vscode/launch.json
