@@ -6,18 +6,23 @@
       <div nxg-vin-details floor-model="wizardFloor.data" validity="wizardFloor.validity" form="form" error-flag="carInfo.vinDetailsErrorFlag" nxg-autofocus="reset"></div>
 
       <div class="main-heading" translate>Color & Odometer</div>
+      <div class="field">
+        <label ng-show="wizardFloor.data.UnitColorId" for="inputColor" class="show-hide">Color</label>
       <div class="style-select full-width" ng-class="{ 'nxg-invalid': form.inputColor.$error.required && form.$submitted }">
-        <select id="inputColor" name="inputColor" ng-model="wizardFloor.data.UnitColorId"
+        <select id="inputColor" name="inputColor" ng-model="wizardFloor.data.UnitColorId" class="form-control input-sm short-input"
                 ng-options="color.ColorName for color in wizardFloor.options.colors" required>
           <option value="" translate>Color</option>
         </select>
+      </div>
       </div>
       <label for="inputColor"
              class="text-error"
              ng-show="form.inputColor.$error.required && form.$submitted" translate>
         Please select a Color.
       </label>
-      <input type="text"  class="input-full" placeholder="Odometer" id="inputMileage"
+      <div class="field">
+      <label ng-show="wizardFloor.data.UnitMileage" for="inputMileage" class="show-hide">Odometer</label>
+      <input type="text"  class="form-control input-full" placeholder="Odometer" id="inputMileage"
              name="inputMileage"
              ng-model="wizardFloor.data.UnitMileage"
              ng-pattern="/^[0-9]{1,3}(?:,?[0-9]{3})*$/"
@@ -26,6 +31,7 @@
              nxg-validate-int="6"
              ng-class="{ 'nxg-invalid': (form.inputMileage.$error.required || form.inputMileage.$error.pattern || form.inputMileage.$error.maxlength || form.inputMileage.$error.nxgMin) && form.$submitted }"
         />
+      </div>
       <label for="inputMileage" class="text-error" ng-show="form.inputMileage.$error.required && form.$submitted">
         <span translate translate-comment="This will be followed by 'odometer'">Please enter the</span>
         <span>{{ carInfo.mileageOrOdometer }}.</span>

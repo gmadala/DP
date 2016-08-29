@@ -119,6 +119,7 @@
           s.vinLookupPending = false;
           $scope.data.$blackbookMileage = mileage;
           s.vinMode = 'matched';
+          $scope.dirtyStatus=true;
         },
         function (error) {
           // treat all errors as "no match" & suppress error messages
@@ -128,6 +129,7 @@
           s.vinLookupPending = false;
           if (!wasUserCancelled(error)) {
             s.vinMode = 'noMatch';
+            $scope.dirtyStatus=false;
             $scope.data.VinAckLookupFailure = false; // make sure user HAS to check this; no pre-checking
 
             // Clear the existing values when searching for a new not-found VIN

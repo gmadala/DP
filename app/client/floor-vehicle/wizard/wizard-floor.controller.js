@@ -194,7 +194,7 @@
 
           break;
         case 2:
-          if (vm.formParts.one) {
+          if (true || vm.formParts.one) {
             $state.go('flooringWizard.sales');
           }
 
