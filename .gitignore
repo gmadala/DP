@@ -25,3 +25,7 @@ app/languages/
 TESTS*.xml
 app/client/react-components.js
 app/react-components.js
+.vscode/launch.json
+.vscode/settings.json
+eslint-debug.json
+app/react-components/dist/common-components.js
