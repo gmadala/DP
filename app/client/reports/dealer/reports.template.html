@@ -28,8 +28,7 @@
             <h3 class="form-title" translate>Upcoming Curtailment / Payoff Quote (PDF)</h3>
 
             <div class="form-row date-field date-picker custom disbursement-date-picker">
-            <react-component name="DateComponent"
-                             props="{clicker:openUpcomingDatePicker, date:data.curtailmentDate, label: labelUpcomingDate, labelFor: 'curtailmentDate', invalid: invalidUpcomingDate, updateDate: updateUpcomingDate, minDate: maxDate}"></react-component>
+            <date-component props="{clicker:openUpcomingDatePicker, date:data.curtailmentDate, label: labelUpcomingDate, labelFor: 'curtailmentDate', invalid: invalidUpcomingDate, updateDate: updateUpcomingDate, minDate: maxDate}"></date-component>
             <!--<label for="curtailmentDate" translate>Date</label>-->
             <input id="curtailmentDate" name="curtailmentDate" nxg-date
                    placeholder="mm/dd/yyyy"
