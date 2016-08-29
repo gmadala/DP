@@ -34,7 +34,7 @@ describe('Directive: nxgCreditAvailability', function() {
           'AvailableCreditAmount': 9903253.4000
         }]
       }
-  };
+    };
 
     $httpBackend.expect('GET', function(url) {
       return url.indexOf('/dealer/buyer/dashboard') === 0;
@@ -52,7 +52,7 @@ describe('Directive: nxgCreditAvailability', function() {
   it('should display total available lines of credit', function() {
     directiveScope = element.isolateScope();
     var lineOfCredits = directiveScope.lineOfCredits;
-    expect(lineOfCredits.hasOwnProperty('TOTAL_LOC')).toBe(true);
+    expect(lineOfCredits.hasOwnProperty('total.lineOfCredits')).toBe(true);
     expect(lineOfCredits.hasOwnProperty('b60dc924-797f-4c0a-8112-63f98d0dfaf8')).toBe(true);
     expect(lineOfCredits.hasOwnProperty('e70e442b-c364-4985-9c1c-3ddbe5dcb6ec')).toBe(true);
 

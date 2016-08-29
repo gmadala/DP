@@ -131,7 +131,7 @@
             };
           });
 
-          scope.lineOfCredits['TOTAL_LOC'] = {
+          scope.lineOfCredits['total.lineOfCredits'] = {
             name: 'Total',
             total: totalLimit,
             available: totalAvailable
@@ -159,7 +159,7 @@
         });
 
       scope.$watch('creditType', function(newValue) {
-        var key = 'TOTAL_LOC';
+        var key = 'total.lineOfCredits';
         if (newValue) {
           key = newValue.LineOfCreditId;
         }
@@ -186,7 +186,7 @@
           }]);
         }
 
-      })
+      });
     }
   }
 
