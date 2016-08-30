@@ -47,39 +47,4 @@
          ng-show="form.inputDisburseAcct.$error.required && form.$submitted" translate>
     Please select a Bank Account for Deposit.
   </label>
-
-
-  <label for="cmn-toggle-1" class="hidden"><span translate>Request additional financing</span></label>
-  <label for="cmn-toggle-1" class="switch hidden">
-    <input id="cmn-toggle-1" class="cmn-toggle cmn-toggle-round" type="checkbox" ng-model="wizardFloor.data.AdditionalFinancing">
-    <div class="slider round">
-      <span class="slider-left">Yes</span>
-      <span class="slider-right">No</span>
-    </div>
-  </label>
-
-  <div class="form-group hidden">
-    <label for="additionalFinancingAmount" class="sr-only">Additional Financing Amount</label>
-    <div class="input-group input-group-sm">
-      <span class="input-group-addon">$</span>
-      <input type="text" id="additionalFinancingAmount" name="additionalFinancingAmount" ng-model="wizardFloor.data.AdditionalFinancingAmount"
-            placeholder="Additional Financing Amount"
-             nxg-input-currency="1000000000000"
-             nxg-min="1"
-             class="form-control"
-             ng-class="{ 'nxg-invalid': (form.additionalFinancingAmount.$error.required || form.additionalFinancingAmount.$error.max || form.additionalFinancingAmount.$error.pattern || form.additionalFinancingAmount.$error.maxlength || form.additionalFinancingAmount.$error.nxgMin) && form.$submitted }" />
-    </div>
-  </div>
-
-  <div class="form-group hidden">
-    <label for="comment" class="sr-only">Comment</label>
-    <textarea class="form-control"
-              rows="3"
-              name="comment"
-              id="comment"
-              placeholder="(Ex. Additional instructions, etc.)"
-              ng-model="wizardFloor.data.commentAdditionalFinancing"
-              ng-disabled="wizardFloor.floorPlanSubmitting"
-              ></textarea>
-  </div>
 </form>

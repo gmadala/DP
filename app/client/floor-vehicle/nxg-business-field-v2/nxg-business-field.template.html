@@ -23,9 +23,9 @@
       </div>
     </div>
 
-    <button class="btn btn-sm btn-primary" type="button" placeholder="Seller" ng-click="disabled || openBusinessSearch()" ng-class="{disabled: disabled}">
+    <!-- <button class="btn btn-sm btn-primary" type="button" placeholder="Seller" ng-click="disabled || openBusinessSearch()" ng-class="{disabled: disabled}">
       SEARCH
-    </button>
+    </button> -->
   <div ng-switch on="mode">
     <label ng-switch-when="buyers" for="inputBiz" class="text-error" ng-show="!validity.inputBiz.$error.minlength && validity.inputBiz.$error.nxgRequires" translate>
       Please look up a Buyer.
