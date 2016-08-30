@@ -11,7 +11,6 @@
     $scope.canAttachDocuments = false;
     $scope.submitInProgress = false;
 
-
     $scope.$parent.wizardFloor.renameFile = function (file, index) {
       var filename = "";
       var dotPos = 0;
@@ -33,6 +32,7 @@
     };
 
     $scope.$watch('$scope.$parent.wizardFloor.data.files', function (newValue, oldValue) {
+      console.log(newValue);
       if (newValue && oldValue) {
         if (newValue.length !== oldValue.length) {
           $scope.form.documents.$setValidity('pattern', true);

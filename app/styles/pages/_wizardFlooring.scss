@@ -1,4 +1,117 @@
 .wizard-container {
+
+  // .nav-tabs {
+  //   position: relative;
+  //   margin: 40px auto;
+  //   margin-bottom: 0;
+  //   border-bottom-color: #e0e0e0;
+  // }
+  //
+  // .nav-tabs > li.active > a, .wizard .nav-tabs > li.active > a:hover, .wizard .nav-tabs > li.active > a:focus {
+  //   color: #555555;
+  //   cursor: default;
+  //   border: 0;
+  //   border-bottom-color: transparent;
+  // }
+  //
+  // > .wizard-inner {
+  //   position: relative;
+  // }
+  //
+  // .connecting-line {
+  //   height: 2px;
+  //   background: #e0e0e0;
+  //   position: absolute;
+  //   width: 80%;
+  //   margin: 0 auto;
+  //   left: 0;
+  //   right: 0;
+  //   top: 50%;
+  //   z-index: 1;
+  // }
+  //
+  // span.round-tab {
+  //   width: 70px;
+  //   height: 70px;
+  //   line-height: 70px;
+  //   display: inline-block;
+  //   border-radius: 100px;
+  //   background: #fff;
+  //   border: 2px solid #e0e0e0;
+  //   z-index: 2;
+  //   position: absolute;
+  //   left: 0;
+  //   text-align: center;
+  //   font-size: 25px;
+  // }
+  //
+  // span.round-tab i{
+  //   color:#555555;
+  // }
+  //
+  // li.active span.round-tab {
+  //   background: #fff;
+  //   border: 2px solid #5bc0de;
+  // }
+  //
+  // li.active span.round-tab i{
+  //   color: #5bc0de;
+  // }
+  //
+  // span.round-tab:hover {
+  //   color: #333;
+  //   border: 2px solid #333;
+  // }
+  //
+  // .nav-tabs > li {
+  //   width: 25%;
+  // }
+  //
+  // li:after {
+  //   content: " ";
+  //   position: absolute;
+  //   left: 46%;
+  //   opacity: 0;
+  //   margin: 0 auto;
+  //   bottom: 0px;
+  //   border: 5px solid transparent;
+  //   border-bottom-color: #5bc0de;
+  //   transition: 0.1s ease-in-out;
+  // }
+  //
+  // li.active:after {
+  //   content: " ";
+  //   position: absolute;
+  //   left: 46%;
+  //   opacity: 1;
+  //   margin: 0 auto;
+  //   bottom: 0px;
+  //   border: 10px solid transparent;
+  //   border-bottom-color: #5bc0de;
+  // }
+  //
+  // .nav-tabs > li a {
+  //   width: 70px;
+  //   height: 70px;
+  //   margin: 20px auto;
+  //   border-radius: 100%;
+  //   padding: 0;
+  // }
+  //
+  // .nav-tabs > li a:hover {
+  //   background: transparent;
+  // }
+  //
+  //
+  // .tab-pane {
+  //   position: relative;
+  //   padding-top: 50px;
+  // }
+  //
+  // .wizard h3 {
+  //   margin-top: 0;
+  // }
+
   ul.wizard-nav {
 
     margin: 0px 0px 35px 0px;
@@ -35,6 +148,7 @@
       //   right: 0;
       // }
 
+
       a {
         width: 50px;
         height: 50px;
@@ -48,6 +162,10 @@
       div {
         margin-top: 10px;
         white-space: nowrap;
+      }
+
+      &.active > a {
+        background-color: #428bca;
       }
 
     }
@@ -127,7 +245,7 @@
 
   .slider.round:before {
     border-radius: 50%;
-    border: 1px solid #000;
+    border: 1px solid #bbb;
   }
 
   .slider-left {
@@ -154,5 +272,83 @@
 
   input:not(:checked) + .slider > .slider-left {
     opacity: 0;
+  }
+
+  .input-group-addon {
+    background-color: #FFFFFF;
+    border: 1px solid #000;
+    border-right: none;
+  }
+
+  input.ng-invalid ~ .input-group-addon {
+    border-color: #C43926;
+  }
+
+  .input-group-addon + input,
+  .input-group-addon + input:focus {
+    border-left: none;
+  }
+
+  .btn-next,
+  .btn-submit {
+    margin-right: 0px;
+  }
+
+  .has-error .input-group-addon {
+    color: #b94a48;
+    border-color: #b94a48;
+  }
+
+  // FILE UPLOAD
+  .req-docs-list {
+
+    li {
+      margin-top: 20px;
+    }
+
+  }
+
+  .wizard-inner-drop {
+    text-align: center;
+    margin-top: 10px;
+
+    i {
+      font-size: 60px;
+    }
+
+    label {
+      display: block;
+      margin: 20px auto;
+      max-width: 200px;
+
+      input[type="file"] {
+        display: none;
+        // margin: auto;
+        // width: inherit;
+      }
+    }
+
+    p {
+      margin: 30px auto;
+    }
+  }
+
+  ul.files-container {
+    margin-bottom: 0px;
+
+    li {
+      width: 100%;
+      margin: 0px;
+      background-color: #eaeaea;
+      margin-top: 5px;
+      padding: 6px;
+      font-size: 20px;
+
+      .wizard-file-delete {
+        float: right;
+        font-weight: 900;
+        cursor: pointer;
+      }
+    }
   }
 }

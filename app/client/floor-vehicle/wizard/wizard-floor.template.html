@@ -20,27 +20,67 @@
       </li>
     </ul>
   </div>
-  <div ui-view></div>
-  <div class="col-xs-12">
+
+  <!-- <div class="wizard-inner">
+      <div class="connecting-line"></div>
+      <ul class="nav nav-tabs" role="tablist">
+
+          <li role="presentation" class="active">
+              <a href="#step1" data-toggle="tab" aria-controls="step1" role="tab" title="Step 1">
+                  <span class="round-tab">
+                      <i class="glyphicon glyphicon-folder-open"></i>
+                  </span>
+              </a>
+          </li>
+
+          <li role="presentation" class="disabled">
+              <a href="#step2" data-toggle="tab" aria-controls="step2" role="tab" title="Step 2">
+                  <span class="round-tab">
+                      <i class="glyphicon glyphicon-pencil"></i>
+                  </span>
+              </a>
+          </li>
+          <li role="presentation" class="disabled">
+              <a href="#step3" data-toggle="tab" aria-controls="step3" role="tab" title="Step 3">
+                  <span class="round-tab">
+                      <i class="glyphicon glyphicon-picture"></i>
+                  </span>
+              </a>
+          </li>
+
+          <li role="presentation" class="disabled">
+              <a href="#complete" data-toggle="tab" aria-controls="complete" role="tab" title="Complete">
+                  <span class="round-tab">
+                      <i class="glyphicon glyphicon-ok"></i>
+                  </span>
+              </a>
+          </li>
+      </ul>
+  </div> -->
+
+
+  <div ui-view class="col-xs-7"></div>
+  <div class="col-xs-5"></div>
+  <div class="col-xs-7">
     <button type="button"
-            class="btn-cta cta-secondary" translate
-            ng-disabled="!wizardFloor.previousAvailable()"
-            ng-click="wizardFloor.previous()">
-      Previous
-    </button>
-    <button type="button"
-            class="btn-cta cta-primary" translate
+            class="btn-cta cta-primary pull-right btn-next" translate
             ng-show="wizardFloor.nextAvailable() && (wizardFloor.attachDocumentsEnabled || wizardFloor.counter != 3)"
             ng-disabled="!wizardFloor.validForm"
             ng-click="wizardFloor.next()">
       Next
     </button>
     <button type="button"
-            class="btn-cta cta-primary" translate
+            class="btn-cta cta-primary pull-right btn-submit" translate
             ng-show="!wizardFloor.nextAvailable() || (!wizardFloor.attachDocumentsEnabled && wizardFloor.counter == 3)"
             ng-disabled="wizardFloor.floorPlanSubmitting"
             ng-click="wizardFloor.submit()">
       Submit
+    </button>
+    <button type="button"
+            class="btn-cta cta-secondary pull-right btn-previous" translate
+            ng-hide="!wizardFloor.previousAvailable()"
+            ng-click="wizardFloor.previous()">
+      Previous
     </button>
   </div>
 </div>

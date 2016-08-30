@@ -44,6 +44,7 @@
 
       $scope.form.$submitted = true;
       $scope.$parent.wizardFloor.validity = angular.copy($scope.form);
+      console.log($scope.$parent.wizardFloor.validity);
       $scope.$parent.wizardFloor.formParts.two = $scope.form.$valid;
       return true;
     };

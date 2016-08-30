@@ -6,10 +6,12 @@
     .controller('PaymentInfoCtrl', PaymentInfoCtrl);
 
   PaymentInfoCtrl.$inject = [
-    '$scope'
+    '$scope',
+    'User',
+    'gettextCatalog'
   ];
 
-  function PaymentInfoCtrl($scope) {
+  function PaymentInfoCtrl($scope, gettextCatalog) {
     var vm = this;
 
     vm.data = null;

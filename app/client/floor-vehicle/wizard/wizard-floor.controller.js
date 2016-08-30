@@ -24,22 +24,24 @@
     'metric'
   ];
 
-  function WizardFloorCtrl($state,
-                           $scope,
-                           $uibModal,
-                           $q,
-                           User,
-                           Floorplan,
-                           Addresses,
-                           protect,
-                           OptionDefaultHelper,
-                           moment,
-                           AccountManagement,
-                           Upload,
-                           nxgConfig,
-                           kissMetricInfo,
-                           segmentio,
-                           metric) {
+  function WizardFloorCtrl(
+    $state,
+    $scope,
+    $uibModal,
+    $q,
+    User,
+    Floorplan,
+    Addresses,
+    protect,
+    OptionDefaultHelper,
+    moment,
+    AccountManagement,
+    Upload,
+    nxgConfig,
+    kissMetricInfo,
+    segmentio,
+    metric
+  ) {
     var vm = this;
     var isDealer = User.isDealer();
 
@@ -115,6 +117,8 @@
 
     // form data model template w/ default values for a new blank form - should be considered read-only
     vm.defaultData = {
+      AdditionalFinancing: false,
+      additionalFinancingAmount: null,
       FloorplanSourceId: User.isDealer() ? 6 : 7, // 6 for dealer in web app, 7 for auction user
       BankAccountId: null, // BankAccount object locally, flatten to string for API tx
       LineOfCreditId: null, // LineOfCredit object locally, flatten to string for API tx
@@ -141,7 +145,9 @@
       $blackbookMileage: null, // cache most recent mileage value used to get updated blackbook data
       files: [],
       invalidFiles: [],
-      comment: ''
+      comment: '',
+      commentAdditionalFinancing: '',
+      commentGeneral: ''
     };
 
     vm.reset = function () {
@@ -200,43 +206,39 @@
 
           break;
         case 3:
-          if (vm.formParts.one && vm.formParts.two) {
+
+          if (true || (vm.formParts.one && vm.formParts.two)) {
             $state.go('flooringWizard.payment');
           }
 
           break;
         case 4:
-          if (vm.formParts.one && vm.formParts.two && vm.formParts.three) {
+          if (true || vm.formParts.one && vm.formParts.two && vm.formParts.three) {
             $state.go('flooringWizard.document');
           }
       }
     }
 
     function canTransition(count) {
-      var result ;
       vm.transitionValidation();
 
       switch (count) {
         case 1:
-          result = true;
-          break;
+          return true;
         case 2:
-          result = vm.formParts.one;
-          break;
+          return true // vm.formParts.one;
         case 3:
-          result = vm.formParts.one && vm.formParts.two;
-          break;
+          return true // vm.formParts.one && vm.formParts.two;
         case 4:
-          result = vm.formParts.one && vm.formParts.two && vm.formParts.three;
-          break;
+          return true; // vm.formParts.one && vm.formParts.two && vm.formParts.three;
       }
-      return result;
     }
 
     vm.canSubmit = function () {
       if (vm.floorPlanSubmitting) {
         return false;
       }
+
       if (!vm.formParts.one) {
         return false;
       }
@@ -244,12 +246,15 @@
       if (!vm.formParts.two) {
         return false;
       }
-      if (vm.attachDocumentsEnabled || !vm.formParts.three) {
+
+      if (vm.attachDocumentsEnabled || !vm.formParts.three){
         return false;
       }
+
       if (vm.attachDocumentsEnabled && vm.data.files.length < 1) {
         return false;
       }
+
       return true;
     };
 
@@ -275,7 +280,7 @@
           controller: 'FloorCarConfirmCtrl',
           resolve: {
             comment: function () {
-              return !!vm.data.comment && vm.data.comment.length > 0;
+              return (!!vm.data.commentGeneral && vm.data.commentGeneral.length > 0 || !!vm.data.commentAdditionalFinancing && vm.data.commentAdditionalFinancing.length > 0);
             },
             formData: function () {
               return angular.copy(vm.data);
@@ -311,9 +316,9 @@
       vm.floorPlanSubmitting = true;
       Floorplan.create(vm.data).then(
         function (response) { /*floorplan success*/
-          if (vm.data.comment) {
+          if (vm.data.commentGeneral || vm.data.commentAdditionalFinancing) {
             Floorplan.addComment({
-              CommentText: vm.data.comment,
+              CommentText: vm.data.commentGeneral + '\n' + vm.data.commentAdditionalFinancing,
               FloorplanId: response.FloorplanId
             });
           }
