@@ -298,4 +298,57 @@
     color: #b94a48;
     border-color: #b94a48;
   }
+
+  // FILE UPLOAD
+  .req-docs-list {
+
+    li {
+      margin-top: 20px;
+    }
+
+  }
+
+  .wizard-inner-drop {
+    text-align: center;
+    margin-top: 10px;
+
+    i {
+      font-size: 60px;
+    }
+
+    label {
+      display: block;
+      margin: 20px auto;
+      max-width: 200px;
+
+      input[type="file"] {
+        display: none;
+        // margin: auto;
+        // width: inherit;
+      }
+    }
+
+    p {
+      margin: 30px auto;
+    }
+  }
+
+  ul.files-container {
+    margin-bottom: 0px;
+
+    li {
+      width: 100%;
+      margin: 0px;
+      background-color: #eaeaea;
+      margin-top: 5px;
+      padding: 6px;
+      font-size: 20px;
+
+      .wizard-file-delete {
+        float: right;
+        font-weight: 900;
+        cursor: pointer;
+      }
+    }
+  }
 }

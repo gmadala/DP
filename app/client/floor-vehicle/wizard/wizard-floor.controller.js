@@ -145,7 +145,9 @@
       $blackbookMileage: null, // cache most recent mileage value used to get updated blackbook data
       files: [],
       invalidFiles: [],
-      comment: ''
+      comment: '',
+      commentAdditionalFinancing: '',
+      commentGeneral: ''
     };
 
     vm.reset = function () {
@@ -211,7 +213,7 @@
 
           break;
         case 4:
-          if (vm.formParts.one && vm.formParts.two && vm.formParts.three) {
+          if (true || vm.formParts.one && vm.formParts.two && vm.formParts.three) {
             $state.go('flooringWizard.document');
           }
       }
@@ -278,7 +280,7 @@
           controller: 'FloorCarConfirmCtrl',
           resolve: {
             comment: function () {
-              return !!vm.data.comment && vm.data.comment.length > 0;
+              return (!!vm.data.commentGeneral && vm.data.commentGeneral.length > 0 || !!vm.data.commentAdditionalFinancing && vm.data.commentAdditionalFinancing.length > 0);
             },
             formData: function () {
               return angular.copy(vm.data);
@@ -314,9 +316,9 @@
       vm.floorPlanSubmitting = true;
       Floorplan.create(vm.data).then(
         function (response) { /*floorplan success*/
-          if (vm.data.comment) {
+          if (vm.data.commentGeneral || vm.data.commentAdditionalFinancing) {
             Floorplan.addComment({
-              CommentText: vm.data.comment,
+              CommentText: vm.data.commentGeneral + '\n' + vm.data.commentAdditionalFinancing,
               FloorplanId: response.FloorplanId
             });
           }

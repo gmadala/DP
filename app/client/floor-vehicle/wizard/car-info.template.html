@@ -8,12 +8,12 @@
       <div class="main-heading" translate>Color & Odometer</div>
       <div class="field">
         <label ng-show="wizardFloor.data.UnitColorId" for="inputColor" class="show-hide">Color</label>
-      <div class="style-select full-width" ng-class="{ 'nxg-invalid': form.inputColor.$error.required && form.$submitted }">
-        <select id="inputColor" name="inputColor" ng-model="wizardFloor.data.UnitColorId" class="form-control input-sm short-input"
-                ng-options="color.ColorName for color in wizardFloor.options.colors" required>
-          <option value="" translate>Color</option>
-        </select>
-      </div>
+        <div class="style-select full-width" ng-class="{ 'nxg-invalid': form.inputColor.$error.required && form.$submitted }">
+          <select id="inputColor" name="inputColor" ng-model="wizardFloor.data.UnitColorId" class="form-control input-sm short-input"
+                  ng-options="color.ColorName for color in wizardFloor.options.colors" required>
+            <option value="" translate>Color</option>
+          </select>
+        </div>
       </div>
       <label for="inputColor"
              class="text-error"
