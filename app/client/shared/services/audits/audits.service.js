@@ -17,7 +17,7 @@
       refreshAudits: function () {
         this.loading = true;
         return User.getInfo().then(_.bind(function (info) {
-          return api.request('GET', '/cam/' + info.BusinessId + '/open_audits', null, null, true).then(_.bind(function (result) {
+          return api.request('GET', api.ngenContentLink('/cam/' + info.BusinessId + '/open_audits'), null, null, true, api.ngenSuccessHandler).then(_.bind(function (result) {
             this.results = _.map(result, function (item) {
               item.daysOnFloorplan = moment().diff(moment(item.flooringDate), 'days');
               item.vehicleStatusDays = moment().diff(moment(item.inspectionDateTime), 'days');
