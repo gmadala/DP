@@ -108,84 +108,78 @@
           }]
         }]
       };
-
       element.find('.nxg-credit-availability').highcharts(options);
 
-      // search for the data from server
-      scope.lineOfCredits = {};
-      // search range 7 days.
-      var startDate = moment().subtract(7, 'days').format('YYYY-MM-DD');
-      var endDate = moment().format('YYYY-MM-DD');
-      api.request('GET', '/dealer/buyer/dashboard/' + startDate + '/' + endDate)
-        .then(function(data) {
-          var totalLimit = 0;
-          var totalAvailable = 0;
-          data.LinesOfCredit.forEach(function(lineOfCredit) {
-            totalLimit = totalLimit + lineOfCredit.LineOfCreditAmount;
-            totalAvailable = totalAvailable + lineOfCredit.AvailableCreditAmount;
+      function updateCharts(name, total, available) {
+        scope.creditTypeName = name;
+        scope.creditLimit = numeral(total).format('($0.00a)');
 
-            scope.lineOfCredits[lineOfCredit.LineOfCreditId] = {
-              name: lineOfCredit.CreditTypeName,
-              total: lineOfCredit.LineOfCreditAmount,
-              available: lineOfCredit.AvailableCreditAmount
+        var chartElement = element.find('.nxg-credit-availability').highcharts();
+        chartElement.series[0].setData([{
+          y: available,
+          color: "#4CAF50",
+          dataLabels: {
+            align: 'right'
+          }
+        }]);
+        chartElement.series[1].setData([{
+          y: total - available,
+          color: "#9E9E9E",
+          dataLabels: {
+            align: 'left'
+          }
+        }]);
+      }
+
+      function updateChartData() {
+        var totalLimit = 0;
+        var totalAvailable = 0;
+
+        // search for the data from server
+        scope.lineOfCredits = {};
+
+        // search range 7 days.
+        var startDate = moment().subtract(7, 'days').format('YYYY-MM-DD');
+        var endDate = moment().format('YYYY-MM-DD');
+        api.request('GET', '/dealer/buyer/dashboard/' + startDate + '/' + endDate)
+          .then(function(data) {
+            // process the lines of credits to credit object with:
+            // 'total.LineOfCredits --> totalLimit, totalAvailable
+            // 'locId1' --> name1, total1, available1
+            // 'locId2' --> name2, total2, available2
+            // ....
+            data.LinesOfCredit.forEach(function(lineOfCredit) {
+              totalLimit = totalLimit + lineOfCredit.LineOfCreditAmount;
+              totalAvailable = totalAvailable + lineOfCredit.AvailableCreditAmount;
+
+              scope.lineOfCredits[lineOfCredit.LineOfCreditId] = {
+                name: lineOfCredit.CreditTypeName,
+                total: lineOfCredit.LineOfCreditAmount,
+                available: lineOfCredit.AvailableCreditAmount
+              };
+            });
+
+            scope.lineOfCredits['total.lineOfCredits'] = {
+              name: 'Total',
+              total: totalLimit,
+              available: totalAvailable
             };
+          })
+          .then(function() {
+            // default to total for the initial view
+            updateCharts('Total', totalLimit, totalAvailable);
           });
-
-          scope.lineOfCredits['total.lineOfCredits'] = {
-            name: 'Total',
-            total: totalLimit,
-            available: totalAvailable
-          };
-
-          // default to total for the initial view
-          scope.creditTypeName = 'Total';
-          scope.creditLimit = numeral(totalLimit).format('($0.00a)');
-
-          var chartElement = element.find('.nxg-credit-availability').highcharts();
-          chartElement.series[0].setData([{
-            y: totalAvailable,
-            color: "#4CAF50",
-            dataLabels: {
-              align: 'right'
-            }
-          }]);
-          chartElement.series[1].setData([{
-            y: totalLimit - totalAvailable,
-            color: "#9E9E9E",
-            dataLabels: {
-              align: 'left'
-            }
-          }]);
-        });
+      }
 
       scope.$watch('creditType', function(newValue) {
-        var key = 'total.lineOfCredits';
-        if (newValue) {
-          key = newValue.LineOfCreditId;
+        if (!newValue) {
+          updateChartData();
+        } else {
+          var lineOfCredit = scope.lineOfCredits[newValue.LineOfCreditId];
+          if (lineOfCredit) {
+            updateCharts(lineOfCredit.name, lineOfCredit.total, lineOfCredit.available);
+          }
         }
-
-        var lineOfCredit = scope.lineOfCredits[key];
-        if (lineOfCredit) {
-          scope.creditTypeName = lineOfCredit.name;
-          scope.creditLimit = numeral(lineOfCredit.total).format('($0.00a)');
-
-          var chartElement = element.find('.nxg-credit-availability').highcharts();
-          chartElement.series[0].setData([{
-            y: lineOfCredit.available,
-            color: "#4CAF50",
-            dataLabels: {
-              align: 'right'
-            }
-          }]);
-          chartElement.series[1].setData([{
-            y: lineOfCredit.total - lineOfCredit.available,
-            color: "#9E9E9E",
-            dataLabels: {
-              align: 'left'
-            }
-          }]);
-        }
-
       });
     }
   }
