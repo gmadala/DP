@@ -75,7 +75,7 @@
       })
       .state('maintenance', {
         url: '/maintenance',
-        templateUrl: 'client/maintenance/maintenance.html',
+        templateUrl: 'client/maintenance/maintenance.template.html',
         controller: 'MaintenanceCtrl',
         data: {
           pageId: 'Maintenance',
