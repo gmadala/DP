@@ -332,9 +332,9 @@ ul.document-list {
 }
 
 .icon-addon.addon-lg .vin-focus {
-  width: 125%;
+  width: 100%;
   padding: 10px 1px 10px 35px;
-  font-size: 13px;
+  font-size: 10px;
 }
 
 .btn-margin {
@@ -448,3 +448,12 @@ ul.document-list {
   margin: -15px 0px 0px 0px;
 }
 //End of floating labels
+
+.wizard-vin {
+  padding-right:0px;
+}
+.wizard-vin-btn {
+  padding: 0px;
+  top: 7px;
+  margin: 0px;
+}
