@@ -43,6 +43,14 @@
       // you should substitute an appropriate default value for these if the user doesn't specify
     };
 
+    $scope.searchDate = function(date){
+      //this gets the filter to trigger upon selection
+      if(date === null ){
+        return null;
+      }
+      $scope.search();
+    };
+
     $scope.search = function () {
       $scope.validity = angular.copy($scope.searchForm);
       $scope.validity.$error.invalidDateRange =

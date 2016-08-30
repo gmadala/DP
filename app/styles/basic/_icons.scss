@@ -203,3 +203,19 @@
 .icon-spacing{
   margin-right: 3%;
 }
+
+.icon-left-margin {
+  margin-left: 3px;
+}
+
+.icon-line-height-0 {
+  line-height: 0;
+}
+
+.user-info {
+  .glyphicon {
+    top: 2px;
+    @extend .icon-left-margin;
+    @extend .icon-line-height-0;
+  }
+}

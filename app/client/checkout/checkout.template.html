@@ -1,286 +1,417 @@
-<section class="row">
-  <section class="col-xs-9">
-    <div ng-switch="paymentQueue.contents.isEmpty()">
+<div class="container">
+  <section class="row">
+    <section class="col-sm-9">
+      <div ng-switch="paymentQueue.contents.isEmpty()">
 
-      <!-- When there are no payments or fees -->
-      <div class="info-block" ng-switch-when="true">
-        <div class="info-block-image">
-          <span nxg-icon="icon-info"></span>
+        <!-- When there are no payments or fees -->
+        <div class="info-block" ng-switch-when="true">
+          <div class="info-block-image">
+            <span nxg-icon="icon-info"></span>
+          </div>
+          <p class="info-block-text">
+            <span translate>You have no payments selected for checkout. Please visit the</span>
+            <a href="#/payments" translate>Payments list</a> <span translate>to select some</span>.
+          </p>
         </div>
-        <p class="info-block-text" translate>
-          You have no payments selected for checkout. Please visit the
-          <a href="#/payments">Payments list</a> to select some.
-        </p>
-      </div>
 
-      <!-- When you have payments or fees in your cart -->
-      <section ng-switch-when="false">
-        <!-- Fees List -->
-        <div class="well" ng-show="paymentQueue.sum.feeCount() > 0">
-          <h2 class="well-title" translate translate-n="2" translate-plural="Account Fees">Account Fee</h2>
-          <table class="table table-striped table-primary">
-            <thead>
-              <th translate>Due Date</th>
-              <th translate>Fee Type</th>
-              <th translate>Payment Date</th>
-              <th translate>Fee Amount</th>
-            </thead>
+        <!-- When you have payments or fees in your cart -->
+        <section ng-switch-when="false">
+          <!-- Fees List -->
+          <div class="panel panel-default" ng-show="paymentQueue.sum.feeCount() > 0">
+            <h2 class="well-title" translate translate-n="2" translate-plural="Account Fees">Account Fee</h2>
 
-            <tr class="separated" ng-repeat="fee in paymentQueue.contents.fees">
-              <td class="paired paired-reversed">
+            <table class="table table-striped table-primary table-hover">
+              <thead>
+              <th class="hidden-xs" translate>Due Date</th>
+              <th class="hidden-xs" translate>Fee Type</th>
+              <th class="hidden-xs" translate>Payment Date</th>
+              <th class="hidden-xs" translate>Fee Amount</th>
+              </thead>
+
+              <tr class="separated" ng-repeat="fee in paymentQueue.contents.fees">
+                <td class="paired paired-reversed hidden-xs">
                  <span class="paired-media svg-icon" ng-class="paymentQueue.getDueStatus(fee)" ng-switch="paymentQueue.getDueStatus(fee)">
                   <span ng-switch-when="today" nxg-icon="icon-warning"></span>
                   <span ng-switch-when="overdue" nxg-icon="icon-alert"></span>
                 </span>
-                <div class="paired-body">
-                  <p class="lockup-major" ng-class="{ 'color-danger': paymentQueue.getDueStatus(fee) == 'overdue' }">{{ fee.dueDate | moment }}</p>
-                </div>
-              </td>
-              <td>
-                <p class="lockup-major">{{ fee.type || 'N/A' }}</p>
-              </td>
-              <td>
-                <!-- is not scheduled or is scheduled for today -->
-                <h4 class="lockup-major" ng-show="!fee.scheduleDate || fee.scheduleDate == todayDate">
-                  <span class="sub-label"><span translate>Today</span>: </span>{{ todayDate | moment }}
-                </h4>
+                  <div class="paired-body">
+                    <p class="lockup-major" ng-class="{ 'color-danger': paymentQueue.getDueStatus(fee) == 'overdue' }">{{ fee.dueDate | moment }}</p>
+                  </div>
+                </td>
+                <td class="hidden-xs" >
+                  <p class="lockup-major">{{ fee.feeType || 'N/A' }}</p>
+                </td>
+                <td>
+                  <!--mobile view-->
+                  <h3 class="visible-xs lockup-major">{{ fee.feeType || 'N/A' }}
+                    <button class="btn-unstyle pull-right"
+                            ng-click="removeFee(fee)"
+                            ng-disabled="paymentInProgress()"
+                            ng-class="{disabled: paymentInProgress()}">
+                      <span nxg-icon="icon-cancel" class="icon-small"></span>
+                    </button>
+                  </h3>
+                  <p class="visible-xs lockup-minor">{{ fee.description }}</p>
 
-                <!-- is already set to be scheduled -->
-                <h4 class="lockup-major" ng-show="fee.scheduleDate && fee.scheduleDate != todayDate">
-                  <span class="sub-label"><span translate>Future</span>: </span>{{ fee.scheduleDate | moment }}
-                </h4>
+                  <div class="paired-body vertical-spacing visible-xs">
+                    <p class="lockup-minor" ng-class="{ 'color-danger': getDueStatus(payment,true) == 'overdue' }">
+                      <span translate>Due:</span>
+                    <span class="paired-media svg-icon" ng-class="paymentQueue.getDueStatus(fee)" ng-switch="paymentQueue.getDueStatus(fee)">
+                      <span ng-switch-when="today" nxg-icon="icon-warning"></span>
+                      <span ng-switch-when="overdue" nxg-icon="icon-alert"></span>
+                    </span>
+                      {{ fee.dueDate | moment }}
+                    </p>
+                  </div>
 
-                <p class="lockup-minor" ng-show="!paymentQueue.canSchedule(fee) && canPayNow">
-                  <span translate>Unable to Schedule</span>
-                  <button class="btn-help"
-                          tooltip-placement="right"
-                          uib-tooltip="{{ 'Payments are unable to be scheduled for loans that are overdue or due today.' | translate }}"
-                          tooltip-popup-delay="300">
-                    <span nxg-icon="icon-help"></span>
+                  <div class="row visible-xs">
+                    <div class="col-xs-8">
+                      <p class="lockup-minor">
+                        <span translate>Payment: </span>
+                        <!-- is not scheduled or is scheduled for today -->
+                  <span ng-show="!fee.scheduleDate || fee.scheduleDate == todayDate">
+                    <span class="sub-label"><span translate>Today</span> - </span> {{ todayDate | moment }}
+                  </span>
+                        <!-- is already set to be scheduled -->
+                  <span ng-show="fee.scheduleDate && fee.scheduleDate != todayDate">
+                    <span class="sub-label"><span translate>Future</span> - </span> {{ todayDate | moment }}
+                  </span>
+                      </p>
+
+                      <p class="lockup-minor" ng-show="true">
+                        <span translate>Unable to Schedule</span>
+                        <button class="btn-help"
+                                tooltip-placement="bottom"
+                                uib-tooltip="{{ 'Payments are unable to be scheduled for loans that are overdue or due today.' | translate }}"
+                                tooltip-popup-delay="300"
+                                popover-trigger="mouseenter click:outsideclick">
+                          <span nxg-icon="icon-help"></span>
+                        </button>
+                      </p>
+                      <button class="btn-unstyle btn-link"
+                              ng-click="paymentQueue.schedule(fee)"
+                              ng-show="paymentQueue.canSchedule(fee)"
+                              ng-disabled="fee.scheduleLoading || submitInProgress" translate>
+                        Change Payment Date
+                      </button>
+                    </div>
+                    <div class="col-xs-4">
+                      <h4 class="pull-right">{{fee.amount | currency}}</h4>
+                    </div>
+                  </div>
+
+                  <!--end mobile view-->
+
+
+                  <!--web and tablet view-->
+                  <div class="hidden-xs">
+                    <!-- is not scheduled or is scheduled for today -->
+                    <h4 class="lockup-major" ng-show="!fee.scheduleDate || fee.scheduleDate == todayDate">
+                      <span class="sub-label"><span translate>Today</span>: </span>{{ todayDate | moment }}
+                    </h4>
+
+                    <!-- is already set to be scheduled -->
+                    <h4 class="lockup-major" ng-show="fee.scheduleDate && fee.scheduleDate != todayDate">
+                      <span class="sub-label"><span translate>Future</span>: </span>{{ fee.scheduleDate | moment }}
+                    </h4>
+
+                    <p class="lockup-minor" ng-show="!paymentQueue.canSchedule(fee) && canPayNow">
+                      <span translate>Unable to Schedule</span>
+                      <button class="btn-help"
+                              tooltip-placement="right"
+                              uib-tooltip="{{ 'Payments are unable to be scheduled for loans that are overdue or due today.' | translate }}"
+                              tooltip-popup-delay="300"
+                              popover-trigger="mouseenter click:outsideclick">
+                        <span nxg-icon="icon-help"></span>
+                      </button>
+                    </p>
+                    <button class="btn-unstyle btn-link"
+                            ng-click="paymentQueue.schedule(fee)"
+                            ng-show="paymentQueue.canSchedule(fee)"
+                            ng-disabled="fee.scheduleLoading || submitInProgress" translate>
+                      Change Payment Date
+                    </button>
+                  </div>
+                  <!--end web and tablet view-->
+                </td>
+                <td class="numeric hidden-xs">
+                  <p class="lockup-major">{{ fee.amount | currency }}</p>
+                  <button class="btn-unstyle btn-link right" ng-click="removeFee(fee)" ng-disabled="submitInProgress" translate>Remove</button>
+                </td>
+              </tr>
+            </table>
+          </div>
+
+          <!-- Payments List -->
+          <div class="panel panel-default" ng-show="paymentQueue.sum.paymentCount() > 0">
+            <h2 class="well-title" translate>Vehicle Payments</h2>
+
+            <table class="table table-striped table-primary">
+              <thead>
+              <th class="hidden-xs" translate>Due Date</th>
+              <th class="hidden-xs" translate>Description</th>
+              <th class="hidden-xs" translate>Payment Date</th>
+              <th class="hidden-xs" translate>Payment Amount</th>
+              </thead>
+
+              <tr class="separated" ng-repeat="payment in paymentQueue.contents.payments">
+                <td>
+                  <!--Start mobile view-->
+                  <div id="description" class="visible-xs">
+                    <!--<h3>-->
+                    <button class="btn-unstyle pull-right"
+                            ng-click="paymentQueue.removePayment(payment.id)"
+                            ng-disabled="submitInProgress"
+                            ng-class="{disabled: submitInProgress()}">
+                      <span nxg-icon="icon-cancel" class="icon-small"></span>
+                    </button>
+                    <a class="lockup-major " href="#/vehicledetails?stockNumber={{ payment.stockNum }}">
+                      {{ payment.description }}
+                    </a>
+
+                    <!--</h3>-->
+                    <p class="lockup-minor caps vin"><span translate>VIN</span>: {{ payment.vin }}</p>
+                    <p class="lockup-minor caps stock"><span translate>STK</span>: {{ payment.stockNum }}</p>
+
+                    <div nxg-alternate-address="payment" is-enabled="payment.isPayoff()" show-tooltip="true" ng-disabled="submitInProgress"></div>
+                  </div>
+                  <div id="due-date" class="paired-body vertical-spacing">
+                    <p class="lockup-minor" ng-class="{ 'color-danger': paymentQueue.getDueStatus(payment) == 'overdue' }">
+                      <span class="visible-xs" style="display: inline !important" translate>Due:</span>
+                    <span class="paired-media svg-icon" ng-class="paymentQueue.getDueStatus(payment)" ng-switch="paymentQueue.getDueStatus(payment)">
+                      <span ng-switch-when="today" nxg-icon="icon-warning"></span>
+                      <span ng-switch-when="overdue" nxg-icon="icon-alert"></span>
+                    </span>{{ payment.dueDate | moment }}
+                    </p>
+
+                  </div>
+                  <div class="row visible-xs">
+                    <div id="payment-date" class="col-xs-7">
+                      <h4 class="lockup-minor" ng-show="!payment.scheduleDate || payment.scheduleDate == todayDate">
+                        <span class="sub-label"><span translate>Payment: Today</span> - </span>{{ todayDate | moment }}
+                      </h4>
+
+                      <!-- is already set to be scheduled -->
+                      <h4 class="lockup-minor" ng-show="payment.scheduleDate && payment.scheduleDate != todayDate">
+                        <span class="sub-label"><span translate>Payment: Future</span> - </span>{{ payment.scheduleDate | moment }}
+                      </h4>
+
+                      <p class="lockup-minor" ng-show="!paymentQueue.canSchedule(payment) && canPayNow">
+                        <span translate>Unable to Schedule</span>
+                        <button class="btn-help inline"
+                                tooltip-placement="right"
+                                uib-tooltip="{{ 'Payments are unable to be scheduled for loans that are overdue or due today.' | translate }}"
+                                tooltip-popup-delay="300"
+                                popover-trigger="mouseenter click:outsideclick"><span nxg-icon="icon-help"></span></button>
+                      </p>
+
+                      <button class="btn-unstyle btn-link"
+                              ng-click="paymentQueue.schedule(payment)"
+                              ng-show="paymentQueue.canSchedule(payment)"
+                              ng-disabled="payment.scheduleLoading || submitInProgress" translate>
+                        Change Payment Date
+                      </button>
+                    </div>
+                    <div id="payment-amount" class="col-xs-5">
+                      <p class="lockup-major pull-right">{{ payment.getCheckoutAmount() | currency }}</p>
+                      <p class="emphasis pull-right" ng-show="payment.isPayoff() && payment.getExtraPrincipal()">Curtailment + Principal</p>
+                      <button class="btn-unstyle btn-link numeric vertical-spacing" ng-click="launchPaymentOptions(payment)" translate>
+                        Payment Options &amp; Breakdown
+                      </button>
+                    </div>
+                  </div>
+                  <!--End mobile view-->
+                </td>
+                <td class="hidden-xs">
+                  <a class="lockup-major " href="#/vehicledetails?stockNumber={{ payment.stockNum }}">{{ payment.description }}</a>
+                  <p class="lockup-minor caps vin"><span translate>VIN</span>: {{ payment.vin }}</p>
+                  <p class="lockup-minor caps stock"><span translate>STK</span>: {{ payment.stockNum }}</p>
+
+                  <div nxg-alternate-address="payment" is-enabled="payment.isPayoff()" show-tooltip="true" ng-disabled="submitInProgress"></div>
+                </td>
+                <td class="hidden-xs">
+                  <!-- is not scheduled or is scheduled for today -->
+                  <h4 class="lockup-major" ng-show="!payment.scheduleDate || payment.scheduleDate == todayDate">
+                    <span class="sub-label"><span translate>Today</span>: </span>{{ todayDate | moment }}
+                  </h4>
+
+                  <!-- is already set to be scheduled -->
+                  <h4 class="lockup-major" ng-show="payment.scheduleDate && payment.scheduleDate != todayDate">
+                    <span class="sub-label"><span translate>Future</span>: </span>{{ payment.scheduleDate | moment }}
+                  </h4>
+
+                  <p class="lockup-minor" ng-show="!paymentQueue.canSchedule(payment) && canPayNow">
+                    <span translate>Unable to Schedule</span>
+                    <button class="btn-help inline"
+                            tooltip-placement="right"
+                            uib-tooltip="{{ 'Payments are unable to be scheduled for loans that are overdue or due today.' | translate }}"
+                            tooltip-popup-delay="300"
+                            popover-trigger="mouseenter click:outsideclick"><span nxg-icon="icon-help"></span></button>
+                  </p>
+
+                  <button class="btn-unstyle btn-link"
+                          ng-click="paymentQueue.schedule(payment)"
+                          ng-show="paymentQueue.canSchedule(payment)"
+                          ng-disabled="payment.scheduleLoading || submitInProgress" translate>
+                    Change Payment Date
                   </button>
-                </p>
-                <button class="btn-unstyle btn-link"
-                        ng-click="paymentQueue.schedule(fee)"
-                        ng-show="paymentQueue.canSchedule(fee)"
-                        ng-disabled="fee.scheduleLoading || submitInProgress" translate>
-                  Change Payment Date
-                </button>
-              </td>
-              <td class="numeric">
-                <p class="lockup-major">{{ fee.amount | currency }}</p>
-                <button class="btn-unstyle btn-link right" ng-click="paymentQueue.removeFee(fee.financialRecordId)" ng-disabled="submitInProgress" translate>Remove</button>
-              </td>
-            </tr>
-          </table>
-        </div>
+                </td>
+                <td class="numeric split hidden-xs">
+                  <div class="split-cell">
+                    <p class="lockup-major"><span class="sub-label">{{ getPaymentTypeText(payment) | capitalize }}: </span>{{ payment.getCheckoutAmount() | currency }}</p>
+                    <p class="emphasis" ng-show="payment.isPayoff() && payment.getExtraPrincipal()">Curtailment + Principal</p>
+                    <button class="btn-unstyle btn-link right"
+                            ng-click="paymentQueue.removePayment(payment.id)"
+                            ng-disabled="submitInProgress" translate>
+                      Remove
+                    </button>
+                  </div>
+                  <div class="split-cell">
+                    <button class="btn-unstyle btn-link numeric" ng-click="launchPaymentOptions(payment)" translate>
+                      Payment Options<br/> &amp; Breakdown
+                    </button>
+                  </div>
+                  <!--<label class="text-error" ng-show="!!payment.scheduleError">{{ payment.scheduleError }}</label>-->
+                </td>
+              </tr>
+            </table>
+          </div>
+        </section>
+      </div>
+    </section>
 
-        <!-- Payments List -->
-        <div class="well" ng-show="paymentQueue.sum.paymentCount() > 0">
-          <h2 class="well-title" translate>Vehicle Payments</h2>
+    <div class="col-sm-3">
+      <form class="panel panel-default sticky" name="paymentForm" novalidate header=".well-title" footer=".well-footer">
+        <h2 class="well-title" translate>Payment Summary</h2>
 
-          <table class="table table-striped table-primary">
-            <thead>
-              <th translate>Due Date</th>
-              <th translate>Description</th>
-              <th translate>Payment Date</th>
-              <th translate>Payment Amount</th>
-            </thead>
+        <section class="nxg-sticky-scroll">
+          <section class="well-item well-dark">
+            <p translate>Please review the following and submit your payments below.</p>
+            <button type="button"
+                    class="btn-cta cta-secondary btn-center"
+                    style="font-size: 11px;"
+                    ng-click="exportPaymentSummary()"
+                    ng-disabled="paymentQueue.sum.todayCount() == 0"
+                    nxg-track="{{metric.DEALER_REPORTS_EXPORT_PAYMENTS_SUMMARY_BUTTON}}"
+                    track-properties="{{kissMetricData}}" >
+              <span translate>Export Summary</span> <span nxg-icon="icon-document" class="icon-small"></span>
+            </button>
+          </section>
 
-            <tr class="separated" ng-repeat="payment in paymentQueue.contents.payments">
-              <td class="paired paired-reversed">
-                <span class="paired-media svg-icon" ng-class="paymentQueue.getDueStatus(payment)" ng-switch="paymentQueue.getDueStatus(payment)">
-                  <span ng-switch-when="today" nxg-icon="icon-warning"></span>
-                  <span ng-switch-when="overdue" nxg-icon="icon-alert"></span>
-                </span>
-                <div class="paired-body">
-                  <p class="lockup-major" ng-class="{ 'color-danger': paymentQueue.getDueStatus(payment) == 'overdue' }">{{ payment.dueDate | moment }}</p>
+          <section class="well-item well-light bordered">
+            <!-- Payments -->
+            <div class="alt-lockup">
+              <h2 class="subtitle">{{ paymentQueue.sum.todayCount() }}
+                <span ng-show="paymentQueue.sum.todayCount() == 1" translate>Payment</span>
+                <span ng-hide="paymentQueue.sum.todayCount() == 1" translate>Payments</span>
+                <span translate>Today</span>
+              </h2>
+
+              <p class="lockup-minor" translate>In the Amount of</p>
+              <h3 class="lockup-major" ng-bind="paymentQueue.sum.todayTotal() | currency"></h3>
+            </div>
+
+            <!-- If User has Unapplied Funds -->
+            <!-- We add an inline style (display: none) here to avoid the flash
+            of our ng-show content before the page finishes compiling and knows
+            the ng-show expression should evaluate to false. -->
+            <div ng-show="unappliedFunds.available > 0">
+              <div class="alt-lockup">
+                <p class="lockup-minor" translate>Available Unapplied Funds</p>
+                <h3 class="lockup-major" ng-bind="unappliedFunds.available | currency"></h3>
+              </div>
+
+              <div class="alt-lockup">
+                <p class="lockup-minor" translate>Apply these Funds to Payment?</p>
+                <div class="cr-inline float-r">
+                  <input type="radio" name="useUnapplied" id="unappliedYes" placeholder="Yes"
+                         ng-value="true" ng-model="unappliedFunds.useFunds"
+                         ng-disabled="paymentQueue.sum.todayTotal() == 0 || submitInProgress">
+                  <label class="radio-img" for="unappliedYes"></label>
+                  <label class="cr-label" for="unappliedYes" translate>Yes</label>
+
+                  <input type="radio" name="useUnapplied" id="unappliedNo" placeholder="No"
+                         ng-value="false" ng-model="unappliedFunds.useFunds"
+                         ng-disabled="paymentQueue.sum.todayTotal() == 0 || submitInProgress">
+                  <label class="radio-img" for="unappliedNo"></label>
+                  <label class="cr-label" for="unappliedNo" translate>No</label>
                 </div>
-              </td>
-              <td>
-                <a class="lockup-major " href="#/vehicledetails?stockNumber={{ payment.stockNum }}">{{ payment.description }}</a>
-                <p class="lockup-minor caps vin"><span translate>VIN</span>: {{ payment.vin }}</p>
-                <p class="lockup-minor caps stock"><span translate>STK</span>: {{ payment.stockNum }}</p>
+              </div>
 
-                <div nxg-alternate-address="payment" is-enabled="payment.isPayoff()" show-tooltip="true" ng-disabled="submitInProgress"></div>
-              </td>
-              <td>
-                <!-- is not scheduled or is scheduled for today -->
-                <h4 class="lockup-major" ng-show="!payment.scheduleDate || payment.scheduleDate == todayDate">
-                  <span class="sub-label"><span translate>Today</span>: </span>{{ todayDate | moment }}
-                </h4>
+              <div class="alt-lockup align-right" ng-show="unappliedFunds.useFunds">
+                <label class="lockup-minor" for="unappliedAmt" translate>Unapplied Funds to Use</label>
+              <span class="input-prepend dollar">
+                <span class="add-on" translate>$</span>
+                <input id="unappliedAmt" name="unappliedAmt"
+                       class="input-small"
+                       type="text"
+                       placeholder="0.00"
+                       ng-model="unappliedFunds.useAmount"
+                       nxg-min="unappliedFunds.min()"
+                       nxg-max="unappliedFunds.max()"
+                       ng-pattern="/^[0-9]{1,3}(?:,?[0-9]{3})*(\.)?([0-9]{1,2})?$/"
+                       ng-required="unappliedFunds.useFunds"
+                       ng-disabled="submitInProgress"
+                       ng-class="{ 'nxg-invalid': validity.unappliedAmt.$error.required || validity.unappliedAmt.$error.pattern || validity.unappliedAmt.$error.nxgMin || validity.unappliedAmt.$error.nxgMax }" />
+              </span>
+                <label class="text-error" ng-show="validity.unappliedAmt.$error.required" translate>
+                  Please enter the amount of unapplied funds to use.
+                </label>
+                <label class="text-error" ng-show="validity.unappliedAmt.$error.pattern" translate>
+                  Please enter the amount of unapplied funds as a number with no more than 2 decimals.
+                </label>
+                <label class="text-error" ng-show="validity.unappliedAmt.$error.nxgMin || validity.unappliedAmt.$error.nxgMax" translate>
+                  Unapplied funds must be <span ng-bind="unappliedFunds.min() | currency"></span> to <span ng-bind="unappliedFunds.max() | currency"></span>
+                </label>
+              </div>
 
-                <!-- is already set to be scheduled -->
-                <h4 class="lockup-major" ng-show="payment.scheduleDate && payment.scheduleDate != todayDate">
-                  <span class="sub-label"><span translate>Future</span>: </span>{{ payment.scheduleDate | moment }}
-                </h4>
+              <div class="alt-lockup" ng-show="unappliedFunds.useFunds">
+                <p class="lockup-minor" translate>Remaining Payment Balance</p>
+                <h3 class="lockup-major" ng-bind="paymentQueue.sum.todayTotal() - sanitize(unappliedFunds.useAmount) | currency"></h3>
+              </div>
+            </div>
+          </section>
 
-                <p class="lockup-minor" ng-show="!paymentQueue.canSchedule(payment) && canPayNow">
-                  <span translate>Unable to Schedule</span>
-                  <button class="btn-help inline"
-                          tooltip-placement="right"
-                          uib-tooltip="{{ 'Payments are unable to be scheduled for loans that are overdue or due today.' | translate }}"
-                          tooltip-popup-delay="300"><span nxg-icon="icon-help"></span></button>
-                </p>
+          <section class="well-item well-light bordered">
+            <div class="alt-lockup">
+              <h2 class="subtitle" translate translate-n="paymentQueue.sum.scheduledCount()" translate-plural="{{ paymentQueue.sum.scheduledCount() }} Future Payments">{{ paymentQueue.sum.scheduledCount() }} Future Payment</h2>
+              <p class="lockup-minor" translate>In the Amount of</p>
+              <h3 class="lockup-major" ng-bind="paymentQueue.sum.scheduledTotal() | currency"></h3>
+            </div>
+          </section>
+        </section>
 
-                <button class="btn-unstyle btn-link"
-                        ng-click="paymentQueue.schedule(payment)"
-                        ng-show="paymentQueue.canSchedule(payment)"
-                        ng-disabled="payment.scheduleLoading || submitInProgress" translate>
-                  Change Payment Date
-                </button>
-              </td>
-              <td class="numeric split">
-                <div class="split-cell">
-                  <p class="lockup-major"><span class="sub-label">{{ getPaymentTypeText(payment) | capitalize }}: </span>{{ payment.getCheckoutAmount() | currency }}</p>
-                  <p class="emphasis" ng-show="payment.isPayoff() && payment.getExtraPrincipal()">Curtailment + Principal</p>
-                  <button class="btn-unstyle btn-link right"
-                          ng-click="paymentQueue.removePayment(payment.id)"
-                          ng-disabled="submitInProgress" translate>
-                    Remove
-                  </button>
-                </div>
-                <div class="split-cell">
-                  <button class="btn-unstyle btn-link numeric" ng-click="launchPaymentOptions(payment)" translate>
-                    Payment Options<br/> &amp; Breakdown
-                  </button>
-                </div>
-                <!--<label class="text-error" ng-show="!!payment.scheduleError">{{ payment.scheduleError }}</label>-->
-              </td>
-            </tr>
-          </table>
-        </div>
-      </section>
+        <section class="well-footer">
+          <section class="well-item well-dark">
+            <!-- Bank Account -->
+            <label for="bankAccount" translate>Bank Account</label>
+            <p class="static-option" ng-show="bankAccounts.singleAccount">
+              {{ bankAccounts.selectedAccount.BankAccountName }}
+            </p>
+            <div class="style-select" ng-hide="bankAccounts.singleAccount">
+              <select name="bankAccount" id="bankAccount"
+                      ng-model="bankAccounts.selectedAccount"
+                      ng-disabled="submitInProgress"
+                      ng-options="account.BankAccountName for account in bankAccounts.getList()"
+                      ng-class="{ 'nxg-invalid': validity.bankAccount.$error.required }" required>
+                <option value="" translate>-- Select Bank --</option>
+              </select>
+            </div>
+            <!-- We add an inline style (display: none) here to avoid the flash
+            of our ng-show content before the page finishes compiling and knows
+            the ng-show expression should evaluate to false. -->
+            <label style="display:none" class="text-error" ng-show="validity.bankAccount.$error.required" translate>Please select a bank account for payment.</label>
+
+
+          </section>
+
+          <button class="btn-cta cta-primary cta-full"
+                  ng-disabled="paymentQueue.contents.isEmpty() || submitInProgress"
+                  ng-click="submit()">
+            <span translate>Submit Payments</span> <span class="glyphicon glyphicon-shopping-cart"></span>
+          </button>
+        </section>
+      </form>
     </div>
   </section>
-
-  <form class="col-xs-3 custom well sticky" name="paymentForm" novalidate nxg-sticky header=".well-title" footer=".well-footer">
-    <h2 class="well-title" translate>Payment Summary</h2>
-
-    <section class="nxg-sticky-scroll">
-      <section class="well-item well-dark">
-        <p translate>Please review the following and submit your payments below.</p>
-        <button type="button"
-                class="btn-cta cta-secondary btn-center"
-                ng-click="exportPaymentSummary()"
-                ng-disabled="paymentQueue.sum.todayCount() == 0"
-                nxg-track="{{metric.DEALER_REPORTS_EXPORT_PAYMENTS_SUMMARY_BUTTON}}"
-                track-properties="{{kissMetricData}}" >
-          <span translate>Export Summary</span> <span nxg-icon="icon-document" class="icon-small"></span>
-        </button>
-      </section>
-
-      <section class="well-item well-light bordered">
-        <!-- Payments -->
-        <div class="alt-lockup">
-          <h2 class="subtitle">{{ paymentQueue.sum.todayCount() }}
-            <span ng-show="paymentQueue.sum.todayCount() == 1" translate>Payment</span>
-            <span ng-hide="paymentQueue.sum.todayCount() == 1" translate>Payments</span>
-            <span translate>Today</span>
-          </h2>
-
-          <p class="lockup-minor" translate>In the Amount of</p>
-          <h3 class="lockup-major" ng-bind="paymentQueue.sum.todayTotal() | currency"></h3>
-        </div>
-
-        <!-- If User has Unapplied Funds -->
-        <!-- We add an inline style (display: none) here to avoid the flash
-        of our ng-show content before the page finishes compiling and knows
-        the ng-show expression should evaluate to false. -->
-        <div ng-show="unappliedFunds.available > 0">
-          <div class="alt-lockup">
-            <p class="lockup-minor" translate>Available Unapplied Funds</p>
-            <h3 class="lockup-major" ng-bind="unappliedFunds.available | currency"></h3>
-          </div>
-
-          <div class="alt-lockup">
-            <p class="lockup-minor" translate>Apply these Funds to Payment?</p>
-            <div class="cr-inline float-r">
-              <input type="radio" name="useUnapplied" id="unappliedYes" placeholder="Yes"
-                     ng-value="true" ng-model="unappliedFunds.useFunds"
-                     ng-disabled="paymentQueue.sum.todayTotal() == 0 || submitInProgress">
-              <label class="radio-img" for="unappliedYes"></label>
-              <label class="cr-label" for="unappliedYes" translate>Yes</label>
-
-              <input type="radio" name="useUnapplied" id="unappliedNo" placeholder="No"
-                     ng-value="false" ng-model="unappliedFunds.useFunds"
-                     ng-disabled="paymentQueue.sum.todayTotal() == 0 || submitInProgress">
-              <label class="radio-img" for="unappliedNo"></label>
-              <label class="cr-label" for="unappliedNo" translate>No</label>
-            </div>
-          </div>
-
-          <div class="alt-lockup align-right" ng-show="unappliedFunds.useFunds">
-            <label class="lockup-minor" for="unappliedAmt" translate>Unapplied Funds to Use</label>
-            <span class="input-prepend dollar">
-              <span class="add-on" translate>$</span>
-              <input id="unappliedAmt" name="unappliedAmt"
-                     class="input-small"
-                     type="text"
-                     placeholder="0.00"
-                     ng-model="unappliedFunds.useAmount"
-                     nxg-min="unappliedFunds.min()"
-                     nxg-max="unappliedFunds.max()"
-                     ng-pattern="/^[0-9]{1,3}(?:,?[0-9]{3})*(\.)?([0-9]{1,2})?$/"
-                     ng-required="unappliedFunds.useFunds"
-                     ng-disabled="submitInProgress"
-                     ng-class="{ 'nxg-invalid': validity.unappliedAmt.$error.required || validity.unappliedAmt.$error.pattern || validity.unappliedAmt.$error.nxgMin || validity.unappliedAmt.$error.nxgMax }" />
-            </span>
-            <label class="text-error" ng-show="validity.unappliedAmt.$error.required" translate>
-              Please enter the amount of unapplied funds to use.
-            </label>
-            <label class="text-error" ng-show="validity.unappliedAmt.$error.pattern" translate>
-              Please enter the amount of unapplied funds as a number with no more than 2 decimals.
-            </label>
-            <label class="text-error" ng-show="validity.unappliedAmt.$error.nxgMin || validity.unappliedAmt.$error.nxgMax" translate>
-                Unapplied funds must be <span ng-bind="unappliedFunds.min() | currency"></span> to <span ng-bind="unappliedFunds.max() | currency"></span>
-            </label>
-          </div>
-
-          <div class="alt-lockup" ng-show="unappliedFunds.useFunds">
-            <p class="lockup-minor" translate>Remaining Payment Balance</p>
-            <h3 class="lockup-major" ng-bind="paymentQueue.sum.todayTotal() - sanitize(unappliedFunds.useAmount) | currency"></h3>
-          </div>
-        </div>
-      </section>
-
-      <section class="well-item well-light bordered">
-        <div class="alt-lockup">
-          <h2 class="subtitle" translate translate-n="paymentQueue.sum.scheduledCount()" translate-plural="{{ paymentQueue.sum.scheduledCount() }} Future Payments">{{ paymentQueue.sum.scheduledCount() }} Future Payment</h2>
-          <p class="lockup-minor" translate>In the Amount of</p>
-          <h3 class="lockup-major" ng-bind="paymentQueue.sum.scheduledTotal() | currency"></h3>
-        </div>
-      </section>
-    </section>
-
-    <section class="well-footer">
-      <section class="well-item well-dark">
-        <!-- Bank Account -->
-        <label for="bankAccount" translate>Bank Account</label>
-        <p class="static-option" ng-show="bankAccounts.singleAccount">
-          {{ bankAccounts.selectedAccount.BankAccountName }}
-        </p>
-        <div class="style-select" ng-hide="bankAccounts.singleAccount">
-          <select name="bankAccount" id="bankAccount"
-                  ng-model="bankAccounts.selectedAccount"
-                  ng-disabled="submitInProgress"
-                  ng-options="account.BankAccountName for account in bankAccounts.getList()"
-                  ng-class="{ 'nxg-invalid': validity.bankAccount.$error.required }" required>
-            <option value="" translate>-- Select Bank --</option>
-          </select>
-        </div>
-        <!-- We add an inline style (display: none) here to avoid the flash
-        of our ng-show content before the page finishes compiling and knows
-        the ng-show expression should evaluate to false. -->
-        <label style="display:none" class="text-error" ng-show="validity.bankAccount.$error.required" translate>Please select a bank account for payment.</label>
-
-
-      </section>
-
-      <button class="btn-cta cta-primary cta-full"
-              ng-disabled="paymentQueue.contents.isEmpty() || submitInProgress"
-              ng-click="submit()">
-        <span translate>Submit Payments</span> <span nxg-icon="icon-cart"></span>
-      </button>
-    </section>
-  </form>
-</section>
+</div>

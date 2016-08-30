@@ -1,5 +1,5 @@
-<div class="promos">
-  <div class="info-block">
+<div class="container promos">
+  <div class="info-block col-xs-12">
     <div class="info-block-image">
       <span nxg-icon="icon-info"></span>
     </div>
@@ -8,62 +8,38 @@
       Please contact your local representative for details about the Promotions and Event Sales listed below.
     </h6>
   </div>
-  <section class="col-md-12 well" ng-class="{'promo-well': !isCollapsed}">
-    <h2 class="well-title">
-      <span translate>Promotions / Event Sales</span>
-    </h2>
-    <div class="well-column-header promo-header col-xs-12">
-      <h6 class="col-xs-3 promo-header-item" translate>Location</h6>
-      <h6 class="col-xs-3 promo-header-item" translate>Description</h6>
-      <h6 class="col-xs-3 promo-header-item" translate>Sale Type</h6>
-      <h6 class="col-xs-1 promo-header-item" translate>Date</h6>
-    </div>
-    <div class="promo-container">
-      <div class="promo-item row" ng-repeat="promo in promosCurrent">
-        <div class="col-xs-3">
-          <span ng-hide="promo.promo" class="promo-auction-name">{{promo.auctionName}}</span>
-          <span ng-show="promo.promo" class="promo-auction-name" translate>See Details</span>
-        </div>
-        <div class="col-xs-3">
-          <div class="promo-name">{{promo.name}}</div>
-        </div>
-        <div class="col-xs-3">
-          <div class="promo-type" ng-hide="promo.promo" translate>Event Sale</div>
-          <div class="promo-type" ng-show="promo.promo" translate>Promo</div>
-        </div>
-        <div class="col-xs-1">
-          <div class="promo-date">{{promo.salesDate | moment}}</div>
-        </div>
-        <div class="col-xs-2" style="text-align: right;">
-          <div ng-click="tcCollapsed = !tcCollapsed; viewDetails(promo)"
-               ng-show="promo.termsAndConditions">
-            <span class="promo-details" translate>Details</span>
-            <span class="paired-media"
-                  ng-class="{ 'point-up':!tcCollapsed, 'point-down':tcCollapsed }"
-                  nxg-icon="icon-chevron"></span>
-          </div>
-        </div>
-        <div uib-collapse="tcCollapsed || !promo.termsAndConditions" ng-init="tcCollapsed = true" class="col-xs-12 promo-terms-conditions">
-          {{promo.termsAndConditions}}
-        </div>
+  <div class="col-xs-12">
+    <section class="panel panel-default" ng-class="{'promo-well': !isCollapsed, 'empty-promos':promosCurrent.length === 0 && isCollapsed}">
+      <h2 class="well-title">
+        <span translate>Promotions / Event Sales</span>
+      </h2>
+      <div class="well-column-header promo-header col-sm-12 hidden-xs" ng-class="{'empty-promos':promosCurrent.length === 0 && isCollapsed}">
+        <h6 class="col-sm-3 promo-header-item" translate>Location</h6>
+        <h6 class="col-sm-3 promo-header-item" translate>Description</h6>
+        <h6 class="col-sm-3 promo-header-item" translate>Sale Type</h6>
+        <h6 class="col-sm-1 promo-header-item" translate>Date</h6>
       </div>
-      <div uib-collapse="isCollapsed" ng-init="isCollapsed = true">
-        <div class="promo-item inactive row" ng-repeat="promo in promosPast" ng-class="{'empty-promos': promosCurrent.length == 0, 'non-empty-promos': promosCurrent.length != 0}">
-          <div class="col-xs-3">
+      <div class="promo-container">
+        <div class="promo-item row" ng-repeat="promo in promosCurrent" ng-class="{'last-item':isCollapsed && $last}">
+          <div class="col-xs-6 col-sm-3">
+            <div class="visible-xs"><label>Location: </label></div>
             <span ng-hide="promo.promo" class="promo-auction-name">{{promo.auctionName}}</span>
             <span ng-show="promo.promo" class="promo-auction-name" translate>See Details</span>
           </div>
-          <div class="col-xs-3">
+          <div class="col-xs-6 col-sm-3">
+            <div class="visible-xs"><label>Description: </label></div>
             <div class="promo-name">{{promo.name}}</div>
           </div>
-          <div class="col-xs-3">
+          <div class="col-xs-6 col-sm-3">
+            <div class="visible-xs"><label>Sale Type: </label></div>
             <div class="promo-type" ng-hide="promo.promo" translate>Event Sale</div>
             <div class="promo-type" ng-show="promo.promo" translate>Promo</div>
           </div>
-          <div class="col-xs-1">
+          <div class="col-xs-6 col-sm-1">
+            <div class="visible-xs"><label>Date: </label></div>
             <div class="promo-date">{{promo.salesDate | moment}}</div>
           </div>
-          <div class="col-xs-2 text-right">
+          <div class="col-xs-12 col-sm-2 detail-link">
             <div ng-click="tcCollapsed = !tcCollapsed; viewDetails(promo)"
                  ng-show="promo.termsAndConditions">
               <span class="promo-details" translate>Details</span>
@@ -76,9 +52,44 @@
             {{promo.termsAndConditions}}
           </div>
         </div>
+        <div uib-collapse="isCollapsed" ng-init="isCollapsed = true">
+          <div class="promo-item inactive row" ng-repeat="promo in promosPast"
+               ng-class="{'empty-promos': promosCurrent.length == 0, 'non-empty-promos': promosCurrent.length != 0}">
+            <div class="col-xs-6 col-sm-3">
+              <div class="visible-xs"><label>Location: </label></div>
+              <span ng-hide="promo.promo" class="promo-auction-name">{{promo.auctionName}}</span>
+              <span ng-show="promo.promo" class="promo-auction-name" translate>See Details</span>
+            </div>
+            <div class="col-xs-6 col-sm-3">
+              <div class="visible-xs"><label>Description: </label></div>
+              <div class="promo-name">{{promo.name}}</div>
+            </div>
+            <div class="col-xs-6 col-sm-3">
+              <div class="visible-xs"><label>Sale Type: </label></div>
+              <div class="promo-type" ng-hide="promo.promo" translate>Event Sale</div>
+              <div class="promo-type" ng-show="promo.promo" translate>Promo</div>
+            </div>
+            <div class="col-xs-6 col-sm-1">
+              <div class="visible-xs"><label>Date: </label></div>
+              <div class="promo-date">{{promo.salesDate | moment}}</div>
+            </div>
+            <div class="col-xs-12 col-sm-2 detail-link">
+              <div ng-click="tcCollapsed = !tcCollapsed; viewDetails(promo)"
+                   ng-show="promo.termsAndConditions">
+                <span class="promo-details" translate>Details</span>
+            <span class="paired-media"
+                  ng-class="{ 'point-up':!tcCollapsed, 'point-down':tcCollapsed }"
+                  nxg-icon="icon-chevron"></span>
+              </div>
+            </div>
+            <div uib-collapse="tcCollapsed || !promo.termsAndConditions" ng-init="tcCollapsed = true" class="col-xs-12 promo-terms-conditions">
+              {{promo.termsAndConditions}}
+            </div>
+          </div>
+        </div>
       </div>
-    </div>
-  </section>
+    </section>
+  </div>
   <button id="showorhide" class="accordion-button paired-reversed" ng-click="isCollapsed = !isCollapsed" ng-class="{ expanded:!isCollapsed }">
     <span class="paired-body">
       <span ng-show="isCollapsed" translate>Show Old Promos</span>

@@ -3,8 +3,8 @@
 </h3>
 
 <div class="modal-body">
-  <form class="row form-block" name="searchControls">
-    <div class="col-xs-5 zeroLeftPadding">
+  <form class="row form-block no-padding" name="searchControls">
+    <div class="col-xs-7 col-sm-5 zeroLeftPadding">
       <label translate>Business Name or Number</label>
 
       <!-- using nxgRequires instead of required, ng-required, and/or ng-minlength because :invalid
@@ -20,8 +20,8 @@
 
   </form>
 
-  <div class="form-block" ng-show="data.results.length > 0">
-    <p class="paragraph" translate>Select a business name below.</p>
+  <div class="form-block no-padding" ng-show="data.results.length > 0">
+    <p class="paragraph" translate>Select a business below.</p>
   </div>
 
   <div ng-switch="data.results.length > 0 || data.loading">
@@ -30,7 +30,7 @@
       <span ng-switch-when="true" translate>Please enter a business name or number to search.</span>
     </p>
 
-    <div class="search-results" ng-switch-when="true"
+    <div class="search-results hidden-xs" ng-switch-when="true"
          nxg-infinite-scroll="fetchNextResults()"
          nxg-infinite-scroll-disabled="data.loading"
          nxg-infinite-scroll-show-indicator="data.loading"
@@ -93,6 +93,54 @@
       <p class="text-error notice-box" ng-show="data.hitInfiniteScrollMax" translate>
         There are too many results to display, please refine your search further.
       </p>
+    </div>
+
+    <div class="visible-xs">
+      <div uib-dropdown>
+        <button class="btn-unstyle dropdown-toggle sort-by vertical-spacing" type="button" id="dropdownSort" uib-dropdown-toggle data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <strong translate>Sort By</strong>
+          <span class="caret"></span>
+        </button>
+        <ul class="dropdown-menu" aria-labelledby="dropdownSort">
+          <li ng-click="sortBy('BusinessName')"><a translate>Business Name</a></li>
+          <li ng-click="sortBy('BusinessLegalName')"><a translate>Business Legal Name</a></li>
+          <li ng-click="sortBy('BusinessNumber')"><a translate>Business Number</a></li>
+          <li ng-click="sortBy('BusinessNumber')"><a translate>City</a></li>
+          <li ng-click="sortBy('BusinessNumber')"><a translate>State</a></li>
+        </ul>
+      </div>
+      <div class="search-results visible-xs" ng-switch-when="true"
+           nxg-infinite-scroll="fetchNextResults()"
+           nxg-infinite-scroll-disabled="data.loading"
+           nxg-infinite-scroll-show-indicator="data.loading"
+           nxg-scroll-container>
+        <table class="table table-secondary table-striped">
+          <tbody>
+          <tr ng-repeat="result in data.results | orderBy:sortField.result:sortDescending.result" class="clickable" ng-click="select(result)">
+            <td>
+              <h5 nxg-highlight="result.BusinessName" highlight="data.query" class="value"></h5>
+              <div nxg-highlight="result.BusinessLegalName" hightlight="data.query"></div>
+              <div>
+                <span translate>Business Number: </span>
+                <span nxg-highlight="result.BusinessNumber" hightlight="data.query"></span>
+              </div>
+              <div ng-show="data.searchBuyersMode">
+                <span translate>Auction Access Number: </span>
+                <span> {{ result.AuctionAccessDealershipNumbers | list }} </span>
+              </div>
+              <div>
+                <span nxg-highlight="result.City" hightlight="data.query"></span>
+                <span>, </span>
+                <span nxg-highlight="result.State" hightlight="data.query"></span>
+              </div>
+            </td>
+          </tr>
+          </tbody>
+        </table>
+        <p class="text-error notice-box" ng-show="data.hitInfiniteScrollMax" translate>
+          There are too many results to display, please refine your search further.
+        </p>
+      </div>
     </div>
   </div>
 </div>

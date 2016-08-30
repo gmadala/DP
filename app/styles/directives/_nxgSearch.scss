@@ -8,5 +8,12 @@
     border-bottom: 0;
     border-left: 1px solid #bbb;
   }
+}
 
+@media (max-width: $screen-xs-max) {
+  #search {
+    .small-left-border {
+      border: none;
+    }
+  }
 }

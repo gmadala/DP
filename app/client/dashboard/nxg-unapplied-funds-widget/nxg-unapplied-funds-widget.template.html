@@ -1,23 +1,25 @@
-<div class="col-xs-3 custom well dash-well left-margin-large">
-  <h2 class="well-title" translate>Unapplied Funds</h2>
+<div class="col-xs-3">
+  <div class="panel panel-default dash-well">
+    <h2 class="well-title" translate>Unapplied Funds</h2>
 
-  <div class="lockup">
-    <h1 class="lockup-major">{{ fundsBalance | currency | alt }}</h1>
-    <p class="lockup-minor" translate>Unapplied Funds</p>
-  </div>
+    <div class="lockup">
+      <h1 class="lockup-major">{{ fundsBalance | currency | alt }}</h1>
+      <p class="lockup-minor" translate>Unapplied Funds</p>
+    </div>
 
-  <div class="lockup">
-    <h1 class="lockup-major color-success">{{ fundsAvail | currency | alt }}</h1>
-    <p class="lockup-minor" translate>Total Available</p>
-  </div>
+    <div class="lockup">
+      <h1 class="lockup-major color-success">{{ fundsAvail | currency | alt }}</h1>
+      <p class="lockup-minor" translate>Total Available</p>
+    </div>
 
-  <button id="requestPayout" class="btn-cta cta-full cta-secondary" href="#"
-          ng-show="fundsAvail > 0 && !autoDisburseUnappliedFunds"
-          ng-click="openRequestPayout($event)">
+    <button id="requestPayout" class="btn-cta cta-full cta-secondary" href="#"
+            ng-show="fundsAvail > 0 && !autoDisburseUnappliedFunds"
+            ng-click="openRequestPayout($event)">
       <span class="paired-body" translate>Request Payout</span>
       <span class="paired-media icon-x-small" nxg-icon="icon-triangle"></span>
-  </button>
-  <div ng-show="autoDisburseUnappliedFunds" id="unappliedFunds">
-    <p><b>Auto-Disburse Unapplied Funds:</b> Enabled</p>
+    </button>
+    <div ng-show="autoDisburseUnappliedFunds" id="unappliedFunds">
+      <p><b>Auto-Disburse Unapplied Funds:</b> Enabled</p>
+    </div>
   </div>
 </div>

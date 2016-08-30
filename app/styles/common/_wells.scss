@@ -79,13 +79,6 @@
       &:hover {
         text-decoration: underline;
       }
-
-      &.cancel {
-        font-size: $small-font-size;
-        font-weight: normal;
-        color: #1B769D;
-        padding-top: 2px;
-      }
     }
   }
 
@@ -189,6 +182,7 @@ p.no-results {
   &.nxg-dash-calendar-container {
     height: auto;
     min-height: 270px;
+    border: none;
   }
 
   .counter-list {
@@ -228,7 +222,6 @@ p.no-results {
   }
 }
 
-
 .settings-well {
   padding-bottom: 20px;
 
@@ -245,14 +238,17 @@ p.no-results {
   border-bottom: 1px solid $wellBorder;
   margin: 0;
   padding: 10px;
-  &:first-child{
+  &:first-child {
     margin-top: 35px;
   }
   &:last-child{
     border-bottom: none;
     margin-bottom: -15px;
   }
-  &.inactive{
+  &.last-item {
+    border-bottom:none;
+  }
+  &.inactive {
     color: $wellBorder;
   }
   &.non-empty-promos:first-child{
@@ -272,11 +268,19 @@ p.no-results {
     color: #3496c7;
     cursor: pointer;
   }
+  .detail-link {
+    text-align: right;
+  }
 }
-.promo-header{
+
+.promo-header {
   padding-left: 10px !important;
   padding-right: 10px !important;
-  .promo-header-item span{
+  &.empty-promos {
+    border-bottom-right-radius: 5px;
+    border-bottom-left-radius: 5px;
+  }
+  .promo-header-item span {
     float: left;
     padding: 0px 15px !important;
   }
@@ -286,7 +290,55 @@ p.no-results {
   padding-bottom: 15px;
 }
 
-.promo-contact{
+.panel {
+  &.empty-promos {
+    padding-bottom: 33px;
+  }
+}
+
+.promo-contact {
   padding-bottom: 9px;
   color: black;
+}
+
+.cancel {
+  margin: 0 15px 0 0;
+}
+
+@media only screen and (max-width: 767px) {
+
+  .promo-item {
+    &:first-child {
+      margin-top: 0;
+    }
+    &.empty-promos:first-child {
+      margin-top: 0 !important;
+    }
+    .detail-link {
+      text-align: left !important;
+      padding-top: 10px;
+
+      .paired-media {
+        width: 12px;
+        height: 12px;
+      }
+    }
+  }
+
+  .accordion-button {
+    width: 65%;
+    max-width: 300px;
+    min-width: 180px;
+  }
+
+  .panel {
+    &.empty-promos {
+      padding-bottom: 0;
+      border-bottom: none;
+      .well-title {
+        border-bottom-right-radius: 5px;
+        border-bottom-left-radius: 5px;
+      }
+    }
+  }
 }

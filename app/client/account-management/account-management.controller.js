@@ -47,9 +47,10 @@
     $scope.contactInfoEnabled = User.getFeatures().hasOwnProperty('contactInfo') ? User.getFeatures().contactInfo.enabled : false;
     $scope.addBankAccountEnabled = User.getFeatures().hasOwnProperty('addBankAccount') ? User.getFeatures().addBankAccount.enabled : false;
     $scope.editBankAccountEnabled = User.getFeatures().hasOwnProperty('editBankAccount') ? User.getFeatures().editBankAccount.enabled : false;
-    $scope.editDefaultAccount = false;
+    $scope.editDefaultDAccount = false;
+    $scope.editDefaultPAccount = false;
     $scope.refreshActiveAchAccounts = refreshActiveAchAccounts;
-
+    $scope.isAddAccountButtonDisable = isAddAccountButtonDisable;
 
     //to retreive the latest transaction date
     if ($scope.isDealer) {
@@ -117,7 +118,12 @@
       getData = AccountManagement.get();
     }
 
-    $scope.editDefaultAccount = false;
+    $scope.editDefaultDAccount = false;
+    $scope.editDefaultPAccount = false;
+
+    function isAddAccountButtonDisable() {
+      return $scope.editDefaultDAccount || $scope.editDefaultPAccount || AccountManagement.getAccountButtonState();
+    }
 
     function refreshActiveAchAccounts() {
       AccountManagement.getFinancialAccountData()
@@ -288,7 +294,7 @@
             },
             isEditable: function () {
               return $scope.brand.editable && $scope.business.data.isStakeholder &&
-                $scope.business.data.isStakeholderActive;
+               $scope.business.data.isStakeholderActive;
             },
             isDisplayed: function () {
               return angular.isDefined(results.AutoPayEnabled) && $scope.isDealer && $scope.isUnitedStates &&
@@ -317,15 +323,28 @@
           },
           dirtyData: null, // a copy of the data for editing (lazily built)
           editable: false,
-          edit: function () {
-            $scope.editDefaultAccount = true;
+          editD: function () {
+            $scope.editDefaultDAccount = true;
+            $scope.editDefaultPAccount = false;
             dirtyPayment = $scope.defaultPayment;
             dirtyDeposit = $scope.defaultDeposit;
+            AccountManagement.setAccountButtonState(true);
+            AccountManagement.setEditButtonState(true);
           },
-          cancel: function () {
+          editP: function () {
+            $scope.editDefaultDAccount = false;
+            $scope.editDefaultPAccount = true;
+            dirtyPayment = $scope.defaultPayment;
+            dirtyDeposit = $scope.defaultDeposit;
+            AccountManagement.setAccountButtonState(true);
+            AccountManagement.setEditButtonState(true);
+          },          cancel: function () {
             $scope.defaultPayment = dirtyPayment;
             $scope.defaultDeposit = dirtyDeposit;
-            $scope.editDefaultAccount = false;
+            $scope.editDefaultDAccount = false;
+            $scope.editDefaultPAccount = false;
+            AccountManagement.setAccountButtonState(false);
+            AccountManagement.setEditButtonState(false);
           },
           save: function () {
             if ($scope.defaultDeposit.BankAccountId === $scope.defaultPayment.BankAccountId) {
@@ -340,7 +359,10 @@
                   return AccountManagement.updateBankAccount(account);
                 })
                 .then(function () {
-                  $scope.editDefaultAccount = false;
+                  $scope.editDefaultDAccount = false;
+                  $scope.editDefaultPAccount = false;
+                  AccountManagement.setAccountButtonState(false);
+                  AccountManagement.setEditButtonState(false);
                   $scope.financial.data.billingAccount = account;
                   $scope.financial.data.disbursementAccount = account;
                 });
@@ -360,7 +382,10 @@
                   return AccountManagement.updateBankAccount(accounts[1]);
                 })
                 .then(function () {
-                  $scope.editDefaultAccount = false;
+                  $scope.editDefaultDAccount = false;
+                  $scope.editDefaultPAccount = false;
+                  AccountManagement.setAccountButtonState(false);
+                  AccountManagement.setEditButtonState(false);
                   $scope.financial.data.disbursementAccount = accounts[0];
                   $scope.financial.data.billingAccount = accounts[1];
                 });
@@ -521,4 +546,6 @@
     );
 
   }
+
+
 })();

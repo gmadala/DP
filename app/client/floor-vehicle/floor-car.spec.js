@@ -246,38 +246,6 @@ describe('Controller: FloorCarCtrl', function () {
         expect(dialog.open).not.toHaveBeenCalled();
       })
     });
-
-    describe('cancel function', function() {
-      var goHome = true,
-        goReset = false,
-        dialogMock,
-        q,
-        deferred;
-
-      beforeEach(inject(function($q) {
-        q = $q;
-
-        dialog.messageBox = function() {
-          return {
-            open: function() {
-              deferred = q.defer();
-              deferred.resolve('home');
-              return deferred.promise;
-            }
-          };
-        };
-      }));
-
-      it('should exist', function() {
-        expect(typeof scope.cancel).toBe('function');
-      });
-
-      it('should launch a messagebox box', function() {
-        spyOn(dialog, 'open').and.callThrough();
-        scope.cancel();
-        expect(dialog.open).toHaveBeenCalled();
-      });
-    });
   };
 
   describe('in dealer mode', function() {

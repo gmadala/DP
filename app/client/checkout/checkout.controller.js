@@ -188,6 +188,10 @@
       }
     };
 
+    $scope.removeFee = function (fee) {
+      Payments.removeFeeFromQueue(fee.financialRecordId);
+    };
+
     User.getInfo().then(function(info) {
       $scope.bankAccounts = {
         getList: function () {

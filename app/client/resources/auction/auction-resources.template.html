@@ -1,11 +1,16 @@
-<div class="well">
-  <h2 class="well-title" translate>NextGear Capital Documents</h2>
-  <ul class="text-list zeroLeftPadding">
-    <li ng-repeat="doc in documents">
-      <a ng-href="{{ doc.url }}" nxg-track="{{ doc.metric }}" track-properties="{{ kissMetricData }}"
-         target="_blank">
-        {{ doc.title }}
-      </a>
-    </li>
-  </ul>
+<div class="container">
+  <div class="col-xs-12">
+    <div class="panel panel-default">
+      <h2 class="well-title" translate>NextGear Capital Documents</h2>
+      <ul class="text-list zeroLeftPadding">
+        <li ng-repeat="doc in documents">
+          <a ng-href="{{ doc.url }}" nxg-track="{{ doc.metric }}" track-properties="{{ kissMetricData }}"
+             target="_blank">
+            {{ doc.title }}
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
 </div>
+

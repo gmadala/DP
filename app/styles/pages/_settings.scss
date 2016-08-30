@@ -41,13 +41,6 @@
   }
 }
 
-.request-credit-increase{
-  height: 400px;
-  overflow-y: auto;
-  overflow-x: auto;
-}
-
-
 #AccountManagementPage, #AuctionSettingsPage {
   .btn-help-adjust {
     margin-top: 10px;
@@ -75,37 +68,53 @@
     }
   }
 }
+
 .small-padding {
   padding: 7px;
 }
+
 .no-left-padding {
-  padding:  0;
+  padding: 0;
 }
+
 .medium-left-padding {
   padding-left: 15px;
 }
+
 .no-right-padding {
   padding-right: 0;
 }
+
 .small-right-padding {
   padding-right: 3%;
 }
+
 .no-left-margin {
   margin-left: 0px;
 }
+
 .small-top-margin {
   margin-top: 3%;
 }
+
 .smaller-top-margin {
   margin-top: 2%;
 }
+
 .smallest-bottom-margin {
   margin-bottom: 1%;
 }
+
 .smallest-left-margin {
   margin-left: 1%;
 }
+
 .text-height {
   height: 14px;
   overflow: hidden;
+}
+
+#ProfileSettingsPage div input {
+  padding: .5em 1em;
+  width: 100%;
 }

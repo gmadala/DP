@@ -1,6 +1,6 @@
 // Karma configuration
-module.exports = function (karma) {
-  karma.set({ 
+module.exports = function(karma) {
+  karma.set({
 
     // base path, that will be used to resolve files and exclude
     basePath: '',
@@ -17,8 +17,8 @@ module.exports = function (karma) {
       'karma-junit-reporter'
     ],
 
-		// list of files / patterns to load in the browser
-		files: [
+    // list of files / patterns to load in the browser
+    files: [
       'app/components/jquery/dist/jquery.js',
       'app/components/angular/angular.js',
       'app/components/angular-sanitize/angular-sanitize.js',
@@ -27,7 +27,6 @@ module.exports = function (karma) {
       'app/components/angular-ui-utils/modules/highlight/highlight.js',
       'app/components/angular-ui-utils/modules/event/event.js',
       'app/components/bootstrap-datepicker/js/bootstrap-datepicker.js',
-      'app/private-components/angular-strap.js',
       'app/components/moment/moment.js',
       'app/components/fullcalendar/dist/fullcalendar.js',
       'app/components/angular-ui-calendar/src/calendar.js',
@@ -42,6 +41,8 @@ module.exports = function (karma) {
       'app/components/ng-file-upload/ng-file-upload-shim.js',
       'app/components/angular-bootstrap/ui-bootstrap.js',
       'app/components/angular-bootstrap/ui-bootstrap-tpls.js',
+      'app/components/bootstrap-switch/dist/js/bootstrap-switch.min.js',
+      'app/components/angular-bootstrap-switch/dist/angular-bootstrap-switch.js',
 
       'app/components/sinon/lib/sinon/util/fake_timers.js',
       'app/components/lodash/lodash.js',

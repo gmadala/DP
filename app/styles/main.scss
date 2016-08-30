@@ -13,6 +13,7 @@
 @import "basic/helpers";
 @import "basic/typography";
 @import "basic/icons";
+@import "common/animations";
 @import "common/buttons";
 @import "common/tables";
 @import "common/header";
@@ -45,6 +46,7 @@
 @import "pages/accountManagement";
 @import "pages/floorcar";
 @import "pages/vehicledetails";
+@import "pages/wizardFlooring";
 
 // Language specific overrides
 @import "lang/es";
