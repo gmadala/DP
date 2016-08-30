@@ -41,6 +41,7 @@
           },
           series: {
             stacking: 'percent',
+            borderWidth: 0,
             dataLabels: {
               enabled: true,
               color: '#fff',
