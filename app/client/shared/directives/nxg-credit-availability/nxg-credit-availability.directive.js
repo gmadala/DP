@@ -51,6 +51,11 @@
                 return numeral(this.y).format('($0.00a)');
               },
               inside: true
+            },
+            states: {
+              hover: {
+                enabled: false
+              }
             }
           }
         },
