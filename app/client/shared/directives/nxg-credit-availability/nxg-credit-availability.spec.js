@@ -57,7 +57,7 @@ describe('Directive: nxgCreditAvailability', function() {
     expect(lineOfCredits.hasOwnProperty('e70e442b-c364-4985-9c1c-3ddbe5dcb6ec')).toBe(true);
 
     expect(directiveScope.creditTypeName).toEqual('Total');
-    expect(directiveScope.creditLimit).toEqual(numeral(10000000 + 99999999).format('($0.00a)'));
+    expect(directiveScope.creditLimit).toEqual(numeral(10000000 + 99999999).format('($0.0a)'));
   });
 
   it('should display total available lines of credit', function() {
@@ -68,13 +68,13 @@ describe('Directive: nxgCreditAvailability', function() {
     };
     scope.$apply();
     expect(directiveScope.creditTypeName).toEqual('Salvage');
-    expect(directiveScope.creditLimit).toEqual(numeral(10000000).format('($0.00a)'));
+    expect(directiveScope.creditLimit).toEqual(numeral(10000000).format('($0.0a)'));
 
     scope.currentCreditType = {
       LineOfCreditId: 'e70e442b-c364-4985-9c1c-3ddbe5dcb6ec'
     };
     scope.$apply();
     expect(directiveScope.creditTypeName).toEqual('Retail');
-    expect(directiveScope.creditLimit).toEqual(numeral(99999999).format('($0.00a)'));
+    expect(directiveScope.creditLimit).toEqual(numeral(99999999).format('($0.0a)'));
   });
 });

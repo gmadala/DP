@@ -1,22 +1,26 @@
 <div>
   <div class="row">
     <div class="col-xs-12">
-      <h4 style="margin-left: 10px;">Credit Availability</h4>
+      <h4 style="margin-left: 10px;" translate>Credit Availability</h4>
     </div>
   </div>
-  <br />
+  <br/>
   <div class="row">
-    <div class="col-xs-12" style="margin-left: 10px;">
+    <div class="col-xs-12" style="margin-left: 10px;" translate>
       {{ creditTypeName }} / {{ creditLimit }} limit
     </div>
   </div>
   <div class="row">
     <div class="col-xs-12">
-      <div class="nxg-credit-availability"></div>
+        <div tooltip-placement="bottom"
+             tooltip-trigger="mouseenter"
+             uib-tooltip-html="availabilityTooltip"
+             tooltip-animation="true"
+             class="nxg-credit-availability"></div>
     </div>
   </div>
   <div class="row">
-    <div class="col-xs-6" style="margin-left: 10px;">Used</div>
-    <div class="col-xs-6 text-right" style="margin-right: -10px;">Available</div>
+    <div class="col-xs-6" style="margin-left: 10px;" translate>Used</div>
+    <div class="col-xs-6 text-right" style="margin-right: -10px;" translate>Available</div>
   </div>
 </div>

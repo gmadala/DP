@@ -6,9 +6,12 @@
     .module('nextgearWebApp')
     .directive('nxgCreditAvailability', nxgCreditAvailability);
 
-  nxgCreditAvailability.$inject = ['api'];
+  nxgCreditAvailability.$inject = ['api', 'gettext', 'gettextCatalog'];
 
-  function nxgCreditAvailability(api) {
+  function nxgCreditAvailability(api, gettext, gettextCatalog) {
+
+    gettext('Used');
+    gettext('Available');
 
     return {
       templateUrl: 'client/shared/directives/nxg-credit-availability/nxg-credit-availability.template.html',
@@ -47,9 +50,6 @@
               color: '#fff',
               style: {
                 fontWeight: 'bolder'
-              },
-              formatter: function() {
-                return numeral(this.y).format('($0.00a)');
               },
               inside: true
             },
@@ -95,44 +95,39 @@
           visible: false
         },
         series: [{
-          name: 'Available',
-          data: [{
-            y: 0,
-            color: "#4CAF50",
-            dataLabels: {
-              align: 'right'
-            }
-          }]
+          name: 'Available'
         }, {
-          name: 'Used',
-          data: [{
-            y: 0,
-            color: "#9E9E9E",
-            dataLabels: {
-              align: 'left'
-            }
-          }]
+          name: 'Used'
         }]
       };
       element.find('.nxg-credit-availability').highcharts(options);
 
       function updateCharts(name, total, available) {
         scope.creditTypeName = name;
-        scope.creditLimit = numeral(total).format('($0.00a)');
+        scope.creditLimit = numeral(total).format('($0.0a)');
+        var usedLine = '<span>' + gettextCatalog.getString('Used') + ': ' + numeral(total - available).format('($0,0.00)') + '</span><br />';
+        var availableLine = '<span>' + gettextCatalog.getString('Available') + ': ' + numeral(available).format('($0,0.00)') + '</span>';
+        scope.availabilityTooltip = usedLine + availableLine;
 
         var chartElement = element.find('.nxg-credit-availability').highcharts();
         chartElement.series[0].setData([{
           y: available,
           color: "#4CAF50",
           dataLabels: {
-            align: 'right'
+            align: 'right',
+            formatter: function() {
+              return numeral(this.y).format('($0.0a)', Math.floor);
+            }
           }
         }]);
         chartElement.series[1].setData([{
           y: total - available,
           color: "#9E9E9E",
           dataLabels: {
-            align: 'left'
+            align: 'left',
+            formatter: function() {
+              return numeral(this.y).format('($0.0a)', Math.ceil);
+            }
           }
         }]);
       }
