@@ -1,13 +1,20 @@
 <form name="form" novalidate>
   <h2 translate>Let us know the details of the sale</h2>
   <h4>Purchase Information:</h4>
+
+
   <div class="date-field date-picker" style="width: 100% !important;">
-    <label for="purchaseDate" class="input-title"  ><span translate>Purchase Date</span></label>
+    <label ng-show="wizardFloor.data.UnitPurchaseDate" for="purchaseDate" class="input-title show-hide"><span translate>Purchase Date</span></label>
+
+    <div class="field row" style="margin-top:-9px;">
+      <div class="col-sm-12">
+
     <button tabindex="-1" type="button" class="btn-unstyle disbursement-btn-calendar" ng-click="salesInfo.openDatePicker()">
-      <span nxg-icon="icon-calendar"></span>
+      <span nxg-icon="icon-calendar" style="left: 15px;"></span>
     </button>
-    <input type="text" uib-datepicker-popup="{{salesInfo.dateFormat}}"
-           placeholder="mm/dd/yyyy" nxg-date
+
+    <input type="text" uib-datepicker-popup="{{salesInfo.dateFormat}}" style="margin-top: 15px;"
+           placeholder="Purchase Date" nxg-date class="input-full"
            ng-model="wizardFloor.data.UnitPurchaseDate"
            min-date="salesInfo.dealerMinDate"
            max-date="salesInfo.maxDate"
@@ -28,16 +35,18 @@
             tooltip-animation="true">
       <span nxg-icon="icon-alert"></span>
     </button>
+      </div>
+    </div>
   </div>
   <label for="purchaseDate" class="text-error"
          ng-show="(form.purchaseDate.$error.required || form.purchaseDate.$error.date || form.purchaseDate.$error.past || form.purchaseDate.$error.future) && form.$submitted" translate>
     Please enter a Valid Purchase Date.
   </label>
-  <label for="inputPurchaseAmt" class="input-title"><span translate>Purchase Amount</span></label>
+  <label ng-show="wizardFloor.data.UnitPurchasePrice" for="inputPurchaseAmt" class="input-title show-hide"><span translate>Purchase Amount</span></label>
   <div class="dollar input-group input-group-sm"
         ng-class="{ 'has-error': (form.inputPurchaseAmt.$error.required || form.inputPurchaseAmt.$error.max || form.inputPurchaseAmt.$error.pattern || form.inputPurchaseAmt.$error.maxlength || form.inputPurchaseAmt.$error.nxgMin) && form.$submitted }">
     <span class="input-group-addon" translate>$</span>
-    <input type="text" id="inputPurchaseAmt" name="inputPurchaseAmt" ng-model="wizardFloor.data.UnitPurchasePrice"
+    <input type="text" id="inputPurchaseAmt" name="inputPurchaseAmt" ng-model="wizardFloor.data.UnitPurchasePrice" placeholder="Purchase Amount"
            required
            nxg-input-currency="1000000000000"
            nxg-min="1"
@@ -138,14 +147,14 @@
     Please select who has the title.
   </label> -->
 
-  <h6>Title Location</h6>
+  <label><span for="titleLocation" translate>Title Location</span></label>
   <div class="cr-inline">
     <input type="radio" name="titleLocation" id="{{location.Id}}" ng-init="wizardFloor.data.TitleLocationId = wizardFloor.options.titleLocationOptions[0].Id" ng-value="{{location.Id}}" ng-model="wizardFloor.data.TitleLocationId" ng-repeat-start="location in wizardFloor.options.titleLocationOptions" />
     <label class="radio-img" for="{{location.Id}}"></label>
     <label class="cr-label" for="{{location.Id}}">{{ location.Name }}</label>
     <br ng-repeat-end />
   </div>
-  <label for="titleLoction" class="text-error" ng-show="form.titleLocation.$error.required && form.$submitted" translate>
+  <label for="titleLocation" class="text-error" ng-show="form.titleLocation.$error.required && form.$submitted" translate>
     Please select who has the title.
   </label>
 
