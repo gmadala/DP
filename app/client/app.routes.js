@@ -75,7 +75,7 @@
       })
       .state('maintenance', {
         url: '/maintenance',
-        templateUrl: 'client/maintenance/maintenance.html',
+        templateUrl: 'client/maintenance/maintenance.template.html',
         controller: 'MaintenanceCtrl',
         data: {
           pageId: 'Maintenance',
@@ -197,6 +197,16 @@
         controller: 'FloorCarCtrl',
         data: {
           pageId: 'FloorCar',
+          showNavBar: true,
+          showMenu: false
+        }
+      })
+      .state('audits', {
+        url: '/audits',
+        templateUrl: 'client/audits/open-audits.template.html',
+        controller: 'AuditsCtrl',
+        data: {
+          pageId: 'Audits',
           showNavBar: true,
           showMenu: false
         }
