@@ -1,6 +1,6 @@
 'use strict';
 
-describe('Model: audits', function () {
+fdescribe('Model: audits', function () {
 
   // load the service's module
   beforeEach(module('nextgearWebApp'));
@@ -28,51 +28,47 @@ describe('Model: audits', function () {
       spyOn(userService, "isUnitedStates").and.returnValue(true);
       spyOn(userService, "isDealer").and.returnValue(true);
       spyOn(userService, "getFeatures").and.returnValue({});
-      httpBackend.whenGET(/^\/cam\/[\w-]+\/open_audits$/).respond({
-        "Success": true,
-        "Message": null,
-        "Data": [
-          {
-            "id": "11111111-1111-1111-1111-111111111111",
-            "unitVin": "1FTYR10U92PB37336",
-            "stockNumber": 123,
-            "flooringDate": "2016-06-01 10:22:00.000",
-            "unitMake": "Toyota",
-            "unitModel": "Highlander",
-            "unitYear": 2014,
-            "unitStyle": "4D SUV 4X4 V6 4.0L V6 EFI DOHC",
-            "inspectionDateTime": "2016-06-08 10:22:00.000",
-            "unitStatusCode": "CUV",
-            "recommendedVerification": "Photo"
-          },
-          {
-            "id": "11111111-1111-1111-1111-111111111111",
-            "unitVin": "2FTYR10U92PB37336",
-            "stockNumber": 124,
-            "flooringDate": "2016-05-21 08:02:00.000",
-            "unitMake": "Toyota",
-            "unitModel": "Prius",
-            "unitYear": 2014,
-            "unitStyle": "4D SEDAN",
-            "inspectionDateTime": "2016-06-08 10:22:00.000",
-            "unitStatusCode": "CUV",
-            "recommendedVerification": "Video"
-          },
-          {
-            "id": "11111111-1111-1111-1111-111111111111",
-            "unitVin": "3FTYR10U92PB37336",
-            "stockNumber": 125,
-            "flooringDate": "2016-06-03 13:23:00.000",
-            "unitMake": "Ford",
-            "unitModel": "Pinto",
-            "unitYear": 1977,
-            "unitStyle": "HATCHBACK NON-EXPLODING ENGINE",
-            "inspectionDateTime": "2016-06-08 10:22:00.000",
-            "unitStatusCode": "CUV",
-            "recommendedVerification": "Photo"
-          }
-        ]
-      });
+      httpBackend.whenGET(/^\/cam\/[\w-]+\/open_audits$/).respond([
+        {
+          "id": "11111111-1111-1111-1111-111111111111",
+          "unitVin": "1FTYR10U92PB37336",
+          "stockNumber": 123,
+          "flooringDate": "2016-06-01 10:22:00.000",
+          "unitMake": "Toyota",
+          "unitModel": "Highlander",
+          "unitYear": 2014,
+          "unitStyle": "4D SUV 4X4 V6 4.0L V6 EFI DOHC",
+          "inspectionDateTime": "2016-06-08 10:22:00.000",
+          "unitStatusCode": "CUV",
+          "recommendedVerification": "Photo"
+        },
+        {
+          "id": "11111111-1111-1111-1111-111111111111",
+          "unitVin": "2FTYR10U92PB37336",
+          "stockNumber": 124,
+          "flooringDate": "2016-05-21 08:02:00.000",
+          "unitMake": "Toyota",
+          "unitModel": "Prius",
+          "unitYear": 2014,
+          "unitStyle": "4D SEDAN",
+          "inspectionDateTime": "2016-06-08 10:22:00.000",
+          "unitStatusCode": "CUV",
+          "recommendedVerification": "Video"
+        },
+        {
+          "id": "11111111-1111-1111-1111-111111111111",
+          "unitVin": "3FTYR10U92PB37336",
+          "stockNumber": 125,
+          "flooringDate": "2016-06-03 13:23:00.000",
+          "unitMake": "Ford",
+          "unitModel": "Pinto",
+          "unitYear": 1977,
+          "unitStyle": "HATCHBACK NON-EXPLODING ENGINE",
+          "inspectionDateTime": "2016-06-08 10:22:00.000",
+          "unitStatusCode": "CUV",
+          "recommendedVerification": "Photo"
+        }
+      ]);
 
       audits.refreshAudits().then(function (results) {
         resultData = results;
