@@ -7,17 +7,18 @@ exports.config = {
       'args': [
         '--disable-extensions',
         '-–allow-file-access-from-files',
-        '--disable-web-security',
-        '--no-sandbox',
-        '--test-type=browser'
-      ],
-      'prefs': {
-        'download': {
-          'prompt_for_download': false,
-          'directory_upgrade': true,
-          'default_directory': '/tmp'
-        }
-      }
+        '--disable-web-security'
+        //'--no-sandbox',
+        //'--test-type=browser'
+      ]
+      // ],
+      // 'prefs': {
+      //   'download': {
+      //     'prompt_for_download': false,
+      //     'directory_upgrade': true,
+      //     'default_directory': '/tmp'
+      //   }
+      // }
     },
     shardTestFiles: (process.env.maxInstances > 1),
     maxInstances: process.env.maxInstances

@@ -14,10 +14,10 @@ var modalObjects = new modalObjects.modalObjects();
 var helper = new helper.helper();
 
 describe('\n Dashboard Page', function () {
-  // beforeEach(function () {
-  //   browser.sleep(browser.params.shortDelay);
-  //   browser.ignoreSynchronization = true;
-  // });
+  beforeEach(function () {
+    browser.sleep(browser.params.shortDelay);
+    browser.ignoreSynchronization = true;
+  });
 
   it("1. Dashboard - Login as 62434AM ", function () {
     helper.goToLogin();
