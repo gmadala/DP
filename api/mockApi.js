@@ -96,6 +96,9 @@ module.exports = {
               },
               eventSales: {
                 enabled: true
+              },
+              openAudits: {
+                enabled: true
               }
             }
           }
@@ -151,7 +154,8 @@ module.exports = {
         var baseFolder,
           level = 0,
           f = folder,
-          keepGoing = true;
+          keepGoing = true,
+          tail = [];
 
         while (keepGoing && f.length !== 0) {
           var marker = '/';
@@ -172,11 +176,13 @@ module.exports = {
               }
             }
             if (keepGoing) {
+              tail.push(f.substring(f.lastIndexOf(marker)));
               f = f.substring(0, f.lastIndexOf(marker));
               level++;
             }
           }
           else {
+            tail.push(f.substring(f.lastIndexOf(marker)));
             f = f.substring(0, f.lastIndexOf(marker));
             level++;
           }
@@ -191,14 +197,21 @@ module.exports = {
         baseFolder = f;
 
         // Go {level} deep to find the right default to serve
+        var isDynamic = false;
         for (var i = 0; i < level; i++) {
           var files = fs.readdirSync(baseFolder);
           for (var x in files) {
             var file = files[x];
             if (dynamicQuery.test(file)) {
               baseFolder += '/' + file;
+              isDynamic = true;
+              tail.pop();
             }
           }
+        }
+        // If there are URL parts after the dynamic portion, reattach them
+        while (tail.length > 0) {
+          baseFolder = baseFolder + tail.pop();
         }
 
         done(baseFolder);
@@ -207,7 +220,7 @@ module.exports = {
 
     return function(req, res) {
       var originalFolder = apiFolder + req.url,
-          file;
+        file;
 
       findFolder(originalFolder, function success(foundFolder) {
         // If the result is not found at the top level, we're using default data
