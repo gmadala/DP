@@ -160,6 +160,7 @@
     };
 
     // Wizard Nav functions ---------------------------------------------------
+    //-------------------------------------------------------------------------
     vm.tabClick = function (count) {
       if (canTransition(count)) {
         vm.counter = count;

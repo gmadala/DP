@@ -1,5 +1,56 @@
 .wizard-container {
 
+  // font-family: OpenSans;
+
+
+
+  .h2 {
+    font-size: 24px;
+    margin-top: 28px;
+    margin-bottom: 32px;
+  }
+
+  .h4 {
+    // font-family: OpenSans;
+    font-size: 20px;
+    margin-bottom: 32px;
+  }
+
+  .form-group {
+    margin-bottom: 24px;
+
+    select: {
+      font-size: 18px;
+    }
+
+    input[type="text"] {
+      font-size: 18px;
+    }
+
+  }
+
+  .form-control,
+  input[type="text"],
+  select {
+    font-size: 18px !important;
+    // font-family: OpenSans;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    height: 38px;
+  }
+
+  // .form-control {
+  //   margin-bottom: 24px;
+  // }
+  //
+  // input[type="text"].form-control {
+  //   margin-bottom: 24px;
+  // }
+  //
+  // select.form-control {
+  //   margin-bottom: 24px;
+  // }
+
   // .nav-tabs {
   //   position: relative;
   //   margin: 40px auto;
