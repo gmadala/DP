@@ -1,6 +1,6 @@
 'use strict';
 
-fdescribe('Model: audits', function () {
+describe('Model: audits', function () {
 
   // load the service's module
   beforeEach(module('nextgearWebApp'));
