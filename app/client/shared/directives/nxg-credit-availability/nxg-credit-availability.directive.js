@@ -150,12 +150,18 @@
             // 'locId2' --> name2, total2, available2
             // ....
             data.LinesOfCredit.forEach(function(lineOfCredit) {
-              totalLimit = totalLimit + lineOfCredit.LineOfCreditAmount;
               totalAvailable = totalAvailable + lineOfCredit.AvailableCreditAmount;
+
+              var totalLineOfCredit = lineOfCredit.LineOfCreditAmount;
+              if (moment(lineOfCredit.TempLineOfCreditExpiration).isSame(moment()) ||
+                moment(lineOfCredit.TempLineOfCreditExpiration).isAfter(moment())) {
+                totalLineOfCredit = totalLineOfCredit + lineOfCredit.TempLineOfCreditAmount;
+              }
+              totalLimit = totalLimit + totalLineOfCredit;
 
               scope.lineOfCredits[lineOfCredit.LineOfCreditId] = {
                 name: lineOfCredit.CreditTypeName,
-                total: lineOfCredit.LineOfCreditAmount,
+                total: totalLineOfCredit,
                 available: lineOfCredit.AvailableCreditAmount
               };
             });
