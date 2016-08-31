@@ -1,4 +1,12 @@
 <div class="container non-responsive">
+  <section class="row" ng-if="auditsEnabled && audits.results.length > 0">
+    <div class="col-xs-12">
+      <div class="alert alert-warning">
+        You have <span ng-bind="audits.results.length"></span> open audits.
+        <a href="#/audits">Click here</a> to resolve them.
+      </div>
+    </div>
+  </section>
   <section class="row upcoming">
     <!-- Calendar -->
     <div class="col-xs-9">
