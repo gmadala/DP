@@ -37,7 +37,13 @@ body {
   }
 }
 
+.menu-wrapper {
+  position: relative;
+  min-height: 100%;
+}
+
 .nxg-main-view {
+  padding-bottom: 87px;
   overflow: auto;
   -ms-overflow-style: none;
   &::-webkit-scrollbar {
