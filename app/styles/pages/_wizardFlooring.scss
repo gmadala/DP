@@ -1,7 +1,7 @@
 .wizard-container {
 
   // font-family: OpenSans;
-
+  //@import "../../components/sass-bootstrap/lib/bootstrap";
 
 
   h2 {
@@ -20,9 +20,22 @@
     margin-bottom: 24px;
 
     .input-group {
+      div:first-child {
+        position: absolute;
+        top: 10px;
+        left: 10px;
+      }
+
+      .form-control {
+        border-radius: 5px;
+        padding-left: 33px;
+      }
+
       .form-control:not(:first-child):not(:last-child) {
-        border-top-right-radius: 5px;
-        border-bottom-right-radius: 5px;
+        // border-top-right-radius: 5px;
+        // border-bottom-right-radius: 5px;
+        border-radius: 5px;
+        padding-left: 33px;
       }
     }
 
@@ -58,6 +71,16 @@
   .style-select:after {
     top: 16px;
   }
+
+  // .has-error .form-control:focus{
+  //   -webkit-box-shadow: none;
+  //   box-shadow: none;
+  // }
+  //
+  // .form-group.has-error:focus .input-group .input-group-addon {
+  //   border-color: #069;
+  //   color: #069;
+  // }
 
   .cr-inline {
 

@@ -2,7 +2,6 @@
   <h2 translate>Let us know the details of the sale</h2>
   <h4 translate>Purchase Information:</h4>
 
-
   <div class="date-field date-picker" style="width: 100% !important; margin-bottom: 24px;">
     <label ng-show="wizardFloor.data.UnitPurchaseDate" for="purchaseDate" class="input-title show-hide"><span translate>Purchase Date</span></label>
 
@@ -45,9 +44,11 @@
 
   <div class="form-group">
     <label ng-show="wizardFloor.data.UnitPurchasePrice" for="inputPurchaseAmt" class="input-title show-hide"><span translate>Purchase Amount</span></label>
-    <div class="dollar input-group input-group-sm"
+    <div class="dollar input-group" style="display: block;"
           ng-class="{ 'has-error': (form.inputPurchaseAmt.$error.required || form.inputPurchaseAmt.$error.max || form.inputPurchaseAmt.$error.pattern || form.inputPurchaseAmt.$error.maxlength || form.inputPurchaseAmt.$error.nxgMin) && form.$submitted }">
-      <span class="input-group-addon" translate>$</span>
+      <div>
+        <i class="glyphicon glyphicon-usd"></i>
+      </div>
       <input type="text" id="inputPurchaseAmt" name="inputPurchaseAmt" ng-model="wizardFloor.data.UnitPurchasePrice" placeholder="Purchase Amount"
              required
              nxg-input-currency="1000000000000"
