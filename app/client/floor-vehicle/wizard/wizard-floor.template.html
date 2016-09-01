@@ -1,28 +1,29 @@
 <div class="container container-fluid">
-  <ul class="nav nav-pills nav-justified wizard-nav">
-    <div class="wizard-line"></div>
-    <li ng-class="{'active': wizardFloor.counter == 1}" ng-click="wizardFloor.tabClick(1)">
-      <a>1</a>
-      <div>Vehicle Information</div>
-    </li>
-    <li ng-class="{'active': wizardFloor.counter == 2}" ng-click="wizardFloor.tabClick(2)">
-      <a>2</a>
-      <div>Sale Information</div>
-    </li>
-    <li ng-class="{'active': wizardFloor.counter == 3, 'hidden': !wizardFloor.attachDocumentsEnabled}" ng-click="wizardFloor.tabClick(3)">
-      <a>3</a>
-      <div>Documents &amp; Instructions</div>
-    </li>
-  </ul>
   <div class="row">
-    <div class="col-xs-8">
-      <div ui-view></div>
-    </div>
+    <ul class="nav nav-pills nav-justified wizard-nav">
+      <div class="wizard-line"></div>
+      <li ng-class="{'active': wizardFloor.counter == 1}" ng-click="wizardFloor.tabClick(1)">
+        <a>1</a>
+        <div>Vehicle Information</div>
+      </li>
+      <li ng-class="{'active': wizardFloor.counter == 2}" ng-click="wizardFloor.tabClick(2)">
+        <a>2</a>
+        <div>Sale Information</div>
+      </li>
+      <li ng-class="{'active': wizardFloor.counter == 3, 'hidden': !wizardFloor.attachDocumentsEnabled}"
+          ng-click="wizardFloor.tabClick(3)">
+        <a>3</a>
+        <div>Documents &amp; Instructions</div>
+      </li>
+    </ul>
+  </div>
+  <div class="row">
+    <div class="col-xs-8" ui-view></div>
     <div class="col-xs-4">
-      <nxg-value-lookup></nxg-value-lookup>
+      <nxg-credit-availability credit-type="wizardFloor.data.LineOfCreditId"></nxg-credit-availability>
     </div>
   </div>
-  <div>
+  <div class="row">
     <button type="button"
             class="btn-cta cta-secondary" translate
             ng-disabled="!wizardFloor.previousAvailable()"
