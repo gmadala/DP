@@ -1,4 +1,4 @@
-<form class="col-xs-12" name="form" novalidate>
+<form name="form" novalidate>
   <h2 translate>Please upload your floor plan documentaion.</h2>
   <h4 translate>Required document types include:</h4>
   <ul class="req-docs-list">
@@ -133,11 +133,23 @@
   </div>
   <!-- End upload file code -->
 
+  <div style="text-align: center";>
+    <p style="margin-bottom: 10px;">Supported Formats: Image, Word, Excel, and PDF</p>
+    <div>
+      <img src="/img/jpg.png" alt="JPG" width="50px" />
+      <img src="/img/doc.png" alt="DOC" width="50px" />
+      <img src="/img/xls.png" alt="XLS" width="50px" />
+      <img src="/img/pdf.png" alt="PDF" width="50px" />
+    </div>
+  </div>
+
   <!-- Floor Plan Comments -->
-  <h4 style="padding-top:15px" translate>Floor Plan Comments</h4>
-  <div class="column-divider"></div>
+  <label for="commentGeneral" class="sr-only">
+    <span>Additional Comments</span>
+  </label>
   <textarea class="comment-box"
-            placeholder="(Ex. Additional instructions, etc.)"
+            name="commentGeneral"
+            placeholder="Please enter any additional comments you have for our team"
             ng-model="wizardFloor.data.commentGeneral"
             ng-disabled="wizardFloor.floorPlanSubmitting"
   ></textarea>

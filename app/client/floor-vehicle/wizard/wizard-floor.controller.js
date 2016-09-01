@@ -227,11 +227,11 @@
         case 1:
           return true;
         case 2:
-          return true // vm.formParts.one;
+          return vm.formParts.one;
         case 3:
-          return true // vm.formParts.one && vm.formParts.two;
+          return vm.formParts.one && vm.formParts.two;
         case 4:
-          return true; // vm.formParts.one && vm.formParts.two && vm.formParts.three;
+          return vm.formParts.one && vm.formParts.two && vm.formParts.three;
       }
     }
 

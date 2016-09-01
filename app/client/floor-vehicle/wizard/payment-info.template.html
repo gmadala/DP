@@ -2,22 +2,24 @@
   <h2>Payment Information</h2>
   <div class="form-group">
     <label ng-show="wizardFloor.data.LineOfCreditId" for="inputCreditLine" class="show-hide">Line of Credit</label>
-    <select id="inputCreditLine"
-            name="inputCreditLine"
-            class="form-control"
-            ng-model="wizardFloor.data.LineOfCreditId"
-            ng-options="line.LineOfCreditName for line in wizardFloor.options.LinesOfCredit"
-            required>
-      <option value="" translate>Line of Credit</option>
-    </select>
+    <div class="style-select full-width" ng-class="{ 'nxg-invalid': form.inputCreditLine.$error.required && form.$submitted }">
+      <select id="inputCreditLine"
+              name="inputCreditLine"
+              class="form-control"
+              ng-model="wizardFloor.data.LineOfCreditId"
+              ng-options="line.LineOfCreditName for line in wizardFloor.options.LinesOfCredit"
+              required>
+        <option value="" translate>Line of Credit</option>
+      </select>
+    </div>
   </div>
   <label for="inputCreditLine" class="text-error"
          ng-show="form.inputCreditLine.$error.required && form.$submitted" translate>
     Please select a Line of Credit.
   </label>
 
-  <label for="payBuyerSeller">Send payment to</label>
-  <div class="cr-inline">
+  <label class="main-heading" for="payBuyerSeller">Send payment to</label>
+  <div class="cr-inline" style="margin-bottom: 24px;">
     <input type="radio" name="payBuyerSeller" id="payBuyer" ng-value="buyer" ng-model="wizardFloor.data.PaySeller"
            ng-disabled="wizardFloor.data.SaleTradeIn"
            ng-change="wizardFloor.data.BankAccountId = null" />
@@ -33,15 +35,17 @@
 
   <div class="form-group">
     <label ng-show="wizardFloor.data.BankAccountId" for="inputDisburseAcct" class="show-hide">Deposit Account</label>
-    <select id="inputDisburseAcct"
-            class="form-control"
-            name="inputDisburseAcct"
-            ng-model="wizardFloor.data.BankAccountId"
-            ng-disabled="wizardFloor.data.PaySeller"
-            ng-required="!wizardFloor.data.PaySeller"
-            ng-options="account as [account.AchAccountNumberLast4, account.AchBankName].join(' - ') for account in wizardFloor.options.BankAccounts">
-      <option value="" translate>Deposit Account</option>
-    </select>
+    <div class="style-select full-width" ng-class="{ 'nxg-invalid': form.inputDisburseAcct.$error.required && form.$submitted }">
+      <select id="inputDisburseAcct"
+              class="form-control"
+              name="inputDisburseAcct"
+              ng-model="wizardFloor.data.BankAccountId"
+              ng-disabled="wizardFloor.data.PaySeller"
+              ng-required="!wizardFloor.data.PaySeller"
+              ng-options="account as [account.AchAccountNumberLast4, account.AchBankName].join(' - ') for account in wizardFloor.options.BankAccounts">
+        <option value="" translate>Deposit Account</option>
+      </select>
+    </div>
   </div>
   <label for="inputDisburseAcct" class="text-error"
          ng-show="form.inputDisburseAcct.$error.required && form.$submitted" translate>

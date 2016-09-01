@@ -1,130 +1,116 @@
 <div class="input-xlarge">
-  <div class="styled-input with-btn">
-    <div class="field row">
-      <div class="icon-addon addon-lg col-xs-8 wizard-vin">
-        <span class="inner-addon left-addon" nxg-icon="icon-search"></span>
-            <label ng-show="data.UnitVin" for="inputVin" class="show-hide field-label">VIN</label>
-            <input type="text" id="inputVin"
-                class="vin-focus input-full" placeholder="VIN"
-                 name="inputVin"
-                 ng-model="data.UnitVin" required
-                 ng-minlength="6"
-                 ng-maxlength="17"
-                 nxg-requires="settings.vinMode == 'matched' || settings.vinMode == 'noMatch'"
-                 ng-change="vinChange()" nxg-blur="vinExit()"
-                 nxg-autofocus
-                 ng-class="{ 'nxg-invalid': validity.inputVin.$error.required || validity.inputVin.$error.minlength || validity.inputVin.$error.maxlength || (vinIsSyntacticallyValid(validity.inputVin.$error) && validity.inputVin.$error.nxgRequires)}" />
+  <div class="form-group">
+    <label ng-show="data.UnitVin" for="inputVin" class="show-hide field-label">VIN</label>
+    <div class="input-group" style="margin-right: 20px;">
+      <div class="input-group-addon">
+        <i class="glyphicon glyphicon-search"></i>
+      </div>
+      <input type="text" id="inputVin"
+             class="vin-focus form-control" placeholder="VIN"
+             name="inputVin"
+             ng-model="data.UnitVin" required
+             ng-minlength="6"
+             ng-maxlength="17"
+             nxg-requires="settings.vinMode == 'matched' || settings.vinMode == 'noMatch'"
+             ng-change="vinChange()" nxg-blur="vinExit()"
+             nxg-autofocus
+             ng-class="{ 'nxg-invalid': validity.inputVin.$error.required || validity.inputVin.$error.minlength || validity.inputVin.$error.maxlength || (vinIsSyntacticallyValid(validity.inputVin.$error) && validity.inputVin.$error.nxgRequires)}" />
+      <div class="input-group-btn">
+       <button type="button" href class="btn btn-primary" style="margin: 0px; left: 20px;" ng-click="lookupVin()" translate>SEARCH</button>
+      </div>
+    </div>
   </div>
-      <div class="col-xs-4 wizard-vin-btn">
-       <button type="button" href class="btn-cta cta-primary" ng-click="lookupVin()" translate>SEARCH</button>
-    </div>
-    </div>
 
-  </div>
-      <label for="inputVin" class="text-error"
-             ng-show="validity.inputVin.$error.required" translate>
-        Please enter a VIN.
-      </label>
-      <label for="inputVin" class="text-error"
-             ng-show="validity.inputVin.$error.minlength || validity.inputVin.$error.maxlength" translate>
-        VIN should be 6 to 17 characters.
-      </label>
-      <label for="inputVin" class="text-error"
-       ng-show="vinIsSyntacticallyValid(validity.inputVin.$error) && validity.inputVin.$error.nxgRequires" translate>
-       Please look up the VIN.
-      </label>
-  </div>
-  <div ng-show="settings.vinMode == 'noMatch'">
-    <div class="row">
-      <div class="col-sm-10">
-    <div class="cr-inline invalid-vin">
-      <label class="vin-acknowledge"><span translate>We're sorry, we were unable to match the provided VIN
-    with an existing vehicle. The number looks like a passenger vehicle to us, please select the year, make, model and style below.</span></label>
-      <label class="vin-acknowledge"><span translate>This is not a passenger vehicle, and I'd like to manually enter the details:</span></label>
 
-      <div ng-show="settings.vinMode == 'noMatch'">
-        <div style="line-height: 1.5;">
-          <input bs-switch type="checkbox" id="cmn-toggle-1" name="cmn-toggle-1" class="noglobal" switch-active="true"
-                 ng-model="dirtyStatus" ng-change="resetSearch()"
-                 switch-size="mini" switch-off-text="No" switch-on-text="Yes" switch-checked="dirtyStatus"
-                 switch-on-color="success">
+  <label for="inputVin" class="text-error" ng-show="validity.inputVin.$error.required" translate>
+    Please enter a VIN.
+  </label>
+  <label for="inputVin" class="text-error" ng-show="validity.inputVin.$error.minlength || validity.inputVin.$error.maxlength" translate>
+    VIN should be 6 to 17 characters.
+  </label>
+  <label for="inputVin" class="text-error" ng-show="vinIsSyntacticallyValid(validity.inputVin.$error) && validity.inputVin.$error.nxgRequires" translate>
+   Please look up the VIN.
+  </label>
+</div>
+
+
+
+<div ng-show="settings.vinMode == 'noMatch'">
+  <div class="row">
+    <div class="col-sm-10">
+      <div class="cr-inline invalid-vin">
+        <label class="vin-acknowledge">
+          <span translate>We're sorry, we were unable to match the provided VIN with an existing vehicle. The number looks like a passenger vehicle to us, please select the year, make, model and style below.</span>
+        </label>
+        <label class="vin-acknowledge">
+          <span translate>This is not a passenger vehicle, and I'd like to manually enter the details:</span>
+        </label>
+
+        <div ng-show="settings.vinMode == 'noMatch'">
+          <div style="line-height: 1.5;">
+            <input bs-switch type="checkbox" id="cmn-toggle-1" name="cmn-toggle-1" class="noglobal" switch-active="true"
+                   ng-model="dirtyStatus" ng-change="resetSearch()"
+                   switch-size="mini" switch-off-text="No" switch-on-text="Yes" switch-checked="dirtyStatus"
+                   switch-on-color="success">
+          </div>
         </div>
       </div>
-      </div>
-    </div>
     </div>
   </div>
-  <div ng-switch="settings.vinMode">
-    <div ng-hide="settings.vinMode == 'noMatch'">
-      <div class="field row">
-        <div class="col-sm-10">
-          <label ng-show="data.$selectedVehicle.Year" for="outputYear" class="show-hide">Year</label>
-          <input id="outputYear" class="input-full" placeholder="Year" ng-model="data.$selectedVehicle.Year" disabled/>
-        </div>
-      </div>
-      <div class="field row">
-        <div class="col-sm-10">
-        <label ng-show="data.$selectedVehicle.Make" for="outputMake" class="show-hide">Make</label>
-        <input id="outputMake" class="input-full" placeholder="Make" ng-model="data.$selectedVehicle.Make"
-               disabled/>
-        </div>
-      </div>
-      <div class="field row">
-        <div class="col-sm-10">
-        <label ng-show="data.$selectedVehicle.Model" for="outputModel" class="show-hide">Model</label>
-        <input id="outputModel" class="input-full" placeholder="Model"
-               ng-model="data.$selectedVehicle.Model" disabled/>
-        </div>
-      </div>
-      <div class="field row">
-        <div class="col-sm-10">
-        <label ng-show="data.$selectedVehicle.Style" for="outputStyle" class="show-hide">Style</label>
-        <input id="outputStyle" class="input-full" placeholder="Style"
-               ng-model="data.$selectedVehicle.Style" disabled/>
-        </div>
-      </div>
+</div>
+
+
+<div ng-switch="settings.vinMode">
+  <div ng-hide="settings.vinMode == 'noMatch'">
+    <div class="form-group">
+      <label ng-show="data.$selectedVehicle.Year" for="outputYear" class="show-hide">Year</label>
+      <input id="outputYear" class="form-control" placeholder="Year" ng-model="data.$selectedVehicle.Year" disabled/>
     </div>
-    <div  ng-switch-when="noMatch" ng-show="dirtyStatus">
-      <div class="field row">
-        <div class="col-sm-10">
-          <label ng-show="data.inputYear" for="inputYear" class="show-hide">Year</label>
-          <input id="inputYear" name="inputYear" class="input-full" placeholder="Year" ng-model="data.inputYear" required/>
-          <label for="inputYear" class="text-error" ng-show="validity.inputYear.$error.required" translate>
-           Please enter a Year.
-          </label>
-        </div>
-      </div>
-      <div class="field row">
-        <div class="col-sm-10">
-          <label ng-show="data.$selectedVehicle.Make" for="inputMake" class="show-hide">Make</label>
-          <input id="inputMake" name="inputMake" class="input-full" placeholder="Make" ng-model="data.inputMake" required/>
-          <label for="inputMake" class="text-error" ng-show="validity.inputMake.$error.required" translate>
-          Please enter a Make.
-          </label>
-        </div>
-      </div>
-      <div class="field row">
-        <div class="col-sm-10">
-          <label ng-show="data.$selectedVehicle.Model" for="inputModel" class="show-hide">Model</label>
-          <input id="inputModel" name="inputModel" class="input-full" placeholder="Model" ng-model="data.inputModel" required/>
-          <label for="inputModel" class="text-error" ng-show="validity.inputModel.$error.required" translate>
-            Please enter a Model.
-          </label>
-        </div>
-      </div>
-      <div class="field row">
-        <div class="col-sm-10">
-          <label ng-show="data.$selectedVehicle.Style" for="inputStyle" class="show-hide">Style</label>
-          <input id="inputStyle" name="inputStyle" class="input-full" placeholder="Style" ng-model="data.inputStyle" required/>
-          <label for="inputStyle" class="text-error" ng-show="validity.inputStyle.$error.required" translate>
-          Please enter a Style.
-          </label>
-         </div>
-      </div>
+    <div class="form-group">
+      <label ng-show="data.$selectedVehicle.Make" for="outputMake" class="show-hide">Make</label>
+      <input id="outputMake" class="form-control" placeholder="Make" ng-model="data.$selectedVehicle.Make" disabled/>
     </div>
-    <div id="nxg-vin-no-match-info" ng-switch-when="noMatch" ng-hide="dirtyStatus">
-    <div class="field row">
-      <div class="col-sm-10">
+    <div class="form-group">
+      <label ng-show="data.$selectedVehicle.Model" for="outputModel" class="show-hide">Model</label>
+      <input id="outputModel" class="form-control" placeholder="Model" ng-model="data.$selectedVehicle.Model" disabled/>
+    </div>
+    <div class="form-group">
+      <label ng-show="data.$selectedVehicle.Style" for="outputStyle" class="show-hide">Style</label>
+      <input id="outputStyle" class="form-control" placeholder="Style" ng-model="data.$selectedVehicle.Style" disabled/>
+    </div>
+  </div>
+  <div  ng-switch-when="noMatch" ng-show="dirtyStatus">
+    <div class="form-group">
+      <label ng-show="data.inputYear" for="inputYear" class="show-hide">Year</label>
+      <input id="inputYear" name="inputYear" class="form-control" placeholder="Year" ng-model="data.inputYear" required/>
+      <label for="inputYear" class="text-error" ng-show="validity.inputYear.$error.required" translate>
+        Please enter a Year.
+      </label>
+    </div>
+    <div class="form-group">
+      <label ng-show="data.$selectedVehicle.Make" for="inputMake" class="show-hide">Make</label>
+      <input id="inputMake" name="inputMake" class="form-control" placeholder="Make" ng-model="data.inputMake" required/>
+      <label for="inputMake" class="text-error" ng-show="validity.inputMake.$error.required" translate>
+        Please enter a Make.
+      </label>
+    </div>
+    <div class="form-group">
+      <label ng-show="data.$selectedVehicle.Model" for="inputModel" class="show-hide">Model</label>
+      <input id="inputModel" name="inputModel" class="form-control" placeholder="Model" ng-model="data.inputModel" required/>
+      <label for="inputModel" class="text-error" ng-show="validity.inputModel.$error.required" translate>
+        Please enter a Model.
+      </label>
+    </div>
+    <div class="form-group">
+      <label ng-show="data.$selectedVehicle.Style" for="inputStyle" class="show-hide">Style</label>
+      <input id="inputStyle" name="inputStyle" class="form-control" placeholder="Style" ng-model="data.inputStyle" required/>
+      <label for="inputStyle" class="text-error" ng-show="validity.inputStyle.$error.required" translate>
+        Please enter a Style.
+      </label>
+    </div>
+  </div>
+  <div id="nxg-vin-no-match-info" ng-switch-when="noMatch" ng-hide="dirtyStatus">
+    <div class="form-group">
       <label ng-show="lookupValues.vehicle.years.selected" for="year" class="show-hide">Year</label>
       <div class="style-select full-width" ng-class="{ 'nxg-invalid' : validity.year.$error.required }">
         <select id="year" name="year"
@@ -135,69 +121,57 @@
           <option value="">Year</option>
         </select>
       </div>
-        <label for="year" class="text-error" ng-show="validity.year.$error.required"
-               translate>
-          Please select a Year.
-        </label>
-     </div>
+      <label for="year" class="text-error" ng-show="validity.year.$error.required" translate>
+        Please select a Year.
+      </label>
     </div>
-    <div class="field row">
-      <div class="col-sm-10">
+    <div class="form-group">
       <label ng-show="lookupValues.vehicle.makes.selected" for="make" class="show-hide">Make</label>
-        <div class="style-select full-width" ng-class="{ 'nxg-invalid' : validity.make.$error.required }">
-          <select id="make" name="make"
-                  ng-model="lookupValues.vehicle.makes.selected"
-                  ng-change="lookupValues.vehicle.models.fill()"
-                  ng-disabled="!lookupValues.vehicle.years.selected"
-                  ng-options="make.Value for make in lookupValues.vehicle.makes.list"
-                  required>
-            <option value="">Make</option>
-          </select>
-        </div>
-        <label for="make" class="text-error"
-               ng-show="validity.make.$error.required" translate>
-          Please select a Make.
-        </label>
+      <div class="style-select full-width" ng-class="{ 'nxg-invalid' : validity.make.$error.required }">
+        <select id="make" name="make"
+                ng-model="lookupValues.vehicle.makes.selected"
+                ng-change="lookupValues.vehicle.models.fill()"
+                ng-disabled="!lookupValues.vehicle.years.selected"
+                ng-options="make.Value for make in lookupValues.vehicle.makes.list"
+                required>
+          <option value="">Make</option>
+        </select>
       </div>
+      <label for="make" class="text-error" ng-show="validity.make.$error.required" translate>
+        Please select a Make.
+      </label>
     </div>
-    <div class="field row">
-      <div class="col-sm-10">
-        <label ng-show="lookupValues.vehicle.models.selected" for="model" class="show-hide">Model</label>
-        <div class="style-select full-width" ng-class="{ 'nxg-invalid': validity.model.$error.required }">
-          <select id="model" name="model"
-                  ng-model="lookupValues.vehicle.models.selected"
-                  ng-change="lookupValues.vehicle.styles.fill()"
-                  ng-disabled="!lookupValues.vehicle.makes.selected"
-                  ng-options="model.Value for model in lookupValues.vehicle.models.list"
-                  required>
-            <option value="">Model</option>
-          </select>
+    <div class="form-group">
+      <label ng-show="lookupValues.vehicle.models.selected" for="model" class="show-hide">Model</label>
+      <div class="style-select full-width" ng-class="{ 'nxg-invalid': validity.model.$error.required }">
+        <select id="model" name="model"
+                ng-model="lookupValues.vehicle.models.selected"
+                ng-change="lookupValues.vehicle.styles.fill()"
+                ng-disabled="!lookupValues.vehicle.makes.selected"
+                ng-options="model.Value for model in lookupValues.vehicle.models.list"
+                required>
+          <option value="">Model</option>
+        </select>
       </div>
-      <label for="model" class="text-error"
-             ng-show="validity.model.$error.required" translate>
+      <label for="model" class="text-error" ng-show="validity.model.$error.required" translate>
         Please select a Model.
       </label>
-      </div>
     </div>
-    <div class="field row">
-      <div class="col-sm-10">
-        <label ng-show="lookupValues.vehicle.styles.selected" for="style" class="show-hide">Style</label>
-        <div class="style-select full-width" ng-class="{ 'nxg-invalid':validity.style.$error.required }">
-          <select id="style" name="style"
-                  ng-model="lookupValues.vehicle.styles.selected"
-                  ng-disabled="!lookupValues.vehicle.models.selected"
-                  ng-options="style.DisplayName for style in lookupValues.vehicle.styles.list"
-                  required>
-            <option value="">Style</option>
-          </select>
-        </div>
-        <label for="style" class="text-error"
-               ng-show="validity.style.$error.required" translate>
-          Please select a Style.
-        </label>
+    <div class="form-group">
+      <label ng-show="lookupValues.vehicle.styles.selected" for="style" class="show-hide">Style</label>
+      <div class="style-select full-width" ng-class="{ 'nxg-invalid':validity.style.$error.required }">
+        <select id="style" name="style"
+                ng-model="lookupValues.vehicle.styles.selected"
+                ng-disabled="!lookupValues.vehicle.models.selected"
+                ng-options="style.DisplayName for style in lookupValues.vehicle.styles.list"
+                required>
+          <option value="">Style</option>
+        </select>
       </div>
+      <label for="style" class="text-error"
+             ng-show="validity.style.$error.required" translate>
+        Please select a Style.
+      </label>
     </div>
   </div>
 </div>
-
-
