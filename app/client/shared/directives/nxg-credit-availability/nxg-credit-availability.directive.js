@@ -17,7 +17,8 @@
       templateUrl: 'client/shared/directives/nxg-credit-availability/nxg-credit-availability.template.html',
       restrict: 'E',
       scope: {
-        creditType: '='
+        creditType: '=',
+        purchasePrice: '='
       },
       replace: 'true',
       link: link
@@ -47,7 +48,7 @@
             borderWidth: 0,
             dataLabels: {
               enabled: true,
-              color: '#fff',
+              color: '#FFF',
               style: {
                 fontWeight: 'bolder'
               },
@@ -111,12 +112,12 @@
 
         var chartElement = element.find('.nxg-credit-availability').highcharts();
         chartElement.series[0].setData([{
-          y: available,
+          y: available > 0 ? available : 0,
           color: "#4CAF50",
           dataLabels: {
             align: 'right',
             formatter: function() {
-              return numeral(this.y).format('($0.0a)', Math.floor);
+              return numeral(available).format('($0.0a)', Math.floor);
             }
           }
         }]);
@@ -126,7 +127,7 @@
           dataLabels: {
             align: 'left',
             formatter: function() {
-              return numeral(this.y).format('($0.0a)', Math.ceil);
+              return numeral(total - available).format('($0.0a)', Math.ceil);
             }
           }
         }]);

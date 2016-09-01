@@ -6,9 +6,9 @@
     .module('nextgearWebApp')
     .directive('nxgValueLookup', nxgCreditAvailability);
 
-  nxgCreditAvailability.$inject = ['gettext', 'gettextCatalog'];
+  nxgCreditAvailability.$inject = ['gettext'];
 
-  function nxgCreditAvailability(gettext, gettextCatalog) {
+  function nxgCreditAvailability(gettext) {
 
     gettext('Purchase Amount');
     gettext('Average Bookout');
@@ -27,8 +27,6 @@
     };
 
     function linkFn(scope, element) {
-      // var purchaseAmountText = gettextCatalog.getString('Purchase Amount');
-      // var averageBookoutText = gettextCatalog.getString('Average Bookout');
 
       var options = {
         chart: {
@@ -43,19 +41,38 @@
         title: {
           text: ''
         },
+        labels: {
+          items: [{
+            html: '<strong>Purchase Price</strong>',
+            style: {
+              top: '5px',
+              left: '-74px'
+            }
+          }, {
+            html: '<strong>Bookout Amount</strong>',
+            style: {
+              top: '55px',
+              left: '-74px'
+            }
+          }]
+        },
         xAxis: {
-          categories: ['Price', '', 'Blackbook', 'MMR', 'KBB'],
-          tickLength: 0
+          categories: ['', 'Total Cost', '', 'Black Book', 'MMR', 'KBB'],
+          tickLength: 0,
+          gridLineColor: 'transparent',
+          lineWidth: 0,
+          minorGridLineWidth: 0,
+          minorTickLength: 0
         },
         yAxis: {
           labels: {
             enabled: false
           },
-          endOnTick: false,
           title: {
             enabled: false
           },
-          gridLineColor: 'transparent'
+          gridLineColor: 'transparent',
+          endOnTick: false
         },
         plotOptions: {
           bar: {
@@ -91,10 +108,13 @@
         series: [{
           type: 'column',
           data: [{
+            color: 'black',
+            y: 0
+          }, {
             color: '#4CAF50',
             y: 34
           }, {
-            color: 'transparent',
+            color: 'black',
             y: 0
           }, {
             color: '#000000',
