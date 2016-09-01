@@ -20,13 +20,13 @@
 
   <label class="main-heading" for="payBuyerSeller">Send payment to</label>
   <div class="cr-inline" style="margin-bottom: 24px;">
-    <input type="radio" name="payBuyerSeller" id="payBuyer" ng-value="buyer" ng-model="wizardFloor.data.PaySeller"
+    <input type="radio" name="payBuyerSeller" id="payBuyer" ng-value="0" ng-model="wizardFloor.data.PaySeller"
            ng-disabled="wizardFloor.data.SaleTradeIn"
            ng-change="wizardFloor.data.BankAccountId = null" />
     <label class="radio-img" for="payBuyer"></label>
     <label class="cr-label" for="payBuyer">Buyer</label>
     <br />
-    <input type="radio" name="payBuyerSeller" id="paySeller" ng-value="seller" ng-model="wizardFloor.data.PaySeller"
+    <input type="radio" name="payBuyerSeller" id="paySeller" ng-value="1" ng-model="wizardFloor.data.PaySeller"
            ng-disabled="wizardFloor.data.SaleTradeIn"
            ng-change="wizardFloor.data.BankAccountId = null" />
     <label class="radio-img" for="paySeller"></label>
