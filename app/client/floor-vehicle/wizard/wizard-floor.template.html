@@ -14,7 +14,14 @@
       <div>Documents &amp; Instructions</div>
     </li>
   </ul>
-  <div ui-view></div>
+  <div class="row">
+    <div class="col-xs-8">
+      <div ui-view></div>
+    </div>
+    <div class="col-xs-4">
+      <nxg-value-lookup></nxg-value-lookup>
+    </div>
+  </div>
   <div>
     <button type="button"
             class="btn-cta cta-secondary" translate
