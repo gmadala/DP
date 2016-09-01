@@ -60,8 +60,8 @@ describe('Directive: nxgBusinessFieldV2', function () {
     };
     scope.validity = {};
 
-    element = angular.element('<form name="myForm">' +
-      '<input id="fooInput" name="fooInputName" nxg-business-field="sellers" ' +
+    element = angular.element('<form name="myFormV2">' +
+      '<input id="fooInput" name="fooInputName" nxg-business-field-v2="sellers" ' +
       'ng-disabled="model.disableMe" selected-business="model.bizness"' +
       'ng-required="model.requireMe" form="theForm" validity="validity">' +
       '</input></form>');
@@ -106,8 +106,8 @@ describe('Directive: nxgBusinessFieldV2', function () {
 
   it('should set the searchBuyersMode for the search to true if field is in buyers mode',
     inject(function ($uibModal, $compile, $rootScope) {
-      element = angular.element('<form name="myForm">' +
-        '<input id="fooInput" name="fooInputName" nxg-business-field="buyers" ' +
+      element = angular.element('<form name="myFormV2">' +
+        '<input id="fooInput" name="fooInputName" nxg-business-field-v2="buyers" ' +
         'ng-disabled="model.disableMe" selected-business="model.bizness"' +
         'ng-required="model.requireMe" form="theForm" validity="validity">' +
         '</input></form>');
@@ -137,8 +137,8 @@ describe('Directive: nxgBusinessFieldV2', function () {
   });
 
   it('should only open business dialog if input is valid', inject(function($uibModal, $compile, $rootScope) {
-    element = angular.element('<form name="myForm">' +
-      '<input id="fooInput" name="fooInputName" nxg-business-field="buyers" ' +
+    element = angular.element('<form name="myFormV2">' +
+      '<input id="fooInput" name="fooInputName" nxg-business-field-v2="buyers" ' +
       'ng-disabled="model.disableMe" selected-business="model.bizness"' +
       'ng-required="model.requireMe" form="theForm" validity="validity">' +
       '</input></form>');
@@ -154,7 +154,7 @@ describe('Directive: nxgBusinessFieldV2', function () {
     expect($uibModal.open).not.toHaveBeenCalled();
 
     element.find('input').val(fakeBiz);
-    element.find('button').trigger('click');
+    element.find('.form-group').find('button').trigger('click');
     expect(scope.model.bizness).toBe(true);
   }));
 
@@ -194,40 +194,40 @@ describe('Directive: nxgBusinessFieldV2', function () {
   });
 
   it('should publish an ngModelController under the original input name', function () {
-    expect(scope.myForm.fooInputName).toBeDefined();
-    expect(typeof scope.myForm.fooInputName.$valid).toBe('boolean');
+    expect(scope.myFormV2.fooInputName).toBeDefined();
+    expect(typeof scope.myFormV2.fooInputName.$valid).toBe('boolean');
   });
 
   it('should provide validity state based on the ng-requires attribute', function () {
-    expect(scope.myForm.fooInputName.$valid).toBe(false);
+    expect(scope.myFormV2.fooInputName.$valid).toBe(false);
     scope.$apply(function () {
       scope.model.requireMe = false;
     });
-    expect(scope.myForm.fooInputName.$valid).toBe(true);
+    expect(scope.myFormV2.fooInputName.$valid).toBe(true);
   });
 
   it('should provide validity state based on minimum 3 characters', function () {
-    expect(scope.myForm.fooInputName.$valid).toBe(false);
+    expect(scope.myFormV2.fooInputName.$valid).toBe(false);
     element.find('input').val('fo');
     element.find('input').trigger('input');
-    expect(scope.myForm.fooInputName.$valid).toBe(false);
-    expect(scope.myForm.fooInputName.$error.minlength).toBe(true);
+    expect(scope.myFormV2.fooInputName.$valid).toBe(false);
+    expect(scope.myFormV2.fooInputName.$error.minlength).toBe(true);
   });
 
   it('should update validity state when selected business changes', function () {
-    expect(scope.myForm.fooInputName.$valid).toBe(false);
+    expect(scope.myFormV2.fooInputName.$valid).toBe(false);
 
     // select a business
     scope.$apply(function () {
       scope.model.bizness = fakeBiz;
     });
-    expect(scope.myForm.fooInputName.$valid).toBe(true);
+    expect(scope.myFormV2.fooInputName.$valid).toBe(true);
 
     // deselect (by entering a value in the field)
     scope.$apply(function () {
-      scope.myForm.fooInputName.$setViewValue('blah');
+      scope.myFormV2.fooInputName.$setViewValue('blah');
     });
-    expect(scope.myForm.fooInputName.$valid).toBe(false);
+    expect(scope.myFormV2.fooInputName.$valid).toBe(false);
   });
 
   it('should clear the query on a reset event', function () {
