@@ -6,9 +6,9 @@
     .module('nextgearWebApp')
     .directive('nxgValueLookup', nxgCreditAvailability);
 
-  nxgCreditAvailability.$inject = ['gettext'];
+  nxgCreditAvailability.$inject = ['gettext', 'gettextCatalog'];
 
-  function nxgCreditAvailability(gettext) {
+  function nxgCreditAvailability(gettext, gettextCatalog) {
 
     gettext('Purchase Amount');
     gettext('Average Bookout');
@@ -30,10 +30,12 @@
 
       var options = {
         chart: {
+          backgroundColor: null,
           type: 'bar',
-          height: 150,
+          height: 200,
           marginTop: 0,
-          marginBottom: 0
+          marginBottom: 50,
+          spacingLeft: 40
         },
         credits: {
           enabled: false
@@ -43,21 +45,28 @@
         },
         labels: {
           items: [{
-            html: '<strong>Purchase Price</strong>',
+            html: '<strong>' + gettextCatalog.getString('Purchase Price') + '</strong>',
             style: {
               top: '5px',
-              left: '-74px'
+              left: '-106px'
             }
           }, {
-            html: '<strong>Bookout Amount</strong>',
+            html: '<strong>' + gettextCatalog.getString('Bookout Amount') + '</strong>',
             style: {
               top: '55px',
-              left: '-74px'
+              left: '-106px'
+            }
+          }, {
+            html: 'Purchase price less than <br /> highest average bookout',
+            style: {
+              top: '160px',
+              left: '135px',
+              fontSize: '10px'
             }
           }]
         },
         xAxis: {
-          categories: ['', 'Total Cost', '', 'Black Book', 'MMR', 'KBB'],
+          categories: ['', 'Total Cost', '', 'Black Book', 'MMR', 'KBB®'],
           tickLength: 0,
           gridLineColor: 'transparent',
           lineWidth: 0,
@@ -72,7 +81,13 @@
             enabled: false
           },
           gridLineColor: 'transparent',
-          endOnTick: false
+          endOnTick: false,
+          plotLines: [{
+            color: 'gray',
+            width: 2,
+            value: 8700,
+            dashStyle: 'solid'
+          }]
         },
         plotOptions: {
           bar: {
@@ -86,7 +101,7 @@
             dataLabels: {
               align: 'right',
               enabled: true,
-              color: '#fff',
+              color: '#FFF',
               style: {
                 fontWeight: 'bolder'
               },
@@ -112,36 +127,23 @@
             y: 0
           }, {
             color: '#4CAF50',
-            y: 34
+            y: 10000
           }, {
             color: 'black',
             y: 0
           }, {
             color: '#000000',
-            y: 40
+            y: 8700
           }, {
             color: '#2196F3',
-            y: 26
+            y: 8650
           }, {
             color: '#FF9800',
-            y: 54
+            y: 8400
           }]
-        }, {
-          type: 'line',
-          name: 'Highest',
-          data: [50]
         }]
       };
       element.find('.nxg-value-lookup').highcharts(options);
-
-      var chart = element.find('.nxg-value-lookup').highcharts();
-      chart.renderer.path(['M', 200, 0, 'L', 200, 330])
-        .attr({
-          'stroke-width': 2,
-          stroke: 'silver',
-          dashstyle: 'dash'
-        })
-        .add();
 
       scope.$watch('vin', function(newValue, oldValue) {
         // skip doing anything when the value is not changing
