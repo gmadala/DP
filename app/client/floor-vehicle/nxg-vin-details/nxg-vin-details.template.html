@@ -18,7 +18,7 @@
              nxg-autofocus
              ng-class="{ 'nxg-invalid': validity.inputVin.$error.required || validity.inputVin.$error.minlength || validity.inputVin.$error.maxlength || (vinIsSyntacticallyValid(validity.inputVin.$error) && validity.inputVin.$error.nxgRequires)}" />
       <div class="input-group-btn">
-       <button type="button" href class="btn btn-primary" style="margin: 0px; left: 20px;" ng-click="lookupVin()" translate>SEARCH</button>
+       <button type="button" href class="btn-cta cta-secondary" style="margin: 0px; left: 20px;" ng-click="lookupVin()" translate>SEARCH</button>
       </div>
     </div>
     <label for="inputVin" class="text-error" ng-show="validity.inputVin.$error.required" translate>

@@ -1,7 +1,7 @@
 <div>
     <div class="form-group">
       <label ng-show="wizardFloor.data.BusinessId" class="input-title show-hide"><span translate>Seller</span></label>
-      <div style="margin-right: 20px;" class="input-group input-group-sm">
+      <div style="margin-right: 20px;" class="input-group">
         <div>
           <i class="glyphicon glyphicon-search"></i>
         </div>
@@ -16,7 +16,7 @@
                nxg-blur="handleExit($event)"
                ng-class="{ 'nxg-invalid': validity.inputBiz.$error.minlength || (isValidLength(validity.inputBiz.$error) && validity.inputBiz.$error.nxgRequires)  }"/>
         <div class="input-group-btn">
-          <button style="margin: 0px; left: 20px;" class="btn btn-primary btn-sm" type="button" placeholder="Seller" ng-click="disabled || openBusinessSearch()" ng-class="{disabled: disabled}">SEARCH</button>
+          <button style="margin: 0px; left: 20px;" class="btn-cta cta-secondary" type="button" placeholder="Seller" ng-click="disabled || openBusinessSearch()" ng-class="{disabled: disabled}" translate>SEARCH</button>
         </div>
         <!-- <button href class="btn btn-input" ng-click="disabled || openBusinessSearch()"
          ng-class="{disabled: disabled}" type="button">
