@@ -540,7 +540,6 @@ module.exports = function(grunt) {
     },
     protractor: { // a specific suite can be run with grunt protractor:run --suite=suite_name
       options: {
-        keepAlive: true,
         configFile: 'e2e/conf.js',
         noColor: false
       },
