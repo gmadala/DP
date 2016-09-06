@@ -21,7 +21,10 @@
     <div class="col-xs-12 col-lg-8" ui-view></div>
     <div class="visible-lg col-lg-4">
       <nxg-credit-availability credit-type="wizardFloor.data.LineOfCreditId"></nxg-credit-availability>
-      <nxg-value-lookup></nxg-value-lookup>
+      <nxg-value-lookup vin="wizardFloor.data.UnitVin"
+                        odometer="wizardFloor.data.UnitMileage"
+                        inventory-location="wizardFloor.data.PhysicalInventoryAddressId"
+                        purchase-price="wizardFloor.data.UnitPurchasePrice"></nxg-value-lookup>
     </div>
   </div>
   <div class="row">
