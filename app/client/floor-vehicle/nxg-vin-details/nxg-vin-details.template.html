@@ -6,9 +6,11 @@
         <i class="glyphicon glyphicon-search"></i>
       </div>
       <input type="text" id="inputVin"
-             class="vin-focus form-control" placeholder="VIN"
+             class="vin-focus form-control"
+             placeholder="VIN"
              name="inputVin"
-             ng-model="data.UnitVin" required
+             ng-model="data.UnitVin"
+             required
              ng-minlength="6"
              ng-maxlength="17"
              nxg-requires="settings.vinMode == 'matched' || settings.vinMode == 'noMatch'"
@@ -19,18 +21,16 @@
        <button type="button" href class="btn btn-primary" style="margin: 0px; left: 20px;" ng-click="lookupVin()" translate>SEARCH</button>
       </div>
     </div>
+    <label for="inputVin" class="text-error" ng-show="validity.inputVin.$error.required" translate>
+      Please enter a VIN.
+    </label>
+    <label for="inputVin" class="text-error" ng-show="validity.inputVin.$error.minlength || validity.inputVin.$error.maxlength" translate>
+      VIN should be 6 to 17 characters.
+    </label>
+    <label for="inputVin" class="text-error" ng-show="vinIsSyntacticallyValid(validity.inputVin.$error) && validity.inputVin.$error.nxgRequires" translate>
+     Please look up the VIN.
+    </label>
   </div>
-
-
-  <label for="inputVin" class="text-error" ng-show="validity.inputVin.$error.required" translate>
-    Please enter a VIN.
-  </label>
-  <label for="inputVin" class="text-error" ng-show="validity.inputVin.$error.minlength || validity.inputVin.$error.maxlength" translate>
-    VIN should be 6 to 17 characters.
-  </label>
-  <label for="inputVin" class="text-error" ng-show="vinIsSyntacticallyValid(validity.inputVin.$error) && validity.inputVin.$error.nxgRequires" translate>
-   Please look up the VIN.
-  </label>
 </div>
 
 
@@ -82,9 +82,12 @@
   <div  ng-switch-when="noMatch" ng-show="dirtyStatus">
     <div class="form-group">
       <label ng-show="data.inputYear" for="inputYear" class="show-hide">Year</label>
-      <input id="inputYear" name="inputYear" class="form-control" placeholder="Year" ng-model="data.inputYear" required/>
+      <input id="inputYear" name="inputYear" class="form-control" placeholder="Year" ng-model="data.inputYear" ng-pattern="/^[0-9]{1,3}(?:,?[0-9]{3})*$/" required/>
       <label for="inputYear" class="text-error" ng-show="validity.inputYear.$error.required" translate>
         Please enter a Year.
+      </label>
+      <label for="inputYear" class="text-error" ng-show="validity.inputYear.$error.pattern" translate>
+        Please enter a positive integer value with no decimals.
       </label>
     </div>
     <div class="form-group">

@@ -1,7 +1,8 @@
 <div>
     <div class="form-group">
+      <label ng-show="wizardFloor.data.BusinessId" class="input-title show-hide"><span translate>Seller</span></label>
       <div style="margin-right: 20px;" class="input-group input-group-sm">
-        <div class="input-group-addon">
+        <div>
           <i class="glyphicon glyphicon-search"></i>
         </div>
         <input type="text" id="{{ inputId }}"
@@ -9,6 +10,7 @@
                ng-disabled="disabled"
                ng-change="clearSelected()"
                ng-minlength="3"
+               placeholder="Seller"
                class="form-control"
                nxg-requires="!isRequired() || selection"
                nxg-blur="handleExit($event)"
@@ -21,20 +23,20 @@
           <span nxg-icon="icon-search"></span>
         </button> -->
       </div>
+      <div ng-switch on="mode">
+        <label ng-switch-when="buyers" for="inputBiz" class="text-error" ng-show="!validity.inputBiz.$error.minlength && validity.inputBiz.$error.nxgRequires" translate>
+          Please look up a Buyer.
+        </label>
+        <label ng-switch-when="sellers" for="inputBiz" class="text-error" ng-show="!validity.inputBiz.$error.minlength && validity.inputBiz.$error.nxgRequires" translate>
+          Please look up a Seller.
+        </label>
+      </div>
+      <label for="inputBiz" class="text-error" ng-show="validity.inputBiz.$error.minlength" translate>
+        Please enter at least 3 characters.
+      </label>
     </div>
 
     <!-- <button class="btn btn-sm btn-primary" type="button" placeholder="Seller" ng-click="disabled || openBusinessSearch()" ng-class="{disabled: disabled}">
       SEARCH
     </button> -->
-  <div ng-switch on="mode">
-    <label ng-switch-when="buyers" for="inputBiz" class="text-error" ng-show="!validity.inputBiz.$error.minlength && validity.inputBiz.$error.nxgRequires" translate>
-      Please look up a Buyer.
-    </label>
-    <label ng-switch-when="sellers" for="inputBiz" class="text-error" ng-show="!validity.inputBiz.$error.minlength && validity.inputBiz.$error.nxgRequires" translate>
-      Please look up a Seller.
-    </label>
-  </div>
-  <label for="inputBiz" class="text-error" ng-show="validity.inputBiz.$error.minlength" translate>
-    Please enter at least 3 characters.
-  </label>
 </div>

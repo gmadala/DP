@@ -36,11 +36,11 @@
         </button>
       </div>
     </div>
+    <label for="purchaseDate" class="text-error"
+           ng-show="(form.purchaseDate.$error.required || form.purchaseDate.$error.date || form.purchaseDate.$error.past || form.purchaseDate.$error.future) && form.$submitted" translate>
+      Please enter a Valid Purchase Date.
+    </label>
   </div>
-  <label for="purchaseDate" class="text-error"
-         ng-show="(form.purchaseDate.$error.required || form.purchaseDate.$error.date || form.purchaseDate.$error.past || form.purchaseDate.$error.future) && form.$submitted" translate>
-    Please enter a Valid Purchase Date.
-  </label>
 
   <div class="form-group">
     <label ng-show="wizardFloor.data.UnitPurchasePrice" for="inputPurchaseAmt" class="input-title show-hide"><span translate>Purchase Amount</span></label>
@@ -56,26 +56,26 @@
              class="form-control"
              ng-class="{ 'nxg-invalid': (form.inputPurchaseAmt.$error.required || form.inputPurchaseAmt.$error.max || form.inputPurchaseAmt.$error.pattern || form.inputPurchaseAmt.$error.maxlength || form.inputPurchaseAmt.$error.nxgMin) && form.$submitted }" />
     </div>
+    <label for="inputPurchaseAmt" class="text-error"
+           ng-show="form.inputPurchaseAmt.$error.required && form.$submitted" translate>
+      Please enter the Purchase Amount.
+    </label>
+    <label for="inputPurchaseAmt"
+           class="text-error"
+           ng-show="!form.inputPurchaseAmt.$error.required && (form.inputPurchaseAmt.$error.pattern || form.inputPurchaseAmt.$error.nxgMin) && form.$submitted" translate>
+      Please enter a positive numeric value with no <br> special characters, such as a dollar sign.
+    </label>
+    <label for="inputPurchaseAmt" class="text-error"
+           ng-show="!form.inputPurchaseAmt.$error.required && !form.inputPurchaseAmt.$error.pattern && form.inputPurchaseAmt.$error.max && form.$submitted" translate>
+      Please enter a value less than $1,000,000,000,000.
+    </label>
   </div>
-  <label for="inputPurchaseAmt" class="text-error"
-         ng-show="form.inputPurchaseAmt.$error.required && form.$submitted" translate>
-    Please enter the Purchase Amount.
-  </label>
-  <label for="inputPurchaseAmt"
-         class="text-error"
-         ng-show="!form.inputPurchaseAmt.$error.required && (form.inputPurchaseAmt.$error.pattern || form.inputPurchaseAmt.$error.nxgMin) && form.$submitted" translate>
-    Please enter a positive numeric value with no <br> special characters, such as a dollar sign.
-  </label>
-  <label for="inputPurchaseAmt" class="text-error"
-         ng-show="!form.inputPurchaseAmt.$error.required && !form.inputPurchaseAmt.$error.pattern && form.inputPurchaseAmt.$error.max && form.$submitted" translate>
-    Please enter a value less than $1,000,000,000,000.
-  </label>
 
   <label for="cmn-toggle-1" class="main-heading" style="margin-bottom: 18px;"><span translate>Request additional financing</span></label>
   <input bs-switch type="checkbox" id="cmn-toggle-1" name="cmn-toggle-1" class="noglobal"
          switch-size="normal" switch-off-text="No" switch-on-text="Yes" switch-on-color="success" ng-model="wizardFloor.data.AdditionalFinancing">
 
-  <div class="form-group" ng-show="wizardFloor.data.AdditionalFinancing">
+  <div class="form-group" style="margin-top: 24px;" ng-show="wizardFloor.data.AdditionalFinancing">
     <label for="comment" class="sr-only">Comment</label>
     <textarea class="form-control"
               style="height: 100px;"
@@ -100,7 +100,6 @@
             switch-size="normal" switch-off-text="No" switch-on-text="Yes" switch-on-color="success" ng-model="wizardFloor.data.SaleTradeIn">
     </div>
 
-  <label for="inputBiz" class="input-title" ng-class="{ 'hidden': wizardFloor.data.SaleTradeIn }"><span translate>Seller</span></label>
   <span class="nxg-business-field" ng-class="{ 'hidden': wizardFloor.data.SaleTradeIn, 'has-error': (form.inputBiz.$error.nxgRequires || form.inputBiz.$error.minlength) && form.$submitted }">
     <input nxg-business-field-v2="sellers"
            id="inputBiz"

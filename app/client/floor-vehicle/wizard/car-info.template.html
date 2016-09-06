@@ -1,6 +1,8 @@
 <form name="form" novalidate>
   <h2 translate>Tell us about the vehicle you would like to floor</h2>
   <h4 translate>Search for a VIN to import vehicle details & style</h4>
+
+
   <div nxg-vin-details floor-model="wizardFloor.data" validity="wizardFloor.validity" form="form" error-flag="carInfo.vinDetailsErrorFlag" nxg-autofocus="reset"></div>
 
   <div class="main-heading" translate>Color & Odometer</div>
@@ -13,12 +15,12 @@
         <option value="" translate>Color</option>
       </select>
     </div>
+    <label for="inputColor"
+           class="text-error"
+           ng-show="form.inputColor.$error.required && form.$submitted" translate>
+      Please select a Color.
+    </label>
   </div>
-  <label for="inputColor"
-         class="text-error"
-         ng-show="form.inputColor.$error.required && form.$submitted" translate>
-    Please select a Color.
-  </label>
 
   <div class="form-group">
     <label ng-show="wizardFloor.data.UnitMileage" for="inputMileage" class="show-hide">Odometer</label>
@@ -32,19 +34,19 @@
            nxg-validate-int="6"
            ng-class="{ 'nxg-invalid': (form.inputMileage.$error.required || form.inputMileage.$error.pattern || form.inputMileage.$error.maxlength || form.inputMileage.$error.nxgMin) && form.$submitted }"
       />
+      <label for="inputMileage" class="text-error" ng-show="form.inputMileage.$error.required && form.$submitted">
+        <span translate translate-comment="This will be followed by 'odometer'">Please enter the</span>
+        <span>{{ carInfo.mileageOrOdometer }}.</span>
+      </label>
+      <label for="inputMileage"
+             class="text-error"
+             ng-show="form.inputMileage.$error.pattern || form.inputMileage.$error.nxgMin && form.$submitted" translate>
+        Please enter a positive integer value with no decimals.
+      </label>
+      <label for="inputMileage"
+             class="text-error"
+             ng-show="form.inputMileage.$error.maxlength && form.$submitted" translate>
+        Please enter a value less than 1,000,000.
+      </label>
   </div>
-  <label for="inputMileage" class="text-error" ng-show="form.inputMileage.$error.required && form.$submitted">
-    <span translate translate-comment="This will be followed by 'odometer'">Please enter the</span>
-    <span>{{ carInfo.mileageOrOdometer }}.</span>
-  </label>
-  <label for="inputMileage"
-         class="text-error"
-         ng-show="form.inputMileage.$error.pattern || form.inputMileage.$error.nxgMin && form.$submitted" translate>
-    Please enter a positive integer value with no decimals.
-  </label>
-  <label for="inputMileage"
-         class="text-error"
-         ng-show="form.inputMileage.$error.maxlength && form.$submitted" translate>
-    Please enter a value less than 1,000,000.
-  </label>
 </form>

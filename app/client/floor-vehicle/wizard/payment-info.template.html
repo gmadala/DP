@@ -12,11 +12,11 @@
         <option value="" translate>Line of Credit</option>
       </select>
     </div>
+    <label for="inputCreditLine" class="text-error"
+           ng-show="form.inputCreditLine.$error.required && form.$submitted" translate>
+      Please select a Line of Credit.
+    </label>
   </div>
-  <label for="inputCreditLine" class="text-error"
-         ng-show="form.inputCreditLine.$error.required && form.$submitted" translate>
-    Please select a Line of Credit.
-  </label>
 
   <label class="main-heading" for="payBuyerSeller">Send payment to</label>
   <div class="cr-inline" style="margin-bottom: 24px;">
@@ -46,9 +46,9 @@
         <option value="" translate>Deposit Account</option>
       </select>
     </div>
+    <label for="inputDisburseAcct" class="text-error"
+           ng-show="form.inputDisburseAcct.$error.required && form.$submitted" translate>
+      Please select a Bank Account for Deposit.
+    </label>
   </div>
-  <label for="inputDisburseAcct" class="text-error"
-         ng-show="form.inputDisburseAcct.$error.required && form.$submitted" translate>
-    Please select a Bank Account for Deposit.
-  </label>
 </form>
