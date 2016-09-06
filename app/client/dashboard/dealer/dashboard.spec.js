@@ -11,6 +11,7 @@ describe('Controller: DashboardCtrl', function () {
     mockState,
     shouldSucceed = true,
     searchSpy,
+    auditsSpy,
     $q,
     dealerDashboardData = {
       "OverduePayments": 1,
@@ -296,7 +297,7 @@ describe('Controller: DashboardCtrl', function () {
     };
 
   // Initialize the controller and a mock scope
-  beforeEach(inject(function ($controller, $rootScope, Dashboard, Floorplan, FloorplanUtil, _$q_, $uibModal) {
+  beforeEach(inject(function ($controller, $rootScope, Dashboard, Audits, Floorplan, FloorplanUtil, _$q_, $uibModal) {
     scope = $rootScope.$new();
     $q = _$q_;
     mockState = {
@@ -306,6 +307,14 @@ describe('Controller: DashboardCtrl', function () {
     searchSpy = spyOn(Floorplan, 'search').and.callFake(function() {
       if(shouldSucceed) {
         return $q.when({ Floorplans: ['one', 'two'] });
+      } else {
+        return $q.reject(false);
+      }
+    });
+
+    auditsSpy = spyOn(Audits, 'refreshAudits').and.callFake(function() {
+      if(shouldSucceed) {
+        return $q.when({});
       } else {
         return $q.reject(false);
       }

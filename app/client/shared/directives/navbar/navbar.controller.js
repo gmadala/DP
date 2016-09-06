@@ -77,6 +77,7 @@
         $scope.isUnitedStates = User.isUnitedStates();
         $scope.displayTitleRelease = info.DisplayTitleReleaseProgram;
         $scope.eventSalesEnabled = User.getFeatures().hasOwnProperty('eventSales') ? User.getFeatures().eventSales.enabled : true;
+        $scope.auditsEnabled = User.getFeatures().hasOwnProperty('openAudits') ? User.getFeatures().openAudits.enabled : true;
         $scope.fedExWaybillEnabled = fedex.wayBillPrintingEnabled();
         if ($scope.isUnitedStates) {
           floorplansSubMenu.splice(2, 0, {
@@ -91,6 +92,13 @@
               activeWhen: 'promos'
             });
           }
+        }
+        if ($scope.auditsEnabled) {
+          floorplansSubMenu.push({
+            name: gettextCatalog.getString('Open Audits'),
+            href: '#/audits',
+            activeWhen: 'audits'
+          });
         }
         if ($scope.displayTitleRelease) {
           floorplansSubMenu.push({
