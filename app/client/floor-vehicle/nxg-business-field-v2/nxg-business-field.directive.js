@@ -44,9 +44,6 @@
         element.find('input').attr('name', attrs.name);
         // remove some duplicate & unneeded attributes on the root element
         element.removeAttr('id name ng-disabled');
-      },
-      link: function() {
-        console.log('link function of directive');
       }
     };
 

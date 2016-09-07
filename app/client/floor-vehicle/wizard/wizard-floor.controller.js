@@ -147,7 +147,9 @@
       invalidFiles: [],
       comment: '',
       commentAdditionalFinancing: '',
-      commentGeneral: ''
+      commentGeneral: '',
+      query: '',
+      notPassengerVehicle: false
     };
 
     vm.reset = function () {

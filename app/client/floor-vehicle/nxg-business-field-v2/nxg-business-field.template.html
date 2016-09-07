@@ -6,7 +6,7 @@
           <i class="glyphicon glyphicon-search"></i>
         </div>
         <input type="text" id="{{ inputId }}"
-               ng-model="query"
+               ng-model="$parent.$parent.wizardFloor.data.query"
                ng-disabled="disabled"
                ng-change="clearSelected()"
                ng-minlength="3"
