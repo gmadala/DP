@@ -8,7 +8,8 @@ body.lang_es {
   #PromosPage {
     @media only screen and (max-width: 767px) {
       .accordion-button {
-        width: 100%;
+        width: 90%;
+        font-size: 12px;
       }
     }
   }
