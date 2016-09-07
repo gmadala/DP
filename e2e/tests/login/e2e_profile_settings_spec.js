@@ -28,14 +28,17 @@ describe('\n Profile Settings Page', function () {
     expect(browser.getCurrentUrl()).toEqual(execSettings.homePage());
   });
 
-  it("1. Profile Settings - Navigating to Profile Settings page  and validating ", function () {
+  it("2. Profile Settings - Navigating to Profile Settings page  and validating ", function () {
     login.clickMyAccount();
     profileSettings.doProfileSettings();
     expect(browser.getCurrentUrl()).toEqual(execSettings.profileSettingsPage());
-
+    expect(profileSettings.elUserProfile.isDisplayed()).toBe(true);
+    //expect(profileSettings.elUserName.isDisplayed()).toBe(true);
+    console.log(profileSettings.getTextUsername());
+    //expect(profileSettings.getTextUsername()).toEqual('62434AM');
   });
 
-  it("5. Profile Settings - Logout", function () {
+  it("5. Profile Settin.lags - Logout", function () {
     login.logout();
     expect(browser.getCurrentUrl()).toEqual(execSettings.loginPage());
   });
