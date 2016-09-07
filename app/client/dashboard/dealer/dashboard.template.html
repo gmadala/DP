@@ -1,4 +1,4 @@
-<div class="container non-responsive">
+<div class="container">
   <section class="row" ng-if="auditsEnabled && audits.results.length > 0">
     <div class="col-xs-12">
       <div class="alert alert-warning">
@@ -9,9 +9,9 @@
   </section>
   <section class="row upcoming">
     <!-- Calendar -->
-    <div class="col-xs-9">
-      <div class="nxg-dash-calendar-container panel panel-default well dash-well" >
-        <div class="dash-calendar-header">
+    <div class="col-sm-9">
+      <div class="nxg-dash-calendar-container panel panel-default well dash-well">
+        <div class="dash-calendar-header hidden-xs">
           <h5>
             <a href class="featured today-btn" ng-class="{ 'disabled': isPast() }" ng-click="onClickToday()"><span translate>Today</span>:</a>
             {{ today }}
@@ -76,7 +76,7 @@
           </div>
         </div>
 
-        <button id="showorhide" class="accordion-button paired-reversed" ng-click="isCollapsed = !isCollapsed" ng-class="{ expanded:!isCollapsed }">
+        <button id="showorhide" class="accordion-button paired-reversed hidden-xs" ng-click="isCollapsed = !isCollapsed" ng-class="{ expanded:!isCollapsed }">
       <span class="paired-body">
         <span ng-show="isCollapsed" translate>Show Payment Details</span>
         <span ng-show="!isCollapsed" translate>Hide Payment Details</span>
@@ -88,7 +88,7 @@
     </div>
 
     <!-- Payment Summary -->
-    <div class="col-xs-3">
+    <div class="col-sm-3">
       <div class="panel panel-default dash-well">
         <h2 class="well-title" translate>Payments Summary</h2>
         <ul class="counter-list">
@@ -190,11 +190,11 @@
     </div>
   </section>
 
-  <section class="page-break"></section>
+  <section class="page-break hidden-xs"></section>
 
   <section class="row">
     <!-- Credit Summary -->
-    <div class="col-xs-5">
+    <div class="col-sm-5">
       <div class="panel panel-default dash-well">
         <h2 class="well-title" translate>Credit Information</h2>
         <div class="row">
@@ -260,8 +260,8 @@
     </div>
 
     <!-- Receipts Summary -->
-    <div class="col-xs-4">
-      <div class="panel panel-default dash-well">
+    <div class="col-sm-4">
+      <div class="panel panel-default dash-well hidden-xs">
         <h2 class="well-title" translate>Recent Receipts</h2>
         <table class="table table-striped table-secondary">
           <thead>
@@ -280,6 +280,11 @@
           <span class="paired-media icon-x-small" nxg-icon="icon-triangle"></span>
         </button>
       </div>
+      <button id="viewAllReceipts" class="btn btn-default btn-block btn-cta cta-secondary cta-full-width receipts-btn visible-xs"
+              ng-click="onClickButtonLink('receipts')">
+        <span class="paired-body" translate>View All Receipts</span>
+        <span class="paired-media icon-x-small" nxg-icon="icon-triangle"></span>
+      </button>
     </div>
 
 
@@ -292,7 +297,7 @@
 
   <section class="row">
     <!-- Floor Plan Summary -->
-    <div class="col-xs-2">
+    <div class="col-sm-2">
       <div class="panel panel-default dash-well">
         <h2 class="well-title" translate>Floor Plan</h2>
         <ul class="counter-list">
@@ -351,7 +356,7 @@
     <!-- end .summary.floorplan -->
 
     <!--Recently Floored Vehicles-->
-    <div class="col-xs-10">
+    <div class="col-sm-10 hidden-xs">
       <div class="panel panel-default dash-well">
         <h2 class="well-title" translate>Recently Floored Vehicles</h2>
         <div ng-switch="floorplanData.results.length > 0 || floorplanData.loading">

@@ -5,9 +5,9 @@
     .module('nextgearWebApp')
     .directive('nxgUpcomingCalendar', nxgUpcomingCalendar);
 
-  nxgUpcomingCalendar.$inject = ['moment', '$state'];
+  nxgUpcomingCalendar.$inject = ['moment', '$state', '$window'];
 
-  function nxgUpcomingCalendar(moment, $state) {
+  function nxgUpcomingCalendar(moment, $state, $window) {
 
     return {
       template: '<div class="dash-calendar" ui-calendar="options" ng-model="eventSources" calendar="cal"></div>',
@@ -55,7 +55,7 @@
               view.start.valueOf() < new Date().valueOf());
 
             // notify that the view has changed
-            if ($scope.options.defaultView === 'basicWeek') {
+            if (($scope.options.defaultView === 'basicWeek') || ($scope.options.defaultView === 'basicDay')) {
               var startOfWeek = view.start.startOf('week').add(4, 'hours');
               var endOfWeek = view.end.endOf('week').add(4,'hours');
               $scope.$emit('setDateRange', startOfWeek.format('YYYY-MM-DD'), endOfWeek.format('YYYY-MM-DD'));
@@ -136,6 +136,10 @@
             return element;
           }
         };
+
+        if ($window.innerWidth <= 768) {
+          $scope.options.defaultView = 'basicDay';
+        }
 
         $scope.$watch('display', function(newValue, oldValue) {
           if (newValue === oldValue) {
