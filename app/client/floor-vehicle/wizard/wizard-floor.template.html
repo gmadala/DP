@@ -62,25 +62,31 @@
   <div ui-view class="col-xs-12 col-md-6 col-md-offset-1"></div>
   <div class="col-xs-12 col-md-4"></div>
   <div class="col-xs-12 col-md-6 col-md-offset-1">
-    <button type="button"
-            class="btn-cta cta-primary pull-right btn-next" translate
-            ng-show="wizardFloor.nextAvailable() && (wizardFloor.attachDocumentsEnabled || wizardFloor.counter != 3)"
-            ng-disabled="!wizardFloor.validForm"
-            ng-click="wizardFloor.next()">
-      Next
-    </button>
-    <button type="button"
-            class="btn-cta cta-primary pull-right btn-submit" translate
-            ng-show="!wizardFloor.nextAvailable() || (!wizardFloor.attachDocumentsEnabled && wizardFloor.counter == 3)"
-            ng-disabled="wizardFloor.floorPlanSubmitting"
-            ng-click="wizardFloor.submit()">
-      Submit
-    </button>
-    <button type="button"
-            class="btn-cta cta-secondary pull-right btn-previous" translate
-            ng-hide="!wizardFloor.previousAvailable()"
-            ng-click="wizardFloor.previous()">
-      Back
-    </button>
+    <div class="row">
+      <div class="col-xs-6" style="padding-right: 0px;">
+        <button type="button"
+                class="btn-cta cta-secondary btn-previous pull-right" translate
+                ng-hide="!wizardFloor.previousAvailable()"
+                ng-click="wizardFloor.previous()">
+          Back
+        </button>
+      </div>
+      <div class="col-xs-6" style="padding-left: 0px;">
+        <button type="button"
+                class="btn-cta cta-primary btn-next pull-left" translate
+                ng-show="wizardFloor.nextAvailable() && (wizardFloor.attachDocumentsEnabled || wizardFloor.counter != 3)"
+                ng-disabled="!wizardFloor.validForm"
+                ng-click="wizardFloor.next()">
+          Next
+        </button>
+        <button type="button"
+                class="btn-cta cta-primary btn-submit pull-left" translate
+                ng-show="!wizardFloor.nextAvailable() || (!wizardFloor.attachDocumentsEnabled && wizardFloor.counter == 3)"
+                ng-disabled="wizardFloor.floorPlanSubmitting"
+                ng-click="wizardFloor.submit()">
+          Submit
+        </button>
+      </div>
+    </div>
   </div>
 </div>
