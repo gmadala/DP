@@ -8,7 +8,6 @@
   BusinessFieldV2Ctrl.$inject = ['$scope', '$element', '$uibModal', '$timeout'];
 
   function BusinessFieldV2Ctrl($scope, $element, $uibModal, $timeout) {
-    console.log($scope.$parent.$parent.wizardFloor.data);
     var uibModal = $uibModal;
     var searchOpen = false;
     // $scope.query = '';
@@ -23,7 +22,6 @@
     };
 
     $scope.openBusinessSearch = function() {
-      console.log($scope.$parent.$parent.wizardFloor.data.query);
       lengthAtSubmit = $element.find('input').val().length;
 
       $scope.validity = angular.extend($scope.validity || {}, {
@@ -47,7 +45,7 @@
           controller: 'BusinessSearchCtrl',
           resolve: {
             initialQuery: function() {
-              return $scope.$parent.$parent.wizardFloor.data.query;
+              return $scope.query;
             },
             searchBuyersMode: function() {
               return $scope.mode === 'buyers';
@@ -68,7 +66,7 @@
         }).then(function(selectedBusiness) {
           if (selectedBusiness) {
             // replace any existing query text with the selected business name
-            $scope.$parent.$parent.wizardFloor.data.query = selectedBusiness.BusinessName;
+            $scope.query = selectedBusiness.BusinessName;
             $scope.selection = selectedBusiness;
           }
           searchOpen = false;
@@ -79,20 +77,20 @@
     // clear any existing data when field becomes disabled
     $scope.$watch('disabled', function(isDisabled) {
       if (isDisabled) {
-        $scope.$parent.$parent.wizardFloor.data.query = null;
+        $scope.query = null;
         $scope.clearSelected();
       }
     });
 
     // force user to resolve a query to a business selection before leaving the field
     $scope.handleExit = function() {
-      if ($scope.$parent.$parent.wizardFloor.data.query && !$scope.selection && !searchOpen) {
+      if ($scope.query && !$scope.selection && !searchOpen) {
         $scope.openBusinessSearch();
       }
     };
 
     $scope.$on('reset', function() {
-      $scope.$parent.$parent.wizardFloor.data.query = '';
+      $scope.query = '';
     });
 
   }

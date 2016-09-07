@@ -36,7 +36,8 @@
         selection: '=selectedBusiness',
         isRequired: '&ngRequired',
         form: '=',
-        validity: '='
+        validity: '=',
+        query: '=parentQuery'
       },
       controller: 'BusinessFieldV2Ctrl',
       compile: function(element, attrs) {
