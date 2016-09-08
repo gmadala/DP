@@ -8,7 +8,9 @@ exports.config = {
         '--disable-extensions',
         '-–allow-file-access-from-files',
         '--disable-web-security',
-        '--test-type=browser'
+        '--no-sandbox',
+        '--test-type=browser',
+        '--trace-to-console'
       ],
       'prefs': {
         'download': {
