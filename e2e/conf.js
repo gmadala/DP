@@ -8,7 +8,6 @@ exports.config = {
         '--disable-extensions',
         '-–allow-file-access-from-files',
         '--disable-web-security',
-        '--no-sandbox',
         '--test-type=browser'
       ],
       'prefs': {
