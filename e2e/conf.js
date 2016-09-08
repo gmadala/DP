@@ -5,9 +5,6 @@ exports.config = {
     'browserName': 'chrome',
     'chromeOptions': {
       'args': [
-        '--disable-extensions',
-        '-–allow-file-access-from-files',
-        '--disable-web-security',
         '--no-sandbox',
         '--test-type=browser'
       ],
