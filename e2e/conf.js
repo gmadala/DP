@@ -5,6 +5,9 @@ exports.config = {
     'browserName': 'chrome',
     'chromeOptions': {
       'args': [
+        '--disable-extensions',
+        '-–allow-file-access-from-files',
+        '--disable-web-security',
         '--no-sandbox',
         '--test-type=browser'
       ],
@@ -21,11 +24,11 @@ exports.config = {
   },
 
   //Spec patterns are relative to the current working directly when protractor is called.
-  specs: ['tests/login/e2e_login_spec.js'],
+  specs: ['tests/login/*_spec.js'],
   //specs: ['tests/login/e2e_dashboard_spec.js'],
 
   //More miscellaneous configuration options
-  //directConnect: true,
+  directConnect: true,
   untrackOutstandingTimeouts: false,
   restartBrowserBetweenTests: false,
 
