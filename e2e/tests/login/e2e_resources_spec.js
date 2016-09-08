@@ -57,10 +57,11 @@ describe('\n Resources Page', function () {
   it("4. Resources - Validating the Dealer Funding Checklist", function () {
     helper.goToResources();
     resources.doDealerFunding();
+
     browser.getAllWindowHandles().then(function (handles) {
       browser.switchTo().window(handles[1]).then(function () {
         browser.ignoreSynchronization = true;
-        expect(browser.getCurrentUrl()).toEqual("https://test.nextgearcapital.com/test/documents/Dealer%20Funding%20Checklist.pdf");
+        expect(browser.getCurrentUrl()).toContain("/documents/Dealer%20Funding%20Checklist.pdf");
         browser.ignoreSynchronization = false;
         browser.close();
         browser.driver.switchTo().window(handles[0]);
@@ -74,7 +75,7 @@ describe('\n Resources Page', function () {
     browser.getAllWindowHandles().then(function (handles) {
       browser.switchTo().window(handles[1]).then(function () {
         browser.ignoreSynchronization = true;
-        expect(browser.getCurrentUrl()).toEqual("https://test.nextgearcapital.com/test/documents/Records%20Title%20FAQ.pdf");
+        expect(browser.getCurrentUrl()).toContain("/documents/Records%20Title%20FAQ.pdf");
         browser.ignoreSynchronization = false;
         browser.close();
         browser.driver.switchTo().window(handles[0]);
@@ -88,7 +89,7 @@ describe('\n Resources Page', function () {
     browser.getAllWindowHandles().then(function (handles) {
       browser.switchTo().window(handles[1]).then(function () {
         browser.ignoreSynchronization = true;
-        expect(browser.getCurrentUrl()).toEqual("https://test.nextgearcapital.com/test/documents/NextGear%20Capital%20Website%20Guide%20-%20Buyers.pdf");
+        expect(browser.getCurrentUrl()).toContain("/documents/NextGear%20Capital%20Website%20Guide%20-%20Buyers.pdf");
         browser.ignoreSynchronization = false;
         browser.close();
         browser.driver.switchTo().window(handles[0]);
@@ -101,7 +102,7 @@ describe('\n Resources Page', function () {
     browser.getAllWindowHandles().then(function (handles) {
       browser.switchTo().window(handles[1]).then(function () {
         browser.ignoreSynchronization = true;
-        expect(browser.getCurrentUrl()).toEqual("https://test.nextgearcapital.com/test/documents/Welcome%20Letter.pdf");
+        expect(browser.getCurrentUrl()).toContain("/documents/Welcome%20Letter.pdf");
         browser.ignoreSynchronization = false;
         browser.close();
         browser.driver.switchTo().window(handles[0]);
@@ -115,7 +116,7 @@ describe('\n Resources Page', function () {
     browser.getAllWindowHandles().then(function (handles) {
       browser.switchTo().window(handles[1]).then(function () {
         browser.ignoreSynchronization = true;
-        expect(browser.getCurrentUrl()).toEqual("https://test.nextgearcapital.com/test/documents/Insurance%20Guidelines.pdf");
+        expect(browser.getCurrentUrl()).toContain("/documents/Insurance%20Guidelines.pdf");
         browser.ignoreSynchronization = false;
         browser.close();
         browser.driver.switchTo().window(handles[0]);
@@ -129,7 +130,7 @@ describe('\n Resources Page', function () {
     browser.getAllWindowHandles().then(function (handles) {
       browser.switchTo().window(handles[1]).then(function () {
         browser.ignoreSynchronization = true;
-        expect(browser.getCurrentUrl()).toEqual("https://test.nextgearcapital.com/test/documents/Information%20Sheet.pdf");
+        expect(browser.getCurrentUrl()).toContain("/documents/Information%20Sheet.pdf");
         browser.ignoreSynchronization = false;
         browser.close();
         browser.driver.switchTo().window(handles[0]);
@@ -143,7 +144,7 @@ describe('\n Resources Page', function () {
     browser.getAllWindowHandles().then(function (handles) {
       browser.switchTo().window(handles[1]).then(function () {
         browser.ignoreSynchronization = true;
-        expect(browser.getCurrentUrl()).toEqual("https://test.nextgearcapital.com/test/documents/Claim%20Form.pdf");
+        expect(browser.getCurrentUrl()).toContain("/documents/Claim%20Form.pdf");
         browser.ignoreSynchronization = false;
         browser.close();
         browser.driver.switchTo().window(handles[0]);
