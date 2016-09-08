@@ -9,8 +9,7 @@ exports.config = {
         '-–allow-file-access-from-files',
         '--disable-web-security',
         '--no-sandbox',
-        '--test-type=browser',
-        '--trace-to-console'
+        '--test-type=browser'
       ],
       'prefs': {
         'download': {
@@ -29,7 +28,7 @@ exports.config = {
   //specs: ['tests/login/e2e_dashboard_spec.js'],
 
   //More miscellaneous configuration options
-  directConnect: true,
+  //directConnect: true,
   untrackOutstandingTimeouts: false,
   restartBrowserBetweenTests: false,
 
