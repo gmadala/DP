@@ -81,7 +81,7 @@
   <div  ng-switch-when="noMatch" ng-show="dirtyStatus">
     <div class="form-group">
       <label ng-show="data.inputYear" for="inputYear" class="show-hide">Year</label>
-      <input id="inputYear" name="inputYear" class="form-control" placeholder="Year" ng-model="data.inputYear" ng-pattern="/^[0-9]{1,3}(?:,?[0-9]{3})*$/" required/>
+      <input id="inputYear" name="inputYear" class="form-control" placeholder="Year" ng-model="data.inputYear" ng-pattern="/^[0-9]{1,3}(?:,?[0-9]{3})*$/" ng-required="dirtyStatus" />
       <label for="inputYear" class="text-error" ng-show="validity.inputYear.$error.required" translate>
         Please enter a Year.
       </label>
@@ -91,21 +91,22 @@
     </div>
     <div class="form-group">
       <label ng-show="data.$selectedVehicle.Make" for="inputMake" class="show-hide">Make</label>
-      <input id="inputMake" name="inputMake" class="form-control" placeholder="Make" ng-model="data.inputMake" required/>
+      <input id="inputMake" name="inputMake" class="form-control" placeholder="Make" ng-model="data.inputMake" ng-required="dirtyStatus" />
       <label for="inputMake" class="text-error" ng-show="validity.inputMake.$error.required" translate>
         Please enter a Make.
       </label>
     </div>
     <div class="form-group">
       <label ng-show="data.$selectedVehicle.Model" for="inputModel" class="show-hide">Model</label>
-      <input id="inputModel" name="inputModel" class="form-control" placeholder="Model" ng-model="data.inputModel" required/>
+      <input id="inputModel" name="inputModel" class="form-control" placeholder="Model" ng-model="data.inputModel" ng-required="dirtyStatus" />
       <label for="inputModel" class="text-error" ng-show="validity.inputModel.$error.required" translate>
         Please enter a Model.
       </label>
     </div>
     <div class="form-group">
       <label ng-show="data.$selectedVehicle.Style" for="inputStyle" class="show-hide">Style</label>
-      <input id="inputStyle" name="inputStyle" class="form-control" placeholder="Style" ng-model="data.inputStyle" required/>
+      <input id="inputStyle" name="inputStyle" class="form-control" placeholder="Style" ng-model="data.UnitStyle" ng-required="dirtyStatus" />
+      {{data.UnitStyle}}
       <label for="inputStyle" class="text-error" ng-show="validity.inputStyle.$error.required" translate>
         Please enter a Style.
       </label>
@@ -119,7 +120,7 @@
                 ng-model="lookupValues.vehicle.years.selected"
                 ng-change="lookupValues.vehicle.makes.fill()"
                 ng-options="year.Value for year in lookupValues.vehicle.years.list"
-                required>
+                ng-required="!dirtyStatus">
           <option value="">Year</option>
         </select>
       </div>
@@ -135,7 +136,7 @@
                 ng-change="lookupValues.vehicle.models.fill()"
                 ng-disabled="!lookupValues.vehicle.years.selected"
                 ng-options="make.Value for make in lookupValues.vehicle.makes.list"
-                required>
+                ng-required="!dirtyStatus">
           <option value="">Make</option>
         </select>
       </div>
@@ -151,7 +152,7 @@
                 ng-change="lookupValues.vehicle.styles.fill()"
                 ng-disabled="!lookupValues.vehicle.makes.selected"
                 ng-options="model.Value for model in lookupValues.vehicle.models.list"
-                required>
+                ng-required="!dirtyStatus">
           <option value="">Model</option>
         </select>
       </div>
@@ -163,10 +164,10 @@
       <label ng-show="lookupValues.vehicle.styles.selected" for="style" class="show-hide">Style</label>
       <div class="style-select full-width" ng-class="{ 'nxg-invalid':validity.style.$error.required }">
         <select id="style" name="style"
-                ng-model="lookupValues.vehicle.styles.selected"
+                ng-model="data.UnitStyle"
                 ng-disabled="!lookupValues.vehicle.models.selected"
                 ng-options="style.DisplayName for style in lookupValues.vehicle.styles.list"
-                required>
+                ng-required="!dirtyStatus">
           <option value="">Style</option>
         </select>
       </div>

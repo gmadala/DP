@@ -148,8 +148,7 @@
       comment: '',
       commentAdditionalFinancing: '',
       commentGeneral: '',
-      query: '',
-      notPassengerVehicle: false
+      query: ''
     };
 
     vm.reset = function () {
