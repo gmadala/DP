@@ -148,6 +148,7 @@
       comment: '',
       commentAdditionalFinancing: '',
       commentGeneral: '',
+      query: '',
       dirtyStatus: false,
       inputYear: null,
       inputMake: null,

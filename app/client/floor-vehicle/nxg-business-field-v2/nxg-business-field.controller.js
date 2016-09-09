@@ -8,10 +8,9 @@
   BusinessFieldV2Ctrl.$inject = ['$scope', '$element', '$uibModal', '$timeout'];
 
   function BusinessFieldV2Ctrl($scope, $element, $uibModal, $timeout) {
-
     var uibModal = $uibModal;
     var searchOpen = false;
-    $scope.query = '';
+    // $scope.query = '';
     var lengthAtSubmit = 0;
 
     $scope.clearSelected = function() {

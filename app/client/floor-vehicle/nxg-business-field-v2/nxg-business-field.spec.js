@@ -55,6 +55,12 @@ describe('Directive: nxgBusinessFieldV2', function () {
       bizness: null
     };
 
+    scope.wizardFloor = {
+      data: {
+        query: ''
+      }
+    };
+
     scope.theForm = {
       inputBiz: {}
     };
@@ -62,7 +68,7 @@ describe('Directive: nxgBusinessFieldV2', function () {
 
     element = angular.element('<form name="myFormV2">' +
       '<input id="fooInput" name="fooInputName" nxg-business-field-v2="sellers" ' +
-      'ng-disabled="model.disableMe" selected-business="model.bizness"' +
+      'parent-query="wizardFloor.data.query" ng-disabled="model.disableMe" selected-business="model.bizness"' +
       'ng-required="model.requireMe" form="theForm" validity="validity">' +
       '</input></form>');
     element = $compile(element)(scope);
