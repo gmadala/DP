@@ -23,7 +23,7 @@ describe('Directive: NxgVinDetails', function () {
       });
 
       scope.data={
-       settingsVinMode:'none'
+        settingsVinMode:'none'
       }
 
       scope.data = {
