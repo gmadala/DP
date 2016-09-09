@@ -147,7 +147,31 @@
       invalidFiles: [],
       comment: '',
       commentAdditionalFinancing: '',
-      commentGeneral: ''
+      commentGeneral: '',
+      dirtyStatus: false,
+      inputYear: null,
+      inputMake: null,
+      inputModel:null,
+      inputStyle:null,
+      settingsVinMode: 'none',
+      kb:{
+        years:{
+          selected:null,
+          list:[]
+        },
+        makes: {
+          selected: null,
+          list: []
+        },
+        models:{
+          selected:null,
+          list:[]
+        },
+        styles:{
+          selected:null,
+          list:[]
+        }
+      }
     };
 
     vm.reset = function () {

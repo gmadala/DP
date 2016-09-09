@@ -14,7 +14,6 @@
     var s = $scope.settings = {
       // next year is the highest valid year
       maxYear: moment().add('years', 2).year(),
-      vinMode: 'none', // none|noMatch|matched
       vinLookupPending: false
     };
 
@@ -49,7 +48,7 @@
       };
 
     $scope.$on('reset', function () {
-      s.vinMode = 'none';
+      $scope.data.settingsVinMode = 'none';
     });
 
     $scope.vinIsSyntacticallyValid = function (errorObj) {
@@ -61,11 +60,11 @@
     };
 
     $scope.vinChange = function () {
-      if (s.vinMode !== 'none') {
+      if ($scope.data.settingsVinMode !== 'none') {
         // if the VIN changes after lookup, clear any match state
         $scope.data.$selectedVehicle = null;
         $scope.errorFlag = false;
-        s.vinMode = 'none';
+        $scope.data.settingsVinMode = 'none';
       }
     };
 
@@ -75,7 +74,7 @@
 
     $scope.vinExit = function () {
       // on leaving VIN field, if it has a syntactically valid value that has not yet been looked up, do it now
-      if ($scope.vinIsSyntacticallyValid($scope.form.inputVin.$error) && s.vinMode === 'none') {
+      if ($scope.vinIsSyntacticallyValid($scope.form.inputVin.$error) && $scope.data.settingsVinMode === 'none') {
         $scope.lookupVin();
       }
     };
@@ -118,8 +117,8 @@
           }
           s.vinLookupPending = false;
           $scope.data.$blackbookMileage = mileage;
-          s.vinMode = 'matched';
-          $scope.dirtyStatus=true;
+          $scope.data.settingsVinMode = 'matched';
+          $scope.data.dirtyStatus=true;
         },
         function (error) {
           // treat all errors as "no match" & suppress error messages
@@ -128,8 +127,9 @@
           }
           s.vinLookupPending = false;
           if (!wasUserCancelled(error)) {
-            s.vinMode = 'noMatch';
-            $scope.dirtyStatus=false;
+            $scope.data.settingsVinMode = 'noMatch';
+            $scope.lookupValues.vehicle.years.fill();
+            $scope.data.dirtyStatus = false ;
             $scope.data.VinAckLookupFailure = false; // make sure user HAS to check this; no pre-checking
 
             // Clear the existing values when searching for a new not-found VIN
@@ -144,39 +144,33 @@
     };
 
     $scope.resetSearch = function() {
-      kb.years.selected = null;
-      kb.makes.list = [];
-      kb.makes.selected = null;
-      kb.models.list = [];
-      kb.models.selected = null;
-      kb.styles.list = [];
-      kb.styles.selected = null;
+      $scope.data.kb.years.selected = null;
+      $scope.data.kb.makes.list = [];
+      $scope.data.kb.makes.selected = null;
+      $scope.data.kb.models.list = [];
+      $scope.data.kb.models.selected = null;
+      $scope.data.kb.styles.list = [];
+      $scope.data.kb.styles.selected = null;
     };
 
     $scope.lookupValues = {
       vehicle: {
-        version: null,
-        fields: ['years', 'makes','models','styles'],
         years: {
-          selected: null,
-          list: [],
           fill: function () {
             Kbb.getYears().then(function (years) {
-              kb.years.list = years;
-              kb.years.selected = null;
+              $scope.data.kb.years.list = years;
+              $scope.data.kb.years.selected = null;
             });
           }
         },
         makes: {
-          selected: null,
-          list: [],
           fill: function() {
-            if(kb.years.selected) {
-              Kbb.getMakes(kb.years.selected).then(function(makes) {
-                kb.makes.list = makes;
+            if($scope.data.kb.years.selected) {
+              Kbb.getMakes($scope.data.kb.years.selected).then(function(makes) {
+                $scope.data.kb.makes.list = makes;
                 if(makes.length === 1) {
-                  kb.makes.selected = makes[0];
-                  kb.models.fill();
+                  $scope.data.kb.makes.selected = makes[0];
+                  $scope.data.kb.models.fill();
                 }
               });
             } else {
@@ -185,29 +179,25 @@
           }
         },
         models: {
-          selected: null,
-          list: [],
           fill: function() {
-            if(kb.makes.selected) {
-              Kbb.getModels(kb.makes.selected, kb.years.selected).then(function(models) {
-                kb.models.list = models;
+            if($scope.data.kb.makes.selected) {
+              Kbb.getModels($scope.data.kb.makes.selected, $scope.data.kb.years.selected).then(function(models) {
+                $scope.data.kb.models.list = models;
                 if(models.length === 1) {
-                  kb.models.selected = models[0];
-                  kb.styles.fill();
+                  $scope.data.kb.models.selected = models[0];
+                  $scope.data.kb.styles.fill();
                 }
               });
             }
           }
         },
         styles: {
-          selected: null,
-          list: [],
           fill: function() {
-            if(kb.models.selected) {
-              Kbb.getBodyStyles(kb.years.selected, kb.models.selected).then(function(bodyStyles) {
-                kb.styles.list = bodyStyles;
+            if($scope.data.kb.models.selected ) {
+              Kbb.getBodyStyles($scope.data.kb.years.selected, $scope.data.kb.models.selected).then(function(bodyStyles) {
+                $scope.data.kb.styles.list = bodyStyles;
                 if (bodyStyles.length === 1) {
-                  kb.styles.selected = bodyStyles[0];
+                  $scope.data.kb.styles.selected = bodyStyles[0];
                 }
               });
             }
@@ -215,9 +205,6 @@
         }
       }
     };
-
-    var kb = $scope.lookupValues.vehicle;
-    $scope.lookupValues.vehicle.years.fill();
   }
 
 })();
