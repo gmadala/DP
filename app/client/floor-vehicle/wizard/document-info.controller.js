@@ -32,7 +32,6 @@
     };
 
     $scope.$watch('$scope.$parent.wizardFloor.data.files', function (newValue, oldValue) {
-      console.log(newValue);
       if (newValue && oldValue) {
         if (newValue.length !== oldValue.length) {
           $scope.form.documents.$setValidity('pattern', true);
