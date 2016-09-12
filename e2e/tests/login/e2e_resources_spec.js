@@ -152,7 +152,7 @@ describe('\n Resources Page', function () {
     });
   });
 
-  it("11. Resources - Validating the myNextGear Mobile IOS", function () {
+  xit("11. Resources - Validating the myNextGear Mobile IOS", function () {
     helper.goToResources();
     resources.doMobileIOS();
     browser.getAllWindowHandles().then(function (handles) {
@@ -166,7 +166,7 @@ describe('\n Resources Page', function () {
     });
   });
 
-  it("12. Resources - Validating the myNextGear Mobile Android", function () {
+  xit("12. Resources - Validating the myNextGear Mobile Android", function () {
     helper.goToResources();
     resources.doMobileAndroid();
     browser.getAllWindowHandles().then(function (handles) {
