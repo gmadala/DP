@@ -318,4 +318,10 @@
       }
     }
   }
+
+  @media (max-width: 767px) {
+    .nav-justified > li.hidden-xs-custom {
+      display: none !important;
+    }
+  }
 }
