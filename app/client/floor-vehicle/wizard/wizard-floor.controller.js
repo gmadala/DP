@@ -303,7 +303,7 @@
         vm.floorPlanSubmitting = true;
 
         var confirmation = {
-          backdrop: true,
+          backdrop: 'static',
           keyboard: true,
           backdropClick: true,
           size: 'md',
@@ -417,9 +417,9 @@
       });
 
       return {
-        backdrop: true,
+        backdrop: 'static',
         keyboard: true,
-        backdropClick: true,
+        backdropClick: false,
         dialogClass: 'modal modal-medium',
         templateUrl: 'client/shared/modals/floor-car-message/floor-car-message.template.html',
         controller: 'FloorCarMessageCtrl',
