@@ -99,6 +99,9 @@ module.exports = {
               },
               openAudits: {
                 enabled: true
+              },
+              responsiveFloorplanBuyer: {
+                enabled: true
               }
             }
           }
