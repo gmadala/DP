@@ -406,7 +406,7 @@
           </section>
 
           <button class="btn-cta cta-primary cta-full"
-                  ng-disabled="paymentQueue.contents.isEmpty() || submitInProgress"
+                  ng-disabled="paymentQueue.contents.isEmpty() || submitInProgress || dialogVisible"
                   ng-click="submit()">
             <span translate>Submit Payments</span> <span class="glyphicon glyphicon-shopping-cart"></span>
           </button>
