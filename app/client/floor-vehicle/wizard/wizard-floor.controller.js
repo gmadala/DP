@@ -77,8 +77,8 @@
         return bankAccount.IsActive === true;
       });
 
-      var useDefaultBankAccount = _.filter(result[1], function (bankAccount) {
-        return bankAccount.id === result[1].DefaultDisbursementBankAccountId;
+      var useDefaultBankAccount = _.filter(result[2].BankAccounts, function (bankAccount) {
+        return bankAccount.AchAccountNumberLast4=== result[1].DefaultDisbursementBankAccountId;
       });
 
       vm.options.BankAccounts = _.sortBy(activeBankAccounts, 'AchBankName');

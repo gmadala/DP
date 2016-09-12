@@ -48,7 +48,9 @@
       };
 
     $scope.$on('reset', function () {
-      $scope.data.settingsVinMode = 'none';
+      if($scope.data) {
+        $scope.data.settingsVinMode = 'none';
+      }
     });
 
     $scope.vinIsSyntacticallyValid = function (errorObj) {
