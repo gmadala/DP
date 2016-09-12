@@ -96,6 +96,9 @@
     font-weight: 300;
   }
 
+  .btn-block {
+    width: 100%;
+  }
 
   ul.wizard-nav {
 
@@ -322,6 +325,10 @@
   @media (max-width: 767px) {
     .nav-justified > li.hidden-xs-custom {
       display: none !important;
+    }
+
+    .wizard-btns {
+      margin-bottom: 40px;
     }
   }
 }
