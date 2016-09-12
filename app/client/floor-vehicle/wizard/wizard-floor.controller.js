@@ -349,7 +349,7 @@
         function (response) { /*floorplan success*/
           if (vm.data.commentGeneral || vm.data.commentAdditionalFinancing) {
             Floorplan.addComment({
-              CommentText: vm.data.commentGeneral + '\n' + vm.data.commentAdditionalFinancing,
+              CommentText: vm.data.commentGeneral + '\n\n' + vm.data.commentAdditionalFinancing,
               FloorplanId: response.FloorplanId
             });
           }
