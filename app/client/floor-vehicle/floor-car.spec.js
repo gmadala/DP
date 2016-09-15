@@ -106,8 +106,6 @@ describe('Controller: FloorCarCtrl', function () {
   }));
 
   var registerCommonTests = function() {
-    var succeed = true;
-
     it('should attach necessary objects to the scope', inject(function ($rootScope) {
       scope.$apply();
       expect(scope.options).toBeDefined();
@@ -141,7 +139,8 @@ describe('Controller: FloorCarCtrl', function () {
       });
     });
 
-    describe('submit function', function() {      
+    describe('submit function', function() {
+      var succeed = true;
 
       beforeEach(inject(function() {
         scope.form = mockForm;

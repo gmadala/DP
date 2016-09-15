@@ -14,6 +14,7 @@
     'gettext',
     'nextgearWebCommon',
     'ngFileUpload',
-    'frapontillo.bootstrap-switch',
+    'frapontillo.bootstrap-switch'
   ]);
+
 })();
