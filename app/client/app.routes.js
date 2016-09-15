@@ -14,6 +14,8 @@
     return !User.isLoggedIn() ? '/login' : User.isDealer() ? '/home' : '/act/home';
   }
 
+  const versionHash = "NTzAoip6aG";
+
   function routeConfig($stateProvider, $urlRouterProvider, $uiViewScrollProvider) {
     $uiViewScrollProvider.useAnchorScroll();
     $urlRouterProvider.otherwise(otherwiseRouteConfig);
@@ -45,7 +47,7 @@
         url: '/sales',
         controller: 'SalesInfoCtrl',
         controllerAs: 'salesInfo',
-        templateUrl: 'client/floor-vehicle/wizard/sales-info.template.html',
+        templateUrl: 'client/floor-vehicle/wizard/sales-info.template.html?hash=' + versionHash,
         data: {
           pageId: 'Floorplan',
           showNavBar: true,
