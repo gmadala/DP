@@ -19,8 +19,8 @@
       </section>
     </div>
 
-    <div class="col-md-4" ng-show="currLang==='en'">
-      <div class="panel panel-default documents-well">
+    <div ng-class="currLang==='en'? 'col-md-4' : 'col-md-6'">
+      <div class="panel panel-default">
         <h2 class="well-title" translate>Documents</h2>
 
         <div class="well-item">
@@ -52,8 +52,8 @@
       </div>
 
     </div>
-    <div class="col-md-4" ng-show="currLang==='en'">
-      <div class="panel panel-default documents-well">
+    <div ng-class="currLang==='en'? 'col-md-4' : 'col-md-4'">
+      <div class="panel panel-default">
         <h2 class="well-title" translate>Mobile Apps</h2>
 
         <div class="well-item">
@@ -80,64 +80,7 @@
 
     <!-- For foreign languages so it shows and scales better -->
 
-    <div class="col-md-6" ng-show="currLang!=='en'">
-      <div class="panel panel-default">
-        <h2 class="well-title" translate>Documents</h2>
 
-        <div class="well-item">
-          <ul class="text-list zeroLeftPadding">
-            <li>
-              <a id="ratesandfees" ng-href="{{ feeScheduleUrl }}" target="_blank"
-                 nxg-track="{{metric.DEALER_RESOURCES_RATES_AND_FEES_PAGE}}"
-                 track-properties="{{ kissMetricData }}" translate>
-                Rates and Fees
-              </a>
-            </li>
-            <li ng-repeat="doc in documents">
-              <a ng-href="{{ doc.url }}" target="_blank" nxg-track="{{ doc.metric }}"
-                 track-properties="{{ kissMetricData }}">
-                {{ doc.title }}
-              </a>
-            </li>
-          </ul>
-          <p translate>Collateral Protection Program</p>
-          <ul class="text-list zeroLeftPadding">
-            <li ng-repeat="doc in collateralProtection">
-              <a ng-href="{{ doc.url }}" target="_blank" nxg-track="{{ doc.metric }}"
-                 track-properties="{{ kissMetricData }}">
-                {{ doc.title }}
-              </a>
-            </li>
-          </ul>
-        </div>
-      </div>
-
-    </div>
-    <div class="col-md-6" ng-show="currLang!=='en'">
-      <div class="panel panel-default">
-        <h2 class="well-title" translate>Mobile Apps</h2>
-
-        <div class="well-item">
-          <p translate>Manage your business with NextGear Capital on the go.</p>
-          <ul class="text-list zeroLeftPadding">
-            <li>
-              <a href="https://itunes.apple.com/us/app/nextgear-capital/id748609885?mt=8"
-                 nxg-track="{{ metric.DEALER_RESOURCES_IOS_APP }}" track-properties="{{ kissMetricData }}"
-                 target="_blank" translate>
-                Download myNextGear mobile iOS
-              </a>
-            </li>
-            <li>
-              <a href="https://play.google.com/store/apps/details?id=com.nextgear.mobile"
-                 nxg-track="{{ metric.DEALER_RESOURCES_ANDROID_APP }}" track-properties="{{ kissMetricData }}"
-                 target="_blank" translate>
-                Download myNextGear mobile Android
-              </a>
-            </li>
-          </ul>
-        </div>
-      </div>
-    </div>
   </div>
 </div>
 
