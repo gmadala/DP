@@ -299,8 +299,16 @@
       }
 
       if (vm.formParts.one && vm.formParts.two && (!vm.attachDocumentsEnabled || vm.formParts.three)) {
+        var addressIndex = _.findIndex(vm.options.locations, { 'IsMainAddress': true });
 
         vm.floorPlanSubmitting = true;
+
+        vm.data.UnitYear = !vm.data.dirtyStatus ? vm.data.kb.years.selected.Value : vm.data.inputYear;
+        vm.data.UnitStyle = !vm.data.dirtyStatus ? vm.data.kb.styles.selected.DisplayName : vm.data.inputStyle;
+        vm.data.UnitMake = !vm.data.dirtyStatus ? vm.data.kb.makes.selected.Value : vm.data.inputMake;
+        vm.data.UnitModel = !vm.data.dirtyStatus ? vm.data.kb.models.selected.Value : vm.data.inputModel;
+
+        vm.data.PhysicalInventoryAddressId = vm.options.locations[addressIndex];
 
         var confirmation = {
           backdrop: 'static',
