@@ -162,23 +162,17 @@
           Blackbook.lookupByVin(scope.vin, scope.odometer, true),
           Mmr.lookupByVin(scope.vin, scope.odometer)
         ]).then(function(results) {
-          console.log(results);
-
-          var blackbookAverage = 0;
-          results[0].forEach(function(blackbookResult) {
-            blackbookAverage = blackbookAverage + blackbookResult.AverageValue;
+          var minimumBlackbookAverage  = results[0].reduce(function(previous, current) {
+            return Math.min(previous.AverageValue, current.AverageValue);
           });
-          blackbookAverage = blackbookAverage / results[0].length;
 
-          var mmrAverage = 0;
-          results[1].forEach(function(mmrResult) {
-            mmrAverage = mmrAverage + mmrResult.AverageWholesale;
+          var minimumMmrAverage  = results[0].reduce(function(previous, current) {
+            return Math.min(previous.AverageValue, current.AverageValue);
           });
-          mmrAverage = mmrAverage / results[1].length;
 
           var data = chart.series[0].data;
-          data[3].y = blackbookAverage;
-          data[4].y = mmrAverage;
+          data[3].y = minimumBlackbookAverage;
+          data[4].y = minimumMmrAverage;
           chart.series[0].setData(data);
         });
       }
@@ -195,15 +189,13 @@
             return $q.all(kbbLookups);
           })
           .then(function(kbbResults) {
-            var kbbAverage = 0;
-            kbbResults.forEach(function(kbbResult) {
-              kbbAverage = kbbAverage + kbbResult.Good;
+            var minimumKbbAverage = kbbResults.reduce(function(previous, current) {
+              return Math.min(previous.Good, current.Good);
             });
-            kbbAverage = kbbAverage / kbbResults.length;
 
             // calculate the average of the averages
             var data = chart.series[0].data;
-            data[5].y = kbbAverage;
+            data[5].y = minimumKbbAverage;
             chart.series[0].setData(data);
           });
       }
