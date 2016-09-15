@@ -162,7 +162,7 @@ describe('Directive: navBar', function () {
         // dealers have 4 primary links
         expect(myLinks.primary.length).toBe(4);
         expect(myLinks.primary[1].subMenu.length).toBe(2);
-        expect(myLinks.primary[2].subMenu.length).toBe(3);
+        expect(myLinks.primary[2].subMenu.length).toBe(4);
         expect(myLinks.primary[3].subMenu.length).toBe(4);
 
         myLinks = aScope.user.navLinks();
@@ -183,7 +183,7 @@ describe('Directive: navBar', function () {
           kissMetricInfo: mockKissMetricInfo
         });
         $rootScope.$digest();
-        expect(scope.user.navLinks().primary[2].subMenu.length).toBe(2);
+        expect(scope.user.navLinks().primary[2].subMenu.length).toBe(3);
       });
 
       it('should include a title release link only if the user has DisplayTitleReleaseProgram set to true', function () {
@@ -196,7 +196,7 @@ describe('Directive: navBar', function () {
           kissMetricInfo: mockKissMetricInfo
         });
         scope.$apply();
-        expect(scope.user.navLinks().primary[2].subMenu.length).toBe(4);
+        expect(scope.user.navLinks().primary[2].subMenu.length).toBe(5);
       });
 
       it('should refresh if showing title release address if user goes from being logged out to logged in', function () {
@@ -213,12 +213,12 @@ describe('Directive: navBar', function () {
           kissMetricInfo: mockKissMetricInfo
         });
         $rootScope.$digest();
-        expect(scope.user.navLinks().primary[2].subMenu.length).toBe(3);
+        expect(scope.user.navLinks().primary[2].subMenu.length).toBe(4);
         loggedIn = true;
 
-        scope.initNav().then(function() {          
+        scope.initNav().then(function() {
           $rootScope.$digest();
-          expect(scope.user.navLinks().primary[2].subMenu.length).toBe(4);
+          expect(scope.user.navLinks().primary[2].subMenu.length).toBe(5);
         });
       });
 

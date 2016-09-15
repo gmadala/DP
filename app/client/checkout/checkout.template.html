@@ -162,7 +162,7 @@
                     <button class="btn-unstyle pull-right"
                             ng-click="paymentQueue.removePayment(payment.id)"
                             ng-disabled="submitInProgress"
-                            ng-class="{disabled: submitInProgress()}">
+                            ng-class="{disabled: submitInProgress}">
                       <span nxg-icon="icon-cancel" class="icon-small"></span>
                     </button>
                     <a class="lockup-major " href="#/vehicledetails?stockNumber={{ payment.stockNum }}">
@@ -406,7 +406,7 @@
           </section>
 
           <button class="btn-cta cta-primary cta-full"
-                  ng-disabled="paymentQueue.contents.isEmpty() || submitInProgress"
+                  ng-disabled="paymentQueue.contents.isEmpty() || submitInProgress || dialogVisible"
                   ng-click="submit()">
             <span translate>Submit Payments</span> <span class="glyphicon glyphicon-shopping-cart"></span>
           </button>

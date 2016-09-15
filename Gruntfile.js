@@ -503,7 +503,7 @@ module.exports = function(grunt) {
         command: 'start iexplore.exe "http://localhost:<%= connect.options.port %>'
       },
       webdriverUpdate: {
-        command: 'node_modules/protractor/bin/webdriver-manager update'
+        command: 'node_modules/protractor/bin/webdriver-manager update && node_modules/grunt-protractor-runner/node_modules/protractor/bin/webdriver-manager update'
       },
       msgmerge: {
         command: function (filename) {
@@ -516,7 +516,6 @@ module.exports = function(grunt) {
     },
     protractor: { // a specific suite can be run with grunt protractor:run --suite=suite_name
       options: {
-        keepAlive: true,
         configFile: 'e2e/conf.js',
         noColor: false
       },
