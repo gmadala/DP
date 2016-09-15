@@ -104,7 +104,8 @@
           modelDest: 'PhysicalInventoryAddressId'
         }, {
           scopeSrc: 'wizardFloor.options.LinesOfCredit',
-          modelDest: 'LineOfCreditId'
+          modelDest: 'LineOfCreditId',
+          useFirst: true
         });
       }
 
