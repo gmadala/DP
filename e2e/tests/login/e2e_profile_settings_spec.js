@@ -35,7 +35,7 @@ describe('\n Profile Settings Page', function () {
     expect(profileSettings.elUserProfile.isDisplayed()).toBe(true);
     //expect(profileSettings.elUserName.isDisplayed()).toBe(true);
     console.log(profileSettings.getTextUsername());
-    //expect(profileSettings.getTextUsername()).toEqual('62434AM');
+    expect(profileSettings.getTextUsername()).toEqual('62434AM');
   });
 
   it("5. Profile Settin.lags - Logout", function () {
