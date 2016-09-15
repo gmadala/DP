@@ -6,7 +6,6 @@ var mockApi = require('./api/mockApi.js');
 module.exports = function(grunt) {
   // load all grunt tasks
   require('matchdep').filterDev('grunt-*').forEach(grunt.loadNpmTasks);
-  grunt.loadNpmTasks("gruntify-eslint");
 
   // configurable paths
   var yeomanConfig = {
@@ -120,14 +119,39 @@ module.exports = function(grunt) {
       },
       server: '.tmp'
     },
-    eslint: {
+    jshint: {
       options: {
-        config: ".eslintrc",
-        quiet: true
+        jshintrc: '.jshintrc',
+        reporter: 'checkstyle'
       },
-      src: [
-        "app/client/**/*.js", 
-        "app/client/react-components/**/*.js"
+      all: [
+        //'Gruntfile.js',
+        '<%= yeoman.app %>/client/**/*.js',
+        '!app/client/**/*.spec.js',
+        '!app/client/config/nxg-config.mock.processed.js',
+        '!app/scripts/translations.js',
+        '!app/client/services/base64.service.js',
+        '!app/client/shared/directives/nxg-chart/nxg-chart.directive.js',
+        '!app/client/shared/directives/tooltip.directive.js',
+        'e2e/**/*.js',
+        'api_tests/**/*.js'
+      ]
+    },
+    jscs: {
+      options: {
+        config: '.jscsrc'
+      },
+      all: [
+        //'Gruntfile.js',
+        '<%= yeoman.app %>/client/**/*.js',
+        '!app/client/config/nxg-config.mock.processed.js',
+        '!app/scripts/translations.js',
+        '!app/client/services/base64.service.js',
+        '!app/client/shared/directives/nxg-chart/nxg-chart.directive.js',
+        '!app/client/shared/directives/tooltip.directive.js',
+        // TODO JSCS could be used for all test files depending on what rules we decide on
+        'e2e/**/*.js',
+        'api_tests/**/*.js'
       ]
     },
     karma: {
@@ -524,8 +548,8 @@ module.exports = function(grunt) {
     },
     githooks: {
       all: {
-        // Will run the eslint tasks at every commit
-        'pre-commit': 'eslint karma'
+        // Will run the jshint tasks at every commit
+        'pre-commit': 'jshint jscs karma'
       }
     }
   });
@@ -621,7 +645,8 @@ module.exports = function(grunt) {
     grunt.task.run('build');
     grunt.task.run('test:e2e:users');
     // run this last so that grunt returns an error code but doesn't abort before running the previous tasks
-    grunt.task.run('eslint');
+    grunt.task.run('jshint');
+    grunt.task.run('jscs');
   });
 
   grunt.registerMultiTask('gettext_update_po', 'update PO files from the POT file', function () {
