@@ -27,7 +27,7 @@
               <div class="style-select" ng-show="editDefaultDAccount">
                 <select id="defaultDeposit"
                         ng-model="defaultDeposit"
-                        ng-options="account as [account.AchAccountNumberLast4, account.AchBankName].join(' - ') for account in financial.data.activeBankAccounts | orderBy:'AchBankName'"
+                        ng-options="account as [account.AchBankName , account.AchAccountNumberLast4].join(' - ') for account in financial.data.activeBankAccounts | orderBy:'AchBankName'"
                         required>
                 </select>
               </div>
