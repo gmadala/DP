@@ -311,6 +311,8 @@
 
         vm.data.PhysicalInventoryAddressId = vm.options.locations[addressIndex];
 
+        vm.data.VinAckLookupFailure = vm.data.$selectedVehicle ? false : true;
+
         var confirmation = {
           backdrop: 'static',
           keyboard: true,
