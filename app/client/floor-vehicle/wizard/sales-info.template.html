@@ -13,7 +13,7 @@
         </button>
 
         <input type="text" uib-datepicker-popup="{{salesInfo.dateFormat}}" style="margin-top: 15px;"
-               placeholder="Purchase Date" nxg-date class="input-full"
+               placeholder="{{ 'Purchase Date' | translate }}" nxg-date class="input-full"
                ng-model="wizardFloor.data.UnitPurchaseDate"
                min-date="salesInfo.dealerMinDate"
                max-date="salesInfo.maxDate"
@@ -49,7 +49,7 @@
       <div>
         <i class="glyphicon glyphicon-usd"></i>
       </div>
-      <input type="text" id="inputPurchaseAmt" name="inputPurchaseAmt" ng-model="wizardFloor.data.UnitPurchasePrice" placeholder="Purchase Amount"
+      <input type="text" id="inputPurchaseAmt" name="inputPurchaseAmt" ng-model="wizardFloor.data.UnitPurchasePrice" placeholder="{{ 'Purchase Amount' | translate }}"
              required
              nxg-input-currency="1000000000000"
              nxg-min="1"
@@ -82,7 +82,7 @@
               rows="3"
               name="comment"
               id="comment"
-              placeholder="(Ex. Additional instructions, etc.)"
+              placeholder="{{ '(Ex. Additional instructions, etc.)' | translate }}"
               ng-model="wizardFloor.data.commentAdditionalFinancing"
               ng-disabled="wizardFloor.floorPlanSubmitting"
               ></textarea>
@@ -97,7 +97,7 @@
     </label> -->
     <div style="margin-bottom: 38px;">
       <input bs-switch type="checkbox" id="cmn-toggle-2" name="cmn-toggle-2" class="noglobal"
-            switch-size="normal" switch-off-text="No" switch-on-text="Yes" switch-on-color="success" ng-model="wizardFloor.data.SaleTradeIn">
+            switch-size="normal" switch-off-text="{{ 'No' | translate }}" switch-on-text="{{ 'Yes' | translate }}" switch-on-color="success" ng-model="wizardFloor.data.SaleTradeIn">
     </div>
 
   <span class="nxg-business-field" ng-class="{ 'hidden': wizardFloor.data.SaleTradeIn, 'has-error': (form.inputBiz.$error.nxgRequires || form.inputBiz.$error.minlength) && form.$submitted }">
