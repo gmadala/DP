@@ -21,7 +21,7 @@
 
       var dialogOptions = {
         dialogClass: 'modal request-unapplied-funds-modal',
-        backdrop: true,
+        backdrop: 'static',
         keyboard: false,
         backdropClick: false,
         templateUrl: 'client/dashboard/nxg-unapplied-funds-widget/request-payout-modal.template.html',
@@ -53,9 +53,9 @@
               }),
               buttons = [{label: gettextCatalog.getString('OK'), cssClass: 'btn-cta cta-primary'}];
             var dialogOptions = {
-              backdrop: true,
+              backdrop: 'static',
               keyboard: true,
-              backdropClick: true,
+              backdropClick: false,
               templateUrl: 'client/shared/modals/message-box/message-box.template.html',
               controller: 'MessageBoxCtrl',
               dialogClass: 'modal modal-medium',

@@ -97,9 +97,9 @@
 
     $scope.showCreditQuery = function(business) {
       var dialogOptions = {
-        backdrop: true,
+        backdrop: 'static',
         keyboard: true,
-        backdropClick: true,
+        backdropClick: false,
         templateUrl: 'client/shared/modals/credit-query/credit-query.template.html',
         controller: 'CreditQueryCtrl',
         dialogClass: 'modal credit-query',

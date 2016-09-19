@@ -97,9 +97,9 @@
 
         $scope.cancelScheduledPayment = function () {
           var dialogOptions = {
-            backdrop: true,
+            backdrop: 'static',
             keyboard: true,
-            backdropClick: true,
+            backdropClick: false,
             templateUrl: 'client/shared/directives/nxg-payment-buttons/cancel-payment-modal/cancel-payment.template.html',
             controller: 'CancelPaymentCtrl',
             resolve: {
@@ -135,9 +135,9 @@
 
         $scope.cancelScheduledFee = function () {
           var dialogOptions = {
-            backdrop: true,
+            backdrop: 'static',
             keyboard: true,
-            backdropClick: true,
+            backdropClick: false,
             templateUrl: 'client/shared/directives/nxg-payment-buttons/cancel-fee-modal/cancel-fee.template.html',
             controller: 'CancelFeeCtrl',
             resolve: {

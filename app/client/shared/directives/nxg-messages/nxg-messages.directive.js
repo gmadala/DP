@@ -20,7 +20,7 @@
         }, function (hasMessages) {
           if (hasMessages && !currentDialog) {
             var dialogOptions = {
-              backdrop: true,
+              backdrop: 'static',
               keyboard: true,
               backdropClick: false,
               templateUrl: 'client/shared/directives/nxg-messages/nxg-messages-modal.template.html',
