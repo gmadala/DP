@@ -37,7 +37,7 @@
     <div class="col-xs-8  value"  ng-hide="business.externalId">
       <button class="btn-unstyle"  ng-click="activate()"  ng-hide="active"><span class="glyphicon glyphicon-plus"></span><span class="edit-text" translate>Add</span></button>
       <input class="col-xs-7 input-external" type="text" ng-model="externalId" ng-show="active" maxlength="50">
-      <button class="btn" style="margin-top:1px;" ng-click="saveExternalId()" ng-show="active">Save</button>
+      <button class="btn" style="margin-top:1px;" ng-click="saveExternalId()" ng-show="active" translate>Save</button>
     </div>
 
     <div class="col-xs-8 value" ng-show="business.externalId">
@@ -51,7 +51,7 @@
       <div ng-show="active">
         <input class="col-xs-7 input-external" type="text" ng-model="business.externalId" ng-show="active"
                maxlength="50">
-        <button class="btn" style="margin-top:1px;"  ng-click="saveExternalId()" ng-show="active">Save</button>
+        <button class="btn" style="margin-top:1px;"  ng-click="saveExternalId()" ng-show="active" translate>Save</button>
       </div>
     </div>
 
