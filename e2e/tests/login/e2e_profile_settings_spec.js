@@ -35,9 +35,13 @@ describe('\n Profile Settings Page', function () {
     profileSettings.doProfileSettings();
     expect(browser.getCurrentUrl()).toEqual(execSettings.profileSettingsPage());
     expect(profileSettings.elUserProfile.isDisplayed()).toBe(true);
-    //expect(profileSettings.elUserName.isDisplayed()).toBe(true);
-    console.log(profileSettings.getTextUsername());
+    expect(profileSettings.getTextUsername()).toEqual('62434AM');
+
+    browser.sleep('3000');
     profileSettings.doEditSettings();
+
+    browser.sleep('7000');
+
   });
 
   it("5. Profile Settin.lags - Logout", function () {
