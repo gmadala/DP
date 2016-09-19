@@ -201,6 +201,16 @@
           showMenu: false
         }
       })
+      .state('audits', {
+        url: '/audits',
+        templateUrl: 'client/audits/open-audits.template.html',
+        controller: 'AuditsCtrl',
+        data: {
+          pageId: 'Audits',
+          showNavBar: true,
+          showMenu: false
+        }
+      })
       .state('reports', {
         url: '/reports',
         templateUrl: 'client/reports/dealer/reports.template.html',
