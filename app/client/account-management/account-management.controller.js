@@ -215,7 +215,7 @@
           confirmDisableEnhanced: function () {
             var dialogOptions = {
               backdrop: 'static',
-              keyboard: true,
+              keyboard: false,
               backdropClick: false,
               templateUrl: 'client/shared/modals/confirm/confirm-disable-enhanced.template.html',
               controller: 'ConfirmCtrl'
@@ -271,7 +271,7 @@
             confirmEnable: function () {
               var dialogOptions = {
                 backdrop: 'static',
-                keyboard: true,
+                keyboard: false,
                 backdropClick: false,
                 templateUrl: 'client/shared/modals/confirm/confirm-enable-autopay.template.html',
                 controller: 'ConfirmCtrl'
@@ -283,7 +283,7 @@
             confirmDisable: function () {
               var dialogOptions = {
                 backdrop: 'static',
-                keyboard: true,
+                keyboard: false,
                 backdropClick: false,
                 templateUrl: 'client/shared/modals/confirm/confirm-disable-autopay.template.html',
                 controller: 'ConfirmCtrl'

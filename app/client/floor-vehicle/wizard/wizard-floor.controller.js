@@ -254,7 +254,7 @@
 
         var confirmation = {
           backdrop: 'static',
-          keyboard: true,
+          keyboard: false,
           backdropClick: false,
           size: 'md',
           templateUrl: 'client/floor-vehicle/floor-car-confirm-modal/floor-car-confirm.template.html',
@@ -368,7 +368,7 @@
 
       return {
         backdrop: 'static',
-        keyboard: true,
+        keyboard: false,
         backdropClick: false,
         dialogClass: 'modal modal-medium',
         templateUrl: 'client/shared/modals/floor-car-message/floor-car-message.template.html',

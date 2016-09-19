@@ -54,7 +54,7 @@
               buttons = [{label: gettextCatalog.getString('OK'), cssClass: 'btn-cta cta-primary'}];
             var dialogOptions = {
               backdrop: 'static',
-              keyboard: true,
+              keyboard: false,
               backdropClick: false,
               templateUrl: 'client/shared/modals/message-box/message-box.template.html',
               controller: 'MessageBoxCtrl',

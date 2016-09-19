@@ -40,7 +40,7 @@
         var dialogOptions = {
           dialogClass: 'modal modal-x-large',
           backdrop: 'static',
-          keyboard: true,
+          keyboard: false,
           backdropClick: false,
           templateUrl: 'client/dealer-search/business-search-modal/business-search.template.html',
           controller: 'BusinessSearchCtrl',

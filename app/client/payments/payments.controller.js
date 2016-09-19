@@ -154,7 +154,7 @@
     $scope.payments.extension = function (payment) {
       uibModal.open({
         backdrop: 'static',
-        keyboard: true,
+        keyboard: false,
         backdropClick: false,
         controller: 'ExtensionRequestCtrl',
         templateUrl: 'client/shared/modals/extension-request/payment-extension.template.html',

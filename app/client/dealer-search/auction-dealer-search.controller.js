@@ -91,7 +91,7 @@
       if (business) {
         var dialogOptions = {
           backdrop: 'static',
-          keyboard: true,
+          keyboard: false,
           backdropClick: false,
           templateUrl: 'client/shared/modals/credit-query/credit-query.template.html',
           controller: 'CreditQueryCtrl',
