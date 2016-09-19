@@ -10,7 +10,7 @@
 .table-primary {
   @include border-bottom-radius($borderRadius);
   border: 0;
-  margin-bottom:0px;
+  margin-bottom: 0px;
   background-color: white;
 
   thead th, thead td {
