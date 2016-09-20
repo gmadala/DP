@@ -74,6 +74,10 @@
         return bankAccount.IsActive === true;
       });
 
+      var useDefaultBankAccount = _.filter(result[1], function (bankAccount) {
+        return bankAccount.id === result[1].DefaultDisbursementBankAccountId;
+      });
+
       vm.options.BankAccounts = _.sortBy(activeBankAccounts, 'AchBankName');
 
       vm.options.locations = Addresses.getActivePhysical();
@@ -81,7 +85,8 @@
       var optionListsToDefault = [
         {
           scopeSrc: 'wizardFloor.options.BankAccounts',
-          modelDest: 'BankAccountId'
+          modelDest: 'BankAccountId',
+          useFirst: useDefaultBankAccount
         },
         {
           scopeSrc: 'wizardFloor.paySellerOptions',
