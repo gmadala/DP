@@ -361,8 +361,8 @@
     <!-- end .summary.floorplan -->
 
     <!--Recently Floored Vehicles-->
-    <div class="col-sm-9 col-md-10 hidden-xs">
-      <div class="panel panel-default dash-well">
+    <div class="col-sm-9 col-md-10">
+      <div class="panel panel-default dash-well hidden-xs">
         <h2 class="well-title" translate>Recently Floored Vehicles</h2>
         <div ng-switch="floorplanData.results.length > 0 || floorplanData.loading">
           <p class="notice-box" ng-switch-when="false" translate>
@@ -394,6 +394,12 @@
           </div>
         </div>
       </div>
+      <button id="viewFloorplans" class="btn btn-default btn-block btn-cta cta-secondary cta-full-width receipts-btn visible-xs"
+              ng-click="onClickButtonLink('floorplan')">
+        <span class="paired-body" translate>Recently Floored Vehicles</span>
+        <span class="paired-media icon-x-small" nxg-icon="icon-triangle"></span>
+      </button>
+
     </div>
   </section>
 </div>
