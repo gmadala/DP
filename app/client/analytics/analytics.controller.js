@@ -23,9 +23,9 @@
 
     $scope.openTopAuctions = function() {
       var dialogOptions = {
-        backdrop: true,
-        keyboard: true,
-        backdropClick: true,
+        backdrop: 'static',
+        keyboard: false,
+        backdropClick: false,
         dialogClass: 'modal modal-x-large',
         templateUrl: 'client/analytics/top-auctions-modal/top-auctions.template.html',
         controller: 'TopAuctionsCtrl',

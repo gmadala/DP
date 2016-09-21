@@ -141,7 +141,7 @@
     $scope.onRequestCredIncr = function() {
       var dialogOptions = {
         dialogClass: 'modal request-credit-increase',
-        backdrop: true,
+        backdrop: 'static',
         keyboard: false,
         backdropClick: false,
         templateUrl: 'client/shared/modals/request-credit-increase/request-credit-increase.template.html',
