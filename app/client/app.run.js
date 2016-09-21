@@ -167,6 +167,7 @@
         //$modal.closeAll();
         uibModal.open({
           keyboard: false,
+          backdrop: 'static',
           backdropClick: false,
           templateUrl: 'client/shared/modals/confirm/confirm-logout/confirm-logout.template.html',
           controller: 'ConfirmLogoutCtrl'
