@@ -57,6 +57,18 @@
   }
 }
 
+@media only screen and (max-width: 767px) {
+  .fc-content-skeleton {
+    td:not(.fc-event-container)::before {
+      content: 'No payments due on this date';
+      position: relative;
+      top: 10px;
+      float: left;
+      padding-left: 10px;
+    }
+  }
+}
+
 .fc-center {
   h2 {
     margin-left: 0 !important;
