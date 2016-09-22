@@ -66,13 +66,6 @@
               top: '55px',
               left: '-106px'
             }
-          }, {
-            html: '',
-            style: {
-              top: '160px',
-              left: '135px',
-              fontSize: '10px'
-            }
           }]
         },
         xAxis: {
@@ -162,17 +155,17 @@
           Blackbook.lookupByVin(scope.vin, scope.odometer, true),
           Mmr.lookupByVin(scope.vin, scope.odometer)
         ]).then(function(results) {
-          var minimumBlackbookAverage  = results[0].reduce(function(previous, current) {
-            return Math.min(previous.AverageValue, current.AverageValue);
+          var minimumBlackbookAverage = _.min(results[0], function(element) {
+            return element.AverageValue;
           });
 
-          var minimumMmrAverage  = results[0].reduce(function(previous, current) {
-            return Math.min(previous.AverageValue, current.AverageValue);
+          var minimumMmrAverage = _.min(results[1], function(element) {
+            return element.AverageWholesale;
           });
 
           var data = chart.series[0].data;
-          data[3].y = minimumBlackbookAverage;
-          data[4].y = minimumMmrAverage;
+          data[3].y = minimumBlackbookAverage ? minimumBlackbookAverage.AverageValue : 0;
+          data[4].y = minimumMmrAverage ? minimumMmrAverage.AverageWholesale : 0;
           chart.series[0].setData(data);
         });
       }
@@ -189,16 +182,18 @@
             return $q.all(kbbLookups);
           })
           .then(function(kbbResults) {
-            var minimumKbbAverage = kbbResults.reduce(function(previous, current) {
-              return Math.min(previous.Good, current.Good);
+            var minimumKbbAverage = _.min(kbbResults, function(element) {
+              return element.Good;
             });
 
             // calculate the average of the averages
             var data = chart.series[0].data;
-            data[5].y = minimumKbbAverage;
+            data[5].y = minimumKbbAverage ? minimumKbbAverage.Good : 0;
             chart.series[0].setData(data);
           });
       }
+
+      var valuationLabel, valuationTriangle;
 
       scope.$watch('purchasePrice', function(newValue, oldValue) {
         if (oldValue === newValue) {
@@ -210,15 +205,83 @@
         var data = chart.series[0].data;
         data[1].y = newValue;
         chart.series[0].setData(data);
+        if (newValue) {
+
+          var projectedPoint = _.max([data[3], data[4], data[5]], function(element) {
+            return element.y;
+          });
+
+          projectedPoint = _.min([projectedPoint, data[1]], function(element) {
+            return element.y;
+          });
+
+          chart.yAxis[0].removePlotLine('max-plot-line');
+          chart.yAxis[0].addPlotLine({
+            value: projectedPoint.y,
+            color: 'black',
+            width: 1,
+            id: 'max-plot-line'
+          });
+
+          if (valuationLabel) {
+            valuationLabel.destroy();
+            valuationTriangle.destroy();
+          }
+
+          var labelX = chart.plotLeft;
+          var labelY = chart.plotTop + chart.chartHeight - 35;
+          var labelText = projectedPoint.category === 'Total Cost' ? purchasePriceLessText : purchasePriceMoreText;
+
+          var percentage = (chart.plotWidth - projectedPoint.plotY) * 100 / chart.plotWidth;
+          if (percentage > 70) {
+            labelX = labelX + 120;
+          } else if (percentage > 30 && percentage <= 70) {
+            labelX = labelX + 60;
+          }
+
+          valuationLabel = chart.renderer
+            .label(
+              labelText,
+              labelX,
+              labelY,
+              'square'
+            )
+            .css({
+              color: '#000',
+              fontSize: '10px'
+            })
+            .attr({
+              padding: 5,
+              r: 5,
+              zIndex: 6
+            })
+            .add();
+
+
+          valuationTriangle =
+            chart.renderer
+              .path(
+                ['M', chart.plotLeft + chart.plotWidth - projectedPoint.plotY, labelY,
+                  'L', chart.plotLeft + chart.plotWidth - projectedPoint.plotY + 5, labelY + 5,
+                  'L', chart.plotLeft + chart.plotWidth - projectedPoint.plotY - 5, labelY + 5,
+                  'L', chart.plotLeft + chart.plotWidth - projectedPoint.plotY, labelY])
+              .attr({
+                fill: 'rgba(0, 0, 0, 0.75)',
+                zIndex: 6
+              })
+              .add();
+        }
+
       });
 
       scope.$watch('vin', function(newValue, oldValue) {
+
         // skip doing anything when the value is not changing
         if (oldValue === newValue) {
           return;
         }
         // update blackbook and mmr values
-        if (scope.odometer) {
+        if (scope.odometer && newValue) {
           updateMmrAndBlackbookValuation();
           // only update the kbb if the zipCode is set
           if (scope.zipCode) {
@@ -234,7 +297,7 @@
         }
 
         // update blackbook and mmr values
-        if (scope.vin) {
+        if (scope.vin && newValue) {
           updateMmrAndBlackbookValuation();
           // only update the kbb if the zipCode is set
           if (scope.zipCode) {
@@ -251,8 +314,8 @@
 
         // update the kbb value only
         if (scope.vin && scope.odometer) {
-          var selectedLocation = locations.filter(function(location) {
-            return location.AddressId === newValue;
+          var selectedLocation = locations.find(function(location) {
+            return location.AddressId === newValue.AddressId;
           });
           scope.zipCode = selectedLocation.Zip;
           updateKbbValuation();
