@@ -153,7 +153,7 @@
           </ul>
           <button class="btn-cta cta-full cta-primary" ng-click="onClickButtonLink('payments')" id="viewAllButton">
             <span class="paired-body" translate>View All Payments</span>
-            <span class="paired-media" nxg-icon="icon-eye"></span>
+            <span class="paired-media icon-x-small" nxg-icon="icon-triangle"></span>
           </button>
         </div>
         <!-- Payments Chart -->
@@ -259,14 +259,13 @@
         </div>
         <button class="btn-cta cta-full cta-secondary" href="javascript:void(0)" ng-click="onRequestCredIncr()" id="requestCreditButton">
           <span class="paired-body" translate>Request Credit Increase</span>
-          <span class="paired-media icon-x-small" nxg-icon="icon-triangle"></span>
         </button>
       </div>
     </div>
 
     <!-- Receipts Summary -->
     <div class="col-sm-5 col-md-4">
-      <div class="panel panel-default dash-well hidden-xs">
+      <div class="panel panel-default dash-well ">
         <h2 class="well-title" translate>Recent Receipts</h2>
         <table class="receipts-table table table-striped table-secondary">
           <thead>
@@ -280,16 +279,11 @@
             <td class="table-value table-numeric">{{ receipt.ReceiptAmount | currency }}</td>
           </tr>
         </table>
-        <button id="viewAllReceipts" class="btn-cta cta-full cta-secondary" ng-click="onClickButtonLink('receipts')">
+        <button id="viewAllReceipts" class="btn-cta cta-full cta-primary" ng-click="onClickButtonLink('receipts')">
           <span class="paired-body" translate>View All Receipts</span>
           <span class="paired-media icon-x-small" nxg-icon="icon-triangle"></span>
         </button>
       </div>
-      <button id="viewAllReceipts" class="btn btn-default btn-block btn-cta cta-secondary cta-full-width receipts-btn visible-xs"
-              ng-click="onClickButtonLink('receipts')">
-        <span class="paired-body" translate>View All Receipts</span>
-        <span class="paired-media icon-x-small" nxg-icon="icon-triangle"></span>
-      </button>
     </div>
 
 
@@ -352,7 +346,7 @@
           </li>
         </ul>
 
-        <button id="floorPlan" class="btn-cta cta-full cta-secondary btn-floor-plans" ng-click="onClickButtonLink('floorplan')">
+        <button id="floorPlan" class="btn-cta cta-full cta-primary btn-floor-plans" ng-click="onClickButtonLink('floorplan')">
           <span class="paired-body" translate>Floor Plans</span>
           <span class="paired-media icon-x-small" nxg-icon="icon-triangle"></span>
         </button>
@@ -394,7 +388,7 @@
           </div>
         </div>
       </div>
-      <button id="viewFloorplans" class="btn btn-default btn-block btn-cta cta-secondary cta-full-width receipts-btn visible-xs"
+      <button id="viewFloorplans" class="btn btn-default btn-block btn-cta cta-primary cta-full-width receipts-btn visible-xs"
               ng-click="onClickButtonLink('floorplan')">
         <span class="paired-body" translate>Recently Floored Vehicles</span>
         <span class="paired-media icon-x-small" nxg-icon="icon-triangle"></span>
