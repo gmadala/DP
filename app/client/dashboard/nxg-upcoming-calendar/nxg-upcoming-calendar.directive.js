@@ -47,6 +47,9 @@
             week: {
               titleFormat: 'MMM DD, YYYY',
               columnFormat: 'ddd M/D'
+            },
+            day: {
+              titleFormat: 'MMMM DD, YYYY'
             }
           },
           viewRender: function (view, element) {
