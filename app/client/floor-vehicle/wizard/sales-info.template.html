@@ -8,8 +8,8 @@
     <div class="field row" style="margin-top:-9px;">
       <div class="col-sm-12">
 
-        <button tabindex="-1" type="button" class="btn-unstyle disbursement-btn-calendar" ng-click="salesInfo.openDatePicker()">
-          <span nxg-icon="icon-calendar" style="left: 15px;"></span>
+        <button tabindex="-1" type="button" style="left: 25px;" class="btn-unstyle disbursement-btn-calendar" ng-click="salesInfo.openDatePicker()">
+          <span nxg-icon="icon-calendar"></span>
         </button>
 
         <input type="text" uib-datepicker-popup="{{salesInfo.dateFormat}}" style="margin-top: 15px;"
@@ -28,7 +28,7 @@
 
         <button class="btn-alert"
                 ng-show="(form.purchaseDate.$error.future || form.purchaseDate.$error.past) && form.$submitted"
-                tooltip-placement="right"
+                tooltip-placement="left"
                 tooltip-trigger="mouseenter"
                 uib-tooltip-html="salesInfo.purchaseDateDisclaimer"
                 tooltip-animation="true">

@@ -322,6 +322,20 @@
     }
   }
 
+  .tooltip-inner {
+    width: auto;
+    max-width: 300px;
+  }
+
+  .date-picker button:hover {
+    background-color: transparent;
+  }
+
+  .btn-alert {
+    height: auto;
+    right: 18px;
+  }
+
   @media (max-width: 767px) {
     .nav-justified > li.hidden-xs-custom {
       display: none !important;
