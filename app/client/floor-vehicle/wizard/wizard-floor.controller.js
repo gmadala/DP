@@ -77,11 +77,13 @@
         return bankAccount.IsActive === true;
       });
 
+      vm.options.BankAccounts = activeBankAccounts;
+      vm.options.LinesOfCredit = _.sortBy(result[1].LinesOfCredit, "LineOfCreditName");
+
       var useDefaultBankAccount = _.filter(result[2].BankAccounts, function (bankAccount) {
-        return bankAccount.AchAccountNumberLast4=== result[1].DefaultDisbursementBankAccountId;
+        return bankAccount.BankAccountId=== result[1].DefaultDisbursementBankAccountId;
       });
 
-      vm.options.BankAccounts = _.sortBy(activeBankAccounts, 'AchBankName');
 
       vm.options.locations = Addresses.getActivePhysical();
 
