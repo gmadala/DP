@@ -39,12 +39,6 @@
   }
 }
 
-.chart-legend {
-  .table {
-    //font-size: 12.5px;
-  }
-}
-
 .receipts-table {
   font-size: 12px;
 }
@@ -54,5 +48,20 @@
     .table, .table-label, .table-symbol, .table-value {
       padding: 8px 0px 8px 0px;
     }
+  }
+}
+
+@media only screen and (min-width: 768px) and (max-width: 991px) {
+  .fc-center {
+    float: left;
+  }
+}
+
+.fc-center {
+  h2 {
+    margin-left: 0 !important;
+  }
+  .fc-next-button {
+    margin-left: 0;
   }
 }
