@@ -10,7 +10,6 @@
   function BusinessFieldV2Ctrl($scope, $element, $uibModal, $timeout) {
     var uibModal = $uibModal;
     var searchOpen = false;
-    // $scope.query = '';
     var lengthAtSubmit = 0;
 
     $scope.clearSelected = function() {
