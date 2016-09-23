@@ -4,7 +4,7 @@ import Translate from 'react-translate-component';
 class ResourceVideos extends Component {
     render() {
         return (
-            <div className="col-md-6">
+            <div className="col-md-4">
                 <section className="panel panel-default">
                     <h2 className="well-title"><Translate content="resources.resourceVideos.loggingIn" /></h2>
                     <div className="nxg-video">
