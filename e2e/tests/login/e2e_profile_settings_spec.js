@@ -35,11 +35,13 @@ describe('\n Profile Settings Page', function () {
     profileSettings.doProfileSettings();
     expect(browser.getCurrentUrl()).toEqual(execSettings.profileSettingsPage());
     expect(profileSettings.elUserProfile.isDisplayed()).toBe(true);
-    expect(profileSettings.getTextUsername()).toEqual('62434AM');
-
+    //expect(profileSettings.getTextUsername()).toEqual('62434AM');
+    // expect(profileSettings.elProfileEditSettings.isDisplayed()).toBe(true);
     browser.sleep('3000');
     profileSettings.doEditSettings();
-
+    browser.sleep('3000');
+    // expect(profileSettings.elProfileCancelSettings.isDisplayed()).toBe(true);
+    // expect(profileSettings.elProfileSaveSettings.isDisplayed()).toBe(true);
     browser.sleep('7000');
 
   });

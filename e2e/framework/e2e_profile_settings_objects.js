@@ -8,7 +8,9 @@ function ProfileSettings() {
   this.elUserProfile = browser.element(by.css('section.panel.panel-default.settings-well'));
   this.elUserName = browser.element(by.css('div.static'));
   this.elEditSettings = browser.element(by.css('button.btn-unstyle'));
-
+  this.elProfileEditSettings = browser.element(by.id('profileEditSettings'));
+  this.elProfileSaveSettings = browser.element(by.id('profileSaveSettings'));
+  this.elProfileCancelSettings = browser.element(by.id('profileCancelSettings'));
   //Doers
   this.doProfileSettings = function () {
     browser.sleep(browser.sleep(browser.params.shortDelay));
