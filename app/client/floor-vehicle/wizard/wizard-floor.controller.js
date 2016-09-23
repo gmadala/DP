@@ -74,6 +74,10 @@
         return bankAccount.IsActive === true;
       });
 
+      var useDefaultBankAccount = _.filter(result[1], function (bankAccount) {
+        return bankAccount.id === result[1].DefaultDisbursementBankAccountId;
+      });
+
       vm.options.BankAccounts = _.sortBy(activeBankAccounts, 'AchBankName');
 
       vm.options.locations = Addresses.getActivePhysical();
@@ -81,7 +85,8 @@
       var optionListsToDefault = [
         {
           scopeSrc: 'wizardFloor.options.BankAccounts',
-          modelDest: 'BankAccountId'
+          modelDest: 'BankAccountId',
+          useFirst: useDefaultBankAccount
         },
         {
           scopeSrc: 'wizardFloor.paySellerOptions',
@@ -248,9 +253,9 @@
         vm.floorPlanSubmitting = true;
 
         var confirmation = {
-          backdrop: true,
-          keyboard: true,
-          backdropClick: true,
+          backdrop: 'static',
+          keyboard: false,
+          backdropClick: false,
           size: 'md',
           templateUrl: 'client/floor-vehicle/floor-car-confirm-modal/floor-car-confirm.template.html',
           controller: 'FloorCarConfirmCtrl',
@@ -362,9 +367,9 @@
       });
 
       return {
-        backdrop: true,
-        keyboard: true,
-        backdropClick: true,
+        backdrop: 'static',
+        keyboard: false,
+        backdropClick: false,
         dialogClass: 'modal modal-medium',
         templateUrl: 'client/shared/modals/floor-car-message/floor-car-message.template.html',
         controller: 'FloorCarMessageCtrl',

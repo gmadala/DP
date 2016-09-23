@@ -59,7 +59,7 @@
             response: function() {return response;}
           },
           dialogClass: 'modal modal-medium modal-long',
-          backdrop: true,
+          backdrop: 'static',
           keyboard: false,
           backdropClick: false,
           templateUrl: 'client/title-releases/title-releases-checkout/confirm-title-release-modal/confirm-title-request.template.html',
