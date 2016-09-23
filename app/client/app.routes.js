@@ -27,6 +27,7 @@
         data: {
           pageId: 'Floorplan',
           showNavBar: true,
+          showMenu: false,
           isFeature: 'responsiveFloorplanBuyer'
         }
       })
@@ -38,6 +39,7 @@
         data: {
           pageId: 'Floorplan',
           showNavBar: true,
+          showMenu: false,
           isFeature: 'responsiveFloorplanBuyer'
         }
       })
@@ -49,6 +51,7 @@
         data: {
           pageId: 'Floorplan',
           showNavBar: true,
+          showMenu: false,
           isFeature: 'responsiveFloorplanBuyer'
         }
       })
@@ -60,6 +63,7 @@
         data: {
           pageId: 'Floorplan',
           showNavBar: true,
+          showMenu: false,
           isFeature: 'responsiveFloorplanBuyer'
         }
       })
@@ -71,6 +75,7 @@
         data: {
           pageId: 'Floorplan',
           showNavBar: true,
+          showMenu: false,
           isFeature: 'responsiveFloorplanBuyer'
         }
       })

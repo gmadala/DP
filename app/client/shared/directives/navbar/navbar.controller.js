@@ -109,7 +109,7 @@
         }
         if (User.getFeatures().hasOwnProperty('responsiveFloorplanBuyer') && User.getFeatures().responsiveFloorplanBuyer.enabled === true) {
           floorplansSubMenu[1].href = '#/flooring-wizard';
-          floorplansSubMenu[1].activeWhen = 'flooring-wizard';
+          floorplansSubMenu[1].activeWhen = 'flooringWizard';
         }
 
         $scope.user = {

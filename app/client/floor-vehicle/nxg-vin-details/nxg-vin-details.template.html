@@ -80,10 +80,19 @@
       <div class="form-group">
         <label ng-show="data.inputYear" for="inputYear" class="show-hide" translate>Year</label>
         <input id="inputYear" name="inputYear" class="form-control" placeholder="{{ 'Year' | translate}}" ng-model="data.inputYear"
-               required/>
-        <label for="inputYear" class="text-error" ng-show="validity.inputYear.$error.required" translate>
-          Please enter a Year.
-        </label>
+               required ng-pattern="/^\d{4}$/" nxg-min="1901" nxg-max="settings.maxYear" />
+         <label for="inputYear" class="text-error"
+                ng-show="validity.inputYear.$error.required" translate>
+           Please enter a Year.
+         </label>
+         <label for="inputYear" class="text-error"
+                ng-show="validity.inputYear.$error.pattern" translate>
+           Please enter a four-digit Year.
+         </label>
+         <label for="inputYear" class="text-error"
+                ng-show="(validity.inputYear.$error.nxgMin || validity.inputYear.$error.nxgMax)" translate>
+           Please enter a Year between 1901 and {{ settings.maxYear }}.
+         </label>
       </div>
       <div class="form-group">
         <label ng-show="data.inputMake" for="inputMake" class="show-hide" translate>Make</label>
