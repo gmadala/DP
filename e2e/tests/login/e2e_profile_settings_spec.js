@@ -2,15 +2,9 @@
 
 var helper = require('../../framework/e2e_helper_functions.js');
 var login = require('../../framework/e2e_login.js');
-// var modalObjects = require('../../framework/e2e_modal_objects.js');
-// var dashboard = require('../../framework/e2e_dashboard_objects.js');
-// var creditIncrease = require('../../framework/e2e_credit_increase_requ_objects.js');
 var profileSettings = require('../../framework/e2e_profile_settings_objects.js');
 var execSettings = require('../../framework/e2e_execSettings.js');
 
-// var dashboard = new dashboard.dashboardObjects();
-// var CredIncrease = new creditIncrease.creditIncrease();
-// var modalObjects = new modalObjects.modalObjects();
 var helper = new helper.helper();
 var profileSettings = new profileSettings.profileSettingsObjects();
 
@@ -30,20 +24,32 @@ describe('\n Profile Settings Page', function () {
     helper.popOver();
   });
 
-  it("2. Profile Settings - Navigating to Profile Settings page  and validating ", function () {
+  it("2. Profile Settings - Navigating to Profile Settings page", function () {
     login.clickMyAccount();
     profileSettings.doProfileSettings();
     expect(browser.getCurrentUrl()).toEqual(execSettings.profileSettingsPage());
+    //Validating the User Profile Section
     expect(profileSettings.elUserProfile.isDisplayed()).toBe(true);
-    //expect(profileSettings.getTextUsername()).toEqual('62434AM');
-    // expect(profileSettings.elProfileEditSettings.isDisplayed()).toBe(true);
-    browser.sleep('3000');
-    profileSettings.doEditSettings();
-    browser.sleep('3000');
-    // expect(profileSettings.elProfileCancelSettings.isDisplayed()).toBe(true);
-    // expect(profileSettings.elProfileSaveSettings.isDisplayed()).toBe(true);
-    browser.sleep('7000');
+    expect(profileSettings.elProfileEditSettings.isDisplayed()).toBe(true);
+    expect(profileSettings.elProfileCancelSettings.isDisplayed()).toBe(false);
+    expect(profileSettings.elProfileSaveSettings.isDisplayed()).toBe(false);
+    //Validating the Notification Section
+    expect(profileSettings.elNotificationsEditSettings.isDisplayed()).toBe(true);
+    expect(profileSettings.elNotificationsCancelSettings.isDisplayed()).toBe(false);
+    expect(profileSettings.elNotificationsSaveSettings.isDisplayed()).toBe(false);
+  });
 
+  it("3. Profile Settings - Validating the Profile Settings", function () {
+    profileSettings.doProfileEditSettings();
+    expect(profileSettings.elProfileCancelSettings.isDisplayed()).toBe(true);
+    expect(profileSettings.elProfileSaveSettings.isDisplayed()).toBe(true);
+    expect(profileSettings.elNotificationsEditSettings.isDisplayed()).toBe(true);
+  });
+
+  it("4. Profile Settings - Validating the Notifications Settings", function () {
+    profileSettings.doNotificationsEditSettings();
+    expect(profileSettings.elNotificationsCancelSettings.isDisplayed()).toBe(true);
+    expect(profileSettings.elNotificationsSaveSettings.isDisplayed()).toBe(true);
   });
 
   it("5. Profile Settin.lags - Logout", function () {
