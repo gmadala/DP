@@ -92,65 +92,74 @@
       <div>
         <div class="panel panel-default dash-well">
           <h2 class="well-title" translate>Payments Summary</h2>
-          <ul class="counter-list">
-            <li id="overdue" class="clickable" ng-click="filterPayments('overdue')">
-              <span class="counter" ng-class="{overdue: paymentSummary[viewMode].OverduePayments > 0}">{{paymentSummary[viewMode].OverduePayments}}</span>
-              <div class="dash-lockup">
-                <p class="dash-minor"
-                   translate
-                   translate-n="paymentSummary[viewMode].OverduePayments"
-                   translate-plural="Overdue"
-                   translate-comment="Payment(s) overdue">
-                  Overdue
-                </p>
-                <h4 class="dash-major" ng-class="{'overdue-amount': paymentSummary[viewMode].OverduePaymentAmount > 0}" id="overduePaymentDash">
-                  {{paymentSummary[viewMode].OverduePaymentAmount | currency}}</h4>
-              </div>
-            </li>
-            <li id="today" class="clickable" ng-click="filterPayments('today')">
-              <span class="counter" ng-class="{'due-today': paymentSummary[viewMode].PaymentsDueToday > 0}" id="paymentsDueDash">{{paymentSummary[viewMode].PaymentsDueToday}}</span>
-              <div class="dash-lockup">
-                <p class="dash-minor"
-                   translate
-                   translate-n="paymentSummary[viewMode].PaymentsDueToday"
-                   translate-plural="Due Today"
-                   translate-comment="Payment(s) due today">
-                  Due Today
-                </p>
-                <h4 class="dash-major">{{paymentSummary[viewMode].PaymentsDueTodayAmount | currency}}</h4>
-              </div>
-            </li>
-            <li id="week" class="clickable" ng-click="filterPayments(viewMode)">
-              <span class="counter">{{paymentSummary[viewMode].UpcomingPayments}}</span>
-
-              <div class="dash-lockup">
-          <span class="lockup-minor" ng-show="viewMode === 'week'"
-                translate
-                translate-n="paymentSummary[viewMode].UpcomingPayments"
-                translate-plural="Due This Week"
-                translate-comment="Payment(s) due this week">
-            Due This Week
-          </span>
-          <span class="lockup-minor" ng-show="viewMode === 'month'"
-                translate
-                translate-n="paymentSummary[viewMode].UpcomingPayments"
-                translate-plural="Due This Month"
-                translate-comment="Payment(s) due this month" id="dueThisMonthDash">
-            Due This Month
-          </span>
-                <h4 class="dash-major">{{paymentSummary[viewMode].UpcomingPaymentsAmount | currency}}</h4>
-              </div>
-            </li>
-            <li id="fees" class="clickable" ng-click="filterPayments()">
-              <span class="counter">{{paymentSummary[viewMode].AccountFees}}</span>
-              <div class="dash-lockup">
-                <p class="dash-minor" translate
-                   translate-n="paymentSummary[viewMode].AccountFees"
-                   translate-plural="Account Fees">Account Fee</p>
-                <h4 class="dash-major">{{paymentSummary[viewMode].AccountFeeAmount | currency}}</h4>
-              </div>
-            </li>
-          </ul>
+          <div class="panel-body">
+            <ul class="counter-list">
+              <li id="overdue" class="clickable row" ng-click="filterPayments('overdue')">
+                <div class="col-xs-6">
+                  <span class="counter" ng-class="{overdue: paymentSummary[viewMode].OverduePayments > 0}">{{paymentSummary[viewMode].OverduePayments}}</span>
+                </div>
+                <div class="dash-lockup col-xs-6">
+                  <p class="dash-minor"
+                     translate
+                     translate-n="paymentSummary[viewMode].OverduePayments"
+                     translate-plural="Overdue"
+                     translate-comment="Payment(s) overdue">
+                    Overdue
+                  </p>
+                  <h4 class="dash-major" ng-class="{'overdue-amount': paymentSummary[viewMode].OverduePaymentAmount > 0}" id="overduePaymentDash">
+                    {{paymentSummary[viewMode].OverduePaymentAmount | currency}}</h4>
+                </div>
+              </li>
+              <li id="today" class="clickable row" ng-click="filterPayments('today')">
+                <div class="col-xs-6">
+                  <span class="counter" ng-class="{'due-today': paymentSummary[viewMode].PaymentsDueToday > 0}" id="paymentsDueDash">{{paymentSummary[viewMode].PaymentsDueToday}}</span>
+                </div>
+                <div class="dash-lockup col-xs-6">
+                  <p class="dash-minor"
+                     translate
+                     translate-n="paymentSummary[viewMode].PaymentsDueToday"
+                     translate-plural="Due Today"
+                     translate-comment="Payment(s) due today">
+                    Due Today
+                  </p>
+                  <h4 class="dash-major">{{paymentSummary[viewMode].PaymentsDueTodayAmount | currency}}</h4>
+                </div>
+              </li>
+              <li id="week" class="clickable row" ng-click="filterPayments(viewMode)">
+                <div class="col-xs-6">
+                  <span class="counter">{{paymentSummary[viewMode].UpcomingPayments}}</span>
+                </div>
+                <div class="dash-lockup col-xs-6">
+                  <p class="lockup-minor" ng-show="viewMode === 'week'"
+                     translate
+                     translate-n="paymentSummary[viewMode].UpcomingPayments"
+                     translate-plural="Due This Week"
+                     translate-comment="Payment(s) due this week">
+                    Due This Week
+                  </p>
+                  <p class="lockup-minor" ng-show="viewMode === 'month'"
+                     translate
+                     translate-n="paymentSummary[viewMode].UpcomingPayments"
+                     translate-plural="Due This Month"
+                     translate-comment="Payment(s) due this month" id="dueThisMonthDash">
+                    Due This Month
+                  </p>
+                  <h4 class="dash-major">{{paymentSummary[viewMode].UpcomingPaymentsAmount | currency}}</h4>
+                </div>
+              </li>
+              <li id="fees" class="clickable row" ng-click="filterPayments()">
+                <div class="col-xs-6">
+                  <span class="counter">{{paymentSummary[viewMode].AccountFees}}</span>
+                </div>
+                <div class="dash-lockup col-xs-6">
+                  <p class="dash-minor" translate
+                     translate-n="paymentSummary[viewMode].AccountFees"
+                     translate-plural="Account Fees">Account Fee</p>
+                  <h4 class="dash-major">{{paymentSummary[viewMode].AccountFeeAmount | currency}}</h4>
+                </div>
+              </li>
+            </ul>
+          </div>
           <button class="btn-cta cta-full cta-primary" ng-click="onClickButtonLink('payments')" id="viewAllButton">
             <span class="paired-body" translate>View All Payments</span>
             <span class="paired-media icon-x-small" nxg-icon="icon-triangle"></span>
@@ -191,6 +200,12 @@
           </div>
         </div>
       </div>
+      <!--Recently Floored Vehicles mobile button-->
+      <button id="viewFloorplans" class="btn btn-default btn-block btn-cta cta-primary cta-full-width solo-btn visible-xs"
+              ng-click="onClickButtonLink('floorplan')">
+        <span class="paired-body" translate>Recently Floored Vehicles</span>
+        <span class="paired-media icon-x-small" nxg-icon="icon-triangle"></span>
+      </button>
     </div>
   </section>
 
@@ -296,56 +311,60 @@
 
   <section class="row">
     <!-- Floor Plan Summary -->
-    <div class="col-sm-3 col-md-2">
+    <div class="col-sm-3">
       <div class="panel panel-default dash-well">
         <h2 class="well-title" translate>Floor Plan</h2>
-        <ul class="counter-list">
-          <li class="row">
-            <div class="col-xs-6">
-          <span class="counter">
-            {{ dashboardData.ApprovedFloorplans | alt }}
-          </span>
-            </div>
-            <div class="col-xs-6 counter-label">
-            <span uib-tooltip="{{ 'This status applies to vehicles floored via NextGearCapital.com or by a NextGear Capital employee via NextGear\'s Discover system that have been approved and are currently on the NextGear dealer\'s floor plan.' | translate }}"
+        <div class="panel-body">
+          <ul class="counter-list">
+            <li class="row">
+              <div class="col-xs-6">
+                <span class="counter">
+                  {{ dashboardData.ApprovedFloorplans | alt }}
+                </span>
+              </div>
+              <div class="col-xs-6 counter-label">
+                <span
+                  uib-tooltip="{{ 'This status applies to vehicles floored via NextGearCapital.com or by a NextGear Capital employee via NextGear\'s Discover system that have been approved and are currently on the NextGear dealer\'s floor plan.' | translate }}"
                   tooltip-placement="right"
                   tooltip-popup-delay="700">
-              <a id="fpApproved" href="javascript:void(0)" ng-click="filterFloorplans('approved')" translate>Approved</a>
-            </span>
-            </div>
-          </li>
+                  <a id="fpApproved" href="javascript:void(0)" ng-click="filterFloorplans('approved')" translate>Approved</a>
+                </span>
+              </div>
+            </li>
 
-          <li class="row">
-            <div class="col-xs-6">
-            <span class="counter">
-              {{ dashboardData.PendingFloorplans | alt }}
-            </span>
-            </div>
-            <div class="col-xs-6 custom counter-label zeroPadding">
-            <span uib-tooltip="{{ 'This status applies to vehicles floored via NextGearCapital.com or by a NextGear Capital employee via NextGear\'s Discover system that have not yet been approved by a NextGear employee.' | translate }}"
+            <li class="row">
+              <div class="col-xs-6">
+                <span class="counter">
+                  {{ dashboardData.PendingFloorplans | alt }}
+                </span>
+              </div>
+              <div class="col-xs-6 custom counter-label zeroPadding">
+                <span
+                  uib-tooltip="{{ 'This status applies to vehicles floored via NextGearCapital.com or by a NextGear Capital employee via NextGear\'s Discover system that have not yet been approved by a NextGear employee.' | translate }}"
                   tooltip-placement="right"
                   tooltip-popup-delay="700">
-                <a id="fpPending" href="javascript:void(0)" ng-click="filterFloorplans('pending')" translate>Pending</a>
-            </span>
-            </div>
-          </li>
+                    <a id="fpPending" href="javascript:void(0)" ng-click="filterFloorplans('pending')" translate>Pending</a>
+                </span>
+              </div>
+            </li>
 
-          <li class="row">
-            <div class="col-xs-6 custom ">
-          <span class="counter">
-            {{ dashboardData.DeniedFloorplans | alt }}
-          </span>
-            </div>
-            <div class="col-xs-6 custom counter-label zeroPadding">
-          <span uib-tooltip="{{ 'This status applies to vehicles floored via NextGearCapital.com that have been denied by a NextGear Capital employee. Please contact NextGear Customer Service to find out why a vehicle has been denied.' | translate }}"
-                tooltip-placement="right"
-                tooltip-popup-delay="700">
-              <a id="fpDenied" href="javascript:void(0)" ng-click="filterFloorplans('denied')" translate>Denied</a>
-          </span>
-            </div>
-          </li>
-        </ul>
-
+            <li class="row">
+              <div class="col-xs-6 custom ">
+                <span class="counter">
+                  {{ dashboardData.DeniedFloorplans | alt }}
+                </span>
+              </div>
+              <div class="col-xs-6 custom counter-label zeroPadding">
+                <span
+                  uib-tooltip="{{ 'This status applies to vehicles floored via NextGearCapital.com that have been denied by a NextGear Capital employee. Please contact NextGear Customer Service to find out why a vehicle has been denied.' | translate }}"
+                  tooltip-placement="right"
+                  tooltip-popup-delay="700">
+                    <a id="fpDenied" href="javascript:void(0)" ng-click="filterFloorplans('denied')" translate>Denied</a>
+                </span>
+              </div>
+            </li>
+          </ul>
+        </div>
         <button id="floorPlan" class="btn-cta cta-full cta-primary btn-floor-plans" ng-click="onClickButtonLink('floorplan')">
           <span class="paired-body" translate>Floor Plans</span>
           <span class="paired-media icon-x-small" nxg-icon="icon-triangle"></span>
@@ -355,7 +374,7 @@
     <!-- end .summary.floorplan -->
 
     <!--Recently Floored Vehicles-->
-    <div class="col-sm-9 col-md-10">
+    <div class="col-sm-9">
       <div class="panel panel-default dash-well hidden-xs">
         <h2 class="well-title" translate>Recently Floored Vehicles</h2>
         <div ng-switch="floorplanData.results.length > 0 || floorplanData.loading">
@@ -388,11 +407,6 @@
           </div>
         </div>
       </div>
-      <button id="viewFloorplans" class="btn btn-default btn-block btn-cta cta-primary cta-full-width receipts-btn visible-xs"
-              ng-click="onClickButtonLink('floorplan')">
-        <span class="paired-body" translate>Recently Floored Vehicles</span>
-        <span class="paired-media icon-x-small" nxg-icon="icon-triangle"></span>
-      </button>
 
     </div>
   </section>
