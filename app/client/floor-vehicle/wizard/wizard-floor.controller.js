@@ -77,10 +77,10 @@
         return bankAccount.IsActive === true;
       });
 
-      vm.options.BankAccounts = activeBankAccounts;
+      vm.options.BankAccounts = _.sortBy(activeBankAccounts, 'AchBankName');
       vm.options.LinesOfCredit = _.sortBy(result[1].LinesOfCredit, "LineOfCreditName");
 
-      var useDefaultBankAccount = _.filter(result[2].BankAccounts, function (bankAccount) {
+      var defaultBankAccount = _.find(result[2].BankAccounts, function (bankAccount) {
         return bankAccount.BankAccountId=== result[1].DefaultDisbursementBankAccountId;
       });
 
@@ -91,7 +91,7 @@
         {
           scopeSrc: 'wizardFloor.options.BankAccounts',
           modelDest: 'BankAccountId',
-          useFirst: useDefaultBankAccount
+          useDefault: defaultBankAccount
         },
         {
           scopeSrc: 'wizardFloor.paySellerOptions',
