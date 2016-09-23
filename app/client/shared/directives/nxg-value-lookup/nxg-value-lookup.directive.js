@@ -44,8 +44,8 @@
           type: 'bar',
           height: 200,
           marginTop: 0,
-          marginBottom: 50,
-          spacingLeft: 40
+          marginRight: 0,
+          marginBottom: 50
         },
         credits: {
           enabled: false
@@ -58,18 +58,18 @@
             html: '<strong>' + purchasePriceText + '</strong>',
             style: {
               top: '5px',
-              left: '-106px'
+              left: '-105px'
             }
           }, {
             html: '<strong>' + bookoutAmountText + '</strong>',
             style: {
               top: '55px',
-              left: '-106px'
+              left: '-105px'
             }
           }]
         },
         xAxis: {
-          categories: ['', 'Total Cost', '', 'Black Book', 'MMR', 'KBB®'],
+          categories: ['', 'From Bill of Sale', '', 'Black Book', 'MMR', 'KBB®'],
           tickLength: 0,
           gridLineColor: 'transparent',
           lineWidth: 0,
@@ -102,7 +102,9 @@
               style: {
                 fontWeight: 'bolder'
               },
-              inside: true
+              formatter: function() {
+                return numeral(this.y).format('$0,0[.]00');
+              }
             },
             states: {
               hover: {
@@ -149,6 +151,31 @@
         scope.zipCode = locations[0].Zip;
       }
 
+      function realignLabels(series) {
+        var chart = series.chart;
+        _.each(series.data, function(point) {
+          if (!point.dataLabel || !point.y) {
+            return true;
+          }
+
+          var color = '#FFF';
+          var position = point.dataLabel.x;
+          if (chart.plotWidth - point.plotY < point.dataLabel.width) {
+            position = position + 30;
+            // default font color is white, if it's outside the bar then change it to black.
+            color = '#000';
+          }
+
+          point.dataLabel
+            .attr({
+              x: position
+            })
+            .css({
+              color: color
+            });
+        });
+      }
+
       function updateMmrAndBlackbookValuation() {
         var chart = element.find('.nxg-value-lookup').highcharts();
         $q.all([
@@ -167,6 +194,7 @@
           data[3].y = minimumBlackbookAverage ? minimumBlackbookAverage.AverageValue : 0;
           data[4].y = minimumMmrAverage ? minimumMmrAverage.AverageWholesale : 0;
           chart.series[0].setData(data);
+          realignLabels(chart.series[0]);
         });
       }
 
@@ -190,6 +218,7 @@
             var data = chart.series[0].data;
             data[5].y = minimumKbbAverage ? minimumKbbAverage.Good : 0;
             chart.series[0].setData(data);
+            realignLabels(chart.series[0]);
           });
       }
 
@@ -205,6 +234,7 @@
         var data = chart.series[0].data;
         data[1].y = newValue;
         chart.series[0].setData(data);
+        realignLabels(chart.series[0]);
         if (newValue) {
 
           var projectedPoint = _.max([data[3], data[4], data[5]], function(element) {
@@ -220,7 +250,6 @@
             value: projectedPoint.y,
             color: 'black',
             width: 1,
-            zIndex: 100,
             id: 'max-plot-line'
           });
 
@@ -231,7 +260,7 @@
 
           var labelX = chart.plotLeft;
           var labelY = chart.plotTop + chart.chartHeight - 45;
-          var labelText = projectedPoint.category === 'Total Cost' ? purchasePriceLessText : purchasePriceMoreText;
+          var labelText = projectedPoint.category === 'From Bill of Sale' ? purchasePriceLessText : purchasePriceMoreText;
 
           var percentage = (chart.plotWidth - projectedPoint.plotY) * 100 / chart.plotWidth;
           if (percentage > 70) {
