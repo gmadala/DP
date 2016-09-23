@@ -336,6 +336,10 @@
     right: 18px;
   }
 
+  input:-ms-input-placeholder {
+    color: #999999;
+  }
+
   @media (max-width: 767px) {
     .nav-justified > li.hidden-xs-custom {
       display: none !important;
