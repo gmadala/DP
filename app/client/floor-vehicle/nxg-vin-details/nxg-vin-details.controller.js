@@ -27,7 +27,7 @@
     var USER_CANCEL = 'userCancel',
       pickMatch = function(matchList) {
         var options = {
-          backdrop: true,
+          backdrop: 'static',
           keyboard: false,
           backdropClick: false,
           dialogClass: 'modal modal-medium',

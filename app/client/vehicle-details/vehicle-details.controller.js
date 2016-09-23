@@ -94,9 +94,9 @@
       }
 
       var dialogParams = {
-        backdrop: true,
-        keyboard: true,
-        backdropClick: true,
+        backdrop: 'static',
+        keyboard: false,
+        backdropClick: false,
         dialogClass: 'modal modal-medium',
         templateUrl: 'client/shared/modals/floor-car-message/floor-car-message.template.html',
         controller: 'FloorCarMessageCtrl',
@@ -271,7 +271,7 @@
 
           var dialogOptions = {
             dialogClass: 'modal modal-medium',
-            backdrop: true,
+            backdrop: 'static',
             keyboard: false,
             backdropClick: false,
             templateUrl: 'client/shared/modals/payment-options-breakdown/payment-options-breakdown.template.html',
@@ -557,9 +557,9 @@
 
           promise.then(function(data) {
             uibModal.open({
-              backdrop: true,
-              keyboard: true,
-              backdropClick: true,
+              backdrop: 'static',
+              keyboard: false,
+              backdropClick: false,
               controller: ctrl,
               templateUrl: 'client/vehicle-details/' + template,
               dialogClass: 'modal',
@@ -603,9 +603,9 @@
           };
 
           uibModal.open({
-            backdrop: true,
-            keyboard: true,
-            backdropClick: true,
+            backdrop: 'static',
+            keyboard: false,
+            backdropClick: false,
             controller: 'ExtensionRequestCtrl',
             templateUrl: 'client/shared/modals/extension-request/payment-extension.template.html',
             dialogClass: 'modal modal-medium',
