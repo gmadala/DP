@@ -140,6 +140,11 @@ module.exports = {
     }
 
     function findFolder(folder, done, failure) {
+      // Strip the query string
+      if (folder.includes('?')) {
+        folder = folder.substring(0, folder.indexOf('?'));
+      }
+
       var lastSeparatorIndex = folder.lastIndexOf('/');
       if (lastSeparatorIndex === folder.length - 1) {
         folder = folder.substring(0, folder.length - 1);
