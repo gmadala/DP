@@ -25,6 +25,9 @@ module.exports = function(grunt) {
 
   grunt.file.defaultEncoding = 'utf8';
 
+
+  grunt.loadNpmTasks('grunt-env');
+
   grunt.initConfig({
     yeoman: yeomanConfig,
     watch: {
@@ -539,6 +542,9 @@ module.exports = function(grunt) {
       },
       webpack: {
           command: 'webpack'
+      },
+      webpack_prod: {
+          command: 'webpack'
       }
     },
     protractor: { // a specific suite can be run with grunt protractor:run --suite=suite_name
@@ -554,11 +560,29 @@ module.exports = function(grunt) {
         // Will run the jshint tasks at every commit
         'pre-commit': 'jshint jscs karma'
       }
-    }
+    },
+    env : {
+        dev : {
+            NODE_ENV : 'development'
+        },
+        prod : {
+            NODE_ENV : 'production'
+        }
+    },
   });
 
+  grunt.registerTask('webpack-dev', [
+      'env:dev',
+      'shell:webpack'
+  ])
+
+  grunt.registerTask('webpack-prod', [
+      'env:prod',
+      'shell:webpack'
+  ])
+
   grunt.registerTask('dev-setup', [
-    'shell:webpack',
+    'webpack-dev',
     'gitinfo',
     'env:dev',
     'clean:server',
@@ -616,6 +640,7 @@ module.exports = function(grunt) {
   ]);
 
   grunt.registerTask('build', [
+    'webpack-prod',
     'gitinfo',
     'env',
     'clean:dist',
