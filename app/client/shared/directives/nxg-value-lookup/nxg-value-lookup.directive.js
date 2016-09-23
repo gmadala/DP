@@ -220,6 +220,7 @@
             value: projectedPoint.y,
             color: 'black',
             width: 1,
+            zIndex: 100,
             id: 'max-plot-line'
           });
 
@@ -229,7 +230,7 @@
           }
 
           var labelX = chart.plotLeft;
-          var labelY = chart.plotTop + chart.chartHeight - 35;
+          var labelY = chart.plotTop + chart.chartHeight - 45;
           var labelText = projectedPoint.category === 'Total Cost' ? purchasePriceLessText : purchasePriceMoreText;
 
           var percentage = (chart.plotWidth - projectedPoint.plotY) * 100 / chart.plotWidth;
@@ -237,6 +238,8 @@
             labelX = labelX + 120;
           } else if (percentage > 30 && percentage <= 70) {
             labelX = labelX + 60;
+          } else {
+            labelX = labelX - 5;
           }
 
           valuationLabel = chart.renderer
@@ -251,8 +254,7 @@
               fontSize: '10px'
             })
             .attr({
-              padding: 5,
-              r: 5,
+              paddingTop: 10,
               zIndex: 6
             })
             .add();
