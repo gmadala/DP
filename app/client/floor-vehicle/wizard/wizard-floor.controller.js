@@ -358,6 +358,8 @@
       var dialogParams;
 
       vm.floorPlanSubmitting = true;
+      vm.data.TitleLocationId = vm.options.titleLocationOptions[vm.data.TitleLocationId];
+
       Floorplan.create(vm.data).then(
         function (response) { /*floorplan success*/
           if (vm.data.commentGeneral || vm.data.commentAdditionalFinancing) {
