@@ -25,31 +25,35 @@
   <div class="col-xs-12 col-md-4"></div>
   <div class="col-xs-12 col-md-6 col-md-offset-1 wizard-btns">
     <div class="row">
-      <div class="visible-xs col-xs-12">
-        <button type="button"
-                class="btn-cta cta-secondary btn-block btn-previous" translate
-                style="margin-left: 0px;"
-                ng-hide="!wizardFloor.previousAvailable()"
-                ng-click="wizardFloor.previous()">
-          Back
-        </button>
-        <button type="button"
-                class="btn-cta cta-primary btn-block btn-next" translate
-                style="margin-left: 0px;"
-                ng-show="wizardFloor.nextAvailable() && (wizardFloor.attachDocumentsEnabled || wizardFloor.counter != 3)"
-                ng-disabled="!wizardFloor.validForm"
-                ng-click="wizardFloor.next()">
-          Next
-        </button>
-        <button type="button"
-                class="btn-cta cta-primary btn-block btn-submit" translate
-                style="margin-left: 0px;"
-                ng-show="!wizardFloor.nextAvailable() || (!wizardFloor.attachDocumentsEnabled && wizardFloor.counter == 3)"
-                ng-disabled="wizardFloor.floorPlanSubmitting"
-                ng-click="wizardFloor.submit()">
-          Submit
-        </button>
-      </div>
+      <span class="visible-xs">
+        <div class="col-xs-6">
+          <button type="button"
+                  class="btn-cta cta-secondary btn-block btn-previous" translate
+                  style="margin-left: 0px;"
+                  ng-hide="!wizardFloor.previousAvailable()"
+                  ng-click="wizardFloor.previous()">
+            Back
+          </button>
+        </div>
+        <div class="col-xs-6">
+          <button type="button"
+                  class="btn-cta cta-primary btn-block btn-next" translate
+                  style="margin-left: 0px;"
+                  ng-show="wizardFloor.nextAvailable() && (wizardFloor.attachDocumentsEnabled || wizardFloor.counter != 3)"
+                  ng-disabled="!wizardFloor.validForm"
+                  ng-click="wizardFloor.next()">
+            Next
+          </button>
+          <button type="button"
+                  class="btn-cta cta-primary btn-block btn-submit" translate
+                  style="margin-left: 0px;"
+                  ng-show="!wizardFloor.nextAvailable() || (!wizardFloor.attachDocumentsEnabled && wizardFloor.counter == 3)"
+                  ng-disabled="wizardFloor.floorPlanSubmitting"
+                  ng-click="wizardFloor.submit()">
+            Submit
+          </button>
+        </div>
+      </span>
       <div class="col-xs-6 hidden-xs" style="padding-right: 0px;">
         <button type="button"
                 class="btn-cta cta-secondary btn-previous pull-right" translate
