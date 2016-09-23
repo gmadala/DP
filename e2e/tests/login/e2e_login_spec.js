@@ -8,6 +8,35 @@ var helper = require('../../framework/e2e_helper_functions.js');
 var loginObjects = new loginObjects.loginObjects();
 var helper = new helper.helper();
 
+describe('\n Login Page', function () {
+
+  beforeEach(function () {
+    browser.sleep(browser.params.shortDelay);
+    browser.ignoreSynchronization = true;
+  });
+
+  it("1. Login  - Validating the NGC Logo and Language selection in Login Page", function () {
+    helper.goToLogin();
+    expect(loginObjects.elMNGLogo.isDisplayed()).toBe(true);
+    expect(loginObjects.elLangChooser.isDisplayed()).toBe(true);
+    expect(loginObjects.elEnglish.isDisplayed()).toBe(true);
+    expect(loginObjects.elSpanish.isDisplayed()).toBe(true);
+    expect(loginObjects.elFrench.isDisplayed()).toBe(true);
+    //Validating the default language as English
+    expect(loginObjects.getTextLogin()).toBe("Login");
+    //Validating the Spanish Language button
+    loginObjects.doSpanish();
+    expect(loginObjects.getTextLogin()).toBe("Iniciar sesión");
+    //Validating the French Language button
+    loginObjects.doFrench();
+    expect(loginObjects.getTextLogin()).toBe("Ouverture de session");
+    //Validating the English language button
+    loginObjects.doEnglish();
+    expect(loginObjects.getTextLogin()).toBe("Login");
+  });
+
+});
+
 describe('\n Login Page - Dealer', function () {
 
   beforeEach(function () {
