@@ -39,9 +39,9 @@
       if (!searchOpen) {
         var dialogOptions = {
           dialogClass: 'modal modal-x-large',
-          backdrop: true,
-          keyboard: true,
-          backdropClick: true,
+          backdrop: 'static',
+          keyboard: false,
+          backdropClick: false,
           templateUrl: 'client/dealer-search/business-search-modal/business-search.template.html',
           controller: 'BusinessSearchCtrl',
           resolve: {

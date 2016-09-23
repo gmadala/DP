@@ -2,23 +2,18 @@
 //  FOOTER
 // ========
 
-footer.row-footer{
+footer.row-footer {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
   @extend %center;
-  @extend %full-width;
   background: #FFF;
   @include background-image(linear-gradient(#FFF, #e4e4e4));
   font-size: $tiny-font-size;
   color: $highlight;
   border-top: 1px solid $border;
-  margin-top: 10px;
-  margin-bottom: -50px;
   padding-top: 14px;
-  padding-bottom:11px;
-}
-
-
-.nxg-main-view {
-  margin-bottom: 50px;
 }
 
 html, body {
@@ -34,12 +29,10 @@ body {
 .nxg-main-container {
   min-height: 100%;
   overflow: hidden;
-  /* equal to footer height plus some extra spacing */
-  margin-bottom: -50px;
 }
 
 .no-left-margin {
-  margin-left:0px;
+  margin-left: 0px;
 }
 
 .no-right-margin {
@@ -49,11 +42,6 @@ body {
 .nxg-main:after {
   content: '';
   display: block;
-}
-
-footer, .nxg-main:after {
-  /* .push must be the same height as footer */
-  height: 120px;
 }
 
 .nxg-phone {

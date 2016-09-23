@@ -108,7 +108,7 @@
       VINSOLUTIONS_INDEX: 'Vin Solutions Partner Link',
 
       //FedEx
-      WAYBILL_PRINTED: 'FedEx Waybill Printed Success'
+      WAYBILL_PRINTED: 'FedEx Waybill Generated'
 
     });
 })();

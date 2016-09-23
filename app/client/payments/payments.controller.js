@@ -153,9 +153,9 @@
 
     $scope.payments.extension = function (payment) {
       uibModal.open({
-        backdrop: true,
-        keyboard: true,
-        backdropClick: true,
+        backdrop: 'static',
+        keyboard: false,
+        backdropClick: false,
         controller: 'ExtensionRequestCtrl',
         templateUrl: 'client/shared/modals/extension-request/payment-extension.template.html',
         dialogClass: 'modal modal-medium',
@@ -266,19 +266,9 @@
       bizHours();
     });
 
-    $scope.getCounter = function () {
-      var count = 0,
-        queue = Payments.getPaymentQueue();
-
-      angular.forEach(queue.fees, function() {
-        count++;
-      });
-
-      angular.forEach(queue.payments, function() {
-        count++;
-      });
-
-      return count;
+    $scope.getCounter = function() {
+      var queue = Payments.getPaymentQueue();
+      return _.size(queue.fees) + _.size(queue.payments);
     };
 
     $scope.getTotal = function(){

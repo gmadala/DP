@@ -49,6 +49,7 @@
     var uibModal = $uibModal;
 
     $scope.isCollapsed = true;
+    $scope.dialogVisible = false;
     $scope.submitInProgress = false;
 
     kissMetricInfo.getKissMetricInfo().then(function(result){
@@ -149,9 +150,9 @@
         item.scheduleLoading = true;
 
         var dialogOptions = {
-          backdrop: true,
-          keyboard: true,
-          backdropClick: true,
+          backdrop: 'static',
+          keyboard: false,
+          backdropClick: false,
           templateUrl: 'client/checkout/schedule-checkout-modal/schedule-checkout.template.html',
           controller: 'ScheduleCheckoutCtrl',
           resolve: {
@@ -277,10 +278,10 @@
               segmentio.track(metric.DEALER_PAYMENT_SUBMITTED, result);
             });
 
+            $scope.dialogVisible = true;
             var dialogOptions = {
-              backdrop: true,
-              keyboard: true,
-              backdropClick: true,
+              backdrop: 'static',
+              keyboard: false,
               templateUrl: 'client/checkout/confirm-checkout-modal/confirm-checkout.template.html',
               controller: 'ConfirmCheckoutCtrl',
               dialogClass: 'modal modal-medium',
@@ -295,6 +296,7 @@
             };
             $uibModal.open(dialogOptions).result.then(function () {
               Payments.clearPaymentQueue();
+              $scope.dialogVisible = false;
             });
           }
         );
@@ -355,7 +357,7 @@
     $scope.launchPaymentOptions = function(payment) {
       var dialogOptions = {
         dialogClass: 'modal modal-medium',
-        backdrop: true,
+        backdrop: 'static',
         keyboard: false,
         backdropClick: false,
         templateUrl: 'client/shared/modals/payment-options-breakdown/payment-options-breakdown.template.html',

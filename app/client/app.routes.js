@@ -18,6 +18,51 @@
     $uiViewScrollProvider.useAnchorScroll();
     $urlRouterProvider.otherwise(otherwiseRouteConfig);
     $stateProvider
+      .state('flooringWizard', {
+        abstract: true,
+        url: '/flooring-wizard',
+        controller: 'WizardFloorCtrl',
+        controllerAs: 'wizardFloor',
+        templateUrl: 'client/floor-vehicle/wizard/wizard-floor.template.html',
+        data: {
+          pageId: 'Floorplan',
+          showNavBar: true,
+          isFeature: 'responsiveFloorplanBuyer'
+        }
+      })
+      .state('flooringWizard.car', {
+        url: '',
+        controller: 'CarInfoCtrl',
+        controllerAs: 'carInfo',
+        templateUrl: 'client/floor-vehicle/wizard/car-info.template.html',
+        data: {
+          pageId: 'Floorplan',
+          showNavBar: true,
+          isFeature: 'responsiveFloorplanBuyer'
+        }
+      })
+      .state('flooringWizard.sales', {
+        url: '/sales',
+        controller: 'SalesInfoCtrl',
+        controllerAs: 'salesInfo',
+        templateUrl: 'client/floor-vehicle/wizard/sales-info.template.html',
+        data: {
+          pageId: 'Floorplan',
+          showNavBar: true,
+          isFeature: 'responsiveFloorplanBuyer'
+        }
+      })
+      .state('flooringWizard.document', {
+        url: '/document',
+        controller: 'DocumentInfoCtrl',
+        controllerAs: 'documentInfo',
+        templateUrl: 'client/floor-vehicle/wizard/document-info.template.html',
+        data: {
+          pageId: 'Floorplan',
+          showNavBar: true,
+          isFeature: 'responsiveFloorplanBuyer'
+        }
+      })
       .state('login', {
         url: '/login',
         templateUrl: 'client/login/login.template.html',
@@ -30,7 +75,7 @@
       })
       .state('maintenance', {
         url: '/maintenance',
-        templateUrl: 'client/maintenance/maintenance.html',
+        templateUrl: 'client/maintenance/maintenance.template.html',
         controller: 'MaintenanceCtrl',
         data: {
           pageId: 'Maintenance',
@@ -152,6 +197,16 @@
         controller: 'FloorCarCtrl',
         data: {
           pageId: 'FloorCar',
+          showNavBar: true,
+          showMenu: false
+        }
+      })
+      .state('audits', {
+        url: '/audits',
+        templateUrl: 'client/audits/open-audits.template.html',
+        controller: 'AuditsCtrl',
+        data: {
+          pageId: 'Audits',
           showNavBar: true,
           showMenu: false
         }

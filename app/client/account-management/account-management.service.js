@@ -1,6 +1,9 @@
 (function() {
   'use strict';
 
+  var addAccountButtonState = false;
+  var editBankButtonState = false;
+
   angular
     .module('nextgearWebApp')
     .factory('AccountManagement', AccountManagement);
@@ -78,7 +81,21 @@
       },
       getDealerSummary: function() {
         return api.request('GET', '/dealer/v1_1/summary');
+      },
+      getAccountButtonState : function () {
+        return addAccountButtonState;
+      },
+      setAccountButtonState : function(state) {
+        addAccountButtonState = state;
+      },
+      getEditButtonState : function () {
+        return editBankButtonState;
+      },
+      setEditButtonState : function(state) {
+        editBankButtonState = state;
       }
+
+
     };
 
   }

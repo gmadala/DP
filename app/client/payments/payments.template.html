@@ -122,9 +122,9 @@
         <div class="info-block-image">
           <span nxg-icon="icon-info"></span>
         </div>
-        <h6 class="info-block-text" translate>
-          Amounts shown are valid through 8pm Eastern Time
-          <span ng-show="canPayNow">today ({{ todayDate | moment }})</span>
+        <h6 class="info-block-text">
+          <span translate>Amounts shown are valid through 8pm Eastern Time</span>
+          <span ng-show="canPayNow"><span translate>today</span> ({{ todayDate | moment }})</span>
           <span ng-show="!canPayNow">({{ nextBusinessDay | moment }})</span>
         </h6>
       </div>

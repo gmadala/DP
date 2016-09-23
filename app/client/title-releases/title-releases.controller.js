@@ -171,9 +171,9 @@
           buttons = [{label: gettextCatalog.getString('Close Window'), cssClass: 'btn-cta cta-primary'}];
 
         var dialogOptions = {
-          backdrop: true,
-          keyboard: true,
-          backdropClick: true,
+          backdrop: 'static',
+          keyboard: false,
+          backdropClick: false,
           templateUrl: 'client/shared/modals/message-box/message-box.template.html',
           controller: 'MessageBoxCtrl',
           dialogClass: 'modal modal-medium',
@@ -199,9 +199,9 @@
         buttons = [{label: gettextCatalog.getString('Close Window'), cssClass: 'btn-cta cta-primary'}];
 
       var dialogOptions = {
-        backdrop: true,
-        keyboard: true,
-        backdropClick: true,
+        backdrop: 'static',
+        keyboard: false,
+        backdropClick: false,
         templateUrl: 'client/shared/modals/message-box/message-box.template.html',
         controller: 'MessageBoxCtrl',
         dialogClass: 'modal modal-medium',

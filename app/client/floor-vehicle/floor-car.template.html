@@ -97,7 +97,7 @@
                 <label class="cr-label" for="no" translate>No</label>
               </div>
             </div>
-            <div class="date-field date-picker" style="width: 120px;">
+            <div class="date-field date-picker" style="width: 130px;">
               <label for="purchaseDate" class="input-title"><span translate>Purchase Date</span> *</label>
               <input type="text" uib-datepicker-popup="{{dateFormat}}"
                      placeholder="mm/dd/yyyy" nxg-date
@@ -226,7 +226,9 @@
             <!-- Floor Plan Comments -->
             <h4 style="padding-top:15px" translate>Floor Plan Comments</h4>
             <div class="column-divider"></div>
-            <textarea class="comment-box" placeholder="(Ex. Additional instructions, etc.)" ng-model="comment"></textarea>
+            <textarea class="comment-box"
+                      placeholder="{{'(Ex. Additional instructions, etc.)' | translate}}"
+                      ng-model="comment"></textarea>
 
           </div>
 
