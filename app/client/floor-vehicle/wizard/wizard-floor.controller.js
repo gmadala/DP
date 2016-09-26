@@ -311,7 +311,9 @@
         vm.data.UnitMake = !vm.data.dirtyStatus ? vm.data.kb.makes.selected.Value : vm.data.inputMake;
         vm.data.UnitModel = !vm.data.dirtyStatus ? vm.data.kb.models.selected.Value : vm.data.inputModel;
 
-        vm.data.PhysicalInventoryAddressId = vm.options.locations[addressIndex];
+        if (addressIndex >= 0) {
+          vm.data.PhysicalInventoryAddressId = vm.options.locations[addressIndex];
+        }
 
         vm.data.VinAckLookupFailure = vm.data.$selectedVehicle ? false : true;
 

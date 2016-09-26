@@ -45,7 +45,8 @@
           height: 200,
           marginTop: 0,
           marginRight: 0,
-          marginBottom: 50
+          marginBottom: 50,
+          marginLeft: 80
         },
         credits: {
           enabled: false
@@ -58,18 +59,18 @@
             html: '<strong>' + purchasePriceText + '</strong>',
             style: {
               top: '5px',
-              left: '-105px'
+              left: '-80px'
             }
           }, {
             html: '<strong>' + bookoutAmountText + '</strong>',
             style: {
               top: '55px',
-              left: '-105px'
+              left: '-80px'
             }
           }]
         },
         xAxis: {
-          categories: ['', 'From Bill of Sale', '', 'Black Book', 'MMR', 'KBB®'],
+          categories: ['', 'Bill of Sale', '', 'Black Book', 'MMR', 'KBB®'],
           tickLength: 0,
           gridLineColor: 'transparent',
           lineWidth: 0,
@@ -103,7 +104,9 @@
                 fontWeight: 'bolder'
               },
               formatter: function() {
-                return numeral(this.y).format('$0,0[.]00');
+                if (this.y > 0) {
+                  return numeral(this.y).format('$0,0[.]00');
+                }
               }
             },
             states: {
@@ -144,11 +147,15 @@
       };
       element.find('.nxg-value-lookup').highcharts(options);
 
-      // stuff in the scope object and watchers
-      scope.zipCode = null;
-      // if there's only one address default the zip to that one
-      if (locations.length === 1) {
-        scope.zipCode = locations[0].Zip;
+      if (locations.length > 1) {
+        // if there's only one address default the zip to that one
+        var defaultAddress = _.find(locations, function(location) {
+          return location.IsMainAddress;
+        });
+        if (!defaultAddress) {
+          defaultAddress = locations[0];
+        }
+        scope.zipCode = defaultAddress.Zip;
       }
 
       function realignLabels() {
@@ -165,7 +172,7 @@
           var position = point.dataLabel.x;
           // we're using the plotY value here because it's a 90deg rotated bar chart
           if (chart.plotWidth - point.plotY < point.dataLabel.width) {
-            position = position + 30;
+            position = position + point.dataLabel.width;
             // if it's outside the bar then change it to black.
             color = '#000';
           }
@@ -214,15 +221,15 @@
 
           var labelX = chart.plotLeft;
           var labelY = chart.plotTop + chart.chartHeight - 45;
-          var labelText = projectedPoint.category === 'From Bill of Sale' ? purchasePriceLessText : purchasePriceMoreText;
+          var labelText = projectedPoint.category === 'Bill of Sale' ? purchasePriceLessText : purchasePriceMoreText;
 
           // the text will have 3 position based on the percentage of where the plot line will be.
           // 0% - 30% - 70%
           var percentage = (chart.plotWidth - projectedPoint.plotY) * 100 / chart.plotWidth;
           if (percentage > 70) {
-            labelX = labelX + 120;
+            labelX = labelX + chart.plotWidth  - 126;
           } else if (percentage > 30 && percentage <= 70) {
-            labelX = labelX + 60;
+            labelX = labelX + ((chart.plotWidth - 126) / 2);
           } else {
             labelX = labelX - 5;
           }
@@ -369,23 +376,6 @@
           if (scope.zipCode) {
             updateKbbValuation();
           }
-        }
-      });
-
-      scope.$watch('inventoryLocation', function(newValue, oldValue) {
-        // skip doing anything when the value is not changing or there's only one address
-        if (oldValue === newValue || locations.length === 1) {
-          return;
-        }
-
-        // update the kbb value only
-        if (scope.vin && scope.odometer) {
-          // select location record based on the selection and then get the zip code.
-          var selectedLocation = locations.find(function(location) {
-            return location.AddressId === newValue.AddressId;
-          });
-          scope.zipCode = selectedLocation.Zip;
-          updateKbbValuation();
         }
       });
     }

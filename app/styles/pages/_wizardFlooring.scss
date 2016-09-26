@@ -7,9 +7,18 @@
     line-height: 1.2;
   }
 
+  h3 {
+    font-size: 22px;
+    margin-top: 20px;
+  }
+
   h4 {
     font-size: 20px;
     margin-bottom: 32px;
+  }
+
+  .highcharts-container {
+    left: 0px;
   }
 
   .form-group {
@@ -39,7 +48,6 @@
       }
     }
 
-
     select: {
       font-size: 18px;
     }
@@ -49,7 +57,6 @@
     }
 
   }
-
 
   .input-group-btn:last-child > .btn {
     height: 38px;
@@ -156,7 +163,7 @@
   }
 
   .switch input {
-    display:none;
+    display: none;
   }
 
   .slider {
