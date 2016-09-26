@@ -364,7 +364,7 @@
         function (response) { /*floorplan success*/
           if (vm.data.commentGeneral || vm.data.commentAdditionalFinancing) {
             Floorplan.addComment({
-              CommentText: 'General Comment: ' +  vm.data.commentGeneral + ' Additional Financing Comment:' + vm.data.commentAdditionalFinancing,
+              CommentText: vm.data.commentGeneral + ' Dealer is requesting additional financing:' + vm.data.commentAdditionalFinancing,
               FloorplanId: response.FloorplanId
             });
           }
