@@ -227,9 +227,9 @@
           // 0% - 30% - 70%
           var percentage = (chart.plotWidth - projectedPoint.plotY) * 100 / chart.plotWidth;
           if (percentage > 70) {
-            labelX = labelX + chart.plotWidth  - 126;
+            labelX = labelX + chart.plotWidth  - 150;
           } else if (percentage > 30 && percentage <= 70) {
-            labelX = labelX + ((chart.plotWidth - 126) / 2);
+            labelX = labelX + ((chart.plotWidth - 150) / 2);
           } else {
             labelX = labelX - 5;
           }
@@ -244,7 +244,7 @@
             )
             .css({
               color: '#000',
-              fontSize: '10px'
+              fontSize: '11px'
             })
             .attr({
               paddingTop: 10,
