@@ -1,7 +1,18 @@
 <div>
   <br/>
   <div class="row">
-    <div class="col-lg-12" style="margin-left: 10px">
+    <div class="col-lg-12 text-center" style="margin-left: 10px" translate>
+      <h3>Requested Funding Amount:</h3>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-lg-12 text-center" style="margin-left: 10px" translate>
+      <h2>{{ projectedFinancedAmount || 0 | numeral : '$0,0[.]00'}}</h2>
+    </div>
+  </div>
+  <br/>
+  <div class="row">
+    <div class="col-lg-12" style="margin-left: 10px" translate>
       Financed amount is calculated based on <em>lowest value</em>: purchase price or highest average bookout.
     </div>
   </div>
@@ -13,7 +24,7 @@
   </div>
   <div class="row" ng-show="lookupFailure">
     <div class="col-lg-12" style="margin-left: 10px">
-      <div class="alert alert-danger" role="alert">
+      <div class="alert alert-danger" role="alert" translate>
         We were unable to pull one or more bookout values from our partner. No need to refresh the browser :)
       </div>
     </div>

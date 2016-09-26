@@ -151,9 +151,9 @@
         scope.zipCode = locations[0].Zip;
       }
 
-      function realignLabels(series) {
-        var chart = series.chart;
-        _.each(series.data, function(point) {
+      function realignLabels() {
+        var chart = element.find('.nxg-value-lookup').highcharts();
+        _.each(chart.series[0].data, function(point) {
           // skip if it doesn't have any data label or the y value is undefined or 0.
           if (!point.dataLabel || !point.y) {
             return true;
@@ -181,77 +181,11 @@
         });
       }
 
-      function updateMmrAndBlackbookValuation() {
+      function updatePlotInformation() {
         var chart = element.find('.nxg-value-lookup').highcharts();
-        $q.all([
-          Blackbook.lookupByVin(scope.vin, scope.odometer, true),
-          Mmr.lookupByVin(scope.vin, scope.odometer)
-        ])
-          .then(function(results) {
-            var minimumBlackbookAverage = _.min(results[0], function(element) {
-              return element.AverageValue;
-            });
-
-            var minimumMmrAverage = _.min(results[1], function(element) {
-              return element.AverageWholesale;
-            });
-
-            var data = chart.series[0].data;
-            data[3].y = minimumBlackbookAverage ? minimumBlackbookAverage.AverageValue : 0;
-            data[4].y = minimumMmrAverage ? minimumMmrAverage.AverageWholesale : 0;
-            chart.series[0].setData(data);
-            realignLabels(chart.series[0]);
-          })
-          .catch(function() {
-            scope.lookupFailure = true;
-          });
-      }
-
-      function updateKbbValuation() {
-        var chart = element.find('.nxg-value-lookup').highcharts();
-        Kbb.getConfigurations(scope.vin, scope.zipCode)
-          .then(function(configurations) {
-            var kbbLookups = [];
-            configurations.forEach(function(configuration) {
-              var kbbLookup = Kbb.lookupByConfiguration(configuration, scope.odometer, scope.zipCode);
-              kbbLookups.push(kbbLookup);
-            });
-            return $q.all(kbbLookups);
-          })
-          .then(function(kbbResults) {
-            var minimumKbbAverage = _.min(kbbResults, function(element) {
-              return element.Good;
-            });
-
-            // calculate the min of the averages
-            var data = chart.series[0].data;
-            data[5].y = minimumKbbAverage ? minimumKbbAverage.Good : 0;
-            chart.series[0].setData(data);
-            realignLabels(chart.series[0]);
-          })
-          .catch(function() {
-            scope.lookupFailure = true;
-          });
-      }
-
-      var valuationLabel, valuationTriangle;
-
-      // watch the purchase value and perform the following:
-      // * update the purchase price bar chart
-      // * display the line, triangle and text for the purchase price vs bookout value
-      scope.$watch('purchasePrice', function(newValue, oldValue) {
-        if (oldValue === newValue) {
-          return;
-        }
-
-        var chart = element.find('.nxg-value-lookup').highcharts();
-        // calculate the average of the averages
         var data = chart.series[0].data;
-        data[1].y = newValue;
-        chart.series[0].setData(data);
-        realignLabels(chart.series[0]);
-
-        if (newValue) {
+        // only display the plot information when we have value for purchase price.
+        if (data[1].y) {
           // calculate the maximum of all the bookout data.
           var projectedPoint = _.max([data[3], data[4], data[5]], function(element) {
             return element.y;
@@ -260,6 +194,9 @@
           projectedPoint = _.min([projectedPoint, data[1]], function(element) {
             return element.y;
           });
+
+          scope.projectedFinancedAmount = projectedPoint.y;
+
           // update the plot line (straight line showing the minimum between max bookout vs purchase price.
           chart.yAxis[0].removePlotLine('max-plot-line');
           chart.yAxis[0].addPlotLine({
@@ -325,15 +262,89 @@
               })
               .add();
         }
+      }
 
+      function updateMmrAndBlackbookValuation() {
+        var chart = element.find('.nxg-value-lookup').highcharts();
+        $q.all([
+          Blackbook.lookupByVin(scope.vin, scope.odometer, true),
+          Mmr.lookupByVin(scope.vin, scope.odometer)
+        ])
+          .then(function(results) {
+            var minimumBlackbookAverage = _.min(results[0], function(element) {
+              return element.AverageValue;
+            });
+
+            var minimumMmrAverage = _.min(results[1], function(element) {
+              return element.AverageWholesale;
+            });
+
+            var data = chart.series[0].data;
+            data[3].y = minimumBlackbookAverage ? minimumBlackbookAverage.AverageValue : 0;
+            data[4].y = minimumMmrAverage ? minimumMmrAverage.AverageWholesale : 0;
+            chart.series[0].setData(data);
+            updatePlotInformation();
+            realignLabels();
+          })
+          .catch(function() {
+            scope.lookupFailure = scope.lookupFailure || true;
+          });
+      }
+
+      function updateKbbValuation() {
+        var chart = element.find('.nxg-value-lookup').highcharts();
+        Kbb.getConfigurations(scope.vin, scope.zipCode)
+          .then(function(configurations) {
+            var kbbLookups = [];
+            configurations.forEach(function(configuration) {
+              var kbbLookup = Kbb.lookupByConfiguration(configuration, scope.odometer, scope.zipCode);
+              kbbLookups.push(kbbLookup);
+            });
+            return $q.all(kbbLookups);
+          })
+          .then(function(kbbResults) {
+            var minimumKbbAverage = _.min(kbbResults, function(element) {
+              return element.Good;
+            });
+
+            // calculate the min of the averages
+            var data = chart.series[0].data;
+            data[5].y = minimumKbbAverage ? minimumKbbAverage.Good : 0;
+            chart.series[0].setData(data);
+            updatePlotInformation();
+            realignLabels();
+          })
+          .catch(function() {
+            scope.lookupFailure = scope.lookupFailure || true;
+          });
+      }
+
+      var valuationLabel, valuationTriangle;
+
+      // watch the purchase value and perform the following:
+      // * update the purchase price bar chart
+      // * display the line, triangle and text for the purchase price vs bookout value
+      scope.$watch('purchasePrice', function(newValue, oldValue) {
+        if (oldValue === newValue) {
+          return;
+        }
+
+        var chart = element.find('.nxg-value-lookup').highcharts();
+        // calculate the average of the averages
+        var data = chart.series[0].data;
+        data[1].y = newValue;
+        chart.series[0].setData(data);
+        updatePlotInformation();
+        realignLabels();
       });
 
       scope.$watch('vin', function(newValue, oldValue) {
-
         // skip doing anything when the value is not changing
         if (oldValue === newValue) {
           return;
         }
+
+        scope.lookupFailure = false;
         // update blackbook and mmr values
         if (scope.odometer && newValue) {
           updateMmrAndBlackbookValuation();
@@ -350,6 +361,7 @@
           return;
         }
 
+        scope.lookupFailure = false;
         // update blackbook and mmr values
         if (scope.vin && newValue) {
           updateMmrAndBlackbookValuation();
