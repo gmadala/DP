@@ -154,18 +154,23 @@
       function realignLabels(series) {
         var chart = series.chart;
         _.each(series.data, function(point) {
+          // skip if it doesn't have any data label or the y value is undefined or 0.
           if (!point.dataLabel || !point.y) {
             return true;
           }
 
+          // default font color is white.
           var color = '#FFF';
+          // get the original data label position.
           var position = point.dataLabel.x;
+          // we're using the plotY value here because it's a 90deg rotated bar chart
           if (chart.plotWidth - point.plotY < point.dataLabel.width) {
             position = position + 30;
-            // default font color is white, if it's outside the bar then change it to black.
+            // if it's outside the bar then change it to black.
             color = '#000';
           }
 
+          // update the position and color for the data label.
           point.dataLabel
             .attr({
               x: position
@@ -181,21 +186,25 @@
         $q.all([
           Blackbook.lookupByVin(scope.vin, scope.odometer, true),
           Mmr.lookupByVin(scope.vin, scope.odometer)
-        ]).then(function(results) {
-          var minimumBlackbookAverage = _.min(results[0], function(element) {
-            return element.AverageValue;
-          });
+        ])
+          .then(function(results) {
+            var minimumBlackbookAverage = _.min(results[0], function(element) {
+              return element.AverageValue;
+            });
 
-          var minimumMmrAverage = _.min(results[1], function(element) {
-            return element.AverageWholesale;
-          });
+            var minimumMmrAverage = _.min(results[1], function(element) {
+              return element.AverageWholesale;
+            });
 
-          var data = chart.series[0].data;
-          data[3].y = minimumBlackbookAverage ? minimumBlackbookAverage.AverageValue : 0;
-          data[4].y = minimumMmrAverage ? minimumMmrAverage.AverageWholesale : 0;
-          chart.series[0].setData(data);
-          realignLabels(chart.series[0]);
-        });
+            var data = chart.series[0].data;
+            data[3].y = minimumBlackbookAverage ? minimumBlackbookAverage.AverageValue : 0;
+            data[4].y = minimumMmrAverage ? minimumMmrAverage.AverageWholesale : 0;
+            chart.series[0].setData(data);
+            realignLabels(chart.series[0]);
+          })
+          .catch(function() {
+            scope.lookupFailure = true;
+          });
       }
 
       function updateKbbValuation() {
@@ -214,16 +223,22 @@
               return element.Good;
             });
 
-            // calculate the average of the averages
+            // calculate the min of the averages
             var data = chart.series[0].data;
             data[5].y = minimumKbbAverage ? minimumKbbAverage.Good : 0;
             chart.series[0].setData(data);
             realignLabels(chart.series[0]);
+          })
+          .catch(function() {
+            scope.lookupFailure = true;
           });
       }
 
       var valuationLabel, valuationTriangle;
 
+      // watch the purchase value and perform the following:
+      // * update the purchase price bar chart
+      // * display the line, triangle and text for the purchase price vs bookout value
       scope.$watch('purchasePrice', function(newValue, oldValue) {
         if (oldValue === newValue) {
           return;
@@ -235,16 +250,17 @@
         data[1].y = newValue;
         chart.series[0].setData(data);
         realignLabels(chart.series[0]);
-        if (newValue) {
 
+        if (newValue) {
+          // calculate the maximum of all the bookout data.
           var projectedPoint = _.max([data[3], data[4], data[5]], function(element) {
             return element.y;
           });
-
+          // calculate the minimum between max bookout vs purchase price
           projectedPoint = _.min([projectedPoint, data[1]], function(element) {
             return element.y;
           });
-
+          // update the plot line (straight line showing the minimum between max bookout vs purchase price.
           chart.yAxis[0].removePlotLine('max-plot-line');
           chart.yAxis[0].addPlotLine({
             value: projectedPoint.y,
@@ -253,6 +269,7 @@
             id: 'max-plot-line'
           });
 
+          // update the triangle and the text at the bottom of the chart.
           if (valuationLabel) {
             valuationLabel.destroy();
             valuationTriangle.destroy();
@@ -262,6 +279,8 @@
           var labelY = chart.plotTop + chart.chartHeight - 45;
           var labelText = projectedPoint.category === 'From Bill of Sale' ? purchasePriceLessText : purchasePriceMoreText;
 
+          // the text will have 3 position based on the percentage of where the plot line will be.
+          // 0% - 30% - 70%
           var percentage = (chart.plotWidth - projectedPoint.plotY) * 100 / chart.plotWidth;
           if (percentage > 70) {
             labelX = labelX + 120;
@@ -271,6 +290,7 @@
             labelX = labelX - 5;
           }
 
+          // render the text on the location.
           valuationLabel = chart.renderer
             .label(
               labelText,
@@ -288,7 +308,10 @@
             })
             .add();
 
-
+          // render the triangle on the bottom of the plot line.
+          // the svg path will start from the top of the triangle,
+          // moving right, moving left and then move back to the
+          // top of the triangle.
           valuationTriangle =
             chart.renderer
               .path(
@@ -345,6 +368,7 @@
 
         // update the kbb value only
         if (scope.vin && scope.odometer) {
+          // select location record based on the selection and then get the zip code.
           var selectedLocation = locations.find(function(location) {
             return location.AddressId === newValue.AddressId;
           });
