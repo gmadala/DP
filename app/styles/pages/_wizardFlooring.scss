@@ -4,14 +4,19 @@
     background: #EBEBEB;
 
     .sidebar-header {
-      font-size: 16px;
+      font-size: 1.1em;
+      font-weight: 100;
       margin-top: 28px;
       margin-bottom: 20px;
     }
 
     .sidebar-hero {
-      font-size: 32px;
+      font-size: 2em;
       margin-bottom: 20px;
+    }
+
+    .sidebar-hint {
+      font-size: 0.8em;
     }
 
     .highcharts-container {

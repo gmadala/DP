@@ -23,7 +23,7 @@
         odometer: '=',
         inventoryLocation: '=',
         purchasePrice: '=',
-        fullPrice: '='
+        additionalFinancing: '='
       },
       replace: 'true',
       link: linkFn
@@ -377,6 +377,15 @@
             updateKbbValuation();
           }
         }
+      });
+
+      scope.$watch('aditionalFinancing', function(newValue, oldValue) {
+        // skip doing anything when the value is not changing
+        if (oldValue === newValue) {
+          return;
+        }
+
+        
       });
     }
   }
