@@ -24,7 +24,8 @@
     'metric'
   ];
 
-  function WizardFloorCtrl($state,
+  function WizardFloorCtrl(
+    $state,
     $scope,
     $uibModal,
     $q,
@@ -39,7 +40,8 @@
     nxgConfig,
     kissMetricInfo,
     segmentio,
-    metric) {
+    metric
+  ) {
     var vm = this;
     var isDealer = User.isDealer();
 
@@ -53,12 +55,13 @@
     vm.formParts = {
       one: false,
       two: false,
-      three: false
+      three: false,
+      four: false
     };
 
     vm.floorPlanSubmitting = false;
 
-    vm.pageCount = 3;
+    vm.pageCount = 4;
 
     switchState();
 
@@ -74,11 +77,13 @@
         return bankAccount.IsActive === true;
       });
 
-      var useDefaultBankAccount = _.filter(result[1], function (bankAccount) {
-        return bankAccount.id === result[1].DefaultDisbursementBankAccountId;
+      vm.options.BankAccounts = _.sortBy(activeBankAccounts, 'AchBankName');
+      vm.options.LinesOfCredit = _.sortBy(result[1].LinesOfCredit, "LineOfCreditName");
+
+      var defaultBankAccount = _.find(result[2].BankAccounts, function (bankAccount) {
+        return bankAccount.BankAccountId=== result[1].DefaultDisbursementBankAccountId;
       });
 
-      vm.options.BankAccounts = _.sortBy(activeBankAccounts, 'AchBankName');
 
       vm.options.locations = Addresses.getActivePhysical();
 
@@ -86,7 +91,7 @@
         {
           scopeSrc: 'wizardFloor.options.BankAccounts',
           modelDest: 'BankAccountId',
-          useFirst: useDefaultBankAccount
+          useDefault: defaultBankAccount
         },
         {
           scopeSrc: 'wizardFloor.paySellerOptions',
@@ -100,9 +105,10 @@
           scopeSrc: 'wizardFloor.options.locations',
           modelDest: 'PhysicalInventoryAddressId'
         }, {
-            scopeSrc: 'wizardFloor.options.LinesOfCredit',
-            modelDest: 'LineOfCreditId'
-          });
+          scopeSrc: 'wizardFloor.options.LinesOfCredit',
+          modelDest: 'LineOfCreditId',
+          useFirst: true
+        });
       }
 
       vm.optionsHelper = OptionDefaultHelper.create(optionListsToDefault);
@@ -119,12 +125,14 @@
 
     // form data model template w/ default values for a new blank form - should be considered read-only
     vm.defaultData = {
+      AdditionalFinancing: false,
+      additionalFinancingAmount: null,
       FloorplanSourceId: User.isDealer() ? 6 : 7, // 6 for dealer in web app, 7 for auction user
       BankAccountId: null, // BankAccount object locally, flatten to string for API tx
       LineOfCreditId: null, // LineOfCredit object locally, flatten to string for API tx
       PaySeller: null, // Boolean, default is false if user is dealer and buyer payment is possible, otherwise true
       PhysicalInventoryAddressId: null, // Location object locally, flatten to string for API tx
-      SaleTradeIn: false, // Boolean, default is no (only dealers that can be paid directly may change this to true)
+      SaleTradeIn: true, // Boolean, default is no (only dealers that can be paid directly may change this to true)
       BusinessId: null, // business search result object locally, flatten to string for API tx
       UnitColorId: null, // Color object locally, flatten to string to API tx
       UnitMake: null, // string
@@ -145,7 +153,34 @@
       $blackbookMileage: null, // cache most recent mileage value used to get updated blackbook data
       files: [],
       invalidFiles: [],
-      comment: ''
+      comment: '',
+      commentAdditionalFinancing: '',
+      commentGeneral: '',
+      query: '',
+      dirtyStatus: false,
+      inputYear: null,
+      inputMake: null,
+      inputModel:null,
+      inputStyle:null,
+      settingsVinMode: 'none',
+      kb:{
+        years:{
+          selected:null,
+          list:[]
+        },
+        makes: {
+          selected: null,
+          list: []
+        },
+        models:{
+          selected:null,
+          list:[]
+        },
+        styles:{
+          selected:null,
+          list:[]
+        }
+      }
     };
 
     vm.reset = function () {
@@ -158,6 +193,7 @@
     };
 
     // Wizard Nav functions ---------------------------------------------------
+    //-------------------------------------------------------------------------
     vm.tabClick = function (count) {
       if (canTransition(count)) {
         vm.counter = count;
@@ -198,17 +234,22 @@
 
           break;
         case 2:
-          if (vm.formParts.one) {
+          if (true || vm.formParts.one) {
             $state.go('flooringWizard.sales');
           }
 
           break;
         case 3:
-          if (vm.formParts.one && vm.formParts.two) {
-            $state.go('flooringWizard.document');
+
+          if (true || (vm.formParts.one && vm.formParts.two)) {
+            $state.go('flooringWizard.payment');
           }
 
           break;
+        case 4:
+          if (true || vm.formParts.one && vm.formParts.two && vm.formParts.three) {
+            $state.go('flooringWizard.document');
+          }
       }
     }
 
@@ -222,19 +263,31 @@
           return vm.formParts.one;
         case 3:
           return vm.formParts.one && vm.formParts.two;
+        case 4:
+          return vm.formParts.one && vm.formParts.two && vm.formParts.three;
       }
     }
 
     vm.canSubmit = function () {
-      if (vm.floorPlanSubmitting) { return false; }
+      if (vm.floorPlanSubmitting) {
+        return false;
+      }
 
-      if (!vm.formParts.one) { return false; }
+      if (!vm.formParts.one) {
+        return false;
+      }
 
-      if (!vm.formParts.two) { return false; }
+      if (!vm.formParts.two) {
+        return false;
+      }
 
-      if (vm.attachDocumentsEnabled || !vm.formParts.three) { return false; }
+      if (vm.attachDocumentsEnabled || !vm.formParts.three){
+        return false;
+      }
 
-      if (vm.attachDocumentsEnabled && vm.data.files.length < 1) { return false; }
+      if (vm.attachDocumentsEnabled && vm.data.files.length < 1) {
+        return false;
+      }
 
       return true;
     };
@@ -249,8 +302,18 @@
       }
 
       if (vm.formParts.one && vm.formParts.two && (!vm.attachDocumentsEnabled || vm.formParts.three)) {
+        var addressIndex = _.findIndex(vm.options.locations, { 'IsMainAddress': true });
 
         vm.floorPlanSubmitting = true;
+
+        vm.data.UnitYear = !vm.data.dirtyStatus ? vm.data.kb.years.selected.Value : vm.data.inputYear;
+        vm.data.UnitStyle = !vm.data.dirtyStatus ? vm.data.kb.styles.selected.DisplayName : vm.data.inputStyle;
+        vm.data.UnitMake = !vm.data.dirtyStatus ? vm.data.kb.makes.selected.Value : vm.data.inputMake;
+        vm.data.UnitModel = !vm.data.dirtyStatus ? vm.data.kb.models.selected.Value : vm.data.inputModel;
+
+        vm.data.PhysicalInventoryAddressId = vm.options.locations[addressIndex];
+
+        vm.data.VinAckLookupFailure = vm.data.$selectedVehicle ? false : true;
 
         var confirmation = {
           backdrop: 'static',
@@ -261,7 +324,7 @@
           controller: 'FloorCarConfirmCtrl',
           resolve: {
             comment: function () {
-              return !!vm.data.comment && vm.data.comment.length > 0;
+              return (!!vm.data.commentGeneral && vm.data.commentGeneral.length > 0 || !!vm.data.commentAdditionalFinancing && vm.data.commentAdditionalFinancing.length > 0);
             },
             formData: function () {
               return angular.copy(vm.data);
@@ -295,11 +358,13 @@
       var dialogParams;
 
       vm.floorPlanSubmitting = true;
+      vm.data.TitleLocationId = vm.options.titleLocationOptions[vm.data.TitleLocationId];
+
       Floorplan.create(vm.data).then(
         function (response) { /*floorplan success*/
-          if (vm.data.comment) {
+          if (vm.data.commentGeneral || vm.data.commentAdditionalFinancing) {
             Floorplan.addComment({
-              CommentText: vm.data.comment,
+              CommentText: 'General Comment: ' +  vm.data.commentGeneral + ' Additional Financing Comment:' + vm.data.commentAdditionalFinancing,
               FloorplanId: response.FloorplanId
             });
           }
