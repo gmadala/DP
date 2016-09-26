@@ -22,15 +22,19 @@ describe('Directive: NxgVinDetails', function () {
         $attrs: attrs
       });
 
+      scope.data={
+        settingsVinMode:'none'
+      }
+
       scope.data = {
         $selectedVehicle: null
       }
     }));
 
     it('should update the vin mode on reset', inject(function($rootScope) {
-      scope.settings.vinMode = 'noMatch';
+      scope.data.settingsVinMode = 'noMatch';
       $rootScope.$broadcast('reset');
-      expect(scope.settings.vinMode).toBe('none');
+      expect(scope.data.settingsVinMode).toBe('none');
     }));
 
     describe('vinIsSyntacticallyValid', function() {
@@ -76,18 +80,18 @@ describe('Directive: NxgVinDetails', function () {
 
     describe('vinChange', function() {
       it('should clear any match state if the vin changes after lookup', function() {
-        scope.settings.vinMode = 'noMatch';
+        scope.data.settingsVinMode = 'noMatch';
         scope.data.$selectedVehicle = {};
         scope.vinChange();
         expect(scope.data.$selectedVehicle).toBe(null);
         expect(scope.errorFlag).toBe(false);
-        expect(scope.settings.vinMode).toBe('none');
+        expect(scope.data.settingsVinMode).toBe('none');
       });
 
       it('should do nothing if vinMode is \'none\'', function() {
         var vehicle = { foo: 'bar' };
         scope.data.$selectedVehicle = vehicle;
-        scope.settings.vinMode = 'none';
+        scope.data.settingsVinMode = 'none';
         scope.vinChange();
         expect(scope.data.$selectedVehicle).toBe(vehicle);
       });
@@ -104,11 +108,15 @@ describe('Directive: NxgVinDetails', function () {
             }
           }
         };
+
+        scope.data={
+          settingsVinMode:'none'
+        }
       });
 
       it('should do nothing if this vin has already been looked up', function() {
         spyOn(scope, 'lookupVin').and.returnValue({});
-        scope.settings.vinMode = 'matched';
+        scope.data.settingsVinMode = 'matched';
         scope.vinExit();
         expect(scope.lookupVin).not.toHaveBeenCalled();
       });
@@ -160,6 +168,10 @@ describe('Directive: NxgVinDetails', function () {
             $valid: true
           }
         };
+
+        scope.data={
+          settingsVinMode:'none'
+        }
 
         spyOn(blackbook, 'lookupByVin').and.returnValue({
           then: function(success, fail) {
@@ -250,10 +262,10 @@ describe('Directive: NxgVinDetails', function () {
       });
 
       it('should handle blackbook errors', function() {
-        expect(scope.settings.vinMode).toBe('none');
+        expect(scope.data.settingsVinMode).toBe('none');
         shouldSucceed = false;
         scope.lookupVin();
-        expect(scope.settings.vinMode).toBe('noMatch');
+        expect(scope.data.settingsVinMode).toBe('noMatch');
         expect(scope.data.VinAckLookupFailure).toBe(false);
         expect(scope.data.UnitMake).toBe('');
         expect(scope.data.UnitModel).toBe('');
@@ -264,7 +276,7 @@ describe('Directive: NxgVinDetails', function () {
       it('should dismiss other errors and reat all as \'no match\'', function() {
         errObject.dismiss = angular.noop;
         spyOn(errObject, 'dismiss').and.callThrough();
-        expect(scope.settings.vinMode).toBe('none');
+        expect(scope.data.settingsVinMode).toBe('none');
         shouldSucceed = false;
         scope.lookupVin();
         expect(errObject.dismiss).toHaveBeenCalled();
@@ -273,11 +285,11 @@ describe('Directive: NxgVinDetails', function () {
       it('should act as if a search was not run if the user cancelled before selecting', function() {
         errObject = 'userCancel';
 
-        expect(scope.settings.vinMode).toBe('none');
+        expect(scope.data.settingsVinMode).toBe('none');
         shouldSucceed = false;
         scope.lookupVin();
 
-        expect(scope.settings.vinMode).toBe('none');
+        expect(scope.data.settingsVinMode).toBe('none');
       });
     });
   });

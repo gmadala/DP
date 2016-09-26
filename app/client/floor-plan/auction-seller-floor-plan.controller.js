@@ -16,14 +16,16 @@
     'Addresses'
   ];
 
-  function AuctionFloorplanCtrl($scope,
-                                $stateParams,
-                                Floorplan,
-                                FloorplanUtil,
-                                User,
-                                $timeout,
-                                gettextCatalog,
-                                Addresses) {
+  function AuctionFloorplanCtrl(
+    $scope,
+    $stateParams,
+    Floorplan,
+    FloorplanUtil,
+    User,
+    $timeout,
+    gettextCatalog,
+    Addresses
+  ) {
 
     $scope.isCollapsed = true;
 

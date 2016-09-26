@@ -97,7 +97,7 @@
             <div ng-if="isDashboard()">
               <div class="mng-logo"></div>
             </div>
-            <div ng-if="!isDashboard()" translate>
+            <div ng-if="!isDashboard()">
               {{getPageTitle()}}
             </div>
           </div>
@@ -114,25 +114,23 @@
             </li>
             <li ng-repeat="link in user.navLinks().primary" class="link_{{ link.activeWhen }}" ng-class="{'dropdown': link.subMenu, 'hover': link.hasHover}">
               <a ng-href="{{link.href}}" ng-class="{ active: isActive(link.activeWhen) }" ng-if="!link.subMenu"
-                 ng-click="setPageTitle(link.name)" translate>{{link.name}}</a>
+                 ng-click="setPageTitle(link.name)">{{link.name}}</a>
               <a class="sub-menu dropdown-toggle hidden-xs" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"
                  ng-class="{ active: isActiveGroup(link.subMenu) }"
                  ng-if="link.subMenu"
                  ng-click="gotoPageIf(link.href, link.activeWhen); setPageTitle(link.name); removeHover()"
                  ng-mouseenter="addHover()"
-                 ng-mouseleave="removeHover()"
-                 translate
-              >
+                 ng-mouseleave="removeHover()">
                 {{link.name}} <span class="caret"></span></a>
               <ul class="dropdown-menu" ng-if="link.subMenu" ng-mouseenter="addHover()"
                   ng-mouseleave="removeHover()">
                 <li ng-repeat="item in link.subMenu" ng-class="{ active: isActive(item.activeWhen) }" ng-click="removeHover()">
-                  <a href="#" ng-href="{{item.href}}" ng-click="setPageTitle(item.name)" translate>{{item.name}}</a>
+                  <a href="#" ng-href="{{item.href}}" ng-click="setPageTitle(item.name)">{{item.name}}</a>
                 </li>
               </ul>
               <ul class="visible-xs mobile-nav-list">
                 <li class="visible-xs" ng-repeat="item in link.subMenu" ng-class="{ active: isActive(item.activeWhen) }" ng-click="removeHover()">
-                  <a href="#" ng-href="{{item.href}}" ng-click="setPageTitle(item.name)" translate>{{item.name}}</a>
+                  <a href="#" ng-href="{{item.href}}" ng-click="setPageTitle(item.name)">{{item.name}}</a>
                 </li>
               </ul>
             </li>

@@ -4,6 +4,22 @@ body.lang_es {
     width: 125px;
   }
 
+  #FloorplanPage {
+    .date-field {
+      width: 130px !important;
+    }
+  }
+
+  /* Promos */
+  #PromosPage {
+    @media only screen and (max-width: 767px) {
+      .accordion-button {
+        width: 90%;
+        font-size: 12px;
+      }
+    }
+  }
+
   /* Details */
   #VehicleDetailsPage {
     @media (max-width: 1090px) {

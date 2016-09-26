@@ -11,7 +11,6 @@
     $scope.canAttachDocuments = false;
     $scope.submitInProgress = false;
 
-
     $scope.$parent.wizardFloor.renameFile = function (file, index) {
       var filename = "";
       var dotPos = 0;
