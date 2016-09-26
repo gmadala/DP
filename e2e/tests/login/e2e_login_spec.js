@@ -26,7 +26,7 @@ describe('\n Login Page', function () {
     expect(loginObjects.getTextLogin()).toBe("Login");
     //Validating the Spanish Language button
     loginObjects.doSpanish();
-    expect(loginObjects.getTextLogin()).toBe("Iniciar sesión");
+    expect(loginObjects.getTextLogin()).toBe("Inicio de sesión");
     //Validating the French Language button
     loginObjects.doFrench();
     expect(loginObjects.getTextLogin()).toBe("Ouverture de session");
