@@ -17,25 +17,16 @@
     'metric',
     'segmentio',
     'kissMetricInfo',
-    '$sce'
+    '$sce',
+    '$window',
+    '$location',
+    '$anchorScroll'
   ];
 
-  function ValueLookupCtrl(
-    $scope,
-    $filter,
-    Mmr,
-    Blackbook,
-    Kbb,
-    User,
-    gettextCatalog,
-    gettext,
-    metric,
-    segmentio,
-    kissMetricInfo,
-    $sce) {
+  function ValueLookupCtrl($scope, $filter, Mmr, Blackbook, Kbb, User, gettextCatalog, gettext, metric, segmentio, kissMetricInfo, $sce, $window, $location, $anchorScroll) {
 
     // need to use the string twice because gettext doesn't like variable sadly.
-    var disclaimerHeader =  gettext('© %YEAR% By Kelley Blue Book Co., Inc.');
+    var disclaimerHeader = gettext('© %YEAR% By Kelley Blue Book Co., Inc.');
     disclaimerHeader = gettextCatalog.getString(disclaimerHeader);
 
     var disclaimerEdition = gettext('%START_DATE% - %END_DATE% Edition for zip code %ZIP_CODE%.');
@@ -65,7 +56,7 @@
     $scope.results = {};
     $scope.searchInProgress = false;
     $scope.isUnitedStates = User.isUnitedStates();
-    $scope.kbbEnabled = (User.getFeatures().hasOwnProperty('kbb') ? User.getFeatures().kbb.enabled  : true) && $scope.isUnitedStates;
+    $scope.kbbEnabled = (User.getFeatures().hasOwnProperty('kbb') ? User.getFeatures().kbb.enabled : true) && $scope.isUnitedStates;
     $scope.lookupOption = 'vin';
 
     var buildDescription = function(obj) {
@@ -100,10 +91,10 @@
 
     var resetOptions = function(field, lookupValue) {
       // clear out all the following options when a field is updated.
-      var object={};
+      var object = {};
       if (lookupValue === 'mmr') {
         object = $scope.manualLookup.mmr;
-      }else if(lookupValue === 'bb') {
+      } else if (lookupValue === 'bb') {
         object = $scope.manualLookup.blackbook;
       } else if (lookupValue === 'kbb') {
         object = $scope.manualLookup.kbb;
@@ -111,7 +102,7 @@
       var fields = object.fields;
       var index = fields.indexOf(field);
 
-      for(var i = fields.length-1; i >= index; --i) {
+      for (var i = fields.length - 1; i >= index; --i) {
         object[fields[i]].selected = null;
         object[fields[i]].list = [];
       }
@@ -154,7 +145,7 @@
         this.zipcode = null;
         resetResults();
       },
-      lookup: function (form) {
+      lookup: function(form) {
         // make sure we reset the other search, in case we had already run that one.
         $scope.manualLookup.resetSearch();
 
@@ -174,8 +165,8 @@
           metric.CLICK_VALUE_LOOKUP_VIN_WITHOUT_ZIP_LOOKUP_BUTTON;
 
         kissMetricInfo.getKissMetricInfo().then(
-          function(result){
-            segmentio.track(whichMetric,result);
+          function(result) {
+            segmentio.track(whichMetric, result);
           }
         );
 
@@ -183,7 +174,7 @@
         Blackbook.lookupByVin(this.vin, this.mileage, true).then(function(results) {
           if (results.length > 0) {
             $scope.results.blackbook.data = results[0];
-            if(results.length > 1) {
+            if (results.length > 1) {
               $scope.results.blackbook.multiple = results;
             }
             if (!$scope.results.description && $scope.results.kbb.noMatch && results) {
@@ -201,7 +192,7 @@
         // search mmr
         Mmr.lookupByVin(this.vin, this.mileage).then(function(results) {
           if (results.length > 0) {
-            if(results.length > 1) {
+            if (results.length > 1) {
               $scope.results.mmr.multiple = results;
             }
             $scope.results.mmr.data = results[0];
@@ -228,21 +219,21 @@
               replacements['%START_DATE%'] = $filter('moment')(version.StartDate);
               replacements['%END_DATE%'] = $filter('moment')(version.EndDate);
               replacements['%ZIP_CODE%'] = zipCode;
-              $scope.disclaimer =$sce.trustAsHtml(disclaimer.replace(/%\w+%/g, function(match) {
+              $scope.disclaimer = $sce.trustAsHtml(disclaimer.replace(/%\w+%/g, function(match) {
                 return replacements[match] || match;
               }));
             });
 
-            Kbb.getConfigurations(vin, zipCode).then(function (results) {
+            Kbb.getConfigurations(vin, zipCode).then(function(results) {
               if (results.length > 0) {
                 $scope.results.kbb.configuration = results[0];
                 if (results.length > 1) {
                   $scope.results.kbb.configurations = results;
                 }
 
-                Kbb.lookupByConfiguration($scope.results.kbb.configuration, mileage, zipCode).then(function (result) {
+                Kbb.lookupByConfiguration($scope.results.kbb.configuration, mileage, zipCode).then(function(result) {
                   $scope.results.kbb.data = result;
-                }, function (error) {
+                }, function(error) {
                   // no valuation results
                   if (error && error.hasOwnProperty('dismiss')) {
                     error.dismiss();
@@ -258,7 +249,7 @@
                 // no result
                 $scope.results.kbb.noMatch = true;
               }
-            }, function (error) {
+            }, function(error) {
               // server error
               error.dismiss();
               $scope.results.kbb.noMatch = true;
@@ -272,10 +263,11 @@
 
         this.searchComplete = true;
         $scope.searchInProgress = false;
+        $scope.gotoValues();
       },
-      validate: function (form) {
-          this.validity = angular.copy(form);
-          return form.$valid;
+      validate: function(form) {
+        this.validity = angular.copy(form);
+        return form.$valid;
       }
     };
 
@@ -283,9 +275,9 @@
       var mileage = $scope.vinLookup.mileage;
       var zipCode = $scope.vinLookup.zipcode;
       var configuration = $scope.results.kbb.configuration;
-      Kbb.lookupByConfiguration(configuration, mileage, zipCode).then(function (result) {
+      Kbb.lookupByConfiguration(configuration, mileage, zipCode).then(function(result) {
         $scope.results.kbb.data = result;
-      }, function (error) {
+      }, function(error) {
         // no results
         error.dismiss();
         $scope.results.kbb.noMatch = true;
@@ -301,7 +293,7 @@
           selected: null,
           list: [],
           fill: function() {
-            resetOptions('makes','bb');
+            resetOptions('makes', 'bb');
 
             Blackbook.getMakes().then(function(makes) {
               bb.makes.list = makes;
@@ -313,13 +305,13 @@
           selected: null,
           list: [],
           fill: function() {
-            resetOptions('models','bb');
+            resetOptions('models', 'bb');
 
-            if(bb.makes.selected) {
+            if (bb.makes.selected) {
               Blackbook.getModels(bb.makes.selected).then(function(models) {
                 bb.models.list = models;
 
-                if(models.length === 1) {
+                if (models.length === 1) {
                   bb.models.selected = models[0];
                   bb.years.fill();
                 }
@@ -331,12 +323,12 @@
           selected: null,
           list: [],
           fill: function() {
-            resetOptions('years','bb');
-            if(bb.models.selected) {
+            resetOptions('years', 'bb');
+            if (bb.models.selected) {
               Blackbook.getYears(bb.makes.selected, bb.models.selected).then(function(years) {
                 bb.years.list = years;
 
-                if(years.length === 1) {
+                if (years.length === 1) {
                   bb.years.selected = years[0];
                   bb.styles.fill();
                 }
@@ -348,13 +340,13 @@
           selected: null,
           list: [],
           fill: function() {
-            resetOptions('styles','bb');
+            resetOptions('styles', 'bb');
 
-            if(bb.years.selected) {
+            if (bb.years.selected) {
               Blackbook.getStyles(bb.makes.selected, bb.models.selected, bb.years.selected).then(function(styles) {
                 bb.styles.list = styles;
 
-                if(styles.length === 1) {
+                if (styles.length === 1) {
                   bb.styles.selected = styles[0];
                 }
               });
@@ -363,7 +355,7 @@
         },
         mileage: null,
         validity: {},
-        lookup: function (form) {
+        lookup: function(form) {
           // make sure we reset the other search, in case we've already run it.
           $scope.vinLookup.resetSearch();
 
@@ -378,7 +370,7 @@
           $scope.results.mileage = which.mileage;
 
           kissMetricInfo.getKissMetricInfo().then(
-            function(result){
+            function(result) {
               segmentio.track(metric.CLICK_VALUE_LOOKUP_NGC_LOOKUP_BUTTON, result);
             }
           );
@@ -395,10 +387,11 @@
 
           $scope.searchInProgress = false;
           $scope.manualLookup.searchComplete = true;
+          $scope.gotoValues();
         },
-        validate: function (form) {
-            this.validity = angular.copy(form);
-            return form.$valid;
+        validate: function(form) {
+          this.validity = angular.copy(form);
+          return form.$valid;
         }
       },
       mmr: {
@@ -421,11 +414,11 @@
           fill: function() {
             resetOptions('makes', 'mmr');
 
-            if(mm.years.selected) {
+            if (mm.years.selected) {
               Mmr.getMakes(mm.years.selected).then(function(makes) {
                 mm.makes.list = makes;
 
-                if(makes.length === 1) {
+                if (makes.length === 1) {
                   mm.makes.selected = makes[0];
                   mm.models.fill();
                 }
@@ -438,11 +431,11 @@
           list: [],
           fill: function() {
             resetOptions('models', 'mmr');
-            if(mm.makes.selected) {
+            if (mm.makes.selected) {
               Mmr.getModels(mm.makes.selected, mm.years.selected).then(function(models) {
                 mm.models.list = models;
 
-                if(models.length === 1) {
+                if (models.length === 1) {
                   mm.models.selected = models[0];
                   mm.styles.fill();
                 }
@@ -456,7 +449,7 @@
           fill: function() {
             resetOptions('styles', 'mmr');
 
-            if(mm.models.selected) {
+            if (mm.models.selected) {
               Mmr.getBodyStyles(mm.makes.selected, mm.years.selected, mm.models.selected).then(function(bodyStyles) {
                 mm.styles.list = bodyStyles;
 
@@ -469,7 +462,7 @@
         },
         mileage: null,
         validity: {},
-        lookup: function (form) {
+        lookup: function(form) {
           // make sure we reset the other search, in case we've already run it.
           $scope.vinLookup.resetSearch();
 
@@ -483,7 +476,7 @@
           $scope.results.mileage = which.mileage;
 
           kissMetricInfo.getKissMetricInfo().then(
-            function(result){
+            function(result) {
               segmentio.track(metric.CLICK_VALUE_LOOKUP_MMR_LOOKUP_BUTTON, result);
             }
           );
@@ -503,9 +496,9 @@
           $scope.searchInProgress = false;
           $scope.manualLookup.searchComplete = true;
         },
-        validate: function (form) {
-            this.validity = angular.copy(form);
-            return form.$valid;
+        validate: function(form) {
+          this.validity = angular.copy(form);
+          return form.$valid;
         }
       },
       kbb: {
@@ -518,10 +511,10 @@
             resetOptions('years', 'kbb');
 
             if ($scope.kbbEnabled) {
-              Kbb.getYears().then(function (years) {
+              Kbb.getYears().then(function(years) {
                 kb.years.list = years;
                 kb.years.selected = null;
-              }, function (error) {
+              }, function(error) {
                 error.dismiss();
               });
             }
@@ -533,15 +526,15 @@
           fill: function() {
             resetOptions('makes', 'kbb');
 
-            if(kb.years.selected) {
+            if (kb.years.selected) {
               Kbb.getMakes(kb.years.selected).then(function(makes) {
                 kb.makes.list = makes;
 
-                if(makes.length === 1) {
+                if (makes.length === 1) {
                   kb.makes.selected = makes[0];
                   kb.models.fill();
                 }
-              }, function (error) {
+              }, function(error) {
                 error.dismiss();
               });
             }
@@ -552,15 +545,15 @@
           list: [],
           fill: function() {
             resetOptions('models', 'kbb');
-            if(kb.makes.selected) {
+            if (kb.makes.selected) {
               Kbb.getModels(kb.makes.selected, kb.years.selected).then(function(models) {
                 kb.models.list = models;
 
-                if(models.length === 1) {
+                if (models.length === 1) {
                   kb.models.selected = models[0];
                   kb.styles.fill();
                 }
-              }, function (error) {
+              }, function(error) {
                 error.dismiss();
               });
             }
@@ -572,14 +565,14 @@
           fill: function() {
             resetOptions('styles', 'kbb');
 
-            if(kb.models.selected) {
+            if (kb.models.selected) {
               Kbb.getBodyStyles(kb.years.selected, kb.models.selected).then(function(bodyStyles) {
                 kb.styles.list = bodyStyles;
 
                 if (bodyStyles.length === 1) {
                   kb.styles.selected = bodyStyles[0];
                 }
-              }, function (error) {
+              }, function(error) {
                 error.dismiss();
               });
             }
@@ -588,7 +581,7 @@
         mileage: null,
         zipcode: null,
         validity: {},
-        lookup: function (form) {
+        lookup: function(form) {
           // make sure we reset the other search, in case we've already run it.
           $scope.vinLookup.resetSearch();
 
@@ -603,7 +596,7 @@
           $scope.results.zip = which.zipcode;
 
           kissMetricInfo.getKissMetricInfo().then(
-            function(result){
+            function(result) {
               segmentio.track(metric.CLICK_VALUE_LOOKUP_KBB_LOOKUP_BUTTON, result);
             }
           );
@@ -645,9 +638,9 @@
           $scope.searchInProgress = false;
           $scope.manualLookup.searchComplete = true;
         },
-        validate: function (form) {
-            this.validity = angular.copy(form);
-            return form.$valid;
+        validate: function(form) {
+          this.validity = angular.copy(form);
+          return form.$valid;
         }
       },
       resetSearch: function() {
@@ -682,16 +675,16 @@
 
         resetResults();
       },
-      lookup: function (form) {
+      lookup: function(form) {
         switch ($scope.lookupValues.id) {
           case 'bb':
-              this.blackbook.lookup(form);
+            this.blackbook.lookup(form);
             break;
           case 'mmr':
-              this.mmr.lookup(form);
+            this.mmr.lookup(form);
             break;
           case 'kbb':
-              this.kbb.lookup(form);
+            this.kbb.lookup(form);
             break;
           default:
             form.lookupValues.$setValidity('required', false);
@@ -709,19 +702,25 @@
     $scope.manualLookup.mmr.years.fill(); // Default MMR
     $scope.manualLookup.kbb.years.fill(); // Default KBB
 
-    $scope.manualLookupValues=[
-      { id:'', name: gettextCatalog.getString('Select Manual Lookup Values')},
-      { id:'bb', name: gettextCatalog.getString('NextGear Capital Book Wholesale Values')},
-      { id:'mmr', name: gettextCatalog.getString('MMR Wholesale Values')}
+    $scope.manualLookupValues = [
+      {id: '', name: gettextCatalog.getString('Select Manual Lookup Values')},
+      {id: 'bb', name: gettextCatalog.getString('NextGear Capital Book Wholesale Values')},
+      {id: 'mmr', name: gettextCatalog.getString('MMR Wholesale Values')}
     ];
     $scope.lookupValues = $scope.manualLookupValues[0];
-    $scope.updateLookupValues = function (selectedValues) {
-        $scope.lookupValues = selectedValues;
+    $scope.updateLookupValues = function(selectedValues) {
+      $scope.lookupValues = selectedValues;
     };
 
-    if ($scope.kbbEnabled){
-      $scope.manualLookupValues.push({ id:'kbb', name: gettextCatalog.getString('Kelley Blue Book® Auction Values')});
+    if ($scope.kbbEnabled) {
+      $scope.manualLookupValues.push({id: 'kbb', name: gettextCatalog.getString('Kelley Blue Book® Auction Values')});
     }
 
+    $scope.gotoValues = function() {
+      if ($window.innerWidth < 768) {
+        $location.hash('lookup-values');
+        $anchorScroll();
+      }
+    };
   }
 })();

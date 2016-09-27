@@ -4,15 +4,48 @@
     width: 400px;
     font-weight: normal;
   }
-  .nav-tabs{
+
+  .nav-tabs {
     background-color: #DDD;
-    .active{
-      a{
+    .active {
+      a {
         background-color: #F5F5F5;
       }
     }
-    a{
+    a {
       color: #39C;
     }
   }
+
+  // value look-up table
+  .valuation-table {
+    @extend .clearfix;
+    @extend .col-bordered;
+    @include border-radius($borderRadius);
+    background-color: $white;
+    border: 1px solid $border;
+    padding: 10px 0;
+    margin: 10px 0 20px;
+
+    & > [class*="col"] {
+      padding: 0px;
+      border-right: 1px solid #BBBBBB;
+      width: 25%;
+      & + [class*="col"] {
+        padding-left: 0;
+      }
+      &:last-child {
+        border-right: 0;
+      }
+    }
+  }
+
+  @media only screen and (max-width: $screen-xs-max) {
+    .valuation-table {
+      h3 {
+        font-size: 0.8em;
+      }
+    }
+  }
+
 }

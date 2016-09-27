@@ -214,29 +214,6 @@ hr {
   padding-top: 10px;
 }
 
-// value look-up table
-.valuation-table {
-  @extend .clearfix;
-  @extend .col-bordered;
-  @include border-radius($borderRadius);
-  background-color: $white;
-  border: 1px solid $border;
-  padding: 10px 0;
-  margin: 10px 0 20px;
-
-   & > [class*="col"] {
-    padding: 0px;
-    border-right: 1px solid #BBBBBB;
-    width:25%;
-    & + [class*="col"] {
-      padding-left: 0;
-    }
-    &:last-child {
-      border-right: 0;
-    }
-  }
-}
-
 .reset {
   @extend %float-r;
   @extend .heavy;
