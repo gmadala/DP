@@ -359,7 +359,7 @@
       var commentText = '';
 
       if (vm.data.commentAdditionalFinancing && vm.data.commentAdditionalFinancing.length > 0) {
-        commentText += 'Dealer is requesting additional financing: ' + vm.data.commentAdditionalFinancing;
+        commentText += 'DEALER REQUESTS FULL PURCHASE PRICE: ' + vm.data.commentAdditionalFinancing;
       }
 
       commentText += (commentText.length > 0) ? ' ' + vm.data.commentGeneral : vm.data.commentGeneral;
