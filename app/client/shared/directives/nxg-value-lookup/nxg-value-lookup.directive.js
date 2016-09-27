@@ -34,7 +34,7 @@
       var purchasePriceText = gettextCatalog.getString('Purchase Price');
       var bookoutAmountText = gettextCatalog.getString('Bookout Amount');
       var purchasePriceLessText = gettextCatalog.getString('Purchase price less than <br /> highest average bookout');
-      var purchasePriceMoreText = gettextCatalog.getString('Purchase price more than <br /> highest average bookout');
+      var purchasePriceMoreText = gettextCatalog.getString('Highest average bookout <br /> less than purchase price');
       var purchasePriceOnlyText = gettextCatalog.getString('Only purchase price data <br /> is available');
       // local vars to hold svg references
       var valuationLabel, valuationTriangle;
@@ -212,11 +212,12 @@
         // only display the plot information when we have value for purchase price.
         if (data[1].y) {
           var projectedPoint;
-          if (!scope.baseValuationUnavailable || !scope.kbbValuationUnavailable) {
-            // calculate the maximum of all the bookout data.
-            projectedPoint = _.max([data[3], data[4], data[5]], function(element) {
-              return element.y;
-            });
+          // calculate the maximum of all the bookout data.
+          projectedPoint = _.max([data[3], data[4], data[5]], function(element) {
+            return element.y;
+          });
+
+          if (projectedPoint.y > 0) {
             // calculate the minimum between max bookout vs purchase price
             projectedPoint = _.min([projectedPoint, data[1]], function(element) {
               return element.y;

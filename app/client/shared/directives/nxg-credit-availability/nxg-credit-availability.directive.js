@@ -25,6 +25,8 @@
     };
 
     function link(scope, element) {
+      scope.insufficientCredit = false;
+
       var options = {
         chart: {
           type: 'bar',
@@ -188,6 +190,26 @@
             updateCharts(lineOfCredit.name, lineOfCredit.total, lineOfCredit.available);
           }
         }
+      });
+
+      scope.$watch('purchasePrice', function(newValue, oldValue) {
+        if (oldValue === newValue || !scope.creditType || !newValue) {
+          return;
+        }
+
+        var lineOfCredit = scope.lineOfCredits[scope.creditType.LineOfCreditId];
+
+        var chart = element.find('.nxg-credit-availability').highcharts();
+        var data = chart.series[0].data;
+        if (lineOfCredit.available <= newValue) {
+          scope.insufficientCredit = true;
+          data[0].color = '#D32F2F';
+        } else {
+          scope.insufficientCredit = false;
+          data[0].color = '#4CAF50';
+        }
+        chart.series[0].setData(data);
+
       });
     }
   }
