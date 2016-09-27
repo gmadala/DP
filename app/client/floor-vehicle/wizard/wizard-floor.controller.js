@@ -356,15 +356,22 @@
       }
 
       var dialogParams;
+      var commentText = '';
+
+      if (vm.data.commentAdditionalFinancing && vm.data.commentAdditionalFinancing.length > 0) {
+        commentText += 'Dealer is requesting additional financing: ' + vm.data.commentAdditionalFinancing;
+      }
+
+      commentText += (commentText.length > 0) ? ' ' + vm.data.commentGeneral : vm.data.commentGeneral;
 
       vm.floorPlanSubmitting = true;
       vm.data.TitleLocationId = vm.options.titleLocationOptions[vm.data.TitleLocationId];
 
       Floorplan.create(vm.data).then(
         function (response) { /*floorplan success*/
-          if (vm.data.commentGeneral || vm.data.commentAdditionalFinancing) {
+          if (commentText.length > 0) {
             Floorplan.addComment({
-              CommentText: vm.data.commentGeneral + ' Dealer is requesting additional financing:' + vm.data.commentAdditionalFinancing,
+              CommentText: commentText,
               FloorplanId: response.FloorplanId
             });
           }
