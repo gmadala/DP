@@ -158,6 +158,10 @@
         scope.zipCode = defaultAddress.Zip;
       }
 
+      /*
+       * Function to realign the position of the data label when the bar doesn't have enough room
+       * to display the data label.
+       */
       function realignLabels() {
         var chart = element.find('.nxg-value-lookup').highcharts();
         _.each(chart.series[0].data, function(point) {
@@ -216,6 +220,9 @@
           // update the triangle and the text at the bottom of the chart.
           if (valuationLabel) {
             valuationLabel.destroy();
+          }
+
+          if (valuationTriangle) {
             valuationTriangle.destroy();
           }
 
@@ -268,6 +275,17 @@
                 zIndex: 6
               })
               .add();
+        } else {
+          // update the triangle and the text at the bottom of the chart.
+          if (valuationLabel) {
+            valuationLabel.destroy();
+            valuationLabel = undefined;
+          }
+
+          if (valuationTriangle) {
+            valuationTriangle.destroy();
+            valuationTriangle = undefined;
+          }
         }
       }
 
@@ -285,6 +303,8 @@
             var minimumMmrAverage = _.min(results[1], function(element) {
               return element.AverageWholesale;
             });
+
+            var data = chart.series[0].data;
             data[3].y = minimumBlackbookAverage ? minimumBlackbookAverage.AverageValue : 0;
             data[4].y = minimumMmrAverage ? minimumMmrAverage.AverageWholesale : 0;
             chart.series[0].setData(data);
@@ -349,6 +369,15 @@
           return;
         }
 
+        if (!newValue) {
+          var chart = element.find('.nxg-value-lookup').highcharts();
+          var data = chart.series[0].data;
+          data[3].y = 0;
+          data[4].y = 0;
+          data[5].y = 0;
+          chart.series[0].setData(data);
+        }
+
         scope.lookupFailure = false;
         // update blackbook and mmr values
         if (scope.odometer && newValue) {
@@ -364,6 +393,15 @@
         // skip doing anything when the value is not changing
         if (oldValue === newValue) {
           return;
+        }
+
+        if (!newValue) {
+          var chart = element.find('.nxg-value-lookup').highcharts();
+          var data = chart.series[0].data;
+          data[3].y = 0;
+          data[4].y = 0;
+          data[5].y = 0;
+          chart.series[0].setData(data);
         }
 
         scope.lookupFailure = false;
