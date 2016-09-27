@@ -176,8 +176,11 @@
             };
           })
           .then(function() {
-            // default to total for the initial view
-            updateCharts('Total', totalLimit, totalAvailable);
+            var lineOfCredit = scope.lineOfCredits['total.lineOfCredits'];
+            if (scope.creditType) {
+              lineOfCredit = scope.lineOfCredits[scope.creditType.LineOfCreditId];
+            }
+            updateCharts(lineOfCredit.name, lineOfCredit.total, lineOfCredit.available);
           });
       }
 
