@@ -285,8 +285,6 @@
             var minimumMmrAverage = _.min(results[1], function(element) {
               return element.AverageWholesale;
             });
-
-            var data = chart.series[0].data;
             data[3].y = minimumBlackbookAverage ? minimumBlackbookAverage.AverageValue : 0;
             data[4].y = minimumMmrAverage ? minimumMmrAverage.AverageWholesale : 0;
             chart.series[0].setData(data);
