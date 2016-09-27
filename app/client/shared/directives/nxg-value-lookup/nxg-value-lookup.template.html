@@ -22,7 +22,7 @@
       <div class="nxg-value-lookup"></div>
     </div>
   </div>
-  <div class="row" ng-show="lookupFailure">
+  <div class="row" ng-show="baseValuationUnavailable || kbbValuationUnavailable">
     <div class="col-md-12">
       <div class="alert alert-danger sidebar-hint" role="alert" translate>
         We were unable to pull one or more bookout values from our partner. No need to refresh the browser :)

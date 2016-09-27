@@ -22,7 +22,7 @@
         vin: '=',
         odometer: '=',
         inventoryLocation: '=',
-        purchasePrice: '=',
+        purchasePrice: '='
       },
       replace: 'true',
       link: linkFn
@@ -35,9 +35,12 @@
       var bookoutAmountText = gettextCatalog.getString('Bookout Amount');
       var purchasePriceLessText = gettextCatalog.getString('Purchase price less than <br /> highest average bookout');
       var purchasePriceMoreText = gettextCatalog.getString('Purchase price more than <br /> highest average bookout');
+      var purchasePriceOnlyText = gettextCatalog.getString('Only purchase price data <br /> is available');
       // local vars to hold svg references
       var valuationLabel, valuationTriangle;
 
+      scope.kbbValuationUnavailable = false;
+      scope.baseValuationUnavailable = false;
       scope.zipCode = getDealerZipCode();
       // init the options for the chart
       element.find('.nxg-value-lookup').highcharts(createOptions());
@@ -61,17 +64,16 @@
 
       scope.$watch('vin', function(newValue, oldValue) {
         // skip doing anything when the value is not changing
-        if (oldValue === newValue && _.size(newValue) < 10) {
+        if (oldValue === newValue || _.size(newValue) < 10) {
           return;
         }
 
         if (!newValue) {
           resetValuation();
         } else {
-          scope.lookupFailure = false;
           // update blackbook and mmr values
           if (scope.odometer) {
-            updateMmrAndBlackbookValuation();
+            updateBaseValuation();
             // only update the kbb if the zipCode is set
             if (scope.zipCode) {
               updateKbbValuation();
@@ -82,17 +84,16 @@
 
       scope.$watch('odometer', function(newValue, oldValue) {
         // skip doing anything when the value is not changing
-        if (oldValue === newValue && _.size(scope.vin) < 10) {
+        if (oldValue === newValue || _.size(scope.vin) < 10) {
           return;
         }
 
         if (!newValue) {
           resetValuation();
         } else {
-          scope.lookupFailure = false;
           // update blackbook and mmr values
           if (scope.vin) {
-            updateMmrAndBlackbookValuation();
+            updateBaseValuation();
             // only update the kbb if the zipCode is set
             if (scope.zipCode) {
               updateKbbValuation();
@@ -103,7 +104,7 @@
 
       /** Supporting local functions **/
 
-      function updateMmrAndBlackbookValuation() {
+      function updateBaseValuation() {
         $q.all([
           Blackbook.lookupByVin(scope.vin, scope.odometer, true),
           Mmr.lookupByVin(scope.vin, scope.odometer)
@@ -128,7 +129,7 @@
             realignLabels();
           })
           .catch(function() {
-            scope.lookupFailure = scope.lookupFailure || true;
+            scope.baseValuationUnavailable = true;
           });
       }
 
@@ -158,7 +159,7 @@
           })
           .catch(function(error) {
             error.dismiss();
-            scope.lookupFailure = scope.lookupFailure || true;
+            scope.kbbValuationUnavailable = true;
           });
       }
 
@@ -206,17 +207,27 @@
       function updatePlotInformation() {
         var chart = getChart();
         var data = chart.series[0].data;
+
+        var labelText, labelX, labelY;
         // only display the plot information when we have value for purchase price.
         if (data[1].y) {
-          // calculate the maximum of all the bookout data.
-          var projectedPoint = _.max([data[3], data[4], data[5]], function(element) {
-            return element.y;
-          });
-          // calculate the minimum between max bookout vs purchase price
-          projectedPoint = projectedPoint.y ?
-            _.min([projectedPoint, data[1]], function(element) {
+          var projectedPoint;
+          if (!scope.baseValuationUnavailable || !scope.kbbValuationUnavailable) {
+            // calculate the maximum of all the bookout data.
+            projectedPoint = _.max([data[3], data[4], data[5]], function(element) {
               return element.y;
-            }) : data[1];
+            });
+            // calculate the minimum between max bookout vs purchase price
+            projectedPoint = _.min([projectedPoint, data[1]], function(element) {
+              return element.y;
+            });
+            // the text will be depends on which one is the selected as projected financed amount.
+            labelText = projectedPoint.category === 'Bill of Sale' ? purchasePriceLessText : purchasePriceMoreText;
+          } else {
+            projectedPoint = data[1];
+            // the text label will be the purchase price only text
+            labelText = purchasePriceOnlyText;
+          }
 
           scope.projectedFinancedAmount = projectedPoint.y;
 
@@ -230,17 +241,8 @@
           });
 
           // update the triangle and the text at the bottom of the chart.
-          if (valuationLabel) {
-            valuationLabel.destroy();
-          }
-
-          if (valuationTriangle) {
-            valuationTriangle.destroy();
-          }
-
-          var labelX = chart.plotLeft;
-          var labelY = chart.plotTop + chart.chartHeight - 45;
-          var labelText = projectedPoint.category === 'Bill of Sale' ? purchasePriceLessText : purchasePriceMoreText;
+          labelX = chart.plotLeft;
+          labelY = chart.plotTop + chart.chartHeight - 45;
 
           // the text will have 3 position based on the percentage of where the plot line will be.
           // 0% - 30% - 70%
@@ -254,12 +256,14 @@
           }
 
           // render the text on the location.
+          if (valuationLabel) {
+            valuationLabel.destroy();
+          }
           valuationLabel = drawBottomInfoText(labelText, labelX, labelY);
-
           // render the triangle on the bottom of the plot line.
-          // the svg path will start from the top of the triangle,
-          // moving right, moving left and then move back to the
-          // top of the triangle.
+          if (valuationTriangle) {
+            valuationTriangle.destroy();
+          }
           valuationTriangle = drawTriangleMarker(projectedPoint.plotY, labelY);
         } else {
           scope.projectedFinancedAmount = 0;
@@ -280,6 +284,9 @@
         return element.find('.nxg-value-lookup').highcharts();
       }
 
+      // the svg path will start from the top of the triangle,
+      // moving right, moving left and then move back to the
+      // top of the triangle.
       function drawTriangleMarker(startingX, startingY) {
         var chart = getChart();
         return chart.renderer
@@ -311,7 +318,7 @@
       }
 
       function createOptions() {
-        return  {
+        return {
           chart: {
             backgroundColor: null,
             type: 'bar',
