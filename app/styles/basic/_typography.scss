@@ -311,3 +311,154 @@ ul.document-list {
     }
   }
 }
+
+.main-heading {
+  font-size: 20px;
+  font-weight: normal;
+  line-height: $baseLineHeight * 1.5;
+  color: $text;
+  margin: 0;
+}
+.sub-heading{
+  font-size: 15px;
+  font-weight: normal;
+  line-height: $baseLineHeight * 1.5;
+  color: $text;
+  margin: 0;
+}
+
+.inner-addon {
+  position: relative;
+}
+
+.left-addon {
+  left: 10px;
+  bottom: -23px;
+}
+
+.icon-addon.addon-lg .vin-focus {
+  width: 100%;
+  padding: 10px 1px 10px 35px;
+  font-size: 10px;
+}
+
+.btn-margin {
+  margin: 0px 0px 0px 37px;
+}
+
+.invalid-vin {
+  background-color: #F2F2F2;
+  width: 100%;
+  padding: 5px 5px 5px 5px;
+}
+.vin-acknowledge {
+  font-size: 12px;
+  font-weight: normal;
+  padding: 5px 5px 5px 5px;
+  margin: 0px;
+}
+
+//Floating labels
+.show-hide.ng-hide-add,
+.show-hide.ng-hide-remove {
+  transition: all linear 0.2s;
+  display: block!important;
+  position: absolute;
+}
+
+.show-hide.ng-hide-add.ng-hide-add-active,
+.show-hide.ng-hide-remove {
+  top: -8px;
+  display: block!important;
+  position: absolute;
+  opacity: 0;
+}
+
+.show-hide.ng-hide-add,
+.show-hide.ng-hide-remove.ng-hide-remove-active {
+  top: -14px;
+  opacity: 1;
+  display: block!important;
+  position: absolute;
+}
+
+.field {
+  position: relative;
+}
+
+.field > label {
+  position: relative;
+  color: #091018;
+  font-size: 0.8em;
+  margin: 0px;
+}
+.field > input  {
+  @include box-shadow(none);
+  color: $text;
+  font-size: $inputFontSize;
+  background: $white;
+  border: 1px solid $form-border;
+
+  &:focus {
+    @include box-shadow(rgba(0, 0, 0, 0) 0 0 0);
+    color: $text;
+    border-color: $highlight;
+    outline: none;
+  }
+
+  &:disabled, &.disabled {
+    border-color: $border;
+  }
+
+  &:focus:invalid, &:invalid {
+    @include box-shadow(rgba(0, 0, 0, 0) 0 0 0);
+    color: $text;
+    border: 1px solid $form-border;
+  }
+
+  &.nxg-invalid {
+    border: 1px solid $danger;
+
+    &:focus {
+      border: 1px solid $highlight;
+    }
+  }
+
+  // placeholder text
+  &::-webkit-input-placeholder,
+  &::-moz-placeholder,
+  &::-ms-input-placeholder {
+    font-weight: normal;
+    color: #B7B7B7;
+  }
+
+  // get rid of IE10's default clear button
+  &::-ms-clear {
+    display: none;
+  }
+
+  // use this when also using the input "size" and "maxlength" attributes for inputs
+  // of known length (social security numbers, PINs, phone numbers, etc.)
+  &.size-fixed {
+    width: auto;
+  }
+}
+
+.short-input {
+  max-width: 400px;
+  display: block;
+}
+
+.field-label {
+  margin: -15px 0px 0px 0px;
+}
+//End of floating labels
+
+.wizard-vin {
+  padding-right:0px;
+}
+.wizard-vin-btn {
+  padding: 0px;
+  top: 7px;
+  margin: 0px;
+}

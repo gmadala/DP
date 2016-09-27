@@ -12,7 +12,7 @@
           </div>
         </h2>
         <div class="well-item">
-          <form class="form-block" ng-class="{ editable:profile.editable }" name="userSettings" novalidate>
+          <form class="form-block" method="POST" ng-class="{ editable:profile.editable }" name="userSettings" novalidate>
             <div class="row">
               <label class="col-xs-6 no-right-padding" for="setUsername" translate>Username</label>
               <div class="col-xs-6 zeroLeftPadding no-right-padding" nxg-input model="profile.data.username" editable="profile.editable">
@@ -44,7 +44,7 @@
               <div class="col-xs-6 zeroLeftPadding no-right-padding">
                 <div class="static" ng-hide="profile.editable">***********</div>
                 <div ng-show="profile.editable">
-                  <input type="password" name="setPassword" class="form-control" ng-model="profile.dirtyData.password" ng-class="{ 'nxg-invalid': profile.validation.setPassword.$error.pattern }" />
+                  <input type="password" autocomplete="off" name="setPassword" class="form-control" ng-model="profile.dirtyData.password" ng-class="{ 'nxg-invalid': profile.validation.setPassword.$error.pattern }" />
                 </div>
 
                 <label for="setPassword" class="text-error" ng-show="profile.validation.setPassword.$error.pattern" translate>
@@ -56,7 +56,7 @@
             <div class="row" ng-show="profile.editable">
               <label class="col-xs-6 no-right-padding" for="confirmPassword" translate>Confirm Password</label>
               <div class="col-xs-6 zeroLeftPadding no-right-padding">
-                <input type="password" id="confirmPassword" class="xsmallInput" ng-model="profile.dirtyData.passwordConfirm" ng-class="{ 'nxg-invalid': profile.validation.setPassword.$error.nomatch }" />
+                <input type="password" autocomplete="off" id="confirmPassword" class="xsmallInput" ng-model="profile.dirtyData.passwordConfirm" ng-class="{ 'nxg-invalid': profile.validation.setPassword.$error.nomatch }" />
                 <label for="confirmPassword" class="text-error" ng-show="profile.validation.setPassword.$error.nomatch" translate>
                   The passwords do not match. Please re-enter the password.
                 </label>
@@ -146,7 +146,7 @@
         </h2>
 
         <div class="well-item">
-          <form class="form-block" ng-class="{ editable:notifications.editable }" name="notificationSettings">
+          <form class="form-block" method="POST" ng-class="{ editable:notifications.editable }" name="notificationSettings">
             <div class="row">
               <label class="col-xs-6 no-left-margin" translate>Notifications</label>
               <label class="col-xs-6 zeroLeftPadding" ng-hide="notifications.editable || notifications.data.selected.length == 0" translate>Delivery Type</label>
