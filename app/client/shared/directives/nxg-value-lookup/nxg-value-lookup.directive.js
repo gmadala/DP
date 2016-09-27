@@ -347,6 +347,15 @@
 
       var valuationLabel, valuationTriangle;
 
+      function resetValuation() {
+        var chart = element.find('.nxg-value-lookup').highcharts();
+        var data = chart.series[0].data;
+        data[3].y = 0;
+        data[4].y = 0;
+        data[5].y = 0;
+        chart.series[0].setData(data)
+      }
+
       // watch the purchase value and perform the following:
       // * update the purchase price bar chart
       // * display the line, triangle and text for the purchase price vs bookout value
@@ -371,21 +380,16 @@
         }
 
         if (!newValue) {
-          var chart = element.find('.nxg-value-lookup').highcharts();
-          var data = chart.series[0].data;
-          data[3].y = 0;
-          data[4].y = 0;
-          data[5].y = 0;
-          chart.series[0].setData(data);
-        }
-
-        scope.lookupFailure = false;
-        // update blackbook and mmr values
-        if (scope.odometer && newValue) {
-          updateMmrAndBlackbookValuation();
-          // only update the kbb if the zipCode is set
-          if (scope.zipCode) {
-            updateKbbValuation();
+          resetValuation();
+        } else {
+          scope.lookupFailure = false;
+          // update blackbook and mmr values
+          if (scope.odometer) {
+            updateMmrAndBlackbookValuation();
+            // only update the kbb if the zipCode is set
+            if (scope.zipCode) {
+              updateKbbValuation();
+            }
           }
         }
       });
@@ -397,32 +401,18 @@
         }
 
         if (!newValue) {
-          var chart = element.find('.nxg-value-lookup').highcharts();
-          var data = chart.series[0].data;
-          data[3].y = 0;
-          data[4].y = 0;
-          data[5].y = 0;
-          chart.series[0].setData(data);
-        }
-
-        scope.lookupFailure = false;
-        // update blackbook and mmr values
-        if (scope.vin && newValue) {
-          updateMmrAndBlackbookValuation();
-          // only update the kbb if the zipCode is set
-          if (scope.zipCode) {
-            updateKbbValuation();
+          resetValuation();
+        } else {
+          scope.lookupFailure = false;
+          // update blackbook and mmr values
+          if (scope.odometer) {
+            updateMmrAndBlackbookValuation();
+            // only update the kbb if the zipCode is set
+            if (scope.zipCode) {
+              updateKbbValuation();
+            }
           }
         }
-      });
-
-      scope.$watch('aditionalFinancing', function(newValue, oldValue) {
-        // skip doing anything when the value is not changing
-        if (oldValue === newValue) {
-          return;
-        }
-
-
       });
     }
   }
