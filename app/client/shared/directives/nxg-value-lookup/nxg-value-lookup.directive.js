@@ -276,6 +276,7 @@
               })
               .add();
         } else {
+          scope.projectedFinancedAmount = 0;
           // update the triangle and the text at the bottom of the chart.
           if (valuationLabel) {
             valuationLabel.destroy();
