@@ -60,7 +60,7 @@
                   </div>
                 </div>
                 <div class="">
-                  <button class="btn-cta cta-primary" ng-click="vinLookup.lookup(vinLookupForm)" ng-disabled="searchInProgress" translate>
+                  <button class="btn-cta cta-primary" ng-click="vinLookup.lookup(vinLookupForm);gotoValues();" ng-disabled="searchInProgress" translate>
                     Look Up Values
                   </button>
                 </div>
@@ -315,7 +315,7 @@
 
                 </div>
                 <div class="">
-                  <button class="btn-cta cta-primary" ng-click="manualLookup.lookup(manualLookupForm)" ng-disabled="searchInProgress" translate>
+                  <button class="btn-cta cta-primary" ng-click="manualLookup.lookup(manualLookupForm);gotoValues();" ng-disabled="searchInProgress" translate>
                     Look Up Values
                   </button>
                 </div>
