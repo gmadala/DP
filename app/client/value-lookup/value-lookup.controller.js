@@ -263,6 +263,7 @@
 
         this.searchComplete = true;
         $scope.searchInProgress = false;
+        $scope.gotoValues();
       },
       validate: function(form) {
         this.validity = angular.copy(form);
@@ -386,6 +387,7 @@
 
           $scope.searchInProgress = false;
           $scope.manualLookup.searchComplete = true;
+          $scope.gotoValues();
         },
         validate: function(form) {
           this.validity = angular.copy(form);
@@ -493,6 +495,7 @@
 
           $scope.searchInProgress = false;
           $scope.manualLookup.searchComplete = true;
+          $scope.gotoValues();
         },
         validate: function(form) {
           this.validity = angular.copy(form);
@@ -635,6 +638,7 @@
 
           $scope.searchInProgress = false;
           $scope.manualLookup.searchComplete = true;
+          $scope.gotoValues();
         },
         validate: function(form) {
           this.validity = angular.copy(form);
