@@ -84,6 +84,9 @@
         return bankAccount.BankAccountId=== result[1].DefaultDisbursementBankAccountId;
       });
 
+      var defaultLineOfCredit = _.find(result[1].LinesOfCredit, function (lineOfCredit) {
+        return lineOfCredit.LineOfCreditName === 'Retail';
+      });
 
       vm.options.locations = Addresses.getActivePhysical();
 
@@ -104,11 +107,14 @@
         optionListsToDefault.push({
           scopeSrc: 'wizardFloor.options.locations',
           modelDest: 'PhysicalInventoryAddressId'
-        }, {
-          scopeSrc: 'wizardFloor.options.LinesOfCredit',
-          modelDest: 'LineOfCreditId',
-          useFirst: true
         });
+      }
+      if(isDealer){
+        if(defaultLineOfCredit){
+          optionListsToDefault.push({ scopeSrc: 'wizardFloor.options.LinesOfCredit', modelDest: 'LineOfCreditId', useDefault:defaultLineOfCredit });
+        }else{
+          optionListsToDefault.push({ scopeSrc: 'wizardFloor.options.LinesOfCredit', modelDest: 'LineOfCreditId', useFirst:true });
+        }
       }
 
       vm.optionsHelper = OptionDefaultHelper.create(optionListsToDefault);
