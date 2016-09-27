@@ -15,7 +15,7 @@
           <form class="form-block" method="POST" ng-class="{ editable:profile.editable }" name="userSettings" novalidate>
             <div class="row">
               <label class="col-xs-6 no-right-padding" for="setUsername" translate>Username</label>
-              <div class="col-xs-6 zeroLeftPadding no-right-padding" nxg-input model="profile.data.username" editable="profile.editable">
+              <div class="col-xs-6 zeroLeftPadding" nxg-input model="profile.data.username" editable="profile.editable">
                 <section class="flexbox-form">
                   <div class="stretch">
                 <input type="text" name="setUsername" class="xsmallInput" ng-model="profile.dirtyData.username" value="profile.dirtyData.username" ng-maxlength="40" ng-class="{ 'nxg-invalid': profile.validation.setUsername.$error.required || profile.validation.setUsername.$error.maxlength }" required/>
@@ -33,7 +33,7 @@
             </div>
 
             <div class="row">
-              <label class="col-xs-6 no-right-padding" for="setPassword"><span ng-show="editable" translate>New Password</span><span ng-show="!editable" translate>Password</span>
+              <label class="col-xs-6" for="setPassword"><span ng-show="editable" translate>New Password</span><span ng-show="!editable" translate>Password</span>
                 <span ng-show="profile.editable">
                 <button class="btn-help"
                         tooltip-placement="bottom"
@@ -41,7 +41,7 @@
                         uib-tooltip-html='passwordTooltip | translate'
                         tooltip-animation="true"><span nxg-icon="icon-help"></span></button></span>
               </label>
-              <div class="col-xs-6 zeroLeftPadding no-right-padding">
+              <div class="col-xs-6 zeroLeftPadding">
                 <div class="static" ng-hide="profile.editable">***********</div>
                 <div ng-show="profile.editable">
                   <input type="password" autocomplete="off" name="setPassword" class="form-control" ng-model="profile.dirtyData.password" ng-class="{ 'nxg-invalid': profile.validation.setPassword.$error.pattern }" />
@@ -55,7 +55,7 @@
 
             <div class="row" ng-show="profile.editable">
               <label class="col-xs-6 no-right-padding" for="confirmPassword" translate>Confirm Password</label>
-              <div class="col-xs-6 zeroLeftPadding no-right-padding">
+              <div class="col-xs-6 zeroLeftPadding">
                 <input type="password" autocomplete="off" id="confirmPassword" class="xsmallInput" ng-model="profile.dirtyData.passwordConfirm" ng-class="{ 'nxg-invalid': profile.validation.setPassword.$error.nomatch }" />
                 <label for="confirmPassword" class="text-error" ng-show="profile.validation.setPassword.$error.nomatch" translate>
                   The passwords do not match. Please re-enter the password.
@@ -67,7 +67,7 @@
               <!-- Question Select -->
               <div class="row">
                 <label class="col-xs-6 no-right-padding questText" translate>Security Question {{$index + 1}}</label>
-                <div class="col-xs-6 zeroLeftPadding no-right-padding static" ng-hide="profile.editable"> {{ question.QuestionText }} </div>
+                <div class="col-xs-6 zeroLeftPadding static" ng-hide="profile.editable"> {{ question.QuestionText }} </div>
               </div>
             </div>
 
@@ -75,20 +75,22 @@
               <!-- Question Select -->
               <div class="row">
                 <label class="col-xs-6 no-right-padding" translate>Security Question {{$index + 1}}</label>
-                <div class="col-xs-6 style-select zeroLeftPadding no-right-padding">
-                  <select ng-model="question.SecurityQuestionId"
-                          ng-options="q.QuestionId as q.QuestionText for q in profile.data.allQuestions"
-                          uib-tooltip="{{ question.QuestionText }}"
-                          tooltip-placement="right"
-                          tooltip-popup-delay="700">
-                  </select>
+                <div class="col-xs-6 zeroLeftPadding">
+                  <div class="style-select">
+                    <select ng-model="question.SecurityQuestionId"
+                            ng-options="q.QuestionId as q.QuestionText for q in profile.data.allQuestions"
+                            uib-tooltip="{{ question.QuestionText }}"
+                            tooltip-placement="right"
+                            tooltip-popup-delay="700">
+                    </select>
+                  </div>
                 </div>
               </div>
 
               <!-- Answer -->
               <div class="row" ng-show="profile.editable">
                 <label class="col-xs-6 no-right-padding" for="secAnswer" translate>Answer</label>
-                <div class="col-xs-6 no-right-padding zeroLeftPadding">
+                <div class="col-xs-6 zeroLeftPadding">
                   <input type="text" name="secAnswer" class="xsmallInput" ng-model="question.Answer" ng-class="{ 'nxg-invalid': question.$error.required || question.$error.maxLength }" required/>
 
                   <label class="text-error" ng-show="question.$error.required" translate>
@@ -103,7 +105,7 @@
             <div class="row">
               <label class="col-xs-6 no-right-padding" for="email" translate>Email</label>
               <span class="noWrap">
-              <div class="col-xs-6 zeroLeftPadding no-right-padding" nxg-input model="profile.data.email" editable="profile.editable">
+              <div class="col-xs-6 zeroLeftPadding" nxg-input model="profile.data.email" editable="profile.editable">
                 <input type="email" name="email" class="xsmallInput" ng-model="profile.dirtyData.email" value="profile.dirtyData.email" ng-class="{ 'nxg-invalid': profile.validation.email.$invalid }" required/>
                 <label class="text-error" ng-show="profile.validation.email.$invalid" translate>
                   Please enter a valid email address.
@@ -114,7 +116,7 @@
 
             <div class="row">
               <label class="col-xs-6 no-right-padding" for="phone" translate>Cell Phone</label>
-              <div class="col-xs-6 no-right-padding zeroLeftPadding" nxg-input model="formatPhonenumber(profile.data.phone)" editable="profile.editable">
+              <div class="col-xs-6 zeroLeftPadding" nxg-input model="formatPhonenumber(profile.data.phone)" editable="profile.editable">
                 <input type="tel"
                        name="phone"
                        class="xsmallInput"
