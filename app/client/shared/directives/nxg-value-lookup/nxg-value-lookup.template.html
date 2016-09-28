@@ -1,19 +1,19 @@
 <div>
   <br/>
   <div class="row">
-    <div class="col-md-12 text-center" translate>
-      <p class="sidebar-header" style="text-transform: uppercase;">Projected Financed Amount</p>
+    <div class="col-md-12 text-center">
+      <p class="sidebar-header" style="text-transform: uppercase;" translate>Projected Financed Amount</p>
     </div>
   </div>
   <div class="row">
-    <div class="col-md-12 text-center" translate>
-      <h3 class="sidebar-hero text-success">{{ projectedFinancedAmount || 0 | numeral : '$0,0[.]00'}}</h3>
+    <div class="col-md-12 text-center">
+      <h3 class="sidebar-hero text-success" translate>{{ projectedFinancedAmount || 0 | numeral : '$0,0[.]00'}}</h3>
     </div>
   </div>
   <div class="row">
-    <div class="col-md-12" translate>
-      <p class="sidebar-hint">
-        Financed amount is calculated based on <em>lowest value</em>: purchase price or highest average bookout.
+    <div class="col-md-12">
+      <p class="sidebar-hint" translate>
+        Finance amount is highest average bookout, not to exceed purchase price.
       </p>
     </div>
   </div>

@@ -167,7 +167,7 @@
         var chart = getChart();
         var data = chart.series[0].data;
         data[3].y = data[4].y = data[5].y = 0;
-        chart.series[0].setData(data)
+        chart.series[0].setData(data);
       }
 
       /*
