@@ -429,7 +429,7 @@
       }
 
       function getDealerZipCode() {
-        if (locations.length > 1) {
+        if (locations.length > 0) {
           // if there's only one address default the zip to that one
           var defaultAddress = _.find(locations, function(location) {
             return location.IsMainAddress;

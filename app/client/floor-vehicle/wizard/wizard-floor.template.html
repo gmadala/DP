@@ -21,7 +21,7 @@
     </ul>
   </div>
 
-  <div class="row">
+  <div class="col-xs-12 display-flex">
     <div ui-view class="col-xs-12 col-md-6 col-md-offset-1" autoscroll="true"></div>
     <div class="hidden-xs hidden-sm col-md-offset-1 col-md-3 sidebar">
       <nxg-credit-availability credit-type="wizardFloor.data.LineOfCreditId"
@@ -29,7 +29,6 @@
       <nxg-value-lookup vin="wizardFloor.data.UnitVin"
                         odometer="wizardFloor.data.UnitMileage"
                         inventory-location="wizardFloor.data.PhysicalInventoryAddressId"
-                        additional-financing="wizardFloor.data.AdditionalFinancing"
                         purchase-price="wizardFloor.data.UnitPurchasePrice"></nxg-value-lookup>
     </div>
   </div>
