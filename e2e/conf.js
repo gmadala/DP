@@ -5,13 +5,12 @@ exports.config = {
     'browserName': 'chrome',
     'chromeOptions': {
       'args': [
-        '--disable-extensions',
-        '-–allow-file-access-from-files',
-        '--disable-web-security'
-        //'--no-sandbox',
-        //'--test-type=browser'
+        // '--disable-extensions',
+        // '-–allow-file-access-from-files',
+        // '--disable-web-security',
+        '--no-sandbox',
+        '--test-type=browser'
       ]
-      // ],
       // 'prefs': {
       //   'download': {
       //     'prompt_for_download': false,
@@ -25,15 +24,19 @@ exports.config = {
   },
 
   //Spec patterns are relative to the current working directly when protractor is called.
-  specs: ['tests/e2e_scripts/*_spec.js'],
-  //specs: ['tests/login/e2e_profile_settings_spec.js'],
+  //specs: ['tests/e2e_scripts/*_spec.js'],
+  specs: ['tests/login/e2e_profile_settings_spec.js'],
   //specs: ['tests/login/e2e_receipts_spec.js'],
+
   //More miscellaneous configuration options
   directConnect: true,
-  untrackOutstandingTimeouts: false,
+  untrackOutstandingTimeouts: true,
   restartBrowserBetweenTests: false,
 
   //Framework selection
+  baseUrl: 'https://test.nextgearcapital.com/test/#/',
+  allScriptsTimeout: 11000,
+  getPageTimeout: 10000,
   framework: 'jasmine',
 
   // Options to be passed to Jasmine.
@@ -41,8 +44,8 @@ exports.config = {
     isVerbose: true,
     includeStackTrace: true,
     showColors: true,
-    defaultTimeoutInterval: 60000,
-    realtimeFailure: true
+    defaultTimeoutInterval: 60000
+    //realtimeFailure: true
   },
 
   //Project global parameters
