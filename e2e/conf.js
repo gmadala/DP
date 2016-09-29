@@ -25,7 +25,7 @@ exports.config = {
 
   //Spec patterns are relative to the current working directly when protractor is called.
   //specs: ['tests/e2e_scripts/*_spec.js'],
-  specs: ['tests/login/e2e_profile_settings_spec.js'],
+  specs: ['tests/e2e_scripts/e2e_profile_settings_spec.js'],
   //specs: ['tests/login/e2e_receipts_spec.js'],
 
   //More miscellaneous configuration options
