@@ -5,7 +5,10 @@
 }
 
 @media (max-width: 640px) {
-  .titlefloat{float: left;}
+  .titlefloat{float: left; font-weight: bold;}
+}
+@media (max-width: 640px) {
+  .balabold{font-weight: bold;}
 }
 @media (min-width: 641px) {
   .titlefloat{float:right;}
@@ -29,4 +32,7 @@
 }
 .moveUPDup {
   top:-60px;
+}
+.moveUPDupNoPayment {
+  top:-428px;
 }

@@ -92,7 +92,7 @@
     $scope.isLargeVP = function () {
       var clientWidth = document.documentElement.clientWidth;
 
-      return (clientWidth > 768) ? true : false;
+      return (clientWidth >= 768) ? true : false;
     };
 
     $scope.uploadDocuments = function(){
