@@ -118,3 +118,12 @@
   padding: .5em 1em;
   width: 100%;
 }
+
+#AuctionSettingsPage, #ProfileSettingsPage {
+    .userProfileSettingsPanel {
+        input {
+            width: 100%;
+            border-radius: 5px;
+        }
+    }
+}
