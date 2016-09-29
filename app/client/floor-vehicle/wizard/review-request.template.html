@@ -1,0 +1,82 @@
+<form name="form" novalidate>
+<h4 translate>Please review your floor plan request.</h4>
+
+<div>
+  <div>
+    <div translate>Vehicle Details</div>
+    <ul class="list-table">
+      <li class="list-table-row">
+        <p class="col-xs-6" translate>VIN</p>
+        <p class="col-xs-6 value">{{ wizardFloor.data.UnitVin }}</p>
+      </li>
+
+      <li class="list-table-row">
+        <p class="col-xs-6" translate>Year</p>
+        <p class="col-xs-6 value">{{ wizardFloor.data.kb.years.selected.Value || wizardFloor.data.UnitYear || }}</p>
+      </li>
+
+      <li class="list-table-row">
+        <p class="col-xs-6" translate>Make</p>
+        <p class="col-xs-6 value">{{ wizardFloor.data.kb.makes.selected.Value  || wizardFloor.data.UnitMake }}</p>
+      </li>
+
+      <li class="list-table-row">
+        <p class="col-xs-6" translate>Model</p>
+        <p class="col-xs-6 value">{{ wizardFloor.data.kb.models.selected.Value || wizardFloor.data.UnitModel }}</p>
+      </li>
+
+      <li class="list-table-row">
+        <p class="col-xs-6" translate>Style</p>
+        <p class="col-xs-6 value"> {{ wizardFloor.data.kb.styles.selected.DisplayName || wizardFloor.data.UnitStyle }}</p>
+      </li>
+
+    </ul>
+  </div>
+
+  <div>
+    <div translate>Flooring Information</div>
+
+    <ul class="list-table">
+      <li class="list-table-row">
+        <p class="col-xs-6" translate>Purchase Amount</p>
+        <p class="col-xs-6 value">{{ wizardFloor.data.UnitPurchasePrice | currency }}</p>
+      </li>
+      <li class="list-table-row">
+        <p class="col-xs-6">
+          <span ng-show="isDealer" translate>Purchase Date</span>
+          <span ng-hide="isDealer" translate>Sales Date</span>
+        </p>
+        <p class="col-xs-6 value">{{ wizardFloor.data.UnitPurchaseDate | moment }}</p>
+      </li>
+      <li class="list-table-row">
+        <p class="col-xs-6" translate>Send Payment To</p>
+        <p class="col-xs-6 value">
+          <span ng-show="isDealer">{{ wizardFloor.data.PaySeller && 'Seller' || 'Buyer' | translate }}</span>
+        </p>
+      </li>
+    </ul>
+  </div>
+
+  <div ng-show="fileNames.length > 0">
+    <div translate>Uploaded Documents</div>
+    <ul class="list-table">
+      <li class="list-table-row" data-ng-repeat="fileName in fileNames track by $index">
+        <p class="col-xs-12">{{ fileName }}</p>
+      </li>
+    </ul>
+  </div>
+  <div class="center" ng-show="isDealer">
+    <button class="btn-link heavy" ng-click="openDocument()" translate>View Dealer Funding Checklist (PDF)</button>
+  </div>
+
+  <p class="modal-body" style="border:0px;" translate>
+    By clicking “SUBMIT,” Borrower agrees to the following terms. Capitalized terms used and not defined herein shall have the respective
+    meanings as set forth in the Demand Promissory Note and Loan and Security Agreement (the “Note”) by and between Borrower and NextGear Capital, Inc. (“Lender”)
+    or in the ACH Authorization and Request previously executed by Borrower. Borrower is requesting a Floorplan Advance for the Unit listed above. Borrower agrees
+    that if such Floorplan Advance is approved by Lender, Borrower is obligated to deliver to Lender the Title or MSO to this Unit within seven (7) days of the Floorplan
+    Date for such Floorplan Advance. Borrower agrees that if Lender does not receive the Title or MSO to the Unit within seven (7) days, Lender will
+    declare a Maturity Event for such Floorplan Advance and will initiate a Required Payment for all Liabilities related to such Floorplan Advance.
+    Borrower agrees that each Required Payment made pursuant to this request shall be deemed an Authorized Debit.
+  </p>
+</div>
+

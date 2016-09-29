@@ -24,30 +24,29 @@
     'metric'
   ];
 
-  function WizardFloorCtrl(
-    $state,
-    $scope,
-    $uibModal,
-    $q,
-    User,
-    Floorplan,
-    Addresses,
-    protect,
-    OptionDefaultHelper,
-    moment,
-    AccountManagement,
-    Upload,
-    nxgConfig,
-    kissMetricInfo,
-    segmentio,
-    metric
-  ) {
+  function WizardFloorCtrl($state,
+                           $scope,
+                           $uibModal,
+                           $q,
+                           User,
+                           Floorplan,
+                           Addresses,
+                           protect,
+                           OptionDefaultHelper,
+                           moment,
+                           AccountManagement,
+                           Upload,
+                           nxgConfig,
+                           kissMetricInfo,
+                           segmentio,
+                           metric) {
     var vm = this;
     var isDealer = User.isDealer();
 
     // init a special version of today's date for our datepicker which only works right with dates @ midnight
     var today = new Date();
     today = moment([today.getFullYear(), today.getMonth(), today.getDate()]).toDate();
+
 
     vm.counter = 1;
     vm.validForm = true;
@@ -56,12 +55,13 @@
       one: false,
       two: false,
       three: false,
-      four: false
+      four: false,
+      five: false
     };
 
     vm.floorPlanSubmitting = false;
 
-    vm.pageCount = 4;
+    vm.pageCount = 5;
 
     switchState();
 
@@ -81,7 +81,7 @@
       vm.options.LinesOfCredit = _.sortBy(result[1].LinesOfCredit, "LineOfCreditName");
 
       var defaultBankAccount = _.find(result[2].BankAccounts, function (bankAccount) {
-        return bankAccount.BankAccountId=== result[1].DefaultDisbursementBankAccountId;
+        return bankAccount.BankAccountId === result[1].DefaultDisbursementBankAccountId;
       });
 
 
@@ -160,25 +160,25 @@
       dirtyStatus: false,
       inputYear: null,
       inputMake: null,
-      inputModel:null,
-      inputStyle:null,
+      inputModel: null,
+      inputStyle: null,
       settingsVinMode: 'none',
-      kb:{
-        years:{
-          selected:null,
-          list:[]
+      kb: {
+        years: {
+          selected: null,
+          list: []
         },
         makes: {
           selected: null,
           list: []
         },
-        models:{
-          selected:null,
-          list:[]
+        models: {
+          selected: null,
+          list: []
         },
-        styles:{
-          selected:null,
-          list:[]
+        styles: {
+          selected: null,
+          list: []
         }
       }
     };
@@ -250,6 +250,12 @@
           if (true || vm.formParts.one && vm.formParts.two && vm.formParts.three) {
             $state.go('flooringWizard.document');
           }
+          break;
+        case 5:
+          if (true || vm.formParts.one && vm.formParts.two && vm.formParts.three && vm.formParts.four) {
+            $state.go('flooringWizard.review');
+          }
+
       }
     }
 
@@ -265,6 +271,8 @@
           return vm.formParts.one && vm.formParts.two;
         case 4:
           return vm.formParts.one && vm.formParts.two && vm.formParts.three;
+        case 5:
+          return vm.formParts.one && vm.formParts.two && vm.formParts.three && vm.formParts.four;
       }
     }
 
@@ -281,16 +289,20 @@
         return false;
       }
 
-      if (vm.attachDocumentsEnabled || !vm.formParts.three){
+      if (vm.attachDocumentsEnabled || !vm.formParts.three) {
         return false;
       }
 
       if (vm.attachDocumentsEnabled && vm.data.files.length < 1) {
         return false;
       }
-
       return true;
     };
+
+    vm.data.UnitYear = !vm.data.dirtyStatus ? vm.data.kb.years.selected.Value : vm.data.inputYear;
+    vm.data.UnitStyle = !vm.data.dirtyStatus ? vm.data.kb.styles.selected.DisplayName : vm.data.inputStyle;
+    vm.data.UnitMake = !vm.data.dirtyStatus ? vm.data.kb.makes.selected.Value : vm.data.inputMake;
+    vm.data.UnitModel = !vm.data.dirtyStatus ? vm.data.kb.models.selected.Value : vm.data.inputModel;
 
     vm.submit = function () {
       if (!vm.transitionValidation()) {
@@ -302,7 +314,7 @@
       }
 
       if (vm.formParts.one && vm.formParts.two && (!vm.attachDocumentsEnabled || vm.formParts.three)) {
-        var addressIndex = _.findIndex(vm.options.locations, { 'IsMainAddress': true });
+        var addressIndex = _.findIndex(vm.options.locations, {'IsMainAddress': true});
 
         vm.floorPlanSubmitting = true;
 
@@ -315,37 +327,6 @@
 
         vm.data.VinAckLookupFailure = vm.data.$selectedVehicle ? false : true;
 
-        var confirmation = {
-          backdrop: 'static',
-          keyboard: false,
-          backdropClick: false,
-          size: 'md',
-          templateUrl: 'client/floor-vehicle/floor-car-confirm-modal/floor-car-confirm.template.html',
-          controller: 'FloorCarConfirmCtrl',
-          resolve: {
-            comment: function () {
-              return (!!vm.data.commentGeneral && vm.data.commentGeneral.length > 0 || !!vm.data.commentAdditionalFinancing && vm.data.commentAdditionalFinancing.length > 0);
-            },
-            formData: function () {
-              return angular.copy(vm.data);
-            },
-            fileNames: function () {
-              var index = 0;
-              return _.map(vm.data.files, function (file) {
-                index++;
-                return vm.renameFile(file.name, index - 1);
-              });
-            }
-          }
-        };
-        $uibModal.open(confirmation).result.then(function (result) {
-          if (result === true) {
-            // submission confirmed
-            vm.reallySubmit(protect);
-          } else {
-            vm.floorPlanSubmitting = false;
-          }
-        });
       }
     };
 
@@ -364,7 +345,7 @@
         function (response) { /*floorplan success*/
           if (vm.data.commentGeneral || vm.data.commentAdditionalFinancing) {
             Floorplan.addComment({
-              CommentText: 'General Comment: ' +  vm.data.commentGeneral + ' Additional Financing Comment:' + vm.data.commentAdditionalFinancing,
+              CommentText: 'General Comment: ' + vm.data.commentGeneral + ' Additional Financing Comment:' + vm.data.commentAdditionalFinancing,
               FloorplanId: response.FloorplanId
             });
           }
