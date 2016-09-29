@@ -14,6 +14,7 @@ var modalObjects = new modalObjects.modalObjects();
 var helper = new helper.helper();
 
 describe('\n Dashboard Page', function () {
+
   beforeEach(function () {
     browser.sleep(browser.params.shortDelay);
     browser.ignoreSynchronization = true;
@@ -25,6 +26,7 @@ describe('\n Dashboard Page', function () {
     browser.sleep(browser.params.mediumDelay);
     login.login2(browser.params.userName, browser.params.password);
     expect(browser.getCurrentUrl()).toEqual(execSettings.homePage());
+
   });
 
   it("2. Dashboard - Request a Temporary Credit Increase", function () {

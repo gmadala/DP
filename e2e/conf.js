@@ -5,19 +5,19 @@ exports.config = {
     'browserName': 'chrome',
     'chromeOptions': {
       'args': [
-        // '--disable-extensions',
-        // '-–allow-file-access-from-files',
-        // '--disable-web-security',
+        '--disable-extensions',
+        '-–allow-file-access-from-files',
+        '--disable-web-security',
         '--no-sandbox',
         '--test-type=browser'
-      ]
-      // 'prefs': {
-      //   'download': {
-      //     'prompt_for_download': false,
-      //     'directory_upgrade': true,
-      //     'default_directory': '/tmp'
-      //   }
-      // }
+      ],
+      'prefs': {
+        'download': {
+          'prompt_for_download': false,
+          'directory_upgrade': true,
+          'default_directory': '/tmp'
+        }
+      }
     },
     shardTestFiles: (process.env.maxInstances > 1),
     maxInstances: process.env.maxInstances
@@ -30,13 +30,10 @@ exports.config = {
 
   //More miscellaneous configuration options
   directConnect: true,
-  untrackOutstandingTimeouts: true,
+  untrackOutstandingTimeouts: false,
   restartBrowserBetweenTests: false,
 
   //Framework selection
-  baseUrl: 'https://test.nextgearcapital.com/test/#/',
-  allScriptsTimeout: 11000,
-  getPageTimeout: 10000,
   framework: 'jasmine',
 
   // Options to be passed to Jasmine.
@@ -44,8 +41,8 @@ exports.config = {
     isVerbose: true,
     includeStackTrace: true,
     showColors: true,
-    defaultTimeoutInterval: 60000
-    //realtimeFailure: true
+    defaultTimeoutInterval: 60000,
+    realtimeFailure: true
   },
 
   //Project global parameters
