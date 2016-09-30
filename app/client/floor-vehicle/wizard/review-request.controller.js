@@ -1,7 +1,4 @@
-/**
- * Created by gayathri.madala on 9/28/16.
- */
-(function() {
+(function () {
   'use strict';
 
   angular
@@ -10,15 +7,10 @@
 
   ReviewInfoCtrl.$inject = [
     '$scope',
-    '$window',
-    'User',
-    'gettextCatalog'];
+    'User'];
 
-  function ReviewInfoCtrl(
-    $scope,
-    $window,
-    User,
-    gettextCatalog) {
+  function ReviewInfoCtrl($scope,
+                          User) {
 
     var vm = this;
 
@@ -27,24 +19,12 @@
 
     $scope.isDealer = User.isDealer();
 
-    var languagePrefix = '';
-    var currentLanguage = gettextCatalog.currentLanguage;
-    if (!User.isUnitedStates()) {
-      if (currentLanguage === 'fr_CA') {
-        languagePrefix = 'CAF%20';
-      } else {
-        languagePrefix = 'CAE%20';
-      }
-    } else {
-      if (currentLanguage === 'es') {
-        languagePrefix = 'ES%20';
-      }
-    }
-
-    $scope.documentLink = '/documents/' + languagePrefix + 'Dealer%20Funding%20Checklist.pdf';
-    $scope.openDocument = function () {
-      $window.open($scope.documentLink);
+    $scope.$parent.wizardFloor.transitionValidation = function () {
+      $scope.form.$submitted = true;
+      $scope.$parent.wizardFloor.validity = angular.copy($scope.form);
+      return $scope.form.$valid;
     };
+
   }
 
 })();

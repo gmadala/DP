@@ -299,11 +299,6 @@
       return true;
     };
 
-    vm.data.UnitYear = !vm.data.dirtyStatus ? vm.data.kb.years.selected.Value : vm.data.inputYear;
-    vm.data.UnitStyle = !vm.data.dirtyStatus ? vm.data.kb.styles.selected.DisplayName : vm.data.inputStyle;
-    vm.data.UnitMake = !vm.data.dirtyStatus ? vm.data.kb.makes.selected.Value : vm.data.inputMake;
-    vm.data.UnitModel = !vm.data.dirtyStatus ? vm.data.kb.models.selected.Value : vm.data.inputModel;
-
     vm.submit = function () {
       if (!vm.transitionValidation()) {
         return;
@@ -327,13 +322,6 @@
 
         vm.data.VinAckLookupFailure = vm.data.$selectedVehicle ? false : true;
 
-      }
-    };
-
-    vm.reallySubmit = function (guard) {
-      if (guard !== protect) {
-        vm.floorPlanSubmitting = false;
-        throw 'FloorCarCtrl: reallySubmit can only be called from controller upon confirmation';
       }
 
       var dialogParams;
