@@ -21,7 +21,7 @@
   <label class="main-heading" for="payBuyerSeller" translate>Send payment to</label>
   <div class="cr-inline" style="margin-bottom: 24px;">
     <input type="radio" name="payBuyerSeller" id="payBuyer" ng-value="0" ng-model="wizardFloor.data.PaySeller"
-           ng-disabled="wizardFloor.data.SaleTradeIn"
+           ng-disabled="wizardFloor.data.SaleTradeIn || !wizardFloor.canPayBuyer"
            ng-change="wizardFloor.data.BankAccountId = null" />
     <label class="radio-img" for="payBuyer"></label>
     <label class="cr-label" for="payBuyer" translate>Buyer</label>

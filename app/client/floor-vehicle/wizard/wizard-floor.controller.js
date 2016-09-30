@@ -233,6 +233,10 @@
       }
     };
 
+    vm.stateChangeCounterFix = function (stateCount) {
+      vm.counter = stateCount;
+    };
+
     function switchState() {
       switch (vm.counter) {
         case 1:
