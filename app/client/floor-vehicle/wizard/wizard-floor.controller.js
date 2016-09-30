@@ -138,7 +138,7 @@
       LineOfCreditId: null, // LineOfCredit object locally, flatten to string for API tx
       PaySeller: null, // Boolean, default is false if user is dealer and buyer payment is possible, otherwise true
       PhysicalInventoryAddressId: null, // Location object locally, flatten to string for API tx
-      SaleTradeIn: true, // Boolean, default is no (only dealers that can be paid directly may change this to true)
+      SaleTradeIn: false, // Boolean, default is no (only dealers that can be paid directly may change this to true)
       BusinessId: null, // business search result object locally, flatten to string for API tx
       UnitColorId: null, // Color object locally, flatten to string to API tx
       UnitMake: null, // string
@@ -231,6 +231,10 @@
         vm.counter--;
         switchState();
       }
+    };
+
+    vm.stateChangeCounterFix = function (stateCount) {
+      vm.counter = stateCount;
     };
 
     function switchState() {

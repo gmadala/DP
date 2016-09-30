@@ -38,6 +38,8 @@
 
     vm.dateFormat = 'MM/dd/yyyy';
 
+    $scope.$parent.wizardFloor.stateChangeCounterFix(2);
+
     $scope.$parent.wizardFloor.transitionValidation = function() {
 
       $scope.form.$submitted = true;

@@ -8,7 +8,7 @@
   PaymentInfoCtrl.$inject = [
     '$scope',
     'User',
-    'gettextCatalog'
+    'gettextCatalog',
   ];
 
   function PaymentInfoCtrl($scope) {
@@ -16,7 +16,9 @@
 
     vm.data = null;
 
-    $scope.$parent.wizardFloor.transitionValidation = function() {
+    $scope.$parent.wizardFloor.stateChangeCounterFix(3);
+
+    $scope.$parent.wizardFloor.transitionValidation = function () {
       $scope.form.$submitted = true;
       $scope.$parent.wizardFloor.validity = angular.copy($scope.form);
       $scope.$parent.wizardFloor.formParts.three = $scope.form.$valid;
