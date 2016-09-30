@@ -9,11 +9,11 @@
     '$scope',
     'User'];
 
-  function ReviewRequestCtrl($scope,
-                          User) {
+  function ReviewRequestCtrl(
+    $scope,
+    User) {
 
     var vm = this;
-
 
     vm.vinDetailsErrorFlag = false;
 
