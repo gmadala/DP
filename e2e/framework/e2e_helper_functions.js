@@ -159,7 +159,6 @@ function Helper() {
      * @returns {none}
      */
     this.elOkButton = browser.element(by.buttonText("OK, I got it!"));
-    // var elPopOver = element(by.css('div.popover-content'));
     var elPopOver = element(by.css('button[ng-click="closeMenuTip()"]'));
     if (elPopOver) {
       browser.actions().mouseMove(element(by.css('.popover'))).perform();
