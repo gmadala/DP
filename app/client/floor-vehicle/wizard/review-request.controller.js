@@ -3,13 +3,13 @@
 
   angular
     .module('nextgearWebApp')
-    .controller('ReviewInfoCtrl', ReviewInfoCtrl);
+    .controller('ReviewRequestCtrl', ReviewRequestCtrl);
 
-  ReviewInfoCtrl.$inject = [
+  ReviewRequestCtrl.$inject = [
     '$scope',
     'User'];
 
-  function ReviewInfoCtrl($scope,
+  function ReviewRequestCtrl($scope,
                           User) {
 
     var vm = this;

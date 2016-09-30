@@ -258,7 +258,7 @@
           break;
         case 5:
           if (true || vm.formParts.one && vm.formParts.two && vm.formParts.three && vm.formParts.four) {
-            $state.go('flooringWizard.review');
+            $state.go('flooringWizard.reviewRequest');
           }
 
       }
