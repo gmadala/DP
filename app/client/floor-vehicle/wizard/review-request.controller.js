@@ -19,6 +19,8 @@
 
     $scope.isDealer = User.isDealer();
 
+    $scope.$parent.wizardFloor.stateChangeCounterFix(5);
+
     $scope.$parent.wizardFloor.transitionValidation = function () {
       $scope.form.$submitted = true;
       $scope.$parent.wizardFloor.validity = angular.copy($scope.form);
