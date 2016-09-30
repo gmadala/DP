@@ -330,6 +330,10 @@
     right: 18px;
   }
 
+  input#payBuyer[disabled] + label + label{
+    color: #999999;
+  }
+
   input:-ms-input-placeholder {
     color: #999999;
   }
