@@ -27,7 +27,7 @@
               <div class="style-select" ng-show="editDefaultDAccount">
                 <select id="defaultDeposit"
                         ng-model="defaultDeposit"
-                        ng-options="account as [account.AchAccountNumberLast4, account.AchBankName].join(' - ') for account in financial.data.activeBankAccounts | orderBy:'AchBankName'"
+                        ng-options="account as [account.AchBankName , account.AchAccountNumberLast4].join(' - ') for account in financial.data.activeBankAccounts | orderBy:'AchBankName'"
                         required>
                 </select>
               </div>
@@ -91,7 +91,7 @@
         <div class="row forAddButton" ng-show="financial.isAddBankAccountEditable()">
           <div class="col-md-12 ">
             <button class="btn-cta cta-primary"  ng-disabled="isAddAccountButtonDisable()"
-                    ng-click="financial.addFinancialAccount()" translate><span class="glyphicon glyphicon-plus-sign" aria-hidden="true" style="font-weight: bold;"  ></span> Add Account
+                    ng-click="financial.addFinancialAccount()"><span class="glyphicon glyphicon-plus-sign" aria-hidden="true" style="font-weight: bold;"></span> <span translate>Add Account</span>
 
             </button>
           </div>
