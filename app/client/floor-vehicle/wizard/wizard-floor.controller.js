@@ -84,6 +84,9 @@
         return bankAccount.BankAccountId=== result[1].DefaultDisbursementBankAccountId;
       });
 
+      var defaultLineOfCredit = _.find(result[1].LinesOfCredit, function (lineOfCredit) {
+        return lineOfCredit.LineOfCreditName === 'Retail';
+      });
 
       vm.options.locations = Addresses.getActivePhysical();
 
@@ -104,11 +107,14 @@
         optionListsToDefault.push({
           scopeSrc: 'wizardFloor.options.locations',
           modelDest: 'PhysicalInventoryAddressId'
-        }, {
-          scopeSrc: 'wizardFloor.options.LinesOfCredit',
-          modelDest: 'LineOfCreditId',
-          useFirst: true
         });
+      }
+      if(isDealer){
+        if(defaultLineOfCredit){
+          optionListsToDefault.push({ scopeSrc: 'wizardFloor.options.LinesOfCredit', modelDest: 'LineOfCreditId', useDefault:defaultLineOfCredit });
+        }else{
+          optionListsToDefault.push({ scopeSrc: 'wizardFloor.options.LinesOfCredit', modelDest: 'LineOfCreditId', useFirst:true });
+        }
       }
 
       vm.optionsHelper = OptionDefaultHelper.create(optionListsToDefault);
@@ -356,15 +362,22 @@
       }
 
       var dialogParams;
+      var commentText = '';
+
+      if (vm.data.commentAdditionalFinancing && vm.data.commentAdditionalFinancing.length > 0) {
+        commentText += 'DEALER REQUESTS FULL PURCHASE PRICE: ' + vm.data.commentAdditionalFinancing;
+      }
+
+      commentText += (commentText.length > 0) ? ' ' + vm.data.commentGeneral : vm.data.commentGeneral;
 
       vm.floorPlanSubmitting = true;
       vm.data.TitleLocationId = vm.options.titleLocationOptions[vm.data.TitleLocationId];
 
       Floorplan.create(vm.data).then(
         function (response) { /*floorplan success*/
-          if (vm.data.commentGeneral || vm.data.commentAdditionalFinancing) {
+          if (commentText.length > 0) {
             Floorplan.addComment({
-              CommentText: 'General Comment: ' +  vm.data.commentGeneral + ' Additional Financing Comment:' + vm.data.commentAdditionalFinancing,
+              CommentText: commentText,
               FloorplanId: response.FloorplanId
             });
           }
