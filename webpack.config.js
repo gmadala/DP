@@ -3,13 +3,14 @@ var webpack = require('webpack');
 var path = require('path');
 
 module.exports = {
+    target: 'node',
     context: __dirname,
     devtool: debug ? "inline-sourcemap" : null,
     entry: './react/app.js',
     output: {
         path: './app/scripts',
         filename: 'react-app.js',
-    },    
+    },
     module: {
         loaders: [
             {
