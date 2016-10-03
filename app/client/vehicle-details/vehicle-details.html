@@ -4,7 +4,7 @@
   </div>
   <div class="row padding-left hidden-md hidden-lg" ng-show="hasOutstanding">
     <button class="accordion-button overridebutton dropbutton" ng-click="isSPAVisible = !isSPAVisible"
-            ng-class="{ expanded:!isSPAVisible }" >
+            ng-class="{ expanded:!isSPAVisible }">
       <span class="paired-body">
           <span ng-show="!isSPAVisible" translate>Show Payment Options</span>
           <span ng-show="isSPAVisible" translate>Hide Payment Options</span>
@@ -263,9 +263,9 @@
       </div>
       <!-- end Flooring Information -->
     </section>
-    <div class=" padding-left hidden-md hidden-lg" >
+    <div class=" padding-left hidden-md hidden-lg">
       <button class="accordion-button overridebutton dropbutton" ng-click="isUPDVisible = !isUPDVisible"
-              ng-class="{ expanded:!isUPDVisible }" >
+              ng-class="{ expanded:!isUPDVisible }">
       <span class="paired-body">
           <span ng-show="!isUPDVisible" translate>Show Document Upload</span>
           <span ng-show="isUPDVisible" translate>Hide Document Upload</span>
@@ -409,21 +409,20 @@
 
         <div class="row">
           <div class="col-md-7 verborder">
-            <div class="col-md-6">
-              <div class="row visible-sm visible-xs" style="padding-top:5px;">
-                <div class="col-md-12 ">
-                  <a class="featured" ng-href="{{ historyReportUrl }}"
-                     nxg-track="{{metric.DEALER_REPORTS_VEHICLE_HISTORY_DETAIL}}"
-                     track-properties="{{ kissMetricData }}">
-                    <span class="paired-body fontresize" translate>View the Vehicle History Detail Report</span><span
-                    class="paired-media" nxg-icon="icon-car"></span>
-                  </a>
-                </div>
+            <div class="row visible-sm visible-xs" style="padding-top:5px; padding-left:15px;">
+              <div class="col-md-12 ">
+                <a class="featured" ng-href="{{ historyReportUrl }}"
+                   nxg-track="{{metric.DEALER_REPORTS_VEHICLE_HISTORY_DETAIL}}"
+                   track-properties="{{ kissMetricData }}">
+                  <span class="paired-body fontresize" translate>View the Vehicle History Detail Report</span><span
+                  class="paired-media" nxg-icon="icon-car"></span>
+                </a>
               </div>
+            </div>
 
-
-              <div class="row">
-                 <div class="chart-obj"
+            <div class="row">
+              <div class="col-md-6">
+                <div class="chart-obj"
                      nxg-chart
                      nxg-chart-size="financialSummary.chart.size"
                      nxg-chart-type="pie"
@@ -434,7 +433,7 @@
                      nxg-chart-title="financialSummary.paidChart.title">
                 </div>
               </div>
-              <div class="col-md-6   ">
+              <div class="col-md-6">
                 <div class="chart-obj"
                      nxg-chart
                      nxg-chart-size="financialSummary.chart.size"
@@ -447,6 +446,8 @@
                 </div>
               </div>
             </div>
+
+
           </div>
           <div class="col-md-5">
             <ul class="list-table finbordertop">
@@ -675,7 +676,7 @@
             <div class="col-md-6 balabold">
               <span translate>Floor Plan Value Estimates</span>
             </div>
-            <div class="col-md-6 titlefloat"><span class="well-sub-title"
+            <div class="col-md-6 hidden-sm hidden-xs"><span class="well-sub-title"
                                                    translate>NextGear Capital &amp; MMR Valuation</span>
             </div>
           </div>
