@@ -7,12 +7,24 @@ export default class Translater {
 
     const translated = this._getTranslated(filePath);
   	const mergedJson = this._mergeObjs(fromObj, toObj);
-    const untranslated = this._translateStrings(fromObj, mergedJson, translated);
+    const translateResult = this._translateStrings(fromObj, mergedJson, translated);
 
-    this._saveUntranslated(untranslated, filePath, fromType, toType);
+		this._saveTranslated(translateResult.json, toType)
+    this._saveUntranslated(translateResult.strings, filePath, fromType, toType);
 
-    return { json: mergedJson, untranslated };
+    return { json: mergedJson, strings: translateResult.strings };
   }
+
+	_saveTranslated(json, toType) {
+		const str = `module.exports = ${JSON.stringify(json)}`;
+		const filePath = __dirname + `/${toType}.js`;
+
+		fs.writeFile(filePath, str, 'utf-8', function(err) {
+      if(err) {
+          return console.log(err);
+      }
+    });
+	}
 
   _saveUntranslated(untranslated, filePath, fromType, toType) {
     console.log('')
@@ -29,8 +41,12 @@ export default class Translater {
 
   _getTranslated(filePath) {
     const array = fs.readFileSync(filePath).toString().split("\n");
-    const newTrans = array.filter(x => { return x.split(' : ')[1].length > 0 });
-    return newTrans.map(x => { return { string: x.split(' : ')[0], translation: x.split(' : ')[1] } })
+		if (typeof(array) === 'object') {
+    	const newTrans = array.filter(x => { return typeof(x.split(' : ')[1]) === 'string'});
+    	return newTrans.map(x => { return { string: x.split(' : ')[0], translation: (x.split(' : ')[1]).replace('\r', '') } });
+		} else {
+			return [];
+		}
   }
 
   _mergeObjs(fromObj, toObj) {
@@ -45,17 +61,19 @@ export default class Translater {
 
   _translateStrings(fromObj, toObj, newTranslations) {
   	let strings = [];
+		let resultObj = {...toObj};
   	for (let key of Object.keys(fromObj)) {
-    	if (typeof(toObj) !== 'undefined') {
+    	if (typeof(resultObj) !== 'undefined') {
         if (typeof(fromObj[key]) === 'object')  {
-          const subStrings = this._translateStrings(fromObj[key], toObj[key], newTranslations);
-          strings = [...strings, ...subStrings];
-        } else if (typeof(fromObj[key]) === 'string' && typeof(toObj[key]) === 'string') {
-          if (fromObj[key] === toObj[key]) {
+          const subResult = this._translateStrings(fromObj[key], resultObj[key], newTranslations);
+          strings = [...strings, ...subResult.strings];
+					resultObj[key] = {...(resultObj[key]), ...subResult.json}
+        } else if (typeof(fromObj[key]) === 'string' && typeof(resultObj[key]) === 'string') {
+          if (fromObj[key] === resultObj[key]) {
           	if (newTranslations.length > 0) {
             	const found = newTranslations.find(x => x.string === fromObj[key])
-              if (found) {
-              	toObj[key] = found.translation;
+              if (found && found.translation.length > 0) {
+              	resultObj[key] = found.translation;
               } else {
               	strings.push({ string: fromObj[key], translation: ''});
               }
@@ -66,6 +84,6 @@ export default class Translater {
         }
       }
     }
-    return strings;
+    return { strings, json: resultObj };
   }
 }

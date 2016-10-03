@@ -32,6 +32,9 @@ module.exports = {
         },
         auctionDocsList: {
             sellerGuide: 'Instructions for Sellers'
+        },
+        test: {
+          test: "test"
         }
     }
 };
