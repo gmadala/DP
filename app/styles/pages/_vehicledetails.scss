@@ -20,10 +20,16 @@
   .horborder{border-top: 1px solid #bbbcbe; padding-top: 10px;}
 }
 @media (max-width: 640px) {
+  .finbordertop{border-top: 1px solid #bbbcbe; }
+}
+@media (max-width: 640px) {
   .fontresize{font-size:12px; }
 }
 .vdrow {
   padding-bottom:13px;
+}
+.vdrowplus {
+  padding-bottom:20px;
 }
 .overridebutton {
   top: 0px;
@@ -31,8 +37,13 @@
   font-size: 13px;
 }
 .moveUPDup {
-  top:-60px;
+  top:-50px;
 }
 .moveUPDupNoPayment {
-  top:-428px;
+  top:-400px;
+}
+.dropbutton {
+  padding-bottom:0px;
+  margin-bottom:0px;
+  border-bottom: 0px;
 }

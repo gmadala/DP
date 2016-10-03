@@ -3,8 +3,8 @@
     <h1 class="fontresize">{{ flooringInfo.Description }}</h1>
   </div>
   <div class="row padding-left hidden-md hidden-lg" ng-show="hasOutstanding">
-    <button class="accordion-button overridebutton" ng-click="isSPAVisible = !isSPAVisible"
-            ng-class="{ expanded:!isSPAVisible }">
+    <button class="accordion-button overridebutton dropbutton" ng-click="isSPAVisible = !isSPAVisible"
+            ng-class="{ expanded:!isSPAVisible }" >
       <span class="paired-body">
           <span ng-show="!isSPAVisible" translate>Show Payment Options</span>
           <span ng-show="isSPAVisible" translate>Hide Payment Options</span>
@@ -102,13 +102,13 @@
 
     </section>
 
-    <section  class="col-lg-9 col-lg-pull-3">
+    <section class="col-lg-9 col-lg-pull-3">
       <!-- Flooring Information -->
       <div class="panel panel-default settings-well">
         <h2 class="well-title">
           <div class="row">
             <div class="col-md-6 balabold"><span translate>Flooring Information</span></div>
-            <div class="col-md-6 titlefloat"><span class="well-sub-title" translate>Floored on {{ flooringInfo.FlooringDate | moment }}</span>
+            <div class="col-md-6 hidden-xs hidden-sm"><span class="well-sub-title" translate>Floored on {{ flooringInfo.FlooringDate | moment }}</span>
             </div>
           </div>
         </h2>
@@ -116,6 +116,12 @@
         <div class="well-item">
           <div class="row">
             <div class="col-md-5 verborder">
+              <div class="row  small-left-padding vdrowplus visible-sm visible-xs">
+                <div class="col-xs-6" translate><strong><span class="" translate>Floored on </span></strong></div>
+
+                <div class="col-xs-6 value"><span class="value-note">{{ flooringInfo.FlooringDate | moment }}</span>
+                </div>
+              </div>
               <div class="row  small-left-padding vdrow">
                 <div class="col-xs-6" translate><span>Total Days Floored</span></div>
 
@@ -256,26 +262,10 @@
         </div>
       </div>
       <!-- end Flooring Information -->
-
-
-      <!-- Expand/Collapse button: disable if there is no floorplan activity. -->
-      <button class="accordion-button" ng-click="isCollapsed = !isCollapsed" ng-class="{ expanded:!isCollapsed }">
-      <span ng-show="financialSummary.FloorplanActivity.length > 0">
-        <span class="paired-body">
-          <span ng-show="isCollapsed" translate>Show Payment Activity</span>
-          <span ng-show="!isCollapsed" translate>Hide Payment Activity</span>
-        </span>
-        <span class="paired-media" ng-class="{ 'point-up':!isCollapsed, 'point-down':isCollapsed }"
-              nxg-icon="icon-chevron"></span>
-      </span>
-      <span ng-hide="financialSummary.FloorplanActivity.length > 0" translate>
-        No Payment Activity Available
-      </span>
-      </button>
     </section>
-    <div class="row padding-left hidden-md hidden-lg">
-      <button class="accordion-button overridebutton" ng-click="isUPDVisible = !isUPDVisible"
-              ng-class="{ expanded:!isUPDVisible }">
+    <div class=" padding-left hidden-md hidden-lg" >
+      <button class="accordion-button overridebutton dropbutton" ng-click="isUPDVisible = !isUPDVisible"
+              ng-class="{ expanded:!isUPDVisible }" >
       <span class="paired-body">
           <span ng-show="!isUPDVisible" translate>Show Document Upload</span>
           <span ng-show="isUPDVisible" translate>Hide Document Upload</span>
@@ -285,7 +275,8 @@
 
       </button>
     </div>
-    <section class="col-lg-3 col-lg-push-9" ng-show="isUPDVisible" ng-class="{moveUPDup : isLargeVP(), moveUPDupNoPayment : !hasOutstanding && isLargeVP() }">
+    <section class="col-lg-3 col-lg-push-9" ng-show="isUPDVisible"
+             ng-class="{moveUPDup : isLargeVP(), moveUPDupNoPayment : !hasOutstanding && isLargeVP() }">
       <!-- Document Upload -->
       <div class="panel panel-default sidebar last" ng-show="attachDocumentsEnabled">
         <form name="form">
@@ -398,13 +389,13 @@
         </form>
       </div>
     </section>
-    <section  class="col-lg-9 col-lg-pull-3">
+    <section class="col-lg-9 col-lg-pull-3">
       <div class="panel panel-default">
         <h2 class="well-title">
           <div class="row">
             <div class="col-md-6 balabold"><span translate>Financial Activity</span></div>
             <div class="col-md-6 titlefloat">
-          <span class="well-sub-title">
+          <span class="well-sub-title hidden-sm hidden-xs">
             <a class="featured" ng-href="{{ historyReportUrl }}"
                nxg-track="{{metric.DEALER_REPORTS_VEHICLE_HISTORY_DETAIL}}"
                track-properties="{{ kissMetricData }}">
@@ -418,9 +409,21 @@
 
         <div class="row">
           <div class="col-md-7 verborder">
-            <div class="row">
-              <div class="col-md-6">
-                <div class="chart-obj"
+            <div class="col-md-6">
+              <div class="row visible-sm visible-xs" style="padding-top:5px;">
+                <div class="col-md-12 ">
+                  <a class="featured" ng-href="{{ historyReportUrl }}"
+                     nxg-track="{{metric.DEALER_REPORTS_VEHICLE_HISTORY_DETAIL}}"
+                     track-properties="{{ kissMetricData }}">
+                    <span class="paired-body fontresize" translate>View the Vehicle History Detail Report</span><span
+                    class="paired-media" nxg-icon="icon-car"></span>
+                  </a>
+                </div>
+              </div>
+
+
+              <div class="row">
+                 <div class="chart-obj"
                      nxg-chart
                      nxg-chart-size="financialSummary.chart.size"
                      nxg-chart-type="pie"
@@ -446,7 +449,7 @@
             </div>
           </div>
           <div class="col-md-5">
-            <ul class="list-table">
+            <ul class="list-table finbordertop">
               <li class="list-table-row list-table-emphasis">
                 <p translate>Payment Summary</p>
               </li>
@@ -529,21 +532,40 @@
           </div>
         </div>
       </div>
+      <!-- Expand/Collapse button: disable if there is no floorplan activity. -->
+      <button class="accordion-button" ng-click="isCollapsed = !isCollapsed" ng-class="{ expanded:!isCollapsed }">
+      <span ng-show="financialSummary.FloorplanActivity.length > 0">
+        <span class="paired-body">
+          <span ng-show="isCollapsed" translate>Show Payment Activity</span>
+          <span ng-show="!isCollapsed" translate>Hide Payment Activity</span>
+        </span>
+        <span class="paired-media" ng-class="{ 'point-up':!isCollapsed, 'point-down':isCollapsed }"
+              nxg-icon="icon-chevron"></span>
+      </span>
+      <span ng-hide="financialSummary.FloorplanActivity.length > 0" translate>
+        No Payment Activity Available
+      </span>
+      </button>
     </section>
 
-    <section  class="col-lg-9 col-lg-pull-3">
+    <section class="col-lg-9 col-lg-pull-3">
       <!-- Vehicle Information -->
       <div class="row ">
         <div class="col-md-6 ">
           <div class="panel panel-default settings-well">
             <h2 class="well-title balabold">
               <span translate>Vehicle Information</span>
-          <span class="well-sub-title">
+          <span class="well-sub-title hidden-sm hidden-xs">
           <span translate>Stock #</span>{{ vehicleInfo.StockNumber }}</span>
             </h2>
 
             <div class="well-item">
               <ul class="list-table padded">
+                <li class="list-table-row hidden-lg hidden-md">
+                  <p class="col-xs-6" translate>Stock #</p>
+
+                  <p class="col-xs-6 value">{{ vehicleInfo.StockNumber }}</p>
+                </li>
                 <li class="list-table-row">
                   <p class="col-xs-6" translate>VIN</p>
 
