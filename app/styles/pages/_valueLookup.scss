@@ -40,4 +40,12 @@
     }
   }
 
+  @media only screen and (max-width: 767px) {
+    .kbb-tooltip {
+      float: right;
+      .tooltip-inner {
+        width: 250px;
+      }
+    }
+  }
 }
