@@ -381,6 +381,16 @@
                 .then(function () {
                   return AccountManagement.updateBankAccount(accounts[1]);
                 })
+                .then(function() {
+                  accounts[0].IsDefaultPayment = false;
+                  accounts[1].IsDefaultDisbursement = false;
+                })
+                .then(function () {
+                  return AccountManagement.updateBankAccount(accounts[0]);
+                })
+                .then(function () {
+                  return AccountManagement.updateBankAccount(accounts[1]);
+                })
                 .then(function () {
                   $scope.editDefaultDAccount = false;
                   $scope.editDefaultPAccount = false;

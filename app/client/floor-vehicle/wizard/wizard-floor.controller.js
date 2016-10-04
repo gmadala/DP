@@ -24,24 +24,22 @@
     'metric'
   ];
 
-  function WizardFloorCtrl(
-    $state,
-    $scope,
-    $uibModal,
-    $q,
-    User,
-    Floorplan,
-    Addresses,
-    protect,
-    OptionDefaultHelper,
-    moment,
-    AccountManagement,
-    Upload,
-    nxgConfig,
-    kissMetricInfo,
-    segmentio,
-    metric
-  ) {
+  function WizardFloorCtrl($state,
+                           $scope,
+                           $uibModal,
+                           $q,
+                           User,
+                           Floorplan,
+                           Addresses,
+                           protect,
+                           OptionDefaultHelper,
+                           moment,
+                           AccountManagement,
+                           Upload,
+                           nxgConfig,
+                           kissMetricInfo,
+                           segmentio,
+                           metric) {
     var vm = this;
     var isDealer = User.isDealer();
 
@@ -56,12 +54,13 @@
       one: false,
       two: false,
       three: false,
-      four: false
+      four: false,
+      five: false
     };
 
     vm.floorPlanSubmitting = false;
 
-    vm.pageCount = 4;
+    vm.pageCount = 5;
 
     switchState();
 
@@ -81,9 +80,12 @@
       vm.options.LinesOfCredit = _.sortBy(result[1].LinesOfCredit, "LineOfCreditName");
 
       var defaultBankAccount = _.find(result[2].BankAccounts, function (bankAccount) {
-        return bankAccount.BankAccountId=== result[1].DefaultDisbursementBankAccountId;
+        return bankAccount.BankAccountId === result[1].DefaultDisbursementBankAccountId;
       });
 
+      var defaultLineOfCredit = _.find(result[1].LinesOfCredit, function (lineOfCredit) {
+        return lineOfCredit.LineOfCreditName === 'Retail';
+      });
 
       vm.options.locations = Addresses.getActivePhysical();
 
@@ -104,11 +106,14 @@
         optionListsToDefault.push({
           scopeSrc: 'wizardFloor.options.locations',
           modelDest: 'PhysicalInventoryAddressId'
-        }, {
-          scopeSrc: 'wizardFloor.options.LinesOfCredit',
-          modelDest: 'LineOfCreditId',
-          useFirst: true
         });
+      }
+      if(isDealer){
+        if(defaultLineOfCredit){
+          optionListsToDefault.push({ scopeSrc: 'wizardFloor.options.LinesOfCredit', modelDest: 'LineOfCreditId', useDefault:defaultLineOfCredit });
+        }else{
+          optionListsToDefault.push({ scopeSrc: 'wizardFloor.options.LinesOfCredit', modelDest: 'LineOfCreditId', useFirst:true });
+        }
       }
 
       vm.optionsHelper = OptionDefaultHelper.create(optionListsToDefault);
@@ -132,7 +137,7 @@
       LineOfCreditId: null, // LineOfCredit object locally, flatten to string for API tx
       PaySeller: null, // Boolean, default is false if user is dealer and buyer payment is possible, otherwise true
       PhysicalInventoryAddressId: null, // Location object locally, flatten to string for API tx
-      SaleTradeIn: true, // Boolean, default is no (only dealers that can be paid directly may change this to true)
+      SaleTradeIn: false, // Boolean, default is no (only dealers that can be paid directly may change this to true)
       BusinessId: null, // business search result object locally, flatten to string for API tx
       UnitColorId: null, // Color object locally, flatten to string to API tx
       UnitMake: null, // string
@@ -160,8 +165,8 @@
       dirtyStatus: false,
       inputYear: null,
       inputMake: null,
-      inputModel:null,
-      inputStyle:null,
+      inputModel: null,
+      inputStyle: null,
       settingsVinMode: 'none',
       kb:{
         years:{
@@ -227,6 +232,10 @@
       }
     };
 
+    vm.stateChangeCounterFix = function (stateCount) {
+      vm.counter = stateCount;
+    };
+
     function switchState() {
       switch (vm.counter) {
         case 1:
@@ -250,6 +259,12 @@
           if (true || vm.formParts.one && vm.formParts.two && vm.formParts.three) {
             $state.go('flooringWizard.document');
           }
+          break;
+        case 5:
+          if (true || vm.formParts.one && vm.formParts.two && vm.formParts.three && vm.formParts.four) {
+            $state.go('flooringWizard.reviewRequest');
+          }
+
       }
     }
 
@@ -265,6 +280,8 @@
           return vm.formParts.one && vm.formParts.two;
         case 4:
           return vm.formParts.one && vm.formParts.two && vm.formParts.three;
+        case 5:
+          return vm.formParts.one && vm.formParts.two && vm.formParts.three && vm.formParts.four;
       }
     }
 
@@ -281,14 +298,13 @@
         return false;
       }
 
-      if (vm.attachDocumentsEnabled || !vm.formParts.three){
+      if (vm.attachDocumentsEnabled || !vm.formParts.three) {
         return false;
       }
 
       if (vm.attachDocumentsEnabled && vm.data.files.length < 1) {
         return false;
       }
-
       return true;
     };
 
@@ -302,7 +318,7 @@
       }
 
       if (vm.formParts.one && vm.formParts.two && (!vm.attachDocumentsEnabled || vm.formParts.three)) {
-        var addressIndex = _.findIndex(vm.options.locations, { 'IsMainAddress': true });
+        var addressIndex = _.findIndex(vm.options.locations, {'IsMainAddress': true});
 
         vm.floorPlanSubmitting = true;
 
@@ -315,56 +331,25 @@
 
         vm.data.VinAckLookupFailure = vm.data.$selectedVehicle ? false : true;
 
-        var confirmation = {
-          backdrop: 'static',
-          keyboard: false,
-          backdropClick: false,
-          size: 'md',
-          templateUrl: 'client/floor-vehicle/floor-car-confirm-modal/floor-car-confirm.template.html',
-          controller: 'FloorCarConfirmCtrl',
-          resolve: {
-            comment: function () {
-              return (!!vm.data.commentGeneral && vm.data.commentGeneral.length > 0 || !!vm.data.commentAdditionalFinancing && vm.data.commentAdditionalFinancing.length > 0);
-            },
-            formData: function () {
-              return angular.copy(vm.data);
-            },
-            fileNames: function () {
-              var index = 0;
-              return _.map(vm.data.files, function (file) {
-                index++;
-                return vm.renameFile(file.name, index - 1);
-              });
-            }
-          }
-        };
-        $uibModal.open(confirmation).result.then(function (result) {
-          if (result === true) {
-            // submission confirmed
-            vm.reallySubmit(protect);
-          } else {
-            vm.floorPlanSubmitting = false;
-          }
-        });
-      }
-    };
-
-    vm.reallySubmit = function (guard) {
-      if (guard !== protect) {
-        vm.floorPlanSubmitting = false;
-        throw 'FloorCarCtrl: reallySubmit can only be called from controller upon confirmation';
       }
 
       var dialogParams;
+      var commentText = '';
+
+      if (vm.data.commentAdditionalFinancing && vm.data.commentAdditionalFinancing.length > 0) {
+        commentText += 'DEALER REQUESTS FULL PURCHASE PRICE: ' + vm.data.commentAdditionalFinancing;
+      }
+
+      commentText += (commentText.length > 0) ? ' ' + vm.data.commentGeneral : vm.data.commentGeneral;
 
       vm.floorPlanSubmitting = true;
       vm.data.TitleLocationId = vm.options.titleLocationOptions[vm.data.TitleLocationId];
 
       Floorplan.create(vm.data).then(
         function (response) { /*floorplan success*/
-          if (vm.data.commentGeneral || vm.data.commentAdditionalFinancing) {
+          if (commentText.length > 0) {
             Floorplan.addComment({
-              CommentText: 'General Comment: ' +  vm.data.commentGeneral + ' Additional Financing Comment:' + vm.data.commentAdditionalFinancing,
+              CommentText: 'General Comment: ' + vm.data.commentGeneral + ' Additional Financing Comment:' + vm.data.commentAdditionalFinancing,
               FloorplanId: response.FloorplanId
             });
           }
