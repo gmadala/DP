@@ -38,6 +38,14 @@
 
     vm.dateFormat = 'MM/dd/yyyy';
 
+    vm.switchChange = function (toggleValue) {
+      $scope.$parent.wizardFloor.data.PaySeller = toggleValue ? 0 : null;
+
+      if (!$scope.$parent.wizardFloor.canPayBuyer) {
+        $scope.$parent.wizardFloor.data.PaySeller = 1;
+      }
+    };
+
     $scope.$parent.wizardFloor.stateChangeCounterFix(2);
 
     $scope.$parent.wizardFloor.transitionValidation = function() {
