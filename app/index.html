@@ -40,10 +40,10 @@
     <!-- processhtml:include:svgDist,server /img/icons/icon_defs.svg -->
     This will pull in the content of our svg file for use across the app.
     <!-- /processhtml -->
-    <!-- htmlmin:ignore -->    
+    <!-- htmlmin:ignore -->
     <div id="wrapper" class="menu-wrapper">
       <div nav-bar></div>
-      <div id="main-container" class="nxg-main-container" nxg-messages>        
+      <div id="main-container" class="nxg-main-container" nxg-messages>
         <div class="nxg-main-view"
              ng-class="{'mobile-menu-push-toleft':navState.current.data.showMenu}"
              ng-click="navState.current.data.showMenu ? navState.current.data.showMenu=false : false">
@@ -146,8 +146,12 @@
 
     <script src="client/floor-vehicle/nxg-business-field/nxg-business-field.directive.js"></script>
     <script src="client/floor-vehicle/nxg-business-field/nxg-business-field.controller.js"></script>
+    <script src="client/floor-vehicle/nxg-business-field-v2/nxg-business-field.directive.js"></script>
+    <script src="client/floor-vehicle/nxg-business-field-v2/nxg-business-field.controller.js"></script>
     <script src="client/floor-vehicle/nxg-vin-details/nxg-vin-details.directive.js"></script>
     <script src="client/floor-vehicle/nxg-vin-details/nxg-vin-details.controller.js"></script>
+    <script src="client/floor-vehicle/nxg-vin-details/nxg-vin-lookup.directive.js"></script>
+    <script src="client/floor-vehicle/nxg-vin-details/nxg-vin-lookup.controller.js"></script>
     <script src="client/floor-vehicle/floor-car-confirm-modal/floor-car-confirm.controller.js"></script>
     <script src="client/floor-vehicle/nxg-vin-details/multiple-vehicles-modal/multiple-vehicles.controller.js"></script>
     <script src="client/floor-vehicle/floor-car.controller.js"></script>
@@ -155,6 +159,8 @@
     <script src="client/floor-vehicle/wizard/car-info.controller.js"></script>
     <script src="client/floor-vehicle/wizard/document-info.controller.js"></script>
     <script src="client/floor-vehicle/wizard/sales-info.controller.js"></script>
+    <script src="client/floor-vehicle/wizard/payment-info.controller.js"></script>
+    <script src="client/floor-vehicle/wizard/review-request.controller.js"></script>
     <script src="client/floor-vehicle/wizard/wizard-floor.controller.js"></script>
 
     <script src="client/floor-plan/floor-plan.service.js"></script>

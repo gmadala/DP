@@ -11,6 +11,7 @@
     $scope.canAttachDocuments = false;
     $scope.submitInProgress = false;
 
+    $scope.$parent.wizardFloor.stateChangeCounterFix(4);
 
     $scope.$parent.wizardFloor.renameFile = function (file, index) {
       var filename = "";
@@ -55,7 +56,7 @@
       $scope.form.$submitted = true;
       setFileValidity();
       $scope.$parent.wizardFloor.validity = angular.copy($scope.form);
-      $scope.$parent.wizardFloor.formParts.three = $scope.form.$valid;
+      $scope.$parent.wizardFloor.formParts.four = $scope.form.$valid;
 
       return $scope.form.$valid;
     };

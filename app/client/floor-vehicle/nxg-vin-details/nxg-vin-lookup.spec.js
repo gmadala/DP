@@ -1,10 +1,10 @@
 'use strict';
 
-describe('Directive: NxgVinDetails', function () {
+describe('Directive: VinLookupCtrl', function () {
   beforeEach(module('nextgearWebApp'));
 
   // this directive is little more than template + controller, so just test the controller
-  describe('VinDetailsCtrl', function () {
+  describe('VinLookupCtrl', function () {
 
     var ctrl,
       scope,
@@ -17,24 +17,24 @@ describe('Directive: NxgVinDetails', function () {
       attrs = {};
       blackbook = Blackbook;
 
-      ctrl = $controller('VinDetailsCtrl', {
+      ctrl = $controller('VinLookupCtrl', {
         $scope: scope,
         $attrs: attrs
       });
 
-      scope.data={
-        settingsVinMode:'none'
-      }
+      scope.settigns={
+        vinMode:'none'
+      };
 
       scope.data = {
         $selectedVehicle: null
-      }
+      };
     }));
 
     it('should update the vin mode on reset', inject(function($rootScope) {
-      scope.data.settingsVinMode = 'noMatch';
+      scope.settings.vinMode = 'noMatch';
       $rootScope.$broadcast('reset');
-      expect(scope.data.settingsVinMode).toBe('none');
+      expect(scope.settings.vinMode).toBe('none');
     }));
 
     describe('vinIsSyntacticallyValid', function() {
@@ -80,18 +80,18 @@ describe('Directive: NxgVinDetails', function () {
 
     describe('vinChange', function() {
       it('should clear any match state if the vin changes after lookup', function() {
-        scope.data.settingsVinMode = 'noMatch';
+        scope.settings.vinMode = 'noMatch';
         scope.data.$selectedVehicle = {};
         scope.vinChange();
         expect(scope.data.$selectedVehicle).toBe(null);
         expect(scope.errorFlag).toBe(false);
-        expect(scope.data.settingsVinMode).toBe('none');
+        expect(scope.settings.vinMode).toBe('none');
       });
 
       it('should do nothing if vinMode is \'none\'', function() {
         var vehicle = { foo: 'bar' };
         scope.data.$selectedVehicle = vehicle;
-        scope.data.settingsVinMode = 'none';
+        scope.settings.vinMode = 'none';
         scope.vinChange();
         expect(scope.data.$selectedVehicle).toBe(vehicle);
       });
@@ -111,7 +111,7 @@ describe('Directive: NxgVinDetails', function () {
 
         scope.data={
           settingsVinMode:'none'
-        }
+        };
       });
 
       it('should do nothing if this vin has already been looked up', function() {
@@ -171,7 +171,7 @@ describe('Directive: NxgVinDetails', function () {
 
         scope.data={
           settingsVinMode:'none'
-        }
+        };
 
         spyOn(blackbook, 'lookupByVin').and.returnValue({
           then: function(success, fail) {
@@ -262,10 +262,10 @@ describe('Directive: NxgVinDetails', function () {
       });
 
       it('should handle blackbook errors', function() {
-        expect(scope.data.settingsVinMode).toBe('none');
+        expect(scope.settings.vinMode).toBe('none');
         shouldSucceed = false;
         scope.lookupVin();
-        expect(scope.data.settingsVinMode).toBe('noMatch');
+        expect(scope.settings.vinMode).toBe('noMatch');
         expect(scope.data.VinAckLookupFailure).toBe(false);
         expect(scope.data.UnitMake).toBe('');
         expect(scope.data.UnitModel).toBe('');
@@ -276,7 +276,7 @@ describe('Directive: NxgVinDetails', function () {
       it('should dismiss other errors and reat all as \'no match\'', function() {
         errObject.dismiss = angular.noop;
         spyOn(errObject, 'dismiss').and.callThrough();
-        expect(scope.data.settingsVinMode).toBe('none');
+        expect(scope.settings.vinMode).toBe('none');
         shouldSucceed = false;
         scope.lookupVin();
         expect(errObject.dismiss).toHaveBeenCalled();
@@ -285,11 +285,11 @@ describe('Directive: NxgVinDetails', function () {
       it('should act as if a search was not run if the user cancelled before selecting', function() {
         errObject = 'userCancel';
 
-        expect(scope.data.settingsVinMode).toBe('none');
+        expect(scope.settings.vinMode).toBe('none');
         shouldSucceed = false;
         scope.lookupVin();
 
-        expect(scope.data.settingsVinMode).toBe('none');
+        expect(scope.settings.vinMode).toBe('none');
       });
     });
   });
