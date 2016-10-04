@@ -23,7 +23,8 @@
     'kissMetricInfo',
     'segmentio',
     'metric',
-    'decimalAdjust'
+    'decimalAdjust',
+    '$state'
   ];
 
   function CheckoutCtrl(
@@ -44,7 +45,8 @@
     kissMetricInfo,
     segmentio,
     metric,
-    decimalAdjust) {
+    decimalAdjust,
+    $state) {
 
     var uibModal = $uibModal;
 
@@ -277,27 +279,10 @@
 
               segmentio.track(metric.DEALER_PAYMENT_SUBMITTED, result);
             });
-
-            $scope.dialogVisible = true;
-            var dialogOptions = {
-              backdrop: 'static',
-              keyboard: false,
-              templateUrl: 'client/checkout/confirm-checkout-modal/confirm-checkout.template.html',
-              controller: 'ConfirmCheckoutCtrl',
-              dialogClass: 'modal modal-medium',
-              resolve: {
-                queue: function () {
-                  return $scope.paymentQueue.contents;
-                },
-                transactionInfo: function () {
-                  return result;
-                }
-              }
-            };
-            $uibModal.open(dialogOptions).result.then(function () {
-              Payments.clearPaymentQueue();
-              $scope.dialogVisible = false;
-            });
+            var params ={};
+            params.queue = $scope.paymentQueue.contents;
+            params.transactionInfo = result;
+            $state.go('paymentsConfirm', {data: params});
           }
         );
       });

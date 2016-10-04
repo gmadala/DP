@@ -49,7 +49,6 @@
     &.numeric {
       text-align: right;
     }
-
     &.paired {
       .paired-media, .paired-body {
         vertical-align: top;
@@ -121,11 +120,21 @@
   &.table-border {
     border: 1px solid $tableBorder;
   }
+  &.add-border{
+    border-width: 1px 1px 1px 1px;
+  }
+
 
   thead th {
     @extend .center;
     vertical-align: middle;
     border: 1px solid $tableBorder;
+    &.left{
+      text-align:left;
+    }
+    &.right{
+      text-align:right;
+    }
   }
 
   .error-row {
@@ -158,6 +167,9 @@
 
     &.center, .center {
       text-align: center;
+    }
+    &.left {
+      text-align: left;
     }
   }
 

@@ -157,6 +157,18 @@
           showMenu: false
         }
       })
+      .state('paymentsConfirm', {
+        url: '/paymentsConfirm',
+        templateUrl: 'client/payments/payments-confirm.template.html',
+        controller: 'paymentConfirmCtrl',
+        params: { data:null },
+        data:
+        {
+          pageId: 'paymentsConfirm',
+          showNavBar: true,
+          showMenu: false
+        }
+      })
       .state('receipts', {
         url: '/receipts',
         templateUrl: 'client/receipts/receipts.template.html',
