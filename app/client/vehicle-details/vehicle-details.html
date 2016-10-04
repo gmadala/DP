@@ -106,14 +106,17 @@
       <!-- Flooring Information -->
       <div class="panel panel-default settings-well">
         <h2 class="well-title">
-          <div class="row">
+          <div class="row ">
             <div class="col-md-6 balabold"><span translate>Flooring Information</span></div>
-            <div class="col-md-6 hidden-xs hidden-sm"><span class="well-sub-title" translate>Floored on {{ flooringInfo.FlooringDate | moment }}</span>
-            </div>
           </div>
         </h2>
 
         <div class="well-item">
+          <div class="row hidden-xs hidden-sm" style="padding-bottom:15px;">
+            <div class="col-md-12 "><h4>&nbsp;<span translate>Floored on {{ flooringInfo.FlooringDate | moment }}</span>
+            </h4>
+            </div>
+          </div>
           <div class="row">
             <div class="col-md-5 verborder">
               <div class="row  small-left-padding vdrowplus visible-sm visible-xs">
@@ -556,11 +559,16 @@
           <div class="panel panel-default settings-well">
             <h2 class="well-title balabold">
               <span translate>Vehicle Information</span>
-          <span class="well-sub-title hidden-sm hidden-xs">
-          <span translate>Stock #</span>{{ vehicleInfo.StockNumber }}</span>
+
             </h2>
 
             <div class="well-item">
+              <div class="row">
+                <div class="col-md-12">
+                  <h4><span class=" hidden-sm hidden-xs">&nbsp;
+          <span translate>Stock #</span>{{ vehicleInfo.StockNumber }}</span></h4>
+                </div>
+              </div>
               <ul class="list-table padded">
                 <li class="list-table-row hidden-lg hidden-md">
                   <p class="col-xs-6" translate>Stock #</p>
@@ -621,7 +629,7 @@
 
             <h2 class="well-title balabold"><span translate>Title Information</span>
 
-              <div class="well-sub-title paired-reversed well-sub-title-edit">
+              <div class="well-sub-title paired-reversed well-sub-title-edit hidden-sm hidden-xs">
                 <a class="featured" ng-show="titleInfo.TitleImageAvailable" ng-href="{{ titleInfo.TitleUrl }}"
                    target="_blank">
                   <span class="paired-body" translate>View the Title</span><span class="paired-media"
@@ -630,6 +638,16 @@
               </div>
             </h2>
             <div class="well-item">
+              <div class="row visible-sm visible-xs" style="padding-top:5px;">
+                <div class="col-md-12">
+                  <a class="featured" ng-show="titleInfo.TitleImageAvailable" ng-href="{{ titleInfo.TitleUrl }}"
+                     target="_blank">
+                    &nbsp;<span class="paired-body" translate>View the Title</span><span class="paired-media"
+                                                                                   nxg-icon="icon-title"></span>
+                  </a>
+
+                </div>
+              </div>
               <ul class="list-table padded">
                 <li class="list-table-row">
                   <p class="col-xs-6" translate>Title Location</p>
@@ -677,7 +695,7 @@
               <span translate>Floor Plan Value Estimates</span>
             </div>
             <div class="col-md-6 hidden-sm hidden-xs"><span class="well-sub-title"
-                                                   translate>NextGear Capital &amp; MMR Valuation</span>
+                                                            translate>NextGear Capital &amp; MMR Valuation</span>
             </div>
           </div>
         </h2>
