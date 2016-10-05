@@ -1,11 +1,11 @@
-var debug = process.env.NODE_ENV !== "production";
 var webpack = require('webpack');
 var path = require('path');
+var debug = process.env.NODE_ENV !== "production";
 
 module.exports = {
-    target: 'node',
+    target: 'web',
     context: __dirname,
-    devtool: debug ? "inline-sourcemap" : null,
+    devtool: "inline-sourcemap",
     entry: './react/app.js',
     output: {
         path: './app/scripts',
@@ -16,7 +16,7 @@ module.exports = {
             {
                 test: /.jsx?$/,
                 loader: 'babel-loader',
-                include: path.resolve(__dirname, "react"),
+                exclude: [path.resolve(__dirname, 'node_modules')],
                 query: {
                     presets: ['es2015', 'react']
                 }
@@ -26,9 +26,20 @@ module.exports = {
             extensions: ['', '.js', '.jsx']
         },
     },
-    plugins: debug ? [] : [
+    plugins: debug ? [
+      new webpack.DefinePlugin({
+        "process.env": {
+          NODE_ENV: JSON.stringify("development")
+        }
+      })
+    ] : [
         new webpack.optimize.DedupePlugin(),
         new webpack.optimize.OccurenceOrderPlugin(),
-        new webpack.optimize.UglifyJsPlugin({ mangle: false, sourcemap: false})
+        new webpack.optimize.UglifyJsPlugin({ mangle: false, sourcemap: false}),
+        new webpack.DefinePlugin({
+          "process.env": {
+            NODE_ENV: JSON.stringify("production")
+          }
+        }),
     ],
 }

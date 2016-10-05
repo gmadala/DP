@@ -9,7 +9,7 @@ export default class Translater {
     const mergedJson = this._mergeObjs(fromObj, toObj);
     const translateResult = this._translateStrings(fromObj, mergedJson, translated);
 
-    this._saveTranslated(translateResult.json, toType)
+    this._saveTranslated(translateResult.json, toType);
     this._saveUntranslated(translateResult.strings, filePath, fromType, toType);
 
     return {
@@ -30,7 +30,7 @@ export default class Translater {
   }
 
   _saveUntranslated(untranslated, filePath, fromType, toType) {
-    console.log('')
+    console.log('');
     const str = untranslated.map(x => `${x.string} : `).join('\n');
 
     fs.writeFile(filePath, str, 'utf-8', function(err) {
@@ -38,7 +38,7 @@ export default class Translater {
         return console.log(err);
       }
       console.log(`${fromType} to ${toType}: ${untranslated.length} new translation(s) needed`);
-      console.log('')
+      console.log('');
     });
   }
 

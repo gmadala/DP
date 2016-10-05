@@ -25,9 +25,6 @@ module.exports = function(grunt) {
 
   grunt.file.defaultEncoding = 'utf8';
 
-
-  grunt.loadNpmTasks('grunt-env');
-
   grunt.initConfig({
     yeoman: yeomanConfig,
     watch: {
@@ -121,41 +118,6 @@ module.exports = function(grunt) {
         ]
       },
       server: '.tmp'
-    },
-    jshint: {
-      options: {
-        jshintrc: '.jshintrc',
-        reporter: 'checkstyle'
-      },
-      all: [
-        //'Gruntfile.js',
-        '<%= yeoman.app %>/client/**/*.js',
-        '!app/client/**/*.spec.js',
-        '!app/client/config/nxg-config.mock.processed.js',
-        '!app/scripts/translations.js',
-        '!app/client/services/base64.service.js',
-        '!app/client/shared/directives/nxg-chart/nxg-chart.directive.js',
-        '!app/client/shared/directives/tooltip.directive.js',
-        'e2e/**/*.js',
-        'api_tests/**/*.js'
-      ]
-    },
-    jscs: {
-      options: {
-        config: '.jscsrc'
-      },
-      all: [
-        //'Gruntfile.js',
-        '<%= yeoman.app %>/client/**/*.js',
-        '!app/client/config/nxg-config.mock.processed.js',
-        '!app/scripts/translations.js',
-        '!app/client/services/base64.service.js',
-        '!app/client/shared/directives/nxg-chart/nxg-chart.directive.js',
-        '!app/client/shared/directives/tooltip.directive.js',
-        // TODO JSCS could be used for all test files depending on what rules we decide on
-        'e2e/**/*.js',
-        'api_tests/**/*.js'
-      ]
     },
     karma: {
       unit: {
@@ -432,13 +394,6 @@ module.exports = function(grunt) {
         ]
       }
     },
-    env: {
-      dev: {
-        ENV: grunt.option('target') || defaultTarget,
-        VERSION: grunt.option('buildVersion') || defaultVersion,
-        GIT_SHA: '<%= gitinfo.local.branch.current.shortSHA %>'
-      }
-    },
     preprocess: {
       index: {
         files: {
@@ -545,6 +500,12 @@ module.exports = function(grunt) {
       },
       webpack_prod: {
           command: 'webpack'
+      },
+      npm: {
+        command: 'npm install'
+      },
+      bower: {
+        command: 'bower install'
       }
     },
     protractor: { // a specific suite can be run with grunt protractor:run --suite=suite_name
@@ -558,32 +519,39 @@ module.exports = function(grunt) {
     githooks: {
       all: {
         // Will run the jshint tasks at every commit
-        'pre-commit': 'jshint jscs karma'
+        'pre-commit': 'karma'
       }
     },
     env : {
         dev : {
-            NODE_ENV : 'development'
+          NODE_ENV: 'development',
+          ENV: grunt.option('target') || defaultTarget,
+          VERSION: grunt.option('buildVersion') || defaultVersion,
+          GIT_SHA: '<%= gitinfo.local.branch.current.shortSHA %>'
         },
         prod : {
-            NODE_ENV : 'production'
+          NODE_ENV: 'production',
         }
     },
   });
 
   grunt.registerTask('webpack-dev', [
       'env:dev',
-      'shell:webpack'
+      'shell:npm',
+      'shell:bower',
+      'shell:webpack',
   ])
 
   grunt.registerTask('webpack-prod', [
       'env:prod',
+      'shell:npm',
+      'shell:bower',
       'shell:webpack'
   ])
 
   grunt.registerTask('dev-setup', [
-    'webpack-dev',
     'gitinfo',
+    'webpack-dev',
     'env:dev',
     'clean:server',
     'processhtml:server',
@@ -640,8 +608,8 @@ module.exports = function(grunt) {
   ]);
 
   grunt.registerTask('build', [
-    'webpack-prod',
     'gitinfo',
+    'webpack-prod',
     'env',
     'clean:dist',
     'nggettext_compile',
@@ -673,9 +641,6 @@ module.exports = function(grunt) {
     grunt.task.run('test:unit');
     grunt.task.run('build');
     grunt.task.run('test:e2e:users');
-    // run this last so that grunt returns an error code but doesn't abort before running the previous tasks
-    grunt.task.run('jshint');
-    grunt.task.run('jscs');
   });
 
   grunt.registerMultiTask('gettext_update_po', 'update PO files from the POT file', function () {
