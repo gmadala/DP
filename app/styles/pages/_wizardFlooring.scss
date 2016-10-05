@@ -12,6 +12,11 @@
     margin-bottom: 32px;
   }
 
+  .text-paragraph{
+    border:0px;
+    font-size:10px;
+  }
+
   .form-group {
     margin-bottom: 24px;
 
@@ -323,6 +328,11 @@
   .btn-alert {
     height: auto;
     right: 18px;
+  }
+
+  input#paySeller[disabled] + label +label,
+  input#payBuyer[disabled] + label + label{
+    color: #999999;
   }
 
   input:-ms-input-placeholder {
