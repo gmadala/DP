@@ -21,7 +21,7 @@
                 </div>
                 <div class="visible-xs">
                   <div class="lockup-minor">
-                    <span>Payment Date: </span>
+                    <span translate>Payment Date: </span>
                     {{ today | moment }}
                   </div>
                   <div class="lockup-major pull-right">
@@ -62,7 +62,7 @@
                   </div>
                 </div>
               </td>
-              <td class="left hidden-xs left">{{ today | moment }}</td>
+              <td class="left hidden-xs">{{ today | moment }}</td>
               <td class="numeric hidden-xs">{{ payment.getCheckoutAmount() | currency }}</td>
             </tr>
           </table>
@@ -160,7 +160,7 @@
     </div>
   </div>
   <div ng-hide="!!receiptUrls.length">
-    <div style="padding:50px 0px 0px 0px;">
+    <div style="padding:20px 0px 0px 0px;">
       <button type="submit" ng-click="backToPayments()" class="btn-cta cta-primary" nxg-autofocus translate>OK</button>
     </div>
   </div>

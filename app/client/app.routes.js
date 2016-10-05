@@ -160,11 +160,11 @@
       .state('paymentsConfirm', {
         url: '/paymentsConfirm',
         templateUrl: 'client/payments/payments-confirm.template.html',
-        controller: 'paymentConfirmCtrl',
+        controller: 'PaymentConfirmCtrl',
         params: { data:null },
         data:
         {
-          pageId: 'paymentsConfirm',
+          pageId: 'PaymentsConfirm',
           showNavBar: true,
           showMenu: false
         }

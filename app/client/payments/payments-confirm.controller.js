@@ -3,9 +3,9 @@
 
   angular
     .module('nextgearWebApp')
-    .controller('paymentConfirmCtrl', paymentConfirmCtrl);
+    .controller('PaymentConfirmCtrl', PaymentConfirmCtrl);
 
-  paymentConfirmCtrl.$inject = [
+  PaymentConfirmCtrl.$inject = [
     '$scope',
     '$state',
     '$stateParams',
@@ -17,7 +17,7 @@
     'metric'
   ];
 
-  function paymentConfirmCtrl($scope,
+  function PaymentConfirmCtrl($scope,
                                       $state,
                                       $stateParams,
                                       Receipts,

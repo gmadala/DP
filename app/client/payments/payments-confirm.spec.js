@@ -1,11 +1,11 @@
 'use strict';
 
-describe('Controller: paymentConfirmCtrl', function () {
+describe('Controller: PaymentConfirmCtrl', function () {
 
   // load the controller's module
   beforeEach(module('nextgearWebApp'));
 
-  var paymentConfirmCtrl,
+  var PaymentConfirmCtrl,
         scope,
         dialog,
         receipts,
@@ -70,7 +70,7 @@ describe('Controller: paymentConfirmCtrl', function () {
     };
 
     run = function () {
-      paymentConfirmCtrl = $controller('paymentConfirmCtrl', {
+      PaymentConfirmCtrl = $controller('PaymentConfirmCtrl', {
         $scope: scope,
         $stateParams: stateParams
       });
