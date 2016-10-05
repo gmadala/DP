@@ -214,9 +214,9 @@
           },
           confirmDisableEnhanced: function () {
             var dialogOptions = {
-              backdrop: true,
-              keyboard: true,
-              backdropClick: true,
+              backdrop: 'static',
+              keyboard: false,
+              backdropClick: false,
               templateUrl: 'client/shared/modals/confirm/confirm-disable-enhanced.template.html',
               controller: 'ConfirmCtrl'
             };
@@ -270,9 +270,9 @@
           autoPay: {
             confirmEnable: function () {
               var dialogOptions = {
-                backdrop: true,
-                keyboard: true,
-                backdropClick: true,
+                backdrop: 'static',
+                keyboard: false,
+                backdropClick: false,
                 templateUrl: 'client/shared/modals/confirm/confirm-enable-autopay.template.html',
                 controller: 'ConfirmCtrl'
               };
@@ -282,9 +282,9 @@
             },
             confirmDisable: function () {
               var dialogOptions = {
-                backdrop: true,
-                keyboard: true,
-                backdropClick: true,
+                backdrop: 'static',
+                keyboard: false,
+                backdropClick: false,
                 templateUrl: 'client/shared/modals/confirm/confirm-disable-autopay.template.html',
                 controller: 'ConfirmCtrl'
               };
@@ -437,7 +437,7 @@
           addFinancialAccount: function () {
             var dialogOptions = {
               dialogClass: 'modal',
-              backdrop: true,
+              backdrop: 'static',
               keyboard: false,
               backdropClick: false,
               templateUrl: 'client/shared/modals/financial-account/financial-account.template.html',
@@ -540,7 +540,7 @@
     $scope.onRequestCredIncr = function () {
       var dialogOptions = {
         dialogClass: 'modal request-credit-increase',
-        backdrop: true,
+        backdrop: 'static',
         keyboard: false,
         backdropClick: false,
         templateUrl: 'client/shared/modals/request-credit-increase/request-credit-increase.template.html',

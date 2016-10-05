@@ -90,9 +90,9 @@
     function viewDealer(business) {
       if (business) {
         var dialogOptions = {
-          backdrop: true,
-          keyboard: true,
-          backdropClick: true,
+          backdrop: 'static',
+          keyboard: false,
+          backdropClick: false,
           templateUrl: 'client/shared/modals/credit-query/credit-query.template.html',
           controller: 'CreditQueryCtrl',
           dialogClass: 'modal modal-medium',

@@ -50,6 +50,9 @@
 
                   model[mapping.modelDest] = options[0];
                 }
+                if(mapping.useDefault){
+                  model[mapping.modelDest] = mapping.useDefault;
+                }
               });
 
               unwatchers.push(unwatch);

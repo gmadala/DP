@@ -20,6 +20,8 @@
 
     vm.mileageOrOdometer = User.isUnitedStates() ? gettextCatalog.getString('Mileage') : gettextCatalog.getString('Odometer');
 
+    $scope.$parent.wizardFloor.stateChangeCounterFix(1);
+
     $scope.$parent.wizardFloor.transitionValidation = function() {
       $scope.form.$submitted = true;
       $scope.$parent.wizardFloor.validity = angular.copy($scope.form);

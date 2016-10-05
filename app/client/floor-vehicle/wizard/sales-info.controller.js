@@ -14,9 +14,7 @@
     var today = new Date();
     today = moment([today.getFullYear(), today.getMonth(), today.getDate()]).toDate();
 
-    var purchaseDateDisclaimer = gettext("To floor plan purchases older than 365 days, please contact NextGear Capital" +
-      " Floorplan Services at fundingservices@nextgearcapital.com, attach the Bill of Sale," +
-      " and provide the customer's NextGear Dealer Number.");
+    var purchaseDateDisclaimer = gettext("Your purchase date is older than 365 days.  Please contact Floor Plan Services at fundingservices@nextgearcapital.com.");
     vm.purchaseDateDisclaimer = gettextCatalog.getString(purchaseDateDisclaimer);
 
     var aucPurchaseDateDisclaimer = gettext("To floor plan purchases older than 7 days, please contact NextGear Capital " +
@@ -39,6 +37,16 @@
     };
 
     vm.dateFormat = 'MM/dd/yyyy';
+
+    vm.switchChange = function (toggleValue) {
+      $scope.$parent.wizardFloor.data.PaySeller = toggleValue ? 0 : null;
+
+      if (!$scope.$parent.wizardFloor.canPayBuyer) {
+        $scope.$parent.wizardFloor.data.PaySeller = 1;
+      }
+    };
+
+    $scope.$parent.wizardFloor.stateChangeCounterFix(2);
 
     $scope.$parent.wizardFloor.transitionValidation = function() {
 

@@ -3,15 +3,13 @@
 
   angular
     .module('nextgearWebApp')
-    .controller('BusinessFieldCtrl', BusinessFieldCtrl);
+    .controller('BusinessFieldV2Ctrl', BusinessFieldV2Ctrl);
 
-  BusinessFieldCtrl.$inject = ['$scope', '$element', '$uibModal', '$timeout'];
+  BusinessFieldV2Ctrl.$inject = ['$scope', '$element', '$uibModal', '$timeout'];
 
-  function BusinessFieldCtrl($scope, $element, $uibModal, $timeout) {
-
+  function BusinessFieldV2Ctrl($scope, $element, $uibModal, $timeout) {
     var uibModal = $uibModal;
     var searchOpen = false;
-    $scope.query = '';
     var lengthAtSubmit = 0;
 
     $scope.clearSelected = function() {
