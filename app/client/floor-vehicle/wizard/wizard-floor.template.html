@@ -30,7 +30,7 @@
     <div class="hidden-xs hidden-sm col-md-offset-1 col-md-3 sidebar">
       <nxg-credit-availability credit-type="wizardFloor.data.LineOfCreditId"
                                purchase-price="wizardFloor.data.UnitPurchasePrice"></nxg-credit-availability>
-      <nxg-value-lookup vin="wizardFloor.data.UnitVin"
+      <nxg-value-lookup vin="wizardFloor.data.UnitVin" ng-if="wizardFloor.flooringValuationFeature"
                         odometer="wizardFloor.data.UnitMileage"
                         inventory-location="wizardFloor.data.PhysicalInventoryAddressId"
                         purchase-price="wizardFloor.data.UnitPurchasePrice"></nxg-value-lookup>
