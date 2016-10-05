@@ -44,6 +44,10 @@
       queue = $stateParams.data.queue;
       transactionInfo = $stateParams.data.transactionInfo;
     }
+    else{
+        // If user hasn't navigated away, from confirm page, go back to payments.
+        $state.transitionTo('payments');
+    }
 
     angular.forEach(queue.payments, function (payment) {
       if (payment.scheduleDate) {
