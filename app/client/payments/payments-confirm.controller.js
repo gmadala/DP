@@ -10,6 +10,7 @@
     '$state',
     '$stateParams',
     'Receipts',
+    'Payments',
     '$window',
     'api',
     'kissMetricInfo',
@@ -21,6 +22,7 @@
                                       $state,
                                       $stateParams,
                                       Receipts,
+                                      Payments,
                                       $window,
                                       api,
                                       kissMetricInfo,
@@ -58,6 +60,10 @@
         feesToday.push(fee);
       }
     });
+
+    //After submitting the payments the queue is cleared for multiple submission
+    Payments.clearPaymentQueue();
+
     $scope.items = {
       feesToday: feesToday,
       feesScheduled: feesScheduled,
