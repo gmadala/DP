@@ -33,15 +33,20 @@
   }
 
   h2 {
-    font-size: 24px;
+    font-size: 1.714em;
     margin-top: 28px;
     margin-bottom: 20px;
     line-height: 1.2;
   }
 
   h4 {
-    font-size: 20px;
+    font-size: 1.429em;
     margin-bottom: 32px;
+  }
+
+  .text-paragraph{
+    border:0px;
+    font-size:10px;
   }
 
   .form-group {
@@ -65,18 +70,18 @@
       }
 
       .input-group-btn button {
-        font-size: 20px;
+        font-size: 1.429em;
         font-weight: 300;
         padding-top: 5px;
       }
     }
 
     select: {
-      font-size: 18px;
+      font-size: 1.286em;
     }
 
     input[type="text"] {
-      font-size: 18px;
+      font-size: 1.286em;
     }
 
   }
@@ -91,7 +96,7 @@
   .form-control,
   input[type="text"],
   select {
-    font-size: 18px !important;
+    font-size: 1.286em !important;
     padding-top: 0px;
     padding-bottom: 0px;
     height: 38px;
@@ -112,7 +117,7 @@
   .btn-next,
   .btn-submit,
   .btn-previous {
-    font-size: 20px;
+    font-size: 1.429em;
     width: 150px;
     height: 40px;
     font-weight: 300;
@@ -304,7 +309,7 @@
     margin-top: 10px;
 
     i {
-      font-size: 60px;
+      font-size: 4.286em;
     }
 
     label {
@@ -331,7 +336,7 @@
       background-color: #eaeaea;
       margin-top: 5px;
       padding: 6px;
-      font-size: 20px;
+      font-size: 1.429em;
 
       .wizard-file-delete {
         float: right;
@@ -353,6 +358,11 @@
   .btn-alert {
     height: auto;
     right: 18px;
+  }
+
+  input#paySeller[disabled] + label +label,
+  input#payBuyer[disabled] + label + label{
+    color: #999999;
   }
 
   input:-ms-input-placeholder {

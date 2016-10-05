@@ -73,7 +73,7 @@
 
   <label for="cmn-toggle-1" class="main-heading" style="margin-bottom: 18px;"><span translate>Request full purchase price financing</span></label>
   <input bs-switch type="checkbox" id="cmn-toggle-1" name="cmn-toggle-1" class="noglobal"
-         switch-size="normal" switch-off-text="{{ No | translate }}" switch-on-text="{{ Yes | translate }}" switch-on-color="success" ng-model="wizardFloor.data.AdditionalFinancing">
+         switch-size="normal" switch-off-text="{{ 'No' | translate }}" switch-on-text="{{ 'Yes' | translate }}" switch-on-color="success" ng-model="wizardFloor.data.AdditionalFinancing">
 
   <div class="form-group" style="margin-top: 24px;" ng-show="wizardFloor.data.AdditionalFinancing">
     <label for="comment" class="sr-only" translate>Comment</label>
@@ -87,11 +87,11 @@
               ng-disabled="wizardFloor.floorPlanSubmitting"
               ></textarea>
   </div>
-  <label class="main-heading" style="margin-top: 18px; margin-bottom: 18px;"><span for="cmn-toggle-2" translate>Trade in</span></label>
+  <label class="main-heading" style="margin-top: 18px; margin-bottom: 18px;"><span for="cmn-toggle-2" ng-hide="!wizardFloor.canPayBuyer" translate>Trade in</span></label>
 
-    <div style="margin-bottom: 38px;">
+    <div style="margin-bottom: 38px;" ng-hide="!wizardFloor.canPayBuyer">
       <input bs-switch type="checkbox" id="cmn-toggle-2" name="cmn-toggle-2" class="noglobal"
-            switch-size="normal" switch-off-text="{{ 'No' | translate }}" switch-on-text="{{ 'Yes' | translate }}" switch-on-color="success" ng-model="wizardFloor.data.SaleTradeIn">
+            switch-size="normal" switch-off-text="{{ 'No' | translate }}" switch-on-text="{{ 'Yes' | translate }}" switch-on-color="success" switch-change="salesInfo.switchChange(wizardFloor.data.SaleTradeIn)" ng-model="wizardFloor.data.SaleTradeIn">
     </div>
 
   <span class="nxg-business-field" ng-class="{ 'hidden': wizardFloor.data.SaleTradeIn, 'has-error': (form.inputBiz.$error.nxgRequires || form.inputBiz.$error.minlength) && form.$submitted }">

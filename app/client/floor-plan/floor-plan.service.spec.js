@@ -190,7 +190,7 @@ describe('Model: Floorplan', function () {
       },
       searchResults = [],
       callParams,
-      respondFnc = function(method, url) {
+      respondFnc = function (method, url) {
         callParams = urlParser.extractParams(url);
         return [200, {
           Success: true,
@@ -206,7 +206,7 @@ describe('Model: Floorplan', function () {
       paginate = Paginate;
       httpBackend.whenGET(/\/floorplan\/search.*/).respond(respondFnc);
       defaultCriteria.filter = floorplan.filterValues.ALL;
-      spyOn(User, 'getInfo').and.returnValue($q.when({ BusinessNumber: '123' }));
+      spyOn(User, 'getInfo').and.returnValue($q.when({BusinessNumber: '123'}));
 
       clock = sinon.useFakeTimers(moment([2014, 2, 20, 0, 0]).valueOf(), 'Date');
     }));
@@ -291,7 +291,9 @@ describe('Model: Floorplan', function () {
           TitleImageAvailable: false
         }
       ];
-      floorplan.search(defaultCriteria).then(function (results) { output = results; });
+      floorplan.search(defaultCriteria).then(function (results) {
+        output = results;
+      });
       httpBackend.flush();
       expect(output.Floorplans[0].$titleURL).toBe('/floorplan/title/123-456/0/Title_456');
       expect(output.Floorplans[1].$titleURL).not.toBeDefined();
@@ -503,7 +505,7 @@ describe('Model: Floorplan', function () {
 
     beforeEach(inject(function (User, _$rootScope_) {
       $rootScope = _$rootScope_;
-      spyOn(User, 'getInfo').and.returnValue($q.when({ BusinessNumber: '123' }));
+      spyOn(User, 'getInfo').and.returnValue($q.when({BusinessNumber: '123'}));
     }));
 
     it('should not add the property if item has no stock number', function () {
@@ -530,8 +532,8 @@ describe('Model: Floorplan', function () {
     });
   });
 
-  describe('getExtensionPreview method', function() {
-    beforeEach(function() {
+  describe('getExtensionPreview method', function () {
+    beforeEach(function () {
       httpBackend.whenGET('/floorplan/extensionPreview/1234').respond({
         "Success": true,
         "Data": {
@@ -540,22 +542,22 @@ describe('Model: Floorplan', function () {
       });
     });
 
-    it('should get the extension preview information based on floorplanid', function() {
+    it('should get the extension preview information based on floorplanid', function () {
       httpBackend.expectGET('/floorplan/extensionPreview/1234');
       floorplan.getExtensionPreview(1234);
       expect(httpBackend.flush).not.toThrow();
     });
   });
 
-  it('should have an overrideInProgress method', function() {
+  it('should have an overrideInProgress method', function () {
     expect(typeof floorplan.overrideInProgress).toBe('function');
   });
 
-  describe('overrideCompletionAddress method', function() {
+  describe('overrideCompletionAddress method', function () {
     var request;
 
-    beforeEach(function() {
-      httpBackend.whenPOST('/floorplan/overrideCompletionAddress').respond(function(method, path, data){
+    beforeEach(function () {
+      httpBackend.whenPOST('/floorplan/overrideCompletionAddress').respond(function (method, path, data) {
         request = angular.fromJson(data);
         return {
           "Success": true,
@@ -565,28 +567,30 @@ describe('Model: Floorplan', function () {
       });
     });
 
-    it('should make an api request', function() {
+    it('should make an api request', function () {
       floorplan.overrideCompletionAddress([
         {
           id: 123,
-          overrideAddress:  {
+          overrideAddress: {
             AddressId: 143
           }
         }
       ]);
 
       httpBackend.flush();
-      expect(request).toEqual({OverrideCompletionAddressInformation: [{
-        FloorplanId: 123,
-        TitleAddressId: 143
-      }]});
+      expect(request).toEqual({
+        OverrideCompletionAddressInformation: [{
+          FloorplanId: 123,
+          TitleAddressId: 143
+        }]
+      });
     });
 
-    it('should return a promise', function() {
+    it('should return a promise', function () {
       var returnVal = floorplan.overrideCompletionAddress([
         {
           id: 123,
-          overrideAddress:  {
+          overrideAddress: {
             AddressId: 143
           }
         }
@@ -596,24 +600,24 @@ describe('Model: Floorplan', function () {
       expect(typeof returnVal.then).toEqual('function');
     });
 
-    it('should not make an API request if empty array passed', function() {
+    it('should not make an API request if empty array passed', function () {
       floorplan.overrideCompletionAddress([]);
 
       expect(httpBackend.flush).toThrow();
     });
 
-    it('should return a promise even if no API request made', function() {
+    it('should return a promise even if no API request made', function () {
       var returnVal = floorplan.overrideCompletionAddress([]);
 
       expect(httpBackend.flush).toThrow();
       expect(typeof returnVal.then).toEqual('function');
     });
 
-    it('should set overrideInProgress', function() {
+    it('should set overrideInProgress', function () {
       floorplan.overrideCompletionAddress([
         {
           id: 123,
-          overrideAddress:  {
+          overrideAddress: {
             AddressId: 143
           }
         }

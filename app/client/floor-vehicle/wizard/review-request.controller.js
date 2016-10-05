@@ -3,25 +3,27 @@
 
   angular
     .module('nextgearWebApp')
-    .controller('PaymentInfoCtrl', PaymentInfoCtrl);
+    .controller('ReviewRequestCtrl', ReviewRequestCtrl);
 
-  PaymentInfoCtrl.$inject = [
+  ReviewRequestCtrl.$inject = [
     '$scope',
-    'User',
-    'gettextCatalog',
-  ];
+    'User'];
 
-  function PaymentInfoCtrl($scope) {
+  function ReviewRequestCtrl(
+    $scope,
+    User) {
+
     var vm = this;
 
-    vm.data = null;
+    vm.vinDetailsErrorFlag = false;
 
-    $scope.$parent.wizardFloor.stateChangeCounterFix(3);
+    $scope.isDealer = User.isDealer();
+
+    $scope.$parent.wizardFloor.stateChangeCounterFix(5);
 
     $scope.$parent.wizardFloor.transitionValidation = function () {
       $scope.form.$submitted = true;
       $scope.$parent.wizardFloor.validity = angular.copy($scope.form);
-      $scope.$parent.wizardFloor.formParts.three = $scope.form.$valid;
       return $scope.form.$valid;
     };
 

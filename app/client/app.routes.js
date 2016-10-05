@@ -79,6 +79,18 @@
           isFeature: 'responsiveFloorplanBuyer'
         }
       })
+      .state('flooringWizard.reviewRequest', {
+        url: '/reviewRequest',
+        controller: 'ReviewRequestCtrl',
+        controllerAs: 'reviewRequest',
+        templateUrl: 'client/floor-vehicle/wizard/review-request.template.html',
+        data: {
+          pageId: 'Floorplan',
+          showNavBar: true,
+          showMenu: false,
+          isFeature: 'responsiveFloorplanBuyer'
+        }
+      })
       .state('login', {
         url: '/login',
         templateUrl: 'client/login/login.template.html',
