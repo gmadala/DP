@@ -39,6 +39,27 @@
 
 .chart-legend {
   margin: 15px 7px 15px 10px;
+  .style-select {
+    margin-left: 10px;
+  }
+}
+
+@media only screen and (max-width: 991px) {
+  .chart-legend {
+    margin-left: 10px;
+    .table {
+      margin-left: 0px !important;
+      margin-right: 0px !important;
+    }
+  }
+}
+
+@media only screen and (max-width: 767px) {
+  .chart-legend {
+    .style-select {
+      margin-left: 0px;
+    }
+  }
 }
 
 .chart-legend-color {
@@ -63,10 +84,9 @@
 .payments-chart {
   @extend %center;
   position: relative;
-  margin-top:30px;
-  padding: 20px 20px 10px;
+  margin-top: -50px;
+  padding: 20px 0px 0px;
   z-index: -1;
-
 
   .chart-label-primary {
     margin-bottom: 0;
@@ -74,7 +94,12 @@
   .chart-label-primary, .chart-label-secondary {
     font-weight: normal;
   }
-  .highcharts-title{ left:45px !important; }
+  .highcharts-title {
+    left: 45px !important;
+  }
+  .highcharts-container {
+    left: 0;
+  }
 }
 
 // Vehicle Details semicircle charts.
