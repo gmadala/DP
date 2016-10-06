@@ -317,10 +317,6 @@
               <td class="paired paired-reversed"> <!-- Vehicle Payments: due date column -->
                 <div class="paired-body">
                   <p class="lockup-major" ng-class="{ 'color-danger': getDueStatus(payment,true) == 'overdue' }">
-                  <span class="paired-media svg-icon" ng-class="getDueStatus(payment,true)" ng-switch="getDueStatus(payment, true)">
-                    <span ng-switch-when="today" nxg-icon="icon-warning"></span>
-                    <span ng-switch-when="overdue" nxg-icon="icon-alert"></span>
-                  </span>
                     {{ payment.DueDate | moment }}</p>
                   <a ng-show="showExtendLink(payment)" ng-click="payments.extension(payment)" href="javascript:void(0)" translate>Request<br/>Extension</a>
                 </div>
