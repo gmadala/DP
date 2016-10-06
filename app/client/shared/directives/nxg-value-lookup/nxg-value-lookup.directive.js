@@ -63,14 +63,13 @@
       });
 
       scope.$watch('vin', function(newValue, oldValue) {
-        // skip doing anything when the value is not changing
-        if (oldValue === newValue || _.size(newValue) < 10) {
-          return;
-        }
-
         if (!newValue) {
           resetValuation();
         } else {
+          // skip doing anything when the value is not changing
+          if (oldValue === newValue || _.size(newValue) < 10) {
+            return;
+          }
           // update blackbook and mmr values
           if (scope.odometer) {
             updateBaseValuation();
@@ -83,14 +82,13 @@
       });
 
       scope.$watch('odometer', function(newValue, oldValue) {
-        // skip doing anything when the value is not changing
-        if (oldValue === newValue || _.size(scope.vin) < 10) {
-          return;
-        }
-
         if (!newValue) {
           resetValuation();
         } else {
+          // skip doing anything when the value is not changing
+          if (oldValue === newValue || _.size(scope.vin) < 10) {
+            return;
+          }
           // update blackbook and mmr values
           if (scope.vin) {
             updateBaseValuation();
