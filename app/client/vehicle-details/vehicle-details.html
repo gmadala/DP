@@ -2,106 +2,107 @@
   <div class="row padding-left">
     <h1 class="fontresize">{{ flooringInfo.Description }}</h1>
   </div>
-  <div class="row padding-left hidden-md hidden-lg" ng-show="hasOutstanding">
-    <button class="accordion-button overridebutton dropbutton" ng-click="isSPAVisible = !isSPAVisible"
-            ng-class="{ expanded:!isSPAVisible }">
+
+  <div class="row">
+    <section class="col-lg-3 col-lg-push-9">
+      <div class="panel panel-default sidebar last" ng-show="hasOutstanding">
+        <h2 class="well-title" translate>Payment Options</h2>
+
+        <div ng-show="isSPAVisible || isLargeVP()">
+          <div class="notice-bar"
+               ng-show="showExtendLink() || financialSummary.paymentOverdue || financialSummary.paymentDueToday || financialSummary.paymentDueSoon">
+            <div class="paired-media">
+              <span ng-show="financialSummary.paymentOverdue" nxg-icon="icon-alert" class="icon-large"></span>
+              <span ng-show="financialSummary.paymentDueToday" nxg-icon="icon-warning" class="icon-large"></span>
+              <span ng-show="financialSummary.paymentDueSoon" nxg-icon="icon-info" class="icon-large"></span>
+            <span
+              ng-show="showExtendLink() && !financialSummary.paymentDueSoon && !financialSummary.paymentDueToday && !financialSummary.paymentOverdue"
+              nxg-icon="icon-info" class="icon-large"></span>
+            </div>
+            <div class="paired-body">
+              <!-- Overdue Payment -->
+              <div ng-show="financialSummary.paymentOverdue">
+                <p translate>A payment is overdue. <br/><a class="primary" href="" ng-show="showExtendLink()"
+                                                           ng-click="requestExtension()">Request an extension? </a>
+                </p>
+              </div>
+
+              <!-- Payment Due Today -->
+              <div ng-show="financialSummary.paymentDueToday">
+                <p translate>A payment is due today. <br/><a class="primary" href="" ng-show="showExtendLink()"
+                                                             ng-click="requestExtension()">Request an extension?</a></p>
+              </div>
+
+              <!-- Payment Due Soon (This Week) -->
+              <div ng-show="financialSummary.paymentDueSoon">
+                <p translate>A payment is due this week. <br/><a class="primary" href="" ng-show="showExtendLink()"
+                                                                 ng-click="requestExtension()">Request an extension?</a>
+                </p>
+              </div>
+
+              <!-- Payments aren't due soon, but can request extension -->
+              <div
+                ng-show="showExtendLink() && !financialSummary.paymentDueSoon && !financialSummary.paymentDueToday && !financialSummary.paymentOverdue">
+                <p><a class="primary" href="" ng-click="requestExtension()" translate>Request an extension?</a></p>
+              </div>
+            </div>
+          </div>
+          <div class="well-item inset">
+            <h4 translate>Next payment due {{ financialSummary.NextPaymentDueDate | moment }}</h4>
+
+            <div class="payment-btn-block" ng-show="dataLoaded">
+              <div class="btn-text-group">
+                <h6 class="btn-text"><span translate>Payment</span>:</h6>
+
+                <div class="btn-btn" nxg-payment-buttons="payment" item="paymentForCheckout"
+                     on-queue="isPaymentOnQueue(vehicleInfo.FloorplanId)"
+                     on-cancel-scheduled-payment="onCancelScheduled()"></div>
+              </div>
+              <div class="btn-text-group payoff-group">
+                <h6 class="btn-text"><span translate>Payoff</span>:</h6>
+
+                <div class="btn-btn" nxg-payment-buttons="payoff" item="paymentForCheckout"
+                     on-queue="isPaymentOnQueue(vehicleInfo.FloorplanId)"
+                     on-cancel-scheduled-payment="onCancelScheduled()"></div>
+              </div>
+            </div>
+            <div class="row" ng-show="getAdditionalPrincipal() > 0">
+              <h6 class="col-xs-8" translate>Additional Principal</h6>
+              <h6 class="col-xs-4 numeric">{{ getAdditionalPrincipal() | currency }}</h6>
+              <br/>
+            </div>
+            <button class="btn-unstyle btn-link right" ng-show="showAddPrincipalLink()"
+                    ng-click="launchPaymentOptions()">
+              <span ng-show="getAdditionalPrincipal() > 0" translate>Edit Additional Principal</span>
+              <span ng-hide="getAdditionalPrincipal() > 0" translate>Add Additional Principal?</span>
+            </button>
+          </div>
+
+          <div class="well-item aside" ng-show="dataLoaded">
+            <a class="featured block" href="javascript:void(0)" ng-click="launchPaymentOptions()" translate>
+              Payment Options &amp; Breakdown
+            </a>
+          </div>
+          <button class="btn-cta cta-primary cta-full" ng-disabled="paymentQueue.isEmpty()"
+                  ng-click="goToCheckout()">
+            <span class="paired-body"><span translate>Checkout</span> <span ng-show="paymentQueue.getQueueCount() > 0">({{ paymentQueue.getQueueCount() }})</span></span>
+            <span class="paired-media glyphicon glyphicon-shopping-cart"></span>
+          </button>
+        </div>
+      </div>
+    </section>
+    <div class="row padding-left hidden-md hidden-lg" ng-show="hasOutstanding">
+      <button class="accordion-button" ng-click="isSPAVisible = !isSPAVisible"
+              ng-class="{ expanded:!isSPAVisible }">
       <span class="paired-body">
-          <span ng-show="!isSPAVisible" translate>Show Payment Options</span>
-          <span ng-show="isSPAVisible" translate>Hide Payment Options</span>
+          <span ng-show="!isSPAVisible" translate>Show</span>
+          <span ng-show="isSPAVisible" translate>Hide</span>
       </span>
       <span class="paired-media" ng-class="{ 'point-up':isSPAVisible, 'point-down':!isSPAVisible }"
             nxg-icon="icon-chevron"></span>
 
-    </button>
-  </div>
-  <div class="row">
-    <section class="col-lg-3 col-lg-push-9" ng-show="isSPAVisible">
-      <div class="panel panel-default sidebar last" ng-show="hasOutstanding">
-        <h2 class="well-title" translate>Payment Options</h2>
-
-        <div class="notice-bar"
-             ng-show="showExtendLink() || financialSummary.paymentOverdue || financialSummary.paymentDueToday || financialSummary.paymentDueSoon">
-          <div class="paired-media">
-            <span ng-show="financialSummary.paymentOverdue" nxg-icon="icon-alert" class="icon-large"></span>
-            <span ng-show="financialSummary.paymentDueToday" nxg-icon="icon-warning" class="icon-large"></span>
-            <span ng-show="financialSummary.paymentDueSoon" nxg-icon="icon-info" class="icon-large"></span>
-            <span
-              ng-show="showExtendLink() && !financialSummary.paymentDueSoon && !financialSummary.paymentDueToday && !financialSummary.paymentOverdue"
-              nxg-icon="icon-info" class="icon-large"></span>
-          </div>
-          <div class="paired-body">
-            <!-- Overdue Payment -->
-            <div ng-show="financialSummary.paymentOverdue">
-              <p translate>A payment is overdue. <br/><a class="primary" href="" ng-show="showExtendLink()"
-                                                         ng-click="requestExtension()">Request an extension? </a>
-              </p>
-            </div>
-
-            <!-- Payment Due Today -->
-            <div ng-show="financialSummary.paymentDueToday">
-              <p translate>A payment is due today. <br/><a class="primary" href="" ng-show="showExtendLink()"
-                                                           ng-click="requestExtension()">Request an extension?</a></p>
-            </div>
-
-            <!-- Payment Due Soon (This Week) -->
-            <div ng-show="financialSummary.paymentDueSoon">
-              <p translate>A payment is due this week. <br/><a class="primary" href="" ng-show="showExtendLink()"
-                                                               ng-click="requestExtension()">Request an extension?</a>
-              </p>
-            </div>
-
-            <!-- Payments aren't due soon, but can request extension -->
-            <div
-              ng-show="showExtendLink() && !financialSummary.paymentDueSoon && !financialSummary.paymentDueToday && !financialSummary.paymentOverdue">
-              <p><a class="primary" href="" ng-click="requestExtension()" translate>Request an extension?</a></p>
-            </div>
-          </div>
-        </div>
-        <div class="well-item inset">
-          <h4 translate>Next payment due {{ financialSummary.NextPaymentDueDate | moment }}</h4>
-
-          <div class="payment-btn-block" ng-show="dataLoaded">
-            <div class="btn-text-group">
-              <h6 class="btn-text"><span translate>Payment</span>:</h6>
-
-              <div class="btn-btn" nxg-payment-buttons="payment" item="paymentForCheckout"
-                   on-queue="isPaymentOnQueue(vehicleInfo.FloorplanId)"
-                   on-cancel-scheduled-payment="onCancelScheduled()"></div>
-            </div>
-            <div class="btn-text-group payoff-group">
-              <h6 class="btn-text"><span translate>Payoff</span>:</h6>
-
-              <div class="btn-btn" nxg-payment-buttons="payoff" item="paymentForCheckout"
-                   on-queue="isPaymentOnQueue(vehicleInfo.FloorplanId)"
-                   on-cancel-scheduled-payment="onCancelScheduled()"></div>
-            </div>
-          </div>
-          <div class="row" ng-show="getAdditionalPrincipal() > 0">
-            <h6 class="col-xs-8" translate>Additional Principal</h6>
-            <h6 class="col-xs-4 numeric">{{ getAdditionalPrincipal() | currency }}</h6>
-            <br/>
-          </div>
-          <button class="btn-unstyle btn-link right" ng-show="showAddPrincipalLink()"
-                  ng-click="launchPaymentOptions()">
-            <span ng-show="getAdditionalPrincipal() > 0" translate>Edit Additional Principal</span>
-            <span ng-hide="getAdditionalPrincipal() > 0" translate>Add Additional Principal?</span>
-          </button>
-        </div>
-
-        <div class="well-item aside" ng-show="dataLoaded">
-          <a class="featured block" href="javascript:void(0)" ng-click="launchPaymentOptions()" translate>
-            Payment Options &amp; Breakdown
-          </a>
-        </div>
-        <button class="btn-cta cta-primary cta-full" ng-disabled="paymentQueue.isEmpty()"
-                ng-click="goToCheckout()">
-          <span class="paired-body"><span translate>Checkout</span> <span ng-show="paymentQueue.getQueueCount() > 0">({{ paymentQueue.getQueueCount() }})</span></span>
-          <span class="paired-media glyphicon glyphicon-shopping-cart"></span>
-        </button>
-      </div>
-
-    </section>
-
+      </button>
+    </div>
     <section class="col-lg-9 col-lg-pull-3">
       <!-- Flooring Information -->
       <div class="panel panel-default settings-well">
@@ -266,132 +267,134 @@
       </div>
       <!-- end Flooring Information -->
     </section>
-    <div class=" padding-left hidden-md hidden-lg">
-      <button class="accordion-button overridebutton dropbutton" ng-click="isUPDVisible = !isUPDVisible"
-              ng-class="{ expanded:!isUPDVisible }">
-      <span class="paired-body">
-          <span ng-show="!isUPDVisible" translate>Show Document Upload</span>
-          <span ng-show="isUPDVisible" translate>Hide Document Upload</span>
-      </span>
-      <span class="paired-media" ng-class="{ 'point-up':isUPDVisible, 'point-down':!isUPDVisible }"
-            nxg-icon="icon-chevron"></span>
-
-      </button>
-    </div>
-    <section class="col-lg-3 col-lg-push-9" ng-show="isUPDVisible"
+    <section class="col-lg-3 col-lg-push-9"
              ng-class="{moveUPDup : isLargeVP(), moveUPDupNoPayment : !hasOutstanding && isLargeVP() }">
       <!-- Document Upload -->
       <div class="panel panel-default sidebar last" ng-show="attachDocumentsEnabled">
         <form name="form">
           <h2 class="well-title balabold" translate>Document Upload</h2>
 
-          <div class="well-form">
-            <p class="spaced" translate>
-              For faster funding, please upload your floor plan documents now. Document types should include:
-            </p>
-            <ul class="document-list">
-              <li><span class="glyphicon glyphicon-ok icon-spacing"></span><span translate>Bill of Sale</span></li>
-              <li><span class="glyphicon glyphicon-ok icon-spacing"></span><span translate>Front of Title</span></li>
-              <li><span class="glyphicon glyphicon-ok icon-spacing"></span><span translate>Back of Title</span></li>
-              <li><span class="glyphicon glyphicon-ok icon-spacing"></span><span
-                translate>Other required documents</span></li>
-            </ul>
-            <p>
-              <span translate>Not sure what to send?</span>
-              <a href="/documents/Dealer%20Funding%20Checklist.pdf" target="_blank" class="primary" translate>View the
-                Dealer Funding Checklist.</a>
-            </p>
+          <div ng-show="isUPDVisible || isLargeVP()">
+            <div class="well-form">
+              <p class="spaced" translate>
+                For faster funding, please upload your floor plan documents now. Document types should include:
+              </p>
+              <ul class="document-list">
+                <li><span class="glyphicon glyphicon-ok icon-spacing"></span><span translate>Bill of Sale</span></li>
+                <li><span class="glyphicon glyphicon-ok icon-spacing"></span><span translate>Front of Title</span></li>
+                <li><span class="glyphicon glyphicon-ok icon-spacing"></span><span translate>Back of Title</span></li>
+                <li><span class="glyphicon glyphicon-ok icon-spacing"></span><span
+                  translate>Other required documents</span></li>
+              </ul>
+              <p>
+                <span translate>Not sure what to send?</span>
+                <a href="/documents/Dealer%20Funding%20Checklist.pdf" target="_blank" class="primary" translate>View the
+                  Dealer Funding Checklist.</a>
+              </p>
 
-            <p class="supported-files" translate>Supported formats: image, word, excel and pdf. 5MB max per file.</p>
+              <p class="supported-files" translate>Supported formats: image, word, excel and pdf. 5MB max per file.</p>
 
-            <!-- Upload file code -->
-            <div ngf-drop
-                 name="boxDocuments"
-                 class="drop-box"
-                 ng-class="{ 'file-error': validity.documents.$error.pattern || validity.boxDocuments.$error.pattern || validity.documents.$error.maxSize || validity.boxDocuments.$error.maxSize }"
-                 ng-model="files"
-                 ngf-model-invalid="invalidFiles"
-                 ngf-fix-orientation="false"
-                 ngf-drag-over-class="'dragover'"
-                 ngf-allow-dir="true"
-                 ngf-pattern="'image/*,application/pdf,application/vnd.ms*,application/vnd.open*,application/ms*'"
-                 ngf-multiple="true"
-                 ngf-keep="true"
-                 ngf-max-size="'5MB'">
-              <div ng-hide="files.length > 0" class="drop-box-empty" translate>Drag files here...</div>
-              <div ng-show="files.length > 0">
-                <ul class="files-container">
-                  <li ng-repeat="file in files" style="width: 96px; margin-left: 20%">
-                    <img ngf-thumbnail="file" class="thumb">
+              <!-- Upload file code -->
+              <div ngf-drop
+                   name="boxDocuments"
+                   class="drop-box"
+                   ng-class="{ 'file-error': validity.documents.$error.pattern || validity.boxDocuments.$error.pattern || validity.documents.$error.maxSize || validity.boxDocuments.$error.maxSize }"
+                   ng-model="files"
+                   ngf-model-invalid="invalidFiles"
+                   ngf-fix-orientation="false"
+                   ngf-drag-over-class="'dragover'"
+                   ngf-allow-dir="true"
+                   ngf-pattern="'image/*,application/pdf,application/vnd.ms*,application/vnd.open*,application/ms*'"
+                   ngf-multiple="true"
+                   ngf-keep="true"
+                   ngf-max-size="'5MB'">
+                <div ng-hide="files.length > 0" class="drop-box-empty" translate>Drag files here...</div>
+                <div ng-show="files.length > 0">
+                  <ul class="files-container">
+                    <li ng-repeat="file in files" style="width: 96px; margin-left: 20%">
+                      <img ngf-thumbnail="file" class="thumb">
 
-                    <div class="file-delete" ng-click="removeFile(file)">&times;</div>
-                    <div>{{ file.name | truncate:18 }}</div>
-                  </li>
-                </ul>
+                      <div class="file-delete" ng-click="removeFile(file)">&times;</div>
+                      <div>{{ file.name | truncate:18 }}</div>
+                    </li>
+                  </ul>
+                </div>
               </div>
-            </div>
 
-            <div class="row">
-              <div class="col-xs-6 paragraph" style="padding-right: 0; margin-right: 0;">
+              <div class="row">
+                <div class="col-xs-6 paragraph" style="padding-right: 0; margin-right: 0;">
           <span ng-show="files.length > 0">
             <span class="glyphicon glyphicon-ok icon-spacing"></span>
             <span>{{ files.length }} <span translate>valid files.</span></span>
           </span>
+                </div>
+                <div class="col-xs-6 paragraph" style="padding-left: 0; margin-left: 0;"
+                     ng-show="invalidFiles.length > 0">
+                  <span class="glyphicon glyphicon-ban-circle icon-spacing"></span>
+                  <span>{{ invalidFiles.length }} <span translate>invalid files.</span></span>
+                  <button class="btn-unstyle btn-link" ng-click="removeInvalidFiles()">clear</button>
+                </div>
               </div>
-              <div class="col-xs-6 paragraph" style="padding-left: 0; margin-left: 0;"
-                   ng-show="invalidFiles.length > 0">
-                <span class="glyphicon glyphicon-ban-circle icon-spacing"></span>
-                <span>{{ invalidFiles.length }} <span translate>invalid files.</span></span>
-                <button class="btn-unstyle btn-link" ng-click="removeInvalidFiles()">clear</button>
+
+              <span translate>Can't drag &amp; drop?</span>
+              <input type="file"
+                     id="documents"
+                     name="documents"
+                     ng-class="{ 'nxg-invalid': validity.documents.$error.pattern || validity.documents.$error.maxSize }"
+                     ngf-select
+                     ng-model="files"
+                     ngf-model-invalid="invalidFiles"
+                     ngf-multiple="true"
+                     ngf-pattern="'image/*,application/pdf,application/vnd.ms*,application/vnd.open*,application/ms*'"
+                     ngf-keep="true"
+                     ngf-fix-orientation="false"
+                     ngf-max-size="'5MB'"
+                     style="width: 100%">
+              <label for="documents" class="text-error"
+                     ng-show="validity.documents.$error.pattern || validity.boxDocuments.$error.pattern" translate>
+                Unsupported file found in selection.
+              </label>
+              <label for="documents" class="text-error"
+                     ng-show="validity.documents.$error.maxSize || validity.boxDocuments.$error.maxSize" translate>
+                One or more files exceeded the 5MB limit.
+              </label>
+              <!--IE9 workaround -->
+              <div ngf-no-file-drop>
+                <div ng-show="files">
+                  <ul class="files-container" style="border-style: solid">
+                    <li ng-repeat="file in files" style="width: 96px; margin-left: 20%">
+                      <img ngf-thumbnail="file" class="thumb">
+
+                      <div class="file-delete" ng-click="removeFile(file)">&times;</div>
+                      <div>{{file.name}}</div>
+                    </li>
+                  </ul>
+                </div>
               </div>
+              <!-- End upload file code -->
             </div>
 
-            <span translate>Can't drag &amp; drop?</span>
-            <input type="file"
-                   id="documents"
-                   name="documents"
-                   ng-class="{ 'nxg-invalid': validity.documents.$error.pattern || validity.documents.$error.maxSize }"
-                   ngf-select
-                   ng-model="files"
-                   ngf-model-invalid="invalidFiles"
-                   ngf-multiple="true"
-                   ngf-pattern="'image/*,application/pdf,application/vnd.ms*,application/vnd.open*,application/ms*'"
-                   ngf-keep="true"
-                   ngf-fix-orientation="false"
-                   ngf-max-size="'5MB'"
-                   style="width: 100%">
-            <label for="documents" class="text-error"
-                   ng-show="validity.documents.$error.pattern || validity.boxDocuments.$error.pattern" translate>
-              Unsupported file found in selection.
-            </label>
-            <label for="documents" class="text-error"
-                   ng-show="validity.documents.$error.maxSize || validity.boxDocuments.$error.maxSize" translate>
-              One or more files exceeded the 5MB limit.
-            </label>
-            <!--IE9 workaround -->
-            <div ngf-no-file-drop>
-              <div ng-show="files">
-                <ul class="files-container" style="border-style: solid">
-                  <li ng-repeat="file in files" style="width: 96px; margin-left: 20%">
-                    <img ngf-thumbnail="file" class="thumb">
-
-                    <div class="file-delete" ng-click="removeFile(file)">&times;</div>
-                    <div>{{file.name}}</div>
-                  </li>
-                </ul>
-              </div>
-            </div>
-            <!-- End upload file code -->
+            <button class="btn-cta cta-primary cta-full" ng-click="uploadDocuments()"
+                    ng-disabled="!files || files.length == 0">
+              <span class="paired-body" translate>Upload</span>
+              <span class="paired-media" nxg-icon="icon-upload"></span>
+            </button>
           </div>
-
-          <button class="btn-cta cta-primary cta-full" ng-click="uploadDocuments()"
-                  ng-disabled="!files || files.length == 0">
-            <span class="paired-body" translate>Upload</span>
-            <span class="paired-media" nxg-icon="icon-upload"></span>
-          </button>
         </form>
       </div>
     </section>
+    <div class=" padding-left hidden-md hidden-lg">
+      <button class="accordion-button " ng-click="isUPDVisible = !isUPDVisible"
+              ng-class="{ expanded:!isUPDVisible }">
+      <span class="paired-body">
+          <span ng-show="!isUPDVisible" translate>Show</span>
+          <span ng-show="isUPDVisible" translate>Hide</span>
+      </span>
+      <span class="paired-media" ng-class="{ 'point-up':isUPDVisible, 'point-down':!isUPDVisible }"
+            nxg-icon="icon-chevron"></span>
+
+      </button>
+    </div>
     <section class="col-lg-9 col-lg-pull-3">
       <div class="panel panel-default">
         <h2 class="well-title">
@@ -540,7 +543,8 @@
         </div>
       </div>
       <!-- Expand/Collapse button: disable if there is no floorplan activity. -->
-      <button class="accordion-button" ng-click="isCollapsed = !isCollapsed" ng-class="{ expanded:!isCollapsed }" style="font-size:11px;">
+      <button class="accordion-button" ng-click="isCollapsed = !isCollapsed" ng-class="{ expanded:!isCollapsed }"
+              style="font-size:11px;">
       <span ng-show="financialSummary.FloorplanActivity.length > 0">
         <span class="paired-body">
           <span ng-show="isCollapsed" translate>Show Payment Activity</span>
