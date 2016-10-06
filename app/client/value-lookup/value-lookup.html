@@ -47,9 +47,8 @@
 
                   <div ng-show="kbbEnabled">
                     <label for="vinKbbZipCode" class="input-title">
-                      <span translate>Zip</span><i style="font-size:10px;font-weight:normal;">
-                      &nbsp;&nbsp;<span translate>Fill out for Kelley Blue Book<sup>®</sup>Auction Values</span>
-                    </i>
+                      <span translate>Zip</span>&nbsp;&nbsp;
+                      <span class="description-italic" translate>Fill out for Kelley Blue Book<sup>®</sup>Auction Values</span>
                     </label>
                     <input type="text" id="vinKbbZipCode" name="vinKbbZipCode" ng-model="vinLookup.zipcode" ng-pattern="/^\d{5}$/"
                            class="input-full"
@@ -364,7 +363,8 @@
 
       <div ng-hide="hideBlackbookAll()">
         <h4 class="subtitle">
-          <span translate>NextGear Capital Book Wholesale Values</span><i style="font-size:10px;font-weight:normal;">&nbsp;&nbsp;<span translate>The following values represent a national average.</span></i>
+          <span translate>NextGear Capital Book Wholesale Values</span>
+          <div class="description-italic" translate>The following values represent a national average.</div>
         </h4>
 
         <p class="text-error" ng-show="results.blackbook.noMatch" translate>We are sorry, but we are unable to provide NextGear Capital Book Values at this
@@ -423,9 +423,8 @@
 
       <div ng-hide="hideMmrAll()">
         <h4 class="subtitle">
-          <span translate>MMR Wholesale Values</span><i style="font-size:10px;font-weight:normal;">
-          &nbsp;&nbsp;<span translate>The following values represent a national average.</span>
-        </i>
+          <span translate>MMR Wholesale Values</span>
+          <div class="description-italic" translate>The following values represent a national average.</div>
         </h4>
 
         <p class="text-error" ng-show="results.mmr.noMatch" translate>We are sorry, but we are unable to provide MMR Values at this time.</p>
@@ -484,12 +483,12 @@
       <div ng-hide="hideKbbAll()">
         <h4 class="subtitle">
           <span translate>Kelley Blue Book<sup>®</sup> Auction Values</span>
-          <i style="font-size:10px;font-weight:normal;">&nbsp;&nbsp;<span translate>The following values are based on the Zip provided.</span></i>
           <button ng-show="results.kbb.data || (results.kbb.noMatch && (results.zip || results.zipcode))" class="btn-help kbb-tooltip"
                   tooltip-placement="left" tooltip-class="kbb-tooltip"
                   uib-tooltip-html="disclaimer" tooltip-popup-delay="500">
             <span nxg-icon="icon-help"></span>
           </button>
+          <div class="description-italic" translate>The following values are based on the Zip provided.</div>
         </h4>
         <p class="text-error" ng-show="results.kbb.noMatch" translate>We are sorry, but we are unable to provide Kelley Blue Book<sup>®</sup> values at this
           time.</p>
