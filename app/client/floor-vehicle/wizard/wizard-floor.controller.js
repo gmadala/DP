@@ -346,13 +346,13 @@
           /**
            *  floorplan success handler
            **/
-          
-          var commentText = 'General Comment: ';
-          commentText = commentText + vm.data.commentGeneral && vm.data.commentGeneral.length > 0 ? vm.data.commentGeneral : '';
+          var commentText = '';
 
           if (vm.data.commentAdditionalFinancing && vm.data.commentAdditionalFinancing.length > 0) {
-            commentText += ', Additional Financing Comment: [DEALER REQUESTS FULL PURCHASE PRICE] ' + vm.data.commentAdditionalFinancing;
+            commentText += 'DEALER REQUESTS FULL PURCHASE PRICE: ' + vm.data.commentAdditionalFinancing;
           }
+
+          commentText += (commentText.length > 0) ? ' ' + vm.data.commentGeneral : vm.data.commentGeneral;
 
           if (commentText.length > 0) {
             Floorplan.addComment({
