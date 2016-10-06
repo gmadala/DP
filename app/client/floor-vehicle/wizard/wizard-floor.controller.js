@@ -337,22 +337,26 @@
       }
 
       var dialogParams;
-      var commentText = '';
-
-      if (vm.data.commentAdditionalFinancing && vm.data.commentAdditionalFinancing.length > 0) {
-        commentText += 'DEALER REQUESTS FULL PURCHASE PRICE: ' + vm.data.commentAdditionalFinancing;
-      }
-
-      commentText += (commentText.length > 0) ? ' ' + vm.data.commentGeneral : vm.data.commentGeneral;
 
       vm.floorPlanSubmitting = true;
       vm.data.TitleLocationId = vm.options.titleLocationOptions[vm.data.TitleLocationId];
 
       Floorplan.create(vm.data).then(
-        function (response) { /*floorplan success*/
+        function (response) {
+          /**
+           *  floorplan success handler
+           **/
+          
+          var commentText = 'General Comment: ';
+          commentText = commentText + vm.data.commentGeneral && vm.data.commentGeneral.length > 0 ? vm.data.commentGeneral : '';
+
+          if (vm.data.commentAdditionalFinancing && vm.data.commentAdditionalFinancing.length > 0) {
+            commentText += ', Additional Financing Comment: [DEALER REQUESTS FULL PURCHASE PRICE] ' + vm.data.commentAdditionalFinancing;
+          }
+
           if (commentText.length > 0) {
             Floorplan.addComment({
-              CommentText: 'General Comment: ' + vm.data.commentGeneral + ' Additional Financing Comment:' + vm.data.commentAdditionalFinancing,
+              CommentText: commentText,
               FloorplanId: response.FloorplanId
             });
           }
