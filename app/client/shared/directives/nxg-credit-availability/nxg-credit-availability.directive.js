@@ -29,6 +29,7 @@
 
       var options = {
         chart: {
+          backgroundColor: '#EBEBEB',
           type: 'bar',
           height: 30,
           margin: [0, 0, 0, 0],
