@@ -97,6 +97,6 @@
   "scripts": {
     "ci-build": "grunt ci-build --target=test",
     "windows": "grunt server-ie",
-    "translate": "babel-node --debug translate.js"
+    "translate": "babel-node translate.js"
   }
 }

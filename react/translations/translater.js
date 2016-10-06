@@ -4,18 +4,14 @@ export default class Translater {
 
   translate(fromObj, toObj, fromType, toType) {
     const filePath = __dirname + `/../../translations/${toType}_untranslated.txt`;
+    const tFilePath = __dirname + `/../../translations/${toType}_translated.txt`;
 
-    const translated = this._getTranslated(filePath);
+    const translated = this._getTranslated(tFilePath);
     const mergedJson = this._mergeObjs(fromObj, toObj);
     const translateResult = this._translateStrings(fromObj, mergedJson, translated);
 
     this._saveTranslated(translateResult.json, toType);
     this._saveUntranslated(translateResult.strings, filePath, fromType, toType);
-
-    return {
-      json: mergedJson,
-      strings: translateResult.strings
-    };
   }
 
   _saveTranslated(json, toType) {

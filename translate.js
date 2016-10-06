@@ -1,6 +1,10 @@
 import Translater from './react/translations/translater';
 
-var t = new Translater();
+import enLocale from './react/translations/en';
+import esLocale from './react/translations/es';
+import frLocale from './react/translations/fr';
 
-t.translate(require('./react/translations/en.js'), require('./react/translations/es.js'), 'en', 'es');
-t.translate(require('./react/translations/en.js'), require('./react/translations/fr.js'), 'en', 'fr');
+const t = new Translater();
+
+t.translate(enLocale, esLocale, 'en', 'es');
+t.translate(enLocale, frLocale, 'en', 'fr');
