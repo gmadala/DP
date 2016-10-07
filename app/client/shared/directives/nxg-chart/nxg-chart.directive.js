@@ -18,6 +18,9 @@
         dataName: '@nxgChartDataName', // Text next to value on tooltip
         tooltip: '@nxgChartTooltip', // true or false
         size: '=nxgChartSize',
+        titleSize: '@nxgChartTitleSize',
+        labelSize: '@nxgChartLabelSize',
+        labelRotation: '@nxgChartLabelRotation',
         options: '&nxgChartOptions', // any overall options.
         truncateLabels: '@nxgChartTrimLabels', // true or false
         showLegend: '=nxgShowLegend', // true or false
@@ -43,7 +46,7 @@
               floating: false, //whether label will affect chart position or not; default is false
               style: {
                 fontFamily: defaultFontFamily,
-                fontSize: '14px',
+                fontSize: scope.titleSize ? scope.titleSize : '14px',
                 fontWeight: 'bold'
               },
               y: 15 // vertical position of title within chart; default is 15
@@ -58,7 +61,7 @@
               shadow: false,
               style: {
                 fontFamily: defaultFontFamily,
-                fontSize: '12px'
+                fontSize: '14px'
               }
             },
             labels: {
@@ -122,11 +125,12 @@
               lineWidth: 1,
               tickWidth: 0,
               labels: {
+                rotation: scope.labelRotation ? parseInt(scope.labelRotation) : 0,
                 enabled: scope.labels && scope.labels === 'true',
                 aligned: 'right',
                 style: {
                   fontFamily: defaultFontFamily,
-                  fontSize: '12px'
+                  fontSize: scope.labelSize ? scope.labelSize : '12px'
                 }
               }
             },
