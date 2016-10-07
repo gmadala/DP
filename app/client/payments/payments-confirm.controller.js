@@ -16,7 +16,7 @@
     'kissMetricInfo',
     'segmentio',
     'metric',
-      '$location'
+    '$location'
   ];
 
   function PaymentConfirmCtrl($scope,
@@ -29,7 +29,7 @@
                                       kissMetricInfo,
                                       segmentio,
                                       metric,
-  $location) {
+                                      $location) {
 
     $scope.today = new Date();
 
