@@ -12,14 +12,29 @@
   }
 }
 
+.description.no-right-padding {
+  padding-right: 0px;
+}
+
 #TitleReleasesPage {
   .requests-grid {
     .btn-title-request {
       width: 135px;
     }
   }
-}
 
-.description.no-right-padding{
-  padding-right: 0px;
+  @media only screen and (max-width: 767px) {
+    .styled-input {
+      input, input[type="text"] {
+        width: 90%;
+      }
+    }
+
+    .search-date-picker {
+      padding-right: 0 !important;
+      input {
+        width: 100% !important;
+      }
+    }
+  }
 }
