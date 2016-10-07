@@ -15,7 +15,8 @@
     'api',
     'kissMetricInfo',
     'segmentio',
-    'metric'
+    'metric',
+      '$location'
   ];
 
   function PaymentConfirmCtrl($scope,
@@ -27,7 +28,8 @@
                                       api,
                                       kissMetricInfo,
                                       segmentio,
-                                      metric) {
+                                      metric,
+  $location) {
 
     $scope.today = new Date();
 
@@ -144,6 +146,12 @@
     $scope.openVehicleDetail = function (payment) {
       $state.go('vehicledetails', {stockNumber: payment.stockNum});
     };
+
+    $scope.$on('$locationChangeStart', function(){
+      if($location.path() === '/checkout'){
+        $location.path('/payments');
+      }
+    });
 
   }
 })();
