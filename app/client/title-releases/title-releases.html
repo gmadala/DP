@@ -1,6 +1,6 @@
-<div class="container non-responsive">
+<div class="container">
   <section class="row">
-    <section class="col-xs-8">
+    <section class="col-sm-9">
       <div class="info-block">
         <div class="info-block-image">
           <span nxg-icon="icon-info"></span>
@@ -99,7 +99,7 @@
         </p>
       </div>
     </section>
-    <div class="col-xs-3">
+    <div class="col-sm-3 hidden-xs">
       <section class="panel panel-default request-queue sticky"
                nxg-requests-summary
                eligibility="eligibility"
@@ -108,6 +108,12 @@
                footer=".well-footer"
                scroll=".queue-list">
       </section>
+    </div>
+    <div class="visible-xs mobile-checkout-widget">
+      <button class="visible-xs btn-cta cta-primary" ng-click="navigate('titleReleaseCheckout')">
+        <span class="paired-body" translate>({{queueLength()}}) Confirm Requests</span>
+        <span class="paired media" nxg-icon="icon-title"></span>
+      </button>
     </div>
   </section>
 </div>
