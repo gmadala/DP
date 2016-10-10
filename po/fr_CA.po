@@ -322,7 +322,7 @@ msgstr "Adresses supplémentaires"
 
 #: app/client/floor-vehicle/wizard/document-info.template.html:118
 msgid "Additional Comments"
-msgstr ""
+msgstr "Commentaires additionnels"
 
 #: app/client/title-releases/title-releases-checkout/confirm-title-release-modal/confirm-title-request.template.html:38
 msgid "Additional fees may apply. Please check your Rates and Fees schedule."
@@ -435,7 +435,7 @@ msgstr "Réponse"
 
 #: app/client/floor-vehicle/wizard/document-info.template.html:8
 msgid "Applicable Supporting Documents"
-msgstr ""
+msgstr "Documents associés applicables"
 
 #: app/client/checkout/checkout.template.html:325
 msgid "Apply these Funds to Payment?"
@@ -488,11 +488,11 @@ msgstr "No AuctionACCESS"
 
 #: app/client/audits/open-audits.template.html:36
 msgid "Audited"
-msgstr ""
+msgstr "Vérifié"
 
 #: app/client/audits/open-audits.template.html:87
 msgid "Audited:"
-msgstr ""
+msgstr "Vérifié :"
 
 #: app/client/shared/modals/confirm/confirm-disable-autopay.template.html:3
 msgid "Authorization and Request to Unenroll"
@@ -801,7 +801,7 @@ msgstr "Sélectionnez des fichiers"
 
 #: app/client/floor-vehicle/wizard/document-info.template.html:32
 msgid "Choose files to Upload"
-msgstr ""
+msgstr "Sélectionnez les fichiers à télécharger"
 
 #: app/client/dealer-search/auction-dealer-search.template.html:63
 #: app/client/dealer-search/business-search-modal/business-search.template.html:108
@@ -828,7 +828,7 @@ msgstr "Propre"
 
 #: app/client/floor-vehicle/wizard/document-info.template.html:74
 msgid "clear"
-msgstr ""
+msgstr "effacer"
 
 #: app/client/shared/directives/nxg-search/nxg-search.template.html:5
 msgid "Clear"
@@ -836,7 +836,7 @@ msgstr "Effacer"
 
 #: app/client/audits/open-audits.template.html:14
 msgid "Click here"
-msgstr ""
+msgstr "Cliquez ici"
 
 #: app/client/payments/payments.template.html:278
 msgid "Click the Add button to add a payoff or a payment."
@@ -885,11 +885,11 @@ msgstr "Couleur"
 
 #: app/client/floor-vehicle/wizard/car-info.template.html:8
 msgid "Color & Odometer"
-msgstr ""
+msgstr "Couleur et odomètre"
 
 #: app/client/floor-vehicle/wizard/sales-info.template.html:79
 msgid "Comment"
-msgstr ""
+msgstr "Commentaire"
 
 #: app/client/floor-plan/auction-seller-floor-plan.controller.js:53
 #: app/client/floor-plan/floor-plan.controller.js:52
@@ -962,11 +962,11 @@ msgstr "Continuer"
 
 #: app/client/floor-vehicle/wizard/document-info.template.html:5
 msgid "Copy of Signed Bill of Sale"
-msgstr ""
+msgstr "Copie de l'acte de vente signé"
 
 #: app/client/floor-vehicle/wizard/document-info.template.html:6
 msgid "Copy of Title: Front, Back and All Attachments"
-msgstr ""
+msgstr "Copie du titre : recto, verso et toutes les pièces jointes"
 
 #: app/client/checkout/schedule-checkout-modal/schedule-checkout.template.html:65
 #: app/client/shared/modals/payment-options-breakdown/payment-options-breakdown.template.html:91
@@ -986,7 +986,7 @@ msgstr "Créer votre NIP d'inscription améliorée à quatre chiffres "
 
 #: app/client/shared/directives/nxg-credit-availability/nxg-credit-availability.template.html:4
 msgid "Credit Availability"
-msgstr ""
+msgstr "Crédit disponible"
 
 #: app/client/reports/auction/auction-reports.controller.js:42
 msgid "Credit Availability Query History (PDF)"
@@ -1128,7 +1128,7 @@ msgstr "Refusé/Impayé"
 #: app/client/floor-vehicle/wizard/payment-info.template.html:42
 #: app/client/floor-vehicle/wizard/payment-info.template.html:51
 msgid "Deposit Account"
-msgstr ""
+msgstr "Compte de dépôt"
 
 #: app/client/account-management/account-management.template.html:21
 msgid "Deposit Account:"
@@ -1194,7 +1194,7 @@ msgstr "Téléchargement de document"
 
 #: app/client/floor-vehicle/wizard/wizard-floor.template.html:19
 msgid "Documentation Upload"
-msgstr ""
+msgstr "Téléchargement des documents"
 
 #: app/client/resources/dealer/resources.template.html:24
 msgid "Documents"
@@ -1880,11 +1880,11 @@ msgstr "Dénomination sociale"
 
 #: app/client/floor-vehicle/wizard/sales-info.template.html:2
 msgid "Let us know the details of the sale"
-msgstr ""
+msgstr "Faites-nous part des détails de la vente"
 
 #: app/client/shared/directives/nxg-credit-availability/nxg-credit-availability.template.html:10
 msgid "limit"
-msgstr ""
+msgstr "limite"
 
 #: app/client/dashboard/dealer/dashboard.template.html:394
 #: app/client/floor-vehicle/floor-car.template.html:165
@@ -1983,7 +1983,7 @@ msgstr "Rapport de classement chronologique du fabricant (PDF)"
 
 #: app/client/floor-vehicle/wizard/document-info.template.html:49
 msgid "Maximum Upload Size: 5MB"
-msgstr ""
+msgstr "Taille maximale des fichiers à télécharger : 5 Mo"
 
 #: app/client/floor-vehicle/floor-car.controller.js:395
 #: app/client/floor-vehicle/wizard/car-info.controller.js:21
@@ -2283,7 +2283,7 @@ msgstr "Un ou plusieurs fichiers dépassaient la limite de 5 Mo."
 #: app/client/audits/open-audits.template.html:6
 #: app/client/shared/directives/navbar/navbar.controller.js:98
 msgid "Open Audits"
-msgstr ""
+msgstr "Ouvrir les vérifications"
 
 #: app/client/shared/directives/nxg-document-upload/nxg-document-upload.template.html:21
 msgid "Optional document upload may include:"
@@ -2291,7 +2291,7 @@ msgstr "Les documents facultatifs à télécharger peuvent comprendre :"
 
 #: app/client/floor-vehicle/wizard/document-info.template.html:48
 msgid "Or drag and drop them here"
-msgstr ""
+msgstr "Ou glissez-déposez-les ici"
 
 #: app/client/vehicle-details/vehicle-details.html:22
 msgid "Original Term"
@@ -2425,7 +2425,7 @@ msgstr "Paiement dû"
 #: app/client/floor-vehicle/wizard/payment-info.template.html:2
 #: app/client/floor-vehicle/wizard/wizard-floor.template.html:15
 msgid "Payment Information"
-msgstr ""
+msgstr "Informations de paiement"
 
 #: app/client/vehicle-details/payment-details-modal/payment-details.template.html:12
 msgid "Payment Made"
@@ -2892,6 +2892,8 @@ msgstr "Veuillez entrer un montant d'augmentation."
 #: app/client/floor-vehicle/wizard/document-info.template.html:122
 msgid "Please enter any additional comments you have for our team"
 msgstr ""
+"Veuillez entrer tout commentaire additionnel que vous aimeriez transmettre à "
+"notre équipe"
 
 #: app/client/dealer-search/business-search-modal/business-search.template.html:13
 #: app/client/dealer-search/dealer-name-search-modal/dealer-name-search.template.html:10
@@ -3002,7 +3004,7 @@ msgstr "Veuillez réviser ce qui suit et soumettre vos paiements ci-dessous."
 
 #: app/client/floor-vehicle/wizard/review-request.template.html:2
 msgid "Please review your floor plan request."
-msgstr ""
+msgstr "Veuillez réviser votre demande de plan de nantissement."
 
 #: app/client/floor-vehicle/auction-bulk-flooring.template.html:187
 #: app/client/floor-vehicle/floor-car.template.html:202
@@ -3127,15 +3129,15 @@ msgstr ""
 
 #: app/client/floor-vehicle/wizard/payment-info.template.html:37
 msgid "Please select who to pay."
-msgstr ""
+msgstr "Veuillez sélectionner une modalité de paiement."
 
 #: app/client/floor-plan/floor-plan.template.html:37
 msgid "Please try a new search"
-msgstr ""
+msgstr "Veuillez tenter une nouvelle recherche."
 
 #: app/client/floor-vehicle/wizard/document-info.template.html:2
 msgid "Please upload your floor plan documentaion."
-msgstr ""
+msgstr "Veuillez télécharger vos documents du plan de nantissement."
 
 #: app/client/floor-vehicle/wizard/document-info.template.html:87
 #: app/client/shared/directives/nxg-document-upload/nxg-document-upload.template.html:98
@@ -3223,7 +3225,7 @@ msgstr "Date d'achat"
 
 #: app/client/floor-vehicle/wizard/sales-info.template.html:3
 msgid "Purchase Information:"
-msgstr ""
+msgstr "Informations sur l'achat :"
 
 #: app/client/analytics/top-auctions-modal/top-auctions.template.html:13
 #: app/client/floor-plan/floor-plan.template.html:30
@@ -3352,7 +3354,7 @@ msgstr "Demander une augmentation de crédit"
 
 #: app/client/floor-vehicle/wizard/sales-info.template.html:74
 msgid "Request additional financing"
-msgstr ""
+msgstr "Demander du financement supplémentaire"
 
 #: app/client/vehicle-details/vehicle-details.html:499
 msgid "Request an extension?"
@@ -3406,7 +3408,7 @@ msgstr "requis"
 
 #: app/client/floor-vehicle/wizard/document-info.template.html:3
 msgid "Required document types include:"
-msgstr ""
+msgstr "Les types de documents requis comprennent :"
 
 #: app/client/analytics/analytics.template.html:89
 msgid "Reserve Funds"
@@ -3419,7 +3421,7 @@ msgstr "Réinitialiser les valeurs"
 
 #: app/client/audits/open-audits.template.html:23
 msgid "Resolve via"
-msgstr ""
+msgstr "Régler par"
 
 #: app/client/shared/directives/navbar/navbar.controller.js:48
 #: app/client/shared/directives/navbar/navbar.controller.js:57
@@ -3440,7 +3442,7 @@ msgstr "Compte rendu et véhicule en nantissement"
 
 #: app/client/floor-vehicle/wizard/wizard-floor.template.html:23
 msgid "Review Request"
-msgstr ""
+msgstr "Réviser la demande"
 
 #: app/client/title-releases/title-releases-checkout/title-release-checkout.html:84
 msgid "Review the following and submit your title release requests."
@@ -3468,7 +3470,7 @@ msgstr "Date de vente"
 
 #: app/client/floor-vehicle/wizard/wizard-floor.template.html:11
 msgid "Sale Details"
-msgstr ""
+msgstr "Informations sur la vente"
 
 #: app/client/floor-vehicle/auction-bulk-flooring.template.html:86
 msgid "Sale Information"
@@ -3556,7 +3558,7 @@ msgstr "Recherche"
 #: app/client/floor-vehicle/nxg-business-field-v2/nxg-business-field.template.html:19
 #: app/client/floor-vehicle/nxg-vin-details/nxg-vin-details.template.html:19
 msgid "SEARCH"
-msgstr ""
+msgstr "RECHERCHE"
 
 #: app/client/dealer-search/auction-dealer-search.template.html:8
 msgid ""
@@ -3569,6 +3571,7 @@ msgstr ""
 #: app/client/floor-vehicle/wizard/car-info.template.html:3
 msgid "Search for a VIN to import vehicle details & style"
 msgstr ""
+"Rechercher un NIV pour importer les informations et le style du véhicule"
 
 #: app/client/login/login-recover/login-recover.template.html:80
 #: app/client/profile-settings/auction/auction-settings.template.html:67
@@ -3655,7 +3658,7 @@ msgstr "Envoyer un courriel"
 
 #: app/client/floor-vehicle/wizard/payment-info.template.html:21
 msgid "Send payment to"
-msgstr ""
+msgstr "Envoyer le paiement à"
 
 #: app/client/floor-vehicle/floor-car-confirm-modal/floor-car-confirm.template.html:85
 #: app/client/floor-vehicle/floor-car.template.html:180
@@ -3939,7 +3942,7 @@ msgstr ""
 
 #: app/client/floor-vehicle/wizard/document-info.template.html:107
 msgid "Supported Formats: Image, Word, Excel, and PDF"
-msgstr ""
+msgstr "Formats reconnus : image, Word, Excel et PDF"
 
 #: app/client/shared/services/user-voice/user-voice.service.js:54
 msgid "Technical Support"
@@ -3947,7 +3950,7 @@ msgstr "Soutien technique"
 
 #: app/client/floor-vehicle/wizard/car-info.template.html:2
 msgid "Tell us about the vehicle you would like to floor"
-msgstr ""
+msgstr "Décrivez-nous le véhicule que vous aimeriez financer"
 
 #: app/client/vehicle-details/vehicle-details.html:81
 msgid "Term Plan Name"
@@ -4091,6 +4094,8 @@ msgstr "Cette demande de prolongation ne peut être complétée en ligne."
 msgid ""
 "This is not a passenger vehicle, and I'd like to manually enter the details:"
 msgstr ""
+"Il ne s'agit pas d'un véhicule de promenade et je souhaite entrer les "
+"informations manuellement :"
 
 #: app/client/dashboard/dealer/dashboard.template.html:269
 msgid ""
@@ -4316,7 +4321,7 @@ msgstr ""
 
 #: app/client/audits/open-audits.template.html:14
 msgid "to return to your dashboard."
-msgstr ""
+msgstr "retourner au tableau de bord."
 
 #: app/client/checkout/checkout.template.html:13
 #: app/client/title-releases/title-releases-checkout/title-release-checkout.html:27
@@ -4486,7 +4491,7 @@ msgstr "Documents téléchargés"
 #: app/client/shared/directives/nxg-credit-availability/nxg-credit-availability.directive.js:13
 #: app/client/shared/directives/nxg-credit-availability/nxg-credit-availability.template.html:23
 msgid "Used"
-msgstr ""
+msgstr "D'occasion"
 
 #: app/client/profile-settings/auction/auction-settings.template.html:8
 #: app/client/profile-settings/dealer/profile-settings.template.html:7
@@ -4526,7 +4531,7 @@ msgstr "Description du véhicule"
 
 #: app/client/floor-vehicle/wizard/review-request.template.html:6
 msgid "Vehicle Details"
-msgstr ""
+msgstr "Informations sur le véhicule"
 
 #: app/client/floor-vehicle/auction-bulk-flooring.template.html:7
 #: app/client/floor-vehicle/floor-car-confirm-modal/floor-car-confirm.template.html:40
@@ -4754,6 +4759,9 @@ msgid ""
 "We're sorry, we were unable to find this VIN. This looks like a passenger "
 "vehicle. Please select the year, make, model and style below."
 msgstr ""
+"Nous sommes désolés, nous ne parvenons pas à trouver ce NIV. Il semble qu'il "
+"s'agisse d'un véhicule de promenade. Veuillez sélectionner l'année, la "
+"marque, le modèle et le style ci-dessous."
 
 #: app/client/dashboard/auction/auction-dashboard.template.html:139
 #: app/client/dashboard/dealer/dashboard.template.html:22
@@ -4778,7 +4786,7 @@ msgstr "Bienvenue chez MyNextGear!"
 
 #: app/client/floor-vehicle/wizard/document-info.template.html:10
 msgid "What all do I need to attach for my flooring request?"
-msgstr ""
+msgstr "Quels documents dois-je joindre à ma demande de nantissement?"
 
 #: app/client/shared/modals/financial-account/financial-account.template.html:143
 msgid "Where can I find my account and routing numbers?"
@@ -4874,7 +4882,7 @@ msgstr ""
 
 #: app/client/audits/open-audits.template.html:9
 msgid "You currently have no open audits."
-msgstr ""
+msgstr "Vous n'avez actuellement aucune vérification d'ouverte."
 
 #: app/client/shared/services/user/user.service.js:76
 msgid ""
@@ -4943,6 +4951,8 @@ msgid ""
 "Your purchase date is older than 365 days.  Please contact Floor Plan "
 "Services at fundingservices@nextgearcapital.com."
 msgstr ""
+"Votre achat date de plus de 365 jours. Veuillez communiquer avec les "
+"Services de plan de nantissement à fundingservices@nextgearcapital.com."
 
 #: app/client/dashboard/nxg-unapplied-funds-widget/nxg-unapplied-funds-widget.controller.js:50
 msgid ""
