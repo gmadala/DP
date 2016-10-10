@@ -1,5 +1,38 @@
 .wizard-container {
 
+  .display-flex{
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+  }
+
+  .sidebar {
+    background: #EBEBEB;
+    padding-bottom: 15px;
+
+    .sidebar-header {
+      font-size: 1.1em;
+      font-weight: 100;
+      margin-top: 28px;
+      margin-bottom: 20px;
+    }
+
+    .sidebar-hero {
+      font-size: 2em;
+      margin-bottom: 20px;
+    }
+
+    .sidebar-hint {
+      font-size: 0.8em;
+    }
+
+    .highcharts-container {
+      left: 0;
+    }
+  }
+
   h2 {
     font-size: 1.714em;
     margin-top: 28px;
@@ -44,7 +77,6 @@
       }
     }
 
-
     select: {
       font-size: 1.286em;
     }
@@ -54,7 +86,6 @@
     }
 
   }
-
 
   .input-group-btn:last-child > .btn {
     height: 38px;
@@ -161,7 +192,7 @@
   }
 
   .switch input {
-    display:none;
+    display: none;
   }
 
   .slider {

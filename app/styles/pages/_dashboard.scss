@@ -1,30 +1,97 @@
 // ===========
 //  DASHBOARD
 // ===========
+// Only apply these styles to the dashboard page
+#DashboardPage {
 
-.col-xs-3.well.payment-summary.dash-well.leftMarginMedium ul.counter-list {
-  margin-top: 5%;
-}
-
-.col-xs-2.well.dash-well ul {
-  margin-top: 14%;
-}
-
-#unappliedFunds {
-  position: absolute;
-  bottom: 0;
-  padding: 14px 5px;
-  color: #39c;
-  border: 1px solid #bbb;
-  border-right: 0;
-  border-bottom: 0;
-  border-left: 0;
-  border-radius: 0 0 5px 5px;
-  height: 40px;
-  margin: 0;
-  width: 100%;
-  p{
-    font-size: 10px;
-    text-align: center;
+  #unappliedFunds {
+    position: absolute;
+    bottom: 0;
+    padding: 14px 5px;
+    color: #39c;
+    border: 1px solid #bbb;
+    border-right: 0;
+    border-bottom: 0;
+    border-left: 0;
+    border-radius: 0 0 5px 5px;
+    height: 40px;
+    margin: 0;
+    width: 100%;
+    p {
+      font-size: 10px;
+      text-align: center;
+    }
   }
+
+  .payments-chart {
+    .table {
+      margin-top: 0px;
+    }
+  }
+
+  .receipts-table {
+    font-size: 12px;
+  }
+
+  .fc-center {
+    h2 {
+      margin-left: 0 !important;
+    }
+    .fc-next-button {
+      margin-left: 0;
+    }
+  }
+
+  .dash-lockup {
+    float: left;
+    text-align: left;
+  }
+
+  @media only screen and (max-width: 991px) {
+    .chart-legend {
+      .table, .table-label, .table-symbol, .table-value {
+        padding: 8px 0px 8px 0px;
+      }
+    }
+  }
+
+  @media only screen and (min-width: 768px) and (max-width: 991px) {
+    .fc-center {
+      float: left;
+    }
+    .panel-body {
+      padding: 10px 5px;
+    }
+  }
+
+  @media only screen and (max-width: 767px) {
+    margin-bottom: 20px;
+
+    .fc-content-skeleton {
+      td:not(.fc-event-container)::before {
+        content: 'No payments due on this date';
+        position: relative;
+        top: 10px;
+        float: left;
+        padding-left: 10px;
+      }
+    }
+
+    .dash-well {
+      position: relative;
+      height: 100% !important;
+      .cta-full {
+        position: relative;
+      }
+    }
+
+    #unappliedFunds {
+      position: relative;
+    }
+
+    .solo-btn {
+      margin: 0 0 20px;
+    }
+  }
+
 }

@@ -39,10 +39,12 @@
     vm.dateFormat = 'MM/dd/yyyy';
 
     vm.switchChange = function (toggleValue) {
-      $scope.$parent.wizardFloor.data.PaySeller = toggleValue ? 0 : null;
+      if ($scope.$parent.wizardFloor.data) {
+        $scope.$parent.wizardFloor.data.PaySeller = toggleValue ? 0 : null;
 
-      if (!$scope.$parent.wizardFloor.canPayBuyer) {
-        $scope.$parent.wizardFloor.data.PaySeller = 1;
+        if (!$scope.$parent.wizardFloor.canPayBuyer) {
+          $scope.$parent.wizardFloor.data.PaySeller = 1;
+        }
       }
     };
 
