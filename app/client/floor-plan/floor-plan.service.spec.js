@@ -35,7 +35,7 @@ describe('Model: Floorplan', function () {
     var sentData,
       dummyFormData = {
         UnitColorId: {ColorId: 'col1'},
-        TitleLocationId: {ResultingTitleTypeId: 'titleType1'},
+        TitleLocationId: {ResultingTitleLocationId: 'titleLoc1', ResultingTitleTypeId: 'titleType1'},
         PhysicalInventoryAddressId: {AddressId: 'loc1'},
         LineOfCreditId: {LineOfCreditId: 'line1'},
         BankAccountId: {BankAccountId: 'account1'},
@@ -88,7 +88,6 @@ describe('Model: Floorplan', function () {
       floorplan.create(angular.extend({}, dummyFormData));
       httpBackend.flush();
       expect(sentData.UnitColorId).toBe('col1');
-      //expect(sentData.TitleLocationId).toBe('titleLoc1');
       expect(sentData.TitleTypeId).toBe('titleType1');
       expect(sentData.PhysicalInventoryAddressId).toBe('loc1');
       expect(sentData.LineOfCreditId).toBe('line1');
