@@ -150,7 +150,8 @@
       UnitVin: null, // string
       VinAckLookupFailure: false, // Boolean (whether vehicle data came from VIN or manual attribute entry)
       UnitYear: null, // int
-      TitleLocationId: null, // TitleLocationOption object locally, flatten to int for API tx
+      TitleLocation: null, // TitleLocationOption object locally, flatten to int for API tx
+      TitleLocationIndex: null, // For TitleLocationIndex value
       TitleTypeId: null, // null locally, int extracted from TitleLocationOption object above for API tx
       ConsignerTicketNumber: null, // string (AUCTION ONLY)
       LotNumber: null, // string (AUCTION ONLY)
@@ -339,7 +340,7 @@
       var dialogParams;
 
       vm.floorPlanSubmitting = true;
-      vm.data.TitleLocationId = vm.options.titleLocationOptions[vm.data.TitleLocationId];
+      vm.data.TitleLocation = vm.options.titleLocationOptions[vm.data.TitleLocationIndex];
 
       Floorplan.create(vm.data).then(
         function (response) {

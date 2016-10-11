@@ -31,8 +31,8 @@
           UnitPurchaseDate: api.toShortISODate(data.UnitPurchaseDate),
           // option object values that need flattened to ids
           UnitColorId: data.UnitColorId ? data.UnitColorId.ColorId : null,
-          TitleLocationId: data.TitleLocationId ? data.TitleLocationId.ResultingTitleLocationId : null,
-          TitleTypeId: data.TitleLocationId ? data.TitleLocationId.ResultingTitleTypeId : null,
+          TitleLocationId: data.TitleLocationIndex ? data.TitleLocation.ResultingTitleLocationId : null,
+          TitleTypeId: data.TitleLocation ? data.TitleLocation.ResultingTitleTypeId : null,
           PhysicalInventoryAddressId: data.PhysicalInventoryAddressId ? data.PhysicalInventoryAddressId.AddressId : null,
           LineOfCreditId: data.LineOfCreditId ? data.LineOfCreditId.LineOfCreditId : null,
           BankAccountId: data.BankAccountId ? data.BankAccountId.BankAccountId : null,
