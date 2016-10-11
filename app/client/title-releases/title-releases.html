@@ -23,7 +23,7 @@
 
       <div class="panel panel-default" ng-switch="data.results.length > 0 || data.loading">
         <h2 class="well-title" translate><span>Title Release Requests</span>
-          <div uib-dropdown class="pull-right visible-xs visible-sm">
+          <div uib-dropdown class="pull-right visible-xs">
             <button class="btn-unstyle dropdown-toggle sort-by right no-padding no-margin" type="button" id="dropdownSort" uib-dropdown-toggle
                     aria-haspopup="true" aria-expanded="false">
               <strong translate>Sort By</strong>
@@ -56,7 +56,7 @@
                 ng-class="{ sorted : sortField == 'UnitMake', desc : sortDescending }">
               <nxg-sortable sortable-text="{{ 'Description' | translate }}"></nxg-sortable>
             </th>
-            <th class="sortable hidden-xs"
+            <th class="sortable hidden-xs hidden-sm"
                 ng-click="sortBy('PurchaseDate')"
                 ng-class="{ sorted : sortField == 'PurchaseDate', desc : sortDescending }">
               <nxg-sortable sortable-text="{{ 'Purchased' | translate }}"></nxg-sortable>
@@ -69,6 +69,8 @@
               <td class="hidden-xs">
                 <p class="lockup-major">{{ item.FlooringDate | moment}}</p>
                 <p class="lockup-minor" translate>{{ item.DaysFloored }} days</p>
+                <p class="lockup-major visible-sm">Purchased:</p>
+                <p class="lockup-minor visible-sm">{{item.UnitPurchaseDate | moment}}</p>
               </td>
               <td class="description">
                 <div class="col-xs-6 no-padding visible-xs">
@@ -110,22 +112,20 @@
                   <p class="lockup-minor vertical-spacing heavy"><span translate>Actions</span>:</p>
                 </div>
                 <div class="col-xs-6 no-padding visible-xs">
-
-                  <div ng-switch="item.TitleReleaseProgramStatus">
+                  <div class="lockup-minor vertical-spacing" ng-switch="item.TitleReleaseProgramStatus">
                     <h6 ng-switch-when="OutstandingTitleReleaseProgramRelease" translate>Pay off this vehicle or return the title to remove from your
                       limit.</h6>
                     <div ng-switch-when="EligibleForRelease">
                       <button type="button" class="btn btn-icon btn-title-request" ng-click="toggleSelected(item)" ng-switch="isFloorplanOnQueue(item)"
                               ng-class="{selected: isFloorplanOnQueue(item)}"
                               ng-disabled="$parent.eligibilityLoading() || (!isFloorplanOnQueue(item) && $parent.eligibility.RemainingReleasesAvailable <= $parent.queueLength())">
-                  <span ng-switch-when="true">
-                    <!-- Force pluralization due to duplicate translations -->
-                    <span translate translate-n="1" translate-plural="Titles Requested">Title Requested</span><span nxg-icon="icon-minus"
-                                                                                                                    class="icon-small"></span>
-                  </span>
-                  <span ng-switch-default>
-                    <span translate>Request Title</span><span nxg-icon="icon-plus" class="icon-small"></span>
-                  </span>
+                        <span ng-switch-when="true"><!-- Force pluralization due to duplicate translations -->
+                          <span translate translate-n="1" translate-plural="Titles Requested">Title Requested</span>
+                          <span nxg-icon="icon-minus" class="icon-small"></span>
+                        </span>
+                        <span ng-switch-default>
+                          <span translate>Request Title</span><span nxg-icon="icon-plus" class="icon-small"></span>
+                        </span>
                       </button>
                     </div>
                     <a ng-switch-when="NotEligibleForRelease" ng-click="titleReleaseUnavailable()" translate>
@@ -134,7 +134,7 @@
                   </div>
                 </div>
               </td>
-              <td class="date hidden-xs">
+              <td class="date hidden-xs hidden-sm">
                 <p>{{item.UnitPurchaseDate | moment}}</p>
               </td>
               <td class="hidden-xs" ng-switch="item.TitleReleaseProgramStatus">
