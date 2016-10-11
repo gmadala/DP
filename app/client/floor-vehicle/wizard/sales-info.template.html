@@ -108,7 +108,7 @@
 
   <label class="main-heading"><span for="titleLocation" translate>Title Location</span></label>
   <div class="cr-inline" style="margin-bottom: 25px;">
-    <input type="radio" name="titleLocation" id="{{location.Id}}" ng-value="{{$index}}" ng-model="wizardFloor.data.TitleLocationId" ng-repeat-start="location in wizardFloor.options.titleLocationOptions" required />
+    <input type="radio" name="titleLocation" id="{{location.Id}}" ng-value="{{$index}}" ng-model="wizardFloor.data.TitleLocationIndex" ng-repeat-start="location in wizardFloor.options.titleLocationOptions" required />
     <label class="radio-img" for="{{location.Id}}"></label>
     <label class="cr-label" for="{{location.Id}}">{{ location.Name }}</label>
     <br ng-repeat-end />
