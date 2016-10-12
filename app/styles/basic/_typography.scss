@@ -7,6 +7,9 @@ h1 {
   font-weight: bold;
   line-height: $baseLineHeight;
   color: $text;
+  &.negative{
+    font-size: 34px;
+  }
 }
 
 h2 {
@@ -139,11 +142,10 @@ a, a:link, a:visited {
 .receipt-option {
   @extend %align-left;
   background: $white;
-  border-top: 1px solid #bbb;
 
   .receipt-minor {
-    padding: 2px;
-    font-size: 12px;
+    padding: 10px 0px 20px 0px;
+    font-size: 16px;
     color: #808080;
   }
 
@@ -154,9 +156,9 @@ a, a:link, a:visited {
 }
 
 .future-payments {
-  background-color: #F2F2F2;
+  background-color:white;
   width: 100%;
-  padding: 20px 20px 20px 20px;
+  padding: 20px 20px 10px 20px;
 }
 
 .more-payments {
@@ -173,15 +175,17 @@ a, a:link, a:visited {
   font-size: 12px;
 }
 
+.view-receipts{
+  font-size: 16px;
+}
+
 .receipt-option {
   width: 100%;
-  padding: 20px;
-  border-bottom: 1px solid #bbb;
+  padding: 0px 20px 20px 20px;
 }
 
 .receipt-modal {
   border-bottom: 1px solid #bbb;
-  background-color: #F2F2F2;
 }
 
 // Titles, subtitles, & other special type classes
@@ -230,6 +234,12 @@ a, a:link, a:visited {
 
 .description {
   font-size: 10px;
+}
+
+.description-italic {
+  font-size: 10px;
+  font-weight: normal;
+  font-style: italic;
 }
 
 .alt-addr {

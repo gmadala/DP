@@ -1,0 +1,165 @@
+<div class="col-xs-12 col-md-6 col-md-offset-2">
+<h1 class="negative"translate>Thank you for your payment submission.</h1>
+
+<div>
+  <div>
+    <section ng-show="items.feesToday.length > 0 || items.paymentsToday.length > 0">
+      <!-- Today's Fees -->
+      <div class="future-payments" ng-show="items.feesToday.length > 0">
+        <h2 class="bottom-padding"><span translate>Today's Fees</span>: <span>{{ items.getTotals().feesToday | currency }}</span></h2>
+        <div>
+          <table class="table table-striped table-secondary add-border">
+            <thead>
+            <th class="hidden-xs left" translate>Fee Type</th>
+            <th class="hidden-xs left" translate>Payment Date</th>
+            <th class="hidden-xs right" translate>Amount</th>
+            </thead>
+            <tr ng-repeat="fee in items.feesToday">
+              <td>
+                <div class="heavy">
+                  {{ fee.feeType || 'N/A' }}
+                </div>
+                <div class="visible-xs">
+                  <div class="lockup-minor">
+                    <span translate>Payment Date: </span>
+                    {{ today | moment }}
+                  </div>
+                  <div class="lockup-major pull-right">
+                    {{ fee.amount | currency }}
+                  </div>
+                </div>
+
+              </td>
+              <td class="left hidden-xs">{{ today | moment }}</td>
+              <td class="numeric hidden-xs">{{ fee.amount | currency }}</td>
+            </tr>
+          </table>
+        </div>
+      </div>
+
+      <!-- Today's Payments -->
+      <div class="future-payments" ng-show="items.paymentsToday.length > 0">
+        <h2 class="bottom-padding"><span translate>Payment Total</span>: <span>{{ items.getTotals().paymentsToday | currency }}</span></h2>
+        <div>
+          <table class="table table-striped table-secondary add-border">
+            <thead>
+            <th class="hidden-xs left" translate>Description</th>
+            <th class="hidden-xs left" translate>Payment Date</th>
+            <th class="hidden-xs right" translate>Amount</th>
+            </thead>
+            <tr ng-repeat="payment in items.paymentsToday">
+              <td>
+                <a class="block-title heavy"  ng-click="openVehicleDetail(payment)">{{ payment.description }}</a><br/>
+                <p class="caps vin"><span translate>VIN</span>: {{ payment.vin }}</p>
+                <p class="caps stock"><span translate>STK</span>: {{ payment.stockNum }}</p>
+                <div class="visible-xs">
+                  <div>
+                    <span class="lockup-minor" translate>Payment Date: </span>
+                    {{ today | moment }}
+                  </div>
+                  <div class="lockup-major pull-right">
+                    {{ payment.getCheckoutAmount() | currency }}
+                  </div>
+                </div>
+              </td>
+              <td class="left hidden-xs">{{ today | moment }}</td>
+              <td class="numeric hidden-xs">{{ payment.getCheckoutAmount() | currency }}</td>
+            </tr>
+          </table>
+        </div>
+      </div>
+    </section>
+    <section ng-show="items.paymentsScheduled.length > 0 || items.feesScheduled.length > 0">
+      <!-- Scheduled Fees -->
+      <div class="future-payments" ng-show="items.feesScheduled.length > 0">
+        <h2 class="bottom-padding"><span translate>Future Fees</span>: <span>{{ items.getTotals().feesScheduled | currency }}</span></h2>
+        <div>
+          <table class="table table-striped table-secondary add-border">
+            <thead>
+            <th class="hidden-xs left" translate>Fee Type</th>
+            <th class="hidden-xs left" translate>Payment Date</th>
+            <th class="hidden-xs right" translate>Amount</th>
+            </thead>
+            <tr ng-repeat="fee in items.feesScheduled">
+              <td>
+                <div class="heavy">
+                  {{ fee.feeType || 'N/A' }}
+                </div>
+                <div class="visible-xs">
+                  <div class="lockup-minor">
+                    <span class="lockup-minor" translate>Payment Date: </span>
+                    {{ fee.scheduleDate | moment }}
+                  </div>
+                  <div class="lockup-major pull-right">
+                    {{ fee.amount | currency }}
+                  </div>
+                </div>
+              </td>
+              <td class="left hidden-xs">{{ fee.scheduleDate | moment }}</td>
+              <td class="numeric hidden-xs">{{ fee.amount | currency }}</td>
+            </tr>
+          </table>
+        </div>
+      </div>
+
+      <!-- Scheduled Payments -->
+      <div class="future-payments" ng-show="items.paymentsScheduled.length > 0">
+        <h2 class="bottom-padding"><span translate>Future Payments</span>: <span>{{ items.getTotals().paymentsScheduled | currency }}</span></h2>
+        <div>
+          <table class="table table-striped table-secondary add-border">
+            <thead>
+            <th class="hidden-xs left" translate>Description</th>
+            <th class="hidden-xs left" translate>Payment Date</th>
+            <th class="hidden-xs right" translate>Amount</th>
+            </thead>
+            <tr ng-repeat="payment in items.paymentsScheduled">
+              <td>
+                <a class="block-title heavy"  ng-click="openVehicleDetail(payment)">{{ payment.description }}</a><br/>
+                <p class="caps vin"><span translate>VIN</span>: {{ payment.vin }}</p>
+                <p class="caps stock"><span translate>STK</span>: {{ payment.stockNum }}</p>
+                <div class="visible-xs">
+                  <div>
+                    <span class="lockup-minor" translate>Payment Date: </span>
+                    {{ payment.scheduleDate | moment }}
+                  </div>
+                  <div class="lockup-major pull-right">
+                    {{ payment.getCheckoutAmount() | currency }}
+                  </div>
+                </div>
+              </td>
+              <td class="left hidden-xs">{{ payment.scheduleDate | moment }}</td>
+              <td class="numeric hidden-xs">{{ payment.getCheckoutAmount() | currency }}</td>
+            </tr>
+          </table>
+        </div>
+      </div>
+    </section>
+  </div>
+  <div class="receipt-option" ng-show="!!receiptUrls.length">
+    <h2><span translate>Receipt Options</span></h2>
+    <p class="receipt-minor" translate>If you wish to view your receipts, please choose from the following formatting options.</p>
+    <div class="cr-inline" style="text-align: left">
+      <input type="radio" name="receiptOption" id="grouped" ng-model="format" value="grouped">
+      <label class="radio-img" for="grouped"></label>
+      <label class="cr-label negative" style="text-align: right" for="grouped" translate>Grouped by transaction</label>
+    </div>
+    <div class="cr-inline" style="text-align: left">
+      <input type="radio" name="receiptOption" id="single" ng-model="format" value="single">
+      <label class="radio-img" for="single"></label>
+      <label class="cr-label negative" for="single" translate>1 VIN per page</label>
+    </div>
+    <div ng-show="!!receiptUrls.length">
+      <div style="padding:20px 0px 0px 0px;">
+        <a href class="featured today-btn" ng-class="{ 'disabled': !format }" ng-click="(format && viewReceipts())"><span translate>View Receipts</span></a>
+      </div>
+    </div>
+  </div>
+  <div ng-show="!!receiptUrls.length">
+      <button type="submit" ng-click="backToPayments()" class="btn-cta cta-primary" translate>Back To Payments</button>
+    </div>
+  </div>
+  <div ng-hide="!!receiptUrls.length">
+      <button type="submit" ng-click="backToPayments()" class="btn-cta cta-primary" nxg-autofocus translate>OK</button>
+  </div>
+ </div>
+</div>

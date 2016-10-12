@@ -3,34 +3,33 @@
 
   angular
     .module('nextgearWebApp')
-    .controller('ConfirmCheckoutCtrl', ConfirmCheckoutCtrl);
+    .controller('PaymentConfirmCtrl', PaymentConfirmCtrl);
 
-  ConfirmCheckoutCtrl.$inject = [
+  PaymentConfirmCtrl.$inject = [
     '$scope',
     '$state',
-    '$uibModalInstance',
-    'queue',
-    'transactionInfo',
+    '$stateParams',
     'Receipts',
+    'Payments',
     '$window',
     'api',
     'kissMetricInfo',
     'segmentio',
-    'metric'
+    'metric',
+    '$location'
   ];
 
-  function ConfirmCheckoutCtrl(
-    $scope,
-    $state,
-    $uibModalInstance,
-    queue,
-    transactionInfo,
-    Receipts,
-    $window,
-    api,
-    kissMetricInfo,
-    segmentio,
-    metric) {
+  function PaymentConfirmCtrl($scope,
+                                      $state,
+                                      $stateParams,
+                                      Receipts,
+                                      Payments,
+                                      $window,
+                                      api,
+                                      kissMetricInfo,
+                                      segmentio,
+                                      metric,
+                                      $location) {
 
     $scope.today = new Date();
 
@@ -39,6 +38,18 @@
       paymentsScheduled = [],
       feesToday = [],
       feesScheduled = [];
+
+    var queue = {};
+    var transactionInfo = {};
+
+    if ($stateParams.data) {
+      queue = $stateParams.data.queue;
+      transactionInfo = $stateParams.data.transactionInfo;
+    }
+    else{
+      // If user hasn't navigated away, from confirm page, go back to payments.
+      $state.transitionTo('payments');
+    }
 
     angular.forEach(queue.payments, function (payment) {
       if (payment.scheduleDate) {
@@ -56,6 +67,9 @@
       }
     });
 
+    //After submitting the payments the queue is cleared for multiple submission
+    Payments.clearPaymentQueue();
+
     $scope.items = {
       feesToday: feesToday,
       feesScheduled: feesScheduled,
@@ -71,7 +85,7 @@
         }
         return statuses.join(' and ');
       },
-      getTotals: function() {
+      getTotals: function () {
         var sumItems = function (subTotal, item) {
           return subTotal + item.getCheckoutAmount();
         };
@@ -100,6 +114,8 @@
       }
     }
 
+
+
     $scope.viewReceipts = function () {
       var stringUrl;
       var transactionId = transactionInfo.FinancialTransactionId;
@@ -120,23 +136,22 @@
         $window.open(stringUrl, '_blank');
       }
       $state.transitionTo('payments');
-      $uibModalInstance.close();
     };
 
-    $scope.close = function () {
-      if ($state.current.name === 'checkout') {
-        // If user hasn't navigated away, from checkout, go back to payments.
-        $state.transitionTo('payments');
-      }
-
-      // If user has navigated away, just close the dialog and let them stay here.
-      $uibModalInstance.close();
+    $scope.backToPayments = function () {
+      // If user hasn't navigated away, from checkout, go back to payments.
+      $state.transitionTo('payments');
     };
 
-    $scope.openVehicleDetail = function(payment) {
-      $uibModalInstance.close();
+    $scope.openVehicleDetail = function (payment) {
       $state.go('vehicledetails', {stockNumber: payment.stockNum});
     };
+
+    $scope.$on('$locationChangeStart', function(){
+      if($location.path() === '/checkout'){
+        $location.path('/payments');
+      }
+    });
 
   }
 })();
