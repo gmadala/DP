@@ -3,3 +3,38 @@
     border: 2px dashed $danger;
   }
 }
+
+@media (max-width: 640px) {
+  .titlefloat{float: left; font-weight: bold;}
+}
+@media (max-width: 640px) {
+  .balabold{font-weight: bold;}
+}
+@media (min-width: 641px) {
+  .titlefloat{float:right;}
+}
+@media (min-width: 640px) {
+  .verborder{border-right: 1px solid #bbbcbe; }
+}
+@media (max-width: 640px) {
+  .horborder{border-top: 1px solid #bbbcbe; padding-top: 10px;}
+}
+@media (max-width: 640px) {
+  .finbordertop{border-top: 1px solid #bbbcbe; }
+}
+@media (max-width: 640px) {
+  .fontresize{font-size:12px; }
+}
+.vdrow {
+  padding-bottom:13px;
+}
+.vdrowplus {
+  padding-bottom:20px;
+}
+
+.moveUPDup {
+  top:-50px;
+}
+.moveUPDupNoPayment {
+  top:-430px;
+}
