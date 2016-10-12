@@ -884,7 +884,7 @@ msgid "Color"
 msgstr "Couleur"
 
 #: app/client/floor-vehicle/wizard/car-info.template.html:8
-msgid "Color & Odometer"
+msgid "Color &amp; Odometer"
 msgstr "Couleur et odomètre"
 
 #: app/client/floor-vehicle/wizard/sales-info.template.html:79
@@ -3569,7 +3569,7 @@ msgstr ""
 "d'entreprise, numéro AuctionACCESS ou ID d'acheteur externe."
 
 #: app/client/floor-vehicle/wizard/car-info.template.html:3
-msgid "Search for a VIN to import vehicle details & style"
+msgid "Search for a VIN to import vehicle details &amp; style"
 msgstr ""
 "Rechercher un NIV pour importer les informations et le style du véhicule"
 
