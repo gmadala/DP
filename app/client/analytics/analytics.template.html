@@ -332,21 +332,6 @@
 
           <div class="row">
             <div class="col-xs-12">
-              <table class="movers-list">
-                <tr ng-repeat="model in selectedMoverChart.labels">
-                  <td class="rank">
-                    {{ $index + 1 }}
-                  </td>
-                  <td class="models">
-                    <div>
-                      <span>({{ model.year }})</span>
-                      <span>{{ model.make }}</span>
-                    </div>
-                    <div>{{ model.model }}</div>
-                  </td>
-                </tr>
-              </table>
-
               <div class="movers-chart">
                 <div>
                   <div class="chart-obj"
@@ -354,7 +339,8 @@
                        nxg-chart-type="bar"
                        nxg-chart-data-name="{{ 'Days to Turn' | translate }}"
                        nxg-chart-description-x="{{ 'Avg. # of Days to Turn' | translate }}"
-                       nxg-chart-data="selectedMoverChart.data"></div>
+                       nxg-chart-data="selectedMoverChart.data"
+                       nxg-chart-labels="true"></div>
                 </div>
               </div>
             </div>
