@@ -42,6 +42,10 @@ exports.resourcesPage = function () {
   return baseUrl + 'documents';
 };
 
+exports.accountManagement = function () {
+  return baseUrl + 'account_management';
+};
+
 exports.promosPage = function () {
   return baseUrl + 'promos';
 };
