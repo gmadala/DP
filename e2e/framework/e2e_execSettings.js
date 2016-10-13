@@ -49,6 +49,11 @@ exports.accountManagement = function () {
 exports.promosPage = function () {
   return baseUrl + 'promos';
 };
+
+exports.accountManagement = function () {
+  return baseUrl + 'account_management';
+};
+
 exports.receiptsPage = function () {
   return baseUrl + 'receipts';
 };

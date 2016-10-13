@@ -78,6 +78,19 @@ function Helper() {
     browser.sleep(browser.params.longDelay);
   };
 
+  this.goToAccountManagement = function () {
+    /**
+     * @name goToHome
+     * @memberof helper
+     * @author Javier Calderon
+     * @description This function navigates to the AccountManagement
+     *
+     * @returns {none}
+     */
+    browser.get(execSettings.accountManagement());
+    browser.sleep(browser.params.longDelay);
+  };
+
   //Generic functions
   this.waitForVisible = function (elementId) {
     /**

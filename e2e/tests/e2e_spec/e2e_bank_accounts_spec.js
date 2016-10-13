@@ -22,7 +22,7 @@ describe('\n Bank Account', function () {
     loginObjects.setLogin(browser.params.userNameBankAccount, browser.params.password);
     loginObjects.doLogin();
     helper.goToAccountManagement();
-    browser.sleep(browser.params.delay);
+    browser.sleep(browser.params.longDelay);
     expect(browser.getCurrentUrl()).toEqual(execSettings.accountManagement());
     helper.popOver();
   });
@@ -34,7 +34,7 @@ describe('\n Bank Account', function () {
     accountManagement.doFirstBankAccount();
     accountManagement.doClickSave();
     browser.refresh();
-    browser.sleep(browser.params.delay);
+    browser.sleep(browser.params.longDelay);
     expect(accountManagement.getDepositAccount()).toEqual("Fulton Bank -Main (...2794)");
   });
 
@@ -45,6 +45,7 @@ describe('\n Bank Account', function () {
     //Validate and refresh
     expect(accountManagement.getDepositAccount()).toEqual("Bank Account 2 (...6789)");
     browser.refresh();
+    browser.sleep(browser.params.longDelay);
     expect(accountManagement.getDepositAccount()).toEqual("Bank Account 2 (...6789)");
   });
 
