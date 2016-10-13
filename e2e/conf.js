@@ -48,6 +48,7 @@ exports.config = {
   params: {
     userNameDealer: '57694AC',
     userNameAuction: '10298KB',
+    userNameBankAccount:'3boysmotors',
     userName: '62434AM',
     password: 'ngcpass!0',
     delay: '500',
