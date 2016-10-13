@@ -127,27 +127,4 @@ describe('\n Login Recovery Page', function () {
     expect(browser.getCurrentUrl()).toEqual(execSettings.loginPage());
   });
 
-  it("5. Login Recovery - Validating the NGC Logo and Language selection in Login Page", function () {
-    helper.goToLogin();
-    expect(loginObjects.elMNGLogo.isDisplayed()).toBe(true);
-    expect(loginObjects.elLangChooser.isDisplayed()).toBe(true);
-    expect(loginObjects.elEnglish.isDisplayed()).toBe(true);
-    expect(loginObjects.elSpanish.isDisplayed()).toBe(true);
-    expect(loginObjects.elFrench.isDisplayed()).toBe(true);
-    //Validating the default language as English
-    expect(loginObjects.getTextLogin()).toBe("Login");
-    //Validating the Spanish Language button
-    loginObjects.doSpanish();
-    //The below line should be uncomment once the login button translation added to dev
-    //expect(loginObjects.getTextLogin()).toBe("Iniciar sesión");
-    //Validating the French Language button
-    loginObjects.doFrench();
-    //The below line should be uncomment once the login button translation added to dev
-    //expect(loginObjects.getTextLogin()).toBe("Ouverture de session");
-    //Validating the English language button
-    loginObjects.doEnglish();
-    //The below line should be uncomment once the login button translation added to dev
-    //expect(loginObjects.getTextLogin()).toBe("Login");
-  });
-
 });

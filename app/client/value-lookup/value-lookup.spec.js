@@ -434,7 +434,7 @@ describe('Controller: ValueLookupCtrl', function () {
 
       it('should reset the opposite search', function() {
         spyOn(scope.manualLookup, 'resetSearch');
-        scope.vinLookup.lookup();
+        scope.vinLookup.lookup(scope.manualLookupForm);
         expect(scope.manualLookup.resetSearch).toHaveBeenCalled();
       });
 
@@ -446,7 +446,7 @@ describe('Controller: ValueLookupCtrl', function () {
 
       it('should do nothing if the form is not valid', function() {
         scope.vinLookupForm.$valid = false;
-        scope.vinLookup.lookup();
+        scope.vinLookup.lookup(scope.vinLookupForm);
         expect(blackbook.lookupByVin).not.toHaveBeenCalled();
         expect(mmr.lookupByVin).not.toHaveBeenCalled();
         expect(kbb.lookupByConfiguration).not.toHaveBeenCalled();
@@ -454,14 +454,14 @@ describe('Controller: ValueLookupCtrl', function () {
 
       it('should call mmr and blackbook but not KBB if ZIP code is missing', function() {
         scope.vinLookup.zipcode = null;
-        scope.vinLookup.lookup();
+        scope.vinLookup.lookup(scope.vinLookupForm);
         expect(blackbook.lookupByVin).toHaveBeenCalled();
         expect(mmr.lookupByVin).toHaveBeenCalled();
         expect(kbb.lookupByConfiguration).not.toHaveBeenCalled();
       });
 
       it('should look up the blackbook values', function() {
-        scope.vinLookup.lookup();
+        scope.vinLookup.lookup(scope.vinLookupForm);
         expect(blackbook.lookupByVin).toHaveBeenCalledWith('someVin1234', 8888, true);
         $httpBackend.flush();
         expect(scope.results.blackbook.data).toEqual(bbResult.Data[0]);
@@ -475,7 +475,7 @@ describe('Controller: ValueLookupCtrl', function () {
 
       it('should handle no blackbook matches', function() {
         bbResult.Data = [];
-        scope.vinLookup.lookup();
+        scope.vinLookup.lookup(scope.vinLookupForm);
         $httpBackend.flush();
         expect(scope.results.blackbook.data).toBe(null);
         expect(scope.results.blackbook.noMatch).toBe(true);
@@ -492,7 +492,7 @@ describe('Controller: ValueLookupCtrl', function () {
           CleanValue: 12000,
           ExtraCleanValue: 13000
         });
-        scope.vinLookup.lookup();
+        scope.vinLookup.lookup(scope.vinLookupForm);
         $httpBackend.flush();
         expect(scope.results.blackbook.multiple).toBeTruthy();
         expect(scope.results.blackbook.multiple.length).toBe(2);
@@ -501,7 +501,7 @@ describe('Controller: ValueLookupCtrl', function () {
       });
 
       it('should look up the mmr values', function() {
-        scope.vinLookup.lookup();
+        scope.vinLookup.lookup(scope.vinLookupForm);
         expect(mmr.lookupByVin).toHaveBeenCalledWith('someVin1234', 8888);
         $httpBackend.flush();
         expect(scope.results.mmr.data).toEqual(mmrResult.Data[0]);
@@ -513,7 +513,7 @@ describe('Controller: ValueLookupCtrl', function () {
 
       it('should handle no mmr matches', function() {
         mmrResult.Data = [];
-        scope.vinLookup.lookup();
+        scope.vinLookup.lookup(scope.vinLookupForm);
         $httpBackend.flush();
         expect(scope.results.mmr.data).toBe(null);
         expect(scope.results.mmr.noMatch).toBe(true);
@@ -531,7 +531,7 @@ describe('Controller: ValueLookupCtrl', function () {
           ExcellentWholesale: 15000
         });
 
-        scope.vinLookup.lookup();
+        scope.vinLookup.lookup(scope.vinLookupForm);
         $httpBackend.flush();
         expect(scope.results.mmr.multiple).toBeTruthy();
         expect(scope.results.mmr.multiple.length).toBe(2);
@@ -540,7 +540,7 @@ describe('Controller: ValueLookupCtrl', function () {
       });
 
       it('should look up the kbb values', function() {
-        scope.vinLookup.lookup();
+        scope.vinLookup.lookup(scope.vinLookupForm);
         $httpBackend.flush();
         expect(kbb.getConfigurations).toHaveBeenCalledWith('someVin1234', 12345);
         expect(kbb.lookupByConfiguration).toHaveBeenCalledWith(configResult.Data[0], 8888, 12345);
@@ -554,7 +554,7 @@ describe('Controller: ValueLookupCtrl', function () {
 
       it('should handle no kbb matches', function() {
         kbbResult.Data = {};
-        scope.vinLookup.lookup();
+        scope.vinLookup.lookup(scope.vinLookupForm);
         $httpBackend.flush();
         expect(scope.results.kbb.data).toBe(null);
         expect(scope.results.kbb.noMatch).toBe(true);
@@ -712,7 +712,7 @@ describe('Controller: ValueLookupCtrl', function () {
 
         it('should reset the opposite search', function() {
           spyOn(scope.vinLookup, 'resetSearch');
-          scope.manualLookup.blackbook.lookup();
+          scope.manualLookup.blackbook.lookup(scope.vinLookupForm);
           expect(scope.vinLookup.resetSearch).toHaveBeenCalled();
         });
 
@@ -724,12 +724,12 @@ describe('Controller: ValueLookupCtrl', function () {
 
         it('should do nothing if the form is not valid', function() {
           scope.manualLookupForm.$valid = false;
-          scope.manualLookup.blackbook.lookup();
+          scope.manualLookup.blackbook.lookup(scope.manualLookupForm);
           expect(blackbook.lookupByOptions).not.toHaveBeenCalled();
         });
 
         it('should look up the blackbook values', function() {
-          scope.manualLookup.blackbook.lookup();
+          scope.manualLookup.blackbook.lookup(scope.manualLookupForm);
           expect(blackbook.lookupByOptions).toHaveBeenCalled();
           $httpBackend.flush();
           expect(scope.results.blackbook.data).toEqual(bbResult.Data[0]);
@@ -743,7 +743,7 @@ describe('Controller: ValueLookupCtrl', function () {
 
         it('should handle no blackbook matches', function() {
           bbResult.Data = [];
-          scope.manualLookup.blackbook.lookup();
+          scope.manualLookup.blackbook.lookup(scope.manualLookupForm);
           $httpBackend.flush();
           expect(scope.results.blackbook.data).toBe(null);
           expect(scope.results.blackbook.noMatch).toBe(true);
@@ -853,7 +853,7 @@ describe('Controller: ValueLookupCtrl', function () {
 
         it('should reset the opposite search', function() {
           spyOn(scope.vinLookup, 'resetSearch');
-          scope.manualLookup.mmr.lookup();
+          scope.manualLookup.mmr.lookup(scope.manualLookupForm);
           expect(scope.vinLookup.resetSearch).toHaveBeenCalled();
         });
 
@@ -865,12 +865,12 @@ describe('Controller: ValueLookupCtrl', function () {
 
         it('should do nothing if the form is not valid', function() {
           scope.manualLookupForm.$valid = false;
-          scope.manualLookup.mmr.lookup();
+          scope.manualLookup.mmr.lookup(scope.manualLookupForm);
           expect(mmr.lookupByOptions).not.toHaveBeenCalled();
         });
 
         it('should look up the mmr values', function() {
-          scope.manualLookup.mmr.lookup();
+          scope.manualLookup.mmr.lookup(scope.manualLookupForm);
           expect(mmr.lookupByOptions).toHaveBeenCalled();
           $httpBackend.flush();
           expect(scope.results.mmr.data).toEqual(mmrResult.Data[0]);
@@ -883,7 +883,7 @@ describe('Controller: ValueLookupCtrl', function () {
 
         it('should handle no mmr matches', function() {
           mmrResult.Data = [];
-          scope.manualLookup.mmr.lookup();
+          scope.manualLookup.mmr.lookup(scope.manualLookupForm);
           $httpBackend.flush();
           expect(scope.results.mmr.data).toBe(null);
           expect(scope.results.mmr.noMatch).toBe(true);
@@ -994,7 +994,7 @@ describe('Controller: ValueLookupCtrl', function () {
 
         it('should reset the opposite search', function() {
           spyOn(scope.vinLookup, 'resetSearch');
-          scope.manualLookup.kbb.lookup();
+          scope.manualLookup.kbb.lookup(scope.vinLookupForm);
           expect(scope.vinLookup.resetSearch).toHaveBeenCalled();
         });
 
@@ -1006,12 +1006,12 @@ describe('Controller: ValueLookupCtrl', function () {
 
         it('should do nothing if the form is not valid', function() {
           scope.manualLookupForm.$valid = false;
-          scope.manualLookup.kbb.lookup();
+          scope.manualLookup.kbb.lookup(scope.manualLookupForm);
           expect(kbb.lookupByOptions).not.toHaveBeenCalled();
         });
 
         it('should look up the kbb values', function() {
-          scope.manualLookup.kbb.lookup();
+          scope.manualLookup.kbb.lookup(scope.manualLookupForm);
           expect(kbb.lookupByOptions).toHaveBeenCalled();
           $httpBackend.flush();
           expect(scope.results.kbb.data).toEqual(kbbResultFormatted[0]);
@@ -1024,7 +1024,7 @@ describe('Controller: ValueLookupCtrl', function () {
 
         it('should handle no kbb matches', function() {
           kbbResult.Data = {};
-          scope.manualLookup.kbb.lookup();
+          scope.manualLookup.kbb.lookup(scope.manualLookupForm);
           $httpBackend.flush();
           expect(scope.results.kbb.data).toBe(null);
           expect(scope.results.kbb.noMatch).toBe(true);

@@ -452,6 +452,9 @@ input[type="radio"] {
   display: table-cell;
   vertical-align: middle;
   padding: 0 40px 0 10px; // to account for checkbox or radio button
+  &.negative {
+    font-size: 16px;
+  }
 }
 
 .checkbox-img, .radio-img {

@@ -1,4 +1,4 @@
-<div class="col-xs-3">
+<div class="col-sm-3">
   <div class="panel panel-default dash-well">
     <h2 class="well-title" translate>Unapplied Funds</h2>
 
@@ -16,7 +16,6 @@
             ng-show="fundsAvail > 0 && !autoDisburseUnappliedFunds"
             ng-click="openRequestPayout($event)">
       <span class="paired-body" translate>Request Payout</span>
-      <span class="paired-media icon-x-small" nxg-icon="icon-triangle"></span>
     </button>
     <div ng-show="autoDisburseUnappliedFunds" id="unappliedFunds">
       <p><b>Auto-Disburse Unapplied Funds:</b> Enabled</p>

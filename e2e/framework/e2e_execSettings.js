@@ -48,3 +48,6 @@ exports.promosPage = function () {
 exports.receiptsPage = function () {
   return baseUrl + 'receipts';
 };
+exports.profileSettingsPage = function () {
+  return baseUrl + 'profile_settings';
+};
