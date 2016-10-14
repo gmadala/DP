@@ -34,6 +34,7 @@ describe('\n Bank Account', function () {
     accountManagement.doFirstBankAccount();
     browser.sleep(browser.params.longDelay);
     accountManagement.doClickSave();
+    browser.sleep(browser.params.shortDelay);
     browser.refresh();
     browser.sleep(browser.params.longDelay);
     expect(accountManagement.getDepositAccount()).toEqual("Fulton Bank -Main (...2794)");
