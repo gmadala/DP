@@ -32,6 +32,7 @@ describe('\n Bank Account', function () {
     //Validate payment account
     accountManagement.doClickEdit();
     accountManagement.doFirstBankAccount();
+    browser.sleep(browser.params.longDelay);
     accountManagement.doClickSave();
     browser.refresh();
     browser.sleep(browser.params.longDelay);
@@ -41,6 +42,7 @@ describe('\n Bank Account', function () {
   it("3. Change to 2nd bank account Bank account 2", function () {
     accountManagement.doClickEdit();
     accountManagement.doSecondBankAccount();
+    browser.sleep(browser.params.longDelay);
     accountManagement.doClickSave();
     //Validate and refresh
     expect(accountManagement.getDepositAccount()).toEqual("Bank Account 2 (...6789)");

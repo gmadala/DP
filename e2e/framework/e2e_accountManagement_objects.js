@@ -40,7 +40,7 @@ function AccountManagement() {
     this.elSecondBankAccount.click();
   };
   this.doClickSave = function () {
-    browser.sleep(browser.params.delay);
+    browser.sleep(browser.params.longDelay);
     this.elSaveButton.click();
   };
 }
