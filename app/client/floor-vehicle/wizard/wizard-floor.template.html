@@ -25,8 +25,17 @@
     </ul>
   </div>
 
-  <div ui-view class="col-xs-12 col-md-6 col-md-offset-1" autoscroll="true"></div>
-  <div class="col-xs-12 col-md-4"></div>
+  <div class="col-xs-12" ng-class="{'display-flex': wizardFloor.flooringValuationFeature}">
+    <div ui-view class="col-xs-12 col-md-6 col-md-offset-1" autoscroll="true"></div>
+    <div class="hidden-xs hidden-sm col-md-offset-1 col-md-3 sidebar">
+      <nxg-credit-availability credit-type="wizardFloor.data.LineOfCreditId"
+                               purchase-price="wizardFloor.data.UnitPurchasePrice"></nxg-credit-availability>
+      <nxg-value-lookup vin="wizardFloor.data.UnitVin" ng-if="wizardFloor.flooringValuationFeature"
+                        odometer="wizardFloor.data.UnitMileage"
+                        inventory-location="wizardFloor.data.PhysicalInventoryAddressId"
+                        purchase-price="wizardFloor.data.UnitPurchasePrice"></nxg-value-lookup>
+    </div>
+  </div>
   <div class="col-xs-12 col-md-6 col-md-offset-1 wizard-btns">
     <div class="row">
       <span class="visible-xs">
