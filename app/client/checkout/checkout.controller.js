@@ -152,7 +152,7 @@
         var dialogOptions = {
           backdrop: 'static',
           keyboard: false,
-          backdropClick: true,
+          backdropClick: false,
           templateUrl: 'client/checkout/schedule-checkout-modal/schedule-checkout.template.html',
           controller: 'ScheduleCheckoutCtrl',
           resolve: {

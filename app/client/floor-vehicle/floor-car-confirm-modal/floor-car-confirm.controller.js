@@ -33,6 +33,7 @@
 
     // access to all the data the user entered in the form (a copy)
     var uibModalInstance = $uibModalInstance;
+    
     $scope.formData = formData;
     $scope.fileNames = fileNames;
     $scope.comment = comment;

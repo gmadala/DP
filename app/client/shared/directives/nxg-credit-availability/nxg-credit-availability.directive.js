@@ -25,8 +25,11 @@
     };
 
     function link(scope, element) {
+      scope.insufficientCredit = false;
+
       var options = {
         chart: {
+          backgroundColor: '#EBEBEB',
           type: 'bar',
           height: 30,
           margin: [0, 0, 0, 0],
@@ -174,8 +177,11 @@
             };
           })
           .then(function() {
-            // default to total for the initial view
-            updateCharts('Total', totalLimit, totalAvailable);
+            var lineOfCredit = scope.lineOfCredits['total.lineOfCredits'];
+            if (scope.creditType) {
+              lineOfCredit = scope.lineOfCredits[scope.creditType.LineOfCreditId];
+            }
+            updateCharts(lineOfCredit.name, lineOfCredit.total, lineOfCredit.available);
           });
       }
 
@@ -188,6 +194,26 @@
             updateCharts(lineOfCredit.name, lineOfCredit.total, lineOfCredit.available);
           }
         }
+      });
+
+      scope.$watch('purchasePrice', function(newValue, oldValue) {
+        if (oldValue === newValue || !scope.creditType || !newValue) {
+          return;
+        }
+
+        var lineOfCredit = scope.lineOfCredits[scope.creditType.LineOfCreditId];
+
+        var chart = element.find('.nxg-credit-availability').highcharts();
+        var data = chart.series[0].data;
+        if (lineOfCredit.available <= newValue) {
+          scope.insufficientCredit = true;
+          data[0].color = '#D32F2F';
+        } else {
+          scope.insufficientCredit = false;
+          data[0].color = '#4CAF50';
+        }
+        chart.series[0].setData(data);
+
       });
     }
   }
