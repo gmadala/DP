@@ -1,11 +1,9 @@
 'use strict';
 
-
 function AccountManagement() {
 
   var helper = require('../framework/e2e_helper_functions.js');
   var Helper = new helper.helper();
-
 
   //Locators
   this.editButton = browser.element.all(by.buttonText('Edit')).get(0);
@@ -14,7 +12,6 @@ function AccountManagement() {
   this.elFirstBankAccount = browser.element.all(by.cssContainingText('option', 'Fulton Bank -Main - 2794'));
   this.elSecondBankAccount = browser.element.all(by.cssContainingText('option', 'Bank Account 2 - 6789'));
   this.elSaveButton= browser.element.all(by.css('.col-md-3.custom.btn-unstyle.save-edit')).get(0);
-
 
   //Getters
   this.getDepositAccount = function () {
@@ -42,6 +39,8 @@ function AccountManagement() {
   this.doClickSave = function () {
     browser.sleep(browser.params.longDelay);
     this.elSaveButton.click();
+    browser.sleep(browser.params.shortDelay);
+    browser.refresh();
   };
 }
 module.exports.accountManagement = AccountManagement;
