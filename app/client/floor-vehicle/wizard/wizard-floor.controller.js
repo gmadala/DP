@@ -68,6 +68,7 @@
     var attachDocsAuction = !isDealer && User.getFeatures().hasOwnProperty('uploadDocumentsAuction') ? User.getFeatures().uploadDocumentsAuction.enabled : false;
 
     vm.attachDocumentsEnabled = User.isUnitedStates() && (attachDocsDealer || attachDocsAuction);
+    vm.flooringValuationFeature = User.getFeatures().flooringValuations && User.getFeatures().flooringValuations.enabled;
 
     $q.all([User.getStatics(), User.getInfo(), AccountManagement.getDealerSummary()]).then(function (result) {
       vm.options = angular.extend({}, result[0], result[1]);
@@ -150,6 +151,7 @@
       VinAckLookupFailure: false, // Boolean (whether vehicle data came from VIN or manual attribute entry)
       UnitYear: null, // int
       TitleLocationId: null, // TitleLocationOption object locally, flatten to int for API tx
+      TitleLocationIndex: null, // For TitleLocationIndex value
       TitleTypeId: null, // null locally, int extracted from TitleLocationOption object above for API tx
       ConsignerTicketNumber: null, // string (AUCTION ONLY)
       LotNumber: null, // string (AUCTION ONLY)
@@ -327,29 +329,35 @@
         vm.data.UnitMake = !vm.data.dirtyStatus ? vm.data.kb.makes.selected.Value : vm.data.inputMake;
         vm.data.UnitModel = !vm.data.dirtyStatus ? vm.data.kb.models.selected.Value : vm.data.inputModel;
 
-        vm.data.PhysicalInventoryAddressId = vm.options.locations[addressIndex];
+        if (addressIndex >= 0) {
+          vm.data.PhysicalInventoryAddressId = vm.options.locations[addressIndex];
+        }
 
         vm.data.VinAckLookupFailure = vm.data.$selectedVehicle ? false : true;
 
       }
 
       var dialogParams;
-      var commentText = '';
-
-      if (vm.data.commentAdditionalFinancing && vm.data.commentAdditionalFinancing.length > 0) {
-        commentText += 'DEALER REQUESTS FULL PURCHASE PRICE: ' + vm.data.commentAdditionalFinancing;
-      }
-
-      commentText += (commentText.length > 0) ? ' ' + vm.data.commentGeneral : vm.data.commentGeneral;
 
       vm.floorPlanSubmitting = true;
-      vm.data.TitleLocationId = vm.options.titleLocationOptions[vm.data.TitleLocationId];
+      vm.data.TitleLocationId = vm.options.titleLocationOptions[vm.data.TitleLocationIndex];
 
       Floorplan.create(vm.data).then(
-        function (response) { /*floorplan success*/
+        function (response) {
+          /**
+           *  floorplan success handler
+           **/
+          var commentText = '';
+
+          if (vm.data.commentAdditionalFinancing && vm.data.commentAdditionalFinancing.length > 0) {
+            commentText += 'DEALER REQUESTS FULL PURCHASE PRICE: ' + vm.data.commentAdditionalFinancing;
+          }
+
+          commentText += (commentText.length > 0) ? ' ' + vm.data.commentGeneral : vm.data.commentGeneral;
+
           if (commentText.length > 0) {
             Floorplan.addComment({
-              CommentText: 'General Comment: ' + vm.data.commentGeneral + ' Additional Financing Comment:' + vm.data.commentAdditionalFinancing,
+              CommentText: commentText,
               FloorplanId: response.FloorplanId
             });
           }
