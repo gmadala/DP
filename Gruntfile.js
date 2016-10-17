@@ -236,7 +236,7 @@ module.exports = function(grunt) {
       }
     },
     usemin: {
-      html: [['<%= yeoman.dist %>/**/*.html', '!<%= yeoman.dist %>/components/**/*.html'], [/<img[^\>]*[^\>\S]+srcset=['"]([^"']+)["']/gm, 'Update the HTML img tag to reference revved images']],
+      html: ['<%= yeoman.dist %>/**/*.html', '!<%= yeoman.dist %>/components/**/*.html'],
       css: ['<%= yeoman.dist %>/styles/**/*.css'],
       js: ['<%= yeoman.dist %>/scripts/**/*.js'],
       options: {
