@@ -178,7 +178,7 @@
           pageId: 'Checkout',
           showNavBar: true,
           showMenu: false,
-          title: 'Make a Payment'
+          title: 'Checkout'
         }
       } )
       .state( 'paymentsConfirm', {
