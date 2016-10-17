@@ -19,17 +19,19 @@
     '$location'
   ];
 
-  function PaymentConfirmCtrl($scope,
-                                      $state,
-                                      $stateParams,
-                                      Receipts,
-                                      Payments,
-                                      $window,
-                                      api,
-                                      kissMetricInfo,
-                                      segmentio,
-                                      metric,
-                                      $location) {
+  function PaymentConfirmCtrl(
+    $scope,
+    $state,
+    $stateParams,
+    Receipts,
+    Payments,
+    $window,
+    api,
+    kissMetricInfo,
+    segmentio,
+    metric,
+    $location
+  ) {
 
     $scope.today = new Date();
 
@@ -116,18 +118,18 @@
 
 
 
-    $scope.viewReceipts = function () {
+    $scope.viewReceipts = function (format) {
       var stringUrl;
       var transactionId = transactionInfo.FinancialTransactionId;
 
-      if ($scope.format === 'grouped') {
+      if (format === 'grouped') {
         stringUrl = api.contentLink('/receipt/viewMultiple/receipts', {financialtransactionids: transactionId});
-      } else if ($scope.format === 'single') {
+      } else if (format === 'single') {
         stringUrl = api.ngenContentLink('/encodedReceipts', {transactions: transactionId});
       }
 
       kissMetricInfo.getKissMetricInfo().then(function (result) {
-        result.singleVin = $scope.format === 'single';
+        result.singleVin = format === 'single';
 
         segmentio.track(metric.DEALER_CHECKOUT_RECEIPT_GENERATED, result);
       });
