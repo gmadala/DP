@@ -187,16 +187,14 @@ describe('Controller: PaymentConfirmCtrl', function () {
     it('viewReceipts - grouped by transaction function should open the receipts in new windows, close modal and transition to the payments state', function () {
       spyOn(_window, 'open');
       spyOn(state, 'transitionTo');
-      scope.format = 'grouped';
-      scope.viewReceipts();
+      scope.viewReceipts('grouped');
       expect(_window.open).toHaveBeenCalledWith('/receipt/viewMultiple/receipts?financialtransactionids=abc123', '_blank');
       expect(state.transitionTo).toHaveBeenCalledWith('payments');
     });
     it('viewReceipts - 1 Vin per page function should open the receipts in new windows, close modal and transition to the payments state', function () {
       spyOn(_window, 'open');
       spyOn(state, 'transitionTo');
-      scope.format = 'single';
-      scope.viewReceipts();
+      scope.viewReceipts('single');
       expect(_window.open).toHaveBeenCalledWith('/encodedReceipts?transactions=abc123', '_blank');
       expect(state.transitionTo).toHaveBeenCalledWith('payments');
     });
@@ -210,4 +208,3 @@ describe('Controller: PaymentConfirmCtrl', function () {
     });
   });
 });
-
