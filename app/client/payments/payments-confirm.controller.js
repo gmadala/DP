@@ -137,7 +137,6 @@
       if (stringUrl !== undefined) {
         $window.open(stringUrl, '_blank');
       }
-      $state.transitionTo('payments');
     };
 
     $scope.backToPayments = function () {
