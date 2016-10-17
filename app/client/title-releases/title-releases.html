@@ -73,15 +73,7 @@
                 <p class="lockup-minor visible-sm">{{item.UnitPurchaseDate | moment}}</p>
               </td>
               <td class="description">
-                <div class="col-xs-6 no-padding visible-xs">
-                  <p class="lockup-minor vertical-spacing heavy"><span translate>Floored On</span>:</p>
-                </div>
-                <div class="col-xs-6 no-padding visible-xs">
-                  <p class="lockup-minor vertical-spacing"><span translate>{{ item.FlooringDate | moment}}</span></p>
-                </div>
                 <div class="col-xs-12 no-padding">
-                  <p class="lockup-minor vertical-spacing heavy visible-xs"><span translate>Description</span>:</p>
-
                   <a class="lockup-major" href="#/vehicledetails?stockNumber={{ item.StockNumber }}">
                     <span nxg-highlight="getVehicleDescription(item)" highlight="item.data.query"></span>
                   </a>
@@ -91,6 +83,12 @@
                     <p class="lockup-minor caps stock"><span translate>STK</span>: <span nxg-highlight="item.StockNumber" highlight="item.data.query"></span>
                     </p>
                   </div>
+                </div>
+                <div class="col-xs-6 no-padding visible-xs">
+                  <p class="lockup-minor vertical-spacing heavy"><span translate>Floored On</span>:</p>
+                </div>
+                <div class="col-xs-6 no-padding visible-xs">
+                  <p class="lockup-minor vertical-spacing"><span translate>{{ item.FlooringDate | moment}}</span></p>
                 </div>
                 <div class="col-xs-6 no-padding visible-xs">
                   <p class="lockup-minor vertical-spacing heavy"><span translate>Purchased</span>:</p>
@@ -181,7 +179,7 @@
                scroll=".queue-list">
       </section>
     </div>
-    <div class="visible-xs mobile-checkout-widget">
+    <div class="visible-xs mobile-checkout-widget hidden-print">
       <button class="visible-xs btn-cta cta-primary" ng-click="navigate('titleReleaseCheckout')">
         <span class="paired-body" translate>({{queueLength()}}) Confirm Requests</span>
         <span class="paired media" nxg-icon="icon-title"></span>
