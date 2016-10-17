@@ -84,7 +84,7 @@
       <div
            ng-class="{'auction-nav':!user.isDealer(), 'es-nav':isCurrentLanguage('es') && !user.isDealer(), 'fr-nav': isCurrentLanguage('fr_CA') && !user.isDealer(), 'container' : !isMobile}">
         <div class="navbar-header">
-          <button type="button" class="navbar-toggle collapsed mobile-menu-button"                  
+          <button type="button" class="navbar-toggle collapsed mobile-menu-button"
                   ng-click="toggleMenu(); closeSupport()"
                   popover-placement="bottom"
                   uib-popover-template="'client/shared/directives/navbar/menuTip.html'"
@@ -98,7 +98,7 @@
               <div class="mng-logo"></div>
             </div>
             <div ng-if="!isDashboard()">
-              {{getPageTitle()}}
+              {{pageTitle}}
             </div>
           </div>
         </div>
@@ -110,27 +110,26 @@
               popover-is-open="!hideMenuTip && !isMobile && user.isDealer()"
               popover-trigger="none">
             <li class="visible-xs" ng-if="user.isDealer()">
-              <a href="#" ng-href="#/checkout" ng-click="setPageTitle('Checkout')" translate>Checkout</a>
+              <a href="#" ng-href="#/checkout" translate>Checkout</a>
             </li>
             <li ng-repeat="link in user.navLinks().primary" class="link_{{ link.activeWhen }}" ng-class="{'dropdown': link.subMenu, 'hover': link.hasHover}">
-              <a ng-href="{{link.href}}" ng-class="{ active: isActive(link.activeWhen) }" ng-if="!link.subMenu"
-                 ng-click="setPageTitle(link.name)">{{link.name}}</a>
+              <a ng-href="{{link.href}}" ng-class="{ active: isActive(link.activeWhen) }" ng-if="!link.subMenu">{{link.name}}</a>
               <a class="sub-menu dropdown-toggle hidden-xs" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"
                  ng-class="{ active: isActiveGroup(link.subMenu) }"
                  ng-if="link.subMenu"
-                 ng-click="gotoPageIf(link.href, link.activeWhen); setPageTitle(link.name); removeHover()"
+                 ng-click="gotoPageIf(link.href, link.activeWhen); removeHover()"
                  ng-mouseenter="addHover()"
                  ng-mouseleave="removeHover()">
                 {{link.name}} <span class="caret"></span></a>
               <ul class="dropdown-menu" ng-if="link.subMenu" ng-mouseenter="addHover()"
                   ng-mouseleave="removeHover()">
                 <li ng-repeat="item in link.subMenu" ng-class="{ active: isActive(item.activeWhen) }" ng-click="removeHover()">
-                  <a href="#" ng-href="{{item.href}}" ng-click="setPageTitle(item.name)">{{item.name}}</a>
+                  <a href="#" ng-href="{{item.href}}">{{item.name}}</a>
                 </li>
               </ul>
               <ul class="visible-xs mobile-nav-list">
                 <li class="visible-xs" ng-repeat="item in link.subMenu" ng-class="{ active: isActive(item.activeWhen) }" ng-click="removeHover()">
-                  <a href="#" ng-href="{{item.href}}" ng-click="setPageTitle(item.name)">{{item.name}}</a>
+                  <a href="#" ng-href="{{item.href}}">{{item.name}}</a>
                 </li>
               </ul>
             </li>
@@ -138,17 +137,17 @@
               <nxg-download-waybill></nxg-download-waybill>
             </li>
             <li class="visible-xs" ng-hide="user.isDealer()">
-              <a href="#/act/settings" ng-click="setPageTitle('Settings')">
+              <a href="#/act/settings">
                 <span translate>Settings</span>
               </a>
             </li>
             <li class="visible-xs" ng-show="user.isDealer()">
-              <a href="#/profile_settings" ng-click="setPageTitle('Profile Settings')">
+              <a href="#/profile_settings">
                 <span translate>Profile Settings</span>
               </a>
             </li>
             <li class="visible-xs" ng-show="user.isDealer()">
-              <a ng-href="#/account_management" ng-click="setPageTitle('Account Management')">
+              <a ng-href="#/account_management">
                 <span translate>Account Management</span>
               </a>
             </li>
@@ -189,7 +188,7 @@
                  data-uv-lightbox="classic_widget"
                  data-uv-mode="full"
                  data-uv-primary-color="#135889"
-                 data-uv-link-color="#1864A1" 
+                 data-uv-link-color="#1864A1"
                  data-uv-default-mode="support"
                  data-uv-forum-id="{forumId}"
                  data-uv-custom-template-id="{customTemplateId}"
