@@ -33,9 +33,8 @@
             </ul>
           </div>
         </h2>
-        <p class="notice-box" ng-switch-when="false" translate>
-          Sorry, no results found. Please <a ng-click="floorplanData.resetSearch()" title="New Search">try a new
-          search</a>.
+        <p class="notice-box" ng-switch-when="false">
+          <span translate>Sorry, no results found. </span><a ng-click="floorplanData.resetSearch()" title="New Search" translate>Please try a new search</a>.
         </p>
 
         <div ng-switch-when="true"
