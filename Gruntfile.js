@@ -236,13 +236,12 @@ module.exports = function(grunt) {
       }
     },
     usemin: {
-      html: ['<%= yeoman.dist %>/**/*.html', '!<%= yeoman.dist %>/components/**/*.html'],
+      html: [['<%= yeoman.dist %>/**/*.html', '!<%= yeoman.dist %>/components/**/*.html'], [/<img[^\>]*[^\>\S]+srcset=['"]([^"']+)["']/gm, 'Update the HTML img tag to reference revved images']],
       css: ['<%= yeoman.dist %>/styles/**/*.css'],
       js: ['<%= yeoman.dist %>/scripts/**/*.js'],
       options: {
         assetsDirs: ['<%= yeoman.dist %>'],
         patterns: {
-          html: [[/<img[^\>]*[^\>\S]+srcset=['"]([^"']+)["']/gm, 'Update the HTML img tag to reference revved images']],
           js: [[/(img\/.*?\.(?:gif|jpeg|jpg|png|webp|svg))/gm, 'Update the JS to reference our revved images']],
           css: [[/(img\/.*?\.(?:gif|jpeg|jpg|png|webp|svg))/gm, 'Update the CSS to reference our revved images']]
         }
