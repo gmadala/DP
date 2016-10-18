@@ -22,7 +22,6 @@
   <div class="cr-inline" style="margin-bottom: 24px;">
     <input type="radio" name="payBuyerSeller" id="payBuyer" ng-value="0" ng-checked="wizardFloor.data.PaySeller == 0" ng-model="wizardFloor.data.PaySeller"
            ng-disabled="!wizardFloor.canPayBuyer"
-           ng-change="wizardFloor.data.BankAccountId = null"
            required />
     <label class="radio-img" for="payBuyer"></label>
     <label class="cr-label" for="payBuyer" translate>Buyer</label>

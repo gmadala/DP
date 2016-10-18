@@ -440,7 +440,9 @@ module.exports = function(grunt) {
       index: {
         files: {
           '<%= yeoman.dist %>/index.html': '<%= yeoman.dist %>/index.html',
-          '<%= yeoman.dist %>/version.txt': '<%= yeoman.dist %>/version.txt'
+          '<%= yeoman.dist %>/version.txt': '<%= yeoman.dist %>/version.txt',
+          '<%= yeoman.dist %>/client/shared/directives/nxg-footer/page-footer.template.html':
+            '<%= yeoman.dist %>/client/shared/directives/nxg-footer/page-footer.template.html'
         }
       },
       dist : {
