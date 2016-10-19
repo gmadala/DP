@@ -13,7 +13,7 @@
         </button>
 
         <input type="text" uib-datepicker-popup="{{salesInfo.dateFormat}}" style="margin-top: 15px;"
-               placeholder="{{ 'Purchase Date' | translate }}" nxg-date class="input-full"
+               placeholder="{{ 'Purchase Date (dd/mm/yyyy)' | translate }}" nxg-date class="input-full"
                ng-model="wizardFloor.data.UnitPurchaseDate"
                min-date="salesInfo.dealerMinDate"
                max-date="salesInfo.maxDate"
