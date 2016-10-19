@@ -183,15 +183,14 @@ describe('Controller: WizardFloorCtrl', function() {
     expect(wizardFloor.options.BankAccounts[1].AchBankName).toBe('Bank Ble Ble');
   });
 
-  fit('should default bank account to default disbursement bank account', function() {
+  it('should default bank account to default disbursement bank account', function() {
     scope.$digest();
-    console.log(wizardFloor.data);
     // Apparently the BankAccountId is holding the BankAccount object,
     // but we call it BankAccountId ...
     expect(wizardFloor.data.BankAccountId.BankAccountId).toEqual('default-disbursement-id');
   });
 
-  fit('should default line of credit to retail', function() {
+  it('should default line of credit to retail', function() {
     spyOn(mockUser, 'isDealer').and.returnValue(true);
     initController();
     scope.$digest();
@@ -203,14 +202,18 @@ describe('Controller: WizardFloorCtrl', function() {
 
   it('should use active physical location of the dealer', function() {
     spyOn(mockAddress, 'getActivePhysical');
+    scope.$digest();
     expect(mockAddress.getActivePhysical).toHaveBeenCalled();
   });
 
   it('should set can pay buyer option', function() {
+    scope.$digest();
+    expect(wizardFloor.paySellerOptions).toBe(false);
   });
 
   it('should get pay seller options', function() {
-
+    scope.$digest();
+    expect(wizardFloor.canPayBuyer).toBe(false);
   });
 
   // navigation test
