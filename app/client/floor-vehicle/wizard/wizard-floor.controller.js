@@ -349,7 +349,7 @@
            **/
           var resultStockNumber = response.StockNumber;
           var resultFloorplanId = response.FloorplanId;
-          var stagedFiles = vm.data.files;
+          // var stagedFiles = vm.data.files;
           var commentText = '';
 
           if (vm.data.commentAdditionalFinancing && vm.data.commentAdditionalFinancing.length > 0) {
@@ -394,9 +394,9 @@
 
                 $state.go('flooringConfirmation', {
                   floorplanId: resultFloorplanId,
-                  stockNumber: resultStockNumber,
-                  uploadSuccess: response.data.Success,
-                  files: (response.data.Success) ? stagedFiles : stagedFiles
+                  stockNumber: resultStockNumber
+                  // uploadSuccess: response.data.Success,
+                  // files: (response.data.Success) ? stagedFiles : stagedFiles
                 });
               });
             }, function () {

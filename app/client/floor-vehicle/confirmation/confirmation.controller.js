@@ -26,14 +26,14 @@
     }
 
     vm.stockNumber = $stateParams.stockNumber;
-    vm.uploadSuccess = $stateParams.uploadSuccess;
-    vm.uploadRetrySuccess = null;
-    vm.files = $stateParams.files;
+    // vm.uploadSuccess = $stateParams.uploadSuccess;
+    // vm.uploadRetrySuccess = null;
+    // vm.files = $stateParams.files;
 
     vm.hideStars = false;
     vm.starHoverValue = 0;
 
-    vm.wayBillPrintingEnabled = fedex.wayBillPrintingEnabled();
+    // vm.wayBillPrintingEnabled = fedex.wayBillPrintingEnabled();
 
     User.getInfo().then(function (userInfo) {
       vm.user = userInfo;
@@ -55,17 +55,17 @@
       });
     };
 
-    vm.reupload = function () {
-      Upload.upload({
-        url: nxgConfig.apiBase + '/floorplan/upload/' + $stateParams.floorplanId,
-        method: 'POST',
-        data: {
-          file: vm.files
-        }
-      }).then(function (response) {
-        vm.uploadRetrySuccess = response.data.Success;
-      });
-    };
+    // vm.reupload = function () {
+    //   Upload.upload({
+    //     url: nxgConfig.apiBase + '/floorplan/upload/' + $stateParams.floorplanId,
+    //     method: 'POST',
+    //     data: {
+    //       file: vm.files
+    //     }
+    //   }).then(function (response) {
+    //     vm.uploadRetrySuccess = response.data.Success;
+    //   });
+    // };
 
   }
 
