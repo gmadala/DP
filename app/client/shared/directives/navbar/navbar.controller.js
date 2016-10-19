@@ -289,7 +289,6 @@
     };
 
     $scope.gotoPageIf = function( link ) {
-      console.log( link )
       var desktop = document.getElementsByClassName( 'no-touch' );
       if ( desktop.length > 0 ) {
         $location.path( page.href.substring( 1 ) );
