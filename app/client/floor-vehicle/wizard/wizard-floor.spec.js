@@ -1,6 +1,6 @@
 'use strict';
 
-fdescribe('Controller: WizardFloorCtrl', function() {
+describe('Controller: WizardFloorCtrl', function() {
   beforeEach(module('nextgearWebApp', 'client/login/login.template.html'));
 
   var
@@ -48,7 +48,16 @@ fdescribe('Controller: WizardFloorCtrl', function() {
         return $q.when({colors: ['red', 'green']});
       },
       getInfo: function() {
-        return $q.when({});
+        return $q.when({
+          DefaultDisbursementBankAccountId: 'default-disbursement-id',
+          LinesOfCredit: [{
+            LineOfCreditName: 'Retail',
+            LineOfCreditId: 'retail-loc-id'
+          }, {
+            LineOfCreditName: 'Wholesale',
+            LineOfCreditId: 'wholesale-loc-id'
+          }]
+        });
       },
       canPayBuyer: function() {
         return $q.when(false);
@@ -69,14 +78,15 @@ fdescribe('Controller: WizardFloorCtrl', function() {
         return $q.when({
           BankAccounts: [{
             'AchBankName': 'Bank Ble Ble',
-            "BankAccountId": "66e9e774-3dcc-4852-801d-b6e91d161a13",
+            "BankAccountId": "default-disbursement-id",
             "IsActive": true
           }, {
             'AchBankName': 'Bank Bla Bla',
-            "BankAccountId": "76e9e774-3dcc-4852-801d-b6e91d161a13",
+            "BankAccountId": "non-default-disbursement-id",
             "IsActive": true
           }, {
-            "BankAccountId": "86e9e774-3dcc-4852-801d-b6e91d161a13",
+            'AchBankName': 'Bank Bli Bli',
+            "BankAccountId": "non-active-id",
             "IsActive": false
           }]
         });
@@ -85,7 +95,11 @@ fdescribe('Controller: WizardFloorCtrl', function() {
 
     mockAddress = {
       getActivePhysical: function() {
-        return [];
+        return [{
+          "AddressId": "active-physical-address-id",
+          "IsActive": true,
+          "IsPhysicalInventory": true
+        }];
       }
     };
 
@@ -169,20 +183,30 @@ fdescribe('Controller: WizardFloorCtrl', function() {
     expect(wizardFloor.options.BankAccounts[1].AchBankName).toBe('Bank Ble Ble');
   });
 
-  it('should default bank account to default disbursement bank account', function() {
-
+  fit('should default bank account to default disbursement bank account', function() {
+    scope.$digest();
+    console.log(wizardFloor.data);
+    // Apparently the BankAccountId is holding the BankAccount object,
+    // but we call it BankAccountId ...
+    expect(wizardFloor.data.BankAccountId.BankAccountId).toEqual('default-disbursement-id');
   });
 
-  it('should default line of credit to retail', function() {
-
+  fit('should default line of credit to retail', function() {
+    spyOn(mockUser, 'isDealer').and.returnValue(true);
+    initController();
+    scope.$digest();
+    // This is the same with above:
+    // the LineOfCreditId is holding the LineOfCredit object,
+    // but we call it LineOfCreditId ...
+    expect(wizardFloor.data.LineOfCreditId.LineOfCreditId).toEqual('retail-loc-id');
   });
 
   it('should use active physical location of the dealer', function() {
-
+    spyOn(mockAddress, 'getActivePhysical');
+    expect(mockAddress.getActivePhysical).toHaveBeenCalled();
   });
 
   it('should set can pay buyer option', function() {
-
   });
 
   it('should get pay seller options', function() {
