@@ -40,84 +40,102 @@
         name: gettextCatalog.getString( 'Make a Payment' ),
         href: '#/payments',
         activeWhen: 'payments',
-        subMenu: paymentsSubMenu
+        subMenu: paymentsSubMenu,
       }, {
         name: gettextCatalog.getString( 'Receipts' ),
         href: '#/receipts',
-        activeWhen: 'receipts'
+        activeWhen: 'receipts',
       }, ],
       floorplansSubMenu = [ {
         name: gettextCatalog.getString( 'View Floor Plan' ),
         href: '#/floorplan',
         activeWhen: 'floorplan',
-        subMenu: floorplansSubMenu
+        subMenu: floorplansSubMenu,
       }, {
         name: gettextCatalog.getString( 'Floor a Vehicle' ),
         href: '#/floorcar',
-        activeWhen: 'floorcar'
+        activeWhen: 'floorcar',
       }, ],
       resourcesSubMenu = [ {
         name: gettextCatalog.getString( 'Resources' ),
         href: '#/documents',
-        activeWhen: 'documents'
+        activeWhen: 'documents',
       }, {
         name: gettextCatalog.getString( 'Reports' ),
         href: '#/reports',
-        activeWhen: 'reports'
+        activeWhen: 'reports',
       }, {
         name: gettextCatalog.getString( 'Analytics' ),
         href: '#/analytics',
-        activeWhen: 'analytics'
+        activeWhen: 'analytics',
       }, ];
     var dealerLinks = {
         primary: [ {
           name: gettextCatalog.getString( 'Dashboard' ),
           href: '#/home',
-          activeWhen: 'dashboard'
+          activeWhen: 'dashboard',
         }, {
           name: gettextCatalog.getString( 'Payments' ),
           href: '#/payments',
           activeWhen: 'payments',
-          subMenu: paymentsSubMenu
+          subMenu: paymentsSubMenu,
         }, {
           name: gettextCatalog.getString( 'Floor Plan' ),
           href: '#/floorplan',
           activeWhen: 'floorplan',
-          subMenu: floorplansSubMenu
+          subMenu: floorplansSubMenu,
         }, {
           name: gettextCatalog.getString( 'Resources' ),
           href: '#/documents',
           activeWhen: 'documents',
-          subMenu: resourcesSubMenu
+          subMenu: resourcesSubMenu,
         } ]
       },
       auctionLinks = {
         primary: [ {
           name: gettextCatalog.getString( 'Dashboard' ),
           href: '#/act/home',
-          activeWhen: 'auction_dashboard'
+          activeWhen: 'auction_dashboard',
         }, {
           name: gettextCatalog.getString( 'Dealer Search' ),
           href: '#/act/dealersearch',
-          activeWhen: 'auction_dealersearch'
+          activeWhen: 'auction_dealersearch',
         }, {
           name: gettextCatalog.getString( 'Floor a Vehicle' ),
           href: '#/act/bulkflooring',
-          activeWhen: 'auction_bulkflooring'
+          activeWhen: 'auction_bulkflooring',
         }, {
           name: gettextCatalog.getString( 'Floor Plan Search' ),
           href: '#/act/sellerfloorplan',
-          activeWhen: 'auction_sellerfloorplan'
+          activeWhen: 'auction_sellerfloorplan',
         }, {
           name: gettextCatalog.getString( 'Reports' ),
           href: '#/act/reports',
-          activeWhen: 'auction_reports'
+          activeWhen: 'auction_reports',
         }, {
           name: gettextCatalog.getString( 'Resources' ),
           href: '#/act/documents',
-          activeWhen: 'auction_documents'
+          activeWhen: 'auction_documents',
         } ]
       };
+
+    $scope.mobileLinks = {
+      settings: {
+        name: gettextCatalog.getString( 'Settings' ),
+        href: '#/act/settings',
+        activeWhen: 'settings',
+      },
+      profile: {
+        name: gettextCatalog.getString( 'Profile Settings' ),
+        href: '#/act/profile_settings',
+        activeWhen: 'profile_settings',
+      },
+      management: {
+        name: gettextCatalog.getString( 'Account Management' ),
+        href: '#/act/account_management',
+        activeWhen: 'account_management',
+      }
+    }
 
     $scope.initNav = function() {
       kissMetricInfo.getKissMetricInfo().then( function( result ) {
@@ -134,13 +152,13 @@
           floorplansSubMenu.splice( 2, 0, {
             name: gettextCatalog.getString( 'Value Lookup' ),
             href: '#/valueLookup',
-            activeWhen: 'valueLookup'
+            activeWhen: 'valueLookup',
           } );
           if ( $scope.eventSalesEnabled ) {
             resourcesSubMenu.push( {
               name: gettextCatalog.getString( 'Promos' ),
               href: '#/promos',
-              activeWhen: 'promos'
+              activeWhen: 'promos',
             } );
           }
         }
@@ -148,14 +166,14 @@
           floorplansSubMenu.push( {
             name: gettextCatalog.getString( 'Open Audits' ),
             href: '#/audits',
-            activeWhen: 'audits'
+            activeWhen: 'audits',
           } );
         }
         if ( $scope.displayTitleRelease ) {
           floorplansSubMenu.push( {
             name: gettextCatalog.getString( 'Title Releases' ),
             href: '#/titlereleases',
-            activeWhen: 'titlereleases'
+            activeWhen: 'titlereleases',
           } );
         }
         if ( User.getFeatures().hasOwnProperty( 'responsiveFloorplanBuyer' ) && User.getFeatures().responsiveFloorplanBuyer.enabled === true ) {
@@ -253,8 +271,12 @@
     // If current state includes the activeWhen property for the given link,
     // this will return true and the active class will be applied to style the nav
     // link appropriately.
-    $scope.isActive = function( activeWhen ) {
-      return $state.includes( activeWhen );
+    $scope.isActive = function( link ) {
+      var isActive = $state.includes( link.activeWhen );
+      if ( isActive ) {
+        $scope.pageTitle = link.name;
+      }
+      return isActive;
     };
 
     $scope.isActiveGroup = function( subMenu ) {
@@ -266,20 +288,17 @@
       return false;
     };
 
-    $scope.gotoPageIf = function( page ) {
+    $scope.gotoPageIf = function( link ) {
+      console.log( link )
       var desktop = document.getElementsByClassName( 'no-touch' );
       if ( desktop.length > 0 ) {
-        $location.path( page.substring( 1 ) );
+        $location.path( page.href.substring( 1 ) );
         //remove open class
         $timeout( function() {
           document.getElementsByClassName( 'dropdown open' )[ 0 ].classList.remove( 'open' );
         }, 0 );
       }
     };
-
-    $rootScope.$watch( 'pageTitle', function( title ) {
-      $scope.pageTitle = title;
-    } )
 
     $scope.isDashboard = function() {
       return $state.current.name === "dashboard" || $state.current.name === "auction_dashboard" || $scope.pageTitle === "";

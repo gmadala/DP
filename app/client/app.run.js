@@ -148,7 +148,6 @@
 
     $rootScope.$on( '$stateChangeSuccess',
       function( event, toState ) {
-        $rootScope.pageTitle = toState.data.title;
         if ( toState.name === 'login' && prv.pendingReload ) {
           // clobber when success going to login
           prv.pendingReload = false;
