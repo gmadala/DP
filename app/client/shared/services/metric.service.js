@@ -18,6 +18,7 @@
       // Flooring car
       DEALER_SUCCESSFUL_FLOORING_REQUEST_SUBMITTED: 'Dealer - Successful Flooring Request Submitted',
       FLOORPLAN_REQUEST_RESULT: 'Floorplan Request Result',
+      FLOORING_EXPERIENCE_RATING: 'Flooring Experiance Rating Submitted',
 
       //Global Events
       CLICK_CHAT_NOW_LINK: 'Click Chat Now Link',//x
