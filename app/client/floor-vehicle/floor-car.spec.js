@@ -68,12 +68,15 @@ describe('Controller: FloorCarCtrl', function () {
         return $q.when({
           BankAccounts: [{
             "BankAccountId": "66e9e774-3dcc-4852-801d-b6e91d161a13",
+            "AchBankName": "achb1",
             "IsActive": true
           }, {
             "BankAccountId": "76e9e774-3dcc-4852-801d-b6e91d161a13",
+            "AchBankName": "achb2",
             "IsActive": true
           }, {
             "BankAccountId": "86e9e774-3dcc-4852-801d-b6e91d161a13",
+            "AchBankName": "achb3",
             "IsActive": false
           }]
         });
