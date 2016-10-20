@@ -88,6 +88,7 @@ describe('Model: Floorplan', function () {
       floorplan.create(angular.extend({}, dummyFormData));
       httpBackend.flush();
       expect(sentData.UnitColorId).toBe('col1');
+      expect(sentData.TitleLocationId).toBe('titleLoc1');
       expect(sentData.TitleTypeId).toBe('titleType1');
       expect(sentData.PhysicalInventoryAddressId).toBe('loc1');
       expect(sentData.LineOfCreditId).toBe('line1');
