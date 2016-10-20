@@ -115,7 +115,16 @@
 
       // replace bank accounts from getInfo() with the active bank accounts from /dealer/v1_1/summary
       var activeBankAccounts = _.filter(data[2].BankAccounts, function(bankAccount) {
-        return bankAccount.IsActive === true;
+
+        var retVal = (bankAccount.IsActive === true) ;
+
+        if (User.isDealer()) {
+          if (! bankAccount.AchBankName) {
+            retVal = false;
+          }
+        }
+
+        return retVal;
       });
 
       $scope.options.BankAccounts = _.sortBy(activeBankAccounts, 'AchBankName');
