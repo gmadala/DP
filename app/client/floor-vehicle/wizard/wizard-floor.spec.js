@@ -272,6 +272,116 @@ describe('Controller: WizardFloorCtrl', function() {
 
   // navigation test
 
+  xdescribe('Submit function', function() {
+    var succeed = true;
+
+    beforeEach(inject(function() {
+      scope.form = mockForm;
+      spyOn(dialog, 'open').and.returnValue({
+        result: {
+          then: function (callback) {
+            callback(succeed);
+          }
+        }
+      });
+
+      $httpBackend.expectPOST('/floorplan/v1_1/create')
+        .respond({
+          Success: true,
+          Message: null,
+          Data: {
+            FloorplanId: 'floorplan-id'
+          }
+        });
+    }));
+
+    it('should exist', function() {
+      expect(typeof wizardFloor.submit).toBe('function');
+    });
+
+    it('should create the validity object and update the error flag', function() {
+      expect(wizardFloor.validity).not.toBeDefined();
+      expect(scope.vinDetailsErrorFlag).toBe(false);
+      scope.submit();
+      expect(scope.validity).toBeDefined();
+      expect(scope.vinDetailsErrorFlag).toBe(true);
+    });
+
+    xit('should do nothing if the form is invalid', function() {
+      scope.form.$valid = false;
+      scope.submit();
+      expect(dialog.open).not.toHaveBeenCalled();
+    });
+
+    xit('should call dialog with a valid form', function() {
+      scope.form.$valid = true;
+      scope.submit();
+      expect(dialog.open.calls.mostRecent().args[0].resolve.formData()).toEqual(scope.data);
+    });
+
+    xit('should call reallySubmit() if user confirms', function() {
+      spyOn(scope, 'reallySubmit').and.returnValue();
+      scope.submit();
+      expect(scope.reallySubmit).toHaveBeenCalled();
+    });
+
+    xit('should not call reallySubmit() if user does not confirm', function() {
+      succeed = false;
+      spyOn(scope, 'reallySubmit').and.returnValue();
+      scope.submit();
+      expect(scope.reallySubmit).not.toHaveBeenCalled();
+    })
+  });
+
+  xdescribe('really submit function', function() {
+    var  p;
+
+    beforeEach(function() {
+      $httpBackend.whenGET('/info/v1_1/businesshours').respond({});
+    });
+
+    beforeEach(inject(function(protect) {
+      p = protect;
+
+      spyOn(dialog, 'open').and.returnValue({
+        open: function() {
+          return {
+            then: function(s,f) {
+              if (succeed) {
+                s(true);
+              } else {
+                s(false);
+              }
+            }
+          };
+        }
+      });
+    }));
+
+    it('should exist', function() {
+      expect(typeof scope.reallySubmit).toBe('function');
+    });
+
+    it('should throw an error if guard and protect are not the same', function() {
+      expect(function() { scope.reallySubmit({}); }).toThrow();
+    });
+
+    xit('should show a dialog if the flooring is successful', function() {
+      $httpBackend.whenPOST('/floorplan/v1_1/create')
+        .respond(function() {
+          return [200, { Success: true , Data: {FloorplanId: 'asdlfkjpobiwjeklfjsdf'}}];
+        });
+    });
+
+    it('should do nothing if the flooring fails', function() {
+      $httpBackend.whenPOST('/floorplan/v1_1/create')
+        .respond(function() {
+          return [200, { Success: false , Data: {FloorplanId: 'asdlfkjpobiwjeklfjsdf'}}];
+        });
+      expect(dialog.open).not.toHaveBeenCalled();
+    })
+  });
+
   // submission test
 
 });

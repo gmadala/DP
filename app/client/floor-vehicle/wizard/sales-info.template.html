@@ -3,7 +3,7 @@
   <h4 translate>Purchase Information:</h4>
 
   <div class="date-field date-picker" style="width: 100% !important; margin-bottom: 24px;">
-    <label ng-show="wizardFloor.data.UnitPurchaseDate" for="purchaseDate" class="input-title show-hide"><span translate>Purchase Date</span></label>
+    <label ng-show="wizardFloor.data.UnitPurchaseDate || salesInfo.purchaseDateHasValue" for="purchaseDate" class="input-title show-hide"><span translate>Purchase Date</span></label>
 
     <div class="field row" style="margin-top:-9px;">
       <div class="col-sm-12">
@@ -13,7 +13,7 @@
         </button>
 
         <input type="text" uib-datepicker-popup="{{salesInfo.dateFormat}}" style="margin-top: 15px;"
-               placeholder="{{ 'Purchase Date (dd/mm/yyyy)' | translate }}" nxg-date class="input-full"
+               placeholder="{{ 'Purchase Date (mm/dd/yyyy)' | translate }}" nxg-date class="input-full"
                ng-model="wizardFloor.data.UnitPurchaseDate"
                min-date="salesInfo.dealerMinDate"
                max-date="salesInfo.maxDate"
@@ -21,6 +21,7 @@
                show-weeks="false"
                show-button-bar="false"
                is-open="salesInfo.datePicker.opened"
+               ng-keyup="salesInfo.onPurchaseDateChange(form.purchaseDate.$viewValue)"
                id="purchaseDate"
                name="purchaseDate"
                required
@@ -38,7 +39,7 @@
     </div>
     <label for="purchaseDate" class="text-error"
            ng-show="(form.purchaseDate.$error.required || form.purchaseDate.$error.date || form.purchaseDate.$error.past || form.purchaseDate.$error.future) && form.$submitted" translate>
-      Please enter a Valid Purchase Date.
+      Please enter a valid purchase date (mm/dd/yyyy).
     </label>
   </div>
 
@@ -58,7 +59,7 @@
     </div>
     <label for="inputPurchaseAmt" class="text-error"
            ng-show="form.inputPurchaseAmt.$error.required && form.$submitted" translate>
-      Please enter the Purchase Amount.
+      Please enter the purchase amount.
     </label>
     <label for="inputPurchaseAmt"
            class="text-error"
