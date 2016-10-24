@@ -12,21 +12,26 @@
   <div class="row">
     <div class="col-xs-12 col-sm-offset-2 col-sm-8">
       <h2 style="font-size: 1.714em; line-height: 1.2; margin-top: 28px; margin-bottom: 20px;" translate>Thank you for your floor plan request.</h2>
-      <h4 style="font-size: 1.429em; line-height: 1.2; margin-bottom: 20px;" translate>Floor plan request number: {{ flooringConfirmation.stockNumber }}<h4>
+      <h4 style="font-size: 1.429em; line-height: 1.2; margin-bottom: 20px;" translate>Stock Number: {{ flooringConfirmation.stockNumber }}</h4>
       <p class="hidden" style="font-size: 1.15em; font-weight: 200; margin-bottom: 60px;" translate>You will receive an email confirmation shortly at {{ flooringConfirmation.user.BusinessEmail }}</p>
 
-      <h4 style="font-size: 1.429em; line-height: 1.2; font-weight: 400; color: #FFA500;" translate>How would you rate your experience with flooring online?<h4>
-      <div class="star-container" style="font-size: 3em; margin-bottom: 60px; color: #545454;" ng-hide="flooringConfirmation.hideStars">
-        <span ng-mouseleave="flooringConfirmation.starHoverValue = 0">
-          <span class="glyphicon" ng-class="{ 'glyphicon-star-empty': flooringConfirmation.starHoverValue < 1, 'glyphicon-star': flooringConfirmation.starHoverValue >= 1 }" ng-click="flooringConfirmation.starClick(1)" ng-mouseover="flooringConfirmation.starHover(1)" style="cursor: pointer;"></span>
-          <span class="glyphicon" ng-class="{ 'glyphicon-star-empty': flooringConfirmation.starHoverValue < 2, 'glyphicon-star': flooringConfirmation.starHoverValue >= 2 }" ng-click="flooringConfirmation.starClick(2)" ng-mouseover="flooringConfirmation.starHover(2)" style="cursor: pointer;"></span>
-          <span class="glyphicon" ng-class="{ 'glyphicon-star-empty': flooringConfirmation.starHoverValue < 3, 'glyphicon-star': flooringConfirmation.starHoverValue >= 3 }" ng-click="flooringConfirmation.starClick(3)" ng-mouseover="flooringConfirmation.starHover(3)" style="cursor: pointer;"></span>
-          <span class="glyphicon" ng-class="{ 'glyphicon-star-empty': flooringConfirmation.starHoverValue < 4, 'glyphicon-star': flooringConfirmation.starHoverValue >= 4 }" ng-click="flooringConfirmation.starClick(4)" ng-mouseover="flooringConfirmation.starHover(4)" style="cursor: pointer;"></span>
-          <span class="glyphicon" ng-class="{ 'glyphicon-star-empty': flooringConfirmation.starHoverValue < 5, 'glyphicon-star': flooringConfirmation.starHoverValue == 5 }" ng-click="flooringConfirmation.starClick(5)" ng-mouseover="flooringConfirmation.starHover(5)" style="cursor: pointer;"></span>
-        </span>
-      </div>
+      <h4 style="font-size: 1.429em; line-height: 1.2; font-weight: 400; color: #FFA500;" translate>How would you rate your experience with flooring online?</h4>
 
-      <p style="font-size: 1.15em; font-weight: 200; margin-bottom: 60px; height: 53px; padding-top: 10px;" ng-show="flooringConfirmation.hideStars" translate>Thank you for the feed back. If you would like to tell us more, click <a href="https://www.surveymonkey.com/r/3W9LD35" target="_blank">here</a>!</p>
+      <form name="confirmationForm" ng-hide="flooringConfirmation.surveyComplete" novalidate>
+        <nxg-star-rating rating-value="flooringConfirmation.starValue" max-rating="5"></nxg-star-rating>
+
+        <div class="form-group">
+          <label for="comment" ng-show="flooringConfirmation.surveyComment" translate>Tell us more!</label>
+          <textarea id="comment" name="comment" class="form-control" style="height: 100px; margin-bottom: 10px;" placeholder="{{ 'Tell us more!' | translate }}" ng-model="flooringConfirmation.surveyComment" required></textarea>
+          <label for="comment" class="text-error" ng-show="confirmationForm.comment.$error.required && confirmationForm.$submitted">Survey comment is required.</label>
+        </div>
+
+        <div style="height: 35px; margin-bottom: 20px;">
+          <button class="btn-cta btn-lg cta-secondary pull-right" ng-click="flooringConfirmation.submitSurvey()" style="margin: 0px;" type="submit">submit</button>
+        </div>
+      </form>
+
+      <p style="font-size: 1.15em; font-weight: 200; margin-bottom: 60px; height: 53px; padding-top: 10px;" ng-show="flooringConfirmation.surveyComplete" translate>Thank you for the feed back!</p>
 
       <div class="hidden" style="margin-bottom: 30px;">
         <a href translate><span class="glyphicon glyphicon-print"></span>&nbsp;Print Request Summary</a>
@@ -41,7 +46,7 @@
         <nxg-download-waybill class="btn btn-lg btn-primary" style="margin-left: 0px; font-size: 1.429em; padding: 10px 35px; height: 45px; font-weight: 400;"></nxg-download-waybill>
       </div> -->
 
-      <button class="btn btn-lg cta-primary" style="font-size: 1.429em; height: 40px; font-weight: 300; margin-left: 0px; padding: 8px 20px;" ui-sref="flooringWizard.car">Floor Another Vehicle</button>
+      <button class="btn-cta btn-lg cta-primary" style="font-size: 1.429em; height: 40px; font-weight: 300; margin-left: 0px; padding: 8px 20px;" ui-sref="flooringWizard.car" translate>Floor Another Vehicle</button>
     </div>
   </div>
 </div>
