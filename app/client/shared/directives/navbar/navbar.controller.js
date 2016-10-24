@@ -250,7 +250,7 @@
         $scope.navbarClosed = false;
       } else {
         setTimeout(function() {
-            $scope.navbarClosed = true;
+          $scope.navbarClosed = true;
         }, 5000)
       }
     };
@@ -259,7 +259,7 @@
       if ($state.current.data.showMenu) {
         $state.current.data.showMenu = false;
         setTimeout(function() {
-            $scope.navbarClosed = true;
+          $scope.navbarClosed = true;
         }, 5000)
       }
     };
