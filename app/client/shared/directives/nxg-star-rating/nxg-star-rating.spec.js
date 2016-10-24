@@ -1,46 +1,36 @@
 'use strict';
 
 describe("Directive: nxgStarRatingCtrl", function () {
-  beforeEach(module('nextgearWebApp'));
+  beforeEach(module('nextgearWebApp', 'client/shared/directives/nxg-star-rating/nxg-star-rating.html'));
 
-  var scope, controller, compile, element;
+  var scope, controller, element;
 
   describe("Directive: NxgStarRating", function () {
-    beforeEach(inject(function (_$compile_, _$rootScope_) {
+    beforeEach(inject(function ($compile, _$rootScope_) {
       scope = _$rootScope_.$new();
-      compile = _$compile_;
 
-      element = angular.element('<nxg-star-rating max-rating="10"></nxg-star-rating>');
-      element = compile(element)(scope);
+      element = angular.element("<nxg-star-rating max-rating='10'></nxg-star-rating>");
+      element = $compile(element)(scope);
       scope.$digest();
     }));
 
 
     it("check max rating is being set correctly when not passed", function () {
-      console.log(scope.maxRating);
-
-      expect(scope.maxRating).toEqual(5);
+      expect(element.attr("max-rating")).toEqual("10");
+      expect(element.find(".glyphicon").length).toEqual(10);
     });
 
 
   });
 
   describe("Controller: NxgStarRatingCtrl", function () {
-    beforeEach(inject(function ($rootScope, $controller, _$compile_) {
+    beforeEach(inject(function ($rootScope, $controller) {
       scope = $rootScope.$new();
-      compile = _$compile_;
+
       controller = $controller('NxgStarRatingCtrl', {
         '$scope': scope
       });
     }));
-
-    // fit('replace the element with appropriate content', function() {
-    //   var elm = compile("<nxg-star-rating></nxg-star-rating")(rootScope);
-    //
-    //   rootScope.$digest();
-    //   expect(scope.maxRating).toEqual(5);
-    //   expect(scope.maxRatings.length).toEqual(5);
-    // });
 
     it("mouse leave to reset rating back to previous current ratingValue or 0", function () {
       scope.ratingValue = 4;
