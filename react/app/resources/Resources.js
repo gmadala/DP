@@ -3,9 +3,9 @@ import counterpart from 'counterpart';
 import ResourceVideos from './ResourceVideos';
 import ResourceDocs from './ResourceDocs';
 import MobileApps from './MobileApps';
-import collateralDocsList from './_collateralDocsList';
-import mobileAppsList from './_mobileAppsList';
-import docsList from './_docsList';
+import collateralDocsList from './data/_collateralDocsList';
+import mobileAppsList from './data/_mobileAppsList';
+import docsList from './data/_docsList';
 
 class Resources extends Component {
     constructor(props) {

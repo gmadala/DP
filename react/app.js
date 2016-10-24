@@ -1,2 +1,2 @@
-import directives from './angular-directives';
-import translations from './translations';
+import './angular-directives';
+import './translations';

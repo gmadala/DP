@@ -1,6 +1,6 @@
 import React from 'react';
 import Translate from 'react-translate-component';
-import metric from '../shared/metric';
+import metric from '../../shared/metric';
 
 module.exports = [
     {

@@ -1,7 +1,7 @@
 import React from 'react';
 import Translate from 'react-translate-component';
 import counterpart from 'counterpart';
-import metric from '../shared/metric';
+import metric from '../../shared/metric';
 
 let languagePrefix = counterpart.getLocale();
 

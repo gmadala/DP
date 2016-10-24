@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import counterpart from 'counterpart';
 import AuctionResourceDocs from './AuctionResourceDocs';
-import auctionDocsList from './_auctionDocsList';
+import auctionDocsList from './data/_auctionDocsList';
 import metric from '../shared/metric';
 
 class AuctionResources extends Component {
