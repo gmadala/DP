@@ -25,6 +25,9 @@ module.exports = {
       query: {
         presets: [ 'es2015', 'react' ]
       }
+    }, {
+      test: /sinon\.js$/,
+      loader: "imports?define=>false"
     } ],
     resolve: {
       extensions: [ '', '.js', '.jsx' ]

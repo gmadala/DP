@@ -1,23 +1,21 @@
-const webpackConfig = require('./webpack.config.js');
-const argv = require('minimist')(process.argv.slice(2));
-webpackConfig.module.loaders.push({
+const webpackConfig = require( './webpack.config.js' );
+const argv = require( 'minimist' )( process.argv.slice( 2 ) );
+webpackConfig.module.loaders.push( {
   test: /\.json$/,
   loader: 'json-loader'
-});
+} );
 
 module.exports = function( config ) {
   config.set( {
     browsers: [ 'Chrome' ],
-    frameworks: [ 'mocha' ],
-    reporters: [ 'coverage' ],
-    files: [
-      {
-        pattern: 'webpack.testsbundle.js',
-        watched: false,
-        served: true,
-        included: true,
-      },
-    ],
+    frameworks: [ 'mocha', 'sinon-chai' ],
+    reporters: [ 'coverage', 'progress', 'html' ],
+    files: [ {
+      pattern: 'webpack.testsbundle.js',
+      watched: false,
+      served: true,
+      included: true,
+    }, ],
     preprocessors: {
       'webpack.testsbundle.js': [ 'webpack', 'sourcemap' ],
     },
@@ -26,7 +24,9 @@ module.exports = function( config ) {
       'karma-mocha',
       'karma-sourcemap-loader',
       'karma-webpack',
-      'karma-coverage'
+      'karma-coverage',
+      'karma-htmlfile-reporter',
+      'karma-sinon-chai'
     ],
     autoWatch: false,
     singleRun: true,
@@ -35,9 +35,12 @@ module.exports = function( config ) {
     webpackServer: {
       noInfo: true,
     },
+    htmlReporter: {
+      outputFile: 'test/units.html'
+    },
     client: {
       chai: {
-          includeStack: true
+        includeStack: true
       }
     },
   } );
