@@ -91,9 +91,9 @@
     "karma-firefox-launcher": "0.1.6",
     "karma-ie-launcher": "^0.2.0",
     "karma-jasmine": "^0.3.8",
+    "karma-jasmine-html-reporter": "^0.2.2",
     "karma-junit-reporter": "0.3.4",
     "karma-mocha": "^1.2.0",
-    "karma-mocha-reporter": "^2.2.0",
     "karma-ng-html2js-preprocessor": "~0.1.0",
     "karma-ng-scenario": "~0.1.0",
     "karma-phantomjs-launcher": "^1.0.2",
@@ -121,7 +121,6 @@
     "ci-build": "grunt ci-build --target=test",
     "windows": "grunt server-ie",
     "translate": "babel-node translate.js",
-    "test": "set NODE_ENV=development && karma start webpack.karma.conf.js --single-run --browsers Chrome",
-    "test:watch": "karma webpack.karma.conf.js start"
+    "test": "set NODE_ENV=development && karma start webpack.karma.conf.js"
   }
 }

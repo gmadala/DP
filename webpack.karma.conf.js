@@ -4,26 +4,12 @@ webpackConfig.module.loaders.push({
   test: /\.json$/,
   loader: 'json-loader'
 });
-webpackConfig.module.loaders.push({
-  test: /sinon(\\|\/)pkg(\\|\/)sinon\.js/,
-  loader: 'imports?define=>false,require=>false',
-});
-webpackConfig.module.loaders.push({
-  test: /sinon(\\|\/)pkg(\\|\/)sinon\.js/,
-  loader: 'imports?define=>false,require=>false',
-});
-webpackConfig.resolve = {
-  alias: {
-      // required for enzyme to work properly
-      sinon: 'sinon/pkg/sinon',
-  }
-};
 
 module.exports = function( config ) {
   config.set( {
-    browsers: [ 'PhantomJS', 'Chrome' ],
-    frameworks: [ 'mocha', 'sinon-chai' ],
-    reporters: [ 'coverage', 'mocha' ],
+    browsers: [ 'Chrome' ],
+    frameworks: [ 'mocha' ],
+    reporters: [ 'coverage' ],
     files: [
       {
         pattern: 'webpack.testsbundle.js',
@@ -35,6 +21,13 @@ module.exports = function( config ) {
     preprocessors: {
       'webpack.testsbundle.js': [ 'webpack', 'sourcemap' ],
     },
+    plugins: [
+      'karma-chrome-launcher',
+      'karma-mocha',
+      'karma-sourcemap-loader',
+      'karma-webpack',
+      'karma-coverage'
+    ],
     autoWatch: false,
     singleRun: true,
     colors: true,
@@ -45,10 +38,6 @@ module.exports = function( config ) {
     client: {
       chai: {
           includeStack: true
-      },
-      mocha: {
-          reporter: 'html',
-          ui: 'bdd'
       }
     },
   } );

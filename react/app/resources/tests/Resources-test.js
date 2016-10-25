@@ -1,13 +1,11 @@
 import React from 'react';
-import { shallow } from 'enzyme';
-import { assert } from 'chai';
+import { expect } from 'chai';
+import { mount, shallow } from 'enzyme';
 import TestComponent from '../TestComponent.jsx';
 
 describe('<TestComponent />', () => {
-  it('renders a <TestComponent>', () => {
-    const renderedComponent = shallow(
-      <TestComponent></TestComponent>
-    );
-    assert.typeOf(renderedComponent, 'object');
+  it('calls componentDidMount', () => {
+    const wrapper = mount(<TestComponent />);
+    expect(TestComponent.prototype.componentDidMount.calledOnce).to.equal(true);
   });
 });
