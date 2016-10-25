@@ -47,6 +47,10 @@
         margin-top: 10px;
         margin-bottom: 30px;
 
+        &.last {
+          margin-bottom: 0;
+        }
+
         .block {
           .block-title {
             font-size: 16px;
