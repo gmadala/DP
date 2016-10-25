@@ -38,6 +38,10 @@
 
     vm.dateFormat = 'MM/dd/yyyy';
 
+    vm.onPurchaseDateChange = function(viewValue) {
+      vm.purchaseDateHasValue = !!viewValue;
+    };
+
     vm.switchChange = function (toggleValue) {
       if ($scope.$parent.wizardFloor.data) {
         $scope.$parent.wizardFloor.data.PaySeller = toggleValue ? 0 : null;
