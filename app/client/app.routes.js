@@ -221,6 +221,17 @@
           showMenu: false
         }
       })
+      .state('titleReleaseConfirm', {
+        url: '/titleReleaseConfirm',
+        templateUrl: 'client/title-releases/title-releases-checkout/confirm-title-release-modal/confirm-title-request.template.html',
+        controller: 'ConfirmTitleReleaseCheckoutCtrl',
+        params: {data: null},
+        data: {
+          pageId: 'TitleReleasessConfirm',
+          showNavBar: true,
+          showMenu: false
+        }
+      })
       .state('vehicledetails', {
         url: '/vehicledetails?stockNumber',
         templateUrl: 'client/vehicle-details/vehicle-details.html',

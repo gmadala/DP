@@ -5,11 +5,21 @@
     .module('nextgearWebApp')
     .controller('ConfirmTitleReleaseCheckoutCtrl', ConfirmTitleReleaseCheckoutCtrl);
 
-  ConfirmTitleReleaseCheckoutCtrl.$inject = ['$scope', '$uibModalInstance', 'response', 'TitleReleases', 'Floorplan'];
+  ConfirmTitleReleaseCheckoutCtrl.$inject = ['$scope', 'TitleReleases', 'Floorplan', '$state', '$stateParams'];
 
-  function ConfirmTitleReleaseCheckoutCtrl($scope, $uibModalInstance, response, TitleReleases, Floorplan) {
+  function ConfirmTitleReleaseCheckoutCtrl($scope, TitleReleases, Floorplan, $state, $stateParams) {
 
-    var uibModalInstance = $uibModalInstance;
+    $scope.backToTitleReleases = function () {
+      $state.transitionTo('titlereleases');
+    };
+
+    var response = {};
+    if ($stateParams.data) {
+      response = $stateParams.data;
+    } else {
+      // If no confirm data go back to title releases
+      $scope.backToTitleReleases();
+    }
 
     $scope.counts = {
       total: response.TitleReleaseResults.length,
@@ -31,10 +41,5 @@
         return result;
       }
     });
-
-    $scope.close = function () {
-      uibModalInstance.close();
-    };
-
   }
 })();
