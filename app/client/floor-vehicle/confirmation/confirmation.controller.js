@@ -22,9 +22,9 @@
   function FlooringConfirmationCtrl($scope, User, kissMetricInfo, segmentio, metric, $stateParams, Upload, nxgConfig, $state, fedex, $rootScope) {
     var vm = this;
 
-    // if (!$stateParams.stockNumber || !$stateParams.floorplanId) {
-    //   $state.go('flooringWizard.car');
-    // }
+    if (!$stateParams.stockNumber || !$stateParams.floorplanId) {
+      $state.go('flooringWizard.car');
+    }
 
     vm.stockNumber = $stateParams.stockNumber;
     // vm.uploadSuccess = $stateParams.uploadSuccess;

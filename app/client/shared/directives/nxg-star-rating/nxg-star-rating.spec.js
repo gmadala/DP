@@ -3,24 +3,29 @@
 describe("Directive: nxgStarRatingCtrl", function () {
   beforeEach(module('nextgearWebApp', 'client/shared/directives/nxg-star-rating/nxg-star-rating.html'));
 
-  var scope, controller, element;
+  var scope, controller, element1, element2;
 
   describe("Directive: NxgStarRating", function () {
     beforeEach(inject(function ($compile, _$rootScope_) {
       scope = _$rootScope_.$new();
 
-      element = angular.element("<nxg-star-rating max-rating='10'></nxg-star-rating>");
-      element = $compile(element)(scope);
+      element1 = angular.element("<nxg-star-rating max-rating='10'></nxg-star-rating>");
+      element1 = $compile(element1)(scope);
+
+      element2 = angular.element("<nxg-star-rating></nxg-star-rating>");
+      element2 = $compile(element2)(scope);
       scope.$digest();
     }));
 
 
     it("check max rating is being set correctly when not passed", function () {
-      expect(element.attr("max-rating")).toEqual("10");
-      expect(element.find(".glyphicon").length).toEqual(10);
+      expect(element1.attr("max-rating")).toEqual("10");
+      expect(element1.find(".glyphicon").length).toEqual(10);
     });
 
-
+    it("check max rating is being set correctly when not passed", function () {
+      expect(element2.find(".glyphicon").length).toEqual(5);
+    });
   });
 
   describe("Controller: NxgStarRatingCtrl", function () {

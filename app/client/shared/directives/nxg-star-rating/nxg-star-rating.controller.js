@@ -10,13 +10,11 @@
 
     $scope.maxRatings = [];
 
-    // console.log($scope.maxRatings);
-
-    for (var i = 1; i <= $scope.maxRating; i++) {
-      $scope.maxRatings.push({});
+    if (!$scope.maxRating || (Number($scope.maxRating <= 0))) {
+      $scope.maxRating = 5;
     }
 
-    // console.log($scope.maxRatings);
+    $scope.maxRatings = new Array(Number($scope.maxRating));
 
     $scope._rating = $scope.ratingValue;
 
