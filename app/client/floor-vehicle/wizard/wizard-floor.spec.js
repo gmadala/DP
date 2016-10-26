@@ -160,9 +160,7 @@ describe('Controller: WizardFloorCtrl', function() {
 
     it('should default pay seller to true, not 1', function() {
       expect(wizardFloor.defaultData.PaySeller).toEqual(true);
-      expect(wizardFloor.defaultData.PaySeller).not.toEqual(false);
       expect(wizardFloor.defaultData.PaySeller).not.toEqual(1);
-      expect(wizardFloor.defaultData.PaySeller).not.toEqual(0);
     });
 
     it('should have flooring valuation feature flag', function() {
