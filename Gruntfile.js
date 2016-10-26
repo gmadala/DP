@@ -207,6 +207,7 @@ module.exports = function(grunt) {
       options: {
         assetsDirs: ['<%= yeoman.dist %>'],
         patterns: {
+          html: [[/(img\/.*?\.(?:gif|jpeg|jpg|png|webp|svg))/gm, 'Update the html to reference our revved images']],
           js: [[/(img\/.*?\.(?:gif|jpeg|jpg|png|webp|svg))/gm, 'Update the JS to reference our revved images']],
           css: [[/(img\/.*?\.(?:gif|jpeg|jpg|png|webp|svg))/gm, 'Update the CSS to reference our revved images']]
         }
@@ -398,7 +399,9 @@ module.exports = function(grunt) {
       index: {
         files: {
           '<%= yeoman.dist %>/index.html': '<%= yeoman.dist %>/index.html',
-          '<%= yeoman.dist %>/version.txt': '<%= yeoman.dist %>/version.txt'
+          '<%= yeoman.dist %>/version.txt': '<%= yeoman.dist %>/version.txt',
+          '<%= yeoman.dist %>/client/shared/directives/nxg-footer/page-footer.template.html':
+            '<%= yeoman.dist %>/client/shared/directives/nxg-footer/page-footer.template.html'
         }
       },
       dist : {

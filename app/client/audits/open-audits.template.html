@@ -2,16 +2,16 @@
   <section class="row">
     <section class="col-xs-12">
       <div class="panel panel-default" ng-if="audits.results.length === 0 && !audits.loading">
-        <h2 class="well-title" translate>
+        <h2 class="well-title">
           <span translate>Open Audits</span>
         </h2>
-        <div class="panel-body" translate>
-          <p>
+        <div class="panel-body">
+          <p translate>
             You currently have no open audits.
           </p>
           <hr>
           <p>
-            <a href="#/home">Click here</a> to return to your dashboard.
+            <a href="#/home" translate>Click here</a> <span translate>to return to your dashboard.</span>
           </p>
         </div>
       </div>
@@ -19,10 +19,10 @@
         <div class="panel panel-default"
              ng-repeat="(method, results) in audits.groupedResults | orderBy:method track by method"
              nxg-infinite-scroll-show-indicator="audits.loading">
-          <h2 class="well-title" translate>
-            <span translate>Resolve via {{ method }}</span>
+          <h2 class="well-title">
+            <span translate>Resolve via</span> {{ method }}
           </h2>
-          <div class="panel-body" translate>
+          <div class="panel-body">
             <table class="table table-striped table-primary">
               <thead>
                 <th class="sortable hidden-xs"
@@ -60,11 +60,11 @@
                 <tr ng-repeat="item in results | orderBy:audits.sortField:audits.sortDescending">
                   <td class="hidden-xs">
                     <p class="lockup-major"> {{ item.flooringDate | moment }} </p>
-                    <p class="lockup-minor" translate>{{ item.daysOnFloorplan }} days</p>
+                    <p class="lockup-minor">{{ item.daysOnFloorplan }} <span translate>days</span></p>
                   </td>
                   <td class="hidden-xs">
                     <p class="lockup-major"> {{ item.inspectionDateTime | moment }} </p>
-                    <p class="lockup-minor" translate>{{ item.vehicleStatusDays }} days</p>
+                    <p class="lockup-minor">{{ item.vehicleStatusDays }} <span translate>days</span></p>
                   </td>
                   <td class="hidden-xs">
                     <p class="lockup-major"> {{ item.stockNumber }} </p>
