@@ -114,7 +114,7 @@ describe('Controller: SalesInfoCtrl', function() {
       initController();
       salesInfo.switchChange(false);
       expect(scope.$parent.wizardFloor.formParts.three).toBe(true);
-      expect(scope.$parent.wizardFloor.data.PaySeller).toBe(1);
+      expect(scope.$parent.wizardFloor.data.PaySeller).toBe(true);
     });
 
     it('should set form part 3 to true when the pay seller is set to non null and it was originally true', function() {
@@ -123,7 +123,7 @@ describe('Controller: SalesInfoCtrl', function() {
       initController();
       salesInfo.switchChange(true);
       expect(scope.$parent.wizardFloor.formParts.three).toBe(true);
-      expect(scope.$parent.wizardFloor.data.PaySeller).toBe(0);
+      expect(scope.$parent.wizardFloor.data.PaySeller).toBe(false);
     });
 
     it('should not set form part 3 to true when the pay seller is set to non null and it was originally false', function() {
@@ -141,7 +141,7 @@ describe('Controller: SalesInfoCtrl', function() {
       initController();
       salesInfo.switchChange(true);
       expect(scope.$parent.wizardFloor.formParts.three).toBe(false);
-      expect(scope.$parent.wizardFloor.data.PaySeller).toBe(1);
+      expect(scope.$parent.wizardFloor.data.PaySeller).toBe(true);
     });
 
     it('should not set form part 3 to true when the pay seller is set to non null and it was originally false', function() {
@@ -150,7 +150,7 @@ describe('Controller: SalesInfoCtrl', function() {
       initController();
       salesInfo.switchChange(true);
       expect(scope.$parent.wizardFloor.formParts.three).toBe(false);
-      expect(scope.$parent.wizardFloor.data.PaySeller).toBe(0);
+      expect(scope.$parent.wizardFloor.data.PaySeller).toBe(false);
     });
 
     it('should not do anything if data is undefined', function() {

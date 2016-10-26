@@ -44,10 +44,10 @@
 
     vm.switchChange = function (toggleValue) {
       if ($scope.$parent.wizardFloor.data) {
-        $scope.$parent.wizardFloor.data.PaySeller = toggleValue ? 0 : null;
+        $scope.$parent.wizardFloor.data.PaySeller = toggleValue ? false : null;
 
         if (!$scope.$parent.wizardFloor.canPayBuyer) {
-          $scope.$parent.wizardFloor.data.PaySeller = 1;
+          $scope.$parent.wizardFloor.data.PaySeller = true;
         }
 
         $scope.$parent.wizardFloor.formParts.three =
