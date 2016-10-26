@@ -138,28 +138,17 @@
   <div class="receipt-option" ng-show="!!receiptUrls.length">
     <h2><span translate>Receipt Options</span></h2>
     <p class="receipt-minor" translate>If you wish to view your receipts, please choose from the following formatting options.</p>
-    <div class="cr-inline" style="text-align: left">
-      <input type="radio" name="receiptOption" id="grouped" ng-model="format" value="grouped">
-      <label class="radio-img" for="grouped"></label>
-      <label class="cr-label negative" style="text-align: right" for="grouped" translate>Grouped by transaction</label>
-    </div>
-    <div class="cr-inline" style="text-align: left">
-      <input type="radio" name="receiptOption" id="single" ng-model="format" value="single">
-      <label class="radio-img" for="single"></label>
-      <label class="cr-label negative" for="single" translate>1 VIN per page</label>
-    </div>
-    <div ng-show="!!receiptUrls.length">
-      <div style="padding:20px 0px 0px 0px;">
-        <a href class="featured today-btn" ng-class="{ 'disabled': !format }" ng-click="(format && viewReceipts())"><span translate>View Receipts</span></a>
-      </div>
-    </div>
+    <a href class="featured today-btn" ng-click="viewReceipts('grouped')">
+      <span translate>Grouped by transaction</span>
+    </a>
+    <br />
+    <a href class="featured today-btn" ng-click="viewReceipts('single')">
+      <span translate>1 VIN per page</span>
+    </a>
   </div>
-  <div ng-show="!!receiptUrls.length">
+  <div>
       <button type="submit" ng-click="backToPayments()" class="btn-cta cta-primary" translate>Back To Payments</button>
     </div>
-  </div>
-  <div ng-hide="!!receiptUrls.length">
-      <button type="submit" ng-click="backToPayments()" class="btn-cta cta-primary" nxg-autofocus translate>OK</button>
   </div>
  </div>
 </div>
