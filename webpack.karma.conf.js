@@ -7,9 +7,9 @@ webpackConfig.module.loaders.push( {
 
 module.exports = function( config ) {
   config.set( {
-    browsers: [ 'Chrome' ],
+    browsers: [ 'PhantomJS' ],
     frameworks: [ 'mocha', 'sinon-chai' ],
-    reporters: [ 'coverage', 'progress', 'html' ],
+    reporters: [ 'progress', 'progress', 'html' ],
     files: [ {
       pattern: 'webpack.testsbundle.js',
       watched: false,
@@ -26,7 +26,8 @@ module.exports = function( config ) {
       'karma-webpack',
       'karma-coverage',
       'karma-htmlfile-reporter',
-      'karma-sinon-chai'
+      'karma-sinon-chai',
+      'karma-phantomjs-launcher'
     ],
     autoWatch: false,
     singleRun: true,
