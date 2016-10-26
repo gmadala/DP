@@ -6,7 +6,13 @@ import ListItemLink from '../shared/ListItemLink';
 class ResourceDocs extends Component {
     render() {
         const docLinks = this.props.docs.map((item) => <ListItemLink name={item.name} url={item.url} metric={item.metric} key={item.id} handleClick={this.props.handleClick} />)
-        const collateralDocLinks = this.props.collateralDocs.map((item) => <ListItemLink name={item.name} url={item.url} metric={item.metric} key={item.id} handleClick={this.props.handleClick} />)
+
+        var collatDocs = null;
+        if(this.props.collateralDocs && this.props.collateralDocs.length > 0) {
+          const collateralDocLinks = this.props.collateralDocs.map((item) => <ListItemLink name={item.name} url={item.url} metric={item.metric} key={item.id} handleClick={this.props.handleClick} />)
+
+           collatDocs = (<div><p><Translate content="resources.resourceDocs.collateralProgram" /></p><ul className="text-list zeroLeftPadding colDocs">{collateralDocLinks}</ul></div>);
+        }
 
         const language = counterpart.getLocale();
         const classes = language !== 'en' ? 'col-md-5' : 'col-md-4';
@@ -16,13 +22,10 @@ class ResourceDocs extends Component {
                 <div className="panel panel-default">
                     <h2 className="well-title"><Translate content="resources.resourceDocs.documents" /></h2>
                     <div className="panel-body">
-                        <ul className="text-list zeroLeftPadding">
+                        <ul className="text-list zeroLeftPadding docs">
                             {docLinks}
                         </ul>
-                        <p><Translate content="resources.resourceDocs.collateralProgram" /></p>
-                        <ul className="text-list zeroLeftPadding">
-                            {collateralDocLinks}
-                        </ul>
+                        {collatDocs}
                     </div>
                 </div>
             </div>
@@ -31,9 +34,9 @@ class ResourceDocs extends Component {
 }
 
 ResourceDocs.propTypes = {
-    docs: PropTypes.array,
+    docs: PropTypes.array.isRequired,
     collateralDocs: PropTypes.array,
-    handleClick: PropTypes.func,
+    handleClick: PropTypes.func.isRequired,
 };
 
 export default ResourceDocs;

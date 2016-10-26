@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import counterpart from 'counterpart';
-import AuctionResourceDocs from './AuctionResourceDocs';
+import ResourceDocs from './ResourceDocs';
 import auctionDocsList from './data/_auctionDocsList';
 import metric from '../shared/metric';
 
@@ -36,7 +36,7 @@ class AuctionResources extends Component {
             <div className="container">
                 <div className="row">
                     <div className="col-md-12">
-                        <AuctionResourceDocs docs={this.state.docs} handleClick={this.handleClick} />
+                        <ResourceDocs docs={this.state.docs} handleClick={this.handleClick} />
                     </div>
                 </div>
             </div>
@@ -45,7 +45,7 @@ class AuctionResources extends Component {
 }
 
 AuctionResources.propTypes = {
-    props: PropTypes.object,
+    props: PropTypes.object.isRequired
 }
 
 export default AuctionResources;
