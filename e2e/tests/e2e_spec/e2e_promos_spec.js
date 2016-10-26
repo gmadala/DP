@@ -28,10 +28,10 @@ describe('\n Promos Page', function () {
     expect(promos.elImage.isDisplayed()).toBe(true);
     expect(promos.getTextTitle()).toEqual("Please contact your local representative for details about the Promotions and Event Sales listed below.");
     expect(promos.getTextHeader()).toEqual("Promotions / Event Sales");
-    //expect(promos.elPromotionsDetails.isDisplayed()).toBe(false);
+    expect(promos.elPromotionsDetails.isDisplayed()).toBe(false);
     expect(promos.getTextPromos()).toEqual("Show Old Promos");
     promos.doPromos();
-    //expect(promos.elPromotionsDetails.isDisplayed()).toBe(true);
+    expect(promos.elPromotionsDetails.isDisplayed()).toBe(true);
     expect(promos.getTextPromos()).toEqual("Hide Old Promos");
     promos.doPromos();
   });

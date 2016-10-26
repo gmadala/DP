@@ -23,6 +23,7 @@ describe('\n Receipts Page', function () {
     helper.goToReceipts();
     browser.sleep(browser.params.delay);
     expect(browser.getCurrentUrl()).toEqual(execSettings.receiptsPage());
+    helper.popOver();
   });
 
   it("2. Receipts - Print a Receipt by Grouped VIN", function () {
