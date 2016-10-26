@@ -59,6 +59,7 @@
 
         var params = {};
         params = response;
+        TitleReleases.clearQueue();
         $state.go('titleReleaseConfirm', {data: params});
       });
     };
