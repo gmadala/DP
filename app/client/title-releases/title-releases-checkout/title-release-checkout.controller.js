@@ -13,8 +13,7 @@
     'Addresses',
     'kissMetricInfo',
     'segmentio',
-    'metric',
-    'gettextCatalog'
+    'metric'
   ];
 
   function TitleReleaseCheckoutCtrl(
@@ -25,8 +24,7 @@
     Addresses,
     kissMetricInfo,
     segmentio,
-    metric,
-    gettextCatalog) {
+    metric) {
 
     $scope.titleQueue = {
       contents: TitleReleases.getQueue(),
@@ -44,7 +42,6 @@
     TitleReleases.getTitleReleaseEligibility().then(function (data) {
       $scope.eligibility = data;
     });
-    $scope.titleLabel = gettextCatalog.getPlural($scope.titleQueue.contents.length, 'Title Requested', 'Titles Requested');
 
     $scope.onConfirmRequest = function() {
       $scope.submitting = true;

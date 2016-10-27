@@ -117,8 +117,8 @@
                       <button type="button" class="btn btn-icon btn-title-request" ng-click="toggleSelected(item)" ng-switch="isFloorplanOnQueue(item)"
                               ng-class="{selected: isFloorplanOnQueue(item)}"
                               ng-disabled="$parent.eligibilityLoading() || (!isFloorplanOnQueue(item) && $parent.eligibility.RemainingReleasesAvailable <= $parent.queueLength())">
-                        <span ng-switch-when="true"><!-- Force pluralization due to duplicate translations -->
-                          <span translate translate-n="1" translate-plural="Titles Requested">Title Requested</span>
+                        <span ng-switch-when="true">
+                          <span translate>Added</span>
                           <span nxg-icon="icon-minus" class="icon-small"></span>
                         </span>
                         <span ng-switch-default>
@@ -147,9 +147,7 @@
                           ng-class="{selected: isFloorplanOnQueue(item)}"
                           ng-disabled="$parent.eligibilityLoading() || (!isFloorplanOnQueue(item) && $parent.eligibility.RemainingReleasesAvailable <= $parent.queueLength())">
                   <span ng-switch-when="true">
-                    <!-- Force pluralization due to duplicate translations -->
-                    <span translate translate-n="1" translate-plural="Titles Requested">Title Requested</span><span nxg-icon="icon-minus"
-                                                                                                                    class="icon-small"></span>
+                    <span translate>Added</span><span nxg-icon="icon-minus" class="icon-small"></span>
                   </span>
                   <span ng-switch-default>
                     <span translate>Request Title</span><span nxg-icon="icon-plus" class="icon-small"></span>
