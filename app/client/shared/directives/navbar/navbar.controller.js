@@ -297,25 +297,17 @@
       return $state.current.name === "dashboard" || $state.current.name === "auction_dashboard" || $scope.pageTitle === "";
     };
 
-    $scope.navbarClosed = true;
-    $state.current.data.showMenu = !$state.current.data.showMenu;
-    $state.current.data.menuToggled = true;
-    $scope.closeMenuTip( );
-    if ( $state.current.data.showMenu ) {
-      $scope.navbarClosed = false;
-    } else {
-      setTimeout( function( ) {
-        $scope.navbarClosed = true;
-      }, 5000)
-    };
-
-    $scope.closeMenu = function( ) {
+    $scope.toggleMenu = function( ) {
+      $state.current.data.showMenu = !$state.current.data.showMenu;
+      $state.current.data.menuToggled = true;
+      $scope.closeMenuTip( );
       if ( $state.current.data.showMenu ) {
-        $state.current.data.showMenu = false;
+        $scope.navbarClosed = false;
+      } else {
         setTimeout( function( ) {
           $scope.navbarClosed = true;
         }, 5000)
-      }
+      };
     };
 
     $scope.addHover = function( ) {
