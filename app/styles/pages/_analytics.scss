@@ -1,88 +1,181 @@
 // ===========
 //  ANALYTICS
 // ===========
-
-.scale-description-x {
-  @extend .scale-description;
-  @extend %full-width;
-  @extend %center;
-  position: absolute;
-  bottom: 0px;
-}
-
-.average-turn-chart {
-  .chart-obj {
-    height: 330px;
-  }
-}
-
-// highly specific because we're basically making our own legend to work with highcharts.
-.movers-list {
-  position: absolute;
-  background: transparent;
-  top: 120px;
-  left: 10px;
-  width: calc(100% - 348px);
-  height: 320px;
-
-  .rank, .models {
-    @extend %float-l;
+#AnalyticsPage {
+  .panel-heading {
+    color: black;
+    background-color: white;
+    font-weight: 200;
+    font-size: 22px;
+    font-style: normal;
   }
 
-  .rank {
-    @extend %align-right;
-    width: 30px;
-    font-size: $large-font-size;
-    padding-right: 7px;
-    vertical-align: middle;
-  }
+  .average-turn {
+    .panel-body {
+      padding: 10px 5px 10px 0;
 
-  .models {
-    width: calc(100% - 30px);
-    font-size: $tiny-font-size;
-    line-height: 1.25;
-
-    div {
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      width: 135px;
-    }
-
-    span:last-child {
-      @extend %heavy;
+      .highcharts-container {
+        position:inherit !important;
+      }
     }
   }
-}
 
-.movers-chart {
-  position: absolute;
-  top: 100px;
-  right: 10px;
-  overflow: hidden;
-  width: 65%;
+  .business-summary {
 
-  .chart-obj {
-    height: 385px;
-    width: 100%;
+    .panel-body {
+      padding: 10px 0;
+
+      > div {
+        padding: 10px 20px;
+      }
+
+      h3 {
+        color: black;
+        padding-bottom: 8px;
+      }
+
+      .divider {
+        margin-bottom: 10px;
+      }
+
+      .subtext {
+        font-size: 10px;
+        font-style: normal;
+      }
+
+      .blocks {
+        margin-top: 10px;
+        margin-bottom: 30px;
+
+        &.last {
+          margin-bottom: 0;
+        }
+
+        .block {
+          .block-title {
+            font-size: 16px;
+            font-weight: bold;
+          }
+
+          .block-content {
+            padding-top: 10px;
+            padding-bottom: 10px;
+            font-size: 16px;
+            font-style: normal;
+          }
+        }
+      }
+    }
+  }
+
+  .scale-description-x {
+    @extend .scale-description;
+    @extend %full-width;
+    @extend %center;
+    position: absolute;
+    bottom: 0;
+  }
+
+  .average-turn-chart {
+    .chart-obj {
+      height: 330px;
+    }
+  }
+  // highly specific because we're basically making our own legend to work with highcharts.
+  .movers-list {
+    position: absolute;
+    background: transparent;
+    top: 120px;
+    left: 10px;
+    width: calc(100% - 348px);
+    height: 320px;
+
+    .models,
+    .rank {
+      @extend %float-l;
+    }
+
+    .rank {
+      @extend %align-right;
+      width: 30px;
+      font-size: $large-font-size;
+      padding-right: 7px;
+      vertical-align: middle;
+    }
+
+    .models {
+      width: calc(100% - 30px);
+      font-size: $tiny-font-size;
+      line-height: 1.25;
+
+      div {
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        width: 135px;
+      }
+
+      span:last-child {
+        @extend %heavy;
+      }
+    }
+  }
+
+  .movers-chart {
+    .chart-obj {
+      height: 385px;
+      width: 100%;
+    }
+  }
+
+  .auctions-chart .chart-obj {
+    height: 375px;
+  }
+
+  .movers-container,
+  .top-auctions-container {
+    position: relative;
+  }
+
+  .business-summary {
+    .list-table {
+      padding-left: 0;
+      padding-right: 0;
+    }
+
+    .counter {
+      margin-left: 0;
+    }
   }
 }
 
-.auctions-chart .chart-obj {
-  height: 375px;
-}
+@media only screen and (max-width: 991px) {
+  #AnalyticsPage {
+    .movers-container {
+      .btn {
+        white-space: normal;
+      }
+    }
 
-.top-auctions-container, .movers-container {
-  position: relative;
-  height: 510px;
-}
+    .business-summary {
 
-.business-summary {
-  .list-table {
-    padding-left: 0;
-    padding-right: 0;
-  }
-  .counter {
-    margin-left: 0;
+      .panel-body {
+        .subtext {
+          font-size: 10px;
+        }
+
+        .blocks {
+          .block {
+            .block-title {
+              font-size: 14px;
+            }
+
+            .block-content {
+              font-size: 14px;
+            }
+          }
+        }
+      }
+    }
   }
 }

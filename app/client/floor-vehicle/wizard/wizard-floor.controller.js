@@ -43,10 +43,6 @@
     var vm = this;
     var isDealer = User.isDealer();
 
-    // init a special version of today's date for our datepicker which only works right with dates @ midnight
-    var today = new Date();
-    today = moment([today.getFullYear(), today.getMonth(), today.getDate()]).toDate();
-
     vm.counter = 1;
     vm.validForm = true;
     vm.data = null;
@@ -144,7 +140,7 @@
       UnitMake: null, // string
       UnitMileage: null, // string
       UnitModel: null, // string
-      UnitPurchaseDate: today, // Date locally, format to string for API transmission, default is today
+      UnitPurchaseDate: null, // Date locally, format to string for API transmission, default is today
       UnitPurchasePrice: null, // string
       UnitStyle: null, // string
       UnitVin: null, // string

@@ -84,7 +84,7 @@
       <div
            ng-class="{'auction-nav':!user.isDealer(), 'es-nav':isCurrentLanguage('es') && !user.isDealer(), 'fr-nav': isCurrentLanguage('fr_CA') && !user.isDealer(), 'container' : !isMobile}">
         <div class="navbar-header">
-          <button type="button" class="navbar-toggle collapsed mobile-menu-button"                  
+          <button type="button" class="navbar-toggle collapsed mobile-menu-button"
                   ng-click="toggleMenu(); closeSupport()"
                   popover-placement="bottom"
                   uib-popover-template="'client/shared/directives/navbar/menuTip.html'"
@@ -103,7 +103,7 @@
           </div>
         </div>
 
-        <div id="navbarContainer" class="navbar-collapse" ng-class="{'open': navState.current.data.showMenu, 'closed': (!navState.current.data.showMenu && navState.current.data.menuToggled)}" ng-click="closeMenu()">
+        <div id="navbarContainer" class="navbar-collapse" ng-class="{'open': navState.current.data.showMenu, 'closed': (!navState.current.data.showMenu && navState.current.data.menuToggled)}">
           <ul class="nav navbar-nav"
               popover-placement="bottom"
               uib-popover-template="'client/shared/directives/navbar/menuTip.html'"
@@ -189,7 +189,7 @@
                  data-uv-lightbox="classic_widget"
                  data-uv-mode="full"
                  data-uv-primary-color="#135889"
-                 data-uv-link-color="#1864A1" 
+                 data-uv-link-color="#1864A1"
                  data-uv-default-mode="support"
                  data-uv-forum-id="{forumId}"
                  data-uv-custom-template-id="{customTemplateId}"
@@ -203,7 +203,7 @@
           </ul>
         </div>
 
-        <div class="navbar-scroll-fix" ng-click="closeMenu()"></div>
+        <div class="navbar-scroll-fix" ng-hide="navbarClosed" ng-class="{'open': navState.current.data.showMenu, 'closed': (!navState.current.data.showMenu && navState.current.data.menuToggled)}" ng-click="closeMenu()"></div>
       </div>
     </nav>
   </div>
