@@ -1,30 +1,18 @@
-import React, { Component, PropTypes } from 'react';
+import React, {PropTypes} from 'react';
 
-class Link extends Component {
-    constructor(props) {
-        super(props);
-
-        this.handleClick = this.handleClick.bind(this);
-    }
-
-    handleClick() {
-        this.props.handleClick(this.props.metric);
-    }
-
-    render() {
-        return (
-            <a href={this.props.url} target="_blank" rel="noopener noreferrer" onClick={this.handleClick}>
-                {this.props.name}
-            </a>
-        );
-    }
+const Link = ({url, name, metric, handleClick}) => {
+  return (
+    <a href={url} target="_blank" rel="noopener noreferrer" onClick={handleClick(metric)}>
+      {name}
+    </a>
+  );
 }
 
 Link.propTypes = {
-    name: PropTypes.element,
-    url: PropTypes.string,
-    metric: PropTypes.string,
-    handleClick: PropTypes.func,
+  name: PropTypes.element,
+  url: PropTypes.string,
+  metric: PropTypes.string,
+  handleClick: PropTypes.func
 };
 
 export default Link;

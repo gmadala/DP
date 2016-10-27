@@ -18,12 +18,17 @@ module.exports = {
     filename: 'react-app.js',
   },
   module: {
+    preLoaders: [ {
+      test: /\.jsx?$/,
+      loaders: [ 'eslint' ],
+      exclude: [ path.resolve( __dirname, 'node_modules' ), path.resolve( __dirname, 'react/translations' ) ]
+    } ],
     loaders: [ {
-      test: /.jsx?$/,
-      loader: 'babel-loader',
+      test: /\.jsx?$/,
+      loader: 'babel',
       exclude: [ path.resolve( __dirname, 'node_modules' ) ],
       query: {
-        presets: [ 'es2015', 'react' ]
+        presets: [ 'es2015', 'react', 'stage-0' ]
       }
     }, {
       test: /sinon\.js$/,

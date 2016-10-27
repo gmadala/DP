@@ -1,5 +1,5 @@
 import React from 'react';
-import { mount, shallow } from 'enzyme';
+import { shallow } from 'enzyme';
 import ResourceDocs from '../ResourceDocs.js';
 import ListItemLink from '../../shared/ListItemLink';
 
@@ -18,5 +18,4 @@ describe( '<ResourceDocs />', () => {
 
     expect( wrapper.find(ListItemLink) ).to.have.length( 1 );
   } );
-
 } );

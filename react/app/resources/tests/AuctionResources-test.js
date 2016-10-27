@@ -4,24 +4,23 @@ import AuctionResources from '../AuctionResources';
 import ResourceDocs from '../ResourceDocs'
 
 describe( '<AuctionResources />', () => {
-  var tracked = 0;
+  let tracked = 0;
   const props = {
     language: 'en',
     isUnitedStates: true,
-    segmentio: { track: function() { tracked = tracked++; }},
-    kissMetricInfo: { getKissMetricInfo: function() { return new Promise(function(resolve) { resolve(); }) }}
+    segmentio: { track : () => { tracked = tracked++; }},
+    kissMetricInfo: { getKissMetricInfo : () => { return new Promise((resolve) => { resolve(); }) }}
   }
 
   it( 'has docs in the state', () => {
-    const wrapper = mount( <AuctionResources props={props}  /> );
+    const wrapper = mount( <AuctionResources props={props} /> );
 
     expect( wrapper.state().docs.length ).to.be.above(0);
   } );
 
   it( 'renders a ResourceDocs component', () => {
-    const wrapper = shallow( <AuctionResources props={props}  /> );
+    const wrapper = shallow( <AuctionResources props={props} /> );
 
     expect( wrapper.find(ResourceDocs) ).to.have.length(1);
   } );
-
-} );
+});

@@ -13,12 +13,14 @@
     "react-dom": "^15.3.2",
     "react-interpolate-component": "^0.10.0",
     "react-router": "^2.8.1",
-    "react-translate-component": "^0.13.1"
+    "react-translate-component": "^0.13.1",
+    "enzyme": "^2.5.1"
   },
   "devDependencies": {
     "babel": "^6.5.2",
     "babel-cli": "^6.16.0",
     "babel-core": "^6.17.0",
+    "babel-eslint": "^7.1.0",
     "babel-loader": "^6.2.5",
     "babel-polyfill": "^6.16.0",
     "babel-preset-airbnb": "^2.1.1",
@@ -29,11 +31,11 @@
     "chai": "^3.5.0",
     "chai-enzyme": "^0.5.2",
     "cross-env": "^2.0.1",
-    "enzyme": "^2.5.1",
     "eslint": "^3.8.1",
     "eslint-config-airbnb": "^10.0.1",
     "eslint-config-angular": "^0.5.0",
     "eslint-config-jquery": "^1.0.0",
+    "eslint-loader": "^1.6.0",
     "eslint-plugin-angular": "^1.4.1",
     "eslint-plugin-import": "^1.16.0",
     "eslint-plugin-jasmine": "^1.8.1",

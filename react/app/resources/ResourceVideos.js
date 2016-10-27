@@ -1,22 +1,20 @@
-import React, { Component } from 'react';
+import React from 'react';
 import Translate from 'react-translate-component';
 import Video from '../shared/Video';
 
-class ResourceVideos extends Component {
-    render() {
-        return (
-            <div className="col-md-4">
-                <section className="panel panel-default">
-                    <h2 className="well-title"><Translate content="resources.resourceVideos.loggingIn" /></h2>
-                    <Video url="https://www.youtube.com/embed/3rqHdE_YgbI" width="854" height="480" />
-                </section>
-                <section className="panel panel-default">
-                    <h2 className="well-title"><Translate content="resources.resourceVideos.howToUse" /></h2>
-                    <Video url="https://www.youtube.com/embed/hahLB6Uu7zU" width="854" height="480" />
-                </section>
-            </div>
-        );
-    }
+const ResourceVideos = () => {
+  return (
+    <div className="col-md-4">
+      <section className="panel panel-default">
+        <h2 className="well-title"><Translate content="resources.resourceVideos.loggingIn" /></h2>
+        <Video url="https://www.youtube.com/embed/3rqHdE_YgbI" width="854" height="480" />
+      </section>
+      <section className="panel panel-default">
+        <h2 className="well-title"><Translate content="resources.resourceVideos.howToUse" /></h2>
+        <Video url="https://www.youtube.com/embed/hahLB6Uu7zU" width="854" height="480" />
+      </section>
+    </div>
+  );
 }
 
 export default ResourceVideos;
