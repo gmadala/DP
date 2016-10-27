@@ -82,10 +82,6 @@
 
     $scope.attachDocumentsEnabled = attachDocsDealer || attachDocsAuction;
 
-    // init a special version of today's date for our datepicker which only works right with dates @ midnight
-    var today = new Date();
-    today = moment([today.getFullYear(), today.getMonth(), today.getDate()]).toDate();
-
     $scope.dealerMinDate = moment().subtract(364, 'days');
     $scope.auctionMinDate = moment().subtract(6, 'days');
     $scope.maxDate = moment();
@@ -176,7 +172,7 @@
       UnitMake: null, // string
       UnitMileage: null, // string
       UnitModel: null, // string
-      UnitPurchaseDate: today, // Date locally, format to string for API transmission, default is today
+      UnitPurchaseDate: null, // Date locally, format to string for API transmission, default is today
       UnitPurchasePrice: null, // string
       UnitStyle: null, // string
       UnitVin: null, // string
