@@ -7,7 +7,7 @@ webpackConfig.module.loaders.push( {
 
 module.exports = function( config ) {
   config.set( {
-    browsers: [ 'PhantomJS' ],
+    browsers: [ 'PhantomJS', 'Chrome', 'IE' ],
     frameworks: [ 'mocha', 'sinon-chai' ],
     reporters: [ 'progress', 'progress', 'html' ],
     files: [ {
@@ -21,13 +21,15 @@ module.exports = function( config ) {
     },
     plugins: [
       'karma-chrome-launcher',
+      'karma-firefox-launcher',
+      'karma-phantomjs-launcher',
+      'karma-ie-launcher',
       'karma-mocha',
       'karma-sourcemap-loader',
       'karma-webpack',
       'karma-coverage',
       'karma-htmlfile-reporter',
-      'karma-sinon-chai',
-      'karma-phantomjs-launcher'
+      'karma-sinon-chai'
     ],
     autoWatch: false,
     singleRun: true,
