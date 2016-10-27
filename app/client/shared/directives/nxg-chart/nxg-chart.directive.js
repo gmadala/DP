@@ -1,9 +1,9 @@
-(function() {
+( function() {
   'use strict';
 
   angular
-    .module('nextgearWebApp')
-    .directive('nxgChart', nxgChart);
+    .module( 'nextgearWebApp' )
+    .directive( 'nxgChart', nxgChart );
 
   nxgChart.$inject = [];
 
@@ -18,6 +18,9 @@
         dataName: '@nxgChartDataName', // Text next to value on tooltip
         tooltip: '@nxgChartTooltip', // true or false
         size: '=nxgChartSize',
+        titleSize: '@nxgChartTitleSize',
+        labelSize: '@nxgChartLabelSize',
+        labelRotation: '@nxgChartLabelRotation',
         options: '&nxgChartOptions', // any overall options.
         truncateLabels: '@nxgChartTrimLabels', // true or false
         showLegend: '=nxgShowLegend', // true or false
@@ -25,10 +28,10 @@
         title: '=nxgChartTitle' // title object that highcharts accepts
 
       },
-      link: function(scope, element) {
+      link: function( scope, element ) {
         var defaultFontFamily = 'Helvetica, Arial, sans-serif';
         // initialize chart with defaults and passed options
-        var initializeChart = function(){
+        var initializeChart = function() {
           var options = {
             chart: {
               type: scope.type,
@@ -39,16 +42,18 @@
               spacingBottom: 5
             },
             title: {
-              text:'',
+              text: '',
               floating: false, //whether label will affect chart position or not; default is false
               style: {
                 fontFamily: defaultFontFamily,
-                fontSize: '14px',
+                fontSize: scope.titleSize ? scope.titleSize : '14px',
                 fontWeight: 'bold'
               },
               y: 15 // vertical position of title within chart; default is 15
             },
-            credits: { enabled: false },
+            credits: {
+              enabled: false
+            },
             tooltip: {
               enabled: scope.tooltip !== 'false' ? true : false,
               backgroundColor: 'rgba(255,255,255,1)',
@@ -58,7 +63,7 @@
               shadow: false,
               style: {
                 fontFamily: defaultFontFamily,
-                fontSize: '12px'
+                fontSize: '14px'
               }
             },
             labels: {
@@ -71,7 +76,7 @@
               enabled: scope.showLegend || false,
               floating: true,
               labelFormatter: function() { // formats label to two lines; adds '$', decimal, comma, etc.
-                return '<div>' + this.name + ' – <b>$' + Highcharts.numberFormat(this.y, 2) + '</b></div>';
+                return '<div>' + this.name + ' – <b>$' + Highcharts.numberFormat( this.y, 2 ) + '</b></div>';
               },
               itemStyle: {
                 fontFamily: defaultFontFamily
@@ -98,15 +103,15 @@
                 pointWidth: 45
               },
               pie: {
-                size: (scope.donutOptions && scope.donutOptions.size) || '100%',
-                innerSize: (scope.donutOptions && scope.donutOptions.innerSize) || '87%',
-                startAngle: (scope.donutOptions && scope.donutOptions.semiCircle) ? -90 : 0,
-                endAngle: (scope.donutOptions && scope.donutOptions.semiCircle) ? 90 : null,
+                size: ( scope.donutOptions && scope.donutOptions.size ) || '100%',
+                innerSize: ( scope.donutOptions && scope.donutOptions.innerSize ) || '87%',
+                startAngle: ( scope.donutOptions && scope.donutOptions.semiCircle ) ? -90 : 0,
+                endAngle: ( scope.donutOptions && scope.donutOptions.semiCircle ) ? 90 : null,
                 dataLabels: {
                   enabled: false
                 },
                 showInLegend: scope.showLegend || false,
-                center: ['50%','50%'],
+                center: [ '50%', '50%' ],
                 point: {
                   events: {
                     legendItemClick: function() {
@@ -122,11 +127,12 @@
               lineWidth: 1,
               tickWidth: 0,
               labels: {
+                rotation: scope.labelRotation ? parseInt( scope.labelRotation ) : 0,
                 enabled: scope.labels && scope.labels === 'true',
                 aligned: 'right',
                 style: {
                   fontFamily: defaultFontFamily,
-                  fontSize: '12px'
+                  fontSize: scope.labelSize ? scope.labelSize : '12px'
                 }
               }
             },
@@ -149,93 +155,96 @@
                 }
               }
             },
-            series: [{
+            series: [ {
               color: '#009EFF',
               name: 'Value',
-              states: {hover: {}}
-            }]
+              states: {
+                hover: {}
+              }
+            } ]
           };
 
-          if(scope.type === 'pie'){
-            options.series[0].states.hover.enabled = false;
+          if ( scope.type === 'pie' ) {
+            options.series[ 0 ].states.hover.enabled = false;
           }
 
-          if (scope.size) {
+          if ( scope.size ) {
             options.chart.width = scope.size.width;
             options.chart.height = scope.size.height;
           }
 
           // set donut options if any have been passed in
-          if (scope.donutOptions) {
+          if ( scope.donutOptions ) {
             var pie = options.plotOptions.pie;
             pie.borderWidth = scope.donutOptions.border ? 1 : options.plotOptions.pie.borderWidth;
-            pie.borderColor = scope.donutOptions.borderColor ? scope.donutOptions.borderColor: '#BBBBBB';
+            pie.borderColor = scope.donutOptions.borderColor ? scope.donutOptions.borderColor : '#BBBBBB';
             pie.size = scope.donutOptions.size ? scope.donutOptions.size : options.plotOptions.pie.size;
             pie.innerSize = scope.donutOptions.innerSize ? scope.donutOptions.innerSize : options.plotOptions.pie.innerSize;
           }
 
           // set title options if any have been passed in.
-          if (scope.title) {
-            options.title.text = (scope.title.text) ? scope.title.text : options.title.text;
-            options.title.floating = (scope.title.floating) ? scope.title.floating : options.title.floating;
-            options.title.useHTML = (scope.title.useHTML) ? scope.title.useHTML : false;
-            if (scope.title.style) {
-              options.title.style.fontSize = (scope.title.style.fontSize) ? scope.title.style.fontSize : options.title.style.fontSize;
-              options.title.style.fontWeight = (scope.title.style.fontWeight) ? scope.title.style.fontWeight : options.title.style.fontWeight;
+          if ( scope.title ) {
+            options.title.text = ( scope.title.text ) ? scope.title.text : options.title.text;
+            options.title.floating = ( scope.title.floating ) ? scope.title.floating : options.title.floating;
+            options.title.useHTML = ( scope.title.useHTML ) ? scope.title.useHTML : false;
+            if ( scope.title.style ) {
+              options.title.style.fontSize = ( scope.title.style.fontSize ) ? scope.title.style.fontSize : options.title.style.fontSize;
+              options.title.style.fontWeight = ( scope.title.style.fontWeight ) ? scope.title.style.fontWeight : options.title.style.fontWeight;
             }
-            options.title.y = (scope.title.y) ? scope.title.y : options.title.y;
+            options.title.y = ( scope.title.y ) ? scope.title.y : options.title.y;
           }
 
-          if(scope.type === 'line') {
+          if ( scope.type === 'line' ) {
             options.xAxis.type = 'category';
           }
 
-          element.highcharts(options);
+          element.highcharts( options );
           initializeChart.initialized = true;
         };
 
         // Because the data is loaded asynchronously, we need to `$watch()`
-        scope.$watch('data', function() {
-          if (angular.isDefined(scope.data)) {
-            if(!initializeChart.initialized){
+        scope.$watch( 'data', function() {
+          if ( angular.isDefined( scope.data ) ) {
+            var data = angular.copy( scope.data );
+            if ( !initializeChart.initialized ) {
               initializeChart();
             }
 
-            if(initializeChart.initialized){
-              var dataMin = _.min(scope.data, function(point){
-                return point[1];
-              })[1];
-              element.highcharts().yAxis[0].update({
+            if ( initializeChart.initialized ) {
+              var dataMin = _.min( data, function( point ) {
+                return point[ 1 ];
+              } )[ 1 ];
+              element.highcharts().yAxis[ 0 ].update( {
                 // only subtract 5 if it won't give us a negative value
-                min: (dataMin >= 5) ? dataMin - 5 : dataMin,
-                max: _.max(scope.data, function(point){
-                  return point[1];
-                })[1] + 5
-              });
+                min: ( dataMin >= 5 ) ? dataMin - 5 : dataMin,
+                max: _.max( data, function( point ) {
+                  return point[ 1 ];
+                } )[ 1 ] + 5
+              } );
 
-              element.highcharts().series[0].setData(scope.data);
-              element.highcharts().series[0].name = scope.dataName || 'Value'; // For tooltip
-              if(scope.labels && scope.labels === 'true'){
+              element.highcharts().series[ 0 ].setData( data );
+              element.highcharts().series[ 0 ].name = scope.dataName || 'Value'; // For tooltip
+              if ( scope.labels && scope.labels === 'true' ) {
                 // If categories are enabled, trim to 20 characters to keep them visible on the chart
-                element.highcharts().xAxis[0].setCategories(_.map(scope.data, function(item){
-                  if(item[0].length > 20 && scope.truncateLabels){
+                element.highcharts().xAxis[ 0 ].setCategories( _.map( data, function( item ) {
+                  if ( item[ 0 ].length > 20 && scope.truncateLabels ) {
                     // cuts string to 20 characters including ellipsis, & no space before ellipsis
-                    return item[0].substr(0,20-3).trim()+"...";
-                  }else{
-                    return item[0];
+                    return item[ 0 ].substr( 0, 20 - 3 ).trim() + "...";
+                  } else {
+                    return item[ 0 ];
                   }
-                }));
+                } ) );
               }
 
               // Update title as well, if there is one.
-              if(scope.title) {
-                element.highcharts().setTitle(scope.title);
+              if ( scope.title ) {
+                element.highcharts().setTitle( scope.title );
               }
             }
           }
-        });
+        } );
       }
     };
 
   }
-})();
+} )();
