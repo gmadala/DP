@@ -98,9 +98,7 @@
         templateUrl: 'client/floor-vehicle/confirmation/confirmation.template.html',
         params: {
           floorplanId: null,
-          stockNumber: null,
-          files: null,
-          uploadSuccess: false
+          stockNumber: null
         },
         data: {
           pageId: 'Floorplan',

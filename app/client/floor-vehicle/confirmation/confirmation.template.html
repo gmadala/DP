@@ -1,21 +1,11 @@
 <div class="container">
-  <!-- <div class="row" ng-hide="flooringConfirmation.uploadSuccess">
-    <div class="col-xs-12 col-sm-offset-2 col-sm-8">
-      <div class="alert" ng-class="{ 'alert-warning': !flooringConfirmation.uploadSuccess && flooringConfirmation.uploadRetrySuccess == null, 'alert-success': flooringConfirmation.uploadRetrySuccess, 'alert-danger': !flooringConfirmation.uploadRetrySuccess && FlooringConfirmation.uploadRetrySuccess != null }">
-        <button type="button" class="close" ng-click="flooringConfirmation.showUploadRetry = true"><span aria-hidden="true">&times;</span></button>
-        <span ng-show="!flooringConfirmation.uploadSuccess && flooringConfirmation.uploadRetrySuccess == null" translate>An error occured while uploading documents. <a href ng-click="flooringConfirmation.reupload()">retry</a></span>
-        <span ng-show="flooringConfirmation.uploadRetrySuccess" translate>Upload was successful!</span>
-        <span ng-show="!flooringConfirmation.uploadRetrySuccess && flooringConfirmation.uploadRetrySuccess != null" translate>SHIZZZZ DI NOT WORK MEH</span>
-      </div>
-    </div>
-  </div> -->
   <div class="row">
     <div class="col-xs-12 col-sm-offset-2 col-sm-8">
       <h2 style="font-size: 1.714em; line-height: 1.2; margin-top: 28px; margin-bottom: 20px;" translate>Thank you for your floor plan request.</h2>
       <h4 style="font-size: 1.429em; line-height: 1.2; margin-bottom: 20px;" translate>Stock Number: {{ flooringConfirmation.stockNumber }}</h4>
       <p class="hidden" style="font-size: 1.15em; font-weight: 200; margin-bottom: 60px;" translate>You will receive an email confirmation shortly at {{ flooringConfirmation.user.BusinessEmail }}</p>
 
-      <h4 style="font-size: 1.429em; line-height: 1.2; font-weight: 400; color: #FFA500;" translate>How would you rate your experience with flooring online?</h4>
+      <h4 style="font-size: 1.429em; line-height: 1.2; font-weight: 400; color: #FFA500;" ng-hide="flooringConfirmation.surveyComplete" translate>How would you rate your experience with flooring online?</h4>
 
       <form name="confirmationForm" ng-hide="flooringConfirmation.surveyComplete" novalidate>
         <nxg-star-rating rating-value="flooringConfirmation.starValue" max-rating="5"></nxg-star-rating>
@@ -27,24 +17,15 @@
         </div>
 
         <div style="height: 35px; margin-bottom: 20px;">
-          <button class="btn-cta btn-lg cta-secondary pull-right" ng-click="flooringConfirmation.submitSurvey()" style="margin: 0px;" type="submit">submit</button>
+          <button class="btn-cta btn-lg cta-secondary pull-right" ng-click="flooringConfirmation.submitSurvey()" style="margin: 0px; font-size: 1.429em; height: 40px; font-weight: 300; padding: 8px 20px;" type="submit">submit</button>
         </div>
       </form>
 
-      <p style="font-size: 1.15em; font-weight: 200; margin-bottom: 60px; height: 53px; padding-top: 10px;" ng-show="flooringConfirmation.surveyComplete" translate>Thank you for the feed back!</p>
+      <p style="font-size: 1.15em; font-weight: 200; margin-bottom: 60px; height: 53px; padding-top: 10px;" ng-show="flooringConfirmation.surveyComplete" translate>Thank you for the feedback!</p>
 
       <div class="hidden" style="margin-bottom: 30px;">
         <a href translate><span class="glyphicon glyphicon-print"></span>&nbsp;Print Request Summary</a>
       </div>
-
-
-
-
-      <!-- <div class="modal-body" style="border: 0px;" ng-show="flooringConfirmation.wayBillPrintingEnabled">
-        <h5 style="font-size: 1.429em; font-weight: 400; margin-bottom: 10px;">Looking for an easy way to send us your titles?</h5>
-        <p style="font-size: 1em; font-weight: 300; line-height: 1.3; margin-bottom: 10px;">We've taken all the guess work out of sending us your titles. Just click, print, and ship. It's really that easy! Just use the button below to print a Fedex label provided by us, and put all your titles and documentation in the same package, and we'll take care of the rest!</p>
-        <nxg-download-waybill class="btn btn-lg btn-primary" style="margin-left: 0px; font-size: 1.429em; padding: 10px 35px; height: 45px; font-weight: 400;"></nxg-download-waybill>
-      </div> -->
 
       <button class="btn-cta btn-lg cta-primary" style="font-size: 1.429em; height: 40px; font-weight: 300; margin-left: 0px; padding: 8px 20px;" ui-sref="flooringWizard.car" translate>Floor Another Vehicle</button>
     </div>
