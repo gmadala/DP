@@ -303,15 +303,25 @@
       return $state.current.name === "dashboard" || $state.current.name === "auction_dashboard" || $scope.pageTitle === "";
     };
 
-    $scope.toggleMenu = function() {
+	$scope.navbarClosed = true;
       $state.current.data.showMenu = !$state.current.data.showMenu;
       $state.current.data.menuToggled = true;
       $scope.closeMenuTip();
+      if($state.current.data.showMenu) {
+        $scope.navbarClosed = false;
+      } else {
+        setTimeout(function() {
+          $scope.navbarClosed = true;
+        }, 5000)
+      }
     };
 
     $scope.closeMenu = function() {
       if ( $state.current.data.showMenu ) {
         $state.current.data.showMenu = false;
+        setTimeout(function() {
+          $scope.navbarClosed = true;
+        }, 5000)
       }
     };
 
@@ -325,7 +335,7 @@
 
     $rootScope.$on( '$stateChangeSuccess', function() {
       $scope.isCollapsed = true;
-    } );
+      $scope.navbarClosed = true;
 
     $scope.showSupport = false;
     $scope.closeSupport = function() {
