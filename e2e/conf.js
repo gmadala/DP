@@ -1,6 +1,7 @@
 //An example configuration file.
 exports.config = {
-  seleniumAddress: 'http://selenium-grid.nextgearcapital.com:4444/wd/hub',
+  seleniumAddress: null,
+  baseUrl: 'https://test.nextgearcapital.com/test/#/',
   //Capabilities to be passed to the webdriver instance.
   capabilities: {
     'browserName': 'chrome',
@@ -31,7 +32,6 @@ exports.config = {
   //More miscellaneous configuration options
   directConnect: false,
   untrackOutstandingTimeouts: false,
-  restartBrowserBetweenTests: false,
 
   //Framework selection
   framework: 'jasmine',
