@@ -1,11 +1,11 @@
 'use strict';
 
-var serveStatic = require('serve-static');
-var mockApi = require('./api/mockApi.js');
+var serveStatic = require( 'serve-static' );
+var mockApi = require( './api/mockApi.js' );
 
-module.exports = function(grunt) {
+module.exports = function( grunt ) {
   // load all grunt tasks
-  require('matchdep').filterDev('grunt-*').forEach(grunt.loadNpmTasks);
+  require( 'matchdep' ).filterDev( 'grunt-*' ).forEach( grunt.loadNpmTasks );
 
   // configurable paths
   var yeomanConfig = {
@@ -13,42 +13,41 @@ module.exports = function(grunt) {
       dist: 'dist',
       api: 'api'
     },
-    useMock = mockApi.mockApi(yeomanConfig.api);
+    useMock = mockApi.mockApi( yeomanConfig.api );
 
   var defaultTarget = 'test';
   var defaultVersion = '15.11.3';
 
   try {
-    yeomanConfig.app = require('./bower.json').appPath || yeomanConfig.app;
-  } catch (e) {
-  }
+    yeomanConfig.app = require( './bower.json' ).appPath || yeomanConfig.app;
+  } catch ( e ) {}
 
   grunt.file.defaultEncoding = 'utf8';
 
-  grunt.initConfig({
+  grunt.initConfig( {
     yeoman: yeomanConfig,
     watch: {
       compass: {
-        files: ['<%= yeoman.app %>/styles/**/*.{scss,sass}'],
-        tasks: ['compass']
+        files: [ '<%= yeoman.app %>/styles/**/*.{scss,sass}' ],
+        tasks: [ 'compass' ]
       },
       livereload: {
         options: {
-            livereload: true
+          livereload: true
         },
         files: [
-        '<%= yeoman.app %>/**/*.html',
-        '!<%= yeoman.app %>/index.html',
-        '.tmp/index.html',
-        '{.tmp,<%= yeoman.app %>}/styles/**/*.css',
-        '{.tmp,<%= yeoman.app %>}/client/**/*.js',
-        '{.tmp,<%= yeoman.app %>}/private-components/**/*.js',
-        '<%= yeoman.app %>/styles/img/**/*.{png,jpg,jpeg,gif,webp,svg}'
+          '<%= yeoman.app %>/**/*.html',
+          '!<%= yeoman.app %>/index.html',
+          '.tmp/index.html',
+          '{.tmp,<%= yeoman.app %>}/styles/**/*.css',
+          '{.tmp,<%= yeoman.app %>}/client/**/*.js',
+          '{.tmp,<%= yeoman.app %>}/private-components/**/*.js',
+          '<%= yeoman.app %>/styles/img/**/*.{png,jpg,jpeg,gif,webp,svg}'
         ]
       },
       html: {
-        files: ['<%= yeoman.app %>/index.html'],
-        tasks: ['processhtml:server']
+        files: [ '<%= yeoman.app %>/index.html' ],
+        tasks: [ 'processhtml:server' ]
       }
     },
     connect: {
@@ -59,12 +58,12 @@ module.exports = function(grunt) {
       },
       livereload: {
         options: {
-          middleware: function(connect) {
+          middleware: function( connect ) {
             return [
-              serveStatic('.tmp'),
-              serveStatic(yeomanConfig.app),
-              serveStatic('test'),
-              serveStatic('api'),
+              serveStatic( '.tmp' ),
+              serveStatic( yeomanConfig.app ),
+              serveStatic( 'test' ),
+              serveStatic( 'api' ),
               useMock
             ];
           }
@@ -72,10 +71,10 @@ module.exports = function(grunt) {
       },
       test: {
         options: {
-          middleware: function(connect) {
+          middleware: function( connect ) {
             return [
-              serveStatic('.tmp'),
-              serveStatic('test')
+              serveStatic( '.tmp' ),
+              serveStatic( 'test' )
             ];
           },
           port: 9002
@@ -83,10 +82,10 @@ module.exports = function(grunt) {
       },
       dist: {
         options: {
-          middleware: function (connect) {
+          middleware: function( connect ) {
             return [
-              serveStatic(yeomanConfig.dist),
-              serveStatic('api'),
+              serveStatic( yeomanConfig.dist ),
+              serveStatic( 'api' ),
               useMock
             ];
           }
@@ -100,17 +99,15 @@ module.exports = function(grunt) {
     },
     clean: {
       dist: {
-        files: [
-          {
-            dot: true,
-            src: [
-              '.tmp',
-              '<%= yeoman.dist %>/*',
-              '<%= yeoman.app %>/styles/main*.css',
-              '!<%= yeoman.dist %>/.git*'
-            ]
-          }
-        ]
+        files: [ {
+          dot: true,
+          src: [
+            '.tmp',
+            '<%= yeoman.dist %>/*',
+            '<%= yeoman.app %>/styles/main*.css',
+            '!<%= yeoman.dist %>/.git*'
+          ]
+        } ]
       },
       maintenance: {
         src: [
@@ -180,49 +177,53 @@ module.exports = function(grunt) {
       },
       dist: {
         files: {
-          '<%= yeoman.dist %>/index.html': ['<%= yeoman.dist %>/index.html']
+          '<%= yeoman.dist %>/index.html': [ '<%= yeoman.dist %>/index.html' ]
         }
       },
       server: { // to pull svg in without overriding index file
         files: {
-          '.tmp/index.html': ['<%= yeoman.app %>/index.html']
+          '.tmp/index.html': [ '<%= yeoman.app %>/index.html' ]
         }
       },
       svgDist: { // SVG for build
         files: {
-          '<%= yeoman.dist %>/index.html': ['<%= yeoman.dist %>/index.html']
+          '<%= yeoman.dist %>/index.html': [ '<%= yeoman.dist %>/index.html' ]
         }
       }
     },
     useminPrepare: {
-      html: ['<%= yeoman.app %>/index.html', '<%= yeoman.app %>/tc.html'],
+      html: [ '<%= yeoman.app %>/index.html', '<%= yeoman.app %>/tc.html' ],
       options: {
         dest: '<%= yeoman.dist %>'
       }
     },
     usemin: {
-      html: ['<%= yeoman.dist %>/**/*.html', '!<%= yeoman.dist %>/components/**/*.html'],
-      css: ['<%= yeoman.dist %>/styles/**/*.css'],
-      js: ['<%= yeoman.dist %>/scripts/**/*.js'],
+      html: [ '<%= yeoman.dist %>/**/*.html', '!<%= yeoman.dist %>/components/**/*.html' ],
+      css: [ '<%= yeoman.dist %>/styles/**/*.css' ],
+      js: [ '<%= yeoman.dist %>/scripts/**/*.js' ],
       options: {
-        assetsDirs: ['<%= yeoman.dist %>'],
+        assetsDirs: [ '<%= yeoman.dist %>' ],
         patterns: {
-          html: [[/(img\/.*?\.(?:gif|jpeg|jpg|png|webp|svg))/gm, 'Update the html to reference our revved images']],
-          js: [[/(img\/.*?\.(?:gif|jpeg|jpg|png|webp|svg))/gm, 'Update the JS to reference our revved images']],
-          css: [[/(img\/.*?\.(?:gif|jpeg|jpg|png|webp|svg))/gm, 'Update the CSS to reference our revved images']]
+          html: [
+            [ /(img\/.*?\.(?:gif|jpeg|jpg|png|webp|svg))/gm, 'Update the html to reference our revved images' ]
+          ],
+          js: [
+            [ /(img\/.*?\.(?:gif|jpeg|jpg|png|webp|svg))/gm, 'Update the JS to reference our revved images' ]
+          ],
+          css: [
+            [ /(img\/.*?\.(?:gif|jpeg|jpg|png|webp|svg))/gm, 'Update the CSS to reference our revved images' ]
+          ]
         }
       }
     },
     imagemin: {
       dist: {
-        files: [
-          {
-            expand: true,
-            cwd: '<%= yeoman.app %>/images',
-            src: '**/*.{png,jpg,jpeg}',
-            dest: '<%= yeoman.dist %>/images'
-          }
-        ]
+        files: [ {
+          expand: true,
+          cwd: '<%= yeoman.app %>/images',
+          src: '**/*.{png,jpg,jpeg}',
+          dest: '<%= yeoman.dist %>/images'
+        } ]
       }
     },
     cssmin: {
@@ -230,28 +231,26 @@ module.exports = function(grunt) {
         options: {
           keepSpecialComments: 0
         },
-        files: [
-          {
-            expand: true,
-            cwd: '<%= yeoman.dist %>',
-            src: '404.html',
-            dest: '<%= yeoman.dist %>'
-          }
-        ]
+        files: [ {
+          expand: true,
+          cwd: '<%= yeoman.dist %>',
+          src: '404.html',
+          dest: '<%= yeoman.dist %>'
+        } ]
       }
     },
     htmlmin: {
       dist: {
         options: {
-          collapseBooleanAttributes:      true,
-          collapseWhitespace:             false, // Breaks translations if we remove whitespace
-          removeAttributeQuotes:          true,
-          removeComments:                 true, // Only if you don't use comment directives!
-          removeEmptyAttributes:          true,
-          removeScriptTypeAttributes:     true,
-          removeStyleLinkTypeAttributes:  true
+          collapseBooleanAttributes: true,
+          collapseWhitespace: false, // Breaks translations if we remove whitespace
+          removeAttributeQuotes: true,
+          removeComments: true, // Only if you don't use comment directives!
+          removeEmptyAttributes: true,
+          removeScriptTypeAttributes: true,
+          removeStyleLinkTypeAttributes: true
         },
-        files: [{
+        files: [ {
           expand: true,
           cwd: '<%= yeoman.dist %>',
           src: [
@@ -262,24 +261,22 @@ module.exports = function(grunt) {
             '!client/shared/directives/nxg-stock-numbers-input/nxg-stock-numbers-input.html'
           ],
           dest: '<%= yeoman.dist %>'
-        }]
+        } ]
       }
     },
     cdnify: {
       dist: {
-        html: ['<%= yeoman.dist %>/*.html']
+        html: [ '<%= yeoman.dist %>/*.html' ]
       }
     },
     ngAnnotate: {
       dist: {
-        files: [
-          {
-            expand: true,
-            cwd: '.tmp/concat/scripts',
-            src: '*.js',
-            dest: '.tmp/concat/scripts'
-          }
-        ]
+        files: [ {
+          expand: true,
+          cwd: '.tmp/concat/scripts',
+          src: '*.js',
+          dest: '.tmp/concat/scripts'
+        } ]
       }
     },
     rev: {
@@ -296,17 +293,16 @@ module.exports = function(grunt) {
     },
     copy: {
       notification: {
-        files: [
-          {
-            expand: true, dot: true, flatten: true,
-            dest: '<%= yeoman.dist %>/img/email',
-            src: '<%= yeoman.app %>/img/email/*'
-          }
-        ]
+        files: [ {
+          expand: true,
+          dot: true,
+          flatten: true,
+          dest: '<%= yeoman.dist %>/img/email',
+          src: '<%= yeoman.app %>/img/email/*'
+        } ]
       },
       maintenance: {
-        files: [
-          {
+        files: [ {
             expand: true,
             dot: true,
             flatten: true,
@@ -400,15 +396,14 @@ module.exports = function(grunt) {
         files: {
           '<%= yeoman.dist %>/index.html': '<%= yeoman.dist %>/index.html',
           '<%= yeoman.dist %>/version.txt': '<%= yeoman.dist %>/version.txt',
-          '<%= yeoman.dist %>/client/shared/directives/nxg-footer/page-footer.template.html':
-            '<%= yeoman.dist %>/client/shared/directives/nxg-footer/page-footer.template.html'
+          '<%= yeoman.dist %>/client/shared/directives/nxg-footer/page-footer.template.html': '<%= yeoman.dist %>/client/shared/directives/nxg-footer/page-footer.template.html'
         }
       },
-      dist : {
-        src : [ '.tmp/concat/scripts/scripts.js' ],
+      dist: {
+        src: [ '.tmp/concat/scripts/scripts.js' ],
         options: {
-          inline : true,
-          context : {
+          inline: true,
+          context: {
             DEBUG: false
           }
         }
@@ -418,9 +413,9 @@ module.exports = function(grunt) {
         dest: '<%= yeoman.app %>/client/config/nxg-config.mock.processed.js',
         options: {
           context: {
-            apiBase: grunt.option('apiBase') || '',
-            apiDomain: grunt.option('apiDomain') || '',
-            isDemo: grunt.option('noTrack') || false
+            apiBase: grunt.option( 'apiBase' ) || '',
+            apiDomain: grunt.option( 'apiDomain' ) || '',
+            isDemo: grunt.option( 'noTrack' ) || false
           }
         }
       },
@@ -431,7 +426,7 @@ module.exports = function(grunt) {
     },
     autoprefixer: {
       options: {
-        browsers: ['ie >= 9', 'firefox >= 3.5', 'chrome >= 25', 'safari >= 5.1']
+        browsers: [ 'ie >= 9', 'firefox >= 3.5', 'chrome >= 25', 'safari >= 5.1' ]
       },
       'no_dest': {
         src: '<%= yeoman.dist %>/styles/*.css'
@@ -455,23 +450,21 @@ module.exports = function(grunt) {
           // work since currently the window has to be reloaded on any language change due to binding issues
           // index.html loads the correct language file as needed before bootstrapping the app
         },
-        files: [
-          {
-            expand: true,
-            dot: true,
-            cwd: 'po',
-            dest: 'app/languages',
-            src: ['*.po'],
-            ext: '.js'
-          }
-        ]
+        files: [ {
+          expand: true,
+          dot: true,
+          cwd: 'po',
+          dest: 'app/languages',
+          src: [ '*.po' ],
+          ext: '.js'
+        } ]
       }
     },
     gettext_update_po: {
-      src: ['po/*.po']
+      src: [ 'po/*.po' ]
     },
     po_validate: {
-      src: ['po/*.po']
+      src: [ 'po/*.po' ]
     },
     shell: {
       options: {
@@ -481,8 +474,8 @@ module.exports = function(grunt) {
       },
       chrome: {
         command: 'open -n -a "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome" --args' +
-        ' --user-data-dir="/Users/$USER/Library/Application Support/Google/Chrome/dealer-portal-dev"' +
-        ' --disable-web-security --homepage http://localhost:<%= connect.options.port %>'
+          ' --user-data-dir="/Users/$USER/Library/Application Support/Google/Chrome/dealer-portal-dev"' +
+          ' --disable-web-security --homepage http://localhost:<%= connect.options.port %>'
       },
       ie: {
         command: 'start iexplore.exe "http://localhost:<%= connect.options.port %>'
@@ -491,7 +484,7 @@ module.exports = function(grunt) {
         command: 'node_modules/protractor/bin/webdriver-manager update && node_modules/grunt-protractor-runner/node_modules/protractor/bin/webdriver-manager update'
       },
       msgmerge: {
-        command: function (filename) {
+        command: function( filename ) {
           // use -N for --no-fuzzy-matching and echo how many strings are untranslated (use 'tail' to skip opening
           // comment lines which typically have an irrelevant msgid)
           return 'msgmerge -U -N -v ' + filename + ' po/extracted.pot -C ../mobile-apps/' + filename + ' && ' +
@@ -499,16 +492,22 @@ module.exports = function(grunt) {
         }
       },
       webpack: {
-          command: 'webpack'
+        command: 'set NODE_ENV=development && webpack'
       },
       webpack_prod: {
-          command: 'webpack'
+        command: 'set NODE_ENV=production && webpack'
       },
       npm: {
         command: 'npm install'
       },
       bower: {
         command: 'bower install'
+      },
+      test_react: {
+        command: 'set NODE_ENV=development && karma start webpack.karma.conf.js'
+      },
+      translate_react: {
+        command: 'babel-node translate.js'
       }
     },
     protractor: { // a specific suite can be run with grunt protractor:run --suite=suite_name
@@ -516,8 +515,7 @@ module.exports = function(grunt) {
         configFile: 'e2e/conf.js',
         noColor: false
       },
-      run: {
-      }
+      run: {}
     },
     githooks: {
       all: {
@@ -525,34 +523,34 @@ module.exports = function(grunt) {
         'pre-commit': 'karma'
       }
     },
-    env : {
-        dev : {
-          NODE_ENV: 'development',
-          ENV: grunt.option('target') || defaultTarget,
-          VERSION: grunt.option('buildVersion') || defaultVersion,
-          GIT_SHA: '<%= gitinfo.local.branch.current.shortSHA %>'
-        },
-        prod : {
-          NODE_ENV: 'production',
-        }
+    env: {
+      dev: {
+        NODE_ENV: 'development',
+        ENV: grunt.option( 'target' ) || defaultTarget,
+        VERSION: grunt.option( 'buildVersion' ) || defaultVersion,
+        GIT_SHA: '<%= gitinfo.local.branch.current.shortSHA %>'
+      },
+      prod: {
+        NODE_ENV: 'production',
+      }
     },
-  });
+  } );
 
-  grunt.registerTask('webpack-dev', [
-      'env:dev',
-      'shell:npm',
-      'shell:bower',
-      'shell:webpack',
-  ])
+  grunt.registerTask( 'webpack-dev', [
+    'env:dev',
+    'shell:npm',
+    'shell:bower',
+    'shell:webpack',
+  ] )
 
-  grunt.registerTask('webpack-prod', [
-      'env:prod',
-      'shell:npm',
-      'shell:bower',
-      'shell:webpack'
-  ])
+  grunt.registerTask( 'webpack-prod', [
+    'env:prod',
+    'shell:npm',
+    'shell:bower',
+    'shell:webpack_prod'
+  ] )
 
-  grunt.registerTask('dev-setup', [
+  grunt.registerTask( 'dev-setup', [
     'gitinfo',
     'webpack-dev',
     'env:dev',
@@ -562,55 +560,55 @@ module.exports = function(grunt) {
     'preprocess:dev',
     'preprocess:debug',
     'nggettext_compile'
-  ]);
+  ] );
 
-  grunt.registerTask('server', [
+  grunt.registerTask( 'server', [
     'dev-setup',
     'connect:livereload',
     'shell:chrome',
     'watch'
-  ]);
+  ] );
 
-  grunt.registerTask('server-np', [
+  grunt.registerTask( 'server-np', [
     'dev-setup',
     'connect:livereload',
     'watch'
-  ]);
+  ] );
 
-  grunt.registerTask('server-ie', [
+  grunt.registerTask( 'server-ie', [
     'dev-setup',
     'connect:livereload',
     'shell:ie',
     'watch'
-  ]);
-  grunt.registerTask('server-dist', [
+  ] );
+  grunt.registerTask( 'server-dist', [
     'build',
     'shell:chrome',
     'connect:dist:keepalive'
-  ]);
+  ] );
 
-  grunt.registerTask('test:unit', [
+  grunt.registerTask( 'test:unit', [
     'dev-setup',
     'connect:test',
     'karma'
-  ]);
+  ] );
 
-  grunt.registerTask('test:e2e', [
+  grunt.registerTask( 'test:e2e', [
     'dev-setup',
     'shell:webdriverUpdate',
     'connect:livereload',
     'protractor'
-  ]);
+  ] );
 
-  grunt.registerTask('build-maintenance', [
+  grunt.registerTask( 'build-maintenance', [
     'gitinfo',
     'env',
     'clean:maintenance',
     'compass:maintenance',
     'copy:maintenance'
-  ]);
+  ] );
 
-  grunt.registerTask('build', [
+  grunt.registerTask( 'build', [
     'gitinfo',
     'webpack-prod',
     'env',
@@ -635,49 +633,49 @@ module.exports = function(grunt) {
     'usemin',
     'htmlmin',
     'copy:notification'
-  ]);
+  ] );
 
   // Continuous Integration build -- call with --target={test|production|training|demo|rubydal} as defined in
   // app/scripts/config/nxgConfig.js
-  grunt.registerTask('ci-build', 'Continuous Integration Build', function () {
-    grunt.log.writeln('Running Continuous Integration Build --target=' + grunt.option('target'));
-    grunt.task.run('test:unit');
-    grunt.task.run('build');
-    grunt.task.run('test:e2e:users');
-  });
+  grunt.registerTask( 'ci-build', 'Continuous Integration Build', function() {
+    grunt.log.writeln( 'Running Continuous Integration Build --target=' + grunt.option( 'target' ) );
+    grunt.task.run( 'test:unit' );
+    grunt.task.run( 'build' );
+    grunt.task.run( 'test:e2e:users' );
+  } );
 
-  grunt.registerMultiTask('gettext_update_po', 'update PO files from the POT file', function () {
+  grunt.registerMultiTask( 'gettext_update_po', 'update PO files from the POT file', function() {
 
-    this.filesSrc.forEach(function (filename) {
+    this.filesSrc.forEach( function( filename ) {
 
-      console.log(filename);
-      grunt.task.run('shell:msgmerge:' + filename);
-    });
-  });
+      console.log( filename );
+      grunt.task.run( 'shell:msgmerge:' + filename );
+    } );
+  } );
 
   // apply validation/formatting/other post-processing as needed
   // TODO: Grunt translation tasks should be cleaned up slightly with MNGW-5568
-  grunt.registerMultiTask('po_validate', 'update PO files from the POT file', function () {
+  grunt.registerMultiTask( 'po_validate', 'update PO files from the POT file', function() {
 
     // Replace ’ with ' for apostrophe symbol - MNGW-5529
-    this.filesSrc.forEach(function (filename) {
+    this.filesSrc.forEach( function( filename ) {
 
       var contents;
       var replace = /’/g;
       var replaceWith = '\'';
 
-      contents = grunt.file.read(filename);
+      contents = grunt.file.read( filename );
 
-      if (replace.test(contents)) {
+      if ( replace.test( contents ) ) {
 
-        console.log('Replacing "' + replace.source + '" with "' + replaceWith + '" in ' + filename);
-        contents = contents.replace(replace, replaceWith);
-        grunt.file.write(filename, contents);
+        console.log( 'Replacing "' + replace.source + '" with "' + replaceWith + '" in ' + filename );
+        contents = contents.replace( replace, replaceWith );
+        grunt.file.write( filename, contents );
       }
-    });
-  });
+    } );
+  } );
 
-  grunt.registerTask('translate', ['nggettext_extract', 'gettext_update_po', 'po_validate', 'nggettext_compile']);
+  grunt.registerTask( 'translate', [ 'nggettext_extract', 'gettext_update_po', 'po_validate', 'nggettext_compile' ] );
 
-  grunt.registerTask('default', ['server']);
+  grunt.registerTask( 'default', [ 'server' ] );
 };
