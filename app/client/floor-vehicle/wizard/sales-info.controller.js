@@ -42,9 +42,9 @@
       vm.purchaseDateHasValue = !!viewValue;
     };
 
-    vm.switchChange = function (hasTradeIn) {
+    vm.switchChange = function (isTradeIn) {
       if ($scope.$parent.wizardFloor.data) {
-        $scope.$parent.wizardFloor.data.PaySeller = hasTradeIn ? false : null;
+        $scope.$parent.wizardFloor.data.PaySeller = isTradeIn ? false : null;
 
         if (!$scope.$parent.wizardFloor.canPayBuyer) {
           $scope.$parent.wizardFloor.data.PaySeller = true;
