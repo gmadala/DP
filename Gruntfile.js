@@ -116,6 +116,23 @@ module.exports = function( grunt ) {
       },
       server: '.tmp'
     },
+    jscs: {
+      options: {
+        config: '.jscsrc'
+      },
+      all: [
+        //'Gruntfile.js',
+        '<%= yeoman.app %>/client/**/*.js',
+        '!app/client/config/nxg-config.mock.processed.js',
+        '!app/scripts/translations.js',
+        '!app/client/services/base64.service.js',
+        '!app/client/shared/directives/nxg-chart/nxg-chart.directive.js',
+        '!app/client/shared/directives/tooltip.directive.js',
+        // TODO JSCS could be used for all test files depending on what rules we decide on
+        'e2e/**/*.js',
+        'api_tests/**/*.js'
+      ]
+    },
     karma: {
       unit: {
         configFile: 'karma.conf.js',
@@ -491,6 +508,19 @@ module.exports = function( grunt ) {
             'msgattrib --untranslated ' + filename + ' | tail -n +10 | echo $(grep "msgid" -c) untranslated strings';
         }
       },
+      protractor: { // a specific suite can be run with grunt protractor:run --suite=suite_name
+        options: {
+          configFile: 'e2e/conf.js',
+          noColor: false
+        },
+        run: {}
+      },
+      githooks: {
+        all: {
+          // Will run the jshint tasks at every commit
+          'pre-commit': 'jshint jscs karma'
+        }
+      }
       webpack: {
         command: 'set NODE_ENV=development && webpack'
       },
@@ -642,6 +672,9 @@ module.exports = function( grunt ) {
     grunt.task.run( 'test:unit' );
     grunt.task.run( 'build' );
     grunt.task.run( 'test:e2e:users' );
+    // run this last so that grunt returns an error code but doesn't abort before running the previous tasks
+    grunt.task.run( 'jshint' );
+    grunt.task.run( 'jscs' );
   } );
 
   grunt.registerMultiTask( 'gettext_update_po', 'update PO files from the POT file', function() {
