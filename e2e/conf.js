@@ -1,5 +1,6 @@
 //An example configuration file.
 exports.config = {
+  seleniumAddress: 'http://selenium-grid.nextgearcapital.com:4444/wd/hub',
   //Capabilities to be passed to the webdriver instance.
   capabilities: {
     'browserName': 'chrome',
@@ -26,9 +27,9 @@ exports.config = {
   //Spec patterns are relative to the current working directly when protractor is called.
   specs: ['tests/e2e_spec/*_spec.js'],
   //specs: ['tests/e2e_spec/e2e_profile_settings_spec.js'],
-  
+
   //More miscellaneous configuration options
-  directConnect: true,
+  directConnect: false,
   untrackOutstandingTimeouts: false,
   restartBrowserBetweenTests: false,
 
