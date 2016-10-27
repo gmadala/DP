@@ -1,4 +1,9 @@
 //An example configuration file.
+
+var ScreenShotReporter = require('protractor-screenshot-reporter'),
+  jasmineReporters = require('jasmine-reporters');
+
+
 exports.config = {
   seleniumAddress: null,
   baseUrl: 'https://test.nextgearcapital.com/test/#/',
@@ -36,6 +41,23 @@ exports.config = {
   //Framework selection
   framework: 'jasmine',
 
+  onPrepare: function () {
+    require('jasmine-reporters');
+    require('protractor-linkuisref-locator')(protractor);
+    console.log(new Date().toISOString());
+
+    jasmine.getEnv().addReporter(new jasmineReporters.JUnitXmlReporter({
+      consolidateAll: false,
+      savePath: 'target/jasmine-results'
+    }));
+
+
+    jasmine.getEnv().addReporter(new ScreenShotReporter({
+      baseDirectory: 'target/screenshots',
+      takeScreenShotsOnlyForFailedSpecs: true
+    }));
+
+  },
   // Options to be passed to Jasmine.
   jasmineNodeOpts: {
     isVerbose: true,
