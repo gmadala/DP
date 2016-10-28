@@ -42,7 +42,12 @@ exports.config = {
 
     var SpecReporter = require('jasmine-spec-reporter');
     env.addReporter(new SpecReporter({
-      displayStacktrace: true
+      displayStacktrace: true,
+      prefixes: {
+        success: 'Pass ',
+        failure: 'Fail ',
+        pending: 'Pending '
+      }
     }));
   },
 
