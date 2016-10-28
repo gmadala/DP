@@ -8,13 +8,15 @@ class AuctionResources extends Component {
   constructor(props) {
     super(props);
 
+    let rp = props.rp;
+
     // set current language
-    counterpart.setLocale(props.props.language.substring(0, 2));
+    counterpart.setLocale(rp.language.substring(0, 2));
 
     this.state = {
       language: counterpart.getLocale(),
-      docs: props.props.isUnitedStates ? auctionDocsList : [],
-      isUnitedStates: props.props.isUnitedStates || false
+      docs: rp.isUnitedStates ? auctionDocsList : [],
+      isUnitedStates: rp.isUnitedStates || false
     }
 
     // log current page view
@@ -23,8 +25,8 @@ class AuctionResources extends Component {
 
   handleClick = ({metricKey}) => {
     if (metricKey) {
-      this.props.props.kissMetricInfo.getKissMetricInfo().then((info) => {
-        this.props.props.segmentio.track(metricKey, info);
+      this.props.rp.kissMetricInfo.getKissMetricInfo().then((info) => {
+        this.props.rp.segmentio.track(metricKey, info);
       });
     }
   }
@@ -43,7 +45,7 @@ class AuctionResources extends Component {
 }
 
 AuctionResources.propTypes = {
-  props: PropTypes.object.isRequired
+  rp: PropTypes.object.isRequired
 }
 
 export default AuctionResources;

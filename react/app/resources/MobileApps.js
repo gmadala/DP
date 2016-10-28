@@ -10,7 +10,7 @@ const MobileApps = ({apps, handleClick}) => {
         <h2 className="well-title"><Translate content="resources.mobileApps.title" /></h2>
         <div className="panel-body">
           <p><Translate content="resources.mobileApps.subText" /></p>
-          <ul className="text-list zeroLeftPadding">
+          <ul className="text-list no-left-padding">
             {appLinks}
           </ul>
         </div>

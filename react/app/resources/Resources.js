@@ -11,25 +11,28 @@ class Resources extends Component {
   constructor(props) {
     super(props);
 
+    let rp = props.rp;
+
     // get fee schedule content link
-    docsList[0].url = props.props.api.contentLink('/dealer/feeschedule/FeeSchedule', {});
+    docsList[0].url = rp.api.contentLink('/dealer/feeschedule/FeeSchedule', {});
 
     // set current language
-    counterpart.setLocale(props.props.language.substring(0, 2));
+    counterpart.setLocale(rp.language.substring(0, 2));
 
     this.state = {
+      rp: rp,
       language: counterpart.getLocale(),
-      docs: props.props.isUnitedStates ? docsList : [],
+      docs: rp.isUnitedStates ? docsList : [],
       collateralDocs: collateralDocsList,
       mobileApps: mobileAppsList,
-      isUnitedStates: props.props.isUnitedStates || false
+      isUnitedStates: rp.isUnitedStates || false
     }
   }
 
   handleClick = (metric) => {
     if (metric) {
-      this.props.props.kissMetricInfo.getKissMetricInfo().then((info) => {
-        this.props.props.segmentio.track(metric, info);
+      this.props.rp.kissMetricInfo.getKissMetricInfo().then((info) => {
+        this.props.rp.segmentio.track(metric, info);
       });
     }
   }
@@ -48,7 +51,7 @@ class Resources extends Component {
 }
 
 Resources.propTypes = {
-  props: PropTypes.object
+  rp: PropTypes.object
 }
 
 export default Resources;
