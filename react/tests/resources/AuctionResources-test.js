@@ -1,7 +1,7 @@
 import React from 'react';
 import { mount, shallow } from 'enzyme';
 import AuctionResources from '../../app/resources/AuctionResources';
-import ResourceDocs from '../../app/resources/ResourceDocs'
+import ResourceDocs from '../../app/resources/ResourceDocs';
 
 describe( 'AuctionResources', () => {
   const props = {

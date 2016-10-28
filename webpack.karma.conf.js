@@ -1,23 +1,32 @@
 const webpackConfig = require( './webpack.config.js' );
-const argv = require( 'minimist' )( process.argv.slice( 2 ) );
-webpackConfig.module.loaders.push( {
-  test: /\.json$/,
-  loader: 'json-loader'
-} );
+const argv = require( 'minimist' )(process.argv.slice( 2 ));
+webpackConfig.module.loaders.push({ test: /\.json$/, loader: 'json-loader' });
+webpackConfig.entry = '';
 
 module.exports = function( config ) {
-  config.set( {
-    browsers: [ 'PhantomJS', 'Chrome', 'IE' ],
-    frameworks: [ 'mocha', 'sinon-chai' ],
-    reporters: [ 'progress', 'progress', 'html' ],
-    files: [ {
-      pattern: 'webpack.testsbundle.js',
-      watched: false,
-      served: true,
-      included: true,
-    }, ],
+  config.set({
+    browsers: [
+      'PhantomJS', 'Chrome', 'IE'
+    ],
+    frameworks: [
+      'mocha', 'sinon-chai'
+    ],
+    reporters: [
+      'progress', 'html', 'coverage'
+    ],
+    files: [
+      'react/app/**/*.js', {
+        pattern: 'webpack.testsbundle.js',
+        watched: false,
+        served: true,
+        included: true
+      }
+    ],
     preprocessors: {
-      'webpack.testsbundle.js': [ 'webpack', 'sourcemap' ],
+      'webpack.testsbundle.js': [
+        'webpack', 'sourcemap'
+      ],
+      'react/app/**/*.js': [ 'webpack', 'coverage' ]
     },
     plugins: [
       'karma-chrome-launcher',
@@ -36,15 +45,19 @@ module.exports = function( config ) {
     colors: true,
     webpack: webpackConfig,
     webpackServer: {
-      noInfo: true,
+      noInfo: true
     },
     htmlReporter: {
       outputFile: 'test/units.html'
+    },
+    coverageReporter: {
+      type: 'html',
+      dir: 'test/coverage'
     },
     client: {
       chai: {
         includeStack: true
       }
-    },
-  } );
+    }
+  });
 };
