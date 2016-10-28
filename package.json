@@ -53,6 +53,7 @@
     "jasmine-core": "^2.5.2",
     "jasmine-node": "^1.14.5",
     "jasmine-reporters": "2.0.7",
+    "jasmine-spec-reporter": "^2.7.0",
     "karma": "~0.13.9",
     "karma-chrome-launcher": "~0.2.0",
     "karma-coffee-preprocessor": "~0.3.0",
