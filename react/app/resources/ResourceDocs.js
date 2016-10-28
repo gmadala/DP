@@ -4,11 +4,11 @@ import counterpart from 'counterpart';
 import ListItemLink from '../shared/ListItemLink';
 
 const ResourceDocs = ({docs, collateralDocs, handleClick}) => {
-  const docLinks = docs.map((item) => <ListItemLink name={item.name} url={item.url} metric={item.metric} key={item.id} handleClick={handleClick} />)
+  const docLinks = docs.map(item => <ListItemLink name={item.name} url={item.url} metric={item.metric} key={item.id} handleClick={handleClick} />)
 
   let collatDocs = null;
   if (collateralDocs && collateralDocs.length > 0) {
-    const collateralDocLinks = collateralDocs.map((item) => <ListItemLink name={item.name} url={item.url} metric={item.metric} key={item.id} handleClick={handleClick} />)
+    const collateralDocLinks = collateralDocs.map(item => <ListItemLink name={item.name} url={item.url} metric={item.metric} key={item.id} handleClick={handleClick} />)
 
     collatDocs = (
       <div>

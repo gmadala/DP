@@ -1,9 +1,9 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import ResourceDocs from '../ResourceDocs.js';
-import ListItemLink from '../../shared/ListItemLink';
+import ResourceDocs from '../../app/resources/ResourceDocs';
+import ListItemLink from '../../app/shared/ListItemLink';
 
-describe( '<ResourceDocs />', () => {
+describe( 'ResourceDocs', () => {
   const onClick = sinon.spy();
   const docs = [ { name: 'test', url: 'https://www.test.com', metric: 'test', id: '1' } ];
 

@@ -12,3 +12,4 @@ Gruntfile.js
 karma-e2e.conf.js
 karma.conf.js
 webpack.config.js
+webpack.karma.conf.js

@@ -8,7 +8,7 @@ class AuctionResources extends Component {
   constructor(props) {
     super(props);
 
-    let rp = props.rp;
+    const rp = props.rp;
 
     // set current language
     counterpart.setLocale(rp.language.substring(0, 2));

@@ -3,7 +3,7 @@ import Translate from 'react-translate-component';
 import ListItemLink from '../shared/ListItemLink';
 
 const MobileApps = ({apps, handleClick}) => {
-  const appLinks = apps.map((app) => <ListItemLink name={app.name} url={app.url} metric={app.metric} key={app.id} handleClick={handleClick} />)
+  const appLinks = apps.map(app => <ListItemLink name={app.name} url={app.url} metric={app.metric} key={app.id} handleClick={handleClick} />)
   return (
     <div className="col-md-4">
       <div className="panel panel-default">
@@ -20,7 +20,7 @@ const MobileApps = ({apps, handleClick}) => {
 };
 
 MobileApps.propTypes = {
-  apps: PropTypes.array,
+  apps: PropTypes.array.isRequired,
   handleClick: PropTypes.func
 };
 

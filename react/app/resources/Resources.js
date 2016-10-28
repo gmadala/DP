@@ -11,7 +11,7 @@ class Resources extends Component {
   constructor(props) {
     super(props);
 
-    let rp = props.rp;
+    const rp = props.rp;
 
     // get fee schedule content link
     docsList[0].url = rp.api.contentLink('/dealer/feeschedule/FeeSchedule', {});
@@ -20,7 +20,6 @@ class Resources extends Component {
     counterpart.setLocale(rp.language.substring(0, 2));
 
     this.state = {
-      rp: rp,
       language: counterpart.getLocale(),
       docs: rp.isUnitedStates ? docsList : [],
       collateralDocs: collateralDocsList,

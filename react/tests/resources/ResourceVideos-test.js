@@ -1,9 +1,9 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import ResourceVideos from '../ResourceVideos.js';
-import Video from '../../shared/Video';
+import ResourceVideos from '../../app/resources/ResourceVideos';
+import Video from '../../app/shared/Video';
 
-describe( '<ResourceVideos />', () => {
+describe( 'ResourceVideos', () => {
   it( 'renders two videos', () => {
     const wrapper = shallow( <ResourceVideos /> );
 

@@ -1,12 +1,9 @@
 import React from 'react';
 import Link from './Link';
 
-const ListItemLink = props => {
-  return (
+const ListItemLink = props =>
     <li>
-      <Link {...props} />
+      <Link {...props}>{props.children}</Link>
     </li>
-  );
-};
 
 export default ListItemLink;

@@ -1,7 +1,6 @@
 import React, {PropTypes} from 'react';
 
-const Date = ({minDate, maxDate, labelFor, label}) => {
-  return (
+const Date = ({minDate, maxDate, labelFor, label}) =>
     <div>
       <label htmlFor={labelFor}>{label}</label>
       <input className="ng-react-date-picker {this.state.invalid}" min={minDate} max={maxDate} placeholder="mm/dd/yyyy" value={this.state.date} onChange={this.handleChange} />
@@ -13,8 +12,6 @@ const Date = ({minDate, maxDate, labelFor, label}) => {
         </span>
       </button>
     </div>
-  );
-}
 
 Date.propTypes = {
   minDate: PropTypes.string,

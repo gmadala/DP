@@ -1,12 +1,9 @@
 import React, {PropTypes} from 'react';
 
-const Link = ({url, name, metric, handleClick}) => {
-  return (
+const Link = ({url, name, metric, handleClick}) =>
     <a href={url} target="_blank" rel="noopener noreferrer" onClick={handleClick(metric)}>
       {name}
     </a>
-  );
-}
 
 Link.propTypes = {
   name: PropTypes.element,

@@ -1,10 +1,16 @@
+/* eslint-disable */
 import fs from 'fs';
+import path from 'path';
 
 export default class Translater {
+  constructor( outputPath, resourcesPath ) {
+    this.outputPath = outputPath;
+    this.resourcesPath = resourcesPath;
+  }
 
   translate( fromObj, toObj, fromType, toType ) {
-    const filePath = __dirname + `/../../translations/${toType}_untranslated.txt`;
-    const tFilePath = __dirname + `/../../translations/${toType}_translated.txt`;
+    const filePath = path.resolve( this.outputPath, `${ toType }_untranslated.txt` );
+    const tFilePath = path.resolve( this.outputPath, `${ toType }_translated.txt` );
 
     const translated = this._getTranslated( tFilePath );
     const mergedJson = this._mergeObjs( fromObj, toObj );
@@ -15,95 +21,92 @@ export default class Translater {
   }
 
   _saveTranslated( json, toType ) {
-    const str = `module.exports = ${JSON.stringify(json)}`;
-    const filePath = __dirname + `/${toType}.js`;
+    const str = `module.exports = ${ JSON.stringify( json ) }`;
+    const filePath = path.resolve( this.resourcesPath, `${ toType }.js` );
 
     fs.writeFile( filePath, str, 'utf-8', function( err ) {
       if ( err ) {
         return console.log( err );
       }
-    } );
+    });
   }
 
   _saveUntranslated( untranslated, filePath, fromType, toType ) {
     console.log( '' );
-    const str = untranslated.map( x => `${x.string} : ` ).join( '\n' );
+    const str = untranslated.map( x => `${ x.string } : ` ).join( '\n' );
 
     fs.writeFile( filePath, str, 'utf-8', function( err ) {
       if ( err ) {
         return console.log( err );
       }
-      console.log( `${fromType} to ${toType}: ${untranslated.length} new translation(s) needed` );
+      console.log( `${ fromType } to ${ toType }: ${ untranslated.length } new translation(s) needed` );
       console.log( '' );
-    } );
+    });
   }
 
   _getTranslated( filePath ) {
-    const array = fs.readFileSync( filePath ).toString().split( "\n" );
+    const array = fs.readFileSync( filePath ).toString( ).split( "\n" );
     if ( typeof( array ) === 'object' ) {
-      const newTrans = array.filter( x => {
-        return typeof( x.split( ' : ' )[ 1 ] ) === 'string'
-      } );
-      return newTrans.map( x => {
+      const newTrans = array.filter(x => {
+        return typeof( x.split( ' : ' )[ 1 ]) === 'string'
+      });
+      return newTrans.map(x => {
         return {
-          string: x.split( ' : ' )[ 0 ],
-          translation: ( x.split( ' : ' )[ 1 ] ).replace( '\r', '' )
+          string: x.split( ' : ' )[0],
+          translation: ( x.split( ' : ' )[ 1 ]).replace( '\r', '' )
         }
-      } );
+      });
     } else {
-      return [];
+      return [ ];
     }
   }
 
   _mergeObjs( fromObj, toObj ) {
-    let resultObj = {...fromObj,
+    let resultObj = {
+      ...fromObj,
       ...toObj
     }
-    for ( let key of Object.keys( fromObj ) ) {
-      if ( typeof( fromObj[ key ] ) === 'object' ) {
-        resultObj[ key ] = this._mergeObjs( fromObj[ key ], toObj[ key ] )
+    for (let key of Object.keys( fromObj )) {
+      if ( typeof(fromObj[key]) === 'object' ) {
+        resultObj[key] = this._mergeObjs(fromObj[key], toObj[key])
       }
     }
     return resultObj;
   }
 
   _translateStrings( fromObj, toObj, newTranslations ) {
-    let strings = [];
-    let resultObj = {...toObj
+    let strings = [ ];
+    let resultObj = {
+      ...toObj
     };
-    for ( let key of Object.keys( fromObj ) ) {
+    for (let key of Object.keys( fromObj )) {
       if ( typeof( resultObj ) !== 'undefined' ) {
-        if ( typeof( fromObj[ key ] ) === 'object' ) {
-          const subResult = this._translateStrings( fromObj[ key ], resultObj[ key ], newTranslations );
-          strings = [ ...strings, ...subResult.strings ];
-          resultObj[ key ] = {...( resultObj[ key ] ),
+        if ( typeof(fromObj[key]) === 'object' ) {
+          const subResult = this._translateStrings( fromObj[key], resultObj[key], newTranslations );
+          strings = [
+            ...strings,
+            ...subResult.strings
+          ];
+          resultObj[key] = {
+            ...(resultObj[key]),
             ...subResult.json
           }
-        } else if ( typeof( fromObj[ key ] ) === 'string' && typeof( resultObj[ key ] ) === 'string' ) {
-          if ( fromObj[ key ] === resultObj[ key ] ) {
+        } else if ( typeof(fromObj[key]) === 'string' && typeof(resultObj[key]) === 'string' ) {
+          if (fromObj[key] === resultObj[key]) {
             if ( newTranslations.length > 0 ) {
-              const found = newTranslations.find( x => x.string === fromObj[ key ] )
+              const found = newTranslations.find(x => x.string === fromObj[key])
               if ( found && found.translation.length > 0 ) {
-                resultObj[ key ] = found.translation;
+                resultObj[key] = found.translation;
               } else {
-                strings.push( {
-                  string: fromObj[ key ],
-                  translation: ''
-                } );
+                strings.push({ string: fromObj[key], translation: '' });
               }
             } else {
-              strings.push( {
-                string: fromObj[ key ],
-                translation: ''
-              } );
+              strings.push({ string: fromObj[key], translation: '' });
             }
           }
         }
       }
     }
-    return {
-      strings,
-      json: resultObj
-    };
+    return { strings, json: resultObj };
   }
 }
