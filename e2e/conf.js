@@ -33,10 +33,12 @@ exports.config = {
   restartBrowserBetweenTests: false,
 
   //Framework selection
-  framework: 'jasmine',
+  framework: 'jasmine2',
   onPrepare: function() {
     var env = jasmine.getEnv();
     env.clearReporters();
+
+    jasmine.DEFAULT_TIMEOUT_INTERVAL = 60000;
 
     var SpecReporter = require('jasmine-spec-reporter');
     env.addReporter(new SpecReporter({
