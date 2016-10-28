@@ -35,9 +35,13 @@ exports.config = {
   //Framework selection
   framework: 'jasmine',
   onPrepare: function() {
+    var env = jasmine.getEnv();
+    env.clearReporters();
+
     var SpecReporter = require('jasmine-spec-reporter');
-    // add jasmine spec reporter
-    jasmine.getEnv().addReporter(new SpecReporter());
+    env.addReporter(new SpecReporter({
+      displayStacktrace: true
+    }));
   },
 
   // Options to be passed to Jasmine.
