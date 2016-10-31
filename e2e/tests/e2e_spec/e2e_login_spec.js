@@ -65,7 +65,7 @@ describe('\n Login Page - Dealer', function () {
   it("4. Dealer Login - Logout Dealer Confirm", function () {
     login.logout();
     expect(browser.getCurrentUrl()).toEqual(execSettings.loginPage());
-    browser.sleep(5000);
+    browser.sleep(browser.params.shortDelay);
   });
 
 });
