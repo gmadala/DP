@@ -1,7 +1,7 @@
 'use strict';
 
 describe('Controller: WizardFloorCtrl', function() {
-  beforeEach(module('nextgearWebApp', 'client/login/login.template.html'));
+  beforeEach(module('nextgearWebApp', 'client/login/login.template.html', 'client/shared/modals/floor-car-message/floor-car-message.template.html'));
 
   var
     initController,
@@ -11,6 +11,9 @@ describe('Controller: WizardFloorCtrl', function() {
     floorplan,
     dialog,
     blackbook,
+    mockModal,
+    mockUpload,
+    mockFloorplan,
     mockAddress,
     mockDealerSummary,
     mockForm,
@@ -42,12 +45,41 @@ describe('Controller: WizardFloorCtrl', function() {
         Message: null
       });
 
+    $httpBackend.whenGET('/info/v1_1/businesshours')
+      .respond({});
+
+    mockUpload = {
+      upload: function() {
+        return $q.when(
+          {
+            data: {
+              success: true
+            }
+          }
+        );
+      },
+      rename: function() {
+        return;
+      }
+    };
+
+    mockFloorplan = {
+      create: function() {
+        return $q.when(
+          {
+            StockNumber: 66,
+            FloorplanId: '123-123-123'
+          }
+        );
+      }
+    };
+
     mockUser = {
       isDealer: function() {
         return false;
       },
       getStatics: function() {
-        return $q.when({colors: ['red', 'green']});
+        return $q.when({colors: ['red', 'green'], titleLocationOptions: [{DisplayOrder: 1, Id: 1, Name: 'I Have It'}]});
       },
       getInfo: function() {
         return $q.when({
@@ -100,11 +132,13 @@ describe('Controller: WizardFloorCtrl', function() {
         return [{
           "AddressId": "active-physical-address-id",
           "IsActive": true,
-          "IsPhysicalInventory": true
+          "IsPhysicalInventory": true,
+          "IsMainAddress": true
         }, {
           "AddressId": "another-active-physical-address-id",
           "IsActive": true,
-          "IsPhysicalInventory": true
+          "IsPhysicalInventory": true,
+          "IsMainAddress": false
         }];
       }
     };
@@ -118,7 +152,8 @@ describe('Controller: WizardFloorCtrl', function() {
       wizardFloor = $controller('WizardFloorCtrl', {
         $scope: scope,
         User: mockUser,
-        Floorplan: floorplan,
+        Floorplan: mockFloorplan,
+        Upload: mockUpload,
         $uibModal: dialog,
         Blackbook: blackbook,
         Addresses: mockAddress,
@@ -273,5 +308,62 @@ describe('Controller: WizardFloorCtrl', function() {
   // navigation test
 
   // submission test
+  describe('Submit function', function() {
+    beforeEach(function() {
+      scope.$digest();
+
+      wizardFloor.data.files = [{name: 'testFile.pdf'}];
+
+      wizardFloor.renameFile = function (file, index) {
+        var filename = "";
+        var dotPos = 0;
+        // Get all files before the current file
+        var firstXFiles = _.first(wizardFloor.data.files, index);
+        // Get all files that have same name as file
+        var fileList = _.map(_.where(firstXFiles, {'name': file}), 'name');
+        // If there are other files with the same name need to add index to file name
+        var fileIndex = fileList.length;
+
+        if (fileIndex > 0) {
+          dotPos = file.lastIndexOf(".");
+          filename = file.substring(0, dotPos) + fileIndex + file.substring(dotPos);
+          return filename;
+        }
+        else {
+          return file;
+        }
+      };
+
+      spyOn(dialog, 'open').and.returnValue({
+        result: {
+          then: function(callback) {
+            callback(true);
+          }
+        }
+      });
+
+    });
+
+    it('should exist', function() {
+      expect(typeof wizardFloor.submit).toBe('function');
+    });
+
+    it('should change state to flooringConfirmation if successful', function() {
+      spyOn($state, 'go');
+
+      wizardFloor.transitionValidation = function() {
+        return true;
+      };
+
+      wizardFloor.submit();
+
+      scope.$digest();
+
+      expect($state.go).toHaveBeenCalledWith('flooringConfirmation', {
+        floorplanId: '123-123-123',
+        stockNumber: 66
+      });
+    });
+  });
 
 });

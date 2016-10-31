@@ -2,8 +2,8 @@
   <div class="row">
     <div class="col-xs-12 col-sm-offset-2 col-sm-8">
       <h2 style="font-size: 1.714em; line-height: 1.2; margin-top: 28px; margin-bottom: 20px;" translate>Thank you for your floor plan request.</h2>
-      <h4 style="font-size: 1.429em; line-height: 1.2; margin-bottom: 20px;" translate>Stock Number: {{ flooringConfirmation.stockNumber }}</h4>
-      <p class="hidden" style="font-size: 1.15em; font-weight: 200; margin-bottom: 60px;" translate>You will receive an email confirmation shortly at {{ flooringConfirmation.user.BusinessEmail }}</p>
+      <h4 style="font-size: 1.429em; line-height: 1.2; margin-bottom: 20px;"><span translate>Stock Number:</span> {{ flooringConfirmation.stockNumber }}</h4>
+      <p class="hidden" style="font-size: 1.15em; font-weight: 200; margin-bottom: 60px;"><span translate>You will receive an email confirmation shortly at</span> {{ flooringConfirmation.user.BusinessEmail }}</p>
 
       <h4 style="font-size: 1.429em; line-height: 1.2; font-weight: 400; color: #FFA500;" ng-hide="flooringConfirmation.surveyComplete" translate>How would you rate your experience with flooring online?</h4>
 

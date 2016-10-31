@@ -122,7 +122,10 @@ describe('Controller ConfirmationCtrl', function () {
     expect(kissMetricsInfoMock.getKissMetricInfo).toHaveBeenCalled();
 
     var resultObj = {
-      surveyComment: scope.vm.surveyComment
+      surveyComment: scope.vm.surveyComment,
+      businessNumber: vm.user.BusinessNumber,
+      businessId: vm.user.BusinessId,
+      flooringExperience: vm.starValue
     };
 
     expect(segmentioMock.track).toHaveBeenCalledWith(metric.FLOORING_EXPERIENCE_RATING, angular.extend(resultObj, kissMetricsData));

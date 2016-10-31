@@ -336,6 +336,7 @@
       var dialogParams;
 
       vm.floorPlanSubmitting = true;
+
       vm.data.TitleLocationId = vm.options.titleLocationOptions[vm.data.TitleLocationIndex];
 
       Floorplan.create(vm.data).then(
