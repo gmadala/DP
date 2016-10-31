@@ -80,8 +80,8 @@
     "grunt-usemin": "~3.1.1",
     "gruntify-eslint": "^3.0.0",
     "isparta": "^4.0.0",
-    "istanbul": "^0.4.5",
-    "istanbul-instrumenter-loader": "^1.0.0",
+    "istanbul": "github:gotwarlost/istanbul#source-map",
+    "istanbul-instrumenter-loader": "0.2.0",
     "jasmine": "^2.5.2",
     "jasmine-core": "^2.5.2",
     "jasmine-node": "^1.14.5",
@@ -123,6 +123,10 @@
   },
   "engines": {
     "node": ">=0.8.0"
+  },
+  "bin": {
+    "karma": "./bin/karma",
+    "webpack": "./bin/webpack"
   },
   "scripts": {
     "ci-build": "grunt ci-build --target=test",

@@ -3,12 +3,19 @@ const webpackConfig = require( './webpack.config.js' );
 const argv = require( 'minimist' )(process.argv.slice( 2 ));
 webpackConfig.module.loaders.push({ test: /\.json$/, loader: 'json-loader' });
 webpackConfig.module.preLoaders = [
-  {
+  { //delays coverage til after tests are run, fixing transpiled source coverage error
     test: /\.js$/,
-    loader: 'isparta',
-    include: path.join( __dirname, 'react/app' )
+    include: path.resolve( 'react/app/' ),
+    loader: 'isparta'
   }
-]
+];
+webpackConfig.module.postLoaders = [
+  { //delays coverage til after tests are run, fixing transpiled source coverage error
+    test: /\.js$/,
+    include: path.resolve( 'react/app/' ),
+    loader: 'istanbul-instrumenter'
+  }
+];
 webpackConfig.entry = '';
 webpackConfig.devtool = 'inline-source-map',
 
@@ -55,13 +62,7 @@ module.exports = function( config ) {
     },
     coverageReporter: {
       type: 'html',
-      dir: 'test/coverage',
-      instrumenters: {
-        isparta: require( 'isparta' )
-      },
-      instrumenter: {
-        '**/*.js': 'isparta'
-      }
+      dir: 'test/coverage'
     },
     client: {
       chai: {
