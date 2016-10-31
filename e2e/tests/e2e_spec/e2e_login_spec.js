@@ -8,7 +8,7 @@ var helper = require('../../framework/e2e_helper_functions.js');
 var loginObjects = new loginObjects.loginObjects();
 var helper = new helper.helper();
 
-describe('\n Login Page', function () {
+describe('\n Login Page - Language Selector', function () {
 
   beforeEach(function () {
     browser.sleep(browser.params.shortDelay);
