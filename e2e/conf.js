@@ -25,7 +25,7 @@ exports.config = {
 
   //Spec patterns are relative to the current working directly when protractor is called.
   specs: ['tests/e2e_spec/*_spec.js'],
-  //specs: ['tests/e2e_spec/e2e_login_spec.js'],
+  //specs: ['tests/e2e_spec/e2e_profile_settings_spec.js'],
 
   //More miscellaneous configuration options
   directConnect: true,
@@ -33,7 +33,23 @@ exports.config = {
   restartBrowserBetweenTests: false,
 
   //Framework selection
-  framework: 'jasmine',
+  framework: 'jasmine2',
+  onPrepare: function() {
+    var env = jasmine.getEnv();
+    env.clearReporters();
+
+    jasmine.DEFAULT_TIMEOUT_INTERVAL = 60000;
+
+    var SpecReporter = require('jasmine-spec-reporter');
+    env.addReporter(new SpecReporter({
+      displayStacktrace: true,
+      prefixes: {
+        success: 'Pass ',
+        failure: 'Fail ',
+        pending: 'Pending '
+      }
+    }));
+  },
 
   // Options to be passed to Jasmine.
   jasmineNodeOpts: {
