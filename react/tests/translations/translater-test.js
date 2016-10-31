@@ -25,7 +25,6 @@ describe('Translater', ( ) => {
 
   it('returns a promise', ( ) => {
     const result = t.translate( enLocale, esLocale, 'en', 'es' );
-    console.log( result )
     expect( result ).to.be.a( 'promise' );
   })
 })

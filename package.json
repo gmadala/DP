@@ -21,7 +21,6 @@
     "react-translate-component": "^0.13.1"
   },
   "devDependencies": {
-    "babel": "^6.5.2",
     "babel-cli": "^6.16.0",
     "babel-core": "^6.17.0",
     "babel-eslint": "^7.1.0",
@@ -81,7 +80,7 @@
     "grunt-usemin": "~3.1.1",
     "gruntify-eslint": "^3.0.0",
     "isparta": "^4.0.0",
-    "istanbul": "github:gotwarlost/istanbul#source-map",
+    "istanbul": "^0.4.5",
     "istanbul-instrumenter-loader": "^1.0.0",
     "jasmine": "^2.5.2",
     "jasmine-core": "^2.5.2",
@@ -93,7 +92,7 @@
     "karma-browserify": "^5.1.0",
     "karma-chrome-launcher": "~0.2.0",
     "karma-coffee-preprocessor": "~0.3.0",
-    "karma-coverage": "^0.5.5",
+    "karma-coverage": "^1.1.1",
     "karma-firefox-launcher": "0.1.6",
     "karma-htmlfile-reporter": "^0.3.4",
     "karma-ie-launcher": "^0.2.0",

@@ -1,13 +1,14 @@
+const path = require( 'path' );
 const webpackConfig = require( './webpack.config.js' );
 const argv = require( 'minimist' )(process.argv.slice( 2 ));
 webpackConfig.module.loaders.push({ test: /\.json$/, loader: 'json-loader' });
-webpackConfig.module.postLoaders = [
-  { //delays coverage til after tests are run, fixing transpiled source coverage error
+webpackConfig.module.preLoaders = [
+  {
     test: /\.js$/,
-    exclude: /(test|node_modules|bower_components)\//,
-    loader: 'istanbul-instrumenter'
+    loader: 'isparta',
+    include: path.join( __dirname, 'react/app' )
   }
-];
+]
 webpackConfig.entry = '';
 webpackConfig.devtool = 'inline-source-map',
 
@@ -20,7 +21,7 @@ module.exports = function( config ) {
       'mocha', 'sinon-chai'
     ],
     reporters: [
-      'progress', 'html', 'mocha', 'coverage'
+      'mocha', 'coverage'
     ],
     files: ['webpack.testsbundle.js'],
     preprocessors: {
@@ -45,6 +46,9 @@ module.exports = function( config ) {
     webpack: webpackConfig,
     webpackServer: {
       noInfo: true
+    },
+    webpackMiddleware: {
+      noInfo: true //please don't spam the console when running in karma!
     },
     htmlReporter: {
       outputFile: 'test/units.html'

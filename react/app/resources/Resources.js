@@ -6,6 +6,7 @@ import MobileApps from './MobileApps';
 import collateralDocsList from './data/_collateralDocsList';
 import mobileAppsList from './data/_mobileAppsList';
 import docsList from './data/_docsList';
+import metric from '../shared/metric';
 
 class Resources extends Component {
   constructor(props) {
@@ -26,12 +27,15 @@ class Resources extends Component {
       mobileApps: mobileAppsList,
       isUnitedStates: rp.isUnitedStates || false
     }
+
+    // log current page view
+    this.handleClick(metric.VIEW_RESOURCES_PAGE);
   }
 
-  handleClick = (metric) => {
-    if (metric) {
+  handleClick = (metricKey) => {
+    if (metricKey) {
       this.props.rp.kissMetricInfo.getKissMetricInfo().then((info) => {
-        this.props.rp.segmentio.track(metric, info);
+        this.props.rp.segmentio.track(metricKey, info);
       });
     }
   }

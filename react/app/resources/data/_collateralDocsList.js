@@ -7,6 +7,8 @@ let languagePrefix = counterpart.getLocale();
 
 if (languagePrefix.indexOf('_CA') !== -1) {
   languagePrefix = 'CAE%20';
+} else {
+  languagePrefix = '';
 }
 
 module.exports = [
