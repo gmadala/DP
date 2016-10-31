@@ -13,6 +13,8 @@
       $state.transitionTo('titlereleases');
     };
 
+    TitleReleases.clearQueue();
+
     var response = {};
     if ($stateParams.data) {
       response = $stateParams.data;
