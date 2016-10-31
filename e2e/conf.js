@@ -38,6 +38,14 @@ exports.config = {
     var env = jasmine.getEnv();
     env.clearReporters();
 
+    var reporters = require('jasmine-reporters');
+    var junitReporter = new reporters.JUnitXmlReporter({
+      savePath: './test/protractor',
+      filePrefix: 'junit-',
+      consolidateAll: false
+    });
+    env.addReporter(junitReporter);
+
     jasmine.DEFAULT_TIMEOUT_INTERVAL = 60000;
 
     var SpecReporter = require('jasmine-spec-reporter');
