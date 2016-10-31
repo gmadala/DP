@@ -8,12 +8,14 @@ describe('Controller: AuditsCtrl', function () {
   var AuditsCtrl,
     kissMetricData,
     mockKissMetricInfo,
-    scope;
+    scope,
+    $httpBackend;
 
   // Initialize the controller and a mock scope
-  beforeEach(inject(function ($controller, _$q_, $rootScope) {
+  beforeEach(inject(function ($controller, _$q_, $rootScope, _$httpBackend_) {
     var $q = _$q_;
-    scope = $rootScope.$new();
+    scope = $rootScope.$new(),
+    $httpBackend = _$httpBackend_;
 
     kissMetricData = {
       height: 1080,
@@ -29,6 +31,8 @@ describe('Controller: AuditsCtrl', function () {
       }
     };
 
+    $httpBackend.whenGET('/Dealer/v1_2/Info').respond($q.when({}));
+
     spyOn(mockKissMetricInfo, 'getKissMetricInfo').and.callThrough();
 
     AuditsCtrl = $controller('AuditsCtrl', {
@@ -39,5 +43,9 @@ describe('Controller: AuditsCtrl', function () {
 
   it('should call to get core properties from kissmetric info service', function() {
     expect(mockKissMetricInfo.getKissMetricInfo).toHaveBeenCalled();
+  });
+
+  it('should attach metric names to the scope', function() {
+    expect(scope.metric.VIEW_OPEN_AUDITS).toBeDefined();
   });
 });
