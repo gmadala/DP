@@ -6,18 +6,19 @@
     "url": "https://git.assembla.com/nextgear-desktop-and-mobile.desktop.git"
   },
   "dependencies": {
+    "babel-polyfill": "^6.16.0",
+    "chai": "^3.5.0",
+    "chai-enzyme": "^0.5.2",
     "counterpart": "^0.17.5",
+    "enzyme": "^2.5.1",
+    "fs-writefile-promise": "^1.0.3",
     "ngreact": "^0.3.0",
     "react": "^15.3.1",
     "react-addons-test-utils": "^15.3.2",
     "react-dom": "^15.3.2",
     "react-interpolate-component": "^0.10.0",
     "react-router": "^2.8.1",
-    "react-translate-component": "^0.13.1",
-    "enzyme": "^2.5.1",
-    "chai": "^3.5.0",
-    "chai-enzyme": "^0.5.2",
-    "babel-polyfill": "^6.16.0"
+    "react-translate-component": "^0.13.1"
   },
   "devDependencies": {
     "babel": "^6.5.2",
@@ -79,6 +80,9 @@
     "grunt-shell": "~1.1.1",
     "grunt-usemin": "~3.1.1",
     "gruntify-eslint": "^3.0.0",
+    "isparta": "^4.0.0",
+    "istanbul": "github:gotwarlost/istanbul#source-map",
+    "istanbul-instrumenter-loader": "^1.0.0",
     "jasmine": "^2.5.2",
     "jasmine-core": "^2.5.2",
     "jasmine-node": "^1.14.5",
@@ -97,6 +101,7 @@
     "karma-jasmine-html-reporter": "^0.2.2",
     "karma-junit-reporter": "0.3.4",
     "karma-mocha": "^1.2.0",
+    "karma-mocha-reporter": "^2.2.0",
     "karma-ng-html2js-preprocessor": "~0.1.0",
     "karma-ng-scenario": "~0.1.0",
     "karma-phantomjs-launcher": "^1.0.2",

@@ -120,7 +120,7 @@
         "angular/typecheck-number": "warn",
         "angular/typecheck-string": "warn",
         "angular/no-private-call": "warn",
-        "angular/log": "warn",
+        "angular/log": 0,
         "angular/controller-as-route": "warn",
         "angular/timeout-service": "warn"
     }

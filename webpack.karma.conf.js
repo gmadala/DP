@@ -1,7 +1,15 @@
 const webpackConfig = require( './webpack.config.js' );
 const argv = require( 'minimist' )(process.argv.slice( 2 ));
 webpackConfig.module.loaders.push({ test: /\.json$/, loader: 'json-loader' });
+webpackConfig.module.postLoaders = [
+  { //delays coverage til after tests are run, fixing transpiled source coverage error
+    test: /\.js$/,
+    exclude: /(test|node_modules|bower_components)\//,
+    loader: 'istanbul-instrumenter'
+  }
+];
 webpackConfig.entry = '';
+webpackConfig.devtool = 'inline-source-map',
 
 module.exports = function( config ) {
   config.set({
@@ -12,21 +20,11 @@ module.exports = function( config ) {
       'mocha', 'sinon-chai'
     ],
     reporters: [
-      'progress', 'html', 'coverage'
+      'progress', 'html', 'mocha', 'coverage'
     ],
-    files: [
-      'react/app/**/*.js', {
-        pattern: 'webpack.testsbundle.js',
-        watched: false,
-        served: true,
-        included: true
-      }
-    ],
+    files: ['webpack.testsbundle.js'],
     preprocessors: {
-      'webpack.testsbundle.js': [
-        'webpack', 'sourcemap'
-      ],
-      'react/app/**/*.js': [ 'webpack', 'coverage' ]
+      'webpack.testsbundle.js': [ 'webpack', 'sourcemap' ]
     },
     plugins: [
       'karma-chrome-launcher',
@@ -38,7 +36,8 @@ module.exports = function( config ) {
       'karma-webpack',
       'karma-coverage',
       'karma-htmlfile-reporter',
-      'karma-sinon-chai'
+      'karma-sinon-chai',
+      'karma-mocha-reporter'
     ],
     autoWatch: false,
     singleRun: true,
@@ -52,7 +51,13 @@ module.exports = function( config ) {
     },
     coverageReporter: {
       type: 'html',
-      dir: 'test/coverage'
+      dir: 'test/coverage',
+      instrumenters: {
+        isparta: require( 'isparta' )
+      },
+      instrumenter: {
+        '**/*.js': 'isparta'
+      }
     },
     client: {
       chai: {

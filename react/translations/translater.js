@@ -1,6 +1,7 @@
 /* eslint-disable */
 import fs from 'fs';
 import path from 'path';
+import write from 'fs-writefile-promise';
 
 export default class Translater {
   constructor( outputPath, resourcesPath ) {
@@ -16,47 +17,41 @@ export default class Translater {
     const mergedJson = this._mergeObjs( fromObj, toObj );
     const translateResult = this._translateStrings( fromObj, mergedJson, translated );
 
-    this._saveTranslated( translateResult.json, toType );
-    this._saveUntranslated( translateResult.strings, filePath, fromType, toType );
+    return this._saveTranslated( translateResult.json, toType ).then(this._saveUntranslated( translateResult.strings, filePath, fromType, toType ));
   }
 
   _saveTranslated( json, toType ) {
     const str = `module.exports = ${ JSON.stringify( json ) }`;
     const filePath = path.resolve( this.resourcesPath, `${ toType }.js` );
 
-    fs.writeFile( filePath, str, 'utf-8', function( err ) {
-      if ( err ) {
-        return console.log( err );
-      }
-    });
+    return write( filePath, str ).then( ( ) => 'success' ).catch( err => err );
   }
 
   _saveUntranslated( untranslated, filePath, fromType, toType ) {
     console.log( '' );
     const str = untranslated.map( x => `${ x.string } : ` ).join( '\n' );
 
-    fs.writeFile( filePath, str, 'utf-8', function( err ) {
-      if ( err ) {
-        return console.log( err );
-      }
+    return write( filePath, str ).then(( ) => {
       console.log( `${ fromType } to ${ toType }: ${ untranslated.length } new translation(s) needed` );
       console.log( '' );
-    });
+      return 'success';
+    }).catch( err => err );
   }
 
   _getTranslated( filePath ) {
-    const array = fs.readFileSync( filePath ).toString( ).split( "\n" );
-    if ( typeof( array ) === 'object' ) {
+    try {
+      const array = fs.readFileSync( filePath ).toString( ).split( "\n" );
       const newTrans = array.filter(x => {
         return typeof( x.split( ' : ' )[ 1 ]) === 'string'
       });
+
       return newTrans.map(x => {
         return {
           string: x.split( ' : ' )[0],
           translation: ( x.split( ' : ' )[ 1 ]).replace( '\r', '' )
         }
       });
-    } else {
+    } catch ( err ) {
       return [ ];
     }
   }

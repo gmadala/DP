@@ -1,7 +1,7 @@
 import React, {PropTypes} from 'react';
 
 const Link = ({url, name, metric, handleClick}) =>
-    <a href={url} target="_blank" rel="noopener noreferrer" onClick={handleClick(metric)}>
+    <a href={url} target="_blank" rel="noopener noreferrer" onClick={() => { handleClick(metric) }}>
       {name}
     </a>
 

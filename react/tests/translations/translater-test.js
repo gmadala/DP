@@ -1,6 +1,9 @@
 import path from 'path';
 import Translater from '../../translations/translater';
 
+import enLocale from '../../translations/en';
+import esLocale from '../../translations/es';
+
 const tempPath = path.resolve( __dirname, 'temp' );
 
 describe('Translater', ( ) => {
@@ -18,5 +21,11 @@ describe('Translater', ( ) => {
   it('has a translate function', ( ) => {
     expect( t ).to.have.property( 'translate' );
     assert.typeOf( t.translate, 'function' )
+  })
+
+  it('returns a promise', ( ) => {
+    const result = t.translate( enLocale, esLocale, 'en', 'es' );
+    console.log( result )
+    expect( result ).to.be.a( 'promise' );
   })
 })
