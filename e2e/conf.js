@@ -53,7 +53,6 @@ exports.config = {
         failure: 'Fail - ',
         pending: 'Pending - '
       }
-
     }));
   },
 
