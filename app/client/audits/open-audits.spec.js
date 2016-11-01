@@ -11,6 +11,8 @@ describe('Controller: AuditsCtrl', function () {
     segmentio,
     scope,
     $httpBackend,
+    state,
+    mockUser,
     VIEW_OPEN_AUDITS = 'View Open Audits';
 
   // Initialize the controller and a mock scope
@@ -39,13 +41,32 @@ describe('Controller: AuditsCtrl', function () {
       }
     };
 
+    state = {
+      transitionTo: function() {
+        return $q.when({});
+      }
+    };
+
+    mockUser = {
+      getFeatures: function() {
+        return {
+          openAudits: {
+            enabled: false
+          }
+        };
+      }
+    };
+
     $httpBackend.whenGET('/Dealer/v1_2/Info').respond($q.when({}));
 
     spyOn(mockKissMetricInfo, 'getKissMetricInfo').and.callThrough();
     spyOn(segmentio, 'track').and.callThrough();
+    spyOn(state, 'transitionTo').and.callThrough();
 
     AuditsCtrl = $controller('AuditsCtrl', {
       $scope: scope,
+      $state: state,
+      User: mockUser,
       kissMetricInfo: mockKissMetricInfo,
       segmentio: segmentio
     });
@@ -59,5 +80,9 @@ describe('Controller: AuditsCtrl', function () {
 
   it('should attach metric names to the scope', function() {
     expect(scope.metric.VIEW_OPEN_AUDITS).toBeDefined();
+  });
+
+  it('should redirect to dashboard when openAudits is not enabled', function() {
+    expect(state.transitionTo).toHaveBeenCalledWith('dashboard');
   });
 });
