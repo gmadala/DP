@@ -22,7 +22,7 @@
       </div>
 
       <div class="panel panel-default" ng-switch="data.results.length > 0 || data.loading">
-        <h2 class="well-title" translate><span>Title Release Requests</span>
+        <h2 class="well-title"><span translate>Title Release Requests</span>
           <div uib-dropdown class="pull-right visible-xs">
             <button class="btn-unstyle dropdown-toggle sort-by right no-padding no-margin" type="button" id="dropdownSort" uib-dropdown-toggle
                     aria-haspopup="true" aria-expanded="false">
@@ -68,8 +68,8 @@
 
               <td class="hidden-xs">
                 <p class="lockup-major">{{ item.FlooringDate | moment}}</p>
-                <p class="lockup-minor" translate>{{ item.DaysFloored }} days</p>
-                <p class="lockup-major visible-sm">Purchased:</p>
+                <p class="lockup-minor">{{ item.DaysFloored }} <span translate>days</span></p>
+                <p class="lockup-major visible-sm"><span translate>Purchased</span>:</p>
                 <p class="lockup-minor visible-sm">{{item.UnitPurchaseDate | moment}}</p>
               </td>
               <td class="description">
@@ -88,20 +88,20 @@
                   <p class="lockup-minor vertical-spacing heavy"><span translate>Floored On</span>:</p>
                 </div>
                 <div class="col-xs-6 no-padding visible-xs">
-                  <p class="lockup-minor vertical-spacing"><span translate>{{ item.FlooringDate | moment}}</span></p>
+                  <p class="lockup-minor vertical-spacing"><span>{{ item.FlooringDate | moment}}</span></p>
                 </div>
                 <div class="col-xs-6 no-padding visible-xs">
                   <p class="lockup-minor vertical-spacing heavy"><span translate>Purchased</span>:</p>
                 </div>
                 <div class="col-xs-6 no-padding visible-xs">
-                  <p class="lockup-minor vertical-spacing"><span translate>{{ item.UnitPurchaseDate | moment}}</span></p>
+                  <p class="lockup-minor vertical-spacing"><span>{{ item.UnitPurchaseDate | moment}}</span></p>
                 </div>
                 <div class="col-xs-6 no-padding visible-xs">
                   <p class="lockup-minor vertical-spacing heavy"><span translate>Status</span>:</p>
                 </div>
                 <div class="col-xs-6 no-padding visible-xs">
                   <div class="lockup-minor vertical-spacing" ng-switch="item.TitleReleaseProgramStatus">
-                    <p ng-switch-when="OutstandingTitleReleaseProgramRelease" translate>Title Released on {{item.TitleReleaseDate | moment}}</p>
+                    <p ng-switch-when="OutstandingTitleReleaseProgramRelease"><span translate>Title Released on</span> {{item.TitleReleaseDate | moment}}</p>
                     <p ng-switch-when="EligibleForRelease" translate>Eligible for Title Release</p>
                     <p ng-switch-when="NotEligibleForRelease" translate>Not Eligible for Title Release</p>
                   </div>
@@ -179,7 +179,7 @@
     </div>
     <div class="visible-xs mobile-checkout-widget hidden-print">
       <button class="visible-xs btn-cta cta-primary" ng-click="navigate('titleReleaseCheckout')">
-        <span class="paired-body" translate>({{queueLength()}}) Confirm Requests</span>
+        <span class="paired-body">({{queueLength()}}) <span translate>Confirm Requests</span></span>
       </button>
     </div>
   </section>

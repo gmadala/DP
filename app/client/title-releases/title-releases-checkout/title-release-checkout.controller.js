@@ -54,9 +54,7 @@
           segmentio.track(metric.DEALER_TITLE_RELEASE_REQUEST, result);
         });
 
-        var params = {};
-        params = response;
-        $state.go('titleReleaseConfirm', {data: params});
+        $state.go('titleReleaseConfirm', {data: response});
       });
     };
 

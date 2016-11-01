@@ -62,13 +62,13 @@
                   <p class="lockup-minor vertical-spacing heavy"><span translate>Floored On</span>:</p>
                 </div>
                 <div class="col-xs-6 no-padding visible-xs">
-                  <p class="lockup-minor vertical-spacing"><span translate>{{ item.FlooringDate | moment}}</span></p>
+                  <p class="lockup-minor vertical-spacing"><span>{{ item.FlooringDate | moment}}</span></p>
                 </div>
                 <div class="col-xs-6 no-padding visible-xs">
                   <p class="lockup-minor vertical-spacing heavy"><span translate>Purchased</span>:</p>
                 </div>
                 <div class="col-xs-6 no-padding visible-xs">
-                  <p class="lockup-minor vertical-spacing"><span translate>{{ item.UnitPurchaseDate | moment}}</span></p>
+                  <p class="lockup-minor vertical-spacing"><span>{{ item.UnitPurchaseDate | moment}}</span></p>
                 </div>
                 <div ng-hide="1 == addresses.length" class="send-to-label lockup-minor heavy"><span translate>Send To</span>:</div>
                 <div nxg-alternate-address="item" is-enabled="true" show-tooltip="true" show-select-menu></div>
