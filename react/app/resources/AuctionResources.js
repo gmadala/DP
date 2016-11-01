@@ -36,7 +36,7 @@ class AuctionResources extends Component {
       <div className="container">
         <div className="row">
           <div className="col-md-12">
-            <ResourceDocs docs={this.state.docs} handleClick={this.handleClick} />
+            <ResourceDocs docs={this.state.docs} handleClick={this.handleClick} titleKey="resources.resourceDocs.ngcDocuments" />
           </div>
         </div>
       </div>

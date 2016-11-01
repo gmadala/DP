@@ -131,6 +131,7 @@
   "scripts": {
     "ci-build": "grunt ci-build --target=test",
     "windows": "grunt server-ie",
+    "webpack": "webpack",
     "translate": "babel-node translate.js",
     "test": "set NODE_ENV=development && karma start webpack.karma.conf.js"
   }

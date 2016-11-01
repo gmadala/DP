@@ -45,7 +45,7 @@ class Resources extends Component {
       <div className="container">
         <div className="row">
           {this.state.language === 'en' ? <ResourceVideos handleClick={this.handleClick} /> : null}
-          <ResourceDocs docs={this.state.docs} collateralDocs={this.state.collateralDocs} handleClick={this.handleClick} />
+          <ResourceDocs docs={this.state.docs} collateralDocs={this.state.collateralDocs} handleClick={this.handleClick} titleKey="resources.resourceDocs.documents" />
           <MobileApps apps={this.state.mobileApps} handleClick={this.handleClick} />
         </div>
       </div>
