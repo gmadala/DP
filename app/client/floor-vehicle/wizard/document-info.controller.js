@@ -57,7 +57,6 @@
       setFileValidity();
       $scope.$parent.wizardFloor.validity = angular.copy($scope.form);
       $scope.$parent.wizardFloor.formParts.four = $scope.form.$valid;
-
       return $scope.form.$valid;
     };
 
