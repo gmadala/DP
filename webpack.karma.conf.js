@@ -2,13 +2,13 @@ const path = require( 'path' );
 const webpackConfig = require( './webpack.config.js' );
 const argv = require( 'minimist' )(process.argv.slice( 2 ));
 webpackConfig.module.loaders.push({ test: /\.json$/, loader: 'json-loader' });
-webpackConfig.module.preLoaders = [
-  { //delays coverage til after tests are run, fixing transpiled source coverage error
-    test: /\.js$/,
-    include: path.resolve( 'react/app/' ),
-    loader: 'isparta'
-  }
-];
+// webpackConfig.module.preLoaders = [
+//   { //delays coverage til after tests are run, fixing transpiled source coverage error
+//     test: /\.js$/,
+//     include: path.resolve( 'react/app/' ),
+//     loader: 'isparta'
+//   }
+// ];
 webpackConfig.module.postLoaders = [
   { //delays coverage til after tests are run, fixing transpiled source coverage error
     test: /\.js$/,

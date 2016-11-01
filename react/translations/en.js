@@ -7,7 +7,7 @@ module.exports = {
     resourceDocs: {
       collateralProgram: 'Collateral Protection Program',
       documents: 'Documents',
-      ngcDocuments: 'Nextgear Capital Documents'
+      ngcDocuments: 'NextGear Capital Documents'
     },
     mobileApps: {
       title: 'Mobile Apps',
