@@ -550,10 +550,8 @@ module.exports = function( grunt ) {
     }
   });
 
-  grunt.registerTask('webpack-dev', [ 'env:dev', 'shell:npm', 'shell:bower', 'shell:webpack' ])
-
-  grunt.registerTask('webpack-prod', [ 'env:prod', 'shell:npm', 'shell:bower', 'shell:webpack_prod' ])
-
+  grunt.registerTask('webpack-dev', [ 'env:dev', 'shell:npm', 'shell:bower', 'shell:webpack' ]);
+  grunt.registerTask('webpack-prod', [ 'env:prod', 'shell:npm', 'shell:bower', 'shell:webpack_prod' ]);
   grunt.registerTask('dev-setup', [
     'gitinfo',
     'webpack-dev',
