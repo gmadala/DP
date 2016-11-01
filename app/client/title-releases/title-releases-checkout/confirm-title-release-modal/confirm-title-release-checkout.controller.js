@@ -13,13 +13,13 @@
       $state.transitionTo('titlereleases');
     };
 
-    TitleReleases.clearQueue();
 
     var response = {};
     if ($stateParams.data) {
       response = $stateParams.data;
     } else {
       // If no confirm data go back to title releases
+      TitleReleases.clearQueue();
       $scope.backToTitleReleases();
     }
 
@@ -43,5 +43,6 @@
         return result;
       }
     });
+    TitleReleases.clearQueue();
   }
 })();
