@@ -8,8 +8,10 @@ describe('Controller: AuditsCtrl', function () {
   var AuditsCtrl,
     kissMetricData,
     mockKissMetricInfo,
+    segmentio,
     scope,
-    $httpBackend;
+    $httpBackend,
+    VIEW_OPEN_AUDITS = 'View Open Audits';
 
   // Initialize the controller and a mock scope
   beforeEach(inject(function ($controller, _$q_, $rootScope, _$httpBackend_) {
@@ -31,18 +33,28 @@ describe('Controller: AuditsCtrl', function () {
       }
     };
 
+    segmentio = {
+      track: function() {
+        return $q.when({});
+      }
+    };
+
     $httpBackend.whenGET('/Dealer/v1_2/Info').respond($q.when({}));
 
     spyOn(mockKissMetricInfo, 'getKissMetricInfo').and.callThrough();
+    spyOn(segmentio, 'track').and.callThrough();
 
     AuditsCtrl = $controller('AuditsCtrl', {
       $scope: scope,
-      kissMetricInfo: mockKissMetricInfo
+      kissMetricInfo: mockKissMetricInfo,
+      segmentio: segmentio
     });
   }));
 
   it('should call to get core properties from kissmetric info service', function() {
     expect(mockKissMetricInfo.getKissMetricInfo).toHaveBeenCalled();
+    scope.$apply();
+    expect(segmentio.track).toHaveBeenCalledWith(VIEW_OPEN_AUDITS, kissMetricData);
   });
 
   it('should attach metric names to the scope', function() {
