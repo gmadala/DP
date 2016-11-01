@@ -92,7 +92,7 @@
 
     <div style="margin-bottom: 38px;" ng-hide="!wizardFloor.canPayBuyer">
       <input bs-switch type="checkbox" id="cmn-toggle-2" name="cmn-toggle-2" class="noglobal"
-            switch-size="normal" switch-off-text="{{ 'No' | translate }}" switch-on-text="{{ 'Yes' | translate }}" switch-on-color="success" switch-change="salesInfo.switchChange(wizardFloor.data.SaleTradeIn)" ng-model="wizardFloor.data.SaleTradeIn">
+            switch-size="normal" switch-off-text="{{ 'No' | translate }}" switch-on-text="{{ 'Yes' | translate }}" switch-on-color="success" ng-change="salesInfo.switchChange(wizardFloor.data.SaleTradeIn)" ng-model="wizardFloor.data.SaleTradeIn">
     </div>
 
   <span class="nxg-business-field" ng-class="{ 'hidden': wizardFloor.data.SaleTradeIn, 'has-error': (form.inputBiz.$error.nxgRequires || form.inputBiz.$error.minlength) && form.$submitted }">

@@ -1,4 +1,4 @@
-(function() {
+(function () {
   'use strict';
 
   angular
@@ -173,9 +173,10 @@
         url: '/paymentsConfirm',
         templateUrl: 'client/payments/payments-confirm.template.html',
         controller: 'PaymentConfirmCtrl',
-        params: { data:null },
-        data:
-        {
+        params: {
+          data: null
+        },
+        data: {
           pageId: 'PaymentsConfirm',
           showNavBar: true,
           showMenu: false
