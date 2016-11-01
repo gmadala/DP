@@ -193,6 +193,11 @@ describe('Controller: WizardFloorCtrl', function() {
       expect(wizardFloor.defaultData.UnitPurchaseDate).toBe(null);
     });
 
+    it('should default pay seller to true, not 1', function() {
+      expect(wizardFloor.defaultData.PaySeller).toEqual(true);
+      expect(wizardFloor.defaultData.PaySeller).not.toEqual(1);
+    });
+
     it('should have flooring valuation feature flag', function() {
       spyOn(mockUser, 'getFeatures').and.returnValue(angular.extend({},
         mockUser.getFeatures(),
