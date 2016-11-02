@@ -96,7 +96,7 @@ describe('Controller ConfirmationCtrl', function () {
     scope.$digest();
   }));
 
-  it('if state params is defined chagne state should not happen', function () {
+  it('if state params is defined change state should not happen', function () {
     expect(stateMock.go).not.toHaveBeenCalled();
   });
 
