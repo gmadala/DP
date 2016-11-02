@@ -1,6 +1,6 @@
 //An example configuration file.
 
-var ScreenShotReporter = require('protractor-screenshot-reporter'),
+var HtmlScreenshotReporter = require('protractor-jasmine2-screenshot-reporter'),
   jasmineReporters = require('jasmine-reporters');
 
 
@@ -38,8 +38,7 @@ exports.config = {
   untrackOutstandingTimeouts: false,
 
   //Framework selection
-  framework: 'jasmine',
-
+  framework: 'jasmine2',
   onPrepare: function () {
     require('jasmine-reporters');
     require('protractor-linkuisref-locator')(protractor);
@@ -51,12 +50,41 @@ exports.config = {
     }));
 
 
-    jasmine.getEnv().addReporter(new ScreenShotReporter({
-      baseDirectory: 'target/screenshots',
-      takeScreenShotsOnlyForFailedSpecs: true
-    }));
+    jasmine.getEnv().addReporter(
+      new HtmlScreenshotReporter({
+        dest: 'target/screenshots',
+        showSummary: true,
+        ignoreSkippedSpecs: true,
+        preserveDirectory: false,
+        captureOnlyFailedSpecs: true,
+        reportOnlyFailedSpecs: true,
+        showConfiguration: true,
+        pathBuilder: function (currentSpec) {
+          return currentSpec.fullName;
+        },
+        filename: new Date().toISOString().replace(/T/, '-').replace(/[:\\]/g, '').replace(/\..+/, '') + '-test-report.html'
+      }))
+    ;
+
+
+    var SpecReporter = require('jasmine-spec-reporter');
+    jasmine.getEnv().addReporter(new SpecReporter({
+        displayStacktrace: true,
+        colors: {
+          success: 'green',
+          failure: 'red',
+          pending: 'yellow'
+        },
+        prefixes: {
+          success: 'Pass - ',
+          failure: 'Fail - ',
+          pending: 'Pending - '
+        }
+      })
+    );
 
   },
+
   // Options to be passed to Jasmine.
   jasmineNodeOpts: {
     isVerbose: true,
