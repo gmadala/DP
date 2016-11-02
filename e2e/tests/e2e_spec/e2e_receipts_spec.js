@@ -4,7 +4,7 @@ var loginObjects = require('../../framework/e2e_login_objects.js');
 var helper = require('../../framework/e2e_helper_functions.js');
 var login = require('../../framework/e2e_login.js');
 var receipts = require('../../framework/e2e_receipts_objects.js');
-var execSettings = require('../../framework/e2e_execSettings.js');
+//var execSettings = require('../../framework/e2e_execSettings.js');
 
 var loginObjects = new loginObjects.loginObjects();
 var receipts = new receipts.receipts();
@@ -22,7 +22,7 @@ describe('\n Receipts Page', function () {
     loginObjects.doGoodLogin();
     helper.goToReceipts();
     browser.sleep(browser.params.delay);
-    expect(browser.getCurrentUrl()).toEqual(execSettings.receiptsPage());
+    expect(browser.getCurrentUrl()).toEqual(helper.goToReceipts());
     helper.popOver();
   });
 
@@ -52,16 +52,16 @@ describe('\n Receipts Page', function () {
   it("4. Receipts - Receipts Search ", function () {
     receipts.setVIN();
     receipts.doFloorPlanSearch();
-    expect(browser.getCurrentUrl()).toEqual(execSettings.receiptsPage());
+    expect(browser.getCurrentUrl()).toEqual(helper.goToReceipts());
     receipts.doPaymentMethod();
-    expect(browser.getCurrentUrl()).toEqual(execSettings.receiptsPage());
+    expect(browser.getCurrentUrl()).toEqual(helper.goToReceipts());
     receipts.doDatesSearch();
-    expect(browser.getCurrentUrl()).toEqual(execSettings.receiptsPage());
+    expect(browser.getCurrentUrl()).toEqual(helper.goToReceipts());
   });
 
   it("5. Receipts - Logout", function () {
     login.logout();
-    expect(browser.getCurrentUrl()).toEqual(execSettings.loginPage());
+    expect(browser.getCurrentUrl()).toEqual(helper.goToLogin());
   });
 
 });

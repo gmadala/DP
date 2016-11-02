@@ -6,7 +6,6 @@
  * @description Helper file for all reusable functions
  * */
 
-var execSettings = require('./e2e_execSettings.js');
 var fs = require('fs');
 var EC = protractor.ExpectedConditions;
 
@@ -22,8 +21,9 @@ function Helper() {
      *
      * @returns {none}
      */
-    browser.get(execSettings.loginPage());
+    browser.get(browser.baseUrl + 'login');
     browser.sleep(browser.params.longDelay);
+    return browser.baseUrl + 'login'
   };
 
   this.goToHome = function () {
@@ -35,8 +35,37 @@ function Helper() {
      *
      * @returns {none}
      */
-    browser.get(execSettings.homePage());
+    browser.get(browser.baseUrl + 'home');
     browser.sleep(browser.params.longDelay);
+    return browser.baseUrl + 'home';
+  };
+
+  this.goToAuction = function () {
+    /**
+     * @name goToAuction
+     * @memberof helper
+     * @author Bobby Washington
+     * @description This function navigates to the auction home page
+     *
+     * @returns {baseUrl + act/home}
+     */
+    browser.get(browser.baseUrl + 'act/home');
+    browser.sleep(browser.params.longDelay);
+    return browser.baseUrl + 'act/home';
+  };
+
+  this.goToForgot = function () {
+    /**
+     * @name goToForgot
+     * @memberof helper
+     * @author Bobby Washington
+     * @description This function navigates to the forgot page
+     *
+     * @returns {baseUrl + login/recover}
+     */
+    browser.get(browser.baseUrl + 'login/recover');
+    browser.sleep(browser.params.longDelay);
+    return browser.baseUrl + 'login/recover';
   };
 
   this.goToResources = function () {
@@ -48,8 +77,9 @@ function Helper() {
      *
      * @returns {none}
      */
-    browser.get(execSettings.resourcesPage());
+    browser.get(browser.baseUrl + 'documents');
     browser.sleep(browser.params.longDelay);
+    return browser.baseUrl + 'documents';
   };
 
   this.goToPromos = function () {
@@ -61,8 +91,9 @@ function Helper() {
      *
      * @returns {none}
      */
-    browser.get(execSettings.promosPage());
+    browser.get(browser.baseUrl + 'promos');
     browser.sleep(browser.params.longDelay);
+    return browser.baseUrl + 'promos';
   };
 
   this.goToReceipts = function () {
@@ -74,8 +105,23 @@ function Helper() {
      *
      * @returns {none}
      */
-    browser.get(execSettings.receiptsPage());
+    browser.get(browser.baseUrl + 'receipts');
     browser.sleep(browser.params.longDelay);
+    return browser.baseUrl + 'receipts';
+  };
+
+  this.goToProfile = function () {
+    /**
+     * @name goToProfile
+     * @memberof helper
+     * @author Bobby Washington
+     * @description This function navigates to the profile page
+     *
+     * @returns {none}
+     */
+    browser.get(browser.baseUrl + 'profile_settings');
+    browser.sleep(browser.params.longDelay);
+    return browser.baseUrl + 'profile_settings';
   };
 
   //Generic functions

@@ -5,7 +5,6 @@ var login = require('../../framework/e2e_login.js');
 var modalObjects = require('../../framework/e2e_modal_objects.js');
 var dashboard = require('../../framework/e2e_dashboard_objects.js');
 var creditIncrease = require('../../framework/e2e_credit_increase_requ_objects.js');
-var execSettings = require('../../framework/e2e_execSettings.js');
 var increaseAmount = 1000;
 
 var dashboard = new dashboard.dashboardObjects();
@@ -22,10 +21,12 @@ describe('\n Dashboard Page', function () {
 
   it("1. Dashboard - Login as 62434AM ", function () {
     helper.goToLogin();
-    expect(browser.getCurrentUrl()).toEqual(execSettings.loginPage());
+    console.log('Return value is ' + helper.goToLogin());
+    expect(browser.getCurrentUrl()).toEqual(helper.goToLogin());
     browser.sleep(browser.params.mediumDelay);
     login.login2(browser.params.userName, browser.params.password);
-    expect(browser.getCurrentUrl()).toEqual(execSettings.homePage());
+    console.log('Return value is ' + helper.goToHome());
+    expect(browser.getCurrentUrl()).toEqual(helper.goToHome());
 
   });
 
@@ -39,7 +40,7 @@ describe('\n Dashboard Page', function () {
     expect(modalObjects.getTextHeader()).toEqual("Request a Credit Increase");
     expect(modalObjects.getTextBody()).toEqual("Your request has been submitted. Credit requests typically take 3-5 business days to process. You will be notified as soon as your request has been processed.");
     modalObjects.doOKBtn();
-    expect(browser.getCurrentUrl()).toEqual(execSettings.homePage());
+    expect(browser.getCurrentUrl()).toEqual(helper.goToHome());
   });
 
   it("3. Dashboard - Request a Permanent Credit Increase", function () {
@@ -52,17 +53,17 @@ describe('\n Dashboard Page', function () {
     expect(modalObjects.getTextHeader()).toEqual("Request a Credit Increase");
     expect(modalObjects.getTextBody()).toEqual("Your request has been submitted. Credit requests typically take 3-5 business days to process. You will be notified as soon as your request has been processed.");
     modalObjects.doOKBtn();
-    expect(browser.getCurrentUrl()).toEqual(execSettings.homePage());
+    expect(browser.getCurrentUrl()).toEqual(helper.goToHome());
   });
 
   it("4. Dashboard - Navigating to Receipts Page", function () {
     //Click Receipts link
     dashboard.doReceipts();
-    expect(browser.getCurrentUrl()).toEqual(execSettings.receiptsPage());
+    expect(browser.getCurrentUrl()).toEqual(helper.goToReceipts());
   });
 
   it("5. Dashboard - Logout", function () {
     login.logout();
-    expect(browser.getCurrentUrl()).toEqual(execSettings.loginPage());
+    expect(browser.getCurrentUrl()).toEqual(helper.goToLogin());
   });
 });

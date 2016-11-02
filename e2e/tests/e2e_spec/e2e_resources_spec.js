@@ -3,7 +3,6 @@
 var loginObjects = require('../../framework/e2e_login_objects.js');
 var resources = require('../../framework/e2e_resources_objects.js');
 var login = require('../../framework/e2e_login.js');
-var execSettings = require('../../framework/e2e_execSettings.js');
 var helper = require('../../framework/e2e_helper_functions.js');
 
 var loginObjects = new loginObjects.loginObjects();
@@ -22,7 +21,7 @@ describe('\n Resources Page', function () {
     loginObjects.doGoodLogin();
     helper.goToResources();
     browser.sleep(browser.params.shortDelay);
-    expect(browser.getCurrentUrl()).toEqual(execSettings.resourcesPage());
+    expect(browser.getCurrentUrl()).toEqual(helper.goToResources());
   });
 
   it("2. Resources - Validating the Rates and Fees link", function () {
@@ -183,6 +182,6 @@ describe('\n Resources Page', function () {
   it("13. Resources - Logout", function () {
     browser.sleep(browser.params.shortDelay);
     login.logout();
-    expect(browser.getCurrentUrl()).toEqual(execSettings.loginPage());
+    expect(browser.getCurrentUrl()).toEqual(helper.goToLogin());
   });
 });
