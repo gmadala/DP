@@ -108,7 +108,11 @@
       VINSOLUTIONS_INDEX: 'Vin Solutions Partner Link',
 
       //FedEx
-      WAYBILL_PRINTED: 'FedEx Waybill Generated'
+      WAYBILL_PRINTED: 'FedEx Waybill Generated',
+
+      //Audits
+      OPEN_AUDITS: 'Open Audits Link',
+      VIEW_OPEN_AUDITS: 'View Open Audits'
 
     });
 })();
