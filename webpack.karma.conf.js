@@ -21,9 +21,6 @@ webpackConfig.devtool = 'inline-source-map',
 
 module.exports = function( config ) {
   config.set({
-    browsers: [
-      'PhantomJS', 'Chrome', 'IE'
-    ],
     frameworks: [
       'mocha', 'sinon-chai'
     ],

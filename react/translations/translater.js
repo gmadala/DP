@@ -28,10 +28,10 @@ export default class Translater {
   }
 
   _saveUntranslated( untranslated, filePath, fromType, toType ) {
-    console.log( '' );
     const str = untranslated.map( x => `${ x.string } : ` ).join( '\n' );
 
     return write( filePath, str ).then(( ) => {
+      console.log( '' );
       console.log( `${ fromType } to ${ toType }: ${ untranslated.length } new translation(s) needed` );
       console.log( '' );
       return 'success';
