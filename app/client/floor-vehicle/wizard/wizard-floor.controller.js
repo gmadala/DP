@@ -43,10 +43,6 @@
     var vm = this;
     var isDealer = User.isDealer();
 
-    // init a special version of today's date for our datepicker which only works right with dates @ midnight
-    var today = new Date();
-    today = moment([today.getFullYear(), today.getMonth(), today.getDate()]).toDate();
-
     vm.counter = 1;
     vm.validForm = true;
     vm.data = null;
@@ -136,7 +132,7 @@
       FloorplanSourceId: User.isDealer() ? 6 : 7, // 6 for dealer in web app, 7 for auction user
       BankAccountId: null, // BankAccount object locally, flatten to string for API tx
       LineOfCreditId: null, // LineOfCredit object locally, flatten to string for API tx
-      PaySeller: 1, // Boolean, default is false if user is dealer and buyer payment is possible, otherwise true
+      PaySeller: true, // Boolean, default is false if user is dealer and buyer payment is possible, otherwise true
       PhysicalInventoryAddressId: null, // Location object locally, flatten to string for API tx
       SaleTradeIn: false, // Boolean, default is no (only dealers that can be paid directly may change this to true)
       BusinessId: null, // business search result object locally, flatten to string for API tx
@@ -144,7 +140,7 @@
       UnitMake: null, // string
       UnitMileage: null, // string
       UnitModel: null, // string
-      UnitPurchaseDate: today, // Date locally, format to string for API transmission, default is today
+      UnitPurchaseDate: null, // Date locally, format to string for API transmission, default is today
       UnitPurchasePrice: null, // string
       UnitStyle: null, // string
       UnitVin: null, // string
