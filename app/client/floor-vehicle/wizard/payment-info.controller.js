@@ -8,7 +8,7 @@
   PaymentInfoCtrl.$inject = [
     '$scope',
     'User',
-    'gettextCatalog',
+    'gettextCatalog'
   ];
 
   function PaymentInfoCtrl($scope) {
