@@ -5,7 +5,7 @@
     .module('nextgearWebApp')
     .directive('nxgStarRating', nxgStarRating);
 
-  nxgStarRating.$inject = ['$compile'];
+  nxgStarRating.$inject = [];
 
   function nxgStarRating() {
 
