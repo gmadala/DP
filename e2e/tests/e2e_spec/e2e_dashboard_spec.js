@@ -21,7 +21,6 @@ describe('\n Dashboard Page', function () {
 
   it("1. Dashboard - Login as 62434AM ", function () {
     helper.goToLogin();
-    console.log('Return value is ' + helper.goToLogin());
     expect(browser.getCurrentUrl()).toEqual(helper.goToLogin());
     browser.sleep(browser.params.mediumDelay);
     login.login2(browser.params.userName, browser.params.password);

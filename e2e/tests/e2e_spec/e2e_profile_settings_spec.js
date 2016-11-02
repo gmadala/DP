@@ -3,7 +3,6 @@
 var helper = require('../../framework/e2e_helper_functions.js');
 var login = require('../../framework/e2e_login.js');
 var profileSettings = require('../../framework/e2e_profile_settings_objects.js');
-//var execSettings = require('../../framework/e2e_execSettings.js');
 
 var helper = new helper.helper();
 var profileSettings = new profileSettings.profileSettingsObjects();

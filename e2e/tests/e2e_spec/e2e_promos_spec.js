@@ -3,7 +3,6 @@
 var loginObjects = require('../../framework/e2e_login_objects.js');
 var promos = require('../../framework/e2e_promos_objects.js');
 var login = require('../../framework/e2e_login.js');
-//var execSettings = require('../../framework/e2e_execSettings.js');
 var helper = require('../../framework/e2e_helper_functions.js');
 
 var loginObjects = new loginObjects.loginObjects();
