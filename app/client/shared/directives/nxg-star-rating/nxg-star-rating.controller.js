@@ -18,15 +18,15 @@
 
     $scope._rating = $scope.ratingValue;
 
-    $scope.isolatedClick = function (param) {
-      $scope.ratingValue = param;
-      $scope._rating = param;
+    $scope.isolatedClick = function (starIndex) {
+      $scope.ratingValue = starIndex;
+      $scope._rating = starIndex;
       $scope.hoverValue = 0;
     };
 
-    $scope.isolatedMouseHover = function (param) {
+    $scope.isolatedMouseHover = function (starIndex) {
       $scope._rating = 0;
-      $scope.hoverValue = param;
+      $scope.hoverValue = starIndex;
     };
 
     $scope.isolatedMouseLeave = function () {
