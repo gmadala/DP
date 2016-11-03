@@ -32,10 +32,6 @@ module.exports = {
     },
     "auctionDocsList": {
       "sellerGuide": "Instrucciones para vendedores"
-    },
-    "test": {
-      "test": "test_es",
-      "test2": "test2"
     }
   }
 }

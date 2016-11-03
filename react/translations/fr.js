@@ -6,7 +6,7 @@ module.exports = {
     },
     "resourceDocs": {
       "collateralProgram": "Programme de protection collatérale",
-      "documents": "test_fr",
+      "documents": "Documents",
       "ngcDocuments": "Documents NextGear Capital"
     },
     "mobileApps": {
@@ -32,10 +32,6 @@ module.exports = {
     },
     "auctionDocsList": {
       "sellerGuide": "Instructions pour les vendeurs"
-    },
-    "test": {
-      "test": "test_fr",
-      "test2": "test2"
     }
   }
 }
