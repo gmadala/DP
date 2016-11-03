@@ -530,7 +530,7 @@ module.exports = function(grunt) {
         command: 'start iexplore.exe "http://localhost:<%= connect.options.port %>'
       },
       webdriverUpdate: {
-        command: 'node_modules/protractor/bin/webdriver-manager update && node_modules/grunt-protractor-runner/node_modules/protractor/bin/webdriver-manager update'
+        command: 'node_modules/protractor/bin/webdriver-manager update'
       },
       msgmerge: {
         command: function (filename) {
