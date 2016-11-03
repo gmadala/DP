@@ -132,9 +132,12 @@
     "webdriver-manager": "./bin/webdriver-manager"
   },
   "scripts": {
-    "ci-build": "grunt ci-build --target=test",
-    "windows": "grunt server-ie",
-    "webpack": "webpack",
+    "start": "webpack && grunt server",
+    "serve:ie": "webpack && grunt server-ie",
+    "serve:np": "webpack && grunt server-np",
+    "serve:ie-test": "webpack && grunt server-ie --apiBase='https://test.nextgearcapital.com/MobileService/api'",
+    "serve:np-test": "webpack && grunt server-np --apiBase='https://test.nextgearcapital.com/MobileService/api'",
+    "webpack:watch": "webpack --watch",
     "webdriver-update": "webdriver-manager update",
     "translate": "babel-node translate.js",
     "test": "set NODE_ENV=development && karma start webpack.karma.conf.js --browsers PhantomJS",
