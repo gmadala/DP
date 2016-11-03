@@ -425,7 +425,7 @@
         result.floorplanSuccess = floorSuccess;
         result.uploadSuccess = uploadSuccess;
 
-        segmentio.track(metric.FLOORPLAN_REQUEST_RESULT, result);
+        segmentio.track(metric.FLOORPLAN_REQUEST_WIZARD_RESULT, result);
       });
 
       return {

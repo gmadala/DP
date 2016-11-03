@@ -2,10 +2,10 @@
   'use strict';
 
   angular
-    .module('nextgearWebApp')
-    .value('metric', {
+    .module ('nextgearWebApp')
+    .value ('metric', {
       //*****************NEW EVENTS TRACKED*******************
-      LOGIN_SUCCESSFUL: 'Login Successful',
+      // LOGIN_SUCCESSFUL: 'Login Successful',
       SECURITY_QUESTIONS_COMPLETED: 'Security Questions Completed',
 
       //Login Events
@@ -18,6 +18,7 @@
       // Flooring car
       DEALER_SUCCESSFUL_FLOORING_REQUEST_SUBMITTED: 'Dealer - Successful Flooring Request Submitted',
       FLOORPLAN_REQUEST_RESULT: 'Floorplan Request Result',
+      FLOORPLAN_REQUEST_WIZARD_RESULT: 'Floorplan Wizard Request Result',
       FLOORING_EXPERIENCE_RATING: 'Flooring Experiance Rating Submitted',
 
       //Global Events
@@ -112,4 +113,4 @@
       WAYBILL_PRINTED: 'FedEx Waybill Generated'
 
     });
-})();
+}) ();

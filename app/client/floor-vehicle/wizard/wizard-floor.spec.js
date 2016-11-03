@@ -1,6 +1,6 @@
 'use strict';
 
-describe('Controller: WizardFloorCtrl', function() {
+describe('Controller: WizardFloorCtrl', function () {
   beforeEach(module('nextgearWebApp', 'client/login/login.template.html', 'client/shared/modals/floor-car-message/floor-car-message.template.html'));
 
   var
@@ -19,17 +19,24 @@ describe('Controller: WizardFloorCtrl', function() {
     mockForm,
     $q,
     $state,
-    $httpBackend;
+    $httpBackend,
+    mockkissMetricsInfo,
+    kissMetricsData,
+    mockSegmentIO,
+    metric
+    ;
 
-  beforeEach(inject(function(_$state_,
-                             _$uibModal_,
-                             _$q_,
-                             _Floorplan_,
-                             _Addresses_,
-                             _Blackbook_,
-                             _$httpBackend_,
-                             $controller,
-                             $rootScope) {
+
+  beforeEach(inject(function (_$state_,
+                              _$uibModal_,
+                              _$q_,
+                              _Floorplan_,
+                              _Addresses_,
+                              _Blackbook_,
+                              _$httpBackend_,
+                              $controller,
+                              $rootScope,
+                              _metric_) {
 
     scope = $rootScope.$new();
     floorplan = _Floorplan_;
@@ -38,6 +45,7 @@ describe('Controller: WizardFloorCtrl', function() {
     $q = _$q_;
     $state = _$state_;
     $httpBackend = _$httpBackend_;
+    metric = _metric_;
 
     $httpBackend.whenPOST('floorplan/upload/asdlfkjpobiwjeklfjsdf')
       .respond({
@@ -48,8 +56,26 @@ describe('Controller: WizardFloorCtrl', function() {
     $httpBackend.whenGET('/info/v1_1/businesshours')
       .respond({});
 
+    kissMetricsData = {
+      comment: "Red Wizard Cast: Summon Floorplan!",
+      floorplanSuccess: true,
+      uploadSuccess: false
+    };
+
+    mockkissMetricsInfo = {
+      getKissMetricInfo: function () {
+        return $q.when(kissMetricsData);
+      }
+    };
+
+    mockSegmentIO = {
+      track: angular.noop
+    };
+
+    spyOn(mockSegmentIO, 'track').and.callThrough();
+
     mockUpload = {
-      upload: function() {
+      upload: function () {
         return $q.when(
           {
             data: {
@@ -58,13 +84,13 @@ describe('Controller: WizardFloorCtrl', function() {
           }
         );
       },
-      rename: function() {
+      rename: function () {
         return;
       }
     };
 
     mockFloorplan = {
-      create: function() {
+      create: function () {
         return $q.when(
           {
             StockNumber: 66,
@@ -75,13 +101,13 @@ describe('Controller: WizardFloorCtrl', function() {
     };
 
     mockUser = {
-      isDealer: function() {
+      isDealer: function () {
         return false;
       },
-      getStatics: function() {
+      getStatics: function () {
         return $q.when({colors: ['red', 'green'], titleLocationOptions: [{DisplayOrder: 1, Id: 1, Name: 'I Have It'}]});
       },
-      getInfo: function() {
+      getInfo: function () {
         return $q.when({
           DefaultDisbursementBankAccountId: 'default-disbursement-id',
           LinesOfCredit: [{
@@ -93,22 +119,22 @@ describe('Controller: WizardFloorCtrl', function() {
           }]
         });
       },
-      canPayBuyer: function() {
+      canPayBuyer: function () {
         return $q.when(false);
       },
-      getPaySellerOptions: function() {
+      getPaySellerOptions: function () {
         return $q.when(false);
       },
-      isUnitedStates: function() {
+      isUnitedStates: function () {
         return true;
       },
-      getFeatures: function() {
+      getFeatures: function () {
         return {uploadDocuments: {enabled: false}, uploadDocumentsAuction: {enabled: false}};
       }
     };
 
     mockDealerSummary = {
-      getDealerSummary: function() {
+      getDealerSummary: function () {
         return $q.when({
           BankAccounts: [{
             'AchBankName': 'Bank Ble Ble',
@@ -128,7 +154,7 @@ describe('Controller: WizardFloorCtrl', function() {
     };
 
     mockAddress = {
-      getActivePhysical: function() {
+      getActivePhysical: function () {
         return [{
           "AddressId": "active-physical-address-id",
           "IsActive": true,
@@ -148,7 +174,7 @@ describe('Controller: WizardFloorCtrl', function() {
       inputMileage: {}
     };
 
-    initController = function() {
+    initController = function () {
       wizardFloor = $controller('WizardFloorCtrl', {
         $scope: scope,
         User: mockUser,
@@ -157,13 +183,15 @@ describe('Controller: WizardFloorCtrl', function() {
         $uibModal: dialog,
         Blackbook: blackbook,
         Addresses: mockAddress,
-        AccountManagement: mockDealerSummary
+        AccountManagement: mockDealerSummary,
+        kissMetricInfo: mockkissMetricsInfo,
+        segmentio: mockSegmentIO
       });
     };
     initController();
   }));
 
-  describe('Initial state of wizard ', function() {
+  describe('Initial state of wizard ', function () {
     it('should attach necessary objects to the scope', inject(function ($rootScope) {
       scope.$digest();
       expect(wizardFloor.options).toBeDefined();
@@ -184,21 +212,21 @@ describe('Controller: WizardFloorCtrl', function() {
       expect(wizardFloor.defaultData).toBeDefined();
     }));
 
-    it('should have 5 pages and initial counter of 1', function() {
+    it('should have 5 pages and initial counter of 1', function () {
       expect(wizardFloor.pageCount).toEqual(5);
       expect(wizardFloor.counter).toEqual(1);
     });
 
-    it('should default purchase date to null', function() {
+    it('should default purchase date to null', function () {
       expect(wizardFloor.defaultData.UnitPurchaseDate).toBe(null);
     });
 
-    it('should default pay seller to true, not 1', function() {
+    it('should default pay seller to true, not 1', function () {
       expect(wizardFloor.defaultData.PaySeller).toEqual(true);
       expect(wizardFloor.defaultData.PaySeller).not.toEqual(1);
     });
 
-    it('should have flooring valuation feature flag', function() {
+    it('should have flooring valuation feature flag', function () {
       spyOn(mockUser, 'getFeatures').and.returnValue(angular.extend({},
         mockUser.getFeatures(),
         {
@@ -210,7 +238,7 @@ describe('Controller: WizardFloorCtrl', function() {
       expect(wizardFloor.flooringValuationFeature).toBe(true);
     });
 
-    it('auction should have wizard feature flag', function() {
+    it('auction should have wizard feature flag', function () {
       expect(wizardFloor.attachDocumentsEnabled).toBe(false);
       spyOn(mockUser, 'isDealer').and.returnValue(false);
       spyOn(mockUser, 'getFeatures').and.returnValue(
@@ -226,7 +254,7 @@ describe('Controller: WizardFloorCtrl', function() {
       expect(wizardFloor.attachDocumentsEnabled).toBe(true);
     });
 
-    it('dealer should have wizard feature flag', function() {
+    it('dealer should have wizard feature flag', function () {
       expect(wizardFloor.attachDocumentsEnabled).toBe(false);
       spyOn(mockUser, 'isDealer').and.returnValue(true);
       spyOn(mockUser, 'getFeatures').and.returnValue(
@@ -242,21 +270,21 @@ describe('Controller: WizardFloorCtrl', function() {
       expect(wizardFloor.attachDocumentsEnabled).toBe(true);
     });
 
-    it('should only have active bank account and sort them', function() {
+    it('should only have active bank account and sort them', function () {
       scope.$digest();
       expect(wizardFloor.options.BankAccounts.length).toBe(2);
       expect(wizardFloor.options.BankAccounts[0].AchBankName).toBe('Bank Bla Bla');
       expect(wizardFloor.options.BankAccounts[1].AchBankName).toBe('Bank Ble Ble');
     });
 
-    it('should default bank account to default disbursement bank account', function() {
+    it('should default bank account to default disbursement bank account', function () {
       scope.$digest();
       // Apparently the BankAccountId is holding the BankAccount object,
       // but we call it BankAccountId ...
       expect(wizardFloor.data.BankAccountId.BankAccountId).toEqual('default-disbursement-id');
     });
 
-    it('should default line of credit to retail for dealer', function() {
+    it('should default line of credit to retail for dealer', function () {
       spyOn(mockUser, 'isDealer').and.returnValue(true);
       initController();
       scope.$digest();
@@ -266,7 +294,7 @@ describe('Controller: WizardFloorCtrl', function() {
       expect(wizardFloor.data.LineOfCreditId.LineOfCreditId).toEqual('retail-loc-id');
     });
 
-    it('should not have line of credit data for non dealer', function() {
+    it('should not have line of credit data for non dealer', function () {
       spyOn(mockUser, 'isDealer').and.returnValue(false);
       initController();
       scope.$digest();
@@ -276,29 +304,29 @@ describe('Controller: WizardFloorCtrl', function() {
       expect(wizardFloor.data.LineOfCreditId).toBe(null);
     });
 
-    it('should use active physical location of the dealer', function() {
+    it('should use active physical location of the dealer', function () {
       spyOn(mockAddress, 'getActivePhysical');
       scope.$digest();
       expect(mockAddress.getActivePhysical).toHaveBeenCalled();
     });
 
-    it('should set can pay buyer option', function() {
+    it('should set can pay buyer option', function () {
       scope.$digest();
       expect(wizardFloor.paySellerOptions).toBe(false);
     });
 
-    it('should get pay seller options', function() {
+    it('should get pay seller options', function () {
       scope.$digest();
       expect(wizardFloor.canPayBuyer).toBe(false);
     });
   });
 
-  describe('Reset function', function() {
-    it('should exist', function() {
+  describe('Reset function', function () {
+    it('should exist', function () {
       expect(typeof wizardFloor.reset).toBe('function');
     });
 
-    it('should reset everything', function() {
+    it('should reset everything', function () {
       scope.$digest();
       spyOn(wizardFloor.optionsHelper, 'applyDefaults');
       spyOn($state, 'go');
@@ -313,8 +341,8 @@ describe('Controller: WizardFloorCtrl', function() {
   // navigation test
 
   // submission test
-  describe('Submit function', function() {
-    beforeEach(function() {
+  describe('Submit function', function () {
+    beforeEach(function () {
       scope.$digest();
 
       wizardFloor.data.files = [{name: 'testFile.pdf'}];
@@ -341,7 +369,7 @@ describe('Controller: WizardFloorCtrl', function() {
 
       spyOn(dialog, 'open').and.returnValue({
         result: {
-          then: function(callback) {
+          then: function (callback) {
             callback(true);
           }
         }
@@ -349,14 +377,15 @@ describe('Controller: WizardFloorCtrl', function() {
 
     });
 
-    it('should exist', function() {
+
+    it('should exist', function () {
       expect(typeof wizardFloor.submit).toBe('function');
     });
 
-    it('should change state to flooringConfirmation if successful', function() {
+    it('should change state to flooringConfirmation if successful', function () {
       spyOn($state, 'go');
 
-      wizardFloor.transitionValidation = function() {
+      wizardFloor.transitionValidation = function () {
         return true;
       };
 
@@ -368,6 +397,23 @@ describe('Controller: WizardFloorCtrl', function() {
         floorplanId: '123-123-123',
         stockNumber: 66
       });
+    });
+
+    fit('Submit Should call SegmentIO and KissMetrics with "FLOORPLAN_REQUEST_WIZARD_RESULT"', function () {
+      wizardFloor.transitionValidation = function () {
+        return true;
+      };
+
+      // spyOn(mockSegmentIO, 'track').and.callThrough();
+      spyOn(mockkissMetricsInfo, 'getKissMetricInfo').and.callThrough();
+
+      wizardFloor.submit();
+      scope.$digest();
+
+      expect(metric).toBeDefined();
+      expect(metric.FLOORPLAN_REQUEST_WIZARD_RESULT).toBeDefined();
+      expect(mockkissMetricsInfo.getKissMetricInfo).toHaveBeenCalled();
+      expect(mockSegmentIO.track).toHaveBeenCalledWith(metric.FLOORPLAN_REQUEST_WIZARD_RESULT, kissMetricsData);
     });
   });
 
