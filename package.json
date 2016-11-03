@@ -42,7 +42,7 @@
     "eslint-plugin-jasmine": "^1.8.1",
     "eslint-plugin-jquery": "^1.0.1",
     "eslint-plugin-jsx-a11y": "^2.2.3",
-    "eslint-plugin-react": "^6.4.1",
+    "eslint-plugin-react": "^6.5.0",
     "frisby": "^0.8.5",
     "fs": "0.0.1-security",
     "grunt": "~0.4.2",
@@ -129,7 +129,8 @@
   "bin": {
     "karma": "./bin/karma",
     "webpack": "./bin/webpack",
-    "webdriver-manager": "./bin/webdriver-manager"
+    "webdriver-manager": "./bin/webdriver-manager",
+    "eslint": "./bin/eslint"
   },
   "scripts": {
     "serve": "webpack && grunt server",
@@ -140,6 +141,7 @@
     "webpack:watch": "webpack --watch",
     "webdriver-update": "webdriver-manager update",
     "translate": "babel-node translate.js",
+    "lint": "eslint",
     "test": "set NODE_ENV=development && karma start webpack.karma.conf.js --browsers PhantomJS",
     "test:ie": "set NODE_ENV=development && karma start webpack.karma.conf.js --browsers IE",
     "test:chrome": "set NODE_ENV=development && karma start webpack.karma.conf.js --browsers Chrome",
