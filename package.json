@@ -146,6 +146,6 @@
     "test:ie": "set NODE_ENV=development && karma start webpack.karma.conf.js --browsers IE",
     "test:chrome": "set NODE_ENV=development && karma start webpack.karma.conf.js --browsers Chrome",
     "test:firefox": "set NODE_ENV=development && karma start webpack.karma.conf.js --browsers Firefox",
-    "test:all": "set NODE_ENV=development && karma start webpack.karma.conf.js --browsers PhantomJS,IE,Chrome,Firefox"
+    "test:all": "set NODE_ENV=development && karma start webpack.karma.conf.js --browsers PhantomJS,IE,Chrome,Firefox" 
   }
 }
