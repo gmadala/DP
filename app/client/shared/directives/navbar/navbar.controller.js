@@ -20,6 +20,7 @@
   ];
 
   function NavBarCtrl( $rootScope, $scope, $state, User, Payments, gettextCatalog, language, kissMetricInfo, $location, $timeout, localStorageService, fedex, nxgConfig ) {
+    var page;
 
     $scope.isCollapsed = true;
     var paymentsSubMenu = [
@@ -131,7 +132,7 @@
         href: '#/act/account_management',
         activeWhen: 'account_management'
       }
-    }
+    };
 
     $scope.initNav = function( ) {
       kissMetricInfo.getKissMetricInfo( ).then( function( result ) {
@@ -141,12 +142,8 @@
       return User.getInfo( ).then( function( info ) {
         $scope.isUnitedStates = User.isUnitedStates( );
         $scope.displayTitleRelease = info.DisplayTitleReleaseProgram;
-        $scope.eventSalesEnabled = User.getFeatures( ).hasOwnProperty( 'eventSales' )
-          ? User.getFeatures( ).eventSales.enabled
-          : true;
-        $scope.auditsEnabled = User.getFeatures( ).hasOwnProperty( 'openAudits' )
-          ? User.getFeatures( ).openAudits.enabled
-          : true;
+        $scope.eventSalesEnabled = User.getFeatures( ).hasOwnProperty( 'eventSales' ) ? User.getFeatures( ).eventSales.enabled : true;
+        $scope.auditsEnabled = User.getFeatures( ).hasOwnProperty( 'openAudits' ) ? User.getFeatures( ).openAudits.enabled : true;
         $scope.fedExWaybillEnabled = fedex.wayBillPrintingEnabled( );
         if ( $scope.isUnitedStates ) {
           floorplansSubMenu.splice(2, 0, {
@@ -184,21 +181,15 @@
             }
           },
           navLinks: function( ) {
-            return User.isDealer( )
-              ? dealerLinks
-              : auctionLinks;
+            return User.isDealer( ) ? dealerLinks : auctionLinks;
           },
           homeLink: function( ) {
-            return User.isDealer( )
-              ? '#/home'
-              : '#/act/home';
+            return User.isDealer( ) ? '#/home' : '#/act/home';
           }
         };
 
         $scope.support = {
-          email: User.isDealer( )
-            ? info.MarketEMail
-            : 'auctionservices@nextgearcapital.com',
+          email: User.isDealer( ) ? info.MarketEMail : 'auctionservices@nextgearcapital.com',
           phone: info.MarketPhoneNumber,
           customerSupportPhone: info.CSCPhoneNumber
         };
@@ -282,7 +273,7 @@
       return false;
     };
 
-    $scope.gotoPageIf = function( link ) {
+    $scope.gotoPageIf = function( ) {
       var desktop = document.getElementsByClassName( 'no-touch' );
       if ( desktop.length > 0 ) {
         $location.path(page.href.substring( 1 ));
@@ -306,8 +297,8 @@
       } else {
         setTimeout( function( ) {
           $scope.navbarClosed = true;
-        }, 5000)
-      };
+        }, 5000);
+      }
     };
 
     $scope.addHover = function( ) {
@@ -343,6 +334,6 @@
           $scope.hideMenuTip = true;
         }
       };
-    })
+    });
   }
 })( );

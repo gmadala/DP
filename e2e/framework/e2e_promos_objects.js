@@ -18,20 +18,16 @@ function Promos() {
   //Doers
   this.doPromos = function () {
     return this.elPromos.click();
-    browser.sleep(browser.params.mediumDelay);
   };
 
   //Getters
   this.getTextTitle = function () {
-    browser.sleep(browser.params.shortDelay);
     return this.elTitle.getText();
   };
   this.getTextPromos = function () {
-    browser.sleep(browser.params.shortDelay);
     return this.elPromos.getText();
   };
   this.getTextHeader = function () {
-    browser.sleep(browser.params.shortDelay);
     return this.elHeader.getText();
   };
 
