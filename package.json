@@ -141,7 +141,7 @@
     "webpack:watch": "webpack --watch",
     "webdriver-update": "webdriver-manager update",
     "translate": "babel-node translate.js",
-    "lint": "eslint",
+    "lint:js": "eslint app/**/*.js --quiet",
     "test": "set NODE_ENV=development && karma start webpack.karma.conf.js --browsers PhantomJS",
     "test:ie": "set NODE_ENV=development && karma start webpack.karma.conf.js --browsers IE",
     "test:chrome": "set NODE_ENV=development && karma start webpack.karma.conf.js --browsers Chrome",
