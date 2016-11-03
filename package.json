@@ -132,7 +132,7 @@
     "webdriver-manager": "./bin/webdriver-manager"
   },
   "scripts": {
-    "start": "webpack && grunt server",
+    "serve": "webpack && grunt server",
     "serve:ie": "webpack && grunt server-ie",
     "serve:np": "webpack && grunt server-np",
     "serve:ie-test": "webpack && grunt server-ie --apiBase='https://test.nextgearcapital.com/MobileService/api'",
