@@ -10,12 +10,20 @@
   function ConfirmTitleReleaseCheckoutCtrl($scope, TitleReleases, Floorplan, $state, $stateParams) {
 
     $scope.backToTitleReleases = function () {
+      TitleReleases.clearQueue();
       $state.transitionTo('titlereleases');
     };
 
-    var response = {};
-    if ($stateParams.data) {
-      response = $stateParams.data;
+    $scope.hasData = function () {
+      if ($stateParams.data) {
+        return true;
+      } else {
+        $scope.backToTitleReleases();
+      }
+    };
+
+    if ($scope.hasData()) {
+      var response = $stateParams.data;
       $scope.counts = {
         total: response.TitleReleaseResults.length,
         failed: _.reduce(response.TitleReleaseResults, function (sum, item) {
@@ -37,11 +45,6 @@
         }
       });
       TitleReleases.clearQueue();
-    } else {
-      // If no confirm data go back to title releases
-      TitleReleases.clearQueue();
-      $scope.backToTitleReleases();
     }
-
   }
 })();

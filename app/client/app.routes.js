@@ -224,7 +224,7 @@
       })
       .state('titleReleaseConfirm', {
         url: '/titleReleaseConfirm',
-        templateUrl: 'client/title-releases/title-releases-checkout/confirm-title-release/confirm-title-request.template.html',
+        templateUrl: 'client/title-releases/title-releases-checkout/confirm-title-release/confirm-title-release.template.html',
         controller: 'ConfirmTitleReleaseCheckoutCtrl',
         params: {data: null},
         data: {
