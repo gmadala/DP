@@ -20,8 +20,6 @@
   ];
 
   function NavBarCtrl( $rootScope, $scope, $state, User, Payments, gettextCatalog, language, kissMetricInfo, $location, $timeout, localStorageService, fedex, nxgConfig ) {
-    var page;
-
     $scope.isCollapsed = true;
     var paymentsSubMenu = [
         {
@@ -273,7 +271,7 @@
       return false;
     };
 
-    $scope.gotoPageIf = function( ) {
+    $scope.gotoPageIf = function(page) {
       var desktop = document.getElementsByClassName( 'no-touch' );
       if ( desktop.length > 0 ) {
         $location.path(page.href.substring( 1 ));
