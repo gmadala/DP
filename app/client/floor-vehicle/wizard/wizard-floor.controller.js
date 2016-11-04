@@ -70,7 +70,16 @@
       vm.options = angular.extend({}, result[0], result[1]);
 
       var activeBankAccounts = _.filter(result[2].BankAccounts, function (bankAccount) {
-        return bankAccount.IsActive === true;
+        
+        var retVal = (bankAccount.IsActive === true) ;
+
+        if (User.isDealer()) {
+          if (! bankAccount.AchBankName) {
+            retVal = false;
+          }
+        }
+
+        return retVal;
       });
 
       vm.options.BankAccounts = _.sortBy(activeBankAccounts, 'AchBankName');

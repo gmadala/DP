@@ -68,13 +68,20 @@ describe('Controller: FloorCarCtrl', function () {
         return $q.when({
           BankAccounts: [{
             "BankAccountId": "66e9e774-3dcc-4852-801d-b6e91d161a13",
+            "AchBankName": "achb1",
             "IsActive": true
           }, {
             "BankAccountId": "76e9e774-3dcc-4852-801d-b6e91d161a13",
+            "AchBankName": "achb2",
             "IsActive": true
           }, {
             "BankAccountId": "86e9e774-3dcc-4852-801d-b6e91d161a13",
+            "AchBankName": "achb3",
             "IsActive": false
+          }, {
+            "BankAccountId": "86e9e774-3dcc-4852-801d-b6e91d161a13",
+            "AchBankName": null,
+            "IsActive": true
           }]
         });
       }
@@ -114,12 +121,6 @@ describe('Controller: FloorCarCtrl', function () {
       expect(scope.paySellerOptions).toBe(myPaySellerOptions);
       expect(scope.canPayBuyer).toBe(myCanPayBuyer);
       expect(scope.optionsHelper).toBeDefined();
-
-      // should only display active bank account
-      scope.options.BankAccounts.forEach(function (bankAccount) {
-        expect(bankAccount.IsActive).toBe(true);
-      });
-      expect(scope.options.BankAccounts.length).toBe(2);
 
       expect(scope.defaultData).toBeDefined();
       expect(scope.vinDetailsErrorFlag).toBe(false);
@@ -257,6 +258,18 @@ describe('Controller: FloorCarCtrl', function () {
 
     registerCommonTests();
 
+    it('Additional Bank Account checks', function() {
+      initController();
+      scope.$apply();
+      // should only display active bank account
+      scope.options.BankAccounts.forEach(function (bankAccount) {
+        expect(bankAccount.IsActive).toBe(true);
+      });
+
+      expect(scope.options.BankAccounts.length).toBe(2);
+    });
+
+
     it('Canada', function() {
       spyOn(userMock, 'isUnitedStates').and.returnValue(false);
       initController();
@@ -281,6 +294,18 @@ describe('Controller: FloorCarCtrl', function () {
     });
 
     registerCommonTests();
+
+
+    it('Additional Bank Account checks', function() {
+      initController();
+      scope.$apply();
+      // should only display active bank account
+      scope.options.BankAccounts.forEach(function (bankAccount) {
+        expect(bankAccount.IsActive).toBe(true);
+      });
+
+      expect(scope.options.BankAccounts.length).toBe(3);
+    });
 
     it('should populate the inventory address options based on the selected business', function() {
       var biz1 = {
