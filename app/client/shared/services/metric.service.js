@@ -19,8 +19,8 @@
       DEALER_SUCCESSFUL_FLOORING_REQUEST_SUBMITTED: 'Dealer - Successful Flooring Request Submitted',
       FLOORPLAN_REQUEST_RESULT: 'Floorplan Request Result',
       FLOORPLAN_REQUEST_WIZARD_RESULT: 'Floorplan Wizard Request Result',
-      FLOORING_EXPERIENCE_RATING: 'Flooring Experiance Rating Submitted',
-
+      FLOORING_EXPERIENCE_RATING: 'Flooring Experience Rating Submitted',
+      FLOORPLAN_PURCHASE_AMOUNT_OVERBOOKING: 'Floorplan Wizard Purchase Amount Over Booking',
       //Global Events
       CLICK_CHAT_NOW_LINK: 'Click Chat Now Link',//x
 
