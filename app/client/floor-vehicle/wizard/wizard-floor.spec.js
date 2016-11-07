@@ -427,7 +427,7 @@ describe ('Controller: WizardFloorCtrl', function () {
       expect (mockSegmentIO.track).toHaveBeenCalledWith (metric.FLOORPLAN_PURCHASE_AMOUNT_OVERBOOKING, kissMetricsData);
     });
 
-    fit ('SegmentIO and Kissmetrics should NOT be called for FLOORPLAN_PURCHASE_AMOUNT_OVERBOOKING', function () {
+    it ('SegmentIO and Kissmetrics should NOT be called for FLOORPLAN_PURCHASE_AMOUNT_OVERBOOKING', function () {
       wizardFloor.transitionValidation = function () {
         return true;
       };
