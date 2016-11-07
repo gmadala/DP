@@ -1,7 +1,6 @@
 /* eslint-disable */
 import fs from 'fs';
 import path from 'path';
-import write from 'fs-writefile-promise';
 
 export default class Translater {
   constructor( outputPath, resourcesPath ) {
@@ -17,25 +16,38 @@ export default class Translater {
     const mergedJson = this._mergeObjs( fromObj, toObj );
     const translateResult = this._translateStrings( fromObj, mergedJson, translated );
 
-    return this._saveTranslated( translateResult.json, toType ).then(this._saveUntranslated( translateResult.strings, filePath, fromType, toType ));
+    return this._saveTranslated( translateResult.json, toType ) && this._saveUntranslated( translateResult.strings, filePath, fromType, toType );
   }
 
   _saveTranslated( json, toType ) {
     const str = `module.exports = ${ JSON.stringify( json ) }`;
     const filePath = path.resolve( this.resourcesPath, `${ toType }.js` );
 
-    return write( filePath, str ).then( ( ) => 'success' ).catch( err => err );
+    try {
+      fs.writeFileSync(filePath, str);
+
+      return true;
+    } catch(err) {
+      console.log(err);
+      return false;
+    }
   }
 
   _saveUntranslated( untranslated, filePath, fromType, toType ) {
     const str = untranslated.map( x => `${ x.string } : ` ).join( '\n' );
 
-    return write( filePath, str ).then(( ) => {
+    try {
+      fs.writeFileSync(filePath, str);
+
       console.log( '' );
       console.log( `${ fromType } to ${ toType }: ${ untranslated.length } new translation(s) needed` );
       console.log( '' );
-      return 'success';
-    }).catch( err => err );
+
+      return true;
+    } catch(err) {
+      console.log(err);
+      return false;
+    }
   }
 
   _getTranslated( filePath ) {

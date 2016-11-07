@@ -9,6 +9,7 @@
     "babel-polyfill": "^6.16.0",
     "chai": "^3.5.0",
     "chai-enzyme": "^0.5.2",
+    "chai-as-promised": "^6.0.0",
     "counterpart": "^0.17.5",
     "enzyme": "^2.5.1",
     "fs-writefile-promise": "^1.0.3",
@@ -18,7 +19,9 @@
     "react-dom": "^15.3.2",
     "react-interpolate-component": "^0.10.0",
     "react-router": "^2.8.1",
-    "react-translate-component": "^0.13.1"
+    "react-translate-component": "^0.13.1",
+    "sinon": "^1.17.6",
+    "sinon-chai": "^2.8.0"
   },
   "devDependencies": {
     "babel-cli": "^6.16.0",
@@ -45,6 +48,7 @@
     "eslint-plugin-react": "^6.5.0",
     "frisby": "^0.8.5",
     "fs": "0.0.1-security",
+    "fs-promise": "^0.5.0",
     "grunt": "~0.4.2",
     "grunt-angular-gettext": "~2.1.3",
     "grunt-autoprefixer": "~3.0.3",
@@ -92,6 +96,7 @@
     "karma": "^1.3.0",
     "karma-babel-preprocessor": "^6.0.1",
     "karma-browserify": "^5.1.0",
+    "karma-chai": "^0.1.0",
     "karma-chrome-launcher": "~0.2.0",
     "karma-coffee-preprocessor": "~0.3.0",
     "karma-coverage": "^1.1.1",
@@ -107,6 +112,7 @@
     "karma-ng-scenario": "~0.1.0",
     "karma-phantomjs-launcher": "^1.0.2",
     "karma-script-launcher": "~0.1.0",
+    "karma-sinon": "^1.0.5",
     "karma-sinon-chai": "^1.2.4",
     "karma-sourcemap-loader": "^0.3.7",
     "karma-webpack": "^1.8.0",
@@ -118,8 +124,6 @@
     "phantomjs-prebuilt": "^2.1.13",
     "protractor": "~4.0.0",
     "serve-static": "1.10.0",
-    "sinon": "^1.17.6",
-    "sinon-chai": "^2.8.0",
     "uglifyify": "^3.0.4",
     "webpack": "^1.13.2"
   },
@@ -139,6 +143,7 @@
     "serve:ie-test": "webpack && grunt server-ie --apiBase='https://test.nextgearcapital.com/MobileService/api'",
     "serve:np-test": "webpack && grunt server-np --apiBase='https://test.nextgearcapital.com/MobileService/api'",
     "webpack:watch": "webpack --watch",
+    "webpack": "webpack",
     "webdriver-update": "webdriver-manager update",
     "translate": "babel-node translate.js",
     "lint:js": "eslint app/**/*.js --quiet",
@@ -146,6 +151,6 @@
     "test:ie": "set NODE_ENV=development && karma start webpack.karma.conf.js --browsers IE",
     "test:chrome": "set NODE_ENV=development && karma start webpack.karma.conf.js --browsers Chrome",
     "test:firefox": "set NODE_ENV=development && karma start webpack.karma.conf.js --browsers Firefox",
-    "test:all": "set NODE_ENV=development && karma start webpack.karma.conf.js --browsers PhantomJS,IE,Chrome,Firefox" 
+    "test:all": "set NODE_ENV=development && karma start webpack.karma.conf.js --browsers PhantomJS,IE,Chrome,Firefox"
   }
 }
