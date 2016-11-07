@@ -36,7 +36,6 @@
     gettextCatalog,
     capitalizeFilter,
     language
-    // metric
   ) {
 
     var uibModal = $uibModal;

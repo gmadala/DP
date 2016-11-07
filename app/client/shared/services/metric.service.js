@@ -5,7 +5,6 @@
     .module ('nextgearWebApp')
     .value ('metric', {
       //*****************NEW EVENTS TRACKED*******************
-      // LOGIN_SUCCESSFUL: 'Login Successful',
       SECURITY_QUESTIONS_COMPLETED: 'Security Questions Completed',
 
       //Login Events
