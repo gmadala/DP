@@ -36,7 +36,7 @@
     "parser": "babel-eslint",
     "rules": {
         "camelcase": 0,
-        "comma-dangle": 0,
+        "comma-dangle": "always-multiline",
         "comma-spacing": 1,
         "consistent-return": 0,
         "curly": 0,
