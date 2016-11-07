@@ -3,10 +3,10 @@ import { shallow } from 'enzyme';
 import ResourceVideos from '../../app/resources/ResourceVideos';
 import Video from '../../app/shared/Video';
 
-describe( 'ResourceVideos', () => {
-  it( 'renders two videos', () => {
-    const wrapper = shallow( < ResourceVideos / > );
+describe('ResourceVideos', ( ) => {
+    it('renders two videos', ( ) => {
+        const wrapper = shallow( < ResourceVideos / > );
 
-    expect( wrapper.find( Video ) ).to.have.length( 2 );
-  } );
-} );
+        expect(wrapper.find( Video )).to.have.length( 2 );
+    });
+});

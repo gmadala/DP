@@ -42,7 +42,7 @@
         "curly": 0,
         "eol-last": 1,
         "eqeqeq": 1,
-        "indent": [2, 2],
+        "indent": [2, 4],
         "init-declarations": 2,
         "key-spacing": 0,
         "max-len": [2, 200],
@@ -96,6 +96,7 @@
         "array-bracket-spacing": 0,
         "object-curly-spacing": 0,
         "template-curly-spacing": 0,
+        "operator-linebreak": 0,
 
         "react/jsx-uses-vars": 1,
         "react/prop-types": [1, { "ignore": ["children"] }],
@@ -106,6 +107,7 @@
         "react/jsx-filename-extension": 0,
         "react/require-extension": "off",
         "react/forbid-prop-types": "off",
+        "react/jsx-space-before-closing": 0,
 
         "angular/controller-name": "warn",
         "angular/controller-as": "warn",
