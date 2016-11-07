@@ -70,7 +70,16 @@
       vm.options = angular.extend({}, result[0], result[1]);
 
       var activeBankAccounts = _.filter(result[2].BankAccounts, function (bankAccount) {
-        return bankAccount.IsActive === true;
+        
+        var retVal = (bankAccount.IsActive === true) ;
+
+        if (User.isDealer()) {
+          if (! bankAccount.AchBankName) {
+            retVal = false;
+          }
+        }
+
+        return retVal;
       });
 
       vm.options.BankAccounts = _.sortBy(activeBankAccounts, 'AchBankName');
@@ -241,25 +250,25 @@
 
           break;
         case 2:
-          if (true || vm.formParts.one) {
+          if (vm.formParts.one) {
             $state.go('flooringWizard.sales');
           }
 
           break;
         case 3:
 
-          if (true || (vm.formParts.one && vm.formParts.two)) {
+          if (vm.formParts.one && vm.formParts.two) {
             $state.go('flooringWizard.payment');
           }
 
           break;
         case 4:
-          if (true || vm.formParts.one && vm.formParts.two && vm.formParts.three) {
+          if (vm.formParts.one && vm.formParts.two && vm.formParts.three) {
             $state.go('flooringWizard.document');
           }
           break;
         case 5:
-          if (true || vm.formParts.one && vm.formParts.two && vm.formParts.three && vm.formParts.four) {
+          if (vm.formParts.one && vm.formParts.two && vm.formParts.three && vm.formParts.four) {
             $state.go('flooringWizard.reviewRequest');
           }
 
@@ -336,6 +345,7 @@
       var dialogParams;
 
       vm.floorPlanSubmitting = true;
+
       vm.data.TitleLocationId = vm.options.titleLocationOptions[vm.data.TitleLocationIndex];
 
       Floorplan.create(vm.data).then(
@@ -343,6 +353,8 @@
           /**
            *  floorplan success handler
            **/
+          var resultStockNumber = response.StockNumber;
+          var resultFloorplanId = response.FloorplanId;
           var commentText = '';
 
           if (vm.data.commentAdditionalFinancing && vm.data.commentAdditionalFinancing.length > 0) {
@@ -384,6 +396,11 @@
               $uibModal.open(dialogParams).result.then(function () {
                 vm.floorPlanSubmitting = false;
                 vm.reset();
+
+                $state.go('flooringConfirmation', {
+                  floorplanId: resultFloorplanId,
+                  stockNumber: resultStockNumber
+                });
               });
             }, function () {
               vm.floorPlanSubmitting = false;

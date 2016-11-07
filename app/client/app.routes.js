@@ -1,4 +1,4 @@
-( function() {
+(function() {
   'use strict';
 
   angular
@@ -90,8 +90,24 @@
           showMenu: false,
           isFeature: 'responsiveFloorplanBuyer'
         }
-      } )
-      .state( 'login', {
+      })
+      .state( 'flooringConfirmation', {
+        url: '/flooring-wizard/confirmation',
+        controller: 'FlooringConfirmationCtrl',
+        controllerAs: 'flooringConfirmation',
+        templateUrl: 'client/floor-vehicle/confirmation/confirmation.template.html',
+        params: {
+          floorplanId: null,
+          stockNumber: null
+        },
+        data: {
+          pageId: 'Floorplan',
+          showNavBar: true,
+          showMenu: false,
+          isFeature: 'responsiveFloorplanBuyer'
+        }
+      })
+      .state('login', {
         url: '/login',
         templateUrl: 'client/login/login.template.html',
         controller: 'LoginCtrl',
