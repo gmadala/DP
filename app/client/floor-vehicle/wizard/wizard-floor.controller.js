@@ -74,12 +74,12 @@
       vm.options = angular.extend ({}, result[0], result[1]);
 
 
-      var activeBankAccounts = _.filter(result[2].BankAccounts, function (bankAccount) {
-        
-        var retVal = (bankAccount.IsActive === true) ;
+      var activeBankAccounts = _.filter (result[2].BankAccounts, function (bankAccount) {
 
-        if (User.isDealer()) {
-          if (! bankAccount.AchBankName) {
+        var retVal = (bankAccount.IsActive === true);
+
+        if (User.isDealer ()) {
+          if (!bankAccount.AchBankName) {
             retVal = false;
           }
         }
@@ -371,14 +371,11 @@
 
           //IF projectedFinancedAmount which comes from nxg-value-lookup [aka book value]
           //is greater than the purchased price, send kiss metric
-          console.log (vm.valueLookUp);
-          console.log (vm.data.purchasePrice);
-          console.log (vm.data.AdditionalFinancing);
-          if (vm.data.purchasePrice > vm.valueLookUp.projectedFinancedAmount) {
+          if (vm.data.UnitPurchasePrice > vm.valueLookUp.projectedFinancedAmount) {
             kissMetricInfo.getKissMetricInfo ().then (function (result) {
-              result.purchasePrice = vm.data.purchasePrice;
+              result.unitPurchasePrice = vm.data.UnitPurchasePrice;
               result.bookValue = vm.valueLookUp.projectedFinancedAmount;
-              result.fullAmountRequested = vm.data.AdditionalFinancing === true ? vm.data.AdditionalFinancing : false;
+              result.fullAmountWasRequested = vm.data.AdditionalFinancing === true ? vm.data.AdditionalFinancing : false;
 
               segmentio.track (metric.FLOORPLAN_PURCHASE_AMOUNT_OVERBOOKING, result);
             });
