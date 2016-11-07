@@ -27,7 +27,7 @@ exports.config = {
       }
     },
     shardTestFiles: true,
-    maxInstances: 7
+    maxInstances: 1
   },
 
   //Spec patterns are relative to the current working directly when protractor is called.
