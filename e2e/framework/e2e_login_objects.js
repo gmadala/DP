@@ -25,7 +25,6 @@ function LoginObjects() {
   this.elSpanish = browser.element(by.buttonText("Español"));
   this.elFrench = browser.element(by.buttonText("Français"));
   this.elMNGLogo = browser.element(by.css('div.nxg-logo'));
-
   //Doers
   this.doForgotUsernamePassword = function () {
     this.elForgotUsernamePassword.click();
@@ -86,6 +85,10 @@ function LoginObjects() {
     browser.sleep(browser.params.shortDelay);
     return this.elLogin.getText();
   };
+  this.getTextLogin = function () {
+    browser.sleep(browser.params.shortDelay);
+    return this.elLogin.getText();
+  };
 
   //Setters
   this.setEmail = function (param) {
@@ -111,3 +114,6 @@ function LoginObjects() {
 
 }
 module.exports.loginObjects = LoginObjects;
+
+
+

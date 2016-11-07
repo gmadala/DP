@@ -7,6 +7,7 @@ var HtmlScreenshotReporter = require('protractor-jasmine2-screenshot-reporter'),
 exports.config = {
   seleniumAddress: null,
   baseUrl: 'https://test.nextgearcapital.com/test/#/',
+  //baseUrl: 'http://localhost:9000',
   //Capabilities to be passed to the webdriver instance.
   capabilities: {
     'browserName': 'chrome',
@@ -26,8 +27,8 @@ exports.config = {
         }
       }
     },
-    shardTestFiles: (process.env.maxInstances > 1),
-    maxInstances: process.env.maxInstances
+    shardTestFiles: true,
+    maxInstances: 7
   },
 
   //Spec patterns are relative to the current working directly when protractor is called.
