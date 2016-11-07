@@ -1,0 +1,5 @@
+<div class="star-container" style="font-size: 3em; margin-bottom: 20px; color: #545454;">
+  <span ng-repeat="idx in maxRatings track by $index">
+    <span class="glyphicon" style="cursor: pointer;" ng-class="{ 'glyphicon-star-empty': ((hoverValue + _rating) <= $index), 'glyphicon-star': !((hoverValue + _rating) <= $index) }" ng-click="isolatedClick($index + 1)" ng-mouseenter="isolatedMouseHover($index + 1)" ng-mouseleave="isolatedMouseLeave($index + 1)"></span>
+  </span>
+</div>
