@@ -15,10 +15,9 @@ describe('\n Profile Settings Page', function () {
 
   it("1. Profile Settings - Login as 62434AM ", function () {
     helper.goToLogin();
-    expect(browser.getCurrentUrl()).toEqual(helper.goToLogin());
-    browser.sleep(browser.params.mediumDelay);
+    expect(browser.getCurrentUrl()).toEqual(helper.loginPage());
     login.login2(browser.params.userName, browser.params.password);
-    expect(browser.getCurrentUrl()).toEqual(helper.goToHome());
+    expect(browser.getCurrentUrl()).toEqual(helper.homePage());
     //Closing popover
     helper.popOver();
   });
@@ -26,7 +25,7 @@ describe('\n Profile Settings Page', function () {
   it("2. Profile Settings - Navigating to Profile Settings page", function () {
     login.clickMyAccount();
     profileSettings.doProfileSettings();
-    expect(browser.getCurrentUrl()).toEqual(helper.goToProfile());
+    expect(browser.getCurrentUrl()).toEqual(helper.profileSettingsPage());
     //Validating the User Profile Section
     expect(profileSettings.elUserProfile.isDisplayed()).toBe(true);
     expect(profileSettings.elProfileEditSettings.isDisplayed()).toBe(true);
@@ -53,7 +52,7 @@ describe('\n Profile Settings Page', function () {
 
   it("5. Profile Setting - Logout", function () {
     login.logout();
-    expect(browser.getCurrentUrl()).toEqual(helper.goToLogin());
+    expect(browser.getCurrentUrl()).toEqual(helper.loginPage());
   });
 
 });

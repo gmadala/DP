@@ -20,7 +20,7 @@ describe('\n Promos Page', function () {
     loginObjects.doGoodLogin();
     helper.goToPromos();
     browser.sleep(browser.params.delay);
-    expect(browser.getCurrentUrl()).toEqual(helper.goToPromos());
+    expect(browser.getCurrentUrl()).toEqual(helper.promosPage());
   });
 
   it("2. Promos - Validating the Labels and Show Old Promos", function () {
@@ -40,7 +40,7 @@ describe('\n Promos Page', function () {
 
   it("3. Promos - Logout", function () {
     login.logout();
-    expect(browser.getCurrentUrl()).toEqual(helper.goToLogin());
+    expect(browser.getCurrentUrl()).toEqual(helper.loginPage());
   });
 
 });

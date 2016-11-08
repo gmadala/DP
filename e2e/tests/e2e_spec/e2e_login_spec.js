@@ -47,23 +47,23 @@ describe('\n Login Page - Dealer', function () {
     helper.goToLogin();
     loginObjects.setLogin('', '');
     loginObjects.doLogin();
-    expect(browser.getCurrentUrl()).toEqual(helper.goToLogin());
+    expect(browser.getCurrentUrl()).toEqual(helper.loginPage());
   });
 
   it("2. Dealer Login - Incorrect Username and Password", function () {
     loginObjects.setLogin('test', 'test');
     loginObjects.doLogin();
-    expect(browser.getCurrentUrl()).toEqual(helper.goToLogin());
+    expect(browser.getCurrentUrl()).toEqual(helper.loginPage());
   });
 
   it("3. Dealer Login - Good Dealer Login (62434AM)", function () {
     loginObjects.doGoodLogin();
-    expect(browser.getCurrentUrl()).toEqual(helper.goToHome());
+    expect(browser.getCurrentUrl()).toEqual(helper.homePage());
   });
 
   it("4. Dealer Login - Logout Dealer Confirm", function () {
     login.logout();
-    expect(browser.getCurrentUrl()).toEqual(helper.goToLogin());
+    expect(browser.getCurrentUrl()).toEqual(helper.loginPage());
   });
 
 });
@@ -74,19 +74,19 @@ describe('\n Login Page - Auction', function () {
     helper.goToLogin();
     loginObjects.setLogin(browser.params.userNameAuction, browser.params.password);
     loginObjects.doLogin();
-    expect(browser.getCurrentUrl()).toEqual(helper.goToAuction());
+    expect(browser.getCurrentUrl()).toEqual(helper.auctionHomePage());
   });
 
   it("6. Auction Login - Logout Auction Cancel", function () {
     login.clickMyAccount();
     login.clickSignoutButton();
     login.clickSignoutCancel();
-    expect(browser.getCurrentUrl()).toEqual(helper.goToAuction());
+    expect(browser.getCurrentUrl()).toEqual(helper.auctionHomePage());
   });
 
   it("7. Auction Login - Logout Auction Confirm", function () {
     login.logout();
-    expect(browser.getCurrentUrl()).toEqual(helper.goToLogin());
+    expect(browser.getCurrentUrl()).toEqual(helper.loginPage());
   });
 
 });

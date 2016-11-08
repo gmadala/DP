@@ -1,11 +1,16 @@
 //An example configuration file.
 
 var HtmlScreenshotReporter = require('protractor-jasmine2-screenshot-reporter'),
-  jasmineReporters = require('jasmine-reporters');
+  jasmineReporters = require('jasmine-reporters'),
+  selenium = null;
+
+if (process.env.bamboo_buildNumber) {
+  selenium = 'http://selenium-grid.nextgearcapital.com:4444/wd/hub';
+}
 
 
 exports.config = {
-  seleniumAddress: null,
+  seleniumAddress: selenium,
   baseUrl: 'https://test.nextgearcapital.com/test/#/',
   //Capabilities to be passed to the webdriver instance.
   capabilities: {

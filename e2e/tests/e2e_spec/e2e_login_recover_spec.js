@@ -35,13 +35,13 @@ describe('\n Login Recovery Page', function () {
 
   it("2. Login Recovery - Forgot User name. My email is correct and no problems", function () {
     helper.goToLogin();
-    expect(browser.getCurrentUrl()).toEqual(helper.goToLogin());
+    expect(browser.getCurrentUrl()).toEqual(helper.loginPage());
     //Validating the SignUp Button label
     expect(loginObjects.getTextSignUpLogin()).toEqual("Not Enrolled? Apply for credit with us.");
     //Validating the ForgotUsernamePassword Label
     expect(loginObjects.getTextForgotUsernamePassword()).toEqual("I forgot");
     loginObjects.doForgotUsernamePassword();
-    expect(browser.getCurrentUrl()).toEqual(helper.goToForgot());
+    expect(browser.getCurrentUrl()).toEqual(helper.forgotPage());
     loginObjects.setEmail(validEmail);
     //Validating the Submit Button label
     expect(loginObjects.getTextSubmitUsername()).toEqual("Submit");
@@ -50,7 +50,7 @@ describe('\n Login Recovery Page', function () {
     expect(modalObjects.getTextBody()).toEqual("Thank you, check your email for the requested account information.");
     //Clicking OK button on modalObjects Window
     modalObjects.doOKBtn();
-    expect(browser.getCurrentUrl()).toEqual(helper.goToLogin());
+    expect(browser.getCurrentUrl()).toEqual(helper.loginPage());
   });
 
   it("3. Login Recovery - Forgot User name. invalid email id no problems ", function () {
@@ -59,7 +59,7 @@ describe('\n Login Recovery Page', function () {
     expect(login.getInvalidLoginText1()).toEqual("We're sorry, but you used a username or password that doesn't match our records.");
     expect(login.getInvalidLoginText2()).toEqual('If you are experiencing an issue logging in, click "Forgot your username or password?" below, or contact:');
     loginObjects.doForgotUsernamePassword();
-    expect(browser.getCurrentUrl()).toEqual(helper.goToForgot());
+    expect(browser.getCurrentUrl()).toEqual(helper.forgotPage());
 
     //Enter invalid email id
     loginObjects.setEmail(invalidEmail);
@@ -90,13 +90,13 @@ describe('\n Login Recovery Page', function () {
     expect(modalObjects.getTextBody()).toEqual("Thank you, check your email for the requested account information.");
     //Exit out and verify back to main
     modalObjects.doOKBtn();
-    expect(browser.getCurrentUrl()).toEqual(helper.goToLogin());
+    expect(browser.getCurrentUrl()).toEqual(helper.loginPage());
   });
 
   it("4. Login Recovery - Forgot password and provide answers", function () {
     //Check button text
     loginObjects.doForgotUsernamePassword();
-    expect(browser.getCurrentUrl()).toEqual(helper.goToForgot());
+    expect(browser.getCurrentUrl()).toEqual(helper.forgotPage());
     //Enter Username
     loginObjects.elFUPWUsername.sendKeys('36017RDT');
     loginObjects.doSubmitPassword();
@@ -123,7 +123,7 @@ describe('\n Login Recovery Page', function () {
     expect(modalObjects.getTextBody()).toEqual("Thank you, check your email for the requested account information.");
     modalObjects.doOKBtn();
     //Exit out and verify back to main
-    expect(browser.getCurrentUrl()).toEqual(helper.goToLogin());
+    expect(browser.getCurrentUrl()).toEqual(helper.loginPage());
   });
 
 });

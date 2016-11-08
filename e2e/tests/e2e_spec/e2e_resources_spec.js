@@ -21,7 +21,7 @@ describe('\n Resources Page', function () {
     loginObjects.doGoodLogin();
     helper.goToResources();
     browser.sleep(browser.params.shortDelay);
-    expect(browser.getCurrentUrl()).toEqual(helper.goToResources());
+    expect(browser.getCurrentUrl()).toEqual(helper.resourcesPage());
   });
 
   it("2. Resources - Validating the Rates and Fees link", function () {
@@ -182,6 +182,6 @@ describe('\n Resources Page', function () {
   it("13. Resources - Logout", function () {
     browser.sleep(browser.params.shortDelay);
     login.logout();
-    expect(browser.getCurrentUrl()).toEqual(helper.goToLogin());
+    expect(browser.getCurrentUrl()).toEqual(helper.loginPage());
   });
 });
