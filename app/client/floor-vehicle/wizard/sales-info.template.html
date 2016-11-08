@@ -52,7 +52,6 @@
       </div>
       <input type="number" id="inputPurchaseAmt" name="inputPurchaseAmt" ng-model="wizardFloor.data.UnitPurchasePrice" placeholder="{{ 'Purchase Amount' | translate }}"
              required
-             ng-pattern="/^[0-9]{1,3}(?:,?[0-9]{3})*(\.)?([0-9]{1,2})?$/"
              nxg-input-currency="400000"
              nxg-min="1"
              class="form-control"
