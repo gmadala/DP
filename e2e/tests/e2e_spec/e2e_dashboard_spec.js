@@ -24,7 +24,6 @@ describe('\n Dashboard Page', function () {
     expect(browser.getCurrentUrl()).toEqual(helper.goToLogin());
     browser.sleep(browser.params.mediumDelay);
     login.login2(browser.params.userName, browser.params.password);
-    console.log('Return value is ' + helper.goToHome());
     expect(browser.getCurrentUrl()).toEqual(helper.goToHome());
 
   });
