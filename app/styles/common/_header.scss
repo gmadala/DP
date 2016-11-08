@@ -542,11 +542,11 @@
     position: relative;
     top: 0;
     left: 0;
-  }  
+  }
 
   #navbar .navbar-collapse {
-    position: absolute;
-    top: 0;
+    position: fixed;
+    top: 48px;
     display: block;
     width: 80vw;
     height: 100vh !important;
@@ -555,7 +555,7 @@
     -webkit-overflow-scrolling: touch;
     margin: 0;
     background-color: grey;
-    border-top: 0;    
+    border-top: 0;
     left: -80vw;
     z-index: 1;
     > ul {
@@ -572,25 +572,8 @@
     }
   }
 
-  body.menu-closed {
-    #main-container,
-    footer {
-      position: relative;
-      @include animations('close-nav .5s 1');
-    }
-
-    .mobile-navbar .navbar-header {
-      @include animations('close-nav .5s 1');
-    }
-
-    .mobile-menu-button {
-      @include animations('close-menu .5s 1');
-    }
-  }
-
   body.menu-open {
-    width: 100vw;
-    height: 100vh;    
+    overflow: hidden;
 
     .hamburger {
       background-color: transparent;
@@ -605,30 +588,21 @@
       transform: rotate3d(0, 0, 1, -45deg);
       transform-origin: 2px center;
     }
+  }
 
-    #wrapper {
-      height: 100vh;
-      width: 100vw;
-      overflow: hidden;
+  .navbar-scroll-fix {
+    position: absolute;
+    right: 0;
+    top: 48px;
+    width: 100vw;
+    height: 100vh;
+    background-color: black;
+
+    &.open {
+      @include animations('open-nav-background .5s 1');
     }
-
-    #main-container,
-    footer {
-      position: relative;
-      @include animations('open-nav .5s 1');
-    }
-
-    .mobile-navbar .navbar-header {
-      @include animations('open-nav .5s 1');
-    }
-
-    .navbar-scroll-fix {
-      height: 100vh;
-      width: 100vw;
-      position: absolute;
-      top: 0;
-      left: 0;
-      z-index: 0;
+    &.closed {
+      @include animations('close-nav-background .5s 1');
     }
   }
 }

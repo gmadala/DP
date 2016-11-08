@@ -43,10 +43,6 @@
     var vm = this;
     var isDealer = User.isDealer();
 
-    // init a special version of today's date for our datepicker which only works right with dates @ midnight
-    var today = new Date();
-    today = moment([today.getFullYear(), today.getMonth(), today.getDate()]).toDate();
-
     vm.counter = 1;
     vm.validForm = true;
     vm.data = null;
@@ -68,12 +64,22 @@
     var attachDocsAuction = !isDealer && User.getFeatures().hasOwnProperty('uploadDocumentsAuction') ? User.getFeatures().uploadDocumentsAuction.enabled : false;
 
     vm.attachDocumentsEnabled = User.isUnitedStates() && (attachDocsDealer || attachDocsAuction);
+    vm.flooringValuationFeature = User.getFeatures().flooringValuations && User.getFeatures().flooringValuations.enabled;
 
     $q.all([User.getStatics(), User.getInfo(), AccountManagement.getDealerSummary()]).then(function (result) {
       vm.options = angular.extend({}, result[0], result[1]);
 
       var activeBankAccounts = _.filter(result[2].BankAccounts, function (bankAccount) {
-        return bankAccount.IsActive === true;
+        
+        var retVal = (bankAccount.IsActive === true) ;
+
+        if (User.isDealer()) {
+          if (! bankAccount.AchBankName) {
+            retVal = false;
+          }
+        }
+
+        return retVal;
       });
 
       vm.options.BankAccounts = _.sortBy(activeBankAccounts, 'AchBankName');
@@ -135,7 +141,7 @@
       FloorplanSourceId: User.isDealer() ? 6 : 7, // 6 for dealer in web app, 7 for auction user
       BankAccountId: null, // BankAccount object locally, flatten to string for API tx
       LineOfCreditId: null, // LineOfCredit object locally, flatten to string for API tx
-      PaySeller: 1, // Boolean, default is false if user is dealer and buyer payment is possible, otherwise true
+      PaySeller: true, // Boolean, default is false if user is dealer and buyer payment is possible, otherwise true
       PhysicalInventoryAddressId: null, // Location object locally, flatten to string for API tx
       SaleTradeIn: false, // Boolean, default is no (only dealers that can be paid directly may change this to true)
       BusinessId: null, // business search result object locally, flatten to string for API tx
@@ -143,13 +149,14 @@
       UnitMake: null, // string
       UnitMileage: null, // string
       UnitModel: null, // string
-      UnitPurchaseDate: today, // Date locally, format to string for API transmission, default is today
+      UnitPurchaseDate: null, // Date locally, format to string for API transmission, default is today
       UnitPurchasePrice: null, // string
       UnitStyle: null, // string
       UnitVin: null, // string
       VinAckLookupFailure: false, // Boolean (whether vehicle data came from VIN or manual attribute entry)
       UnitYear: null, // int
       TitleLocationId: null, // TitleLocationOption object locally, flatten to int for API tx
+      TitleLocationIndex: null, // For TitleLocationIndex value
       TitleTypeId: null, // null locally, int extracted from TitleLocationOption object above for API tx
       ConsignerTicketNumber: null, // string (AUCTION ONLY)
       LotNumber: null, // string (AUCTION ONLY)
@@ -243,25 +250,25 @@
 
           break;
         case 2:
-          if (true || vm.formParts.one) {
+          if (vm.formParts.one) {
             $state.go('flooringWizard.sales');
           }
 
           break;
         case 3:
 
-          if (true || (vm.formParts.one && vm.formParts.two)) {
+          if (vm.formParts.one && vm.formParts.two) {
             $state.go('flooringWizard.payment');
           }
 
           break;
         case 4:
-          if (true || vm.formParts.one && vm.formParts.two && vm.formParts.three) {
+          if (vm.formParts.one && vm.formParts.two && vm.formParts.three) {
             $state.go('flooringWizard.document');
           }
           break;
         case 5:
-          if (true || vm.formParts.one && vm.formParts.two && vm.formParts.three && vm.formParts.four) {
+          if (vm.formParts.one && vm.formParts.two && vm.formParts.three && vm.formParts.four) {
             $state.go('flooringWizard.reviewRequest');
           }
 
@@ -327,29 +334,38 @@
         vm.data.UnitMake = !vm.data.dirtyStatus ? vm.data.kb.makes.selected.Value : vm.data.inputMake;
         vm.data.UnitModel = !vm.data.dirtyStatus ? vm.data.kb.models.selected.Value : vm.data.inputModel;
 
-        vm.data.PhysicalInventoryAddressId = vm.options.locations[addressIndex];
+        if (addressIndex >= 0) {
+          vm.data.PhysicalInventoryAddressId = vm.options.locations[addressIndex];
+        }
 
         vm.data.VinAckLookupFailure = vm.data.$selectedVehicle ? false : true;
 
       }
 
       var dialogParams;
-      var commentText = '';
-
-      if (vm.data.commentAdditionalFinancing && vm.data.commentAdditionalFinancing.length > 0) {
-        commentText += 'DEALER REQUESTS FULL PURCHASE PRICE: ' + vm.data.commentAdditionalFinancing;
-      }
-
-      commentText += (commentText.length > 0) ? ' ' + vm.data.commentGeneral : vm.data.commentGeneral;
 
       vm.floorPlanSubmitting = true;
-      vm.data.TitleLocationId = vm.options.titleLocationOptions[vm.data.TitleLocationId];
+
+      vm.data.TitleLocationId = vm.options.titleLocationOptions[vm.data.TitleLocationIndex];
 
       Floorplan.create(vm.data).then(
-        function (response) { /*floorplan success*/
+        function (response) {
+          /**
+           *  floorplan success handler
+           **/
+          var resultStockNumber = response.StockNumber;
+          var resultFloorplanId = response.FloorplanId;
+          var commentText = '';
+
+          if (vm.data.commentAdditionalFinancing && vm.data.commentAdditionalFinancing.length > 0) {
+            commentText += 'DEALER REQUESTS FULL PURCHASE PRICE: ' + vm.data.commentAdditionalFinancing;
+          }
+
+          commentText += (commentText.length > 0) ? ' ' + vm.data.commentGeneral : vm.data.commentGeneral;
+
           if (commentText.length > 0) {
             Floorplan.addComment({
-              CommentText: 'General Comment: ' + vm.data.commentGeneral + ' Additional Financing Comment:' + vm.data.commentAdditionalFinancing,
+              CommentText: commentText,
               FloorplanId: response.FloorplanId
             });
           }
@@ -380,6 +396,11 @@
               $uibModal.open(dialogParams).result.then(function () {
                 vm.floorPlanSubmitting = false;
                 vm.reset();
+
+                $state.go('flooringConfirmation', {
+                  floorplanId: resultFloorplanId,
+                  stockNumber: resultStockNumber
+                });
               });
             }, function () {
               vm.floorPlanSubmitting = false;

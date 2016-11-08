@@ -18,6 +18,7 @@
       // Flooring car
       DEALER_SUCCESSFUL_FLOORING_REQUEST_SUBMITTED: 'Dealer - Successful Flooring Request Submitted',
       FLOORPLAN_REQUEST_RESULT: 'Floorplan Request Result',
+      FLOORING_EXPERIENCE_RATING: 'Flooring Experiance Rating Submitted',
 
       //Global Events
       CLICK_CHAT_NOW_LINK: 'Click Chat Now Link',//x
@@ -108,7 +109,11 @@
       VINSOLUTIONS_INDEX: 'Vin Solutions Partner Link',
 
       //FedEx
-      WAYBILL_PRINTED: 'FedEx Waybill Generated'
+      WAYBILL_PRINTED: 'FedEx Waybill Generated',
+
+      //Audits
+      OPEN_AUDITS: 'Open Audits Link',
+      VIEW_OPEN_AUDITS: 'View Open Audits'
 
     });
 })();

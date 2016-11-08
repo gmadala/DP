@@ -20,14 +20,13 @@
 
   <label class="main-heading" for="payBuyerSeller" translate>Send payment to</label>
   <div class="cr-inline" style="margin-bottom: 24px;">
-    <input type="radio" name="payBuyerSeller" id="payBuyer" ng-value="0" ng-checked="wizardFloor.data.PaySeller == 0" ng-model="wizardFloor.data.PaySeller"
+    <input type="radio" name="payBuyerSeller" id="payBuyer" ng-value="false" ng-checked="wizardFloor.data.PaySeller == false" ng-model="wizardFloor.data.PaySeller"
            ng-disabled="!wizardFloor.canPayBuyer"
-           ng-change="wizardFloor.data.BankAccountId = null"
            required />
     <label class="radio-img" for="payBuyer"></label>
     <label class="cr-label" for="payBuyer" translate>Buyer</label>
     <br />
-    <input type="radio" name="payBuyerSeller" id="paySeller" ng-value="1" ng-checked="wizardFloor.data.PaySeller == 1" ng-model="wizardFloor.data.PaySeller"
+    <input type="radio" name="payBuyerSeller" id="paySeller" ng-value="true" ng-checked="wizardFloor.data.PaySeller == true" ng-model="wizardFloor.data.PaySeller"
            ng-disabled="wizardFloor.data.SaleTradeIn"
            ng-change="wizardFloor.data.BankAccountId = null"
            required />

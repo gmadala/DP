@@ -82,10 +82,6 @@
 
     $scope.attachDocumentsEnabled = attachDocsDealer || attachDocsAuction;
 
-    // init a special version of today's date for our datepicker which only works right with dates @ midnight
-    var today = new Date();
-    today = moment([today.getFullYear(), today.getMonth(), today.getDate()]).toDate();
-
     $scope.dealerMinDate = moment().subtract(364, 'days');
     $scope.auctionMinDate = moment().subtract(6, 'days');
     $scope.maxDate = moment();
@@ -115,7 +111,16 @@
 
       // replace bank accounts from getInfo() with the active bank accounts from /dealer/v1_1/summary
       var activeBankAccounts = _.filter(data[2].BankAccounts, function(bankAccount) {
-        return bankAccount.IsActive === true;
+
+        var retVal = (bankAccount.IsActive === true) ;
+
+        if (User.isDealer()) {
+          if (! bankAccount.AchBankName) {
+            retVal = false;
+          }
+        }
+
+        return retVal;
       });
 
       $scope.options.BankAccounts = _.sortBy(activeBankAccounts, 'AchBankName');
@@ -176,7 +181,7 @@
       UnitMake: null, // string
       UnitMileage: null, // string
       UnitModel: null, // string
-      UnitPurchaseDate: today, // Date locally, format to string for API transmission, default is today
+      UnitPurchaseDate: null, // Date locally, format to string for API transmission, default is today
       UnitPurchasePrice: null, // string
       UnitStyle: null, // string
       UnitVin: null, // string

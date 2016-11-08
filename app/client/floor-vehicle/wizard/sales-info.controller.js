@@ -38,22 +38,30 @@
 
     vm.dateFormat = 'MM/dd/yyyy';
 
-    vm.switchChange = function (toggleValue) {
-      $scope.$parent.wizardFloor.data.PaySeller = toggleValue ? 0 : null;
+    vm.onPurchaseDateChange = function(viewValue) {
+      vm.purchaseDateHasValue = !!viewValue;
+    };
 
-      if (!$scope.$parent.wizardFloor.canPayBuyer) {
-        $scope.$parent.wizardFloor.data.PaySeller = 1;
+    vm.switchChange = function (isTradeIn) {
+      if ($scope.$parent.wizardFloor.data) {
+        $scope.$parent.wizardFloor.data.PaySeller = isTradeIn ? false : null;
+
+        if (!$scope.$parent.wizardFloor.canPayBuyer) {
+          $scope.$parent.wizardFloor.data.PaySeller = true;
+        }
+
+        $scope.$parent.wizardFloor.formParts.three =
+          $scope.$parent.wizardFloor.formParts.three && ($scope.$parent.wizardFloor.data.PaySeller !== null);
       }
     };
 
     $scope.$parent.wizardFloor.stateChangeCounterFix(2);
 
     $scope.$parent.wizardFloor.transitionValidation = function() {
-
       $scope.form.$submitted = true;
       $scope.$parent.wizardFloor.validity = angular.copy($scope.form);
       $scope.$parent.wizardFloor.formParts.two = $scope.form.$valid;
-      return true;
+      return $scope.form.$valid;
     };
   }
 
