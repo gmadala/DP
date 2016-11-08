@@ -36,6 +36,7 @@ exports.config = {
   //More miscellaneous configuration options
   directConnect: false,
   untrackOutstandingTimeouts: false,
+  restartBrowserBetweenTests: false,
 
   //Framework selection
   framework: 'jasmine2',
