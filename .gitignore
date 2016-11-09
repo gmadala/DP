@@ -28,3 +28,4 @@ app/react-components.js
 .vscode/settings.json
 eslint-debug.json
 app/react-components/dist/common-components.js
+/translations
