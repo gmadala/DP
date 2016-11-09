@@ -26,7 +26,7 @@
       $scope.$parent.wizardFloor.validity = angular.copy($scope.form);
       return $scope.form.$valid;
     };
-  $scope.isBuyerPayBuyersPossession = $scope.$parent.wizardFloor.options.buyerPayWhenTitleIsInBuyersPossession;
+    $scope.isBuyerPayBuyersPossession = $scope.$parent.wizardFloor.options.buyerPayWhenTitleIsInBuyersPossession;
   }
 
 })();
