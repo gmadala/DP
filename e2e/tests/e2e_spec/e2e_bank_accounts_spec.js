@@ -62,6 +62,7 @@ describe('\n Bank Account', function () {
     expect(accountManagement.getPaymentAccount()).toEqual("Bank Account 2 (...6789)");
     expect(accountManagement.getDepositAccount()).toEqual("Bank Account 2 (...6789)");
   });
+
   it("5. Bank Accounts - Change Payment Account Name to Fulton Bank account", function () {
     accountManagement.doPaymentEdit();
     accountManagement.doPaymentFirstBankAccount();
@@ -72,7 +73,20 @@ describe('\n Bank Account', function () {
     expect(accountManagement.getDepositAccount()).toEqual("Bank Account 2 (...6789)");
   });
 
-  it("6. Bank Accounts - Logout", function () {
+  it("6. Bank Accounts - Validating Add Bank Account Functionality Before Hit the Submit Button", function () {
+    expect(accountManagement.elAddBankAccount.isDisplayed()).toBe(true);
+    accountManagement.doAddAccount();
+    expect(accountManagement.getTextStep1AddAccountTitle()).toEqual("Step 1 of 2: Add Your Account");
+    accountManagement.setBankDetails();
+    accountManagement.doSubmitBankAccount();
+    expect(accountManagement.getTextStep2AddAccountTitle()).toEqual("Step 2 of 2: Designated Account Change Request and Consent");
+    accountManagement.doTermsAddAccount();
+    expect(accountManagement.elCancelAddAccount.isDisplayed()).toBe(true);
+    accountManagement.doCancelAddAccount();
+  });
+
+
+  it("7. Bank Accounts - Logout", function () {
     login.logout();
     expect(browser.getCurrentUrl()).toEqual(execSettings.loginPage());
   });

@@ -2,9 +2,6 @@
 
 function AccountManagement() {
 
-  var helper = require('../framework/e2e_helper_functions.js');
-  var Helper = new helper.helper();
-
   //Locators
   this.elDepositEditButton = browser.element.all(by.buttonText('Edit')).get(0);
   this.elDepositAccount = browser.element.all(by.css('span[style="font-size: 13px"]')).get(0);
@@ -16,6 +13,18 @@ function AccountManagement() {
   this.elPaymentSave = browser.element.all(by.css('button.col-md-3.custom.btn-unstyle.save-edit')).get(1);
   this.elPaymentFirstBankAccount = browser.element.all(by.cssContainingText('option', '2794 - Fulton Bank -Main'));
   this.elPaymentSecondBankAccount = browser.element.all(by.cssContainingText('option', '6789 - Bank Account 2'));
+  this.elAddBankAccount = browser.element(by.buttonText("Add Account"));
+  this.elCancelAddAccount = browser.element(by.css("button.btn-cta.cta-secondary"));
+  this.elBankName = browser.element(by.id("bankName"));
+  this.elAccountNumber = browser.element(by.id("accountNumber"));
+  this.elConfirmAccountNumber = browser.element(by.id("confirmAccountNumber"));
+  this.elRoutingNumber = browser.element(by.id("routingNumber"));
+  this.elCity = browser.element(by.id("addressCity"));
+  this.elState = browser.element(by.id("addressState"));
+  this.elSubmitBankAccount = browser.element(by.id("submitProceed"));
+  this.elStep1AddAccountTitle = browser.element(by.css("h4.add-account.step-two"));
+  this.elStep2AddAccountTitle = browser.element.all(by.css("h4.add-account")).get(0);
+  this.elTermsAddAccount = browser.element(by.css("label.checkbox-img.small"));
 
   //Getters
   this.getDepositAccount = function () {
@@ -25,6 +34,14 @@ function AccountManagement() {
   this.getPaymentAccount = function () {
     browser.sleep(browser.params.shortDelay);
     return this.elPaymentAccount.getText();
+  };
+  this.getTextStep1AddAccountTitle = function () {
+    browser.sleep(browser.params.shortDelay);
+    return this.elStep1AddAccountTitle.getText();
+  };
+  this.getTextStep2AddAccountTitle = function () {
+    browser.sleep(browser.params.shortDelay);
+    return this.elStep2AddAccountTitle.getText();
   };
 
   //Doers
@@ -64,6 +81,39 @@ function AccountManagement() {
     browser.sleep(browser.params.shortDelay);
     this.elPaymentSecondBankAccount.click();
   };
+  this.doAddAccount = function () {
+    browser.sleep(browser.params.shortDelay);
+    this.elAddBankAccount.click();
+  };
+  this.doCancelAddAccount = function () {
+    browser.sleep(browser.params.shortDelay);
+    this.elCancelAddAccount.click();
+  };
+  this.doSubmitBankAccount = function () {
+    browser.sleep(browser.params.shortDelay);
+    this.elSubmitBankAccount.click();
+  };
+  this.doTermsAddAccount = function () {
+    browser.sleep(browser.params.shortDelay);
+    this.elTermsAddAccount.click();
+  };
+
+  //Setters
+  this.setBankDetails = function () {
+    this.elBankName.sendKeys('Automation Bank');
+    browser.sleep(browser.params.shortDelay);
+    this.elAccountNumber.sendKeys('1111');
+    browser.sleep(browser.params.shortDelay);
+    this.elConfirmAccountNumber.sendKeys('1111');
+    browser.sleep(browser.params.shortDelay);
+    this.elRoutingNumber.sendKeys('123456789');
+    browser.sleep(browser.params.shortDelay);
+    this.elCity.sendKeys('Indy');
+    browser.sleep(browser.params.shortDelay);
+    this.elState.sendKeys('Indiana');
+    browser.sleep(browser.params.shortDelay);
+  };
+
 }
 module.exports.accountManagement = AccountManagement;
 
