@@ -375,7 +375,7 @@
             kissMetricInfo.getKissMetricInfo ().then (function (result) {
               result.unitPurchasePrice = vm.data.UnitPurchasePrice;
               result.bookValue = vm.valueLookUp.projectedFinancedAmount;
-              result.fullAmountWasRequested = vm.data.AdditionalFinancing === true ? vm.data.AdditionalFinancing : false;
+              result.fullAmountWasRequested = vm.data.AdditionalFinancing === true;
 
               segmentio.track (metric.FLOORPLAN_PURCHASE_AMOUNT_OVERBOOKING, result);
             });
