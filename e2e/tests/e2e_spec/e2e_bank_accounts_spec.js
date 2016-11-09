@@ -27,29 +27,52 @@ describe('\n Bank Account', function () {
     helper.popOver();
   });
 
-  it("2. Bank account - Change bank deposit account same to payment account of Fulton Bank account", function () {
+  it("2. Bank Accounts - Change Deposit Account to Fulton Bank account", function () {
     //Set bank account to same as deposit then change and refresh and check bank account
-    //Validate payment account
-    accountManagement.doClickEdit();
+    //Validate the existing Deposit Account
+    expect(accountManagement.getDepositAccount()).toEqual("Bank Account 2 (...6789)");
+    //Validate the existing Payment Account
+    expect(accountManagement.getPaymentAccount()).toEqual("Fulton Bank -Main (...2794)");
+    accountManagement.doDepositEdit();
     accountManagement.doFirstBankAccount();
     browser.sleep(browser.params.longDelay);
-    accountManagement.doClickSave();
+    accountManagement.doDepositSave();
     browser.sleep(browser.params.longDelay);
     expect(accountManagement.getDepositAccount()).toEqual("Fulton Bank -Main (...2794)");
+    expect(accountManagement.getPaymentAccount()).toEqual("Fulton Bank -Main (...2794)");
   });
 
-  it("3. Change to 2nd bank account Bank account 2", function () {
-    accountManagement.doClickEdit();
+  it("3. Bank Accounts - Change Deposit Account to Bank account 2", function () {
+    accountManagement.doDepositEdit();
     accountManagement.doSecondBankAccount();
     browser.sleep(browser.params.longDelay);
-    accountManagement.doClickSave();
+    accountManagement.doDepositSave();
     //Validate deposit and payment accounts
-    expect(accountManagement.getPaymentAccount()).toEqual("Fulton Bank -Main (...2794)");
     browser.sleep(browser.params.longDelay);
+    expect(accountManagement.getDepositAccount()).toEqual("Bank Account 2 (...6789)");
+    expect(accountManagement.getPaymentAccount()).toEqual("Fulton Bank -Main (...2794)");
+  });
+
+  it("4. Bank Accounts - Change Payment Account Name to Bank account 2", function () {
+    accountManagement.doPaymentEdit();
+    accountManagement.doPaymentSecondBankAccount();
+    browser.sleep(browser.params.longDelay);
+    accountManagement.doPaymentSave();
+    browser.sleep(browser.params.longDelay);
+    expect(accountManagement.getPaymentAccount()).toEqual("Bank Account 2 (...6789)");
+    expect(accountManagement.getDepositAccount()).toEqual("Bank Account 2 (...6789)");
+  });
+  it("5. Bank Accounts - Change Payment Account Name to Fulton Bank account", function () {
+    accountManagement.doPaymentEdit();
+    accountManagement.doPaymentFirstBankAccount();
+    browser.sleep(browser.params.longDelay);
+    accountManagement.doPaymentSave();
+    browser.sleep(browser.params.longDelay);
+    expect(accountManagement.getPaymentAccount()).toEqual("Fulton Bank -Main (...2794)");
     expect(accountManagement.getDepositAccount()).toEqual("Bank Account 2 (...6789)");
   });
 
-  it("4. Bank Account - Logout", function () {
+  it("6. Bank Accounts - Logout", function () {
     login.logout();
     expect(browser.getCurrentUrl()).toEqual(execSettings.loginPage());
   });
