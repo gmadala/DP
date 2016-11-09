@@ -9,6 +9,9 @@
   & + .nxg-alt-addr {
     float: left;
     width: 80%;
+    .style-select {
+      margin-right: 10px;
+    }
   }
 }
 
@@ -18,8 +21,38 @@
       width: 135px;
     }
   }
+
+  @media only screen and (max-width: 767px) {
+    .styled-input {
+      input, input[type="text"] {
+        width: 90%;
+      }
+    }
+
+    .search-date-picker {
+      padding-right: 0 !important;
+      input {
+        width: 100% !important;
+      }
+    }
+  }
+
+  @media only screen and (min-width: 768px) and (max-width: 991px) {
+    .requests-grid {
+      .btn-title-request {
+        width: 115px;
+        font-size: 0.75em;
+      }
+    }
+  }
 }
 
-.description.no-right-padding{
-  padding-right: 0px;
+#TitleReleasesPage, #TitleReleasesCheckoutPage {
+  @media only screen and (max-width: 767px) {
+    .description {
+      border-left-width: 0px;
+      border-right-width: 0px;
+      border-top-width: 0px;
+    }
+  }
 }
