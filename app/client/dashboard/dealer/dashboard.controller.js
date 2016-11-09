@@ -18,8 +18,7 @@
     'gettext',
     'gettextCatalog',
     'capitalizeFilter',
-    'language',
-    'metric'
+    'language'
   ];
 
   function DashboardCtrl(
