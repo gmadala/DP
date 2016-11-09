@@ -4,6 +4,7 @@
   angular
     .module ('nextgearWebApp')
     .value ('metric', {
+      LOGIN_SUCCESSFUL: 'Login Successful',
       //*****************NEW EVENTS TRACKED*******************
       SECURITY_QUESTIONS_COMPLETED: 'Security Questions Completed',
 
