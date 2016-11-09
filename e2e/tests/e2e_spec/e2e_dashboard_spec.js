@@ -65,4 +65,5 @@ describe('\n Dashboard Page', function () {
     login.logout();
     expect(browser.getCurrentUrl()).toEqual(execSettings.loginPage());
   });
+
 });

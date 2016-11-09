@@ -76,7 +76,6 @@ describe('\n Bank Account', function () {
     accountManagement.doCancelAddAccount();
   });
 
-
   it("7. Bank Accounts - Logout", function () {
     login.logout();
     expect(browser.getCurrentUrl()).toEqual(execSettings.loginPage());
