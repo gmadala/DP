@@ -21,7 +21,7 @@ describe('\n Profile Settings Page', function () {
     login.login2(browser.params.userName, browser.params.password);
     expect(browser.getCurrentUrl()).toEqual(execSettings.homePage());
     //Closing popover
-    helper.popOver();
+    //helper.popOver();
   });
 
   it("2. Profile Settings - Navigating to Profile Settings page", function () {
