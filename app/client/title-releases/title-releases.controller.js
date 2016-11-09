@@ -11,7 +11,8 @@
     'Floorplan',
     '$uibModal',
     'dealerCustomerSupportPhone',
-    'gettextCatalog'
+    'gettextCatalog',
+    '$state'
   ];
 
   function TitleReleasesCtrl(
@@ -20,7 +21,8 @@
     Floorplan,
     $uibModal,
     dealerCustomerSupportPhone,
-    gettextCatalog) {
+    gettextCatalog,
+    $state) {
 
     var uibModal = $uibModal;
     $scope.isCollapsed = true;
@@ -32,6 +34,7 @@
     });
     $scope.eligibilityLoading = TitleReleases.getEligibilityLoading;
 
+    $scope.navigate = $state.transitionTo;
 
     $scope.queueLength = function() {
       return TitleReleases.getQueue().length;

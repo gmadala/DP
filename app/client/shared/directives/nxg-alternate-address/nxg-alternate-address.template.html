@@ -7,9 +7,9 @@
     ng-class="{ wide: !showTooltip }"></select>
   </div>
   <button ng-show="showTooltip && showSelectMenu"
-          class="btn-help"
+          class="btn-help pull-right"
           type="button"
-          tooltip-placement="right"
+          tooltip-placement="left"
           tooltip-trigger="mouseenter"
           tooltip-popup-delay="300"
           uib-tooltip="{{ 'You may select an already approved address on file with NextGear Capital.' | translate }}"
