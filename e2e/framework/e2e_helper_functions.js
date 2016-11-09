@@ -88,7 +88,7 @@ function Helper() {
      * @returns {none}
      */
     browser.get(execSettings.accountManagement());
-    browser.sleep(browser.params.longDelay);
+    browser.sleep(browser.params.longerDelay);
   };
 
   //Generic functions
