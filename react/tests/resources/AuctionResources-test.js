@@ -8,11 +8,11 @@ describe('AuctionResources', ( ) => {
         language: 'en',
         isUnitedStates: true,
         segmentio: {
-            track: ( ) => {}
+            track: ( ) => {},
         },
         kissMetricInfo: {
-            getKissMetricInfo: ( ) => new Promise(resolve => resolve( ))
-        }
+            getKissMetricInfo: ( ) => new Promise(resolve => resolve( )),
+        },
     }
 
     it('has docs in the state', ( ) => {

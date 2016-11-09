@@ -9,8 +9,8 @@ describe('MobileApps', ( ) => {
             name: 'test',
             url: 'https://www.test.com',
             metric: 'metric',
-            id: '1'
-        }
+            id: '1',
+        },
     ]
     it('renders a ListItemLink for apps when passed in', ( ) => {
         const onClick = sinon.spy( );

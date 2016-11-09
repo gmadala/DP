@@ -11,8 +11,8 @@ describe('ResourceDocs', ( ) => {
             name: 'test',
             url: 'https://www.test.com',
             metric: 'test',
-            id: '1'
-        }
+            id: '1',
+        },
     ];
 
     it('renders a ListItemLink for docs when passed in', ( ) => {

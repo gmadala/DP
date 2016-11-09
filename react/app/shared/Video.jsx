@@ -9,7 +9,7 @@ const Video = ({ url, width, height }) => (
 Video.propTypes = {
     url: PropTypes.string.isRequired,
     width: PropTypes.string.isRequired,
-    height: PropTypes.string.isRequired
+    height: PropTypes.string.isRequired,
 };
 
 export default Video

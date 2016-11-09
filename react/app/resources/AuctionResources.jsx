@@ -18,7 +18,7 @@ class AuctionResources extends Component {
             docs: rp.isUnitedStates
                 ? auctionDocsList
                 : [],
-            isUnitedStates: rp.isUnitedStates || false
+            isUnitedStates: rp.isUnitedStates || false,
         }
 
         // log current page view

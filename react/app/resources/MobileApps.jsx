@@ -21,7 +21,7 @@ const MobileApps = ({ apps, handleClick }) => {
 
 MobileApps.propTypes = {
     apps: PropTypes.array.isRequired,
-    handleClick: PropTypes.func
+    handleClick: PropTypes.func,
 };
 
 export default MobileApps;

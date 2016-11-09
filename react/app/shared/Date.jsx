@@ -18,7 +18,7 @@ Date.propTypes = {
     minDate: PropTypes.string,
     maxDate: PropTypes.string,
     labelFor: PropTypes.string,
-    label: PropTypes.string
+    label: PropTypes.string,
 };
 
 export default Date;

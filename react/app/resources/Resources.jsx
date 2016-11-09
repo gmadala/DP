@@ -25,7 +25,7 @@ class Resources extends Component {
             docs: rp.isUnitedStates ? docsList : [],
             collateralDocs: collateralDocsList,
             mobileApps: mobileAppsList,
-            isUnitedStates: rp.isUnitedStates || false
+            isUnitedStates: rp.isUnitedStates || false,
         }
 
         // log current page view
@@ -54,7 +54,7 @@ class Resources extends Component {
 }
 
 Resources.propTypes = {
-    rp: PropTypes.object
+    rp: PropTypes.object,
 }
 
 export default Resources;

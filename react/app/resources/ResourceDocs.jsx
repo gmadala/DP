@@ -42,7 +42,7 @@ ResourceDocs.propTypes = {
     collateralDocs: PropTypes.array,
     handleClick: PropTypes.func.isRequired,
     titleKey: PropTypes.string.isRequired,
-    classes: PropTypes.string
+    classes: PropTypes.string,
 };
 
 export default ResourceDocs;

@@ -103,6 +103,6 @@ export default {
     VINSOLUTIONS_INDEX : 'Vin Solutions Partner Link',
 
     // FedEx
-    WAYBILL_PRINTED : 'FedEx Waybill Generated'
+    WAYBILL_PRINTED : 'FedEx Waybill Generated',
 
 }

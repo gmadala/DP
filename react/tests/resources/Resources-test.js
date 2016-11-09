@@ -8,14 +8,14 @@ describe('Resources', ( ) => {
         language: 'en',
         isUnitedStates: true,
         segmentio: {
-            track: ( ) => {}
+            track: ( ) => {},
         },
         kissMetricInfo: {
-            getKissMetricInfo: ( ) => new Promise(resolve => resolve( ))
+            getKissMetricInfo: ( ) => new Promise(resolve => resolve( )),
         },
         api: {
-            contentLink: ( ) => {}
-        }
+            contentLink: ( ) => {},
+        },
     }
 
     it('has docs in the state', ( ) => {

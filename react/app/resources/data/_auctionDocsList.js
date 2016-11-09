@@ -16,6 +16,6 @@ module.exports = [
         id: 0,
         name: <Translate content="resources.auctionDocsList.sellerGuide"/>,
         metric: metric.AUCTION_RESOURCES_INSTRUCTIONS_FOR_SELLERS_PAGE,
-        url: `documents/${ languagePrefix }NextGear%20Capital%20Website%20Guide%20-%20Sellers.pdf`
-    }
+        url: `documents/${ languagePrefix }NextGear%20Capital%20Website%20Guide%20-%20Sellers.pdf`,
+    },
 ]

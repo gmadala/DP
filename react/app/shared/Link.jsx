@@ -10,7 +10,7 @@ Link.propTypes = {
     name: PropTypes.element,
     url: PropTypes.string,
     metric: PropTypes.string,
-    handleClick: PropTypes.func
+    handleClick: PropTypes.func,
 };
 
 export default Link;
