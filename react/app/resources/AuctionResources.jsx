@@ -47,7 +47,7 @@ class AuctionResources extends Component {
 }
 
 AuctionResources.propTypes = {
-    rp: PropTypes.object.isRequired
+    rp: PropTypes.object.isRequired,
 }
 
 export default AuctionResources;
