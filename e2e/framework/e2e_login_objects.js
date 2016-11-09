@@ -7,7 +7,7 @@
 
 function LoginObjects() {
 
-  this.elForgotUsernamePassword = browser.element(by.css('a.forgot'));
+  this.elForgotUsernamePassword = browser.element.all(by.css('a.forgot')).get(0);
   this.elEmail = browser.element(by.id("email"));
   this.elSubmitUsername = browser.element(by.id("forgotUsernameSubmit"));
   this.elSubmitPassword = browser.element(by.id("forgotPasswordSubmit"));

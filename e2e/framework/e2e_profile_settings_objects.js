@@ -9,7 +9,7 @@ function ProfileSettings() {
 
   //Locators
   this.elProfileSettings = browser.element(by.css('a[href="#/profile_settings"]'));
-  this.elUserProfile = browser.element(by.css('section.panel.panel-default.settings-well'));
+  this.elUserProfile = browser.element.all(by.css('section.panel.panel-default.settings-well')).get(0);
   this.elProfileEditSettings = browser.element(by.css('[ng-click="profile.edit()"]'));
   this.elProfileSaveSettings = browser.element(by.css('[ng-click="profile.save()"]'));
   this.elProfileCancelSettings = browser.element(by.css('[ng-click="profile.cancel()"]'));
