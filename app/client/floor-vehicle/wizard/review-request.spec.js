@@ -1,6 +1,6 @@
 'use strict'
 
-describe('Controller: ReviewRequestCtrl', function () {
+fdescribe('Controller: ReviewRequestCtrl', function () {
 
   beforeEach(module('nextgearWebApp'));
 
@@ -19,10 +19,6 @@ describe('Controller: ReviewRequestCtrl', function () {
     // create the mock parent scope object
     scope.$parent = {
       wizardFloor: {
-        formParts: {
-          four: false,
-          five: false
-        },
         options: {
           buyerPayWhenTitleIsInBuyersPossession: true
         },
@@ -47,11 +43,16 @@ describe('Controller: ReviewRequestCtrl', function () {
     initController();
   }));
 
+  it('should check the Dealer mode', function () {
+    spyOn(mockUser, 'isDealer').and.returnValue(true);
+    initController();
+  });
+
   it('should check for isBuyerPayBuyersPossession value is true', function () {
     expect(scope.isBuyerPayBuyersPossession).toBe(true);
   });
 
-  it('should check for the  is false ', function () {
+  it('should check for isBuyerPayBuyersPossession value is false', function () {
     scope.$parent = {
       wizardFloor: {
         options: {
@@ -68,7 +69,6 @@ describe('Controller: ReviewRequestCtrl', function () {
 
   it('should test for the transitionValidation', function () {
     scope.$parent.wizardFloor.transitionValidation();
-    expect(scope.$parent.wizardFloor.formParts.four).toBe(false);
     expect(scope.$parent.wizardFloor.validity).toEqual(scope.form);
     expect(scope.form.$submitted).toBe(true);
   });
