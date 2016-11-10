@@ -50,61 +50,52 @@ function AccountManagement() {
     this.elDepositEditButton.click();
   };
   this.doFirstBankAccount = function () {
-    browser.sleep(browser.params.shortDelay);
     this.elFirstBankAccount.click();
     browser.sleep(browser.params.longDelay);
   };
   this.doSecondBankAccount = function () {
-    browser.sleep(browser.params.shortDelay);
     this.elSecondBankAccount.click();
     browser.sleep(browser.params.longDelay);
   };
   this.doDepositSave = function () {
-    browser.sleep(browser.params.longDelay);
     this.elSaveButton.click();
-    browser.sleep(browser.params.shortDelay);
+    browser.sleep(browser.params.mediumDelay);
     browser.refresh();
     browser.sleep(browser.params.longDelay);
   };
   this.doPaymentEdit = function () {
-    browser.sleep(browser.params.shortDelay);
     this.elPaymentEdit.click();
+    browser.sleep(browser.params.shortDelay);
   };
   this.doPaymentSave = function () {
-    browser.sleep(browser.params.longDelay);
     this.elPaymentSave.click();
-    browser.sleep(browser.params.shortDelay);
+    browser.sleep(browser.params.mediumDelay);
     browser.refresh();
     browser.sleep(browser.params.longDelay);
   };
   this.doPaymentFirstBankAccount = function () {
-    browser.sleep(browser.params.shortDelay);
     this.elPaymentFirstBankAccount.click();
     browser.sleep(browser.params.longDelay);
   };
   this.doPaymentSecondBankAccount = function () {
-    browser.sleep(browser.params.shortDelay);
     this.elPaymentSecondBankAccount.click();
     browser.sleep(browser.params.longDelay);
   };
   this.doAddAccount = function () {
-    browser.sleep(browser.params.shortDelay);
     this.elAddBankAccount.click();
+    browser.sleep(browser.params.shortDelay);
   };
   this.doCancelAddAccount = function () {
-    browser.sleep(browser.params.shortDelay);
     this.elCancelAddAccount.click();
-    browser.sleep(browser.params.shortDelay);
+    browser.sleep(browser.params.mediumDelay);
   };
   this.doSubmitBankAccount = function () {
-    browser.sleep(browser.params.shortDelay);
     this.elSubmitBankAccount.click();
-    browser.sleep(browser.params.shortDelay);
+    browser.sleep(browser.params.mediumDelay);
   };
   this.doTermsAddAccount = function () {
-    browser.sleep(browser.params.shortDelay);
     this.elTermsAddAccount.click();
-    browser.sleep(browser.params.shortDelay);
+    browser.sleep(browser.params.mediumDelay);
   };
 
   //Setters
