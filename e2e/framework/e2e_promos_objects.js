@@ -13,10 +13,12 @@ function Promos() {
   this.elTitle = element(by.css('h6.info-block-text'));
   this.elHeader = element(by.css('h2.well-title'));
   this.elPromos = element(by.id('showorhide'));
-  this.elPromotionsDetails = element(by.css('div.promo-item.inactive.row.empty-promos'));
+  // this.elPromotionsDetails = element(by.css('div.promo-item.inactive.row.empty-promos'));
+  this.elPromotionsDetails = element(by.css('div.promo-container'));
 
   //Doers
   this.doPromos = function () {
+    browser.sleep(browser.params.shortDelay);
     return this.elPromos.click();
     browser.sleep(browser.params.mediumDelay);
   };
