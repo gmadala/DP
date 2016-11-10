@@ -20,8 +20,6 @@ describe('\n Profile Settings Page', function () {
     browser.sleep(browser.params.mediumDelay);
     login.login2(browser.params.userName, browser.params.password);
     expect(browser.getCurrentUrl()).toEqual(execSettings.homePage());
-    //Closing popover
-    helper.popOver();
   });
 
   it("2. Profile Settings - Navigating to Profile Settings page", function () {
