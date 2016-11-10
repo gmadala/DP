@@ -23,7 +23,7 @@ describe ('Controller: WizardFloorCtrl', function () {
     mockkissMetricsInfo,
     kissMetricsData,
     mockSegmentIO,
-    metric
+    mockMetric
     ;
 
 
@@ -36,7 +36,7 @@ describe ('Controller: WizardFloorCtrl', function () {
                                 _$httpBackend_,
                                 $controller,
                                 $rootScope,
-                                _metric_) {
+                                metric) {
 
     scope = $rootScope.$new ();
     floorplan = _Floorplan_;
@@ -45,7 +45,7 @@ describe ('Controller: WizardFloorCtrl', function () {
     $q = _$q_;
     $state = _$state_;
     $httpBackend = _$httpBackend_;
-    metric = _metric_;
+    mockMetric = metric;
 
     $httpBackend.whenPOST ('floorplan/upload/asdlfkjpobiwjeklfjsdf')
       .respond ({
@@ -408,7 +408,7 @@ describe ('Controller: WizardFloorCtrl', function () {
       //set purchasePrice > projectedFinancedAmount
       wizardFloor.data.UnitPurchasePrice = 1;
       wizardFloor.valueLookUp.projectedFinancedAmount = 0;
-      wizardFloor.AdditionalFinancing = false;
+      wizardFloor.data.AdditionalFinancing = false;
 
       kissMetricsData = {
         unitPurchasePrice: wizardFloor.data.UnitPurchasePrice,
@@ -421,10 +421,10 @@ describe ('Controller: WizardFloorCtrl', function () {
       wizardFloor.submit ();
       scope.$digest ();
 
-      expect (metric).toBeDefined ();
-      expect (metric.FLOORPLAN_PURCHASE_AMOUNT_OVERBOOKING).toBeDefined ();
+      expect (mockMetric).toBeDefined ();
+      expect (mockMetric.FLOORPLAN_PURCHASE_AMOUNT_OVERBOOKING).toBeDefined ();
       expect (mockkissMetricsInfo.getKissMetricInfo).toHaveBeenCalled ();
-      expect (mockSegmentIO.track).toHaveBeenCalledWith (metric.FLOORPLAN_PURCHASE_AMOUNT_OVERBOOKING, kissMetricsData);
+      expect (mockSegmentIO.track).toHaveBeenCalledWith (mockMetric.FLOORPLAN_PURCHASE_AMOUNT_OVERBOOKING, kissMetricsData);
     });
 
     it ('SegmentIO and Kissmetrics should NOT be called for FLOORPLAN_PURCHASE_AMOUNT_OVERBOOKING', function () {
@@ -435,7 +435,7 @@ describe ('Controller: WizardFloorCtrl', function () {
       //set purchasePrice > projectedFinancedAmount
       wizardFloor.data.UnitPurchasePrice = 0;
       wizardFloor.valueLookUp.projectedFinancedAmount = 1;
-      wizardFloor.AdditionalFinancing = false;
+      wizardFloor.data.AdditionalFinancing = false;
 
       kissMetricsData = {
         unitPurchasePrice: wizardFloor.data.UnitPurchasePrice,
@@ -448,10 +448,37 @@ describe ('Controller: WizardFloorCtrl', function () {
       wizardFloor.submit ();
       scope.$digest ();
 
-      expect (metric).toBeDefined ();
-      expect (metric.FLOORPLAN_PURCHASE_AMOUNT_OVERBOOKING).toBeDefined ();
+      expect (mockMetric).toBeDefined ();
+      expect (mockMetric.FLOORPLAN_PURCHASE_AMOUNT_OVERBOOKING).toBeDefined ();
       expect (mockkissMetricsInfo.getKissMetricInfo).toHaveBeenCalled ();
-      expect (mockSegmentIO.track).not.toHaveBeenCalledWith (metric.FLOORPLAN_PURCHASE_AMOUNT_OVERBOOKING, kissMetricsData);
+      expect (mockSegmentIO.track).not.toHaveBeenCalledWith (mockMetric.FLOORPLAN_PURCHASE_AMOUNT_OVERBOOKING, kissMetricsData);
+    });
+
+    fit ('SegmentIO and Kissmetrics should be called with additionalfinancing equal to true', function () {
+      wizardFloor.transitionValidation = function () {
+          return true;
+      };
+
+      //set purchasePrice > projectedFinancedAmount
+      wizardFloor.data.UnitPurchasePrice = 1;
+      wizardFloor.valueLookUp.projectedFinancedAmount = 0;
+      wizardFloor.data.AdditionalFinancing = true;
+
+      kissMetricsData = {
+          unitPurchasePrice: wizardFloor.data.UnitPurchasePrice,
+          bookValue: wizardFloor.valueLookUp.projectedFinancedAmount,
+          fullAmountWasRequested: true
+      };
+
+      spyOn (mockkissMetricsInfo, 'getKissMetricInfo').and.callThrough ();
+
+      wizardFloor.submit ();
+      scope.$digest ();
+
+      expect (mockMetric).toBeDefined ();
+      expect (mockMetric.FLOORPLAN_PURCHASE_AMOUNT_OVERBOOKING).toBeDefined ();
+      expect (mockkissMetricsInfo.getKissMetricInfo).toHaveBeenCalled ();
+      expect (mockSegmentIO.track).toHaveBeenCalledWith (mockMetric.FLOORPLAN_PURCHASE_AMOUNT_OVERBOOKING, kissMetricsData);
     });
 
     it ('SegmentIO and KissMetrics with "FLOORPLAN_REQUEST_WIZARD_RESULT"', function () {
@@ -476,10 +503,10 @@ describe ('Controller: WizardFloorCtrl', function () {
       wizardFloor.submit ();
       scope.$digest ();
 
-      expect (metric).toBeDefined ();
-      expect (metric.FLOORPLAN_REQUEST_WIZARD_RESULT).toBeDefined ();
+      expect ( mockMetric).toBeDefined ();
+      expect (mockMetric.FLOORPLAN_REQUEST_WIZARD_RESULT).toBeDefined ();
       expect (mockkissMetricsInfo.getKissMetricInfo).toHaveBeenCalled ();
-      expect (mockSegmentIO.track).toHaveBeenCalledWith (metric.FLOORPLAN_REQUEST_WIZARD_RESULT, kissMetricsData);
+      expect (mockSegmentIO.track).toHaveBeenCalledWith (mockMetric.FLOORPLAN_REQUEST_WIZARD_RESULT, kissMetricsData);
     });
   });
 });
