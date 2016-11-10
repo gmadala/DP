@@ -1,0 +1,70 @@
+{
+  "name": "myNextGear",
+  "short_name": "MNG",
+  "start_url": "index.html",
+  "display": "fullscreen",
+  "orientation": "portrait",
+  "scope": "/",
+  "icons": [
+    {
+      "src": "img/mobile-icons/AppIcon29x29.png",
+      "sizes": "29x29",
+      "type": "image/png",
+      "density": 1
+    },
+    {
+      "src": "img/mobile-icons/AppIcon29x29@2x.png",
+      "sizes": "29x29",
+      "type": "image/png",
+      "density": 2
+    },
+    {
+      "src": "img/mobile-icons/AppIcon40x40.png",
+      "sizes": "40x40",
+      "type": "image/png",
+      "density": 1
+    },
+    {
+      "src": "img/mobile-icons/AppIcon40x40@2x.png",
+      "sizes": "40x40",
+      "type": "image/png",
+      "density": 2
+    },
+    {
+      "src": "img/mobile-icons/AppIcon57x57.png",
+      "sizes": "57x57",
+      "type": "image/png",
+      "density": 1
+    },
+    {
+      "src": "img/mobile-icons/AppIcon57x57@2x.png",
+      "sizes": "57x57",
+      "type": "image/png",
+      "density": 2
+    },
+    {
+      "src": "img/mobile-icons/AppIcon60x60.png",
+      "sizes": "60x60",
+      "type": "image/png",
+      "density": 1
+    },
+    {
+      "src": "img/mobile-icons/AppIcon60x60@2x.png",
+      "sizes": "60x60",
+      "type": "image/png",
+      "density": 2
+    },
+    {
+      "src": "img/mobile-icons/AppIcon76x76.png",
+      "sizes": "76x76",
+      "type": "image/png",
+      "density": 1
+    },
+    {
+      "src": "img/mobile-icons/AppIcon76x76@2x.png",
+      "sizes": "76x76",
+      "type": "image/png",
+      "density": 2
+    },
+  ]
+}
