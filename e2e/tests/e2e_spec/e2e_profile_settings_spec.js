@@ -52,7 +52,7 @@ describe('\n Profile Settings Page', function () {
     expect(profileSettings.elNotificationsSaveSettings.isDisplayed()).toBe(true);
   });
 
-  it("5. Profile Setting - Logout", function () {
+  it("5. Profile Settings - Logout", function () {
     login.logout();
     expect(browser.getCurrentUrl()).toEqual(execSettings.loginPage());
   });
