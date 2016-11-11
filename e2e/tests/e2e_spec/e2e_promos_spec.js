@@ -28,7 +28,8 @@ describe('\n Promos Page', function () {
     expect(promos.getTextTitle()).toEqual("Please contact your local representative for details about the Promotions and Event Sales listed below.");
     expect(promos.getTextHeader()).toEqual("Promotions / Event Sales");
 
-    expect(promos.elPromotionsDetails.isDisplayed()).toBe(false);
+    //Commented out this expect statement per pr review.
+    //expect(promos.elPromotionsDetails.isDisplayed()).toBe(false);
 
 
     expect(promos.getTextPromos()).toEqual("Show Old Promos");
