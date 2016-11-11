@@ -24,7 +24,7 @@
 
         console.log('Entered get way bill function');
 
-        return api.request('GET', api.ngenContentLink('/fedex/waybill/' + businessId), null, null, true).then(function (response) {
+        return api.request('GET', api.ngenContentLink('/fedex/waybill/' + businessId), null, null, true, handleNgenRequest).then(function (response) {
 
           console.log('in success handler');
 
@@ -45,5 +45,10 @@
         });
       }
     };
+
+    function handleNgenRequest(response) {
+      api.resetSessionTimeout();
+      return response;
+    }
   }
 })();
