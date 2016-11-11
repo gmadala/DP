@@ -33,6 +33,8 @@
 
     function handleNgenSucessRequest(response, wizardStatus) {
       api.resetSessionTimeout();
+      console.log('wizardStatus: ' + wizardStatus);
+      console.log(response);
 
       kissMetricInfo.getKissMetricInfo().then(function (result) {
         result.FedExTrackingNumber = response.trackingNumber;
