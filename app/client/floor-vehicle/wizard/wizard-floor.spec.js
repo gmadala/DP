@@ -454,7 +454,7 @@ describe ('Controller: WizardFloorCtrl', function () {
       expect (mockSegmentIO.track).not.toHaveBeenCalledWith (mockMetric.FLOORPLAN_PURCHASE_AMOUNT_OVERBOOKING, kissMetricsData);
     });
 
-    fit ('SegmentIO and Kissmetrics should be called with additionalfinancing equal to true', function () {
+    it ('SegmentIO and Kissmetrics should be called with additionalfinancing equal to true', function () {
       wizardFloor.transitionValidation = function () {
           return true;
       };
