@@ -21,7 +21,7 @@ describe('\n Resources Page', function () {
     browser.sleep(browser.params.shortDelay);
     loginObjects.doGoodLogin();
     helper.goToResources();
-    browser.sleep(browser.params.shortDelay);
+    browser.sleep(browser.params.longDelay);
     expect(browser.getCurrentUrl()).toEqual(execSettings.resourcesPage());
   });
 
@@ -152,7 +152,7 @@ describe('\n Resources Page', function () {
     });
   });
 
-  xit("11. Resources - Validating the myNextGear Mobile IOS", function () {
+  it("11. Resources - Validating the myNextGear Mobile IOS", function () {
     helper.goToResources();
     resources.doMobileIOS();
     browser.getAllWindowHandles().then(function (handles) {
@@ -166,8 +166,9 @@ describe('\n Resources Page', function () {
     });
   });
 
-  xit("12. Resources - Validating the myNextGear Mobile Android", function () {
+  it("12. Resources - Validating the myNextGear Mobile Android", function () {
     helper.goToResources();
+    browser.sleep(browser.params.shortDelay);
     resources.doMobileAndroid();
     browser.getAllWindowHandles().then(function (handles) {
       browser.switchTo().window(handles[1]).then(function () {
@@ -181,7 +182,7 @@ describe('\n Resources Page', function () {
   });
 
   it("13. Resources - Logout", function () {
-    browser.sleep(browser.params.shortDelay);
+    browser.sleep(browser.params.mediumDelay);
     login.logout();
     expect(browser.getCurrentUrl()).toEqual(execSettings.loginPage());
   });

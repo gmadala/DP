@@ -242,6 +242,7 @@ module.exports = function(grunt) {
       options: {
         assetsDirs: ['<%= yeoman.dist %>'],
         patterns: {
+          html: [[/(img\/.*?\.(?:gif|jpeg|jpg|png|webp|svg))/gm, 'Update the html to reference our revved images']],
           js: [[/(img\/.*?\.(?:gif|jpeg|jpg|png|webp|svg))/gm, 'Update the JS to reference our revved images']],
           css: [[/(img\/.*?\.(?:gif|jpeg|jpg|png|webp|svg))/gm, 'Update the CSS to reference our revved images']]
         }
@@ -529,7 +530,7 @@ module.exports = function(grunt) {
         command: 'start iexplore.exe "http://localhost:<%= connect.options.port %>'
       },
       webdriverUpdate: {
-        command: 'node_modules/protractor/bin/webdriver-manager update && node_modules/grunt-protractor-runner/node_modules/protractor/bin/webdriver-manager update'
+        command: 'node_modules/protractor/bin/webdriver-manager update'
       },
       msgmerge: {
         command: function (filename) {

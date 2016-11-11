@@ -89,7 +89,6 @@
 
   .input-group-btn:last-child > .btn {
     height: 38px;
-    width: 120px;
     border-bottom-left-radius: 5px;
     border-top-left-radius: 5px;
   }
@@ -316,7 +315,7 @@
     label {
       display: block;
       margin: 20px auto;
-      max-width: 200px;
+      max-width: 250px;
 
       input[type="file"] {
         display: none;
