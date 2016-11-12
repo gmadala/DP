@@ -152,7 +152,6 @@ describe('Controller ConfirmationCtrl', function () {
     vm.getWaybill();
     scope.$apply();
     expect(vm.getWaybill).toHaveBeenCalled();
-    expect(userMock.getInfo).toHaveBeenCalled();
     expect(fedex.getWaybill).toHaveBeenCalled();
     expect(responseMock.data.waybill).toBe('labelImage');
     expect(responseMock.data.trackingNumber).toBe('1234567890');

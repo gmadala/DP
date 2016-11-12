@@ -34,8 +34,6 @@
       vm.businessId = userInfo.BusinessId;
     });
 
-    $scope.businessId = vm.businessId;
-
     vm.submitSurvey = function () {
 
       if (!$scope.confirmationForm.$valid) {
@@ -55,19 +53,14 @@
     };
 
     vm.getWaybill = function() {
-      var businessId = null;
-      User.getInfo().then(function(info) {
-        businessId = info.BusinessId;
-
-        fedex.getWaybill(businessId)
-          .then(function(data) {
-            if (data.waybill !== null) {
-              var blob = fedex.base64ToBlob(data.waybill, 'application/pdf');
-              /*global saveAs */
-              saveAs(blob, "FedEx-" + data.trackingNumber + ".pdf");
-            }
-          });
-      });
+      fedex.getWaybill(vm.businessId)
+        .then(function (data) {
+          if (data.waybill !== null) {
+            var blob = fedex.base64ToBlob(data.waybill, 'application/pdf');
+            /*global saveAs */
+            saveAs(blob, "FedEx-" + data.trackingNumber + ".pdf");
+          }
+        });
     };
   }
 })();
