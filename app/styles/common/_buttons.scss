@@ -230,6 +230,20 @@
   border: 1px solid $border;
 }
 
+.fedex-label {
+  margin: 0px;
+  font-size: 1.429em;
+  font-family: Helvetica,Arial,sans-serif;
+  height: 40px;
+  font-weight: 300;
+  padding: 8px 35px;
+  background-color: black;
+  color: #fff;
+  border: 0;
+  border-radius: 5px;
+
+}
+
 /*
  * CTA BUTTON
  * Used for call-out buttons; can have primary or secondary styles.

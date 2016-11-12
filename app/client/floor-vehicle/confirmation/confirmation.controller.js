@@ -13,9 +13,10 @@
     'metric',
     '$stateParams',
     '$state',
+    'fedex'
   ];
 
-  function FlooringConfirmationCtrl($scope, User, kissMetricInfo, segmentio, metric, $stateParams, $state) {
+  function FlooringConfirmationCtrl($scope, User, kissMetricInfo, segmentio, metric, $stateParams, $state, fedex) {
     var vm = this;
 
     if (!$stateParams.stockNumber || !$stateParams.floorplanId) {
@@ -30,7 +31,10 @@
 
     User.getInfo().then(function (userInfo) {
       vm.user = userInfo;
+      vm.businessId = userInfo.BusinessId;
     });
+
+    $scope.businessId = vm.businessId;
 
     vm.submitSurvey = function () {
 
@@ -48,6 +52,22 @@
       });
 
       vm.surveyComplete = true;
+    };
+
+    vm.getWaybill = function() {
+      var businessId = null;
+      User.getInfo().then(function(info) {
+        businessId = info.BusinessId;
+
+        fedex.getWaybill(businessId)
+          .then(function(data) {
+            if (data.waybill !== null) {
+              var blob = fedex.base64ToBlob(data.waybill, 'application/pdf');
+              /*global saveAs */
+              saveAs(blob, "FedEx-" + data.trackingNumber + ".pdf");
+            }
+          });
+      });
     };
   }
 })();

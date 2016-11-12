@@ -43,6 +43,7 @@ module.exports = function(karma) {
       'app/components/angular-bootstrap/ui-bootstrap-tpls.js',
       'app/components/bootstrap-switch/dist/js/bootstrap-switch.min.js',
       'app/components/angular-bootstrap-switch/dist/angular-bootstrap-switch.js',
+      'app/components/file-saver/FileSaver.js',
 
       'app/components/sinon/lib/sinon/util/fake_timers.js',
       'app/components/lodash/lodash.js',
