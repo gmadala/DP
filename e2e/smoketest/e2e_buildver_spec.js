@@ -12,7 +12,7 @@ describe('\n Build Verification', function () {
 
   it("1. Build Version  - Validating the current build version has been deployed", function () {
     browser.get('https://test.nextgearcapital.com/test/version.txt');
-    console.log('\n The commit has from bamboo enviornment variable "bamboo_repository_revision_number" is: ' + bambooCommitHash);
+    console.log('\n The commit hash from bamboo enviornment variable "bamboo_repository_revision_number" is: ' + bambooCommitHash);
     objHash.getText().then(function (string) {
       var substr = string.substring(12, 19)
       expect(substr).toEqual(bambooCommitHash);
