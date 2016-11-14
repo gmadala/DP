@@ -99,6 +99,12 @@ describe('Service: BusinessSearch', function () {
       expect(callParams.SearchCriteria).toBe('foobar');
     });
 
+    it('should send the Performing as a parameter to the SellerStatuses for the SellerSearch', function(){
+      bs.search(false, 'foobar', 'BusinessName', false);
+      httpBackend.flush();
+      expect(callParams.SellerStatuses).toBe('3');
+    })
+
   });
 
   describe('search function, buyer mode', function () {

@@ -23,7 +23,8 @@
         filterable: '=',
         helpText: '@',
         info: '@',
-        locs: '=showLocationFilter' // whether to display the filter for inventory location
+        locs: '=showLocationFilter', // whether to display the filter for inventory location
+        hideClear: '='
       },
       controller: 'NxgSearchCtrl'
     };

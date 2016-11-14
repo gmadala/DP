@@ -21,7 +21,7 @@
 
     $scope.chartSize = { height: 320 };
 
-    $scope.isMobile = function() { return window.innerWidth < 768 };
+    $scope.isMobile = function() { return window.innerWidth < 768; };
 
     $scope.openTopAuctions = function() {
       var dialogOptions = {
