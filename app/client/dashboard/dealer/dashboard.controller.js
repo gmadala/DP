@@ -18,8 +18,7 @@
     'gettext',
     'gettextCatalog',
     'capitalizeFilter',
-    'language',
-    'metric'
+    'language'
   ];
 
   function DashboardCtrl(
@@ -35,8 +34,8 @@
     gettext,
     gettextCatalog,
     capitalizeFilter,
-    language,
-    metric) {
+    language
+  ) {
 
     var uibModal = $uibModal;
 

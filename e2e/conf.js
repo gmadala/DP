@@ -1,5 +1,17 @@
 //An example configuration file.
+
+var HtmlScreenshotReporter = require('protractor-jasmine2-screenshot-reporter'),
+  jasmineReporters = require('jasmine-reporters'),
+  selenium = null;
+
+if (process.env.bamboo_buildNumber) {
+  selenium = 'http://selenium-grid.nextgearcapital.com:4444/wd/hub';
+}
+
+
 exports.config = {
+  seleniumAddress: selenium,
+  baseUrl: 'https://test.nextgearcapital.com/test/#/',
   //Capabilities to be passed to the webdriver instance.
   capabilities: {
     'browserName': 'chrome',
@@ -19,49 +31,64 @@ exports.config = {
         }
       }
     },
-    shardTestFiles: (process.env.maxInstances > 1),
-    maxInstances: process.env.maxInstances
+    shardTestFiles: true,
+    maxInstances: 1
   },
 
   //Spec patterns are relative to the current working directly when protractor is called.
   specs: ['tests/e2e_spec/*_spec.js'],
-  //specs: ['tests/e2e_spec/e2e_receipts_spec.js'],
 
   //More miscellaneous configuration options
-  directConnect: true,
+  directConnect: false,
   untrackOutstandingTimeouts: false,
   restartBrowserBetweenTests: false,
 
   //Framework selection
   framework: 'jasmine2',
   onPrepare: function () {
-    var env = jasmine.getEnv();
-    env.clearReporters();
+    require('jasmine-reporters');
+    require('protractor-linkuisref-locator')(protractor);
+    console.log(new Date().toISOString());
 
-    var reporters = require('jasmine-reporters');
-    var junitReporter = new reporters.JUnitXmlReporter({
-      savePath: './test/protractor',
-      filePrefix: 'junit-',
-      consolidateAll: false
-    });
-    env.addReporter(junitReporter);
+    jasmine.getEnv().addReporter(new jasmineReporters.JUnitXmlReporter({
+      consolidateAll: false,
+      savePath: 'target/jasmine-results'
+    }));
 
-    jasmine.DEFAULT_TIMEOUT_INTERVAL = 60000;
+
+    jasmine.getEnv().addReporter(
+      new HtmlScreenshotReporter({
+        dest: 'target/screenshots',
+        showSummary: true,
+        ignoreSkippedSpecs: true,
+        preserveDirectory: false,
+        captureOnlyFailedSpecs: true,
+        reportOnlyFailedSpecs: true,
+        showConfiguration: true,
+        pathBuilder: function (currentSpec) {
+          return currentSpec.fullName;
+        },
+        filename: new Date().toISOString().replace(/T/, '-').replace(/[:\\]/g, '').replace(/\..+/, '') + '-test-report.html'
+      }))
+    ;
+
 
     var SpecReporter = require('jasmine-spec-reporter');
-    env.addReporter(new SpecReporter({
-      displayStacktrace: true,
-      colors: {
-        success: 'green',
-        failure: 'red',
-        pending: 'yellow'
-      },
-      prefixes: {
-        success: 'Pass - ',
-        failure: 'Fail - ',
-        pending: 'Pending - '
-      }
-    }));
+    jasmine.getEnv().addReporter(new SpecReporter({
+        displayStacktrace: true,
+        colors: {
+          success: 'green',
+          failure: 'red',
+          pending: 'yellow'
+        },
+        prefixes: {
+          success: 'Pass - ',
+          failure: 'Fail - ',
+          pending: 'Pending - '
+        }
+      })
+    );
+
   },
 
   // Options to be passed to Jasmine.
