@@ -88,8 +88,10 @@
 
       });
 
-      vm.options.BankAccounts = _.sortBy (activeBankAccounts, 'AchBankName');
-      vm.options.LinesOfCredit = _.sortBy (result[1].LinesOfCredit, "LineOfCreditName");
+      vm.options.buyerPayWhenTitleIsInBuyersPossession = result[1].BuyerPayWhenTitleIsInBuyersPossession;
+
+      vm.options.BankAccounts = _.sortBy(activeBankAccounts, 'AchBankName');
+      vm.options.LinesOfCredit = _.sortBy(result[1].LinesOfCredit, "LineOfCreditName");
 
       var defaultBankAccount = _.find (result[2].BankAccounts, function (bankAccount) {
         return bankAccount.BankAccountId === result[1].DefaultDisbursementBankAccountId;
