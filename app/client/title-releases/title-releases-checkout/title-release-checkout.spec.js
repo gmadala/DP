@@ -118,21 +118,18 @@ describe('Controller: TitleReleaseCheckoutCtrl', function () {
       expect(titleReleasesMock.makeRequest).toHaveBeenCalled();
     });
 
-    it('should open dialog once API call is done', function() {
-      spyOn(dialogMock, 'open').and.callThrough();
-      scope.onConfirmRequest();
-      expect(dialogMock.open).toHaveBeenCalled();
-    });
+    it('should clear queue and redirect to search once dialog closes', function () {
+      var stateInfo, dataInfo;
 
-    it('should clear queue and redirect to search once dialog closes', function() {
-      spyOn(titleReleasesMock, 'clearQueue');
+      spyOn(state, 'go').and.callFake(function (fakeStateInfo, fakeDataInfo) {
+        stateInfo = fakeStateInfo;
+        dataInfo = fakeDataInfo;
+      });
       spyOn(state, 'transitionTo');
       scope.onConfirmRequest();
-      expect(titleReleasesMock.clearQueue).toHaveBeenCalled();
-      expect(state.transitionTo).toHaveBeenCalledWith('titlereleases');
+      expect(state.go).toHaveBeenCalled();
+      expect(stateInfo).toEqual('titleReleaseConfirm');
     });
 
   });
-
-
 });

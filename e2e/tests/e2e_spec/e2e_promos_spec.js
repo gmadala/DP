@@ -3,7 +3,6 @@
 var loginObjects = require('../../framework/e2e_login_objects.js');
 var promos = require('../../framework/e2e_promos_objects.js');
 var login = require('../../framework/e2e_login.js');
-var execSettings = require('../../framework/e2e_execSettings.js');
 var helper = require('../../framework/e2e_helper_functions.js');
 
 var loginObjects = new loginObjects.loginObjects();
@@ -20,8 +19,7 @@ describe('\n Promos Page', function () {
     helper.goToLogin();
     loginObjects.doGoodLogin();
     helper.goToPromos();
-    browser.sleep(browser.params.delay);
-    expect(browser.getCurrentUrl()).toEqual(execSettings.promosPage());
+    expect(browser.getCurrentUrl()).toEqual(helper.promosPage());
   });
 
   it("2. Promos - Validating the Labels and Show Old Promos", function () {
@@ -37,7 +35,7 @@ describe('\n Promos Page', function () {
 
   it("3. Promos - Logout", function () {
     login.logout();
-    expect(browser.getCurrentUrl()).toEqual(execSettings.loginPage());
+    expect(browser.getCurrentUrl()).toEqual(helper.loginPage());
   });
 
 });

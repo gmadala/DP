@@ -7,30 +7,24 @@
 
   TitleReleaseCheckoutCtrl.$inject = [
     '$scope',
-    '$uibModal',
     '$state',
     'TitleReleases',
     'Floorplan',
     'Addresses',
     'kissMetricInfo',
     'segmentio',
-    'metric',
-    'gettextCatalog'
+    'metric'
   ];
 
   function TitleReleaseCheckoutCtrl(
     $scope,
-    $uibModal,
     $state,
     TitleReleases,
     Floorplan,
     Addresses,
     kissMetricInfo,
     segmentio,
-    metric,
-    gettextCatalog) {
-
-    var uibModal = $uibModal;
+    metric) {
 
     $scope.titleQueue = {
       contents: TitleReleases.getQueue(),
@@ -48,35 +42,19 @@
     TitleReleases.getTitleReleaseEligibility().then(function (data) {
       $scope.eligibility = data;
     });
-    $scope.titleLabel = gettextCatalog.getPlural($scope.titleQueue.contents.length, 'Title Requested', 'Titles Requested');
 
     $scope.onConfirmRequest = function() {
       $scope.submitting = true;
       TitleReleases.makeRequest().then(function(response) {
         $scope.submitting = false;
-        var dialogOptions = {
-          resolve: {
-            response: function() {return response;}
-          },
-          dialogClass: 'modal modal-medium modal-long',
-          backdrop: 'static',
-          keyboard: false,
-          backdropClick: false,
-          templateUrl: 'client/title-releases/title-releases-checkout/confirm-title-release-modal/confirm-title-request.template.html',
-          controller: 'ConfirmTitleReleaseCheckoutCtrl'
-        };
 
         kissMetricInfo.getKissMetricInfo().then(function (result) {
-          result.titles = $scope .titleQueue.contents.length;
+          result.titles = $scope.titleQueue.contents.length;
 
           segmentio.track(metric.DEALER_TITLE_RELEASE_REQUEST, result);
         });
 
-        uibModal.open(dialogOptions).result.then(function() {
-          TitleReleases.clearQueue();
-
-          $state.transitionTo('titlereleases');
-        });
+        $state.go('titleReleaseConfirm', {data: response});
       });
     };
 

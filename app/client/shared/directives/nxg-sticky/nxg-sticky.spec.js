@@ -4,6 +4,7 @@ describe('Directive: nxgSticky', function () {
   beforeEach(module('nextgearWebApp'));
 
   var elem,
+    winWidth,
     scrollElem,
     scope,
     ctrl,
@@ -14,6 +15,7 @@ describe('Directive: nxgSticky', function () {
     scope = $rootScope.$new();
 
     win = angular.element($window);
+    winWidth = $window.innerWidth;
     offset = {
       top: 150
     };
@@ -84,6 +86,17 @@ describe('Directive: nxgSticky', function () {
       expect(scrollElem.height()).toBe(150);
       expect(scrollElem.css('overflow-y')).toBe('visible');
       expect(scrollElem.css('overflow-x')).toBe('visible');
+    });
+  });
+
+  describe('mobile sticky scroll', function () {
+
+    it('isMobile() method should return "true" if < 768px or "false" if >= 768px', function () {
+      if (winWidth >= 768) {
+        expect(scope.isMobile()).toBeFalsy();
+      } else {
+        expect(scope.isMobile()).toBeTruthy();
+      }
     });
   });
 
