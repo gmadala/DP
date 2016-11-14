@@ -20,7 +20,6 @@ describe('\n Receipts Page', function () {
     helper.goToLogin();
     loginObjects.doGoodLogin();
     helper.goToReceipts();
-    //browser.sleep(browser.params.delay);
     expect(browser.getCurrentUrl()).toEqual(helper.receiptsPage());
   });
 

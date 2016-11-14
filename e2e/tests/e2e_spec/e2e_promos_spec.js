@@ -19,7 +19,6 @@ describe('\n Promos Page', function () {
     helper.goToLogin();
     loginObjects.doGoodLogin();
     helper.goToPromos();
-    //browser.sleep(browser.params.delay);
     expect(browser.getCurrentUrl()).toEqual(helper.promosPage());
   });
 
@@ -27,11 +26,6 @@ describe('\n Promos Page', function () {
     expect(promos.elImage.isDisplayed()).toBe(true);
     expect(promos.getTextTitle()).toEqual("Please contact your local representative for details about the Promotions and Event Sales listed below.");
     expect(promos.getTextHeader()).toEqual("Promotions / Event Sales");
-
-    //Commented out this expect statement per pr review.
-    //expect(promos.elPromotionsDetails.isDisplayed()).toBe(false);
-
-
     expect(promos.getTextPromos()).toEqual("Show Old Promos");
     promos.doPromos();
     expect(promos.elPromotionsDetails.isDisplayed()).toBe(true);

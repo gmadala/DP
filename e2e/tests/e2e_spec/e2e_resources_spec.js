@@ -17,10 +17,8 @@ describe('\n Resources Page', function () {
 
   it("1. Resources - Login as 62434AM", function () {
     helper.goToLogin();
-    //browser.sleep(browser.params.shortDelay);
     loginObjects.doGoodLogin();
     helper.goToResources();
-    //browser.sleep(browser.params.shortDelay);
     expect(browser.getCurrentUrl()).toEqual(helper.resourcesPage());
   });
 
