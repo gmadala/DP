@@ -36,7 +36,7 @@ exports.config = {
   },
 
   //Spec patterns are relative to the current working directly when protractor is called.
-  specs: ['tests/e2e_spec/*_spec.js'],
+  specs: ['tests/e2e_spec/e2e_resources_spec.js'],
 
   //More miscellaneous configuration options
   directConnect: false,
@@ -49,6 +49,8 @@ exports.config = {
     require('jasmine-reporters');
     require('protractor-linkuisref-locator')(protractor);
     console.log(new Date().toISOString());
+
+    jasmine.getEnv().clearReporters();
 
     jasmine.getEnv().addReporter(new jasmineReporters.JUnitXmlReporter({
       consolidateAll: false,
