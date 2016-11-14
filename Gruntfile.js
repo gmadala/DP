@@ -496,7 +496,7 @@ module.exports = function( grunt ) {
                 command: 'start iexplore.exe "http://localhost:<%= connect.options.port %>'
             },
             webdriverUpdate: {
-                command: 'npm run webdriver-update && npm run webdriver-update-chrome'
+                command: 'node_modules/protractor/bin/webdriver-manager update'
             },
             msgmerge: {
                 command: function( filename ) {

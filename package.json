@@ -81,7 +81,7 @@
     "grunt-open": "~0.2.0",
     "grunt-preprocess": "~5.0.1",
     "grunt-processhtml": "~0.3.3",
-    "grunt-protractor-runner": "~4.0.0",
+    "grunt-protractor-runner": "4.0.0",
     "grunt-rev": "~0.1.0",
     "grunt-shell": "~1.1.1",
     "grunt-usemin": "~3.1.1",
@@ -124,7 +124,8 @@
     "moment": "^2.15.1",
     "phantomjs-polyfill": "0.0.2",
     "phantomjs-prebuilt": "^2.1.13",
-    "protractor": "~4.0.0",
+    "protractor-jasmine2-screenshot-reporter": "^0.3.2",
+    "protractor-linkuisref-locator": "1.1.2",
     "serve-static": "1.10.0",
     "uglifyify": "^3.0.4"
   },

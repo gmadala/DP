@@ -314,6 +314,26 @@ describe ('Controller: WizardFloorCtrl', function () {
       scope.$digest ();
       expect (wizardFloor.canPayBuyer).toBe (false);
     });
+
+    it('should get the BuyerPayWhenTitleIsInBuyersPossession value is TRUE when it is checked in Discover and should return Dealer Info JSON object', function() {
+      spyOn(mockUser, 'getInfo').and.returnValue($q.when({
+        BuyerPayWhenTitleIsInBuyersPossession: true
+      }));
+      initController();
+      scope.$digest();
+      expect(wizardFloor.options.buyerPayWhenTitleIsInBuyersPossession).toEqual(true);
+    });
+
+    it('should get the BuyerPayWhenTitleIsInBuyersPossession value is FALSE when it is checked in Discover and should return Dealer Info JSON object ', function(){
+      spyOn(mockUser, 'getInfo').and.returnValue($q.when({
+        BuyerPayWhenTitleIsInBuyersPossession: false
+      }));
+      initController();
+      scope.$digest();
+      expect(wizardFloor.options.buyerPayWhenTitleIsInBuyersPossession).toEqual(false);
+    });
+
+
   });
 
   describe ('Reset function', function () {
