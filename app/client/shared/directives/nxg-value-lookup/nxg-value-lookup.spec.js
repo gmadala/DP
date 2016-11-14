@@ -106,13 +106,15 @@ describe('Directive: nxgCreditAvailability', function() {
     scope.odometer = undefined;
     scope.inventoryLocation = undefined;
     scope.purchasePrice = undefined;
+    scope.projectedFinancedAmount = undefined;
 
     element = angular.element(
       '<nxg-value-lookup' +
       ' vin="vin"' +
       ' odometer="odometer"' +
       ' inventory-location="inventoryLocation"' +
-      ' purchase-price="purchasePrice">' +
+      ' purchase-price="purchasePrice"' +
+      ' projected-financed-amount="projectedFinancedAmount">' +
       '</nxg-value-lookup>');
     element = $compile(element)(scope);
     $rootScope.$digest();
