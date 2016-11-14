@@ -25,7 +25,7 @@
         return api.request('GET', api.ngenContentLink('/fedex/waybill/' + businessId), null, null, true, handleNgenRequest).then(function (response) {
 
           kissMetricInfo.getKissMetricInfo().then(function (result) {
-            result.FedExTrackingNumber = response.data.trackingNumber;
+            result.fedexTrackingNumber = response.data.trackingNumber;
             result.fromWizard = wizardStatus === null || wizardStatus === undefined ? false : wizardStatus;
             segmentio.track(metric.WAYBILL_PRINTED, result);
           });
