@@ -11,266 +11,270 @@ var EC = protractor.ExpectedConditions;
 
 function Helper() {
 
-  this.loginPage = function (){
-    return browser.baseUrl + 'login';
-  };
+    this.loginPage = function () {
+        return browser.baseUrl + 'login';
+    };
 
-  this.homePage = function () {
-    return browser.baseUrl + 'home';
-  };
+    this.homePage = function () {
+        return browser.baseUrl + 'home';
+    };
 
-  this.auctionHomePage = function () {
-    return browser.baseUrl + 'act/home';
-  };
+    this.auctionHomePage = function () {
+        return browser.baseUrl + 'act/home';
+    };
 
-  this.forgotPage = function () {
-    return browser.baseUrl + 'login/recover';
-  };
+    this.forgotPage = function () {
+        return browser.baseUrl + 'login/recover';
+    };
 
-  this.resourcesPage = function () {
-    return browser.baseUrl + 'documents';
-  };
+    this.resourcesPage = function () {
+        return browser.baseUrl + 'documents';
+    };
 
-  this.promosPage = function () {
-    return browser.baseUrl + 'promos';
-  };
-  this.receiptsPage = function () {
-    return browser.baseUrl + 'receipts';
-  };
-  this.profileSettingsPage = function () {
-    return browser.baseUrl + 'profile_settings';
-  };
+    this.promosPage = function () {
+        return browser.baseUrl + 'promos';
+    };
+    this.receiptsPage = function () {
+        return browser.baseUrl + 'receipts';
+    };
+    this.profileSettingsPage = function () {
+        return browser.baseUrl + 'profile_settings';
+    };
 
-  //Navigation functions
-  this.goToLogin = function () {
-    /**
-     * @name goToLogin
-     * @memberof helper
-     * @author Derek Gibson
-     * @description This function navigates to the login page
-     *
-     * @returns {promise}
-     */
-    return browser.get(this.loginPage())
-      .then(browser.sleep(browser.params.longDelay));
-  };
+    this.accountManagementPage = function () {
+        return browser.baseUrl + 'account_management';
+    };
 
-  this.goToHome = function () {
-    /**
-     * @name goToHome
-     * @memberof helper
-     * @author Derek Gibson
-     * @description This function navigates to the home page
-     *
-     * @returns {promise}
-     */
-    return browser.get(this.homePage())
-      .then(browser.sleep(browser.params.longDelay));
-  };
+    //Navigation functions
+    this.goToLogin = function () {
+        /**
+         * @name goToLogin
+         * @memberof helper
+         * @author Derek Gibson
+         * @description This function navigates to the login page
+         *
+         * @returns {promise}
+         */
+        return browser.get(this.loginPage())
+            .then(browser.sleep(browser.params.longDelay));
+    };
 
-  this.goToAuction = function () {
-    /**
-     * @name goToAuction
-     * @memberof helper
-     * @author Bobby Washington
-     * @description This function navigates to the auction home page
-     *
-     * @returns {promise}
-     */
-    browser.get(this.auctionHomePage())
-      .then(browser.sleep(browser.params.longDelay));
-  };
+    this.goToHome = function () {
+        /**
+         * @name goToHome
+         * @memberof helper
+         * @author Derek Gibson
+         * @description This function navigates to the home page
+         *
+         * @returns {promise}
+         */
+        return browser.get(this.homePage())
+            .then(browser.sleep(browser.params.longDelay));
+    };
 
-  this.goToForgot = function () {
-    /**
-     * @name goToForgot
-     * @memberof helper
-     * @author Bobby Washington
-     * @description This function navigates to the forgot page
-     *
-     * @returns {promise}
-     */
-    browser.get(this.forgotPage())
-      .then(browser.sleep(browser.params.longDelay));
-  };
+    this.goToAuction = function () {
+        /**
+         * @name goToAuction
+         * @memberof helper
+         * @author Bobby Washington
+         * @description This function navigates to the auction home page
+         *
+         * @returns {promise}
+         */
+        browser.get(this.auctionHomePage())
+            .then(browser.sleep(browser.params.longDelay));
+    };
 
-  this.goToResources = function () {
-    /**
-     * @name goToResources
-     * @memberof helper
-     * @author Derek Gibson
-     * @description This function navigates to the resources page
-     *
-     * @returns {promise}
-     */
-    browser.get(this.resourcesPage())
-      .then(browser.sleep(browser.params.longDelay));
-  };
+    this.goToForgot = function () {
+        /**
+         * @name goToForgot
+         * @memberof helper
+         * @author Bobby Washington
+         * @description This function navigates to the forgot page
+         *
+         * @returns {promise}
+         */
+        browser.get(this.forgotPage())
+            .then(browser.sleep(browser.params.longDelay));
+    };
 
-  this.goToPromos = function () {
-    /**
-     * @name goToPromos
-     * @memberof helper
-     * @author Bala Nithiya
-     * @description This function navigates to the promos page
-     *
-     * @returns {promise}
-     */
-    browser.get(this.promosPage())
-      .then(browser.sleep(browser.params.longDelay));
-  };
+    this.goToResources = function () {
+        /**
+         * @name goToResources
+         * @memberof helper
+         * @author Derek Gibson
+         * @description This function navigates to the resources page
+         *
+         * @returns {promise}
+         */
+        browser.get(this.resourcesPage())
+            .then(browser.sleep(browser.params.longDelay));
+    };
 
-  this.goToReceipts = function () {
-    /**
-     * @name goToReceipts
-     * @memberof helper
-     * @author Bala Nithiya
-     * @description This function navigates to the receipts page
-     *
-     * @returns {promise}
-     */
-    browser.get(this.receiptsPage())
-      .then(browser.sleep(browser.params.longDelay));
-  };
+    this.goToPromos = function () {
+        /**
+         * @name goToPromos
+         * @memberof helper
+         * @author Bala Nithiya
+         * @description This function navigates to the promos page
+         *
+         * @returns {promise}
+         */
+        browser.get(this.promosPage())
+            .then(browser.sleep(browser.params.longDelay));
+    };
 
-  this.goToProfile = function () {
-    /**
-     * @name goToProfile
-     * @memberof helper
-     * @author Bobby Washington
-     * @description This function navigates to the profile page
-     *
-     * @returns {promise}
-     */
-    browser.get(this.profileSettingsPage())
-      .then(browser.sleep(browser.params.longDelay));
-  };
+    this.goToReceipts = function () {
+        /**
+         * @name goToReceipts
+         * @memberof helper
+         * @author Bala Nithiya
+         * @description This function navigates to the receipts page
+         *
+         * @returns {promise}
+         */
+        browser.get(this.receiptsPage())
+            .then(browser.sleep(browser.params.longDelay));
+    };
 
-  this.goToAccountManagement = function () {
-    /**
-     * @name goToHome
-     * @memberof helper
-     * @author Javier Calderon
-     * @description This function navigates to the AccountManagement
-     *
-     * @returns {none}
-     */
-    browser.get(execSettings.accountManagement());
-    browser.sleep(browser.params.longerDelay);
-  };
+    this.goToProfile = function () {
+        /**
+         * @name goToProfile
+         * @memberof helper
+         * @author Bobby Washington
+         * @description This function navigates to the profile page
+         *
+         * @returns {promise}
+         */
+        browser.get(this.profileSettingsPage())
+            .then(browser.sleep(browser.params.longDelay));
+    };
 
-  //Generic functions
-  this.waitForVisible = function (elementId) {
-    /**
-     * @name waitForVisible
-     * @memberof HelperObject
-     * @author Bryan Noland
-     * @description This helper function uses Expected Conditions and a check to make sure that
-     *              the element passed in to the function is visible.  This function can be
-     *              used to select 'X', Cancel or any other element, just pass in the element id.
-     *
-     * @param {string} elementId - Id of the element expected to be checked
-     * @returns {none}
-     */
-    var isVisible = EC.visibilityOf(elementId);
-    browser.wait(isVisible, browser.params.mediumDelay);
-  };
+    this.goToAccountManagement = function () {
+        /**
+         * @name goToHome
+         * @memberof helper
+         * @author Javier Calderon
+         * @description This function navigates to the AccountManagement
+         *
+         * @returns {none}
+         */
+        browser.get(this.accountManagementPage());
+        browser.sleep(browser.params.longerDelay);
+    };
 
-  this.waitForClickable = function (elementId) {
-    /**
-     * @name waitForClickable
-     * @memberof HelperObject
-     * @author Bryan Noland
-     * @description This helper function uses Expected Conditions and a check to make sure that
-     *              the element passed in to the function is clickable.  This function can be
-     *              used to select 'X', Cancel or any other element, just pass in the element id.
-     *
-     * @param {string} elementId - Id of the element expected to be checked
-     * @returns {none}
-     */
-    var isClickable = EC.elementToBeClickable(elementId);
-    //doing this twice makes the tests stable, protractor has issues, man
-    //still better than a static sleep()
-    browser.wait(isClickable, browser.params.mediumDelay);
-    browser.wait(isClickable, browser.params.mediumDelay);
-  };
+    //Generic functions
+    this.waitForVisible = function (elementId) {
+        /**
+         * @name waitForVisible
+         * @memberof HelperObject
+         * @author Bryan Noland
+         * @description This helper function uses Expected Conditions and a check to make sure that
+         *              the element passed in to the function is visible.  This function can be
+         *              used to select 'X', Cancel or any other element, just pass in the element id.
+         *
+         * @param {string} elementId - Id of the element expected to be checked
+         * @returns {none}
+         */
+        var isVisible = EC.visibilityOf(elementId);
+        browser.wait(isVisible, browser.params.mediumDelay);
+    };
 
-  this.takeSnapshot = function (snapshotFileName) {
-    /**
-     * @name takeSnapshot
-     * @memberof HelperObject
-     * @author Derek Gibson
-     * @description This helper function takes a snapshot of the UI at the moment it is called
-     *              and saves it as a .png in client/target/protractor_screenshots with the name given
-     * @param {string} snapshotFileName
-     */
-    browser.takeScreenshot().then(function (png) {
-      var buf = new Buffer(png, 'base64');
-      var stream = fs.createWriteStream('target/protractor_screenshots/' + snapshotFileName + '.png');
-      stream.write(buf);
-      stream.end();
-    });
-  };
+    this.waitForClickable = function (elementId) {
+        /**
+         * @name waitForClickable
+         * @memberof HelperObject
+         * @author Bryan Noland
+         * @description This helper function uses Expected Conditions and a check to make sure that
+         *              the element passed in to the function is clickable.  This function can be
+         *              used to select 'X', Cancel or any other element, just pass in the element id.
+         *
+         * @param {string} elementId - Id of the element expected to be checked
+         * @returns {none}
+         */
+        var isClickable = EC.elementToBeClickable(elementId);
+        //doing this twice makes the tests stable, protractor has issues, man
+        //still better than a static sleep()
+        browser.wait(isClickable, browser.params.mediumDelay);
+        browser.wait(isClickable, browser.params.mediumDelay);
+    };
 
-  this.getTodaysDate = function () {
-    var todaysDate;
-    var month;
-    var date;
-    todaysDate = new Date();
-    month = todaysDate.getMonth() + 1;
-    date = todaysDate.getDate();
-    if (month < 10) {
-      month = '0' + month; //ensure leading 0
-    }
-    if (date < 10) {
-      date = '0' + date;//ensure leading 0
-    }
-    //mm/dd/yyyy
-    var currentDate = month + '/' + date + '/' + todaysDate.getFullYear();
-    return (currentDate);
-  };
+    this.takeSnapshot = function (snapshotFileName) {
+        /**
+         * @name takeSnapshot
+         * @memberof HelperObject
+         * @author Derek Gibson
+         * @description This helper function takes a snapshot of the UI at the moment it is called
+         *              and saves it as a .png in client/target/protractor_screenshots with the name given
+         * @param {string} snapshotFileName
+         */
+        browser.takeScreenshot().then(function (png) {
+            var buf = new Buffer(png, 'base64');
+            var stream = fs.createWriteStream('target/protractor_screenshots/' + snapshotFileName + '.png');
+            stream.write(buf);
+            stream.end();
+        });
+    };
 
-  this.popOver = function () {
-    /**
-     * @name Popover
-     * @memberof helper
-     * @author Bala Nithiya
-     * @description This function helps to close the popover message
-     *
-     * @returns {none}
-     */
-    this.elOkButton = browser.element(by.buttonText("OK, I got it!"));
-    var elPopOver = element(by.css('button[ng-click="closeMenuTip()"]'));
-    if (elPopOver) {
-      browser.actions().mouseMove(element(by.css('.popover'))).perform();
-      expect(elPopOver.isDisplayed()).toBe(true);
-      this.elOkButton.click();
-    }
-  };
-
-  this.doClick = function (elementToClick, elementToWaitFor) {
-    /**
-     * @name doClick
-     * @memberof helper
-     * @author Bryan Noland
-     * @description This function waits for an element to be clickable, then clicks the element
-     *
-     * @param elementToClick = element to be clicked
-     * @param elementToWaitFor = optional - element to wait to be visible after the click
-     * @returns {promise}
-     */
-
-    browser.wait(EC.elementToBeClickable((elementToClick)), 10000);
-    return elementToClick.click()
-      .then(function validateAndWait() {
-        if (elementToWaitFor) {
-          return browser.wait(EC.elementToBeClickable((elementToWaitFor)), 10000);
+    this.getTodaysDate = function () {
+        var todaysDate;
+        var month;
+        var date;
+        todaysDate = new Date();
+        month = todaysDate.getMonth() + 1;
+        date = todaysDate.getDate();
+        if (month < 10) {
+            month = '0' + month; //ensure leading 0
         }
-        else {
-          return true;
+        if (date < 10) {
+            date = '0' + date;//ensure leading 0
         }
-      });
-  };
+        //mm/dd/yyyy
+        var currentDate = month + '/' + date + '/' + todaysDate.getFullYear();
+        return (currentDate);
+    };
+
+    this.popOver = function () {
+        /**
+         * @name Popover
+         * @memberof helper
+         * @author Bala Nithiya
+         * @description This function helps to close the popover message
+         *
+         * @returns {none}
+         */
+        this.elOkButton = browser.element(by.buttonText("OK, I got it!"));
+        var elPopOver = element(by.css('button[ng-click="closeMenuTip()"]'));
+        if (elPopOver) {
+            browser.actions().mouseMove(element(by.css('.popover'))).perform();
+            expect(elPopOver.isDisplayed()).toBe(true);
+            this.elOkButton.click();
+        }
+    };
+
+    this.doClick = function (elementToClick, elementToWaitFor) {
+        /**
+         * @name doClick
+         * @memberof helper
+         * @author Bryan Noland
+         * @description This function waits for an element to be clickable, then clicks the element
+         *
+         * @param elementToClick = element to be clicked
+         * @param elementToWaitFor = optional - element to wait to be visible after the click
+         * @returns {promise}
+         */
+
+        browser.wait(EC.elementToBeClickable((elementToClick)), 10000);
+        return elementToClick.click()
+            .then(function validateAndWait() {
+                if (elementToWaitFor) {
+                    return browser.wait(EC.elementToBeClickable((elementToWaitFor)), 10000);
+                }
+                else {
+                    return true;
+                }
+            });
+    };
 }
 
 module.exports.helper = Helper;
