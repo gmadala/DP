@@ -1,6 +1,6 @@
 'use strict'
 
-fdescribe('Controller: ReviewRequestCtrl', function () {
+describe('Controller: ReviewRequestCtrl', function () {
 
   beforeEach(module('nextgearWebApp'));
 
