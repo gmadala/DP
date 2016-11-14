@@ -50,8 +50,6 @@ exports.config = {
     require('protractor-linkuisref-locator')(protractor);
     console.log(new Date().toISOString());
 
-    jasmine.getEnv().clearReporters();
-
     jasmine.getEnv().addReporter(new jasmineReporters.JUnitXmlReporter({
       consolidateAll: false,
       savePath: 'target/jasmine-results'
