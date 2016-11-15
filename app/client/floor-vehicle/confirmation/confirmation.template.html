@@ -28,7 +28,10 @@
       </div>
 
       <div>
-        <button class="fedex-label" ng-click="flooringConfirmation.getWaybill()"  type="submit" translate>Print Fedex Label</button>
+        <nxg-download-waybill wizard-status="true"
+                              class="btn btn-lg btn-primary"
+                              style="margin-left: 0px;font-size: 1.429em;padding: 8px 35px;height: 40px;font-weight: 300;background-color: black;color: #fff;"
+                              title="Print FedEx Label"></nxg-download-waybill>
       </div>
 
       <button class="btn-cta btn-lg cta-primary" style="font-size: 1.429em; height: 40px; font-weight: 300; margin-left: 0px; padding: 8px 20px;" ui-sref="flooringWizard.car" translate>Floor Another Vehicle</button>

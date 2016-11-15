@@ -16,7 +16,7 @@
     'fedex'
   ];
 
-  function FlooringConfirmationCtrl($scope, User, kissMetricInfo, segmentio, metric, $stateParams, $state, fedex) {
+  function FlooringConfirmationCtrl($scope, User, kissMetricInfo, segmentio, metric, $stateParams, $state) {
     var vm = this;
 
     if (!$stateParams.stockNumber || !$stateParams.floorplanId) {
@@ -50,17 +50,6 @@
       });
 
       vm.surveyComplete = true;
-    };
-
-    vm.getWaybill = function() {
-      fedex.getWaybill(vm.businessId)
-        .then(function (data) {
-          if (data.waybill !== null) {
-            var blob = fedex.base64ToBlob(data.waybill, 'application/pdf');
-            /*global saveAs */
-            saveAs(blob, "FedEx-" + data.trackingNumber + ".pdf");
-          }
-        });
     };
   }
 })();

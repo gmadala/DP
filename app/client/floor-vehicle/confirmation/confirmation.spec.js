@@ -146,15 +146,4 @@ describe('Controller ConfirmationCtrl', function () {
     expect(vm.surveyComplete).toEqual(false);
   });
 
-  it('should download the fedex waybill', inject(function ($q, fedex) {
-    spyOn(vm, 'getWaybill').and.callThrough();
-    spyOn(fedex, 'getWaybill').and.returnValue($q.when(responseMock.data));
-    vm.getWaybill();
-    scope.$apply();
-    expect(vm.getWaybill).toHaveBeenCalled();
-    expect(fedex.getWaybill).toHaveBeenCalled();
-    expect(responseMock.data.waybill).toBe('labelImage');
-    expect(responseMock.data.trackingNumber).toBe('1234567890');
-  }));
-
 });
