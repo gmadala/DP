@@ -3,7 +3,7 @@
 var bambooCommitHash = process.env.bamboo_repository_revision_number.substring(0, 7);
 var objHash = browser.element(by.css('[style=\'word-wrap: break-word; white-space: pre-wrap;\']'));
 
-describe('\n Build Verification', function () {
+describe('Build Verification', function () {
 
   beforeEach(function () {
     browser.sleep(browser.params.shortDelay);
