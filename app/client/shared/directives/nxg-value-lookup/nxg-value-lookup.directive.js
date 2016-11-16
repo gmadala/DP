@@ -22,7 +22,8 @@
         vin: '=',
         odometer: '=',
         inventoryLocation: '=',
-        purchasePrice: '='
+        purchasePrice: '=',
+        projectedFinancedAmount: '='
       },
       replace: 'true',
       link: linkFn

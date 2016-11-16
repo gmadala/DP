@@ -37,6 +37,7 @@
           url = '/dealer/search/seller';
           countField = 'SellerCount';
           angular.extend(params, {
+            SellerStatuses: '3',
             SearchCriteria: query || undefined,
             OrderByDirection: sortDesc ? 'DESC' : 'ASC'
           });
