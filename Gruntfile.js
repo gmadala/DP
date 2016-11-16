@@ -506,10 +506,10 @@ module.exports = function( grunt ) {
                 }
             },
             webpack: {
-                command: 'set NODE_ENV=development && webpack'
+                command: 'set NODE_ENV=development && npm run webpack'
             },
             webpack_prod: {
-                command: 'set NODE_ENV=production && webpack'
+                command: 'set NODE_ENV=production && npm run webpack'
             },
             npm: {
                 command: 'npm install'

@@ -13,3 +13,5 @@ karma-e2e.conf.js
 karma.conf.js
 webpack.config.js
 webpack.karma.conf.js
+app/scripts/react-app.js
+app/client/debug-info.js
