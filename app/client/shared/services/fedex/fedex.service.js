@@ -20,24 +20,28 @@
 
         return false;
       },
-      getWaybill: function (businessId) {
-        return api.request('GET', api.ngenContentLink('/fedex/waybill/' + businessId), null, null, true, handleNgenSucessRequest).then(function (response) {
+      getWaybill: function (businessId, wizardStatus) {
+
+        return api.request('GET', api.ngenContentLink('/fedex/waybill/' + businessId), null, null, true, handleNgenRequest).then(function (response) {
+
+          kissMetricInfo.getKissMetricInfo().then(function (result) {
+            result.fedexTrackingNumber = response.data.trackingNumber;
+            result.fromWizard = wizardStatus === null || wizardStatus === undefined ? false : wizardStatus;
+            segmentio.track(metric.WAYBILL_PRINTED, result);
+          });
+
           return {
             waybill: response.data.labelImage,
-            trackingNumber: response.data.trackingNumber
+            trackingNumber: response.data.trackingNumber,
+            wizardStatus: wizardStatus
           };
+
         });
       }
     };
 
-    function handleNgenSucessRequest(response) {
+    function handleNgenRequest(response) {
       api.resetSessionTimeout();
-
-      kissMetricInfo.getKissMetricInfo().then(function (result) {
-        result.FedExTrackingNumber = response.trackingNumber;
-        segmentio.track(metric.WAYBILL_PRINTED, result);
-      });
-
       return response;
     }
   }
