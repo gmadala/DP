@@ -2,8 +2,8 @@
   'use strict';
 
   angular
-    .module('nextgearWebApp')
-    .controller('WizardFloorCtrl', WizardFloorCtrl);
+    .module ('nextgearWebApp')
+    .controller ('WizardFloorCtrl', WizardFloorCtrl);
 
   WizardFloorCtrl.$inject = [
     '$state',
@@ -24,24 +24,24 @@
     'metric'
   ];
 
-  function WizardFloorCtrl($state,
-                           $scope,
-                           $uibModal,
-                           $q,
-                           User,
-                           Floorplan,
-                           Addresses,
-                           protect,
-                           OptionDefaultHelper,
-                           moment,
-                           AccountManagement,
-                           Upload,
-                           nxgConfig,
-                           kissMetricInfo,
-                           segmentio,
-                           metric) {
+  function WizardFloorCtrl ($state,
+                            $scope,
+                            $uibModal,
+                            $q,
+                            User,
+                            Floorplan,
+                            Addresses,
+                            protect,
+                            OptionDefaultHelper,
+                            moment,
+                            AccountManagement,
+                            Upload,
+                            nxgConfig,
+                            kissMetricInfo,
+                            segmentio,
+                            metric) {
     var vm = this;
-    var isDealer = User.isDealer();
+    var isDealer = User.isDealer ();
 
     vm.counter = 1;
     vm.validForm = true;
@@ -54,46 +54,54 @@
       five: false
     };
 
+    vm.valueLookUp = {
+      projectedFinancedAmount: 0.0
+    };
+
     vm.floorPlanSubmitting = false;
 
     vm.pageCount = 5;
 
-    switchState();
+    switchState ();
 
-    var attachDocsDealer = isDealer && User.getFeatures().hasOwnProperty('uploadDocuments') ? User.getFeatures().uploadDocuments.enabled : false;
-    var attachDocsAuction = !isDealer && User.getFeatures().hasOwnProperty('uploadDocumentsAuction') ? User.getFeatures().uploadDocumentsAuction.enabled : false;
+    var attachDocsDealer = isDealer && User.getFeatures ().hasOwnProperty ('uploadDocuments') ? User.getFeatures ().uploadDocuments.enabled : false;
+    var attachDocsAuction = !isDealer && User.getFeatures ().hasOwnProperty ('uploadDocumentsAuction') ? User.getFeatures ().uploadDocumentsAuction.enabled : false;
 
-    vm.attachDocumentsEnabled = User.isUnitedStates() && (attachDocsDealer || attachDocsAuction);
-    vm.flooringValuationFeature = User.getFeatures().flooringValuations && User.getFeatures().flooringValuations.enabled;
+    vm.attachDocumentsEnabled = User.isUnitedStates () && (attachDocsDealer || attachDocsAuction);
+    vm.flooringValuationFeature = User.getFeatures ().flooringValuations && User.getFeatures ().flooringValuations.enabled;
 
-    $q.all([User.getStatics(), User.getInfo(), AccountManagement.getDealerSummary()]).then(function (result) {
-      vm.options = angular.extend({}, result[0], result[1]);
+    $q.all ([User.getStatics (), User.getInfo (), AccountManagement.getDealerSummary ()]).then (function (result) {
+      vm.options = angular.extend ({}, result[0], result[1]);
 
-      var activeBankAccounts = _.filter(result[2].BankAccounts, function (bankAccount) {
-        
-        var retVal = (bankAccount.IsActive === true) ;
 
-        if (User.isDealer()) {
-          if (! bankAccount.AchBankName) {
+      var activeBankAccounts = _.filter (result[2].BankAccounts, function (bankAccount) {
+
+        var retVal = (bankAccount.IsActive === true);
+
+        if (User.isDealer ()) {
+          if (!bankAccount.AchBankName) {
             retVal = false;
           }
         }
 
         return retVal;
+
       });
+
+      vm.options.buyerPayWhenTitleIsInBuyersPossession = result[1].BuyerPayWhenTitleIsInBuyersPossession;
 
       vm.options.BankAccounts = _.sortBy(activeBankAccounts, 'AchBankName');
       vm.options.LinesOfCredit = _.sortBy(result[1].LinesOfCredit, "LineOfCreditName");
 
-      var defaultBankAccount = _.find(result[2].BankAccounts, function (bankAccount) {
+      var defaultBankAccount = _.find (result[2].BankAccounts, function (bankAccount) {
         return bankAccount.BankAccountId === result[1].DefaultDisbursementBankAccountId;
       });
 
-      var defaultLineOfCredit = _.find(result[1].LinesOfCredit, function (lineOfCredit) {
+      var defaultLineOfCredit = _.find (result[1].LinesOfCredit, function (lineOfCredit) {
         return lineOfCredit.LineOfCreditName === 'Retail';
       });
 
-      vm.options.locations = Addresses.getActivePhysical();
+      vm.options.locations = Addresses.getActivePhysical ();
 
       var optionListsToDefault = [
         {
@@ -109,28 +117,28 @@
       ];
 
       if (isDealer) {
-        optionListsToDefault.push({
+        optionListsToDefault.push ({
           scopeSrc: 'wizardFloor.options.locations',
           modelDest: 'PhysicalInventoryAddressId'
         });
       }
-      if(isDealer){
-        if(defaultLineOfCredit){
-          optionListsToDefault.push({ scopeSrc: 'wizardFloor.options.LinesOfCredit', modelDest: 'LineOfCreditId', useDefault:defaultLineOfCredit });
-        }else{
-          optionListsToDefault.push({ scopeSrc: 'wizardFloor.options.LinesOfCredit', modelDest: 'LineOfCreditId', useFirst:true });
+      if (isDealer) {
+        if (defaultLineOfCredit) {
+          optionListsToDefault.push ({scopeSrc: 'wizardFloor.options.LinesOfCredit', modelDest: 'LineOfCreditId', useDefault: defaultLineOfCredit});
+        } else {
+          optionListsToDefault.push ({scopeSrc: 'wizardFloor.options.LinesOfCredit', modelDest: 'LineOfCreditId', useFirst: true});
         }
       }
 
-      vm.optionsHelper = OptionDefaultHelper.create(optionListsToDefault);
-      vm.reset();
+      vm.optionsHelper = OptionDefaultHelper.create (optionListsToDefault);
+      vm.reset ();
     });
 
-    User.getPaySellerOptions().then(function (opts) {
+    User.getPaySellerOptions ().then (function (opts) {
       vm.paySellerOptions = opts;
     });
 
-    User.canPayBuyer().then(function (canPay) {
+    User.canPayBuyer ().then (function (canPay) {
       vm.canPayBuyer = canPay;
     });
 
@@ -138,7 +146,7 @@
     vm.defaultData = {
       AdditionalFinancing: false,
       additionalFinancingAmount: null,
-      FloorplanSourceId: User.isDealer() ? 6 : 7, // 6 for dealer in web app, 7 for auction user
+      FloorplanSourceId: User.isDealer () ? 6 : 7, // 6 for dealer in web app, 7 for auction user
       BankAccountId: null, // BankAccount object locally, flatten to string for API tx
       LineOfCreditId: null, // LineOfCredit object locally, flatten to string for API tx
       PaySeller: true, // Boolean, default is false if user is dealer and buyer payment is possible, otherwise true
@@ -175,42 +183,42 @@
       inputModel: null,
       inputStyle: null,
       settingsVinMode: 'none',
-      kb:{
-        years:{
-          selected:null,
-          list:[]
+      kb: {
+        years: {
+          selected: null,
+          list: []
         },
         makes: {
           selected: null,
           list: []
         },
-        models:{
-          selected:null,
-          list:[]
+        models: {
+          selected: null,
+          list: []
         },
-        styles:{
-          selected:null,
-          list:[]
+        styles: {
+          selected: null,
+          list: []
         }
       }
     };
 
     vm.reset = function () {
-      vm.data = angular.copy(vm.defaultData);
-      vm.optionsHelper.applyDefaults($scope, vm.data);
+      vm.data = angular.copy (vm.defaultData);
+      vm.optionsHelper.applyDefaults ($scope, vm.data);
       vm.validity = undefined;
       vm.counter = 1;
-      switchState();
-      $scope.$broadcast('reset');
+      switchState ();
+      $scope.$broadcast ('reset');
     };
 
     // Wizard Nav functions ---------------------------------------------------
     //-------------------------------------------------------------------------
     vm.tabClick = function (count) {
-      if (canTransition(count)) {
+      if (canTransition (count)) {
         vm.counter = count;
 
-        switchState();
+        switchState ();
       }
     };
 
@@ -221,10 +229,10 @@
     vm.next = function () {
       var nextCount = vm.counter + 1;
 
-      if (vm.nextAvailable() && canTransition(nextCount)) {
+      if (vm.nextAvailable () && canTransition (nextCount)) {
         vm.counter++;
 
-        switchState();
+        switchState ();
       }
     };
 
@@ -233,9 +241,9 @@
     };
 
     vm.previous = function () {
-      if (vm.previousAvailable()) {
+      if (vm.previousAvailable ()) {
         vm.counter--;
-        switchState();
+        switchState ();
       }
     };
 
@@ -243,40 +251,40 @@
       vm.counter = stateCount;
     };
 
-    function switchState() {
+    function switchState () {
       switch (vm.counter) {
         case 1:
-          $state.go('flooringWizard.car');
+          $state.go ('flooringWizard.car');
 
           break;
         case 2:
           if (vm.formParts.one) {
-            $state.go('flooringWizard.sales');
+            $state.go ('flooringWizard.sales');
           }
 
           break;
         case 3:
 
           if (vm.formParts.one && vm.formParts.two) {
-            $state.go('flooringWizard.payment');
+            $state.go ('flooringWizard.payment');
           }
 
           break;
         case 4:
           if (vm.formParts.one && vm.formParts.two && vm.formParts.three) {
-            $state.go('flooringWizard.document');
+            $state.go ('flooringWizard.document');
           }
           break;
         case 5:
           if (vm.formParts.one && vm.formParts.two && vm.formParts.three && vm.formParts.four) {
-            $state.go('flooringWizard.reviewRequest');
+            $state.go ('flooringWizard.reviewRequest');
           }
 
       }
     }
 
-    function canTransition(count) {
-      vm.transitionValidation();
+    function canTransition (count) {
+      vm.transitionValidation ();
 
       switch (count) {
         case 1:
@@ -316,7 +324,7 @@
     };
 
     vm.submit = function () {
-      if (!vm.transitionValidation()) {
+      if (!vm.transitionValidation ()) {
         return;
       }
 
@@ -325,7 +333,7 @@
       }
 
       if (vm.formParts.one && vm.formParts.two && (!vm.attachDocumentsEnabled || vm.formParts.three)) {
-        var addressIndex = _.findIndex(vm.options.locations, {'IsMainAddress': true});
+        var addressIndex = _.findIndex (vm.options.locations, {'IsMainAddress': true});
 
         vm.floorPlanSubmitting = true;
 
@@ -348,7 +356,7 @@
 
       vm.data.TitleLocationId = vm.options.titleLocationOptions[vm.data.TitleLocationIndex];
 
-      Floorplan.create(vm.data).then(
+      Floorplan.create (vm.data).then (
         function (response) {
           /**
            *  floorplan success handler
@@ -363,8 +371,19 @@
 
           commentText += (commentText.length > 0) ? ' ' + vm.data.commentGeneral : vm.data.commentGeneral;
 
+          //IF projectedFinancedAmount which comes from nxg-value-lookup [aka book value]
+          //is greater than the purchased price, send kiss metric
+          if (vm.data.UnitPurchasePrice > vm.valueLookUp.projectedFinancedAmount) {
+            kissMetricInfo.getKissMetricInfo ().then (function (result) {
+              result.unitPurchasePrice = vm.data.UnitPurchasePrice;
+              result.bookValue = vm.valueLookUp.projectedFinancedAmount;
+              result.fullAmountWasRequested = vm.data.AdditionalFinancing === true;
+
+              segmentio.track (metric.FLOORPLAN_PURCHASE_AMOUNT_OVERBOOKING, result);
+            });
+          }
           if (commentText.length > 0) {
-            Floorplan.addComment({
+            Floorplan.addComment ({
               CommentText: commentText,
               FloorplanId: response.FloorplanId
             });
@@ -372,15 +391,15 @@
 
           if (vm.data.files && vm.data.files.length > 0) {
             // Rename duplicate files with an index so they are all uploaded
-            vm.data.files = _.map(vm.data.files, function (file, index) {
-              var newName = vm.renameFile(file.name, index);
+            vm.data.files = _.map (vm.data.files, function (file, index) {
+              var newName = vm.renameFile (file.name, index);
               if (newName !== file) {
-                Upload.rename(file, newName);
+                Upload.rename (file, newName);
               }
               return file;
             });
 
-            var upload = Upload.upload({
+            var upload = Upload.upload ({
               url: nxgConfig.apiBase + '/floorplan/upload/' + response.FloorplanId,
               method: 'POST',
               data: {
@@ -388,53 +407,53 @@
               }
             });
 
-            upload.then(function (response) {
+            upload.then (function (response) {
               vm.floorPlanSubmitting = false;
 
-              dialogParams = response.data.Success ? buildDialog(vm.attachDocumentsEnabled, true, true) : buildDialog(vm.attachDocumentsEnabled, true, false);
+              dialogParams = response.data.Success ? buildDialog (vm.attachDocumentsEnabled, true, true) : buildDialog (vm.attachDocumentsEnabled, true, false);
 
-              $uibModal.open(dialogParams).result.then(function () {
+              $uibModal.open (dialogParams).result.then (function () {
                 vm.floorPlanSubmitting = false;
-                vm.reset();
+                vm.reset ();
 
-                $state.go('flooringConfirmation', {
+                $state.go ('flooringConfirmation', {
                   floorplanId: resultFloorplanId,
                   stockNumber: resultStockNumber
                 });
               });
             }, function () {
               vm.floorPlanSubmitting = false;
-              dialogParams = buildDialog(vm.attachDocumentsEnabled, true, false);
-              $uibModal.open(dialogParams).result.then(function () {
+              dialogParams = buildDialog (vm.attachDocumentsEnabled, true, false);
+              $uibModal.open (dialogParams).result.then (function () {
                 vm.floorPlanSubmitting = false;
-                vm.reset();
+                vm.reset ();
               });
             });
           } else {
             vm.floorPlanSubmitting = false;
-            dialogParams = buildDialog(false, true, false);
-            $uibModal.open(dialogParams).result.then(function () {
+            dialogParams = buildDialog (false, true, false);
+            $uibModal.open (dialogParams).result.then (function () {
               vm.floorPlanSubmitting = false;
-              vm.reset();
+              vm.reset ();
             });
           }
         }, function (/*floorplan error*/) {
           vm.floorPlanSubmitting = false;
-          dialogParams = buildDialog(vm.attachDocumentsEnabled, false, false);
-          $uibModal.open(dialogParams).result.then(function () {
+          dialogParams = buildDialog (vm.attachDocumentsEnabled, false, false);
+          $uibModal.open (dialogParams).result.then (function () {
             vm.floorPlanSubmitting = false;
           });
         });
     };
 
-    function buildDialog(canAttachDocuments, floorSuccess, uploadSuccess) {
+    function buildDialog (canAttachDocuments, floorSuccess, uploadSuccess) {
 
-      kissMetricInfo.getKissMetricInfo().then(function (result) {
+      kissMetricInfo.getKissMetricInfo ().then (function (result) {
         result.comment = !!vm.data.comment && vm.data.comment.length > 0;
         result.floorplanSuccess = floorSuccess;
         result.uploadSuccess = uploadSuccess;
 
-        segmentio.track(metric.FLOORPLAN_REQUEST_RESULT, result);
+        segmentio.track (metric.FLOORPLAN_REQUEST_WIZARD_RESULT, result);
       });
 
       return {
@@ -461,4 +480,4 @@
       };
     }
   }
-})();
+}) ();

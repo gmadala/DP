@@ -301,7 +301,7 @@
                    ng-class="{ 'file-error': validity.documents.$error.pattern || validity.boxDocuments.$error.pattern || validity.documents.$error.maxSize || validity.boxDocuments.$error.maxSize }"
                    ng-model="files"
                    ngf-model-invalid="invalidFiles"
-                   ngf-fix-orientation="false"
+                   ngf-fix-orientation="true"
                    ngf-drag-over-class="'dragover'"
                    ngf-allow-dir="true"
                    ngf-pattern="'image/*,application/pdf,application/vnd.ms*,application/vnd.open*,application/ms*'"
@@ -347,7 +347,7 @@
                      ngf-multiple="true"
                      ngf-pattern="'image/*,application/pdf,application/vnd.ms*,application/vnd.open*,application/ms*'"
                      ngf-keep="true"
-                     ngf-fix-orientation="false"
+                     ngf-fix-orientation="true"
                      ngf-max-size="'5MB'"
                      style="width: 100%">
               <label for="documents" class="text-error"

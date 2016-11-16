@@ -5,6 +5,7 @@
     "BusinessId": "8c17ed1c-284d-46da-a43f-00115f3ea0dd",
     "BusinessNumber": 56555,
     "BusinessName": "2nd Chance Auto Wholesale",
+    "BuyerPayWhenTitleIsInBuyersPossession": true,
     "MarketName": "Raleigh West",
     "MarketPhoneNumber": "7049683065",
     "CSCPhoneNumber": "8889693721",
