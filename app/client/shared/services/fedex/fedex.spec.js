@@ -94,6 +94,19 @@ describe("Service: FedEx", function () {
       expect(fedExService.wayBillPrintingEnabled()).toBe(true);
     });
 
+    it("should render new image from the wayBill", function () {
+      var contentType = "text/plain";
+      var base64String = "VGVzdFN0cmluZw==";
+      var resultByteArray = [];
+
+      var expectedByteArray = new Uint8Array([84, 101, 115, 116, 83, 116, 114, 105, 110, 103]);
+
+      fedExService.base64ToBlob(base64String, contentType, 512, function (byteArray) {
+        resultByteArray = byteArray.slice(0);
+      });
+      expect(resultByteArray[0]).toEqual(expectedByteArray);
+    });
+
   });
 
 });

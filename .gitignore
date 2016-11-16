@@ -29,3 +29,4 @@ app/react-components.js
 eslint-debug.json
 app/react-components/dist/common-components.js
 /translations
+app/scripts/react-app.js
