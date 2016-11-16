@@ -18,7 +18,7 @@
        ng-class="{ 'file-error': (form.documents.$error.pattern || form.boxDocuments.$error.pattern || wizardFloor.data.invalidFiles.length > 0 || wizardFloor.data.files.length == 0) &&  docUploadAndComments.$submitted}"
        ng-model="wizardFloor.data.files"
        ngf-model-invalid="wizardFloor.data.invalidFiles"
-       ngf-fix-orientation="false"
+       ngf-fix-orientation="true"
        ngf-drag-over-class="'dragover'"
        ngf-allow-dir="true"
        ngf-pattern="'image/*,application/pdf,application/vnd.ms*,application/vnd.open*,application/ms*'"
@@ -40,7 +40,7 @@
                ngf-multiple="true"
                ngf-pattern="'image/*,application/pdf,application/vnd.ms*,application/vnd.open*,application/ms*'"
                ngf-keep="true"
-               ngf-fix-orientation="false"
+               ngf-fix-orientation="true"
                ngf-max-size="'5MB'"
                ng-disabled="wizardFloor.floorPlanSubmitting"
          />
