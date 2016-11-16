@@ -4,11 +4,40 @@ describe("Service: FedEx", function () {
 
   var fedExService = null;
   var userService = null;
+  var kissMetricInfo = null;
+  var $rootScope = null;
+  var $httpBackend = null;
 
-  beforeEach(inject(function (_fedex_, _User_) {
+  beforeEach(inject(function (_fedex_, _User_, _kissMetricInfo_, _$rootScope_, _$httpBackend_) {
     fedExService = _fedex_;
     userService = _User_;
+    kissMetricInfo = _kissMetricInfo_;
+    $rootScope = _$rootScope_;
+    $httpBackend = _$httpBackend_;
   }));
+
+  describe("ensure that kissMetricInfo service is called after getWaybill is used", function () {
+
+    beforeEach(function () {
+      spyOn(kissMetricInfo, "getKissMetricInfo").and.callThrough();
+    });
+
+    it("kissMetricInfo service should be called", function () {
+      fedExService.getWaybill("123-123-123", true);
+
+      $httpBackend.whenGET("/fedex/waybill/123-123-123").respond({ data: { trackingNumber: "123456789", labelImage: null } });
+      $httpBackend.expectGET("/fedex/waybill/123-123-123");
+
+      $httpBackend.whenGET("/info/v1_1/businesshours").respond(true);
+      $httpBackend.expectGET("/info/v1_1/businesshours");
+
+      $httpBackend.flush();
+      $rootScope.$digest();
+
+      expect(kissMetricInfo.getKissMetricInfo).toHaveBeenCalled();
+    });
+
+  });
 
   describe("ensure wayBillPrintingEnabled returns false when non united states is used", function () {
 

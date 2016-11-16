@@ -12,7 +12,7 @@
       User.getInfo().then(function(info) {
         businessId = info.BusinessId;
 
-        fedex.getWaybill(businessId)
+        fedex.getWaybill(businessId, $scope.wizardStatus)
           .then(function(data) {
             if (data.waybill !== null) {
               var blob = fedex.base64ToBlob(data.waybill, 'application/pdf');
@@ -25,4 +25,3 @@
   }
 })
 ();
-
