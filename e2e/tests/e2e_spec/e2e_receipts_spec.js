@@ -11,54 +11,54 @@ var helper = new helper.helper();
 
 describe('\n Receipts Page', function () {
 
-  beforeEach(function () {
-    browser.sleep(browser.params.shortDelay);
-    browser.ignoreSynchronization = true;
-  });
-
-  it("1. Receipts - Login as 62434AM ", function () {
-    helper.goToLogin();
-    loginObjects.doGoodLogin();
-    helper.goToReceipts();
-    expect(browser.getCurrentUrl()).toEqual(helper.receiptsPage());
-  });
-
-  it("2. Receipts - Print a Receipt by Grouped VIN", function () {
-    //Click First Receipt link
-    receipts.doFirstReceipt();
-    receipts.doExportReceipts();
-    browser.sleep(browser.params.mediumDelay);
-    browser.getAllWindowHandles().then(function (handles) {
-      browser.switchTo().window(handles[1]).then(function () {
-        expect(browser.getCurrentUrl()).toContain("https://test.nextgearcapital.com/MobileService/api/receipt/viewMultiple/receipts?");
-      });
-      browser.sleep(browser.params.mediumDelay);
-      browser.close();
-      browser.switchTo().window(handles[0]);
-      browser.sleep(browser.params.mediumDelay);
+    beforeEach(function () {
+        browser.sleep(browser.params.shortDelay);
+        browser.ignoreSynchronization = true;
     });
-  });
 
-  it("3. Receipts - Validating the labels and text boxes ", function () {
-    expect(receipts.elReceiptsLabel.isDisplayed()).toBe(true);
-    expect(receipts.getTestClearSearch()).toEqual('Clear');
-    //Validating receipts table
-    expect(receipts.elReceipts.isDisplayed()).toBe(true);
-  });
+    it("1. Receipts - Login as 62434AM ", function () {
+        helper.goToLogin();
+        loginObjects.doGoodLogin();
+        helper.goToReceipts();
+        expect(browser.getCurrentUrl()).toEqual(helper.receiptsPage());
+    });
 
-  it("4. Receipts - Receipts Search ", function () {
-    receipts.setVIN();
-    receipts.doFloorPlanSearch();
-    expect(browser.getCurrentUrl()).toEqual(helper.receiptsPage());
-    receipts.doPaymentMethod();
-    expect(browser.getCurrentUrl()).toEqual(helper.receiptsPage());
-    receipts.doDatesSearch();
-    expect(browser.getCurrentUrl()).toEqual(helper.receiptsPage());
-  });
+    it("2. Receipts - Print a Receipt by Grouped VIN", function () {
+        //Click First Receipt link
+        receipts.doFirstReceipt();
+        receipts.doExportReceipts();
+        browser.sleep(browser.params.mediumDelay);
+        browser.getAllWindowHandles().then(function (handles) {
+            browser.switchTo().window(handles[1]).then(function () {
+                expect(browser.getCurrentUrl()).toContain("https://test.nextgearcapital.com/MobileService/api/receipt/viewMultiple/receipts?");
+            });
+            browser.sleep(browser.params.mediumDelay);
+            browser.close();
+            browser.switchTo().window(handles[0]);
+            browser.sleep(browser.params.mediumDelay);
+        });
+    });
 
-  it("5. Receipts - Logout", function () {
-    login.logout();
-    expect(browser.getCurrentUrl()).toEqual(helper.loginPage());
-  });
+    it("3. Receipts - Validating the labels and text boxes ", function () {
+        expect(receipts.elReceiptsLabel.isDisplayed()).toBe(true);
+        expect(receipts.getTestClearSearch()).toEqual('Clear');
+        //Validating receipts table
+        expect(receipts.elReceipts.isDisplayed()).toBe(true);
+    });
+
+    it("4. Receipts - Receipts Search ", function () {
+        receipts.setVIN();
+        receipts.doFloorPlanSearch();
+        expect(browser.getCurrentUrl()).toEqual(helper.receiptsPage());
+        receipts.doPaymentMethod();
+        expect(browser.getCurrentUrl()).toEqual(helper.receiptsPage());
+        receipts.doDatesSearch();
+        expect(browser.getCurrentUrl()).toEqual(helper.receiptsPage());
+    });
+
+    it("5. Receipts - Logout", function () {
+        login.logout();
+        expect(browser.getCurrentUrl()).toEqual(helper.loginPage());
+    });
 
 });

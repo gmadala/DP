@@ -36,7 +36,7 @@
      ng-class="{ 'file-error': (form.documents.$error.pattern || form.boxDocuments.$error.pattern) && invalidFiles.length > 0 }"
      ng-model="files"
      ngf-model-invalid="invalidFiles"
-     ngf-fix-orientation="false"
+     ngf-fix-orientation="true"
      ngf-drag-over-class="'dragover'"
      ngf-allow-dir="true"
      ngf-pattern="'image/*,application/pdf,application/vnd.ms*,application/vnd.open*,application/ms*'"
@@ -83,7 +83,7 @@
          ngf-multiple="true"
          ngf-pattern="'image/*,application/pdf,application/vnd.ms*,application/vnd.open*,application/ms*'"
          ngf-keep="true"
-         ngf-fix-orientation="false"
+         ngf-fix-orientation="true"
          ngf-max-size="'5MB'" style="display:none">
 </label>
 <label for="documents" class="text-error"
