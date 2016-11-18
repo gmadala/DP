@@ -36,7 +36,8 @@ exports.config = {
     },
 
     //Spec patterns are relative to the current working directly when protractor is called.
-    specs: ['tests/e2e_spec/*_spec.js'],
+    // specs: ['tests/e2e_spec/*_spec.js'],
+    specs: ['tests/e2e_spec/e2e_analytics_spec.js'],
 
     //More miscellaneous configuration options
     directConnect: false,
