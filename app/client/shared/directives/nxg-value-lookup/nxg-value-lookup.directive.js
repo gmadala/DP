@@ -105,6 +105,7 @@
       /** Supporting local functions **/
 
       function updateBaseValuation() {
+        scope.baseValuationUnavailable = false;
         $q.all([
           Blackbook.lookupByVin(scope.vin, scope.odometer, true),
           Mmr.lookupByVin(scope.vin, scope.odometer)
@@ -173,6 +174,7 @@
         data[4].y = 0;
         data[5].y = 0;
         chart.series[0].setData(data);
+        scope.baseValuationUnavailable = false;
       }
 
       /*
