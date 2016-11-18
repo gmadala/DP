@@ -23,7 +23,8 @@
         odometer: '=',
         inventoryLocation: '=',
         purchasePrice: '=',
-        projectedFinancedAmount: '='
+        projectedFinancedAmount: '=',
+        selectedVehicle: '='
       },
       replace: 'true',
       link: linkFn
@@ -109,9 +110,12 @@
           Mmr.lookupByVin(scope.vin, scope.odometer)
         ])
           .then(function(results) {
-            var minimumBlackbookAverage = _.min(results[0], function(element) {
-              return element.AverageValue;
-            });
+            var minimumBlackbookAverage;
+            if (scope.selectedVehicle) {
+              minimumBlackbookAverage = _.find(results[0], function(element){
+                return element.GroupNumber === scope.selectedVehicle.GroupNumber;
+              });
+            }
 
             var minimumMmrAverage = _.min(results[1], function(element) {
               return element.AverageWholesale;
