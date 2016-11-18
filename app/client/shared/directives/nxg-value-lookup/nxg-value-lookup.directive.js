@@ -6,9 +6,9 @@
     .module('nextgearWebApp')
     .directive('nxgValueLookup', nxgValueLookup);
 
-  nxgValueLookup.$inject = ['$q', 'Addresses', 'gettext', 'gettextCatalog', 'Kbb', 'Mmr', 'Blackbook'];
+  nxgValueLookup.$inject = ['$q', 'Addresses', 'gettext', 'gettextCatalog', 'Mmr', 'Blackbook'];
 
-  function nxgValueLookup($q, Addresses, gettext, gettextCatalog, Kbb, Mmr, Blackbook) {
+  function nxgValueLookup($q, Addresses, gettext, gettextCatalog, Mmr, Blackbook) {
 
     gettext('Purchase Amount');
     gettext('Average Bookout');
@@ -41,7 +41,6 @@
       // local vars to hold svg references
       var valuationLabel, valuationTriangle;
 
-      scope.kbbValuationUnavailable = false;
       scope.baseValuationUnavailable = false;
       scope.zipCode = getDealerZipCode();
       // init the options for the chart
@@ -75,10 +74,6 @@
           // update blackbook and mmr values
           if (scope.odometer) {
             updateBaseValuation();
-            // only update the kbb if the zipCode is set
-            if (scope.zipCode) {
-              updateKbbValuation();
-            }
           }
         }
       });
@@ -94,10 +89,6 @@
           // update blackbook and mmr values
           if (scope.vin) {
             updateBaseValuation();
-            // only update the kbb if the zipCode is set
-            if (scope.zipCode) {
-              updateKbbValuation();
-            }
           }
         }
       });
@@ -118,14 +109,9 @@
               });
             }
 
-            var minimumMmrAverage = _.min(results[1], function(element) {
-              return element.AverageWholesale;
-            });
-
             var chart = getChart();
             var data = chart.series[0].data;
             data[3].y = minimumBlackbookAverage ? minimumBlackbookAverage.AverageValue : 0;
-            data[4].y = minimumMmrAverage ? minimumMmrAverage.AverageWholesale : 0;
             chart.series[0].setData(data);
           })
           .finally(function() {
@@ -137,42 +123,10 @@
           });
       }
 
-      function updateKbbValuation() {
-        Kbb.getConfigurations(scope.vin, scope.zipCode)
-          .then(function(configurations) {
-            var kbbLookups = [];
-            configurations.forEach(function(configuration) {
-              var kbbLookup = Kbb.lookupByConfiguration(configuration, scope.odometer, scope.zipCode);
-              kbbLookups.push(kbbLookup);
-            });
-            return $q.all(kbbLookups);
-          })
-          .then(function(kbbResults) {
-            var minimumKbbAverage = _.min(kbbResults, function(element) {
-              return element.Good;
-            });
-
-            var chart = getChart();
-            var data = chart.series[0].data;
-            data[5].y = minimumKbbAverage ? minimumKbbAverage.Good : 0;
-            chart.series[0].setData(data);
-          })
-          .finally(function() {
-            updatePlotInformation();
-            realignLabels();
-          })
-          .catch(function(error) {
-            error.dismiss();
-            scope.kbbValuationUnavailable = true;
-          });
-      }
-
       function resetValuation() {
         var chart = getChart();
         var data = chart.series[0].data;
         data[3].y = 0;
-        data[4].y = 0;
-        data[5].y = 0;
         chart.series[0].setData(data);
         scope.baseValuationUnavailable = false;
       }
@@ -220,7 +174,7 @@
         if (data[1].y) {
           var projectedPoint;
           // calculate the maximum of all the bookout data.
-          projectedPoint = _.max([data[3], data[4], data[5]], function(element) {
+          projectedPoint = _.max([data[3]], function(element) {
             return element.y;
           });
 
@@ -330,7 +284,7 @@
           chart: {
             backgroundColor: null,
             type: 'bar',
-            height: 200,
+            height: 150,
             marginTop: 0,
             marginRight: 0,
             marginBottom: 50,
@@ -358,7 +312,7 @@
             }]
           },
           xAxis: {
-            categories: ['', 'Bill of Sale', '', 'Black Book', 'MMR', 'KBB®'],
+            categories: ['', 'Bill of Sale', '', 'Black Book'],
             tickLength: 0,
             gridLineColor: 'transparent',
             lineWidth: 0,
@@ -423,12 +377,6 @@
               y: 0
             }, {
               color: '#000000',
-              y: 0
-            }, {
-              color: '#FF9800',
-              y: 0
-            }, {
-              color: '#2196F3',
               y: 0
             }]
           }]
