@@ -6,19 +6,17 @@ describe('Directive: nxgCreditAvailability', function() {
     $q,
     $rootScope,
     Addresses,
-    Kbb,
     Mmr,
     Blackbook,
     scope,
     directiveScope,
     element;
 
-  beforeEach(inject(function(_$compile_, _$q_, _$rootScope_, _Kbb_, _Mmr_, _Blackbook_, _Addresses_) {
+  beforeEach(inject(function(_$compile_, _$q_, _$rootScope_, _Mmr_, _Blackbook_, _Addresses_) {
     $q = _$q_;
     $compile = _$compile_;
     $rootScope = _$rootScope_;
 
-    Kbb = _Kbb_;
     Mmr = _Mmr_;
     Blackbook = _Blackbook_;
 
@@ -61,20 +59,6 @@ describe('Directive: nxgCreditAvailability', function() {
     );
     spyOn(Mmr, 'lookupByVin').and.callFake(function() {
       return mmrObject;
-    });
-
-    var kbbObject = $q.when(
-      {"Excellent": 18218, "Fair": 16382, "Good": 17532, "VeryGood": 17974}
-    );
-    spyOn(Kbb, 'lookupByConfiguration').and.callFake(function() {
-      return kbbObject;
-    });
-
-    var kbbConfigObject = $q.when(
-      [{"Id": 400272}]
-    );
-    spyOn(Kbb, 'getConfigurations').and.callFake(function() {
-      return kbbConfigObject;
     });
 
     var blackbookObject = $q.when(
@@ -121,26 +105,19 @@ describe('Directive: nxgCreditAvailability', function() {
     directiveScope = element.isolateScope();
   }));
 
-  it('should use main address zip code to lookup kbb', function() {
-    expect(directiveScope.zipCode).toEqual('57312')
-  });
-
   it('should not call any valuation when vin and odometer is undefined', function() {
     expect(Mmr.lookupByVin).not.toHaveBeenCalled();
-    expect(Kbb.getConfigurations).not.toHaveBeenCalled();
     expect(Blackbook.lookupByVin).not.toHaveBeenCalled();
 
     scope.odometer = 1000;
     scope.$apply();
     expect(Mmr.lookupByVin).not.toHaveBeenCalled();
-    expect(Kbb.getConfigurations).not.toHaveBeenCalled();
     expect(Blackbook.lookupByVin).not.toHaveBeenCalled();
 
     scope.odometer = undefined;
     scope.vin = 'ABCDE12345';
     scope.$apply();
     expect(Mmr.lookupByVin).not.toHaveBeenCalled();
-    expect(Kbb.getConfigurations).not.toHaveBeenCalled();
     expect(Blackbook.lookupByVin).not.toHaveBeenCalled();
   });
 
@@ -150,7 +127,6 @@ describe('Directive: nxgCreditAvailability', function() {
     scope.$apply();
 
     expect(Mmr.lookupByVin).not.toHaveBeenCalled();
-    expect(Kbb.getConfigurations).not.toHaveBeenCalled();
     expect(Blackbook.lookupByVin).not.toHaveBeenCalled();
   });
 
@@ -160,8 +136,6 @@ describe('Directive: nxgCreditAvailability', function() {
     scope.$apply();
 
     expect(Mmr.lookupByVin).toHaveBeenCalledWith(scope.vin, scope.odometer);
-    expect(Kbb.getConfigurations).toHaveBeenCalledWith(scope.vin, directiveScope.zipCode);
-    expect(Kbb.lookupByConfiguration).toHaveBeenCalledWith({"Id": 400272}, scope.odometer, directiveScope.zipCode);
     expect(Blackbook.lookupByVin).toHaveBeenCalledWith(scope.vin, scope.odometer, true);
   });
 
