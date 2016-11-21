@@ -103,10 +103,14 @@
         ])
           .then(function(results) {
             var minimumBlackbookAverage;
-            if (scope.selectedVehicle) {
-              minimumBlackbookAverage = _.find(results[0], function(element){
-                return element.GroupNumber === scope.selectedVehicle.GroupNumber;
-              });
+            if (results[0].length > 0) {
+              if (scope.selectedVehicle) {
+                minimumBlackbookAverage = _.find(results[0], function(element) {
+                  return element.GroupNumber === scope.selectedVehicle.GroupNumber;
+                });
+              } else {
+                minimumBlackbookAverage = results[0][0];
+              }
             }
 
             var chart = getChart();
