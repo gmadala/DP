@@ -243,13 +243,15 @@ function Helper() {
          *
          * @returns {none}
          */
-        var elPopOverBtn = browser.element(by.css('button[ng-click=\'closeMenuTip()\']'));
+        var elPopOverBtn = browser.element(by.css('[tooltip-template-transclude-scope=\'originScope()\'] button[ng-click=\'closeMenuTip()\']'));
         elPopOverBtn.isPresent()
             .then(function (bool) {
                 if (bool) {
                     elPopOverBtn.click()
                 }
             });
+
+        browser.wait(EC.not(EC.presenceOf(elPopOverBtn)), 3000);
     };
 
 
