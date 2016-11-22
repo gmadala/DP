@@ -6,9 +6,9 @@
     .module('nextgearWebApp')
     .directive('nxgValueLookup', nxgValueLookup);
 
-  nxgValueLookup.$inject = ['$q', 'Addresses', 'gettext', 'gettextCatalog', 'Mmr', 'Blackbook'];
+  nxgValueLookup.$inject = ['$q', 'Addresses', 'gettext', 'gettextCatalog', 'Blackbook'];
 
-  function nxgValueLookup($q, Addresses, gettext, gettextCatalog, Mmr, Blackbook) {
+  function nxgValueLookup($q, Addresses, gettext, gettextCatalog, Blackbook) {
 
     gettext('Purchase Amount');
     gettext('Average Bookout');
@@ -23,7 +23,8 @@
         odometer: '=',
         inventoryLocation: '=',
         purchasePrice: '=',
-        projectedFinancedAmount: '='
+        projectedFinancedAmount: '=',
+        selectedVehicle: '='
       },
       replace: 'true',
       link: linkFn
@@ -95,14 +96,19 @@
       /** Supporting local functions **/
 
       function updateBaseValuation() {
-        $q.all([
-          Blackbook.lookupByVin(scope.vin, scope.odometer, true),
-          Mmr.lookupByVin(scope.vin, scope.odometer)
-        ])
+        scope.baseValuationUnavailable = false;
+        Blackbook.lookupByVin(scope.vin, scope.odometer, true)
           .then(function(results) {
-            var minimumBlackbookAverage = _.min(results[0], function(element) {
-              return element.AverageValue;
-            });
+            var minimumBlackbookAverage;
+            if (results.length > 0) {
+              if (scope.selectedVehicle) {
+                minimumBlackbookAverage = _.find(results, function(element) {
+                  return element.GroupNumber === scope.selectedVehicle.GroupNumber;
+                });
+              } else {
+                minimumBlackbookAverage = results[0];
+              }
+            }
 
             var chart = getChart();
             var data = chart.series[0].data;
@@ -123,6 +129,7 @@
         var data = chart.series[0].data;
         data[3].y = 0;
         chart.series[0].setData(data);
+        scope.baseValuationUnavailable = false;
       }
 
       /*
