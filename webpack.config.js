@@ -6,7 +6,9 @@ module.exports = {
     target: 'web',
     context: __dirname,
     devtool: "inline-sourcemap",
-    entry: './react/app.js',
+    entry: [
+        './react/app.js'
+    ],
     externals: {
         jsdom: 'window',
         'react/addons': true,
@@ -35,10 +37,7 @@ module.exports = {
             {
                 test: /\.jsx?$/,
                 loader: 'babel',
-                exclude: [path.resolve( __dirname, 'node_modules' )],
-                query: {
-                    presets: [ 'es2015', 'react', 'stage-0' ]
-                }
+                exclude: [path.resolve( __dirname, 'node_modules' )]
             }, {
                 test: /sinon\.js$/,
                 loader: "imports?define=>false"
@@ -49,11 +48,13 @@ module.exports = {
         extensions: [ '', '.js', '.jsx' ]
     },
     plugins: debug
-        ? [new webpack.DefinePlugin({
+        ? [
+            new webpack.DefinePlugin({
                 "process.env": {
                     NODE_ENV: JSON.stringify( "development" )
                 }
-            })]
+            })
+        ]
         : [
             new webpack.optimize.DedupePlugin( ),
             new webpack.optimize.OccurenceOrderPlugin( ),

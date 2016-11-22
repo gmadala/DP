@@ -177,10 +177,8 @@
         // only display the plot information when we have value for purchase price.
         if (data[1].y) {
           var projectedPoint;
-          // calculate the maximum of all the bookout data.
-          projectedPoint = _.max([data[3]], function(element) {
-            return element.y;
-          });
+
+          projectedPoint = data[3];
 
           if (projectedPoint.y > 0) {
             // calculate the minimum between max bookout vs purchase price
