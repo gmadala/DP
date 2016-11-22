@@ -5,6 +5,9 @@
  * @description Page objects for login page elements
  * */
 
+var helper = require('./e2e_helper_functions.js');
+var helper = new helper.helper();
+
 function LoginObjects() {
 
     this.elForgotUsernamePassword = browser.element.all(by.css('a.forgot')).get(0);
@@ -48,6 +51,7 @@ function LoginObjects() {
     this.doLogin = function () {
         this.elLogin.click();
         browser.sleep(browser.params.longDelay);
+        helper.popOver();
     };
     this.doSubmitPassword = function () {
         this.elSubmitPassword.click();
