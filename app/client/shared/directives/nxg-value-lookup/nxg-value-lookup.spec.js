@@ -127,7 +127,7 @@ describe('Directive: nxgCreditAvailability', function() {
     expect(Blackbook.lookupByVin).toHaveBeenCalledWith(scope.vin, scope.odometer, true);
   });
 
-  it('should update the finance amount the purchase price when blackbook selected vehicle is null', function() {
+  it('should update the finance amount the purchase price or blackbook value', function() {
     scope.vin = 'ABCDE12345';
     scope.odometer = 5000;
     scope.purchasePrice = 2000;
