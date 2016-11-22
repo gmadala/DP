@@ -6,9 +6,9 @@
     .module('nextgearWebApp')
     .directive('nxgValueLookup', nxgValueLookup);
 
-  nxgValueLookup.$inject = ['$q', 'Addresses', 'gettext', 'gettextCatalog', 'Mmr', 'Blackbook'];
+  nxgValueLookup.$inject = ['$q', 'Addresses', 'gettext', 'gettextCatalog', 'Blackbook'];
 
-  function nxgValueLookup($q, Addresses, gettext, gettextCatalog, Mmr, Blackbook) {
+  function nxgValueLookup($q, Addresses, gettext, gettextCatalog, Blackbook) {
 
     gettext('Purchase Amount');
     gettext('Average Bookout');
@@ -97,19 +97,16 @@
 
       function updateBaseValuation() {
         scope.baseValuationUnavailable = false;
-        $q.all([
-          Blackbook.lookupByVin(scope.vin, scope.odometer, true),
-          Mmr.lookupByVin(scope.vin, scope.odometer)
-        ])
+        Blackbook.lookupByVin(scope.vin, scope.odometer, true)
           .then(function(results) {
             var minimumBlackbookAverage;
-            if (results[0].length > 0) {
+            if (results.length > 0) {
               if (scope.selectedVehicle) {
-                minimumBlackbookAverage = _.find(results[0], function(element) {
+                minimumBlackbookAverage = _.find(results, function(element) {
                   return element.GroupNumber === scope.selectedVehicle.GroupNumber;
                 });
               } else {
-                minimumBlackbookAverage = results[0][0];
+                minimumBlackbookAverage = results[0];
               }
             }
 

@@ -39,18 +39,6 @@ describe('Directive: nxgCreditAvailability', function() {
     Addresses = _Addresses_;
     spyOn(Addresses, 'getActivePhysical').and.returnValue(mockAddresses);
 
-    var mmrObject = $q.when(
-      [{
-        "ExcellentWholesale": 15000,
-        "GoodWholesale": 14500,
-        "FairWholesale": 14000,
-        "AverageWholesale": 14500
-      }]
-    );
-    spyOn(Mmr, 'lookupByVin').and.callFake(function() {
-      return mmrObject;
-    });
-
     var blackbookObject = $q.when(
       [{
         "RoughValue": 16000,
@@ -94,18 +82,15 @@ describe('Directive: nxgCreditAvailability', function() {
   }));
 
   it('should not call any valuation when vin and odometer is undefined', function() {
-    expect(Mmr.lookupByVin).not.toHaveBeenCalled();
     expect(Blackbook.lookupByVin).not.toHaveBeenCalled();
 
     scope.odometer = 1000;
     scope.$apply();
-    expect(Mmr.lookupByVin).not.toHaveBeenCalled();
     expect(Blackbook.lookupByVin).not.toHaveBeenCalled();
 
     scope.odometer = undefined;
     scope.vin = 'ABCDE12345';
     scope.$apply();
-    expect(Mmr.lookupByVin).not.toHaveBeenCalled();
     expect(Blackbook.lookupByVin).not.toHaveBeenCalled();
   });
 
@@ -114,7 +99,6 @@ describe('Directive: nxgCreditAvailability', function() {
     scope.odometer = 5000;
     scope.$apply();
 
-    expect(Mmr.lookupByVin).not.toHaveBeenCalled();
     expect(Blackbook.lookupByVin).not.toHaveBeenCalled();
   });
 
@@ -123,7 +107,6 @@ describe('Directive: nxgCreditAvailability', function() {
     scope.odometer = 5000;
     scope.$apply();
 
-    expect(Mmr.lookupByVin).toHaveBeenCalledWith(scope.vin, scope.odometer);
     expect(Blackbook.lookupByVin).toHaveBeenCalledWith(scope.vin, scope.odometer, true);
   });
 
