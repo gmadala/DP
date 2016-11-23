@@ -1,28 +1,28 @@
 <div>
   <br/>
-  <div class="row">
-    <div class="col-md-12 text-center">
-      <p class="sidebar-header" style="text-transform: uppercase;" translate>Projected Financed Amount</p>
-    </div>
-  </div>
-  <div class="row">
-    <div class="col-md-12 text-center">
-      <h3 class="sidebar-hero text-success" translate>{{ projectedFinancedAmount || 0 | numeral : '$0,0[.]00'}}</h3>
-    </div>
-  </div>
-  <div class="row">
-    <div class="col-md-12">
-      <p class="sidebar-hint" translate>
-        Finance amount is highest average bookout, not to exceed purchase price.
-      </p>
-    </div>
-  </div>
+  <!--<div class="row">-->
+    <!--<div class="col-md-12 text-center">-->
+      <!--<p class="sidebar-header" style="text-transform: uppercase;" translate>Projected Financed Amount</p>-->
+    <!--</div>-->
+  <!--</div>-->
+  <!--<div class="row">-->
+    <!--<div class="col-md-12 text-center">-->
+      <!--<h3 class="sidebar-hero text-success" translate>{{ projectedFinancedAmount || 0 | numeral : '$0,0[.]00'}}</h3>-->
+    <!--</div>-->
+  <!--</div>-->
+  <!--<div class="row">-->
+    <!--<div class="col-md-12">-->
+      <!--<p class="sidebar-hint" translate>-->
+        <!--Finance amount is highest average bookout, not to exceed purchase price.-->
+      <!--</p>-->
+    <!--</div>-->
+  <!--</div>-->
   <div class="row">
     <div class="col-md-12">
       <div class="nxg-value-lookup"></div>
     </div>
   </div>
-  <div class="row" ng-show="baseValuationUnavailable || kbbValuationUnavailable">
+  <div class="row" ng-show="baseValuationUnavailable">
     <div class="col-md-12">
       <div class="alert alert-danger sidebar-hint" role="alert" translate>
         We were unable to pull one or more bookout values from our partner. No need to refresh the browser.

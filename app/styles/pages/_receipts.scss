@@ -1,0 +1,29 @@
+//// RECEIPTS
+
+#ReceiptsPage {
+
+  @media only screen and (max-width: 767px) {
+    .styled-input {
+      input {
+        width: 90%;
+      }
+    }
+
+    .search-date-picker {
+      padding-right: 0 !important;
+      input {
+        width: 100% !important;
+      }
+    }
+
+    .numeric, .table {
+      text-align: left !important;
+    }
+
+    .actions {
+      border-left-width: 0px;
+      border-right-width: 0px;
+      border-top-width: 0px;
+    }
+  }
+}

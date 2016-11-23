@@ -6,19 +6,17 @@ describe('Directive: nxgCreditAvailability', function() {
     $q,
     $rootScope,
     Addresses,
-    Kbb,
     Mmr,
     Blackbook,
     scope,
     directiveScope,
     element;
 
-  beforeEach(inject(function(_$compile_, _$q_, _$rootScope_, _Kbb_, _Mmr_, _Blackbook_, _Addresses_) {
+  beforeEach(inject(function(_$compile_, _$q_, _$rootScope_, _Mmr_, _Blackbook_, _Addresses_) {
     $q = _$q_;
     $compile = _$compile_;
     $rootScope = _$rootScope_;
 
-    Kbb = _Kbb_;
     Mmr = _Mmr_;
     Blackbook = _Blackbook_;
 
@@ -41,60 +39,19 @@ describe('Directive: nxgCreditAvailability', function() {
     Addresses = _Addresses_;
     spyOn(Addresses, 'getActivePhysical').and.returnValue(mockAddresses);
 
-    var mmrObject = $q.when(
-      [{
-        "Mid": "201501756938560",
-        "MakeId": "017",
-        "Make": "FORD",
-        "ModelId": "5693",
-        "Model": "ESCAPE FWD",
-        "YearId": "2015",
-        "Year": "2015",
-        "BodyId": "8560",
-        "Body": "4D SUV 2.5L SE",
-        "Display": "2015 FORD ESCAPE FWD 4D SUV 2.5L SE",
-        "ExcellentWholesale": 15150,
-        "GoodWholesale": 14750,
-        "FairWholesale": 14400,
-        "AverageWholesale": 14750
-      }]
-    );
-    spyOn(Mmr, 'lookupByVin').and.callFake(function() {
-      return mmrObject;
-    });
-
-    var kbbObject = $q.when(
-      {"Excellent": 18218, "Fair": 16382, "Good": 17532, "VeryGood": 17974}
-    );
-    spyOn(Kbb, 'lookupByConfiguration').and.callFake(function() {
-      return kbbObject;
-    });
-
-    var kbbConfigObject = $q.when(
-      [{"Id": 400272}]
-    );
-    spyOn(Kbb, 'getConfigurations').and.callFake(function() {
-      return kbbConfigObject;
-    });
-
     var blackbookObject = $q.when(
       [{
-        "VinPos1To8": "1FMCU0G7",
-        "VinYearCode": "F",
-        "Make": "Ford",
-        "Model": "Escape SE",
-        "Style": "4D SUV FWD 2.5L I-4 SMPI DOHC",
-        "Year": 2015,
-        "RoughValue": 16025,
-        "AverageValue": 18600,
-        "CleanValue": 20500,
-        "ExtraCleanValue": 21450,
-        "GroupNumber": "7444",
-        "MakeNumber": "300",
-        "UVc": "271",
-        "DSCRegionalAveragePurchasePrice": null,
-        "DSCRegionalMaxPurchasePrice": null,
-        "DSCRegionalMinPurchasePrice": null
+        "RoughValue": 16000,
+        "AverageValue": 17000,
+        "CleanValue": 18000,
+        "ExtraCleanValue": 19000,
+        "GroupNumber": "7444"
+      }, {
+        "RoughValue": 18000,
+        "AverageValue": 19000,
+        "CleanValue": 20000,
+        "ExtraCleanValue": 21000,
+        "GroupNumber": "7445"
       }]
     );
     spyOn(Blackbook, 'lookupByVin').and.callFake(function() {
@@ -107,6 +64,7 @@ describe('Directive: nxgCreditAvailability', function() {
     scope.inventoryLocation = undefined;
     scope.purchasePrice = undefined;
     scope.projectedFinancedAmount = undefined;
+    scope.selectedVehicle = undefined;
 
     element = angular.element(
       '<nxg-value-lookup' +
@@ -114,33 +72,25 @@ describe('Directive: nxgCreditAvailability', function() {
       ' odometer="odometer"' +
       ' inventory-location="inventoryLocation"' +
       ' purchase-price="purchasePrice"' +
-      ' projected-financed-amount="projectedFinancedAmount">' +
+      ' projected-financed-amount="projectedFinancedAmount"' +
+      ' selected-vehicle="selectedVehicle"' +
+      '>' +
       '</nxg-value-lookup>');
     element = $compile(element)(scope);
     $rootScope.$digest();
     directiveScope = element.isolateScope();
   }));
 
-  it('should use main address zip code to lookup kbb', function() {
-    expect(directiveScope.zipCode).toEqual('57312')
-  });
-
   it('should not call any valuation when vin and odometer is undefined', function() {
-    expect(Mmr.lookupByVin).not.toHaveBeenCalled();
-    expect(Kbb.getConfigurations).not.toHaveBeenCalled();
     expect(Blackbook.lookupByVin).not.toHaveBeenCalled();
 
     scope.odometer = 1000;
     scope.$apply();
-    expect(Mmr.lookupByVin).not.toHaveBeenCalled();
-    expect(Kbb.getConfigurations).not.toHaveBeenCalled();
     expect(Blackbook.lookupByVin).not.toHaveBeenCalled();
 
     scope.odometer = undefined;
     scope.vin = 'ABCDE12345';
     scope.$apply();
-    expect(Mmr.lookupByVin).not.toHaveBeenCalled();
-    expect(Kbb.getConfigurations).not.toHaveBeenCalled();
     expect(Blackbook.lookupByVin).not.toHaveBeenCalled();
   });
 
@@ -149,8 +99,6 @@ describe('Directive: nxgCreditAvailability', function() {
     scope.odometer = 5000;
     scope.$apply();
 
-    expect(Mmr.lookupByVin).not.toHaveBeenCalled();
-    expect(Kbb.getConfigurations).not.toHaveBeenCalled();
     expect(Blackbook.lookupByVin).not.toHaveBeenCalled();
   });
 
@@ -159,21 +107,41 @@ describe('Directive: nxgCreditAvailability', function() {
     scope.odometer = 5000;
     scope.$apply();
 
-    expect(Mmr.lookupByVin).toHaveBeenCalledWith(scope.vin, scope.odometer);
-    expect(Kbb.getConfigurations).toHaveBeenCalledWith(scope.vin, directiveScope.zipCode);
-    expect(Kbb.lookupByConfiguration).toHaveBeenCalledWith({"Id": 400272}, scope.odometer, directiveScope.zipCode);
     expect(Blackbook.lookupByVin).toHaveBeenCalledWith(scope.vin, scope.odometer, true);
   });
 
-  it('should update the finance amount to correct value', function() {
+  it('should update the finance amount the purchase price or blackbook value', function() {
     scope.vin = 'ABCDE12345';
     scope.odometer = 5000;
     scope.purchasePrice = 2000;
+    scope.selectedVehicle = {
+      "GroupNumber": "7445"
+    };
     scope.$apply();
+    // should pick the purchase price since it's lower vs highest of the valuation.
     expect(directiveScope.projectedFinancedAmount).toEqual(2000);
 
     scope.purchasePrice = 30000;
     scope.$apply();
-    expect(directiveScope.projectedFinancedAmount).toEqual(18600);
+    // should pick the blackbook since it's lower vs purchase price and blackbook is the highest of all the valuation.
+    expect(directiveScope.projectedFinancedAmount).toEqual(19000);
+  });
+
+  it('should reset the valuation when resetting the vin', function() {
+    scope.vin = undefined;
+    scope.$apply();
+    expect(directiveScope.baseValuationUnavailable).toBe(false);
+  });
+
+  it('should reset the valuation when resetting the odometer', function() {
+    scope.odometer = undefined;
+    scope.$apply();
+    expect(directiveScope.baseValuationUnavailable).toBe(false);
+  });
+
+  it('should reset the projected financed amount when resetting the purchase price', function() {
+    scope.purchasePrice = undefined;
+    scope.$apply();
+    expect(directiveScope.projectedFinancedAmount).toBe(undefined);
   });
 });

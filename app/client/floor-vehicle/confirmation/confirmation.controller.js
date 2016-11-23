@@ -13,6 +13,7 @@
     'metric',
     '$stateParams',
     '$state',
+    'fedex'
   ];
 
   function FlooringConfirmationCtrl($scope, User, kissMetricInfo, segmentio, metric, $stateParams, $state) {
@@ -30,6 +31,7 @@
 
     User.getInfo().then(function (userInfo) {
       vm.user = userInfo;
+      vm.businessId = userInfo.BusinessId;
     });
 
     vm.submitSurvey = function () {
