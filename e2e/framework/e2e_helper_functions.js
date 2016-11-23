@@ -250,8 +250,6 @@ function Helper() {
                     elPopOverBtn.click()
                 }
             });
-
-        browser.wait(EC.not(EC.presenceOf(elPopOverBtn)), 3000);
     };
 
 
