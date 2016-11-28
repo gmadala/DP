@@ -50,9 +50,9 @@
       <div>
         <i class="glyphicon glyphicon-usd"></i>
       </div>
-      <input type="text" id="inputPurchaseAmt" name="inputPurchaseAmt" ng-model="wizardFloor.data.UnitPurchasePrice" placeholder="{{ 'Purchase Amount' | translate }}"
+      <input type="number" id="inputPurchaseAmt" name="inputPurchaseAmt" ng-model="wizardFloor.data.UnitPurchasePrice" placeholder="{{ 'Purchase Amount' | translate }}"
              required
-             nxg-input-currency="1000000000000"
+             nxg-input-currency="400000"
              nxg-min="1"
              class="form-control"
              ng-class="{ 'nxg-invalid': (form.inputPurchaseAmt.$error.required || form.inputPurchaseAmt.$error.max || form.inputPurchaseAmt.$error.pattern || form.inputPurchaseAmt.$error.maxlength || form.inputPurchaseAmt.$error.nxgMin) && form.$submitted }" />
@@ -68,7 +68,7 @@
     </label>
     <label for="inputPurchaseAmt" class="text-error"
            ng-show="!form.inputPurchaseAmt.$error.required && !form.inputPurchaseAmt.$error.pattern && form.inputPurchaseAmt.$error.max && form.$submitted" translate>
-      Please enter a value less than $1,000,000,000,000.
+      Please enter a value less than $400,000.
     </label>
   </div>
 

@@ -34,7 +34,8 @@
     gettext,
     gettextCatalog,
     capitalizeFilter,
-    language) {
+    language
+  ) {
 
     var uibModal = $uibModal;
 
