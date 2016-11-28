@@ -127,7 +127,7 @@ describe('Directive: nxgCreditAvailability', function() {
     expect(directiveScope.projectedFinancedAmount).toEqual(19000);
   });
 
-  it('should update the finance amount the selected blackbook value', function() {
+  it('should update the finance amount to the selected blackbook value', function() {
     scope.vin = 'ABCDE12345';
     scope.odometer = 5000;
     scope.purchasePrice = 30000;
