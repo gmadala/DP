@@ -17,6 +17,7 @@ describe('Controller ConfirmationCtrl', function () {
   var metric;
   var userMockData;
   var kissMetricsData;
+  var responseMock;
 
   function reloadController() {
     vm = controller('FlooringConfirmationCtrl', {
@@ -74,6 +75,13 @@ describe('Controller ConfirmationCtrl', function () {
 
     segmentioMock = {
       track: angular.noop
+    };
+
+    responseMock = {
+      data: {
+        waybill:'labelImage',
+        trackingNumber: '1234567890'
+      }
     };
 
     spyOn(stateMock, 'go').and.callThrough();
@@ -137,4 +145,5 @@ describe('Controller ConfirmationCtrl', function () {
 
     expect(vm.surveyComplete).toEqual(false);
   });
+
 });

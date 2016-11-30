@@ -1,6 +1,6 @@
-<div class="container non-responsive">
+<div class="container ">
   <section class="row">
-    <section class="col-xs-8">
+    <section class="col-sm-8">
       <div nxg-search
            title="{{ 'Receipt Search' | translate }}"
            class="search-form"
@@ -10,11 +10,25 @@
            active-criteria="receipts.proposedSearchCriteria"
            on-search="receipts.search()"
            on-clear="receipts.resetSearch()"
-           filterable="true" >
+           filterable="true">
       </div>
 
       <div class="panel panel-default">
-        <h2 class="well-title" translate>Receipts</h2>
+        <h2 class="well-title" translate>Receipts
+          <div uib-dropdown class="pull-right visible-xs">
+            <button class="btn-unstyle dropdown-toggle sort-by right no-padding no-margin" type="button" id="dropdownSort" uib-dropdown-toggle
+                    aria-haspopup="true" aria-expanded="false">
+              <strong translate>Sort By</strong>
+              <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu" aria-labelledby="dropdownSort">
+              <li ng-click="sortBy('CreateDate')"><a translate>Payment Date</a></li>
+              <li ng-click="sortBy('TransactionNumber')"><a translate>Receipt No.</a></li>
+              <li ng-click="sortBy('PaymentMethod')"><a translate>Payment Description</a></li>
+              <li ng-click="sortBy('AmountProvided')"><a translate>Amount</a></li>
+            </ul>
+          </div>
+        </h2>
         <div ng-switch="receipts.results.length > 0 || receipts.loading">
           <p class="notice-box" ng-switch-when="false" translate>
             Sorry, no results found. Please <a ng-click="receipts.resetSearch()" title="New Search">try a new search</a>.
@@ -27,33 +41,33 @@
             <table class="table table-striped table-primary">
               <thead>
               <tr>
-                <th class="sortable"
+                <th class="sortable hidden-xs"
                     ng-click="sortBy('CreateDate')"
                     ng-class="{ sorted : sortField == 'CreateDate', desc : sortDescending }">
                   <nxg-sortable sortable-text="{{ 'Payment Date' | translate }}"></nxg-sortable>
                 </th>
-                <th class="sortable"
+                <th class="sortable hidden-xs"
                     ng-click="sortBy('TransactionNumber')"
                     ng-class="{ sorted : sortField == 'TransactionNumber', desc : sortDescending }">
                   <nxg-sortable sortable-text="{{ 'Receipt No.' | translate }}"></nxg-sortable>
                 </th>
-                <th class="sortable"
+                <th class="sortable hidden-xs"
                     ng-click="sortBy('PaymentMethod')"
                     ng-class="{ sorted : sortField == 'PaymentMethod', desc : sortDescending }">
                   <nxg-sortable sortable-text="{{ 'Payment Description' | translate }}"></nxg-sortable>
                 </th>
-                <th class="sortable"
+                <th class="sortable hidden-xs"
                     ng-click="sortBy('AmountProvided')"
                     ng-class="{ sorted : sortField == 'AmountProvided', desc : sortDescending }">
                   <nxg-sortable sortable-text="{{ 'Amount' | translate }}"></nxg-sortable>
                 </th>
-                <th translate>
+                <th class="hidden-xs" translate>
                   Export Receipt(s)
                 </th>
               </tr>
               </thead>
               <tr ng-repeat="receipt in receipts.results">
-                <td >
+                <td class="hidden-xs">
                   <h4 class="lockup-major">{{ receipt.CreateDate | moment }}</h4>
                   <p class="lockup-minor" ng-switch="getReceiptStatus(receipt)">
                     <span ng-switch-when="nsf" translate>Insufficient Funds</span>
@@ -61,12 +75,12 @@
                     <span ng-switch-when="normal" translate>Processed</span>
                   </p>
                 </td>
-                <td>
+                <td class="hidden-xs">
                   <a class="lockup-major" href="javascript:void(0)" ng-click="viewReceipt(receipt)">
                     <span nxg-highlight="receipt.TransactionNumber" highlight="receipt.data.query"></span>
                   </a>
                 </td>
-                <td class="description-no-vin">
+                <td class="description-no-vin hidden-xs">
                   <p>
                     <span translate>Payment</span>: {{ receipt.PaymentMethod }}<br/>
                   <span ng-switch on="!!receipt.CheckNumber">
@@ -77,22 +91,64 @@
                   </span>
                     <span ng-show="receipt.PayeeDescription">{{ receipt.PayeeDescription }}</span></p>
                 </td>
-                <td>
+                <td class="hidden-xs">
                   <h4 class="lockup-major numeric">{{ receipt.AmountProvided | currency }}</h4>
                 </td>
                 <td class="actions">
-                  <button class="btn btn-adapts right"
+                  <div class="col-xs-6 no-padding visible-xs">
+                    <p class="lockup-minor heavy"><span translate>Payment Date</span>:</p>
+                  </div>
+                  <div class="col-xs-6 no-padding visible-xs">
+                    <h4 class="lockup-major">{{ receipt.CreateDate | moment }}</h4>
+                    <p class="lockup-minor" ng-switch="getReceiptStatus(receipt)">
+                      <span ng-switch-when="nsf" translate>Insufficient Funds</span>
+                      <span ng-switch-when="void" translate>Voided</span>
+                      <span ng-switch-when="normal" translate>Processed</span>
+                    </p>
+                  </div>
+                  <div class="col-xs-6 no-padding visible-xs">
+                    <p class="lockup-minor  heavy"><span translate>Receipt No.</span>:</p>
+                  </div>
+                  <div class="col-xs-6 no-padding visible-xs">
+                    <a class="lockup-major" href="javascript:void(0)" ng-click="viewReceipt(receipt)">
+                      <span nxg-highlight="receipt.TransactionNumber" highlight="receipt.data.query"></span>
+                    </a>
+                  </div>
+                  <div class="col-xs-6 no-padding visible-xs">
+                    <p class="lockup-minor  heavy"><span translate>Payment Description</span>:</p>
+                  </div>
+                  <div class="description-no-vin col-xs-6 no-padding visible-xs">
+                    <p>
+                      <span translate>Payment</span>: {{ receipt.PaymentMethod }}<br/>
+                  <span ng-switch on="!!receipt.CheckNumber">
+                  <span ng-switch-when="true">
+                  <span ng-show="receipt.CheckNumber"><span translate>Check #</span>:</span>
+                  <span nxg-highlight="receipt.CheckNumber" highlight="receipt.data.query"></span>
+                  </span>
+                  </span>
+                      <span ng-show="receipt.PayeeDescription">{{ receipt.PayeeDescription }}</span></p>
+                  </div>
+                  <div class="col-xs-6 no-padding visible-xs">
+                    <p class="lockup-minor  heavy"><span translate>Amount</span>:</p>
+                  </div>
+                  <div class="col-xs-6 no-padding visible-xs">
+                    <h4 class="lockup-major numeric">{{ receipt.AmountProvided | currency }}</h4>
+                  </div>
+                  <div class="col-xs-6 no-padding visible-xs">
+                    <p class="lockup-minor  heavy"><span translate>Actions</span>:</p>
+                  </div>
+                  <button class="btn btn-adapts"
                           type="button"
                           ng-class="{'selected': isSelected(receipt)}"
                           ng-disabled="tooMany() && !isSelected(receipt)"
                           ng-click="toggleInQueue(receipt)">
                   <span class="paired-body">
-                    <span ng-show="isSelected(receipt)" translate>Remove Receipt</span>
-                    <span ng-hide="isSelected(receipt)" translate>Add Receipt</span>
+                  <span ng-show="isSelected(receipt)" translate>Remove Receipt</span>
+                  <span ng-hide="isSelected(receipt)" translate>Add Receipt</span>
                   </span>
                   <span ng-switch="isSelected(receipt)">
-                    <span ng-switch-when="false" nxg-icon="icon-plus" class="paired-media icon-small"></span>
-                    <span ng-switch-when="true" nxg-icon="icon-minus" class="paired-media icon-small"></span>
+                  <span ng-switch-when="false" nxg-icon="icon-plus" class="paired-media icon-small"></span>
+                  <span ng-switch-when="true" nxg-icon="icon-minus" class="paired-media icon-small"></span>
                   </span>
                   </button>
                 </td>
@@ -107,7 +163,7 @@
       </div>
     </section>
 
-    <div class="col-xs-3">
+    <div class="col-sm-3 hidden-xs">
       <section class="panel panel-default sticky" nxg-sticky header=".nxg-sticky-header" scroll=".queue-list" footer=".well-footer">
         <div class="nxg-sticky-header">
           <h2 class="well-title" translate>Export Receipts</h2>
@@ -118,7 +174,7 @@
           <div class="well-item well-light bordered">
             <div class="alt-lockup">
               <p class="lockup-minor" translate>Receipts Selected</p>
-              <h3 class="lockup-major" translate>{{ selectedReceipts.length }} <span class="lockup-minor heavy">out of</span> 20</h3>
+              <h3 class="lockup-major">{{ selectedReceipts.length }} <span class="lockup-minor heavy" translate>out of</span> 20</h3>
             </div>
           </div>
         </div>
@@ -162,6 +218,15 @@
           </button>
         </div>
       </section>
+    </div>
+    <div class="visible-xs mobile-checkout-widget hidden-print">
+      <button class="btn-cta cta-primary"
+              ng-click="onExport()">
+        <span translate>Export Receipt(s)</span>
+        <span> {{ selectedReceipts.length }} <span class="lockup-minor heavy" translate>out of</span> 20</span>
+
+        <span nxg-icon="icon-document" class="icon-small"></span>
+      </button>
     </div>
   </section>
 </div>

@@ -24,14 +24,13 @@
 
   <div class="form-group">
     <label ng-show="wizardFloor.data.UnitMileage" for="inputMileage" class="show-hide" translate>Odometer</label>
-    <input type="text"  class="input-full" placeholder="{{ 'Odometer' | translate }}" id="inputMileage"
+    <input type="number" placeholder="{{ 'Odometer' | translate }}" id="inputMileage"
            name="inputMileage"
            class="form-control"
            ng-model="wizardFloor.data.UnitMileage"
-           ng-pattern="/^[0-9]{1,3}(?:,?[0-9]{3})*$/"
            nxg-min="1"
+           nxg-max="999999"
            required
-           nxg-validate-int="6"
            ng-class="{ 'nxg-invalid': (form.inputMileage.$error.required || form.inputMileage.$error.pattern || form.inputMileage.$error.maxlength || form.inputMileage.$error.nxgMin) && form.$submitted }"
       />
       <label for="inputMileage" class="text-error" ng-show="form.inputMileage.$error.required && form.$submitted">
@@ -45,7 +44,7 @@
       </label>
       <label for="inputMileage"
              class="text-error"
-             ng-show="form.inputMileage.$error.maxlength && form.$submitted" translate>
+             ng-show="form.inputMileage.$error.nxgMax && form.$submitted" translate>
         Please enter a value less than 1,000,000.
       </label>
   </div>

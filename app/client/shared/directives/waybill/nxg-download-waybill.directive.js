@@ -9,7 +9,10 @@
     return {
       templateUrl: 'client/shared/directives/waybill/nxg-download-waybill.html',
       restrict: "E",
-      scope: {},
+      scope: {
+        title:'@title',
+        wizardStatus: '='
+      },
       replace: true,
       controller: 'NxgDownloadWaybillCtrl'
     };

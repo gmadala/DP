@@ -22,10 +22,10 @@ app/languages/
 .metadata/
 #maintenance
 TESTS*.xml
-app/client/react-components.js
-app/react-components.js
+app/scripts/react-app.js
 .vscode/launch.json
 .vscode/settings.json
 eslint-debug.json
 app/react-components/dist/common-components.js
 /translations
+app/scripts/react-app.js
