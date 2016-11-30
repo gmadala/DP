@@ -45,7 +45,7 @@
         "indent": [2, 4, {SwitchCase: 1}],
         "init-declarations": 2,
         "key-spacing": 0,
-        "max-len": [2, 300],
+        "max-len": [2, 200],
         "no-alert": 1,
         "no-catch-shadow": 2,
         "no-cond-assign": 2,
