@@ -6,8 +6,6 @@
     "url": "https://git.assembla.com/nextgear-desktop-and-mobile.desktop.git"
   },
   "dependencies": {
-    "Base64": "^1.0.0",
-    "axios": "^0.15.2",
     "babel-polyfill": "^6.16.0",
     "chai": "^3.5.0",
     "chai-as-promised": "^6.0.0",
