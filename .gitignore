@@ -19,6 +19,7 @@ npm-debug.log
 *.pot
 app/client/scripts/translations.js
 app/languages/
+app/private-components/addtohomescreen/
 .metadata/
 #maintenance
 TESTS*.xml
@@ -29,3 +30,4 @@ eslint-debug.json
 app/react-components/dist/common-components.js
 /translations
 app/scripts/react-app.js
+app/scripts/addtohomescreen.js
