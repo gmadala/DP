@@ -300,6 +300,17 @@ module.exports = function( grunt ) {
                     }
                 ]
             },
+            addToHomescreen: {
+                files: [
+                    {
+                        expand: true,
+                        dot: true,
+                        flatten: true,
+                        dest: '<%= yeoman.app %>/private-components/addtohomescreen',
+                        src: 'node_modules/add-to-homescreen/dist/**/*'
+                    },
+                ]
+            },
             maintenance: {
                 files: [
                     {
@@ -373,6 +384,12 @@ module.exports = function( grunt ) {
                         flatten: true,
                         dest: '<%= yeoman.dist %>/img/icons/',
                         src: '<%= yeoman.app %>/img/icons/*'
+                    }, {
+                        expand: true,
+                        dot: true,
+                        flatten: true,
+                        dest: '<%= yeoman.dist %>/img/mobile-icons/',
+                        src: '<%= yeoman.app %>/img/mobile-icons/*'
                     }, {
                         expand: true,
                         dot: true,
@@ -553,6 +570,7 @@ module.exports = function( grunt ) {
     grunt.registerTask('webpack-dev', [ 'env:dev', 'shell:npm', 'shell:bower', 'shell:webpack' ]);
     grunt.registerTask('webpack-prod', [ 'env:prod', 'shell:npm', 'shell:bower', 'shell:webpack_prod' ]);
     grunt.registerTask('dev-setup', [
+        'copy:addToHomescreen'
         'gitinfo',
         'webpack-dev',
         'env:dev',
@@ -601,7 +619,8 @@ module.exports = function( grunt ) {
         'imagemin',
         'usemin',
         'htmlmin',
-        'copy:notification'
+        'copy:notification',
+        'copy:addToHomescreen'
     ]);
 
     // Continuous Integration build -- call with --target={test|production|training|demo|rubydal} as defined in

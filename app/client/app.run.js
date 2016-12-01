@@ -38,7 +38,7 @@
     metric,
     language,
     features,
-    kissMetricInfo ) {
+    kissMetricInfo) {
 
     var uibModal = $uibModal;
     // state whose transition was interrupted to ask the user to log in
@@ -53,6 +53,19 @@
     language.loadLanguage();
     // set enabled features
     features.loadFromQueryString();
+    // set addToHomescreen
+    $rootScope.addToHomescreen = addToHomescreen({
+        debug: false,
+        autostart: false,
+        icon: false,
+        modal: true,
+        lifespan: 0,
+        startDelay: 2,
+        maxDisplayCount: 1,
+        displayPace: 0
+    });
+    $rootScope.isHeadless = $rootScope.addToHomescreen.session.added;
+    $rootScope.isMobile = $window.innerWidth < 768;
 
     var prv = {
       pendingReload: false,

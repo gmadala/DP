@@ -60,6 +60,10 @@ acorn@~2.6.4:
   version "2.6.4"
   resolved "https://registry.yarnpkg.com/acorn/-/acorn-2.6.4.tgz#eb1f45b4a43fa31d03701a5ec46f3b52673e90ee"
 
+add-to-homescreen:
+  version "3.2.6"
+  resolved "https://nexus.nextgearcapital.com/repository/npm/add-to-homescreen/-/add-to-homescreen-3.2.6.tgz#24ab95e8b41a43588fdc4691e576de9f0466e3c2"
+
 adm-zip@^0.4.7, adm-zip@0.4.7:
   version "0.4.7"
   resolved "https://registry.yarnpkg.com/adm-zip/-/adm-zip-0.4.7.tgz#8606c2cbf1c426ce8c8ec00174447fd49b6eafc1"
@@ -4457,9 +4461,9 @@ grunt-processhtml@~0.3.3:
     htmlprocessor "0.2.3"
     lodash.clonedeep "^4.3.0"
 
-grunt-protractor-runner@~4.0.0:
+grunt-protractor-runner@4.0.0:
   version "4.0.0"
-  resolved "https://registry.yarnpkg.com/grunt-protractor-runner/-/grunt-protractor-runner-4.0.0.tgz#eabadb78826663f10f57935e0b727b3f7fab29fd"
+  resolved "https://nexus.nextgearcapital.com/repository/npm/grunt-protractor-runner/-/grunt-protractor-runner-4.0.0.tgz#eabadb78826663f10f57935e0b727b3f7fab29fd"
   dependencies:
     protractor "^4.0.0"
     split "~1.0.0"
@@ -4689,7 +4693,7 @@ hasha@~2.2.0:
     is-stream "^1.0.1"
     pinkie-promise "^2.0.0"
 
-hat@^0.0.3:
+hat@^0.0.3, hat@0.0.3:
   version "0.0.3"
   resolved "https://registry.yarnpkg.com/hat/-/hat-0.0.3.tgz#bb014a9e64b3788aed8005917413d4ff3d502d8a"
 
@@ -6316,7 +6320,7 @@ lodash@^2.4.1, lodash@~2.4.1:
   version "2.4.2"
   resolved "https://registry.yarnpkg.com/lodash/-/lodash-2.4.2.tgz#fadd834b9683073da179b3eae6d9c0d15053f73e"
 
-lodash@^3.10.0, lodash@^3.10.1, lodash@^3.2.0, lodash@^3.3.0, lodash@^3.5.0, lodash@^3.6.0, lodash@^3.7.0, lodash@^3.8.0, lodash@^3.9.3, lodash@~3.10.0:
+lodash@^3.0.0, lodash@^3.10.0, lodash@^3.10.1, lodash@^3.2.0, lodash@^3.3.0, lodash@^3.5.0, lodash@^3.6.0, lodash@^3.7.0, lodash@^3.8.0, lodash@^3.9.3, lodash@~3.10.0:
   version "3.10.1"
   resolved "https://registry.yarnpkg.com/lodash/-/lodash-3.10.1.tgz#5bf45e8e49ba4189e17d482789dfd15bd140b7b6"
 
@@ -7558,7 +7562,22 @@ proto-list@~1.2.1:
   version "1.2.4"
   resolved "https://registry.yarnpkg.com/proto-list/-/proto-list-1.2.4.tgz#212d5bfe1318306a420f6402b8e26ff39647a849"
 
-protractor@^4.0.0, protractor@~4.0.0:
+protractor-jasmine2-screenshot-reporter@^0.3.2:
+  version "0.3.2"
+  resolved "https://nexus.nextgearcapital.com/repository/npm/protractor-jasmine2-screenshot-reporter/-/protractor-jasmine2-screenshot-reporter-0.3.2.tgz#d9c9f952550f63b3ee3efd3a4a2d8f9bbe0be850"
+  dependencies:
+    hat "0.0.3"
+    lodash "^3.0.0"
+    mkdirp "^0.5.0"
+    rimraf "^2.4.3"
+    string.prototype.startswith "^0.2.0"
+    uuid "^2.0.0"
+
+protractor-linkuisref-locator@1.1.2:
+  version "1.1.2"
+  resolved "https://nexus.nextgearcapital.com/repository/npm/protractor-linkuisref-locator/-/protractor-linkuisref-locator-1.1.2.tgz#23627860e9833548e8e3807f5d59f791a0715a60"
+
+protractor@^4.0.0:
   version "4.0.11"
   resolved "https://registry.yarnpkg.com/protractor/-/protractor-4.0.11.tgz#fc4bf8d75deec8516b600f87ea5b95ecf537d059"
   dependencies:
@@ -8212,7 +8231,7 @@ right-align@^0.1.1:
   dependencies:
     align-text "^0.1.1"
 
-rimraf@^2.2.2, rimraf@^2.2.6, rimraf@^2.2.8, rimraf@^2.3.3, rimraf@^2.5.2, rimraf@~2.5.1, rimraf@~2.5.4, rimraf@2, rimraf@2.x.x:
+rimraf@^2.2.2, rimraf@^2.2.6, rimraf@^2.2.8, rimraf@^2.3.3, rimraf@^2.4.3, rimraf@^2.5.2, rimraf@~2.5.1, rimraf@~2.5.4, rimraf@2, rimraf@2.x.x:
   version "2.5.4"
   resolved "https://registry.yarnpkg.com/rimraf/-/rimraf-2.5.4.tgz#96800093cbf1a0c86bd95b4625467535c29dfa04"
   dependencies:
@@ -8789,6 +8808,10 @@ string-width@^2.0.0:
   dependencies:
     is-fullwidth-code-point "^2.0.0"
     strip-ansi "^3.0.0"
+
+string.prototype.startswith@^0.2.0:
+  version "0.2.0"
+  resolved "https://nexus.nextgearcapital.com/repository/npm/string.prototype.startswith/-/string.prototype.startswith-0.2.0.tgz#da68982e353a4e9ac4a43b450a2045d1c445ae7b"
 
 stringify-object@^2.3.1:
   version "2.4.0"
@@ -9454,7 +9477,7 @@ utils-merge@1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/utils-merge/-/utils-merge-1.0.0.tgz#0294fb922bb9375153541c4f7096231f287c8af8"
 
-uuid@^2.0.1, uuid@^2.0.2, uuid@^2.0.3:
+uuid@^2.0.0, uuid@^2.0.1, uuid@^2.0.2, uuid@^2.0.3:
   version "2.0.3"
   resolved "https://registry.yarnpkg.com/uuid/-/uuid-2.0.3.tgz#67e2e863797215530dff318e5bf9dcebfd47b21a"
 
