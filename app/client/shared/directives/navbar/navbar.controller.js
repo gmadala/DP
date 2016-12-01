@@ -122,12 +122,12 @@
       },
       profile: {
         name: gettextCatalog.getString( 'Profile Settings' ),
-        href: '#/act/profile_settings',
+        href: '#/profile_settings',
         activeWhen: 'profile_settings'
       },
       management: {
         name: gettextCatalog.getString( 'Account Management' ),
-        href: '#/act/account_management',
+        href: '#/account_management',
         activeWhen: 'account_management'
       }
     };
