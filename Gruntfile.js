@@ -300,7 +300,7 @@ module.exports = function( grunt ) {
                     }
                 ]
             },
-            addToHomescreen: {
+            homescreen: {
                 files: [
                     {
                         expand: true,
@@ -308,7 +308,7 @@ module.exports = function( grunt ) {
                         flatten: true,
                         dest: '<%= yeoman.app %>/private-components/addtohomescreen',
                         src: 'node_modules/add-to-homescreen/dist/**/*'
-                    },
+                    }
                 ]
             },
             maintenance: {
@@ -570,7 +570,7 @@ module.exports = function( grunt ) {
     grunt.registerTask('webpack-dev', [ 'env:dev', 'shell:npm', 'shell:bower', 'shell:webpack' ]);
     grunt.registerTask('webpack-prod', [ 'env:prod', 'shell:npm', 'shell:bower', 'shell:webpack_prod' ]);
     grunt.registerTask('dev-setup', [
-        'copy:addToHomescreen'
+        'copy:homescreen',
         'gitinfo',
         'webpack-dev',
         'env:dev',
@@ -620,7 +620,7 @@ module.exports = function( grunt ) {
         'usemin',
         'htmlmin',
         'copy:notification',
-        'copy:addToHomescreen'
+        'copy:homescreen'
     ]);
 
     // Continuous Integration build -- call with --target={test|production|training|demo|rubydal} as defined in
