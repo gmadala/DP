@@ -19,6 +19,7 @@ module.exports = function(karma) {
 
     // list of files / patterns to load in the browser
     files: [
+      'app/private-components/addtohomescreen/addtohomescreen.min.js',
       'app/components/jquery/dist/jquery.js',
       'app/components/angular/angular.js',
       'app/components/angular-sanitize/angular-sanitize.js',
