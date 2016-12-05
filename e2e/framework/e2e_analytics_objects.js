@@ -8,7 +8,7 @@ function Analytics() {
     this.elStaleAgingVehiclesContainer = browser.element.all(by.css("h2.well-title")).get(2);
     this.elBestWorstMoversContainer = browser.element.all(by.css("h2.well-title")).get(3);
     this.elYourTop10AuctionsContainer = browser.element.all(by.css("h2.well-title")).get(4);
-
+    this.elApprovedFloorPlans = browser.element.all(by.css("h3")).get(0);
 
     //Getters
     this.getBusinessSummaryContainer = function () {
@@ -30,6 +30,10 @@ function Analytics() {
     this.getYourTop10AuctionsContainer = function () {
         browser.sleep(browser.params.shortDelay);
         return this.elYourTop10AuctionsContainer.getText();
+    };
+    this.getApprovedFloorPlans = function () {
+        browser.sleep(browser.params.shortDelay);
+        return this.elApprovedFloorPlans.getText();
     };
 
 }
