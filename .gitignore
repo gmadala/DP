@@ -22,8 +22,7 @@ app/languages/
 .metadata/
 #maintenance
 TESTS*.xml
-app/client/react-components.js
-app/react-components.js
+app/scripts/react-app.js
 .vscode/launch.json
 .vscode/settings.json
 eslint-debug.json
