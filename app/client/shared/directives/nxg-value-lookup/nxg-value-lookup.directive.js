@@ -78,15 +78,6 @@
 
       /** Supporting local functions **/
 
-      function resetValuation() {
-        var chart = getChart();
-        var data = chart.series[0].data;
-        data[3].y = 0;
-        data[4].y = 0;
-        chart.series[0].setData(data);
-        scope.baseValuationUnavailable = false;
-      }
-
       /*
        * Function to realign the position of the data label when the bar doesn't have enough room
        * to display the data label.
@@ -121,6 +112,9 @@
         });
       }
 
+      /*
+       * Function to update the plot line, triangle position and information text position.
+       */
       function updatePlotInformation() {
         var chart = getChart();
         var data = chart.series[0].data;
@@ -130,7 +124,10 @@
         if (data[1].y) {
           var projectedPoint;
 
-          projectedPoint = data[3];
+          // calculate the maximum of all the bookout data.
+          projectedPoint = _.max([data[3], data[4]], function(element) {
+            return element.y;
+          });
 
           if (projectedPoint.y > 0) {
             // calculate the minimum between max bookout vs purchase price
@@ -196,13 +193,19 @@
         }
       }
 
+      /*
+       * Get the reference to the highchart object.
+       */
       function getChart() {
         return element.find('.nxg-value-lookup').highcharts();
       }
 
-      // the svg path will start from the top of the triangle,
-      // moving right, moving left and then move back to the
-      // top of the triangle.
+      /*
+       * Function to draw the little triangle svg.
+       *
+       * The svg path will start from the top of the triangle, moving down to the right,
+       * moving left and then move back to the starting point of the triangle.
+       */
       function drawTriangleMarker(startingX, startingY) {
         var chart = getChart();
         return chart.renderer
@@ -218,6 +221,9 @@
           .add();
       }
 
+      /*
+       * Function to draw the bottom text information.
+       */
       function drawBottomInfoText(text, x, y) {
         var chart = getChart();
         return chart.renderer
@@ -233,6 +239,9 @@
           .add();
       }
 
+      /*
+       * Base options for the highchart component
+       */
       function createOptions() {
         return {
           chart: {
