@@ -6,7 +6,7 @@
     .module('nextgearWebApp')
     .directive('nxgValueLookup', nxgValueLookup);
 
-  nxgValueLookup.$inject = ['$q', 'Addresses', 'gettext', 'gettextCatalog', 'Blackbook'];
+  nxgValueLookup.$inject = ['gettext', 'gettextCatalog'];
 
   function nxgValueLookup(gettext, gettextCatalog) {
 
