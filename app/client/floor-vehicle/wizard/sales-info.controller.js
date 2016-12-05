@@ -69,10 +69,11 @@
       .then(function(valuations) {
         vm.mmrValuations = valuations;
         if (wizardFloor.valuations.mmr) {
-          vm.selectedMmrValue = _.find(vm.mmrValuations, function(element) {
+          vm.selectedMmrValuation = _.find(vm.mmrValuations, function(element) {
             return element.MakeId === wizardFloor.valuations.mmr.MakeId &&
               element.ModelId === wizardFloor.valuations.mmr.ModelId &&
-              element.YearId === wizardFloor.valuations.mmr.YearId
+              element.YearId === wizardFloor.valuations.mmr.YearId &&
+              element.BodyId === wizardFloor.valuations.mmr.BodyId
           });
         }
       });

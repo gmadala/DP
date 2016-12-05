@@ -64,6 +64,13 @@
             }
           }
         });
+
+      wizardService.getMmrValues(wizardFloor.data.UnitVin, wizardFloor.data.UnitMileage)
+        .then(function(valuations) {
+          if (valuations.length > 0) {
+            wizardFloor.valuations.mmr = valuations[0];
+          }
+        });
     }
 
   }
