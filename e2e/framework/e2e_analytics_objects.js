@@ -9,6 +9,10 @@ function Analytics() {
     this.elBestWorstMoversContainer = browser.element.all(by.css("h2.well-title")).get(3);
     this.elYourTop10AuctionsContainer = browser.element.all(by.css("h2.well-title")).get(4);
     this.elApprovedFloorPlans = browser.element.all(by.css("h3")).get(0);
+    this.elPendingFloorPlans = browser.element.all(by.css("h3")).get(1);
+    this.elCreditAndPayments = browser.element.all(by.css("h3")).get(2);
+    this.elAverageTurnGraph = browser.element.all(by.css("rect.highcharts-background")).get(0);
+
 
     //Getters
     this.getBusinessSummaryContainer = function () {
@@ -34,6 +38,14 @@ function Analytics() {
     this.getApprovedFloorPlans = function () {
         browser.sleep(browser.params.shortDelay);
         return this.elApprovedFloorPlans.getText();
+    };
+    this.getPendingFloorPlans = function () {
+        browser.sleep(browser.params.shortDelay);
+        return this.elPendingFloorPlans.getText();
+    };
+    this.getCreditAndPayments = function () {
+        browser.sleep(browser.params.shortDelay);
+        return this.elCreditAndPayments.getText();
     };
 
 }

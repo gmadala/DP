@@ -20,18 +20,26 @@ describe('\n Analytics Page', function () {
         loginObjects.doGoodLogin();
         helper.goToAnalytics();
         expect(browser.getCurrentUrl()).toEqual(helper.analyticsPage());
+        helper.popOver();
     });
 
     // it("2. Analytics - Title validations ", function () {
-    //     expect(analytics.getBusinessSummaryContainer()).toEqual('Business Summary');
+    //
     //     expect(analytics.getAverageTurnContainer()).toEqual('Average Turn');
     //     expect(analytics.getStaleAgingVehiclesContainer()).toEqual('Stale and Aging Vehicles');
     //     expect(analytics.getBestWorstMoversContainer()).toEqual('Best and Worst Movers by Zipcode');
     //     expect(analytics.getYourTop10AuctionsContainer()).toEqual('Your Top 10 Auctions');
     // });
-    it("3. Analytics - Title validations ", function () {
-        expect(analytics.getApprovedFloorPlans()).toEqual('Business Summary');
+    it("2. Analytics - Business Summary Section Title Validations", function () {
+        expect(analytics.getBusinessSummaryContainer()).toEqual('Business Summary');
+        expect(analytics.getApprovedFloorPlans()).toContain('Approved Floor Plans');
+        expect(analytics.getPendingFloorPlans()).toContain('Pending Floor Plans');
+        expect(analytics.getCreditAndPayments()).toContain('Credit and Payments');
+    });
 
+    it("3. Analytics - Average Turn Container Validations ", function () {
+        expect(analytics.getAverageTurnContainer()).toEqual('Average Turn');
+        expect(analytics.elAverageTurnGraph.isDisplayed()).toBe(true);
     });
 
     it("13. Analytics - Logout", function () {
