@@ -4,31 +4,66 @@ describe('Controller: SalesInfoCtrl', function() {
   beforeEach(module('nextgearWebApp', 'client/login/login.template.html'));
 
   var
-    initController,
-    salesInfo,
+    $q,
     scope,
     moment,
-    $q;
+    salesInfo,
+    mmrObjects,
+    wizardService,
+    initController;
 
   beforeEach(inject(function(_$q_,
                              $controller,
                              $rootScope,
-                             _moment_) {
+                             _moment_,
+                             _wizardService_) {
 
     $q = _$q_;
     moment = _moment_;
     scope = $rootScope.$new();
+    wizardService = _wizardService_;
+
+    mmrObjects = [{
+      "MakeId": "010",
+      "ModelId": "5000",
+      "YearId": "2015",
+      "BodyId": "8000",
+      "Display": "2015 FORD ESCAPE FWD 4D SUV 2.5L SE",
+      "ExcellentWholesale": 15000,
+      "GoodWholesale": 14500,
+      "FairWholesale": 14000,
+      "AverageWholesale": 14500
+    }, {
+      "MakeId": "010",
+      "ModelId": "5001",
+      "YearId": "2015",
+      "BodyId": "8001",
+      "Display": "2015 FORD ESCAPE FWD 4D SUV 2.5L LE",
+      "ExcellentWholesale": 16000,
+      "GoodWholesale": 15500,
+      "FairWholesale": 15000,
+      "AverageWholesale": 15500
+    }];
+
+    spyOn(wizardService, 'getMmrValues').and.returnValue($q.when(mmrObjects));
 
     // create the mock parent scope object
     scope.$parent = {
       wizardFloor: {
+        valuations: {
+          mmr: null,
+          blackbook: null
+        },
         canPayBuyer: false,
         formParts: {
           two: false,
           three: false
         },
         data: {
-          PaySeller: null
+          PaySeller: null,
+          UnitVin: null,
+          UnitMileage: null,
+          $selectedVehicle: null
         },
         stateChangeCounterFix: function() {
           return false;
@@ -193,5 +228,45 @@ describe('Controller: SalesInfoCtrl', function() {
       expect(scope.form.$submitted).toBe(true);
     })
   });
+
+  describe('valuation mmr dropdown', function() {
+    it('should call wizard service when UnitVin and UnitMileage is available', function() {
+      scope.$parent.wizardFloor.data.UnitVin = 'ABC1234567890';
+      scope.$parent.wizardFloor.data.UnitMileage = 5000;
+      initController();
+      expect(wizardService.getMmrValues).toHaveBeenCalledWith('ABC1234567890', 5000);
+    });
+
+    it('should set the selection to empty when coming to this page for the first time', function() {
+      scope.$parent.wizardFloor.data.UnitVin = 'ABC1234567890';
+      scope.$parent.wizardFloor.data.UnitMileage = 5000;
+      initController();
+      scope.$digest();
+      expect(salesInfo.mmrValuations).toEqual(mmrObjects);
+      expect(salesInfo.selectedMmrValuation).toEqual(undefined);
+    });
+
+    it('should set the selection to the previously selected mmr when coming from other page', function() {
+      scope.$parent.wizardFloor.valuations.mmr = mmrObjects[0];
+      scope.$parent.wizardFloor.data.UnitVin = 'ABC1234567890';
+      scope.$parent.wizardFloor.data.UnitMileage = 5000;
+      initController();
+      scope.$digest();
+      expect(salesInfo.mmrValuations).toEqual(mmrObjects);
+      expect(salesInfo.selectedMmrValuation).toEqual(mmrObjects[0]);
+    });
+
+    it('changing selection should also update the valuations on parent', function() {
+      scope.$parent.wizardFloor.valuations.mmr = mmrObjects[0];
+      scope.$parent.wizardFloor.data.UnitVin = 'ABC1234567890';
+      scope.$parent.wizardFloor.data.UnitMileage = 5000;
+      initController();
+      scope.$digest();
+      expect(salesInfo.mmrValuations).toEqual(mmrObjects);
+      expect(salesInfo.selectedMmrValuation).toEqual(mmrObjects[0]);
+      salesInfo.onMmrValuationsChange(mmrObjects[1]);
+      expect(scope.$parent.wizardFloor.valuations.mmr).toEqual(mmrObjects[1]);
+    });
+  })
 
 });

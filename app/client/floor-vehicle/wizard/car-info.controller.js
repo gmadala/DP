@@ -56,12 +56,13 @@
       wizardService.getBlackbookValues(wizardFloor.data.UnitVin, wizardFloor.data.UnitMileage)
         .then(function(valuations) {
           if (valuations.length > 0) {
-            wizardFloor.valuations.blackbook = valuations[0];
-            if (wizardFloor.selectedVehicle) {
-              wizardFloor.valuations.blackbook = _.find(valuations, function(element) {
-                return element.GroupNumber === wizardFloor.$selectedVehicle.GroupNumber;
+            var index = 0;
+            if (wizardFloor.data.$selectedVehicle) {
+              index = _.findIndex(valuations, function(element) {
+                return element.GroupNumber === wizardFloor.data.$selectedVehicle.GroupNumber;
               });
             }
+            wizardFloor.valuations.blackbook = valuations[index < 0 ? 0 : index];
           }
         });
 
@@ -72,7 +73,5 @@
           }
         });
     }
-
   }
-
 } )();

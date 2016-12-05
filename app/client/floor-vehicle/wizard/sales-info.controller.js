@@ -65,18 +65,20 @@
     };
 
     var wizardFloor = $scope.$parent.wizardFloor;
-    wizardService.getMmrValues(wizardFloor.data.UnitVin, wizardFloor.data.UnitMileage)
-      .then(function(valuations) {
-        vm.mmrValuations = valuations;
-        if (wizardFloor.valuations.mmr) {
-          vm.selectedMmrValuation = _.find(vm.mmrValuations, function(element) {
-            return element.MakeId === wizardFloor.valuations.mmr.MakeId &&
-              element.ModelId === wizardFloor.valuations.mmr.ModelId &&
-              element.YearId === wizardFloor.valuations.mmr.YearId &&
-              element.BodyId === wizardFloor.valuations.mmr.BodyId
-          });
-        }
-      });
+    if (wizardFloor.data && wizardFloor.data.UnitVin && wizardFloor.data.UnitMileage) {
+      wizardService.getMmrValues(wizardFloor.data.UnitVin, wizardFloor.data.UnitMileage)
+        .then(function(valuations) {
+          vm.mmrValuations = valuations;
+          if (wizardFloor.valuations.mmr) {
+            vm.selectedMmrValuation = _.find(vm.mmrValuations, function(element) {
+              return element.MakeId === wizardFloor.valuations.mmr.MakeId &&
+                element.ModelId === wizardFloor.valuations.mmr.ModelId &&
+                element.YearId === wizardFloor.valuations.mmr.YearId &&
+                element.BodyId === wizardFloor.valuations.mmr.BodyId
+            });
+          }
+        });
+    }
 
     vm.onMmrValuationsChange = function(value) {
       wizardFloor.valuations.mmr = value;
