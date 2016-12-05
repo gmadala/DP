@@ -50,7 +50,7 @@ function LoginObjects() {
     };
     this.doLogin = function () {
         this.elLogin.click();
-        browser.sleep(browser.params.longDelay);
+        browser.sleep(browser.params.longerDelay);
         helper.popOver();
     };
     this.doSubmitPassword = function () {

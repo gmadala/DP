@@ -127,6 +127,25 @@ describe('Directive: nxgCreditAvailability', function() {
     expect(directiveScope.projectedFinancedAmount).toEqual(19000);
   });
 
+  it('should update the finance amount to the selected blackbook value', function() {
+    scope.vin = 'ABCDE12345';
+    scope.odometer = 5000;
+    scope.purchasePrice = 30000;
+    scope.selectedVehicle = {
+      "GroupNumber": "7445"
+    };
+    scope.$apply();
+    // should pick the average value for 7445
+    expect(directiveScope.projectedFinancedAmount).toEqual(19000);
+
+    scope.selectedVehicle = {
+      "GroupNumber": "7444"
+    };
+    scope.$apply();
+    // should pick the average value for 7444
+    expect(directiveScope.projectedFinancedAmount).toEqual(17000);
+  });
+
   it('should reset the valuation when resetting the vin', function() {
     scope.vin = undefined;
     scope.$apply();

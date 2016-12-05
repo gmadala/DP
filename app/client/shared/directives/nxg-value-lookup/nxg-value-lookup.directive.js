@@ -78,6 +78,12 @@
         }
       });
 
+      scope.$watch('selectedVehicle', function(newValue, oldValue) {
+        if (scope.odometer && _.size(scope.vin) >= 10) {
+          updateBaseValuation();
+        }
+      });
+
       scope.$watch('odometer', function(newValue, oldValue) {
         if (!newValue) {
           resetValuation();

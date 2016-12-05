@@ -243,7 +243,6 @@ function Helper() {
          *
          * @returns {none}
          */
-        //var elPopOverBtn = browser.element(by.css('[tooltip-template-transclude-scope=\'originScope()\'] button[ng-click=\'closeMenuTip()\']'));
         var elPopOverBtn = browser.element(by.buttonText('OK, I got it!'));
         elPopOverBtn.isPresent()
             .then(function (bool) {
