@@ -42,7 +42,19 @@ describe('\n Analytics Page', function () {
         expect(analytics.elAverageTurnGraph.isDisplayed()).toBe(true);
     });
 
-    it("13. Analytics - Logout", function () {
+    it("4. Analytics - Stale and Aging Vehicles Container Validations ", function () {
+        expect(analytics.getStaleAgingVehiclesContainer()).toEqual('Stale and Aging Vehicles');
+    });
+
+    it("5. Analytics - Best and Worst Movers by Zipcode Container Validations ", function () {
+        expect(analytics.getBestWorstMoversContainer()).toEqual('Best and Worst Movers by Zipcode');
+    });
+
+    it("6. Analytics - Your Top 10 Auctions Container Validations ", function () {
+        expect(analytics.getYourTop10AuctionsContainer()).toEqual('Your Top 10 Auctions');
+    });
+
+    it("7. Analytics - Logout", function () {
         browser.sleep(browser.params.shortDelay);
         login.logout();
         expect(browser.getCurrentUrl()).toEqual(helper.loginPage());
