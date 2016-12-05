@@ -46,26 +46,18 @@
       // * update the purchase price bar chart
       // * display the line, triangle and text for the purchase price vs bookout value
       scope.$watch('purchasePrice', function(newValue, oldValue) {
-        if (oldValue === newValue) {
-          return;
+        if (oldValue !== newValue) {
+          var chart = getChart();
+          var data = chart.series[0].data;
+          data[1].y = newValue;
+          chart.series[0].setData(data);
+          updatePlotInformation();
+          realignLabels();
         }
-
-        var chart = getChart();
-        var data = chart.series[0].data;
-        data[1].y = newValue;
-        chart.series[0].setData(data);
-        updatePlotInformation();
-        realignLabels();
       });
 
       scope.$watch('blackbook', function(newValue, oldValue) {
-        if (!newValue) {
-          resetValuation();
-        } else {
-          if (oldValue === newValue) {
-            return;
-          }
-
+        if (oldValue !== newValue) {
           var chart = getChart();
           var data = chart.series[0].data;
           data[3].y = newValue;
@@ -75,13 +67,7 @@
       });
 
       scope.$watch('mmr', function(newValue, oldValue) {
-        if (!newValue) {
-          resetValuation();
-        } else {
-          if (oldValue === newValue) {
-            return;
-          }
-
+        if (oldValue !== newValue) {
           var chart = getChart();
           var data = chart.series[0].data;
           data[4].y = newValue;
@@ -96,6 +82,7 @@
         var chart = getChart();
         var data = chart.series[0].data;
         data[3].y = 0;
+        data[4].y = 0;
         chart.series[0].setData(data);
         scope.baseValuationUnavailable = false;
       }

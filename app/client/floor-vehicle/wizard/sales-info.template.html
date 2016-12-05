@@ -76,6 +76,7 @@
     <label for="inputMmrStyle" translate>MMR Value Vehicle Style</label>
     <div class="style-select full-width">
       <select id="inputMmrStyle" class="form-control" name="inputMmrStyle"
+              ng-cloak
               ng-model="salesInfo.selectedMmrValuation"
               ng-change="salesInfo.onMmrValuationsChange(salesInfo.selectedMmrValuation)"
               ng-options="mmrValuation as mmrValuation.Display for mmrValuation in salesInfo.mmrValuations">
