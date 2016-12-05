@@ -8,7 +8,7 @@
 
   nxgValueLookup.$inject = ['$q', 'Addresses', 'gettext', 'gettextCatalog', 'Blackbook'];
 
-  function nxgValueLookup($q, Addresses, gettext, gettextCatalog, Blackbook) {
+  function nxgValueLookup(gettext, gettextCatalog) {
 
     gettext('Purchase Amount');
     gettext('Average Bookout');
@@ -251,7 +251,7 @@
             marginTop: 0,
             marginRight: 0,
             marginBottom: 50,
-            marginLeft: 80
+            marginLeft: 85
           },
           credits: {
             enabled: false

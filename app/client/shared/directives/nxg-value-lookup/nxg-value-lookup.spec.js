@@ -8,7 +8,7 @@ describe('Directive: nxgCreditAvailability', function() {
     directiveScope,
     element;
 
-  beforeEach(inject(function(_$compile_, _$q_, _$rootScope_) {
+  beforeEach(inject(function(_$compile_, _$rootScope_) {
     $compile = _$compile_;
     $rootScope = _$rootScope_;
 
