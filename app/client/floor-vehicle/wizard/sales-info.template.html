@@ -71,6 +71,17 @@
       Please enter a value less than $400,000.
     </label>
   </div>
+
+  <div class="form-group">
+    <label for="inputMmrStyle" translate>MMR Value Vehicle Style</label>
+    <div class="style-select full-width">
+      <select id="inputMmrStyle" class="form-control" name="inputMmrStyle"
+              ng-model="salesInfo.selectedMmrValuation"
+              ng-change="salesInfo.onMmrValuationsChange(salesInfo.selectedMmrValuation)"
+              ng-options="mmrValuation as mmrValuation.Display for mmrValuation in salesInfo.mmrValuations">
+      </select>
+    </div>
+  </div>
   <!--<label for="cmn-toggle-1" class="main-heading" style="margin-bottom: 18px;" ng-if="wizardFloor.flooringValuationFeature"><span translate>Request full purchase price financing</span></label>-->
   <!--<input bs-switch type="checkbox" id="cmn-toggle-1" name="cmn-toggle-1" class="noglobal" ng-if="wizardFloor.flooringValuationFeature"-->
          <!--switch-size="normal" switch-off-text="{{ 'No' | translate }}" switch-on-text="{{ 'Yes' | translate }}" switch-on-color="success" ng-model="wizardFloor.data.AdditionalFinancing">-->

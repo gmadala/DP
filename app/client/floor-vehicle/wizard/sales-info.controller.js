@@ -5,9 +5,9 @@
     .module('nextgearWebApp')
     .controller('SalesInfoCtrl', SalesInfoCtrl);
 
-  SalesInfoCtrl.$inject = ['$scope', 'gettext', 'gettextCatalog', 'moment'];
+  SalesInfoCtrl.$inject = ['$scope', 'gettext', 'gettextCatalog', 'moment', 'wizardService'];
 
-  function SalesInfoCtrl($scope, gettext, gettextCatalog, moment) {
+  function SalesInfoCtrl($scope, gettext, gettextCatalog, moment, wizardService) {
     var vm = this;
 
     // init a special version of today's date for our datepicker which only works right with dates @ midnight
@@ -63,6 +63,23 @@
       $scope.$parent.wizardFloor.formParts.two = $scope.form.$valid;
       return $scope.form.$valid;
     };
+
+    var wizardFloor = $scope.$parent.wizardFloor;
+    wizardService.getMmrValues(wizardFloor.data.UnitVin, wizardFloor.data.UnitMileage)
+      .then(function(valuations) {
+        vm.mmrValuations = valuations;
+        if (wizardFloor.valuations.mmr) {
+          vm.selectedMmrValue = _.find(vm.mmrValuations, function(element) {
+            return element.MakeId === wizardFloor.valuations.mmr.MakeId &&
+              element.ModelId === wizardFloor.valuations.mmr.ModelId &&
+              element.YearId === wizardFloor.valuations.mmr.YearId
+          });
+        }
+      });
+
+    vm.onMmrValuationsChange = function(value) {
+      wizardFloor.valuations.mmr = value;
+    }
   }
 
 })();

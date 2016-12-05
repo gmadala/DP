@@ -19,12 +19,10 @@
       templateUrl: 'client/shared/directives/nxg-value-lookup/nxg-value-lookup.template.html',
       restrict: 'E',
       scope: {
-        vin: '=',
-        odometer: '=',
-        inventoryLocation: '=',
+        mmr: '=',
+        blackbook: '=',
         purchasePrice: '=',
-        projectedFinancedAmount: '=',
-        selectedVehicle: '='
+        projectedFinancedAmount: '='
       },
       replace: 'true',
       link: linkFn
@@ -32,7 +30,6 @@
 
     function linkFn(scope, element) {
       // local vars for translations
-      var locations = Addresses.getActivePhysical();
       var purchasePriceText = gettextCatalog.getString('Purchase Price');
       var bookoutAmountText = gettextCatalog.getString('Bookout Amount');
       var purchasePriceLessText = gettextCatalog.getString('Purchase price less than <br /> highest average bookout');
@@ -41,8 +38,6 @@
       // local vars to hold svg references
       var valuationLabel, valuationTriangle;
 
-      scope.baseValuationUnavailable = false;
-      scope.zipCode = getDealerZipCode();
       // init the options for the chart
       element.find('.nxg-value-lookup').highcharts(createOptions());
 
@@ -63,72 +58,39 @@
         realignLabels();
       });
 
-      scope.$watch('vin', function(newValue, oldValue) {
+      scope.$watch('blackbook', function(newValue, oldValue) {
         if (!newValue) {
           resetValuation();
         } else {
-          // skip doing anything when the value is not changing
-          if (oldValue === newValue || _.size(newValue) < 10) {
+          if (oldValue === newValue) {
             return;
           }
-          // update blackbook and mmr values
-          if (scope.odometer) {
-            updateBaseValuation();
-          }
+
+          var chart = getChart();
+          var data = chart.series[0].data;
+          data[3].y = newValue;
+          chart.series[0].setData(data);
+          realignLabels();
         }
       });
 
-      scope.$watch('selectedVehicle', function(newValue, oldValue) {
-        if (scope.odometer && _.size(scope.vin) >= 10) {
-          updateBaseValuation();
-        }
-      });
-
-      scope.$watch('odometer', function(newValue, oldValue) {
+      scope.$watch('mmr', function(newValue, oldValue) {
         if (!newValue) {
           resetValuation();
         } else {
-          // skip doing anything when the value is not changing
-          if (oldValue === newValue || _.size(scope.vin) < 10) {
+          if (oldValue === newValue) {
             return;
           }
-          // update blackbook and mmr values
-          if (scope.vin) {
-            updateBaseValuation();
-          }
+
+          var chart = getChart();
+          var data = chart.series[0].data;
+          data[4].y = newValue;
+          chart.series[0].setData(data);
+          realignLabels();
         }
       });
 
       /** Supporting local functions **/
-
-      function updateBaseValuation() {
-        scope.baseValuationUnavailable = false;
-        Blackbook.lookupByVin(scope.vin, scope.odometer, true)
-          .then(function(results) {
-            var minimumBlackbookAverage;
-            if (results.length > 0) {
-              if (scope.selectedVehicle) {
-                minimumBlackbookAverage = _.find(results, function(element) {
-                  return element.GroupNumber === scope.selectedVehicle.GroupNumber;
-                });
-              } else {
-                minimumBlackbookAverage = results[0];
-              }
-            }
-
-            var chart = getChart();
-            var data = chart.series[0].data;
-            data[3].y = minimumBlackbookAverage ? minimumBlackbookAverage.AverageValue : 0;
-            chart.series[0].setData(data);
-          })
-          .finally(function() {
-            updatePlotInformation();
-            realignLabels();
-          })
-          .catch(function() {
-            scope.baseValuationUnavailable = true;
-          });
-      }
 
       function resetValuation() {
         var chart = getChart();
@@ -289,7 +251,7 @@
           chart: {
             backgroundColor: null,
             type: 'bar',
-            height: 150,
+            height: 175,
             marginTop: 0,
             marginRight: 0,
             marginBottom: 50,
@@ -317,7 +279,7 @@
             }]
           },
           xAxis: {
-            categories: ['', 'Bill of Sale', '', 'Black Book'],
+            categories: ['', 'Bill of Sale', '', 'Black Book', 'MMR'],
             tickLength: 0,
             gridLineColor: 'transparent',
             lineWidth: 0,
@@ -383,22 +345,12 @@
             }, {
               color: '#000000',
               y: 0
+            }, {
+              color: '#FF9800',
+              y: 0
             }]
           }]
         };
-      }
-
-      function getDealerZipCode() {
-        if (locations.length > 0) {
-          // if there's only one address default the zip to that one
-          var defaultAddress = _.find(locations, function(location) {
-            return location.IsMainAddress;
-          });
-          if (!defaultAddress) {
-            defaultAddress = locations[0];
-          }
-          return defaultAddress.Zip;
-        }
       }
     }
   }

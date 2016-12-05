@@ -203,6 +203,11 @@
       }
     };
 
+    vm.valuations = {
+      blackbook: null,
+      mmr: null
+    };
+
     vm.reset = function () {
       vm.data = angular.copy (vm.defaultData);
       vm.optionsHelper.applyDefaults ($scope, vm.data);

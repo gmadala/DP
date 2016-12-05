@@ -25,18 +25,25 @@
     </ul>
   </div>
 
-  <div class="col-xs-12" ng-class="{'display-flex': wizardFloor.flooringValuationFeature}">
+  <div class="col-xs-12">
     <div ui-view class="col-xs-12 col-md-6 col-md-offset-1" autoscroll="true"></div>
-    <div class="hidden-xs hidden-sm col-md-offset-1 col-md-3 sidebar">
-      <nxg-credit-availability credit-type="wizardFloor.data.LineOfCreditId"
-                               purchase-price="wizardFloor.data.UnitPurchasePrice"></nxg-credit-availability>
-      <nxg-value-lookup vin="wizardFloor.data.UnitVin" ng-if="wizardFloor.flooringValuationFeature"
-                        odometer="wizardFloor.data.UnitMileage"
-                        inventory-location="wizardFloor.data.PhysicalInventoryAddressId"
-                        purchase-price="wizardFloor.data.UnitPurchasePrice"
-                        projected-financed-amount="wizardFloor.valueLookUp.projectedFinancedAmount"
-                        selected-vehicle="wizardFloor.data.$selectedVehicle"
-      ></nxg-value-lookup>
+    <div class="hidden-xs hidden-sm col-md-offset-1 col-md-3">
+      <div class="row">
+        <div class="col-md-12 sidebar">
+          <nxg-credit-availability credit-type="wizardFloor.data.LineOfCreditId"
+                                   purchase-price="wizardFloor.data.UnitPurchasePrice"></nxg-credit-availability>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12 sidebar">
+          <nxg-value-lookup ng-if="wizardFloor.flooringValuationFeature"
+                            mmr="wizardFloor.valuations.mmr.AverageWholesale"
+                            blackbook="wizardFloor.valuations.blackbook.AverageValue"
+                            purchase-price="wizardFloor.data.UnitPurchasePrice"
+                            projected-financed-amount="wizardFloor.valueLookUp.projectedFinancedAmount">
+          </nxg-value-lookup>
+        </div>
+      </div>
     </div>
   </div>
   <div class="col-xs-12 col-md-6 col-md-offset-1 wizard-btns">
