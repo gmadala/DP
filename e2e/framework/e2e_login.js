@@ -1,5 +1,8 @@
 'use strict';
 
+var helper = require('./e2e_helper_functions.js');
+var helper = new helper.helper();
+
 var login = {
 
     elements: {
@@ -99,6 +102,7 @@ var login = {
         this.enterPassword(param2);
         browser.sleep(browser.params.longDelay);
         this.clickLoginButton();
+        helper.popOver();
     },
     logout: function () {
         this.clickMyAccount();
