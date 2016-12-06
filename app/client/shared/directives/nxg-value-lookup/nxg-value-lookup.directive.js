@@ -49,7 +49,7 @@
         if (oldValue !== newValue) {
           var chart = getChart();
           var data = chart.series[0].data;
-          data[1].y = newValue;
+          data[0].y = newValue;
           chart.series[0].setData(data);
           updatePlotInformation();
           realignLabels();
@@ -60,7 +60,7 @@
         if (oldValue !== newValue) {
           var chart = getChart();
           var data = chart.series[0].data;
-          data[3].y = newValue;
+          data[1].y = newValue;
           chart.series[0].setData(data);
           realignLabels();
         }
@@ -70,7 +70,7 @@
         if (oldValue !== newValue) {
           var chart = getChart();
           var data = chart.series[0].data;
-          data[4].y = newValue;
+          data[2].y = newValue;
           chart.series[0].setData(data);
           realignLabels();
         }
@@ -121,23 +121,23 @@
 
         var labelText, labelX, labelY;
         // only display the plot information when we have value for purchase price.
-        if (data[1].y) {
+        if (data[0].y) {
           var projectedPoint;
 
           // calculate the maximum of all the bookout data.
-          projectedPoint = _.max([data[3], data[4]], function(element) {
+          projectedPoint = _.max([data[1], data[2]], function(element) {
             return element.y;
           });
 
           if (projectedPoint.y > 0) {
             // calculate the minimum between max bookout vs purchase price
-            projectedPoint = _.min([projectedPoint, data[1]], function(element) {
+            projectedPoint = _.min([projectedPoint, data[0]], function(element) {
               return element.y;
             });
             // the text will be depends on which one is the selected as projected financed amount.
             labelText = projectedPoint.category === 'Bill of Sale' ? purchasePriceLessText : purchasePriceMoreText;
           } else {
-            projectedPoint = data[1];
+            projectedPoint = data[0];
             // the text label will be the purchase price only text
             labelText = purchasePriceOnlyText;
           }
@@ -247,7 +247,7 @@
           chart: {
             backgroundColor: null,
             type: 'bar',
-            height: 175,
+            height: 140,
             marginTop: 0,
             marginRight: 0,
             marginBottom: 50,
@@ -259,23 +259,8 @@
           title: {
             text: ''
           },
-          labels: {
-            items: [{
-              html: '<strong>' + purchasePriceText + '</strong>',
-              style: {
-                top: '5px',
-                left: '-80px'
-              }
-            }, {
-              html: '<strong>' + bookoutAmountText + '</strong>',
-              style: {
-                top: '55px',
-                left: '-80px'
-              }
-            }]
-          },
           xAxis: {
-            categories: ['', 'Bill of Sale', '', 'Black Book', 'MMR'],
+            categories: ['Bill of Sale', 'Black Book', 'MMR'],
             tickLength: 0,
             gridLineColor: 'transparent',
             lineWidth: 0,
@@ -290,7 +275,9 @@
               enabled: false
             },
             gridLineColor: 'transparent',
-            endOnTick: false
+            endOnTick: false,
+            minPadding: 0.01,
+            maxPadding: 0.01
           },
           plotOptions: {
             bar: {
@@ -330,13 +317,7 @@
           series: [{
             type: 'column',
             data: [{
-              color: 'black',
-              y: 0
-            }, {
               color: '#4CAF50',
-              y: 0
-            }, {
-              color: 'black',
               y: 0
             }, {
               color: '#000000',
