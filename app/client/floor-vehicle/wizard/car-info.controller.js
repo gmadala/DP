@@ -48,7 +48,7 @@
       // * the data is still the same
       // * unit vin is less than 10 chars
       // * mileage and vin is undefined
-      if (oldValue === newValue || _.size(wizardFloor.data.UnitVin) < 10
+      if (oldValue === newValue || !wizardFloor.data || _.size(wizardFloor.data.UnitVin) < 10
         || !wizardFloor.data.UnitVin || !wizardFloor.data.UnitMileage) {
         return;
       }
