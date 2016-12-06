@@ -16,11 +16,25 @@
     '$timeout',
     'localStorageService',
     'fedex',
-    'nxgConfig'
+    'nxgConfig',
+    'Dashboard'
   ];
 
-  function NavBarCtrl( $rootScope, $scope, $state, User, Payments, gettextCatalog, language, kissMetricInfo, $location, $timeout, localStorageService, fedex, nxgConfig ) {
+  function NavBarCtrl( $rootScope, $scope, $state, User, Payments, gettextCatalog, language, kissMetricInfo, $location, $timeout, localStorageService, fedex, nxgConfig, Dashboard ) {
     $scope.isCollapsed = true;
+
+    $scope.cachePendingFloorplans = 0;
+
+    Dashboard.cachePendingFloorplans().then(function(floorplanPendingCount) {
+      $scope.cachePendingFloorplans = floorplanPendingCount;
+
+    });
+
+
+    $scope.pendingFloorPlanFlag =  true; //User.getFeatures().hasOwnProperty('pendingFloorPlans') ? User.getFeatures().pendingFloorPlans.enabled : true,
+
+
+
     var paymentsSubMenu = [
         {
           name: gettextCatalog.getString( 'Make a Payment' ),
@@ -131,6 +145,8 @@
         activeWhen: 'account_management'
       }
     };
+    //handles for checking Ribbon using React components features floating
+    $scope.RibbonPendingFP = true; //User.getFeatures().hasOwnProperty('pendingFloorPlans') ? User.getFeatures().pendingFloorPlans.enabled : true;
 
     $scope.initNav = function( ) {
       kissMetricInfo.getKissMetricInfo( ).then( function( result ) {
