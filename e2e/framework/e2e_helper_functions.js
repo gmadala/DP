@@ -260,14 +260,15 @@ function Helper() {
          *
          * @returns {none}
          */
-        this.elOkButton = browser.element(by.buttonText("OK, I got it!"));
-        var elPopOver = element(by.css('button[ng-click="closeMenuTip()"]'));
-        if (elPopOver) {
-            browser.actions().mouseMove(element(by.css('.popover'))).perform();
-            expect(elPopOver.isDisplayed()).toBe(true);
-            this.elOkButton.click();
-        }
+        var elPopOverBtn = browser.element(by.buttonText('OK, I got it!'));
+        elPopOverBtn.isPresent()
+            .then(function (bool) {
+                if (bool) {
+                    elPopOverBtn.click()
+                }
+            });
     };
+
 
     this.doClick = function (elementToClick, elementToWaitFor) {
         /**
