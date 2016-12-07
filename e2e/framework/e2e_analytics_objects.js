@@ -12,7 +12,11 @@ function Analytics() {
     this.elPendingFloorPlans = browser.element.all(by.css("h3")).get(1);
     this.elCreditAndPayments = browser.element.all(by.css("h3")).get(2);
     this.elAverageTurnGraph = browser.element.all(by.css("rect.highcharts-background")).get(0);
-
+    this.elBestMovers = browser.element(by.buttonText('Best Movers'));
+    this.elWorstMovers = browser.element(by.buttonText('Worst Movers'));
+    this.elViewAllAuction = browser.element(by.buttonText('View All Auctions'));
+    this.elCloseWindow = browser.element(by.buttonText('Close Window'));
+    this.elModalHeader = browser.element(by.css('h3.modal-header'));
 
     //Getters
     this.getBusinessSummaryContainer = function () {
@@ -46,6 +50,28 @@ function Analytics() {
     this.getCreditAndPayments = function () {
         browser.sleep(browser.params.shortDelay);
         return this.elCreditAndPayments.getText();
+    };
+    this.getModalHeader = function () {
+        browser.sleep(browser.params.shortDelay);
+        return this.elModalHeader.getText();
+    };
+
+    //Doers
+    this.doBestMovers = function () {
+        browser.sleep(browser.params.shortDelay);
+        this.elBestMovers.click();
+    };
+    this.doWorstMovers = function () {
+        browser.sleep(browser.params.shortDelay);
+        this.elWorstMovers.click();
+    };
+    this.doViewAllAuction = function () {
+        browser.sleep(browser.params.shortDelay);
+        this.elViewAllAuction.click();
+    };
+    this.doModalCloseWindow = function () {
+        browser.sleep(browser.params.shortDelay);
+        this.elCloseWindow.click();
     };
 
 }

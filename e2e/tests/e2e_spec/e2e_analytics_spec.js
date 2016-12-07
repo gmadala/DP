@@ -23,13 +23,6 @@ describe('\n Analytics Page', function () {
         helper.popOver();
     });
 
-    // it("2. Analytics - Title validations ", function () {
-    //
-    //     expect(analytics.getAverageTurnContainer()).toEqual('Average Turn');
-    //     expect(analytics.getStaleAgingVehiclesContainer()).toEqual('Stale and Aging Vehicles');
-    //     expect(analytics.getBestWorstMoversContainer()).toEqual('Best and Worst Movers by Zipcode');
-    //     expect(analytics.getYourTop10AuctionsContainer()).toEqual('Your Top 10 Auctions');
-    // });
     it("2. Analytics - Business Summary Section Title Validations", function () {
         expect(analytics.getBusinessSummaryContainer()).toEqual('Business Summary');
         expect(analytics.getApprovedFloorPlans()).toContain('Approved Floor Plans');
@@ -48,10 +41,15 @@ describe('\n Analytics Page', function () {
 
     it("5. Analytics - Best and Worst Movers by Zipcode Container Validations ", function () {
         expect(analytics.getBestWorstMoversContainer()).toEqual('Best and Worst Movers by Zipcode');
+        analytics.doWorstMovers();
+        analytics.doBestMovers();
     });
 
     it("6. Analytics - Your Top 10 Auctions Container Validations ", function () {
         expect(analytics.getYourTop10AuctionsContainer()).toEqual('Your Top 10 Auctions');
+        analytics.doViewAllAuction();
+        expect(analytics.getModalHeader()).toEqual('Your Top Auctions');
+        analytics.doModalCloseWindow();
     });
 
     it("7. Analytics - Logout", function () {
