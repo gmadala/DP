@@ -6,7 +6,6 @@
     .controller('DashboardCtrl', DashboardCtrl);
 
   DashboardCtrl.$inject = [
-    '$rootScope',
     '$scope',
     '$state',
     '$uibModal',
@@ -23,7 +22,6 @@
   ];
 
   function DashboardCtrl(
-    $rootScope,
     $scope,
     $state,
     $uibModal,
@@ -40,9 +38,6 @@
   ) {
 
     var uibModal = $uibModal;
-    if (!$rootScope.isHeadless && $rootScope.isMobile) {
-        $rootScope.addToHomescreen.show();
-    }
 
     // for caching our week/month summary data
     $scope.paymentSummary = {
