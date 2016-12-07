@@ -66,7 +66,7 @@ function Analytics() {
         this.elWorstMovers.click();
     };
     this.doViewAllAuction = function () {
-        browser.sleep(browser.params.shortDelay);
+        browser.sleep(browser.params.mediumDelay);
         this.elViewAllAuction.click();
     };
     this.doModalCloseWindow = function () {

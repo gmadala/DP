@@ -42,7 +42,9 @@ describe('\n Analytics Page', function () {
     it("5. Analytics - Best and Worst Movers by Zipcode Container Validations ", function () {
         expect(analytics.getBestWorstMoversContainer()).toEqual('Best and Worst Movers by Zipcode');
         analytics.doWorstMovers();
+        expect(browser.getCurrentUrl()).toEqual(helper.analyticsPage());
         analytics.doBestMovers();
+        expect(browser.getCurrentUrl()).toEqual(helper.analyticsPage());
     });
 
     it("6. Analytics - Your Top 10 Auctions Container Validations ", function () {
@@ -50,6 +52,7 @@ describe('\n Analytics Page', function () {
         analytics.doViewAllAuction();
         expect(analytics.getModalHeader()).toEqual('Your Top Auctions');
         analytics.doModalCloseWindow();
+        expect(browser.getCurrentUrl()).toEqual(helper.analyticsPage());
     });
 
     it("7. Analytics - Logout", function () {
