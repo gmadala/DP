@@ -11,10 +11,6 @@
 
     var savedUsername = localStorageService.get('rememberUsername');
 
-    if (!$rootScope.isHeadless && $rootScope.isMobile) {
-        $rootScope.addToHomescreen.show();
-    }
-
     $scope.credentials = {
       username: savedUsername || '',
       password: '',
