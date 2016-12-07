@@ -1,4 +1,9 @@
 'use strict';
+/**
+ * @class analytics_objects
+ * @author Balanithiya Krishnamoorthy
+ * @description Page objects for analytics page elements
+ * */
 
 function Analytics() {
 
