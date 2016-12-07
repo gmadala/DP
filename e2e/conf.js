@@ -40,7 +40,7 @@ exports.config = {
 
 
     //To run a single test suite enter the following at the command prompt:
-    //   grunt test:e2e -suite=<enter suite name
+    //   grunt test:e2e -suite=<enter suite name>
     //   Ex: grunt test:e2e -suite=smoketest
 
     suites: {
