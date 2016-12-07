@@ -9,11 +9,16 @@
 
   function wizardService($q, Blackbook, Mmr) {
     var self = this;
-    self.cachedVin = undefined;
-    self.cachedOdometer = undefined;
-    self.cachedValuations = {
-      blackbook: [],
-      mmr: []
+    self.cachedBlackbook = {
+      cachedVin: undefined,
+      cachedOdometer: undefined,
+      blackbookValuations: []
+    };
+
+    self.cachedMmr = {
+      cachedVin: undefined,
+      cachedOdometer: undefined,
+      mmrValuations: []
     };
 
     return {
@@ -23,16 +28,17 @@
 
     function getBlackbookValues(vin, odometer) {
       var deferred = $q.defer();
-      if (vin === self.cachedVin && odometer == self.cachedOdometer
-        && self.cachedValuations.blackbook.length > 0) {
-        deferred.resolve(self.cachedValuations.blackbook);
+      var cachedBlackbook = self.cachedBlackbook;
+      if (vin === cachedBlackbook.cachedVin && odometer == cachedBlackbook.cachedOdometer
+        && cachedBlackbook.blackbookValuations.length > 0) {
+        deferred.resolve(cachedBlackbook.blackbookValuations);
       } else {
         Blackbook.lookupByVin(vin, odometer, true)
           .then(function(results) {
-            self.cachedVin = vin;
-            self.cachedOdometer = odometer;
-            self.cachedValuations.blackbook = results;
-            deferred.resolve(self.cachedValuations.blackbook);
+            cachedBlackbook.cachedVin = vin;
+            cachedBlackbook.cachedOdometer = odometer;
+            cachedBlackbook.blackbookValuations = results;
+            deferred.resolve(cachedBlackbook.blackbookValuations);
           })
       }
       return deferred.promise;
@@ -40,16 +46,17 @@
 
     function getMmrValues(vin, odometer) {
       var deferred = $q.defer();
-      if (vin === self.cachedVin && odometer == self.cachedOdometer
-        && self.cachedValuations.mmr.length > 0) {
-        deferred.resolve(self.cachedValuations.mmr);
+      var cachedMmr = self.cachedMmr;
+      if (vin === cachedMmr.cachedVin && odometer == cachedMmr.cachedOdometer
+        && cachedMmr.mmrValuations.length > 0) {
+        deferred.resolve(cachedMmr.mmrValuations);
       } else {
         Mmr.lookupByVin(vin, odometer)
           .then(function(results) {
-            self.cachedVin = vin;
-            self.cachedOdometer = odometer;
-            self.cachedValuations.mmr = results;
-            deferred.resolve(self.cachedValuations.mmr);
+            cachedMmr.cachedVin = vin;
+            cachedMmr.cachedOdometer = odometer;
+            cachedMmr.mmrValuations = results;
+            deferred.resolve(cachedMmr.mmrValuations);
           })
       }
       return deferred.promise;
