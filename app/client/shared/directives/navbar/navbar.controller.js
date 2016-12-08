@@ -25,14 +25,20 @@
 
     $scope.cachePendingFloorplans = 0;
 
-    Dashboard.cachePendingFloorplans().then(function(floorplanPendingCount) {
-      $scope.cachePendingFloorplans = floorplanPendingCount;
-
+    $scope.$on('setDateRange', function (event, startDate, endDate) {
+      Dashboard.fetchDealerDashboard(startDate, endDate).then(
+        function (result) {
+          $scope.cachePendingFloorplans = result.PendingFloorplans;
+        });
     });
-
 
     $scope.pendingFloorPlanFlag =  true; //User.getFeatures().hasOwnProperty('pendingFloorPlans') ? User.getFeatures().pendingFloorPlans.enabled : true,
 
+    $scope.navFloorplan = function(pendingValue){
+       $state.go('floorplan', {
+         filter: pendingValue
+       });
+    }
 
 
     var paymentsSubMenu = [

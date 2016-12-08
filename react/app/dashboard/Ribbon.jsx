@@ -3,12 +3,18 @@ import React, { Component, PropTypes } from 'react';
 const navBarStyles = {
     boxShadow: 'rgba(0,0,0,0.25) 0px 2px 3px',
     backgroundColor: '#0e1e4e',
+    borderColor: '#0e1e4e',
     height: '38px',
     minHeight: '48px',
     fontSize: '1.4rem',
 };
-const pendingFPColor = {
+const pendingFPStyle = {
     color: '#efefef',
+    fontSize: '14px',
+    paddingTop: '7px',
+};
+const unitsStyles = {
+    fontSize:'12px',
 }
 class Ribbon extends Component {
     render() {
@@ -19,10 +25,10 @@ class Ribbon extends Component {
                           <div className="collapse navbar-collapse">
                               <ul className="nav navbar-nav">
                                   <li>
-                                      <a href="" style={pendingFPColor} role="button">
+                                      <button onClick={( ) => { this.props.navfloorplan('pending') } } style={pendingFPStyle} role="button">
                                           <span>Pending Floorplans</span><br/>
-                                          <span>{ this.props.floorPlanCount } { this.props.floorPlanFlag } units</span>
-                                      </a>
+                                          <span style={unitsStyles}>{ this.props.floorplancount } { this.props.floorplanflag } units</span>
+                                      </button>
                                   </li>
                               </ul>
                           </div>
@@ -33,8 +39,9 @@ class Ribbon extends Component {
     }
 }
 Ribbon.propTypes = {
-    floorPlanCount: PropTypes.number.isRequired,
-    floorPlanFlag: PropTypes.string,
+    floorplancount: PropTypes.number.isRequired,
+    floorplanflag: PropTypes.bool,
+    navfloorplan: PropTypes.func,
 };
 
 export default Ribbon;

@@ -24,7 +24,8 @@
         helpText: '@',
         info: '@',
         locs: '=showLocationFilter', // whether to display the filter for inventory location
-        hideClear: '='
+        hideClear: '=',
+        pendingValue: '='
       },
       controller: 'NxgSearchCtrl'
     };
