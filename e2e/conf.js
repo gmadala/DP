@@ -124,7 +124,7 @@ exports.config = {
         userNameAuction: '10298KB',
         userName: '62434AM',
         userNameBankAccount: '3boysmotors',
-        password: 'ngcpass!0',
+        password: 'ringoffire@1',
         delay: '500',
         shortDelay: '1000',
         mediumDelay: '3000',
