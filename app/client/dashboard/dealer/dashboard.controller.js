@@ -18,7 +18,8 @@
     'gettext',
     'gettextCatalog',
     'capitalizeFilter',
-    'language'
+    'language',
+    '$cookieStore'
   ];
 
   function DashboardCtrl(
@@ -34,10 +35,22 @@
     gettext,
     gettextCatalog,
     capitalizeFilter,
-    language
+    language,
+    $cookieStore
   ) {
 
     var uibModal = $uibModal;
+
+    var isMobile = window.innerWidth < 768;
+    var isAndroid = /Android/i.test(navigator.userAgent);
+    var isIos = /iPhone|iPad|iPod/i.test(navigator.userAgent);
+    $scope.prompted = $cookieStore.get('headlessPrompted');
+    $scope.isHeadless = $state.includes('headless');
+
+    if (isMobile && (isAndroid || isIos) && !$scope.isHeadless && !$scope.prompted) {
+        $cookieStore.put('headlessPrompted', true);
+        $state.go('headless')
+    }
 
     // for caching our week/month summary data
     $scope.paymentSummary = {

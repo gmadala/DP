@@ -52,19 +52,6 @@
     language.loadLanguage();
     // set enabled features
     features.loadFromQueryString();
-    // set addToHomescreen
-    $rootScope.addToHomescreen = addToHomescreen({
-        debug: false,
-        autostart: false,
-        icon: false,
-        modal: true,
-        lifespan: 0,
-        startDelay: 2,
-        maxDisplayCount: 1,
-        displayPace: 0
-    });
-    $rootScope.isHeadless = $rootScope.addToHomescreen.session && $rootScope.addToHomescreen.session.added;
-    $rootScope.isMobile = $window.innerWidth < 768;
 
     var prv = {
       pendingReload: false,
