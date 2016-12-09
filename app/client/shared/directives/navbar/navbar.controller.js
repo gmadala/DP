@@ -32,7 +32,7 @@
         });
     });
 
-    $scope.pendingFloorPlanFlag = true; //User.getFeatures().hasOwnProperty('ribbonPendingFloorplans') ? User.getFeatures().ribbonPendingFloorplans.enabled : false;
+    $scope.pendingFloorPlanFlag = User.getFeatures().hasOwnProperty('ribbonPendingFloorplans') ? User.getFeatures().ribbonPendingFloorplans.enabled : false;
 
     $scope.navFloorplan = function(pendingValue){
       $state.go('floorplan', {
