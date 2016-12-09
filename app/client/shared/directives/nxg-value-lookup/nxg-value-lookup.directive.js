@@ -250,7 +250,7 @@
             marginTop: 0,
             marginRight: 0,
             marginBottom: 50,
-            marginLeft: 85
+            marginLeft: 80
           },
           credits: {
             enabled: false

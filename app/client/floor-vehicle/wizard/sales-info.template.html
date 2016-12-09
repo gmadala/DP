@@ -80,6 +80,7 @@
               ng-model="salesInfo.selectedMmrValuation"
               ng-change="salesInfo.onMmrValuationsChange(salesInfo.selectedMmrValuation)"
               ng-options="mmrValuation as mmrValuation.Display for mmrValuation in salesInfo.mmrValuations">
+        <option value="" ng-if="!salesInfo.mmrValuations || salesInfo.mmrValuations.length == 0">Valuation Not Available</option>
       </select>
     </div>
   </div>
