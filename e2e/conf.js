@@ -123,7 +123,7 @@ exports.config = {
     params: {
         userNameDealer: '57694AC',
         userNameAuction: '10298KB',
-        userName: '62434AM',
+        userName: '62434sf',
         userNameBankAccount: '3boysmotors',
         password: 'ringoffire@1',
         delay: '500',
