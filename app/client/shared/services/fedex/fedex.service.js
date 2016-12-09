@@ -20,24 +20,55 @@
 
         return false;
       },
-      getWaybill: function (businessId) {
-        return api.request('GET', api.ngenContentLink('/fedex/waybill/' + businessId), null, null, true, handleNgenSucessRequest).then(function (response) {
+      getWaybill: function (businessId, wizardStatus) {
+
+        return api.request('GET', api.ngenContentLink('/fedex/waybill/' + businessId), null, null, true, handleNgenRequest).then(function (response) {
+
+          kissMetricInfo.getKissMetricInfo().then(function (result) {
+            result.fedexTrackingNumber = response.data.trackingNumber;
+            result.fromWizard = wizardStatus === null || wizardStatus === undefined ? false : wizardStatus;
+            segmentio.track(metric.WAYBILL_PRINTED, result);
+          });
+
           return {
             waybill: response.data.labelImage,
-            trackingNumber: response.data.trackingNumber
+            trackingNumber: response.data.trackingNumber,
+            wizardStatus: wizardStatus
           };
+
         });
+      },
+      base64ToBlob: function(b64Data, contentType, sliceSize, processByteArray){
+        contentType = contentType || '';
+        sliceSize = sliceSize || 512;
+
+        var byteCharacters = atob(b64Data);
+        var byteArrays = [];
+
+        for (var offset = 0; offset < byteCharacters.length; offset += sliceSize) {
+          var slice = byteCharacters.slice(offset, offset + sliceSize);
+
+          var byteNumbers = new Array(slice.length);
+          for (var i = 0; i < slice.length; i++) {
+            byteNumbers[i] = slice.charCodeAt(i);
+          }
+
+          var byteArray = new Uint8Array(byteNumbers);
+
+          byteArrays.push(byteArray);
+        }
+
+        if (processByteArray !== undefined) {
+          processByteArray(byteArrays);
+        }
+
+        var blob = new Blob(byteArrays, {type: contentType});
+        return blob;
       }
     };
 
-    function handleNgenSucessRequest(response) {
+    function handleNgenRequest(response) {
       api.resetSessionTimeout();
-
-      kissMetricInfo.getKissMetricInfo().then(function (result) {
-        result.FedExTrackingNumber = response.trackingNumber;
-        segmentio.track(metric.WAYBILL_PRINTED, result);
-      });
-
       return response;
     }
   }
