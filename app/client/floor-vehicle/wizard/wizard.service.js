@@ -40,6 +40,9 @@
             cachedBlackbook.blackbookValuations = results;
             deferred.resolve(cachedBlackbook.blackbookValuations);
           })
+          .catch(function() {
+            deferred.reject();
+          })
       }
       return deferred.promise;
     }
@@ -57,6 +60,9 @@
             cachedMmr.cachedOdometer = odometer;
             cachedMmr.mmrValuations = results;
             deferred.resolve(cachedMmr.mmrValuations);
+          })
+          .catch(function() {
+            deferred.reject();
           })
       }
       return deferred.promise;

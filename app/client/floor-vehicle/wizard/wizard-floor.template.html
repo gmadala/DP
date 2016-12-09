@@ -34,11 +34,12 @@
                                    purchase-price="wizardFloor.data.UnitPurchasePrice"></nxg-credit-availability>
         </div>
       </div>
-      <div class="row">
+      <div class="row" ng-if="wizardFloor.flooringValuationFeature">
         <div class="col-md-12 sidebar">
-          <nxg-value-lookup ng-if="wizardFloor.flooringValuationFeature"
+          <nxg-value-lookup
                             mmr="wizardFloor.valuations.mmr.AverageWholesale"
                             blackbook="wizardFloor.valuations.blackbook.AverageValue"
+                            valuationAvailable="wizardFloor.valuations.valuationAvailable"
                             purchase-price="wizardFloor.data.UnitPurchasePrice"
                             projected-financed-amount="wizardFloor.valueLookUp.projectedFinancedAmount">
           </nxg-value-lookup>

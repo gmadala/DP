@@ -169,6 +169,76 @@ describe('Controller: SalesInfoCtrl', function() {
       expect(wizardService.getBlackbookValues).toHaveBeenCalledWith('ABC1234567890', 5000);
       expect(scope.$parent.wizardFloor.valuations.blackbook).toEqual(blackbookObjects[1]);
     });
+
+    it('should set the valuation unavailable flag when no mmr available', function() {
+      // change the spy return value to empty array
+      wizardService.getMmrValues.and.returnValue($q.when([]));
+      initController();
+      // fill out vin
+      scope.$parent.wizardFloor.data.UnitVin = 'ABC1234567890';
+      scope.$digest();
+      // fill out mileage
+      scope.$parent.wizardFloor.data.UnitMileage = 5000;
+      scope.$digest();
+      expect(wizardService.getBlackbookValues).toHaveBeenCalledWith('ABC1234567890', 5000);
+      expect(scope.$parent.wizardFloor.valuations.valuationUnavailable).toBe(true);
+    });
+
+    it('should set the valuation unavailable flag when no blackbook available', function() {
+      // change the spy return value to empty array
+      wizardService.getBlackbookValues.and.returnValue($q.when([]));
+      initController();
+      // fill out vin
+      scope.$parent.wizardFloor.data.UnitVin = 'ABC1234567890';
+      scope.$digest();
+      // fill out mileage
+      scope.$parent.wizardFloor.data.UnitMileage = 5000;
+      scope.$digest();
+      expect(wizardService.getBlackbookValues).toHaveBeenCalledWith('ABC1234567890', 5000);
+      expect(scope.$parent.wizardFloor.valuations.valuationUnavailable).toBe(true);
+    });
+
+    it('should set the valuation unavailable flag when no blackbook return error', function() {
+      // change the spy return value to empty array
+      wizardService.getBlackbookValues.and.returnValue($q.reject());
+      initController();
+      // fill out vin
+      scope.$parent.wizardFloor.data.UnitVin = 'ABC1234567890';
+      scope.$digest();
+      // fill out mileage
+      scope.$parent.wizardFloor.data.UnitMileage = 5000;
+      scope.$digest();
+      expect(wizardService.getBlackbookValues).toHaveBeenCalledWith('ABC1234567890', 5000);
+      expect(scope.$parent.wizardFloor.valuations.valuationUnavailable).toBe(true);
+    });
+
+    it('should set the valuation unavailable flag when no mmr return error', function() {
+      // change the spy return value to empty array
+      wizardService.getMmrValues.and.returnValue($q.reject());
+      initController();
+      // fill out vin
+      scope.$parent.wizardFloor.data.UnitVin = 'ABC1234567890';
+      scope.$digest();
+      // fill out mileage
+      scope.$parent.wizardFloor.data.UnitMileage = 5000;
+      scope.$digest();
+      expect(wizardService.getBlackbookValues).toHaveBeenCalledWith('ABC1234567890', 5000);
+      expect(scope.$parent.wizardFloor.valuations.valuationUnavailable).toBe(true);
+    });
+
+    it('should set the valuation unavailable flag when no mmr return error', function() {
+      // change the spy return value to empty array
+      wizardService.getMmrValues.and.returnValue($q.reject());
+      initController();
+      // fill out vin
+      scope.$parent.wizardFloor.data.UnitVin = 'ABC1234567890';
+      scope.$digest();
+      // fill out mileage
+      scope.$parent.wizardFloor.data.UnitMileage = 5000;
+      scope.$digest();
+      expect(wizardService.getBlackbookValues).toHaveBeenCalledWith('ABC1234567890', 5000);
+      expect(scope.$parent.wizardFloor.valuations.valuationUnavailable).toBe(true);
+    });
   });
 
 });

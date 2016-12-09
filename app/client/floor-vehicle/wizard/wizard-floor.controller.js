@@ -204,6 +204,7 @@
     };
 
     vm.valuations = {
+      valuationUnavailable: false,
       blackbook: null,
       mmr: null
     };

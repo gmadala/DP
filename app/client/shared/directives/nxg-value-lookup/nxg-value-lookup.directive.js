@@ -22,6 +22,7 @@
         mmr: '=',
         blackbook: '=',
         purchasePrice: '=',
+        valuationUnavailable: '=',
         projectedFinancedAmount: '='
       },
       replace: 'true',
@@ -30,8 +31,6 @@
 
     function linkFn(scope, element) {
       // local vars for translations
-      var purchasePriceText = gettextCatalog.getString('Purchase Price');
-      var bookoutAmountText = gettextCatalog.getString('Bookout Amount');
       var purchasePriceLessText = gettextCatalog.getString('Purchase price less than <br /> highest average bookout');
       var purchasePriceMoreText = gettextCatalog.getString('Highest average bookout <br /> less than purchase price');
       var purchasePriceOnlyText = gettextCatalog.getString('Only purchase price data <br /> is available');
