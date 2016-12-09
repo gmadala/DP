@@ -61,6 +61,7 @@
           var data = chart.series[0].data;
           data[1].y = newValue;
           chart.series[0].setData(data);
+          updatePlotInformation();
           realignLabels();
         }
       });
@@ -71,6 +72,7 @@
           var data = chart.series[0].data;
           data[2].y = newValue;
           chart.series[0].setData(data);
+          updatePlotInformation();
           realignLabels();
         }
       });
