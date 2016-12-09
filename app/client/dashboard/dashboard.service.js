@@ -56,24 +56,6 @@
         }, 0);
       },
       extendLineOfCreditObject: extendLineOfCreditObject,
-      cachePendingFloorplans: function() {
-        var deferred = $q.defer();
-        if (cachedPending) {
-          deferred.resolve(cachedPending);
-        } else {
-          var params = {
-            SearchApproved: false,
-            SearchCompleted: false,
-            SearchDenied: false
-          };
-          api.request('GET', '/floorplan/search', params)
-            .then(function (results) {
-              cachedPending = results.FloorplanRowCount;
-              deferred.resolve(cachedPending);
-            });
-        }
-        return deferred.promise;
-      },
       fetchDealerDashboard: function (startDate, endDate) {
         return $q.all([
           api.request('GET', '/dealer/buyer/dashboard/' + startDate + '/' + endDate),

@@ -75,7 +75,6 @@
       $scope.audits = Audits;
       $scope.audits.refreshAudits();
     }
-    
     $scope.changeViewMode = function(mode) {
       $scope.viewMode = mode;
       $scope.viewModeLabel = gettextCatalog.getString(capitalizeFilter($scope.viewMode));
