@@ -8,13 +8,14 @@ const navBarStyles = {
     minHeight: '48px',
     fontSize: '1.4rem',
 };
+
 const pendingFPStyle = {
-    color: '#efefef',
-    fontSize: '14px',
-    paddingTop: '7px',
+    backgroundColor: '#0e1e4e',
+    border: '0px',
+    color: '#fff',
 };
 const unitsStyles = {
-    fontSize:'12px',
+    marginLeft: '-75px',
 }
 class Ribbon extends Component {
     render() {
@@ -25,9 +26,9 @@ class Ribbon extends Component {
                           <div className="collapse navbar-collapse">
                               <ul className="nav navbar-nav">
                                   <li>
-                                      <button onClick={( ) => { this.props.navfloorplan('pending') } } style={pendingFPStyle} role="button">
+                                      <button onClick={( ) => { this.props.navfloorplan('pending') }} className="btn btn-default navbar-btn" style={pendingFPStyle} role="button">
                                           <span>Pending Floorplans</span><br/>
-                                          <span style={unitsStyles}>{ this.props.floorplancount } { this.props.floorplanflag } units</span>
+                                          <span style={unitsStyles}>{ this.props.floorplancount } units</span>
                                       </button>
                                   </li>
                               </ul>
@@ -40,7 +41,6 @@ class Ribbon extends Component {
 }
 Ribbon.propTypes = {
     floorplancount: PropTypes.number.isRequired,
-    floorplanflag: PropTypes.bool,
     navfloorplan: PropTypes.func,
 };
 

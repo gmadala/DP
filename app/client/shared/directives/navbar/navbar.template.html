@@ -205,5 +205,7 @@
       </div>
     </nav>
   </div>
-  <ribbon-component ng-show="isDashboard() && user.isDealer()" navfloorplan="navFloorplan" floorplancount="cachePendingFloorplans" floorplanflag="pendingFloorPlanFlag" />
+  <div ng-show="pendingFloorPlanFlag">
+     <ribbon-component ng-show="isDashboard() && user.isDealer()" navfloorplan="navFloorplan" floorplancount="cachePendingFloorplans" />
+  </div>
 </header>

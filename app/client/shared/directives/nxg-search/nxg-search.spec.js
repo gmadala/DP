@@ -108,6 +108,23 @@ describe('Directive: nxgSearch', function () {
         expect(scope.onSearch).toHaveBeenCalled();
       });
 
+      it('should set flooring status dropdown to PENDING in the floorplan page', function(){
+        var scopeMock = {
+          pendingValue:true,
+          activeCriteria: {
+            filter: 'pending'
+          }
+        }
+        expect(scopeMock.pendingValue).toBe(true);
+        expect(scopeMock.activeCriteria.filter).toBe('pending');
+        scope.onSearch = jasmine.createSpy('onSearch');
+        scope.searchForm = {
+          $valid: true,
+          $error: {}
+        };
+        scope.search();
+        expect(scope.onSearch).toHaveBeenCalled();
+      });
     });
 
     it('should attach a clear function to the scope', function () {

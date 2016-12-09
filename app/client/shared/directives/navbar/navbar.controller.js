@@ -32,12 +32,12 @@
         });
     });
 
-    $scope.pendingFloorPlanFlag =  true; //User.getFeatures().hasOwnProperty('pendingFloorPlans') ? User.getFeatures().pendingFloorPlans.enabled : true,
+    $scope.pendingFloorPlanFlag = true; //User.getFeatures().hasOwnProperty('ribbonPendingFloorplans') ? User.getFeatures().ribbonPendingFloorplans.enabled : false;
 
     $scope.navFloorplan = function(pendingValue){
-       $state.go('floorplan', {
-         filter: pendingValue
-       });
+      $state.go('floorplan', {
+        filter: pendingValue
+      });
     }
 
 

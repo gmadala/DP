@@ -91,7 +91,7 @@
       ];
     }
 
-    $scope.pendingValue = ($stateParams.filter == true) ? true : false;
+    $scope.pendingValue = ($stateParams.filter == 'pending') ? true : false;
 
     // Grab inventory locations (floored against) to send to search directive
     $scope.inventoryLocations = Addresses.getFlooredBusinessAddresses();
