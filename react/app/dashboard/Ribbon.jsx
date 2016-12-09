@@ -16,7 +16,8 @@ const pendingFPStyle = {
 };
 const unitsStyles = {
     marginLeft: '-75px',
-}
+};
+
 class Ribbon extends Component {
     render() {
         return (
@@ -39,6 +40,7 @@ class Ribbon extends Component {
         );
     }
 }
+
 Ribbon.propTypes = {
     floorplancount: PropTypes.number.isRequired,
     navfloorplan: PropTypes.func,

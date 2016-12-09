@@ -279,8 +279,7 @@ describe( 'Directive: navBar', function() {
         spyOn(stateMock, 'go').and.callThrough();
         stateMock.go('floorplan');
         expect(stateMock.go).toHaveBeenCalledWith('floorplan');
-      })
-
+      } );
     } );
 
     describe( 'isActive function', function() {
