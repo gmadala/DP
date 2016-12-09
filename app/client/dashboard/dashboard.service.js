@@ -8,7 +8,6 @@
   Dashboard.$inject = ['$q', '$filter', 'api', 'moment', 'gettextCatalog'];
 
   function Dashboard($q, $filter, api, moment, gettextCatalog) {
-    var cachedPending = 0;
     function getReceiptURL(transactionId) {
       return api.contentLink('/receipt/view/' + transactionId + '/Receipt');
     }
