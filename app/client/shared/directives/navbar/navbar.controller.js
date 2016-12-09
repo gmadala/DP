@@ -25,6 +25,7 @@
 
     $scope.cachePendingFloorplans = 0;
 
+    //used to fetch the pending floorplans from the dashboard service
     $scope.$on('setDateRange', function (event, startDate, endDate) {
       Dashboard.fetchDealerDashboard(startDate, endDate).then(
         function (result) {
@@ -32,14 +33,15 @@
         });
     });
 
+    //checking the feature flag for the displaying pending floorplans on the dashboard ribbon
     $scope.pendingFloorPlanFlag = User.getFeatures().hasOwnProperty('ribbonPendingFloorplans') ? User.getFeatures().ribbonPendingFloorplans.enabled : false;
 
+    //click event is fired from the React component
     $scope.navFloorplan = function(pendingValue){
       $state.go('floorplan', {
         filter: pendingValue
       });
-    }
-
+    };
 
     var paymentsSubMenu = [
         {
@@ -151,8 +153,6 @@
         activeWhen: 'account_management'
       }
     };
-    //handles for checking Ribbon using React components features floating
-    $scope.RibbonPendingFP = true; //User.getFeatures().hasOwnProperty('pendingFloorPlans') ? User.getFeatures().pendingFloorPlans.enabled : true;
 
     $scope.initNav = function( ) {
       kissMetricInfo.getKissMetricInfo( ).then( function( result ) {
