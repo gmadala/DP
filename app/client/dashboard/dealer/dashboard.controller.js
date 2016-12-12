@@ -45,7 +45,7 @@
     var isAndroid = /Android/i.test(navigator.userAgent);
     var isIos = /iPhone|iPad|iPod/i.test(navigator.userAgent);
     $scope.prompted = $cookieStore.get('headlessPrompted');
-    $scope.isHeadless = $state.includes('headless');
+    $scope.isHeadless = $state.current.name.indexOf('headless') !== -1;
 
     if (isMobile && (isAndroid || isIos) && !$scope.isHeadless && !$scope.prompted) {
         $cookieStore.put('headlessPrompted', true);
