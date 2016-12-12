@@ -1,4 +1,4 @@
-import React, { Component, PropTypes } from 'react';
+import React, { PropTypes } from 'react';
 
 const navBarStyles = {
     boxShadow: 'rgba(0,0,0,0.25) 0px 2px 3px',
@@ -18,18 +18,16 @@ const unitsStyles = {
     marginLeft: '-75px',
 };
 
-class Ribbon extends Component {
-    render() {
-        return (
+const Ribbon = ({ navfloorplan, floorplancount }) => (
               <div>
                   <nav className="navbar navbar-default" style={navBarStyles}>
                       <div className="container">
                           <div className="collapse navbar-collapse">
                               <ul className="nav navbar-nav">
                                   <li>
-                                      <button onClick={( ) => { this.props.navfloorplan('pending') }} className="btn btn-default navbar-btn" style={pendingFPStyle} role="button">
+                                      <button onClick={( ) => { navfloorplan('pending') }} className="btn btn-default navbar-btn" style={pendingFPStyle} role="button">
                                           <span>Pending Floorplans</span><br/>
-                                          <span style={unitsStyles}>{ this.props.floorplancount } units</span>
+                                          <span style={unitsStyles}>{ floorplancount } units</span>
                                       </button>
                                   </li>
                               </ul>
@@ -38,8 +36,6 @@ class Ribbon extends Component {
                   </nav>
               </div>
         );
-    }
-}
 
 Ribbon.propTypes = {
     floorplancount: PropTypes.number.isRequired,
