@@ -53,7 +53,7 @@
         <li ng-repeat="file in wizardFloor.data.files">
           <!-- <img ngf-thumbnail="file" class="thumb"> -->
           <div>
-            {{ file.name | truncate:18 }}
+            <div class="pull-left" ng-bind="wizardFloor.renameFile(file.name,$index) | truncate:18"></div>
             <div class="wizard-file-delete" ng-click="removeFile(file)">&times;</div>
           </div>
         </li>
