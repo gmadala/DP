@@ -45,6 +45,10 @@ function Helper() {
         return browser.baseUrl + 'account_management';
     };
 
+    this.analyticsPage = function () {
+        return browser.baseUrl + 'analytics';
+    };
+
     //Navigation functions
     this.goToLogin = function () {
         /**
@@ -160,6 +164,19 @@ function Helper() {
          * @returns {none}
          */
         browser.get(this.accountManagementPage());
+        browser.sleep(browser.params.longerDelay);
+    };
+
+    this.goToAnalytics = function () {
+        /**
+         * @name goToHome
+         * @memberof helper
+         * @author Bala Nithiya
+         * @description This function navigates to the Analytics
+         *
+         * @returns {none}
+         */
+        browser.get(this.analyticsPage());
         browser.sleep(browser.params.longerDelay);
     };
 

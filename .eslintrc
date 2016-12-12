@@ -42,7 +42,7 @@
         "curly": 0,
         "eol-last": 1,
         "eqeqeq": 1,
-        "indent": [2, 4],
+        "indent": [2, 4, {SwitchCase: 1}],
         "init-declarations": 2,
         "key-spacing": 0,
         "max-len": [2, 200],
