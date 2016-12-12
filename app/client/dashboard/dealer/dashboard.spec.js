@@ -301,7 +301,10 @@ describe('Controller: DashboardCtrl', function () {
     scope = $rootScope.$new();
     $q = _$q_;
     mockState = {
-      transitionTo: jasmine.createSpy()
+      transitionTo: jasmine.createSpy(),
+      current: {
+          name: 'home'
+      }
     };
 
     searchSpy = spyOn(Floorplan, 'search').and.callFake(function() {
