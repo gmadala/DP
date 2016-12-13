@@ -34,7 +34,7 @@ class Modal extends Component {
         const modalHeader = this.props.title ? (
             <div className="modal-header">
               {modalHeaderCloseBtn}
-              <h4 className="modal-title" id="myModalLabel">{this.props.title}</h4>
+              <h4 className="modal-title" id="modalLabel">{this.props.title}</h4>
             </div>
         ) : null;
 
@@ -67,7 +67,7 @@ class Modal extends Component {
                 id="myModal"
                 tabIndex="-1"
                 role="dialog"
-                aria-labelledby="myModalLabel"
+                aria-labelledby="modalLabel"
                 ref={(m) => { this.modalRef = m; }}
                 style={{zIndex: '99999998'}}
                 onClick={() => { this.onClick() }}

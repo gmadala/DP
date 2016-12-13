@@ -27,7 +27,7 @@ const Arrow = ({ position }) => {
         arrowStyle.margin = '0 auto';
     }
 
-    return position ? <div style={arrowStyle} /> : null;
+    return <div style={arrowStyle} />;
 }
 
 Arrow.propTypes = {
