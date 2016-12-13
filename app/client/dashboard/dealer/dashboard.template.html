@@ -1,12 +1,13 @@
+<ribbon-component class="hidden-sm"
+                  ng-show="pendingFloorPlanFlag || openAuditsFlag"
+                  navfloorplan="navFloorplan"
+                  floorplancount="pendingFloorplans"
+                  floorplanshow="pendingFloorPlanFlag"
+                  openauditsshow="openAuditsFlag"
+                  openauditscount="audits.results.length"
+                  navaudit="navAudit"></ribbon-component>
+
 <div class="container">
-  <section class="row" ng-if="auditsEnabled && audits.results.length > 0">
-    <div class="col-xs-12">
-      <div class="alert alert-warning">
-        You have <span ng-bind="audits.results.length"></span> open audits.
-        <a href="#/audits" nxg-track="{{ metric.OPEN_AUDITS }}">Click here</a> to view them.
-      </div>
-    </div>
-  </section>
   <section class="row upcoming">
     <!-- Calendar -->
     <div class="col-sm-9">

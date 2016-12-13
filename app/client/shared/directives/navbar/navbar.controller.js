@@ -17,30 +17,15 @@
     'localStorageService',
     'fedex',
     'nxgConfig',
-    'Dashboard'
+    'Dashboard',
+    'Audits'
   ];
 
-  function NavBarCtrl( $rootScope, $scope, $state, User, Payments, gettextCatalog, language, kissMetricInfo, $location, $timeout, localStorageService, fedex, nxgConfig, Dashboard ) {
+  function NavBarCtrl( $rootScope, $scope, $state, User, Payments, gettextCatalog, language, kissMetricInfo, $location, $timeout, localStorageService, fedex, nxgConfig, Dashboard, Audits ) {
     $scope.isCollapsed = true;
 
-    $scope.cachePendingFloorplans = 0;
-
-    //used to fetch the pending floorplans from the dashboard service
-    $scope.$on('setDateRange', function (event, startDate, endDate) {
-      Dashboard.fetchDealerDashboard(startDate, endDate).then(
-        function (result) {
-          $scope.cachePendingFloorplans = result.PendingFloorplans;
-        });
-    });
-
-    //checking the feature flag for the displaying pending floorplans on the dashboard ribbon
-    $scope.pendingFloorPlanFlag = User.getFeatures().hasOwnProperty('ribbonPendingFloorplans') ? User.getFeatures().ribbonPendingFloorplans.enabled : false;
-
-    //click event is fired from the React component
-    $scope.navFloorplan = function(pendingValue){
-      $state.go('floorplan', {
-        filter: pendingValue
-      });
+    $scope.isDashboard = function( ) {
+      return $state.current.name === "dashboard" || $state.current.name === "auction_dashboard" || $scope.pageTitle === "";
     };
 
     var paymentsSubMenu = [
@@ -302,10 +287,6 @@
           document.getElementsByClassName( 'dropdown open' )[ 0 ].classList.remove( 'open' );
         }, 0);
       }
-    };
-
-    $scope.isDashboard = function( ) {
-      return $state.current.name === "dashboard" || $state.current.name === "auction_dashboard" || $scope.pageTitle === "";
     };
 
     $scope.toggleMenu = function( ) {
