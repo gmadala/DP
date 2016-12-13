@@ -201,9 +201,9 @@
             </li>
           </ul>
         </div>
-
         <div class="navbar-scroll-fix" ng-hide="navbarClosed" ng-class="{'open': navState.current.data.showMenu, 'closed': (!navState.current.data.showMenu && navState.current.data.menuToggled)}" ng-click="toggleMenu()"></div>
       </div>
     </nav>
   </div>
+     <ribbon-component ng-show="isDashboard() && user.isDealer() && pendingFloorPlanFlag" navfloorplan="navFloorplan" floorplancount="cachePendingFloorplans" />
 </header>
