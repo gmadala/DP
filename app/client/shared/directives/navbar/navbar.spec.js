@@ -268,18 +268,6 @@ describe( 'Directive: navBar', function() {
         ret = aScope.user.homeLink();
         expect( ret ).toBe( '#/act/home' );
       } );
-
-      it('should check for the function navFloorPlan is executed', function(){
-        expect(scope.pendingFloorPlanFlag).toBe(true);
-        expect(scope.navFloorplan).toBeDefined();
-        expect( typeof scope.navFloorplan).toBe( 'function');
-        spyOn(scope, 'navFloorplan').and.callThrough();
-        scope.navFloorplan();
-        expect(scope.navFloorplan).toHaveBeenCalled();
-        spyOn(stateMock, 'go').and.callThrough();
-        stateMock.go('floorplan');
-        expect(stateMock.go).toHaveBeenCalledWith('floorplan');
-      } );
     } );
 
     describe( 'isActive function', function() {
