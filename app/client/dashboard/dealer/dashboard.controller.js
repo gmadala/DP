@@ -110,13 +110,6 @@
       $state.go('audits');
     };
 
-    // click event is fired from the React component
-    $scope.navFloorplan = function(pendingValue){
-      $state.go('floorplan', {
-        filter: pendingValue
-      });
-    };
-
     $scope.isPast = function() {
 
       var currentCalendarDate = angular.element('.dash-calendar').fullCalendar('getDate');

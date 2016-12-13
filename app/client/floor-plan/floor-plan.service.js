@@ -97,7 +97,7 @@
             PhysicalInventoryAddressIds: criteria.inventoryLocation && criteria.inventoryLocation.AddressId
           };
 
-        return  api.request('GET', '/floorplan/search', params).then(
+        return api.request('GET', '/floorplan/search', params).then(
           function (results) {
             angular.forEach(results.Floorplans, function (floorplan) {
               floorplan.data = {query: criteria.query};

@@ -91,15 +91,11 @@
       ];
     }
 
-    $scope.pendingValue = $stateParams.filter === 'pending';
-
     // Grab inventory locations (floored against) to send to search directive
     $scope.inventoryLocations = Addresses.getFlooredBusinessAddresses();
 
     // FloorplanUtil handles all search/fetch/reset functionality.
     $scope.floorplanData = new FloorplanUtil('FlooringDate');
-
-
 
     // Set up page-load filtering based on $stateParams
     var filterParam = null;
