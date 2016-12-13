@@ -4,7 +4,7 @@ import { shallow } from 'enzyme';
 import Ribbon from '../../app/dashboard/Ribbon'
 import RibbonItem from '../../app/dashboard/RibbonItem';
 
-describe.only('Ribbon', ( ) => {
+describe('Ribbon', ( ) => {
     const navfloorplan = sinon.spy( );
     const floorplanshow = true;
     const floorplancount = 12;
