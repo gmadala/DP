@@ -6,6 +6,7 @@
     "url": "https://git.assembla.com/nextgear-desktop-and-mobile.desktop.git"
   },
   "dependencies": {
+    "axios": "^0.15.3",
     "babel-polyfill": "^6.16.0",
     "chai": "^3.5.0",
     "chai-as-promised": "^6.0.0",
@@ -20,6 +21,10 @@
     "react-interpolate-component": "^0.10.0",
     "react-router": "^2.8.1",
     "react-translate-component": "^0.13.1",
+    "redux": "^3.6.0",
+    "redux-logger": "^2.7.4",
+    "redux-promise-middleware": "^4.2.0",
+    "redux-thunk": "^2.1.0",
     "sinon": "^1.17.6",
     "sinon-chai": "^2.8.0",
     "webpack": "^1.13.2"

@@ -3,22 +3,21 @@ import counterpart from 'counterpart';
 import ResourceVideos from './ResourceVideos';
 import ResourceDocs from './ResourceDocs';
 import MobileApps from './MobileApps';
-import collateralDocsList from './data/_collateralDocsList';
-import mobileAppsList from './data/_mobileAppsList';
-import docsList from './data/_docsList';
-import metric from '../shared/metric';
+import store from '../../store';
+import { logAction } from '../../actions/metricActions';
 
 class Resources extends Component {
     constructor( props ) {
         super( props );
 
         const rp = props.rp;
+        const state = store.getState();
+        const docsList = state.resource.docs;
+        const collateralDocsList = state.resource.collateralDocs;
+        const mobileAppsList = state.resource.mobileApps;
 
         // get fee schedule content link
         docsList[0].url = rp.api.contentLink('/dealer/feeschedule/FeeSchedule', { });
-
-        // set current language
-        counterpart.setLocale(rp.language.substring( 0, 2 ));
 
         this.state = {
             language: counterpart.getLocale( ),
@@ -29,11 +28,12 @@ class Resources extends Component {
         }
 
         // log current page view
-        this.handleClick( metric.VIEW_RESOURCES_PAGE );
+        store.dispatch(logAction(state.metric.VIEW_RESOURCES_PAGE));
     }
 
     handleClick = ( metricKey ) => {
         if ( metricKey ) {
+            store.dispatch(logAction(metricKey));
             this.props.rp.kissMetricInfo.getKissMetricInfo( ).then(( info ) => {
                 this.props.rp.segmentio.track( metricKey, info );
             });

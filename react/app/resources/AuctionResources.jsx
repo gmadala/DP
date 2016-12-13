@@ -1,14 +1,15 @@
 import React, { Component, PropTypes } from 'react';
 import counterpart from 'counterpart';
 import ResourceDocs from './ResourceDocs';
-import auctionDocsList from './data/_auctionDocsList';
-import metric from '../shared/metric';
+import store from '../../store';
 
 class AuctionResources extends Component {
     constructor( props ) {
         super( props );
 
         const rp = props.rp;
+        const state = store.getState();
+        const auctionDocsList = state.resource.docs;
 
         // set current language
         counterpart.setLocale(rp.language.substring( 0, 2 ));
@@ -22,7 +23,7 @@ class AuctionResources extends Component {
         }
 
         // log current page view
-        this.handleClick( metric.VIEW_RESOURCES_PAGE );
+        this.handleClick( state.metric.VIEW_RESOURCES_PAGE );
     }
 
     handleClick = ({ metricKey }) => {
