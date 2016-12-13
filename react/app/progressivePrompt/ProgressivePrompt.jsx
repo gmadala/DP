@@ -28,7 +28,7 @@ class ProgressivePrompt extends Component {
                 marginLeft: '5px',
                 marginRight: '5px',
             }
-            icon = <img style={iconStyle} src="/private-components/addtohomescreen/img/action-icon-android.png" role="presentation" />;
+            icon = <img style={iconStyle} src="/img/addtohomescreen/action-icon-android.png" role="presentation" />;
             iconPosition = 'top right';
         }
 
@@ -41,7 +41,7 @@ class ProgressivePrompt extends Component {
                 marginLeft: '5px',
                 marginRight: '5px',
             }
-            icon = <img style={iconStyle} src="/private-components/addtohomescreen/img/action-icon-ios7.png" role="presentation" />;
+            icon = <img style={iconStyle} src="/img/addtohomescreen/action-icon-ios7.png" role="presentation" />;
             iconPosition = 'bottom'
         }
 
