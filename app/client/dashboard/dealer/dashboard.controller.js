@@ -7,7 +7,6 @@
 
   DashboardCtrl.$inject = [
     '$scope',
-    '$rootScope',
     '$state',
     '$uibModal',
     'Dashboard',
@@ -24,7 +23,6 @@
 
   function DashboardCtrl(
     $scope,
-    $rootScope,
     $state,
     $uibModal,
     Dashboard,
