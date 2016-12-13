@@ -34,6 +34,18 @@ module.exports = {
             sellerGuide: 'Instructions for Sellers',
         },
     },
+    dashboard: {
+        ribbon: {
+            auditLabel: 'Open Audits',
+            floorplanLabel: 'Pending Floorplans',
+        },
+        ribbonItem: {
+            units: {
+                one: '%(count)s Unit',
+                other: '%(count)s Units',
+            },
+        },
+    },
     progressivePrompt: {
         isAndroid: 'Tap the top right menu icon %(icon)s and click on "Add to Home Screen"',
         isIos: 'Tap the share icon %(icon)s and click on "Add to Home Screen"',

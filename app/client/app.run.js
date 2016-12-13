@@ -147,10 +147,20 @@
 
     $rootScope.$on( '$stateChangeSuccess',
       function( event, toState ) {
+        var pendingFloorPlanFlag = User.getFeatures().hasOwnProperty('ribbonPendingFloorplans') ? User.getFeatures().ribbonPendingFloorplans.enabled : false;
+        var openAuditsFlag = User.getFeatures().hasOwnProperty('openAudits') ? User.getFeatures().openAudits.enabled : false;
+
+
         if ( toState.name === 'login' && prv.pendingReload ) {
           // clobber when success going to login
           prv.pendingReload = false;
           $window.location.reload( true );
+        }
+
+        if (toState.name === 'dashboard' && (pendingFloorPlanFlag || openAuditsFlag)) {
+          $rootScope.ribbonStyle = { 'margin-bottom': '0' };
+        } else {
+          $rootScope.ribbonStyle = {};
         }
       }
     );

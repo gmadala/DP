@@ -14,12 +14,14 @@ describe( 'Directive: navBar', function() {
       shouldShowTRP,
       dMock,
       aMock,
-      mockCustomerSupportPhone;
+      mockCustomerSupportPhone,
+      httpBackend;
 
-    beforeEach( inject( function( _$rootScope_, _$controller_, $state, $q ) {
+    beforeEach( inject( function( _$rootScope_, _$controller_, $state, $q, $httpBackend ) {
       $controller = _$controller_;
       $rootScope = _$rootScope_;
       scope = $rootScope.$new();
+      httpBackend = $httpBackend;
 
       kissMetricData = {
         height: 1080,
@@ -28,6 +30,8 @@ describe( 'Directive: navBar', function() {
         version: 'Chrome 44',
         width: 1920
       };
+
+      $httpBackend.when('GET', 'floorplan/search').respond({});
 
       mockKissMetricInfo = {
         getKissMetricInfo: function() {
@@ -44,6 +48,9 @@ describe( 'Directive: navBar', function() {
         },
         includes: function( param ) {
           return stateMock.current.indexOf( param ) != -1;
+        },
+        go: function( newState ){
+          stateMock.current = newState;
         }
       };
       shouldShowTRP = false;
@@ -80,6 +87,9 @@ describe( 'Directive: navBar', function() {
               enabled: true
             },
             uploadDocumentsAuction: {
+              enabled: true
+            },
+            ribbonPendingFloorplans: {
               enabled: true
             }
           };
@@ -258,7 +268,6 @@ describe( 'Directive: navBar', function() {
         ret = aScope.user.homeLink();
         expect( ret ).toBe( '#/act/home' );
       } );
-
     } );
 
     describe( 'isActive function', function() {

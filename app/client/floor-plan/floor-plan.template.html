@@ -11,7 +11,8 @@
            on-search="floorplanData.search(floorplanData.searchCriteria)"
            on-clear="floorplanData.resetSearch()"
            filterable="true"
-           show-location-filter="inventoryLocations">
+           show-location-filter="inventoryLocations"
+           pending-value="pendingValue">
       </div>
 
       <div class="panel panel-default" ng-switch="floorplanData.results.length > 0 || floorplanData.loading">

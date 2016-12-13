@@ -1,4 +1,4 @@
-<header class="app-header" ng-class="{ login: !navState.current.data.showNavBar, auctions: !user.isDealer() }">
+<header class="app-header" ng-style="ribbonStyle" ng-class="{ login: !navState.current.data.showNavBar, auctions: !user.isDealer() }">
   <div class="container" ng-class="{'hidden-xs':navState.current.data.showNavBar}">
     <div class="header">
       <a ng-href="{{user.homeLink()}}" class="col-sm-4 col-md-8 custom ng-binding">
@@ -201,7 +201,6 @@
             </li>
           </ul>
         </div>
-
         <div class="navbar-scroll-fix" ng-hide="navbarClosed" ng-class="{'open': navState.current.data.showMenu, 'closed': (!navState.current.data.showMenu && navState.current.data.menuToggled)}" ng-click="toggleMenu()"></div>
       </div>
     </nav>
