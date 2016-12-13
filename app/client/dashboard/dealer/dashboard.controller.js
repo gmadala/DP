@@ -99,8 +99,9 @@
     // get number of open audits for ribbon and for pending floorplans
     $scope.pendingFloorplans = 0;
 
+    $scope.audits = Audits;
+
     if ($scope.openAuditsFlag) {
-      $scope.audits = Audits;
       $scope.audits.refreshAudits();
     }
 
