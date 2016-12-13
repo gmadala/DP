@@ -3,7 +3,7 @@ import { shallow } from 'enzyme';
 
 import Ribbon from '../../app/dashboard/Ribbon'
 
-describe('Ribbon', ( ) => {
+describe.only('Ribbon', ( ) => {
     it('should test for the prop types', ( ) => {
         const navfloorplan = sinon.spy( );
         const wrapper = shallow( <Ribbon navfloorplan={navfloorplan}/>);

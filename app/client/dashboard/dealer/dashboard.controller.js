@@ -7,34 +7,36 @@
 
   DashboardCtrl.$inject = [
     '$scope',
+    '$rootScope',
     '$state',
     '$uibModal',
     'Dashboard',
     'User',
     'FloorplanUtil',
-    'Audits',
     'moment',
     '$filter',
     'gettext',
     'gettextCatalog',
     'capitalizeFilter',
-    'language'
+    'language',
+    'Audits'
   ];
 
   function DashboardCtrl(
     $scope,
+    $rootScope,
     $state,
     $uibModal,
     Dashboard,
     User,
     FloorplanUtil,
-    Audits,
     moment,
     $filter,
     gettext,
     gettextCatalog,
     capitalizeFilter,
-    language
+    language,
+    Audits
   ) {
 
     var uibModal = $uibModal;
@@ -69,12 +71,6 @@
     // initial search
     $scope.floorplanData.resetSearch();
 
-    // Handles checking if dealer has open audits
-    $scope.auditsEnabled = User.getFeatures().hasOwnProperty('openAudits') ? User.getFeatures().openAudits.enabled : true;
-    if ($scope.auditsEnabled) {
-      $scope.audits = Audits;
-      $scope.audits.refreshAudits();
-    }
     $scope.changeViewMode = function(mode) {
       $scope.viewMode = mode;
       $scope.viewModeLabel = gettextCatalog.getString(capitalizeFilter($scope.viewMode));
@@ -95,6 +91,31 @@
       } else {
         return 'future';
       }
+    };
+
+
+    // checking the feature flag for the displaying pending floorplans && open audits on the dashboard ribbon
+    $scope.pendingFloorPlanFlag = User.getFeatures().hasOwnProperty('ribbonPendingFloorplans') ? User.getFeatures().ribbonPendingFloorplans.enabled : false;
+    $scope.openAuditsFlag = User.getFeatures().hasOwnProperty('openAudits') ? User.getFeatures().openAudits.enabled : false;
+
+    // get number of open audits for ribbon and for pending floorplans
+    $scope.pendingFloorplans = 0;
+
+    if ($scope.openAuditsFlag) {
+      $scope.audits = Audits;
+      $scope.audits.refreshAudits();
+    }
+
+    // click event for ribbon navigation to audits screen
+    $scope.navAudit = function () {
+      $state.go('audits');
+    };
+
+    // click event is fired from the React component
+    $scope.navFloorplan = function(pendingValue){
+      $state.go('floorplan', {
+        filter: pendingValue
+      });
     };
 
     $scope.isPast = function() {
@@ -228,6 +249,7 @@
       Dashboard.fetchDealerDashboard(startDate, endDate).then(
         function (result) {
           $scope.dashboardData = result;
+          $scope.pendingFloorplans = result.PendingFloorplans;
 
           if($scope.dashboardData.LinesOfCredit.length === 1) {
             $scope.dashboardData.selectedLineOfCredit = $scope.dashboardData.LinesOfCredit[0];

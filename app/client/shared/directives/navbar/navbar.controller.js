@@ -17,31 +17,56 @@
     'localStorageService',
     'fedex',
     'nxgConfig',
-    'Dashboard'
+    'Dashboard',
+    'Audits'
   ];
 
-  function NavBarCtrl( $rootScope, $scope, $state, User, Payments, gettextCatalog, language, kissMetricInfo, $location, $timeout, localStorageService, fedex, nxgConfig, Dashboard ) {
+  function NavBarCtrl( $rootScope, $scope, $state, User, Payments, gettextCatalog, language, kissMetricInfo, $location, $timeout, localStorageService, fedex, nxgConfig, Dashboard, Audits ) {
     $scope.isCollapsed = true;
 
-    $scope.cachePendingFloorplans = 0;
+    // $scope.cachePendingFloorplans = 0;
 
-    //used to fetch the pending floorplans from the dashboard service
-    $scope.$on('setDateRange', function (event, startDate, endDate) {
-      Dashboard.fetchDealerDashboard(startDate, endDate).then(
-        function (result) {
-          $scope.cachePendingFloorplans = result.PendingFloorplans;
-        });
-    });
+    // used to fetch the pending floorplans from the dashboard service
+    // $scope.$on('setDateRange', function (event, startDate, endDate) {
+    //   Dashboard.fetchDealerDashboard(startDate, endDate).then(
+    //     function (result) {
+    //       $scope.cachePendingFloorplans = result.PendingFloorplans;
+    //     });
+    // });
 
-    //checking the feature flag for the displaying pending floorplans on the dashboard ribbon
-    $scope.pendingFloorPlanFlag = User.getFeatures().hasOwnProperty('ribbonPendingFloorplans') ? User.getFeatures().ribbonPendingFloorplans.enabled : false;
-
-    //click event is fired from the React component
-    $scope.navFloorplan = function(pendingValue){
-      $state.go('floorplan', {
-        filter: pendingValue
-      });
+    $scope.isDashboard = function( ) {
+      return $state.current.name === "dashboard" || $state.current.name === "auction_dashboard" || $scope.pageTitle === "";
     };
+
+    // checking the feature flag for the displaying pending floorplans && open audits on the dashboard ribbon
+    // var pendingFloorPlanFlag = User.getFeatures().hasOwnProperty('ribbonPendingFloorplans') ? User.getFeatures().ribbonPendingFloorplans.enabled : false;
+    //  var openAuditsFlag = User.getFeatures().hasOwnProperty('openAudits') ? User.getFeatures().openAudits.enabled : false;
+    // $scope.ribbonStyle = {};
+    //
+    // $scope.ribbonStyle = function() {
+    //   if (($scope.isDashboard() && User.isDealer()) && (pendingFloorPlanFlag || openAuditsFlag)) {
+    //     return { 'margin-bottom': '0' };
+    //   }
+    // };
+    //
+
+    // get number of open audits for ribbon
+    // if ($scope.openAuditsFlag) {
+    //   $scope.audits = Audits;
+    //   $scope.audits.refreshAudits();
+    // }
+
+    // click event for ribbon navigation to audits screen
+    // $scope.navAudit = function () {
+    //   $state.go('audits');
+    // };
+
+    // click event is fired from the React component
+    // $scope.navFloorplan = function(pendingValue){
+    //   $state.go('floorplan', {
+    //     filter: pendingValue
+    //   });
+    // };
 
     var paymentsSubMenu = [
         {
@@ -302,10 +327,6 @@
           document.getElementsByClassName( 'dropdown open' )[ 0 ].classList.remove( 'open' );
         }, 0);
       }
-    };
-
-    $scope.isDashboard = function( ) {
-      return $state.current.name === "dashboard" || $state.current.name === "auction_dashboard" || $scope.pageTitle === "";
     };
 
     $scope.toggleMenu = function( ) {

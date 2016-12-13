@@ -1,4 +1,4 @@
-<header class="app-header" ng-class="{ login: !navState.current.data.showNavBar, auctions: !user.isDealer() }">
+<header class="app-header" ng-style="ribbonStyle" ng-class="{ login: !navState.current.data.showNavBar, auctions: !user.isDealer() }">
   <div class="container" ng-class="{'hidden-xs':navState.current.data.showNavBar}">
     <div class="header">
       <a ng-href="{{user.homeLink()}}" class="col-sm-4 col-md-8 custom ng-binding">
@@ -205,5 +205,12 @@
       </div>
     </nav>
   </div>
-     <ribbon-component ng-show="isDashboard() && user.isDealer() && pendingFloorPlanFlag" navfloorplan="navFloorplan" floorplancount="cachePendingFloorplans" />
+   <!-- <ribbon-component class="hidden-sm"
+                     ng-show="isDashboard() && user.isDealer() && (pendingFloorPlanFlag || openAuditsFlag)"
+                     navfloorplan="navFloorplan"
+                     floorplancount="cachePendingFloorplans"
+                     floorplanshow="pendingFloorPlanFlag"
+                     openauditsshow="openAuditsFlag"
+                     openauditscount="audits.results.length"
+                     navaudit="navAudit" /> -->
 </header>
