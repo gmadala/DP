@@ -45,6 +45,10 @@ function Helper() {
         return browser.baseUrl + 'account_management';
     };
 
+    this.analyticsPage = function () {
+        return browser.baseUrl + 'analytics';
+    };
+
     //Navigation functions
     this.goToLogin = function () {
         /**
@@ -163,6 +167,19 @@ function Helper() {
         browser.sleep(browser.params.longerDelay);
     };
 
+    this.goToAnalytics = function () {
+        /**
+         * @name goToHome
+         * @memberof helper
+         * @author Bala Nithiya
+         * @description This function navigates to the Analytics
+         *
+         * @returns {none}
+         */
+        browser.get(this.analyticsPage());
+        browser.sleep(browser.params.longerDelay);
+    };
+
     //Generic functions
     this.waitForVisible = function (elementId) {
         /**
@@ -243,14 +260,15 @@ function Helper() {
          *
          * @returns {none}
          */
-        this.elOkButton = browser.element(by.buttonText("OK, I got it!"));
-        var elPopOver = element(by.css('button[ng-click="closeMenuTip()"]'));
-        if (elPopOver) {
-            browser.actions().mouseMove(element(by.css('.popover'))).perform();
-            expect(elPopOver.isDisplayed()).toBe(true);
-            this.elOkButton.click();
-        }
+        var elPopOverBtn = browser.element(by.buttonText('OK, I got it!'));
+        elPopOverBtn.isPresent()
+            .then(function (bool) {
+                if (bool) {
+                    elPopOverBtn.click()
+                }
+            });
     };
+
 
     this.doClick = function (elementToClick, elementToWaitFor) {
         /**

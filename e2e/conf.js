@@ -37,6 +37,25 @@ exports.config = {
 
     //Spec patterns are relative to the current working directly when protractor is called.
     specs: ['tests/e2e_spec/*_spec.js'],
+    //specs: ['tests/e2e_spec/e2e_analytics_spec.js'],
+
+
+    //To run a single test suite enter the following at the command prompt:
+    //   grunt test:e2e -suite=<enter suite name>
+    //   Ex: grunt test:e2e -suite=smoketest
+
+    suites: {
+        smoketest: ['smoketest/e2e_buildver_spec.js'],
+        accounts: ['tests/e2e_spec/e2e_bank_accounts_spec.js'],
+        dashboard: ['tests/e2e_spec/e2e_dashboard_spec.js'],
+        loginrecover: ['tests/e2e_spec/e2e_login_recover_spec.js'],
+        login: ['tests/e2e_spec/e2e_login_spec.js'],
+        profile: ['tests/e2e_spec/e2e_profile_settings_spec.js'],
+        promos: ['tests/e2e_spec/e2e_promos_spec.js'],
+        receipts: ['tests/e2e_spec/e2e_receipts_spec.js'],
+        resources: ['tests/e2e_spec/e2e_resources_spec.js']
+    },
+
 
     //More miscellaneous configuration options
     directConnect: false,
@@ -104,9 +123,9 @@ exports.config = {
     params: {
         userNameDealer: '57694AC',
         userNameAuction: '10298KB',
-        userName: '62434AM',
+        userName: '62434sf',
         userNameBankAccount: '3boysmotors',
-        password: 'ngcpass!0',
+        password: 'ringoffire@1',
         delay: '500',
         shortDelay: '1000',
         mediumDelay: '3000',

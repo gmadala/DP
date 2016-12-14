@@ -48,7 +48,7 @@
       if(date === null ){
         return null;
       }
-      $scope.search();
+      $scope.onSearch();
     };
 
     $scope.search = function () {

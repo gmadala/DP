@@ -23,7 +23,6 @@ describe('\n Bank Account', function () {
         loginObjects.doLogin();
         helper.goToAccountManagement();
         expect(browser.getCurrentUrl()).toEqual(helper.accountManagementPage());
-        helper.popOver();
     });
 
     it("2. Bank Accounts - Change Deposit Account to Fulton Bank account", function () {

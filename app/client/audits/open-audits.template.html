@@ -70,12 +70,12 @@
                     <p class="lockup-major"> {{ item.stockNumber }} </p>
                   </td>
                   <td class="description-narrow">
-                    <a class="lockup-major" href="#/vehicledetails?stockNumber={{ item.stockNumber }}">
-                      <span nxg-highlight="item.Description" highlight="item.data.query" class="break-word"></span>
-                    </a>
-
+                    <p class="lockup-major">
+                        <a href="#/vehicledetails?stockNumber={{ item.stockNumber }}">
+                            {{ item.unitYear }} {{ item.unitMake }} {{ item.unitModel }}
+                        </a>
+                    </p>
                     <!--mobile view-->
-                    <p class="lockup-minor">{{ item.unitYear }} {{ item.unitMake }} {{ item.unitModel }}</p>
                     <div class="visible-xs">
                       <p class="lockup-minor">VIN: {{ item.unitVin }}</p>
                       <p class="lockup-minor">Stock #: {{ item.stockNumber }}</p>
