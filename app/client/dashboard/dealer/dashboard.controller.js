@@ -110,6 +110,10 @@
       $state.go('audits');
     };
 
+    $scope.navFloorplans = function() {
+      $scope.filterFloorplans('pending');
+    };
+
     $scope.isPast = function() {
 
       var currentCalendarDate = angular.element('.dash-calendar').fullCalendar('getDate');
