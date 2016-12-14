@@ -16,12 +16,12 @@ const labelStyle = {
 };
 
 const RibbonItem = ({ itemcount, label, handleclick }) => (
-    <li>
+    <span>
         <button className="btn btn-default navbar-btn" style={buttonStyles} onClick={( ) => { handleclick() }} role="button">
           <Translate style={labelStyle} content={label} /><br />
           <Translate content="dashboard.ribbonItem.units" with={{ count:itemcount }} />
         </button>
-    </li>
+    </span>
 );
 
 RibbonItem.propTypes = {

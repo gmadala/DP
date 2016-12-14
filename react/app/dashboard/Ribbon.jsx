@@ -9,20 +9,17 @@ const navBarStyles = {
     minHeight: '48px',
     fontSize: '1.4rem',
     borderRadius: '0',
+    marginBottom: '20px',
 };
 
 const Ribbon = ({ floorplanshow, navfloorplan, floorplancount, openauditsshow, openauditscount, navaudit }) => (
-    <div>
-        <nav className="navbar navbar-default" style={navBarStyles}>
-            <div className="container">
-                <div className="collapse navbar-collapse">
-                    <ul className="nav navbar-nav">
-                        { floorplanshow ? <RibbonItem itemcount={floorplancount} handleclick={navfloorplan} label="dashboard.ribbon.floorplanLabel" /> : null }
-                        { openauditsshow ? <RibbonItem itemcount={openauditscount} handleclick={navaudit} label="dashboard.ribbon.auditLabel" /> : null}
-                    </ul>
-                </div>
+    <div className="row" style={navBarStyles}>
+        <div className="container">
+            <div className="col-xs-12">
+                { floorplanshow ? <RibbonItem itemcount={floorplancount} handleclick={navfloorplan} label="dashboard.ribbon.floorplanLabel" /> : null }
+                { openauditsshow ? <RibbonItem itemcount={openauditscount} handleclick={navaudit} label="dashboard.ribbon.auditLabel" /> : null}
             </div>
-        </nav>
+        </div>
     </div>
 );
 
