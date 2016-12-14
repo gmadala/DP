@@ -16,11 +16,18 @@
     '$timeout',
     'localStorageService',
     'fedex',
-    'nxgConfig'
+    'nxgConfig',
+    'Dashboard',
+    'Audits'
   ];
 
-  function NavBarCtrl( $rootScope, $scope, $state, User, Payments, gettextCatalog, language, kissMetricInfo, $location, $timeout, localStorageService, fedex, nxgConfig ) {
+  function NavBarCtrl( $rootScope, $scope, $state, User, Payments, gettextCatalog, language, kissMetricInfo, $location, $timeout, localStorageService, fedex, nxgConfig, Dashboard, Audits ) {
     $scope.isCollapsed = true;
+
+    $scope.isDashboard = function( ) {
+      return $state.current.name === "dashboard" || $state.current.name === "auction_dashboard" || $scope.pageTitle === "";
+    };
+
     var paymentsSubMenu = [
         {
           name: gettextCatalog.getString( 'Make a Payment' ),
@@ -280,10 +287,6 @@
           document.getElementsByClassName( 'dropdown open' )[ 0 ].classList.remove( 'open' );
         }, 0);
       }
-    };
-
-    $scope.isDashboard = function( ) {
-      return $state.current.name === "dashboard" || $state.current.name === "auction_dashboard" || $scope.pageTitle === "";
     };
 
     $scope.toggleMenu = function( ) {

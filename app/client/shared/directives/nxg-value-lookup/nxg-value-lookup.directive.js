@@ -6,9 +6,9 @@
     .module('nextgearWebApp')
     .directive('nxgValueLookup', nxgValueLookup);
 
-  nxgValueLookup.$inject = ['$q', 'Addresses', 'gettext', 'gettextCatalog', 'Blackbook'];
+  nxgValueLookup.$inject = ['gettext', 'gettextCatalog'];
 
-  function nxgValueLookup($q, Addresses, gettext, gettextCatalog, Blackbook) {
+  function nxgValueLookup(gettext, gettextCatalog) {
 
     gettext('Purchase Amount');
     gettext('Average Bookout');
@@ -19,12 +19,11 @@
       templateUrl: 'client/shared/directives/nxg-value-lookup/nxg-value-lookup.template.html',
       restrict: 'E',
       scope: {
-        vin: '=',
-        odometer: '=',
-        inventoryLocation: '=',
+        mmr: '=',
+        blackbook: '=',
         purchasePrice: '=',
-        projectedFinancedAmount: '=',
-        selectedVehicle: '='
+        valuationUnavailable: '=',
+        projectedFinancedAmount: '='
       },
       replace: 'true',
       link: linkFn
@@ -32,17 +31,12 @@
 
     function linkFn(scope, element) {
       // local vars for translations
-      var locations = Addresses.getActivePhysical();
-      var purchasePriceText = gettextCatalog.getString('Purchase Price');
-      var bookoutAmountText = gettextCatalog.getString('Bookout Amount');
       var purchasePriceLessText = gettextCatalog.getString('Purchase price less than <br /> highest average bookout');
       var purchasePriceMoreText = gettextCatalog.getString('Highest average bookout <br /> less than purchase price');
       var purchasePriceOnlyText = gettextCatalog.getString('Only purchase price data <br /> is available');
       // local vars to hold svg references
       var valuationLabel, valuationTriangle;
 
-      scope.baseValuationUnavailable = false;
-      scope.zipCode = getDealerZipCode();
       // init the options for the chart
       element.find('.nxg-value-lookup').highcharts(createOptions());
 
@@ -51,92 +45,39 @@
       // * update the purchase price bar chart
       // * display the line, triangle and text for the purchase price vs bookout value
       scope.$watch('purchasePrice', function(newValue, oldValue) {
-        if (oldValue === newValue) {
-          return;
-        }
-
-        var chart = getChart();
-        var data = chart.series[0].data;
-        data[1].y = newValue;
-        chart.series[0].setData(data);
-        updatePlotInformation();
-        realignLabels();
-      });
-
-      scope.$watch('vin', function(newValue, oldValue) {
-        if (!newValue) {
-          resetValuation();
-        } else {
-          // skip doing anything when the value is not changing
-          if (oldValue === newValue || _.size(newValue) < 10) {
-            return;
-          }
-          // update blackbook and mmr values
-          if (scope.odometer) {
-            updateBaseValuation();
-          }
+        if (oldValue !== newValue) {
+          var chart = getChart();
+          var data = chart.series[0].data;
+          data[0].y = newValue;
+          chart.series[0].setData(data);
+          updatePlotInformation();
+          realignLabels();
         }
       });
 
-      scope.$watch('selectedVehicle', function(newValue, oldValue) {
-        if (scope.odometer && _.size(scope.vin) >= 10) {
-          updateBaseValuation();
+      scope.$watch('blackbook', function(newValue, oldValue) {
+        if (oldValue !== newValue) {
+          var chart = getChart();
+          var data = chart.series[0].data;
+          data[1].y = newValue;
+          chart.series[0].setData(data);
+          updatePlotInformation();
+          realignLabels();
         }
       });
 
-      scope.$watch('odometer', function(newValue, oldValue) {
-        if (!newValue) {
-          resetValuation();
-        } else {
-          // skip doing anything when the value is not changing
-          if (oldValue === newValue || _.size(scope.vin) < 10) {
-            return;
-          }
-          // update blackbook and mmr values
-          if (scope.vin) {
-            updateBaseValuation();
-          }
+      scope.$watch('mmr', function(newValue, oldValue) {
+        if (oldValue !== newValue) {
+          var chart = getChart();
+          var data = chart.series[0].data;
+          data[2].y = newValue;
+          chart.series[0].setData(data);
+          updatePlotInformation();
+          realignLabels();
         }
       });
 
       /** Supporting local functions **/
-
-      function updateBaseValuation() {
-        scope.baseValuationUnavailable = false;
-        Blackbook.lookupByVin(scope.vin, scope.odometer, true)
-          .then(function(results) {
-            var minimumBlackbookAverage;
-            if (results.length > 0) {
-              if (scope.selectedVehicle) {
-                minimumBlackbookAverage = _.find(results, function(element) {
-                  return element.GroupNumber === scope.selectedVehicle.GroupNumber;
-                });
-              } else {
-                minimumBlackbookAverage = results[0];
-              }
-            }
-
-            var chart = getChart();
-            var data = chart.series[0].data;
-            data[3].y = minimumBlackbookAverage ? minimumBlackbookAverage.AverageValue : 0;
-            chart.series[0].setData(data);
-          })
-          .finally(function() {
-            updatePlotInformation();
-            realignLabels();
-          })
-          .catch(function() {
-            scope.baseValuationUnavailable = true;
-          });
-      }
-
-      function resetValuation() {
-        var chart = getChart();
-        var data = chart.series[0].data;
-        data[3].y = 0;
-        chart.series[0].setData(data);
-        scope.baseValuationUnavailable = false;
-      }
 
       /*
        * Function to realign the position of the data label when the bar doesn't have enough room
@@ -172,26 +113,32 @@
         });
       }
 
+      /*
+       * Function to update the plot line, triangle position and information text position.
+       */
       function updatePlotInformation() {
         var chart = getChart();
         var data = chart.series[0].data;
 
         var labelText, labelX, labelY;
         // only display the plot information when we have value for purchase price.
-        if (data[1].y) {
+        if (data[0].y) {
           var projectedPoint;
 
-          projectedPoint = data[3];
+          // calculate the maximum of all the bookout data.
+          projectedPoint = _.max([data[1], data[2]], function(element) {
+            return element.y;
+          });
 
           if (projectedPoint.y > 0) {
             // calculate the minimum between max bookout vs purchase price
-            projectedPoint = _.min([projectedPoint, data[1]], function(element) {
+            projectedPoint = _.min([projectedPoint, data[0]], function(element) {
               return element.y;
             });
             // the text will be depends on which one is the selected as projected financed amount.
             labelText = projectedPoint.category === 'Bill of Sale' ? purchasePriceLessText : purchasePriceMoreText;
           } else {
-            projectedPoint = data[1];
+            projectedPoint = data[0];
             // the text label will be the purchase price only text
             labelText = purchasePriceOnlyText;
           }
@@ -247,13 +194,19 @@
         }
       }
 
+      /*
+       * Get the reference to the highchart object.
+       */
       function getChart() {
         return element.find('.nxg-value-lookup').highcharts();
       }
 
-      // the svg path will start from the top of the triangle,
-      // moving right, moving left and then move back to the
-      // top of the triangle.
+      /*
+       * Function to draw the little triangle svg.
+       *
+       * The svg path will start from the top of the triangle, moving down to the right,
+       * moving left and then move back to the starting point of the triangle.
+       */
       function drawTriangleMarker(startingX, startingY) {
         var chart = getChart();
         return chart.renderer
@@ -269,6 +222,9 @@
           .add();
       }
 
+      /*
+       * Function to draw the bottom text information.
+       */
       function drawBottomInfoText(text, x, y) {
         var chart = getChart();
         return chart.renderer
@@ -284,12 +240,15 @@
           .add();
       }
 
+      /*
+       * Base options for the highchart component
+       */
       function createOptions() {
         return {
           chart: {
             backgroundColor: null,
             type: 'bar',
-            height: 150,
+            height: 140,
             marginTop: 0,
             marginRight: 0,
             marginBottom: 50,
@@ -301,23 +260,8 @@
           title: {
             text: ''
           },
-          labels: {
-            items: [{
-              html: '<strong>' + purchasePriceText + '</strong>',
-              style: {
-                top: '5px',
-                left: '-80px'
-              }
-            }, {
-              html: '<strong>' + bookoutAmountText + '</strong>',
-              style: {
-                top: '55px',
-                left: '-80px'
-              }
-            }]
-          },
           xAxis: {
-            categories: ['', 'Bill of Sale', '', 'Black Book'],
+            categories: ['Bill of Sale', 'Black Book', 'MMR'],
             tickLength: 0,
             gridLineColor: 'transparent',
             lineWidth: 0,
@@ -332,7 +276,9 @@
               enabled: false
             },
             gridLineColor: 'transparent',
-            endOnTick: false
+            endOnTick: false,
+            minPadding: 0.01,
+            maxPadding: 0.01
           },
           plotOptions: {
             bar: {
@@ -372,33 +318,17 @@
           series: [{
             type: 'column',
             data: [{
-              color: 'black',
-              y: 0
-            }, {
               color: '#4CAF50',
-              y: 0
-            }, {
-              color: 'black',
               y: 0
             }, {
               color: '#000000',
               y: 0
+            }, {
+              color: '#FF9800',
+              y: 0
             }]
           }]
         };
-      }
-
-      function getDealerZipCode() {
-        if (locations.length > 0) {
-          // if there's only one address default the zip to that one
-          var defaultAddress = _.find(locations, function(location) {
-            return location.IsMainAddress;
-          });
-          if (!defaultAddress) {
-            defaultAddress = locations[0];
-          }
-          return defaultAddress.Zip;
-        }
       }
     }
   }

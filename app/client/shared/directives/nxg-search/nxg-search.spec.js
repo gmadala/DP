@@ -107,7 +107,6 @@ describe('Directive: nxgSearch', function () {
         scope.search();
         expect(scope.onSearch).toHaveBeenCalled();
       });
-
     });
 
     it('should attach a clear function to the scope', function () {

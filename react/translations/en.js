@@ -1,4 +1,16 @@
 module.exports = {
+  dashboard: {
+    ribbon: {
+      auditLabel: 'Open Audits',
+      floorplanLabel: 'Pending Floorplans'
+    },
+    ribbonItem: {
+      units: {
+        one: '%(count)s Unit',
+        other: '%(count)s Units'
+      }
+    }
+  },
   resources: {
     resourceVideos: {
       loggingIn: 'Logging In to myNextGear',
