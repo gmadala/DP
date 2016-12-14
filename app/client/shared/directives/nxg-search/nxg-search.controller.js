@@ -5,9 +5,9 @@
     .module('nextgearWebApp')
     .controller('NxgSearchCtrl', NxgSearchCtrl);
 
-  NxgSearchCtrl.$inject = ['$scope', '$attrs', '$filter', 'gettextCatalog', 'Floorplan'];
+  NxgSearchCtrl.$inject = ['$scope', '$attrs', '$filter', 'gettextCatalog'];
 
-  function NxgSearchCtrl($scope, $attrs, $filter, gettextCatalog, Floorplan) {
+  function NxgSearchCtrl($scope, $attrs, $filter, gettextCatalog) {
 
     $scope.showHelpText = ($attrs.helpText) ? true : false;
     $scope.showInventoryLocation = angular.isDefined($attrs.showLocationFilter) ? !!$attrs.showLocationFilter : false;
@@ -61,11 +61,6 @@
       }
       $scope.onSearch();
     };
-
-    if($scope.pendingValue){
-      $scope.activeCriteria.filter = $scope.filterOptions[1].value;
-      $scope.onSearch();
-    }
 
     // if we have inventory locations to filter, set them here.
     $scope.inventoryLocations = [];

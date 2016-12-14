@@ -110,11 +110,8 @@
       $state.go('audits');
     };
 
-    // click event is fired from the React component
-    $scope.navFloorplan = function(pendingValue){
-      $state.go('floorplan', {
-        filter: pendingValue
-      });
+    $scope.navFloorplans = function() {
+      $scope.filterFloorplans('pending');
     };
 
     $scope.isPast = function() {
