@@ -56,18 +56,16 @@
 
         // check if mobile and android or ios
         // check to see if it is not the headless page
-        // check to see if the user has been prompted already
-        // check to see if unique user has been prompted
-        if (isMobile && (isAndroid || isIos) && !isHeadless && !prompted && !userPrompted) {
+        // check to see if the user has been prompted already OR if it is a different user
+        if (isMobile && (isAndroid || isIos) && !isHeadless && (!prompted || !userPrompted)) {
             $state.go('headless')
         }
 
         // check if mobile and android or isIos
         // check if state is headless
         // check if state was home
-        // check to see if the user has been prompted already
-        // check to see if unique user has been prompted
-        if (isMobile && (isAndroid || isIos) && isHeadless && wasDashboard && !prompted && !userPrompted) {
+        // check to see if the user has been prompted already OR if it is a different user
+        if (isMobile && (isAndroid || isIos) && isHeadless && wasDashboard && (!prompted || !userPrompted)) {
             $cookieStore.put('headlessPrompted', true);
 
             // add this user to prompted users cookie
