@@ -19,7 +19,8 @@
     'capitalizeFilter',
     'language',
     '$cookieStore',
-    'Audits'
+    'Audits',
+    '$rootScope'
   ];
 
   function DashboardCtrl(
@@ -36,21 +37,48 @@
     capitalizeFilter,
     language,
     $cookieStore,
-    Audits
+    Audits,
+    $rootScope
   ) {
 
     var uibModal = $uibModal;
 
-    var isMobile = window.innerWidth < 768;
-    var isAndroid = /Android/i.test(navigator.userAgent);
-    var isIos = /iPhone|iPad|iPod/i.test(navigator.userAgent);
-    $scope.prompted = $cookieStore.get('headlessPrompted');
-    $scope.isHeadless = $state.current.name.indexOf('headless') !== -1;
+    User.getInfo().then(function(userInfo) {
+        var isMobile = window.innerWidth < 768;
+        var isAndroid = /Android/i.test(navigator.userAgent);
+        var isIos = /iPhone|iPad|iPod/i.test(navigator.userAgent);
+        var usersPrompted = $cookieStore.get('headlessUsersPrompted');
+        var userPrompted = usersPrompted && usersPrompted.indexOf(userInfo.BusinessContactUserName) !== -1;
+        var prompted = $cookieStore.get('headlessPrompted');
+        var isHeadless = $rootScope.currentState === 'headless';
+        var wasDashboard = $rootScope.previousState === 'dashboard';
+        $scope.showPrompt = !prompted && isHeadless && wasDashboard;
 
-    if (isMobile && (isAndroid || isIos) && !$scope.isHeadless && !$scope.prompted) {
-        $cookieStore.put('headlessPrompted', true);
-        $state.go('headless')
-    }
+        // check if mobile and android or ios
+        // check to see if it is not the headless page
+        // check to see if the user has been prompted already
+        // check to see if unique user has been prompted
+        if (isMobile && (isAndroid || isIos) && !isHeadless && !prompted && !userPrompted) {
+            $state.go('headless')
+        }
+
+        // check if mobile and android or isIos
+        // check if state is headless
+        // check if state was home
+        // check to see if the user has been prompted already
+        // check to see if unique user has been prompted
+        if (isMobile && (isAndroid || isIos) && isHeadless && wasDashboard && !prompted && !userPrompted) {
+            $cookieStore.put('headlessPrompted', true);
+
+            // add this user to prompted users cookie
+            if (!usersPrompted)
+                usersPrompted = [];
+
+            usersPrompted.push(userInfo.BusinessContactUserName);
+            $cookieStore.put('headlessUsersPrompted', usersPrompted);
+        }
+
+    });
 
     // for caching our week/month summary data
     $scope.paymentSummary = {

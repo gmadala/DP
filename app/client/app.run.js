@@ -146,7 +146,10 @@
     );
 
     $rootScope.$on( '$stateChangeSuccess',
-      function( event, toState ) {
+      function( event, toState, toParams, fromState, fromParams ) {
+          $rootScope.previousState = fromState.name;
+          $rootScope.currentState = toState.name;
+
         var pendingFloorPlanFlag = User.getFeatures().hasOwnProperty('ribbonPendingFloorplans') ? User.getFeatures().ribbonPendingFloorplans.enabled : false;
         var openAuditsFlag = User.getFeatures().hasOwnProperty('openAudits') ? User.getFeatures().openAudits.enabled : false;
 
