@@ -222,9 +222,6 @@
         url: '/floorplan?filter',
         templateUrl: 'client/floor-plan/floor-plan.template.html',
         controller: 'FloorplanCtrl',
-        params: {
-          filter: null
-        },
         data: {
           pageId: 'Floorplan',
           showNavBar: true,

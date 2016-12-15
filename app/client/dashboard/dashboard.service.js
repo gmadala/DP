@@ -67,8 +67,6 @@
             return extendLineOfCreditObject(loc, utilizedAmount);
           });
 
-
-
           // inserting view receipt URLs
           angular.forEach(result.Receipts, function(receipt) {
             receipt.$receiptURL = getReceiptURL(receipt.FinancialTransactionId);
