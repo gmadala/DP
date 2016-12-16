@@ -297,7 +297,7 @@ describe('Controller: DashboardCtrl', function () {
     };
 
   // Initialize the controller and a mock scope
-  beforeEach(inject(function ($controller, $rootScope, $cookieStore, Dashboard, Audits, Floorplan, FloorplanUtil, _$q_, $uibModal) {
+  beforeEach(inject(function ($controller, $rootScope, $cookieStore, Dashboard, Audits, Floorplan, FloorplanUtil, _$q_, $uibModal, $httpBackend) {
     scope = $rootScope.$new();
     $q = _$q_;
     mockState = {
@@ -326,9 +326,14 @@ describe('Controller: DashboardCtrl', function () {
     dashboard = Dashboard;
     DashboardCtrl = $controller('DashboardCtrl', {
       $scope: scope,
-      $state: mockState
+      $state: mockState,
+      $rootScope,
+      $cookieStore,
     });
 
+    $httpBackend.expectGET('/Dealer/v1_2/Info').respond({
+        BusinessContactUserName: 'testUserName'
+    });
   }));
 
   describe('non-cached info', function() {

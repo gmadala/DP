@@ -75,7 +75,6 @@
             usersPrompted.push(userInfo.BusinessContactUserName);
             $cookieStore.put('headlessUsersPrompted', usersPrompted);
         }
-
     });
 
     // for caching our week/month summary data
