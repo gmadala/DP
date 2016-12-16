@@ -76,10 +76,8 @@
       setFileValidity();
     };
 
-    $scope.removeFile = function (file) {
-      $scope.$parent.wizardFloor.data.files = $scope.$parent.wizardFloor.data.files.filter(function (f) {
-        return f.name !== file.name;
-      });
+    $scope.removeFile = function (index) {
+      $scope.$parent.wizardFloor.data.files.splice(index, 1);
     };
   }
 })();
