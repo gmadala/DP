@@ -24,7 +24,7 @@
         "moment": "~2.6.0",
         "ng-file-upload": "~10.0.2",
         "ng-file-upload-shim": "~10.0.2",
-        "ngreact": "^0.3.0",
+        "ngReact": "^0.3.0",
         "numeral": "~1.5.0",
         "sass-bootstrap": "3.0.2",
         "ui-router": "~0.2.15",
