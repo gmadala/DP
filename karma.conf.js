@@ -44,7 +44,6 @@ module.exports = function(karma) {
       'app/components/bootstrap-switch/dist/js/bootstrap-switch.min.js',
       'app/components/angular-bootstrap-switch/dist/angular-bootstrap-switch.js',
       'app/components/file-saver/FileSaver.js',
-      'app/private-components/addtohomescreen/addtohomescreen.min.js',
 
       'app/components/ngReact/ngReact.js',
       'app/components/react/react.js',

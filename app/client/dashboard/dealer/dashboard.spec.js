@@ -297,7 +297,7 @@ describe('Controller: DashboardCtrl', function () {
     };
 
   // Initialize the controller and a mock scope
-  beforeEach(inject(function ($controller, $rootScope, Dashboard, Audits, Floorplan, FloorplanUtil, _$q_, $uibModal) {
+  beforeEach(inject(function ($controller, $rootScope, $cookieStore, Dashboard, Audits, Floorplan, FloorplanUtil, _$q_, $uibModal) {
     scope = $rootScope.$new();
     $q = _$q_;
     mockState = {
