@@ -258,7 +258,6 @@ describe( 'Directive: navBar', function() {
         ret = aScope.user.homeLink();
         expect( ret ).toBe( '#/act/home' );
       } );
-
     } );
 
     describe( 'isActive function', function() {

@@ -17,6 +17,11 @@ export default {
 
     // Global Events
     CLICK_CHAT_NOW_LINK : 'Click Chat Now Link', // x
+    MOBILE_CLICK_CHAT_NOW_LINK: 'Mobile Click Chat Now Link', // x
+    MOBILE_CLICK_CALL_ACCOUNT_EXECUTIVE: 'Mobile Click Call Account Executive',
+    MOBILE_CLICK_CALL_CUSTOMER_SERVICE: 'Mobile Click Call Customer Service',
+    MOBILE_CLICK_SEND_EMAIL: 'Mobile Click Send Email',
+    MOBILE_CLICK_FEEDBACK: 'Mobile Click Feedback',
 
     // Checkout Events
     DEALER_REPORTS_EXPORT_PAYMENTS_SUMMARY_BUTTON : 'Dealer Reports - Export Payment Summary', // x

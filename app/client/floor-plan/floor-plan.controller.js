@@ -97,8 +97,6 @@
     // FloorplanUtil handles all search/fetch/reset functionality.
     $scope.floorplanData = new FloorplanUtil('FlooringDate');
 
-
-
     // Set up page-load filtering based on $stateParams
     var filterParam = null;
 

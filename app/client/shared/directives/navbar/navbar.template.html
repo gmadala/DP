@@ -1,4 +1,4 @@
-<header class="app-header" ng-class="{ login: !navState.current.data.showNavBar, auctions: !user.isDealer() }">
+<header class="app-header" ng-style="ribbonStyle" ng-class="{ login: !navState.current.data.showNavBar, auctions: !user.isDealer() }">
   <div class="container" ng-class="{'hidden-xs':navState.current.data.showNavBar}">
     <div class="header">
       <a ng-href="{{user.homeLink()}}" class="col-sm-4 col-md-8 custom ng-binding">
@@ -82,7 +82,7 @@
   <div ng-if="navState.current.data.showNavBar">
     <nav id="navbar" class="navbar navbar-default mng-navbar main-navbar" ng-class="{'menu-open in' : navState.current.data.showMenu, 'mobile-navbar' : isMobile }">
       <div
-           ng-class="{'auction-nav':!user.isDealer(), 'es-nav':isCurrentLanguage('es') && !user.isDealer(), 'fr-nav': isCurrentLanguage('fr_CA') && !user.isDealer(), 'container' : !isMobile}">
+        ng-class="{'auction-nav':!user.isDealer(), 'es-nav':isCurrentLanguage('es') && !user.isDealer(), 'fr-nav': isCurrentLanguage('fr_CA') && !user.isDealer(), 'container' : !isMobile}">
         <div class="navbar-header">
           <button type="button" class="navbar-toggle collapsed mobile-menu-button"
                   ng-click="toggleMenu(); closeSupport()"
@@ -152,34 +152,33 @@
               </a>
             </li>
             <li class="visible-xs" ng-click="$event.stopPropagation()">
-                <a ng-click="toggleSupport()">
+              <a ng-click="toggleSupport()">
                 <span translate>Support</span>
                  <span class="paired-media icon-chevron support-chevron"
-                   ng-class="{ 'point-up':showSupport, 'point-down':!showSupport }"
-                   nxg-icon="icon-chevron" style="float: right;">
+                       ng-class="{ 'point-up':showSupport, 'point-down':!showSupport }"
+                       nxg-icon="icon-chevron" style="float: right;">
                    </span>
               </a>
             </li>
             <li class="visible-xs" ng-show="user.isDealer() && showSupport">
               <span class="spacer" ng-show="chatEnabled && user.isDealer()">
-                <a class="support-text" nxg-chat-with-us nxg-track="{{metric.CLICK_CHAT_NOW_LINK}}"
-                   track-properties="{{ kissMetricData }}"><span translate>Chat</span>
-                  <span class="glyphicon"></span>
+                <a class="support-text" nxg-chat-with-us nxg-track="{{metric.MOBILE_CLICK_CHAT_NOW_LINK}}" track-properties="{{ kissMetricData }}" translate>
+                  Chat
                 </a>
                 </span>
             </li>
             <li class="visible-xs" ng-show="user.isDealer() && showSupport">
-              <a class="support-text" href="tel:+{{support.phone}}" translate>
+              <a class="support-text" href="tel:+{{support.phone}}" nxg-track="{{metric.MOBILE_CLICK_CALL_ACCOUNT_EXECUTIVE}}" track-properties="{{ kissMetricData }}" translate>
                 Call Account Executive
               </a>
             </li>
             <li class="visible-xs" ng-show="showSupport">
-              <a class="support-text" href= "tel:+{{ support.customerSupportPhone }}" translate>
+              <a class="support-text" href="tel:+{{ support.customerSupportPhone }}" nxg-track="{{metric.MOBILE_CLICK_CALL_CUSTOMER_SERVICE}}" track-properties="{{ kissMetricData }}" translate>
                 Call Customer Service
               </a>
             </li>
             <li class="visible-xs" ng-show="showSupport">
-              <a class="support-text" href="mailto:{{ support.email }}" translate>
+              <a class="support-text" href="mailto:{{ support.email }}" nxg-track="{{metric.MOBILE_CLICK_SEND_EMAIL}}" track-properties="{{ kissMetricData }}" translate>
                 Send Email
               </a>
             </li>
@@ -192,7 +191,8 @@
                  data-uv-default-mode="support"
                  data-uv-forum-id="{forumId}"
                  data-uv-custom-template-id="{customTemplateId}"
-                 data-uv-trigger>
+                 data-uv-trigger
+                 nxg-track="{{metric.MOBILE_CLICK_FEEDBACK}}" track-properties="{{ kissMetricData }}">
                 <span translate>Feedback</span>
               </a>
             </li>
@@ -201,7 +201,6 @@
             </li>
           </ul>
         </div>
-
         <div class="navbar-scroll-fix" ng-hide="navbarClosed" ng-class="{'open': navState.current.data.showMenu, 'closed': (!navState.current.data.showMenu && navState.current.data.menuToggled)}" ng-click="toggleMenu()"></div>
       </div>
     </nav>
