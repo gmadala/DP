@@ -17,7 +17,7 @@
       var filename = "";
       var dotPos = 0;
       // Get all files before the current file
-      var firstXFiles = _.first(this.data.files, index);
+      var firstXFiles = _.first($scope.$parent.wizardFloor.data.files, index);
       // Get all files that have same name as file
       var fileList = _.map(_.where(firstXFiles, {'name': file}), 'name');
       // If there are other files with the same name need to add index to file name
