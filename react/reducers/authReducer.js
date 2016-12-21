@@ -1,0 +1,23 @@
+import axios from 'axios';
+
+export default function reducer(state = {}, action) {
+    switch (action.type) {
+        case 'SET_AUTH': {
+            axios.defaults.headers.common.Authorization = action.payload.Token;
+            return Object.assign({}, state, {
+                authData: action.payload,
+                authToken: action.payload.Token,
+                timestamp: Date().now(),
+            });
+        }
+        case 'RESET_AUTH': {
+            return Object.assign({}, state, {
+                authData: null,
+                authToken: null,
+                timestamp: Date().now(),
+            });
+        }
+        default:
+            return state;
+    }
+}
