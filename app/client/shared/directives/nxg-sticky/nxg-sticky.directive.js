@@ -11,12 +11,9 @@
 
     return {
       restrict: 'A',
-      controller: function ($scope, $element, $attrs, $window, $document, $timeout) {
-        $scope.isMobile = function () {
-          return $window.innerWidth < 768;
-        };
+      controller: function ($scope, $rootScope, $element, $attrs, $window, $document, $timeout) {
 
-        if (!$scope.isMobile()) {// Do not do sticky on mobile
+        if (!$rootScope.isMobile) {// Do not do sticky on mobile
           var win = angular.element($window),
             doc = angular.element($document),
             el = angular.element($element), // our element that needs to move

@@ -176,7 +176,7 @@
           BusinessName: info.BusinessName,
           isDealer: User.isDealer,
           logout: function( ) {
-            if ( $scope.isMobile ) {
+            if ( $rootScope.isMobile ) {
               // wait until animation completes before emitting logout, otherwise modal sometimes sizes incorrectly on slow phones
               setTimeout( function( ) {
                 $rootScope.$emit( 'event:userRequestedLogout' );

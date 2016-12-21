@@ -87,6 +87,17 @@
       return ( state.data.isAuctionState && isDealer ) || ( !state.data.isAuctionState && !isDealer );
     }
 
+    function isMobile() {
+      $rootScope.isMobile = window.innerWidth < 768;
+    }
+
+    isMobile();
+
+    angular.element($window).bind('resize', function () {
+      isMobile();
+      $rootScope.$apply();
+    });
+
     // listen for route changes
     $rootScope.$on( '$stateChangeStart',
       function( event, toState, toStateParams ) {
