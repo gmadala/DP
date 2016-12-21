@@ -8,7 +8,6 @@
   Dashboard.$inject = ['$q', '$filter', 'api', 'moment', 'gettextCatalog'];
 
   function Dashboard($q, $filter, api, moment, gettextCatalog) {
-
     function getReceiptURL(transactionId) {
       return api.contentLink('/receipt/view/' + transactionId + '/Receipt');
     }
@@ -63,7 +62,6 @@
         ]).then(function (responses) {
           // result looks like response object for /dealer/buyer/dashboard, with some added calculated properties
           var result = responses[0];
-
           result.LinesOfCredit = _.map(result.LinesOfCredit, function(loc) {
             var utilizedAmount = (loc.LineOfCreditAmount + loc.TempLineOfCreditAmount) - loc.AvailableCreditAmount;
             return extendLineOfCreditObject(loc, utilizedAmount);

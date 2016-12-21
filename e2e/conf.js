@@ -37,6 +37,7 @@ exports.config = {
 
     //Spec patterns are relative to the current working directly when protractor is called.
     specs: ['tests/e2e_spec/*_spec.js'],
+    //specs: ['tests/e2e_spec/e2e_analytics_spec.js'],
 
 
     //To run a single test suite enter the following at the command prompt:
@@ -122,9 +123,9 @@ exports.config = {
     params: {
         userNameDealer: '57694AC',
         userNameAuction: '10298KB',
-        userName: '62434AM',
+        userName: '62434sf',
         userNameBankAccount: '3boysmotors',
-        password: 'ngcpass!0',
+        password: 'ringoffire@1',
         delay: '500',
         shortDelay: '1000',
         mediumDelay: '3000',

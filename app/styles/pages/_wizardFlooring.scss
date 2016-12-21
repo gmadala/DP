@@ -1,6 +1,6 @@
 .wizard-container {
 
-  .display-flex{
+  .display-flex {
     display: -webkit-box;
     display: -moz-box;
     display: -ms-flexbox;
@@ -10,13 +10,15 @@
 
   .sidebar {
     background: #EBEBEB;
+    border-radius: 5px;
+    margin-bottom: 20px;
     padding-bottom: 15px;
 
     .sidebar-header {
       font-size: 1.1em;
-      font-weight: 100;
-      margin-top: 28px;
-      margin-bottom: 20px;
+      font-weight: 700;
+      margin-top: 20px;
+      margin-bottom: 10px;
     }
 
     .sidebar-hero {
@@ -45,9 +47,9 @@
     margin-bottom: 32px;
   }
 
-  .text-paragraph{
-    border:0px;
-    font-size:10px;
+  .text-paragraph {
+    border: 0px;
+    font-size: 10px;
   }
 
   .form-group {
@@ -360,8 +362,8 @@
     right: 18px;
   }
 
-  input#paySeller[disabled] + label +label,
-  input#payBuyer[disabled] + label + label{
+  input#paySeller[disabled] + label + label,
+  input#payBuyer[disabled] + label + label {
     color: #999999;
   }
 
