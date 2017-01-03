@@ -60,8 +60,8 @@
   <div>
     <h4 style="margin-bottom:10px;" translate>Uploaded Documents</h4>
     <ul class="list-table">
-      <li class="list-table-row" data-ng-repeat="fileName in wizardFloor.data.files">
-        <p class="col-xs-12 value">{{ fileName.name }}</p>
+      <li class="list-table-row" data-ng-repeat="file in wizardFloor.data.files">
+        <p class="col-xs-12 value" ng-bind="wizardFloor.renameFile(file.name,$index) | truncate:18"></p>
       </li>
     </ul>
   </div>
