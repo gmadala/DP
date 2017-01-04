@@ -24,11 +24,14 @@ class ProgressivePrompt extends Component {
             modalPosition = 'top';
 
             const iconStyle = {
-                height: '20px',
+                height: '23px',
                 marginLeft: '5px',
                 marginRight: '5px',
+                display: 'inline-block',
+                width: '7px',
+                marginBottom: '-7px',
             }
-            icon = <img style={iconStyle} src="/img/addtohomescreen/action-icon-android.png" role="presentation" />;
+            icon = <span style={iconStyle} className="action-icon-android" role="presentation" />;
             iconPosition = 'top right';
         }
 
@@ -37,11 +40,14 @@ class ProgressivePrompt extends Component {
             modalPosition = 'bottom';
 
             const iconStyle = {
-                width: '15px',
+                height: '23px',
                 marginLeft: '5px',
                 marginRight: '5px',
+                display: 'inline-block',
+                width: '14px',
+                marginBottom: '-7px',
             }
-            icon = <img style={iconStyle} src="/img/addtohomescreen/action-icon-ios7.png" role="presentation" />;
+            icon = <span style={iconStyle} className="action-icon-ios7" role="presentation" />;
             iconPosition = 'bottom'
         }
 
