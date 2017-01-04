@@ -377,6 +377,12 @@ module.exports = function( grunt ) {
                         expand: true,
                         dot: true,
                         flatten: true,
+                        dest: '<%= yeoman.dist %>/img/addtohomescreen/',
+                        src: '<%= yeoman.app %>/img/addtohomescreen/*'
+                    }, {
+                        expand: true,
+                        dot: true,
+                        flatten: true,
                         dest: '<%= yeoman.dist %>/img/mobile-icons/',
                         src: '<%= yeoman.app %>/img/mobile-icons/*'
                     }, {
