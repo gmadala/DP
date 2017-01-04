@@ -20,7 +20,8 @@
     'metric',
     'language',
     'features',
-    'kissMetricInfo'
+    'kissMetricInfo',
+    'resize'
   ];
 
   function initialize(
@@ -38,7 +39,8 @@
     metric,
     language,
     features,
-    kissMetricInfo ) {
+    kissMetricInfo,
+    resize) {
 
     var uibModal = $uibModal;
     // state whose transition was interrupted to ask the user to log in
@@ -88,14 +90,13 @@
     }
 
     function isMobile() {
-      $rootScope.isMobile = window.innerWidth < 768;
+      $rootScope.isMobile = resize.isMobile();
     }
 
     isMobile();
 
     angular.element($window).bind('resize', function () {
       isMobile();
-      $rootScope.$digest();
     });
 
     // listen for route changes
