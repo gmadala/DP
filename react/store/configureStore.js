@@ -1,14 +1,15 @@
 import { applyMiddleware, createStore } from 'redux';
 
 import logger from 'redux-logger';
-import thunk from 'redux-thunk';
-import promise from 'redux-promise-middleware';
+import axiosMiddleware from 'redux-axios-middleware';
 
 import reducers from '../reducers';
+import { initApi } from '../config/apiConfig';
+
+const client = initApi();
 
 const middleware = applyMiddleware(
-    promise(),
-    thunk,
+    axiosMiddleware(client),
     logger()
 );
 

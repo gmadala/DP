@@ -18,11 +18,5 @@ function getLocaleId() {
 
 export function setLocale(locale = 'en') {
     counterpart.setLocale(locale);
-    return {
-        type: 'SET_LOCALE',
-        payload: {
-            id: getLocaleId(locale),
-            name: locale,
-        },
-    };
+    return getLocaleId();
 }
