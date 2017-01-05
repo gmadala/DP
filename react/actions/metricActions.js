@@ -1,3 +1,3 @@
-export function logAction(action) {
-    return { type: 'LOG_ACTION', payload: action }
+export function logMetric(metric) {
+    return { type: 'LOG_METRIC', payload: metric }
 }

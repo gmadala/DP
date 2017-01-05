@@ -4,6 +4,7 @@ import user from './userReducer';
 import resource from './resourceReducer';
 import metric from './metricReducer';
 import auth from './authReducer';
+import api from './apiReducer';
 
 const reducers = combineReducers({
     log,
@@ -11,6 +12,7 @@ const reducers = combineReducers({
     resource,
     metric,
     auth,
+    api
 });
 
 export default reducers;

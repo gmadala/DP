@@ -1,20 +1,16 @@
 import { connect } from 'react-redux'
-import counterpart from 'counterpart';
-import { logAction } from '../../actions/metricActions';
+import { logMetric } from '../../actions/metricActions';
 import AuctionResources from './AuctionResources';
 
 const mapStateToProps = (state, props) => ({
-    docs: state.resource.docs,
-    language: counterpart.getLocale(),
-    isUnitedStates: props.isUnitedStates,
+    docs: props.isUnitedStates ? state.resource.docs : [],
+    metrics: state.metric
 })
 
 const mapDispatchToProps = dispatch => ({
-    onResourceClick: ( metric ) => {
-        dispatch(logAction( metric ))
+    logMetric: ( metric ) => {
+        dispatch(logMetric( metric ))
     }
 })
 
-const AuctionResourcesContainer = connect( mapStateToProps, mapDispatchToProps )( AuctionResources )
-
-export default AuctionResourcesContainer;
+export default connect( mapStateToProps, mapDispatchToProps )( AuctionResources )

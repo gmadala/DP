@@ -31,7 +31,8 @@
         "moment": true,
         "_": true,
         "document": true,
-        "assert": true
+        "assert": true,
+        "ENVIRONMENT": true
     },
     "parser": "babel-eslint",
     "parserOptions":{
