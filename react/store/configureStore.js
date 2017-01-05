@@ -4,11 +4,11 @@ import reduxThunk from 'redux-thunk';
 
 import reducers from '../reducers';
 
-const middleware = applyMiddleware(
+const createStoreWithMiddleware = applyMiddleware(
     reduxThunk,
     logger()
 )(createStore);
 
 export default function configureStore(initialState) {
-    return createStore(reducers, initialState, middleware);
+    return createStoreWithMiddleware(reducers, initialState);
 }
