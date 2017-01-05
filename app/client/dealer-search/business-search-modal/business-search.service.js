@@ -29,7 +29,7 @@
           url = '/dealer/search/buyer';
           countField = 'DealerRowCount';
           angular.extend(params, {
-            BusinessName: isNumeric(query) ? undefined : (query || undefined),
+            BusinessName: query,
             BusinessNumber: isNumeric(query) ? query : undefined,
             OrderByDirection: sortDesc ? 'DESC' : 'ASC'
           });
