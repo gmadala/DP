@@ -9,7 +9,6 @@
     },
     "extends": [
         "airbnb",
-        "angular",
         "plugin:jasmine/recommended",
         "plugin:react/recommended",
         "jquery"
@@ -23,6 +22,7 @@
         "jquery"
     ],
     "globals": {
+        "angular": true,
         "Highcharts": true,
         "jQuery": true,
         "Modernizr": true,
@@ -110,21 +110,6 @@
         "react/forbid-prop-types": "off",
         "react/jsx-space-before-closing": 0,
 
-        "angular/controller-name": "warn",
-        "angular/controller-as": "warn",
-        "angular/controller-as-vm": "warn",
-        "angular/definedundefined": "warn",
-        "angular/window-service": "warn",
-        "angular/json-functions": "warn",
-        "angular/document-service": "warn",
-        "angular/no-service-method": "warn",
-        "angular/on-watch": "warn",
-        "angular/no-cookiestore": "warn",
-        "angular/typecheck-number": "warn",
-        "angular/typecheck-string": "warn",
-        "angular/no-private-call": "warn",
-        "angular/log": 0,
-        "angular/controller-as-route": "warn",
-        "angular/timeout-service": "warn"
+        "jsx-a11y/no-static-element-interactions": 1,
     }
 }
