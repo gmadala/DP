@@ -2,6 +2,7 @@
 
 var bambooCommitHash = process.env.bamboo_repository_revision_number.substring(0, 7);
 var objHash = browser.element(by.css('[style=\'word-wrap: break-word; white-space: pre-wrap;\']'));
+var appendurl = "version.txt";
 
 describe('Build Verification', function () {
 
@@ -11,13 +12,18 @@ describe('Build Verification', function () {
   });
 
   it("1. Build Version  - Validating the current build version has been deployed", function () {
-    browser.get('https://test.nextgearcapital.com/test/version.txt');
+
+    browser.get(browser.baseUrl.split('#')[0] + appendurl);
+
     console.log('\n The commit hash from bamboo environment variable "bamboo_repository_revision_number" is: ' + bambooCommitHash);
+      
+    browser.getCurrentUrl().then(function (url) {
+          console.log("\n The url being used is " + url)
+      });
+
     objHash.getText().then(function (string) {
-      var substr = string.substring(12, 19)
+      var substr = string.substring(12, 19);
       expect(substr).toEqual(bambooCommitHash);
     });
   });
 });
-
-
