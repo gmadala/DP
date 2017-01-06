@@ -20,3 +20,6 @@ export function setLocale(locale = 'en') {
     counterpart.setLocale(locale);
     return getLocaleId();
 }
+
+// Initialize language
+setLocale();
