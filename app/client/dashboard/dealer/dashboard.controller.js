@@ -44,7 +44,7 @@
     var uibModal = $uibModal;
 
     User.getInfo().then(function(userInfo) {
-        var isMobile = window.innerWidth < 768;
+        var isMobile = $rootScope.isMobile;
         var isAndroid = /Android/i.test(navigator.userAgent);
         var isIos = /iPhone|iPad|iPod/i.test(navigator.userAgent);
         var usersPrompted = $cookieStore.get('headlessUsersPrompted');
