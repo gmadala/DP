@@ -281,20 +281,16 @@
       switch (vm.counter) {
         case 1:
           $state.go ('flooringWizard.car');
-
           break;
         case 2:
           if (vm.formParts.one) {
             $state.go ('flooringWizard.sales');
           }
-
           break;
         case 3:
-
           if (vm.formParts.one && vm.formParts.two) {
             $state.go ('flooringWizard.payment');
           }
-
           break;
         case 4:
           if (vm.formParts.one && vm.formParts.two && vm.formParts.three) {
@@ -311,7 +307,6 @@
 
     function canTransition (count) {
       vm.transitionValidation ();
-
       switch (count) {
         case 1:
           return true;

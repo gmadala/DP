@@ -197,7 +197,7 @@
       });
 
       scope.$watch('purchasePrice', function(newValue, oldValue) {
-        if (oldValue === newValue || !scope.creditType || !newValue) {
+        if (oldValue === newValue || !scope.creditType) {
           return;
         }
 
@@ -205,7 +205,7 @@
 
         var chart = element.find('.nxg-credit-availability').highcharts();
         var data = chart.series[0].data;
-        if (lineOfCredit.available <= newValue) {
+        if (newValue && lineOfCredit.available <= newValue) {
           scope.insufficientCredit = true;
           data[0].color = '#D32F2F';
         } else {
