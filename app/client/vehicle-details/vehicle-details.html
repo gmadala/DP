@@ -218,7 +218,7 @@
                 <div class="col-xs-6" translate>Seller Address</div>
 
                 <div ng-show="flooringInfo.SellerName != null" class="col-xs-6 value">
-                  <span nxg-address="flooringInfo.sellerAddress"></span>
+                  <span nxg-address-inline="flooringInfo.sellerAddress"></span>
                 </div>
 
                 <div ng-hide="flooringInfo.SellerName != null || dataLoaded == false"
@@ -229,7 +229,7 @@
                 <div class="col-xs-6" translate>Inventory Location</div>
 
                 <div class="col-xs-6 value" ng-hide="flooringInfo.showEditInventoryLocation">
-                  <span nxg-address="flooringInfo.inventoryAddress"></span>
+                  <span nxg-address-inline="flooringInfo.inventoryAddress"></span>
                 <span ng-show="flooringInfo.showChangeLink"><br/><br/>
                   <a id="changeInvLocation" class="value-note" href="" ng-click="flooringInfo.showInventorySelect()"
                      translate>Change Inventory Location</a>
