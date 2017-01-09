@@ -1,6 +1,6 @@
 'use strict';
 
-fdescribe('Model: VinValidator', function () {
+describe('Model: VinValidator', function () {
     beforeEach(module('nextgearWebApp'));
 
     var vinValidator;
