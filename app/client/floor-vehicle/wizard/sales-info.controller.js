@@ -38,8 +38,8 @@
 
     vm.dateFormat = 'MM/dd/yyyy';
 
-    vm.onPurchaseDateChange = function(viewValue) {
-      vm.purchaseDateHasValue = !!viewValue;
+    vm.fieldHasValue = function(fieldValue) {
+      return !!fieldValue;
     };
 
     vm.switchChange = function (isTradeIn) {
