@@ -23,7 +23,8 @@ describe ('Controller: WizardFloorCtrl', function () {
     mockkissMetricsInfo,
     kissMetricsData,
     mockSegmentIO,
-    mockMetric
+    mockMetric,
+    VinValidator
     ;
 
 
@@ -36,7 +37,8 @@ describe ('Controller: WizardFloorCtrl', function () {
                                 _$httpBackend_,
                                 $controller,
                                 $rootScope,
-                                metric) {
+                                metric,
+                                _VinValidator_) {
 
     scope = $rootScope.$new ();
     floorplan = _Floorplan_;
@@ -46,6 +48,7 @@ describe ('Controller: WizardFloorCtrl', function () {
     $state = _$state_;
     $httpBackend = _$httpBackend_;
     mockMetric = metric;
+    VinValidator = _VinValidator_;
 
     $httpBackend.whenPOST ('floorplan/upload/asdlfkjpobiwjeklfjsdf')
       .respond ({
@@ -362,6 +365,10 @@ describe ('Controller: WizardFloorCtrl', function () {
 
       wizardFloor.data.files = [{name: 'testFile.pdf'}];
 
+      wizardFloor.transitionValidation = function () {
+        return true;
+      };
+
       wizardFloor.renameFile = function (file, index) {
         var filename = "";
         var dotPos = 0;
@@ -400,10 +407,6 @@ describe ('Controller: WizardFloorCtrl', function () {
     it ('should change state to flooringConfirmation if successful', function () {
       spyOn ($state, 'go');
 
-      wizardFloor.transitionValidation = function () {
-        return true;
-      };
-
       kissMetricsData = {
         comment: "Red Wizard Casts: Summon Floorplan!",
         floorplanSuccess: true,
@@ -421,10 +424,6 @@ describe ('Controller: WizardFloorCtrl', function () {
     });
 
     it ('SegmentIO and Kissmetrics with FLOORPLAN_PURCHASE_AMOUNT_OVERBOOKING when purchase Price is Greater Than ProjectedFinancedAmount', function () {
-      wizardFloor.transitionValidation = function () {
-        return true;
-      };
-
       //set purchasePrice > projectedFinancedAmount
       wizardFloor.data.UnitPurchasePrice = 1;
       wizardFloor.valueLookUp.projectedFinancedAmount = 0;
@@ -448,10 +447,6 @@ describe ('Controller: WizardFloorCtrl', function () {
     });
 
     it ('SegmentIO and Kissmetrics should NOT be called for FLOORPLAN_PURCHASE_AMOUNT_OVERBOOKING', function () {
-      wizardFloor.transitionValidation = function () {
-        return true;
-      };
-
       //set purchasePrice > projectedFinancedAmount
       wizardFloor.data.UnitPurchasePrice = 0;
       wizardFloor.valueLookUp.projectedFinancedAmount = 1;
@@ -475,10 +470,6 @@ describe ('Controller: WizardFloorCtrl', function () {
     });
 
     it ('SegmentIO and Kissmetrics should be called with additionalfinancing equal to true', function () {
-      wizardFloor.transitionValidation = function () {
-          return true;
-      };
-
       //set purchasePrice > projectedFinancedAmount
       wizardFloor.data.UnitPurchasePrice = 1;
       wizardFloor.valueLookUp.projectedFinancedAmount = 0;
@@ -502,10 +493,6 @@ describe ('Controller: WizardFloorCtrl', function () {
     });
 
     it ('SegmentIO and KissMetrics with "FLOORPLAN_REQUEST_WIZARD_RESULT"', function () {
-      wizardFloor.transitionValidation = function () {
-        return true;
-      };
-
       kissMetricsData = {
         comment: "Red Wizard Casts: Summon Floorplan!",
         floorplanSuccess: true,
@@ -527,6 +514,32 @@ describe ('Controller: WizardFloorCtrl', function () {
       expect (mockMetric.FLOORPLAN_REQUEST_WIZARD_RESULT).toBeDefined ();
       expect (mockkissMetricsInfo.getKissMetricInfo).toHaveBeenCalled ();
       expect (mockSegmentIO.track).toHaveBeenCalledWith (mockMetric.FLOORPLAN_REQUEST_WIZARD_RESULT, kissMetricsData);
+    });
+
+    it('should acknowledge invalid vin when vin is invalid but not checked', function() {
+      wizardFloor.data = {
+        UnitVin: '1G8AN14F45Z10003',
+        VinAckLookupFailure: false
+      };
+
+      spyOn(VinValidator, 'isValid');
+      wizardFloor.submit();
+
+      expect(VinValidator.isValid).toHaveBeenCalledWith('1G8AN14F45Z10003');
+      expect(scope.data.VinAckLookupFailure).toEqual(true);
+    });
+
+    it('should not acknowledge invalid vin when vin is valid', function() {
+      wizardFloor.data = {
+        UnitVin: '1FTYR10U92PB37336',
+        VinAckLookupFailure: false
+      };
+
+      spyOn(VinValidator, 'isValid');
+      wizardFloor.submit();
+
+      expect(VinValidator.isValid).toHaveBeenCalledWith('1FTYR10U92PB37336');
+      expect(scope.data.VinAckLookupFailure).toEqual(false);
     });
   });
 });

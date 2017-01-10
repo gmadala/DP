@@ -21,7 +21,8 @@
     'nxgConfig',
     'kissMetricInfo',
     'segmentio',
-    'metric'
+    'metric',
+    'VinValidator'
   ];
 
   function WizardFloorCtrl ($state,
@@ -39,7 +40,8 @@
                             nxgConfig,
                             kissMetricInfo,
                             segmentio,
-                            metric) {
+                            metric,
+                            VinValidator) {
     var vm = this;
     var isDealer = User.isDealer ();
 
@@ -372,7 +374,7 @@
           vm.data.PhysicalInventoryAddressId = vm.options.locations[addressIndex];
         }
 
-        vm.data.VinAckLookupFailure = vm.data.$selectedVehicle ? false : true;
+        vm.data.VinAckLookupFailure = !vm.data.$selectedVehicle;
 
       }
 
@@ -381,6 +383,13 @@
       vm.floorPlanSubmitting = true;
 
       vm.data.TitleLocationId = vm.options.titleLocationOptions[vm.data.TitleLocationIndex];
+
+      // set the vin acknowledgment if it's not checked but the vin is invalid;
+      var vinValid = VinValidator.isValid(vm.data.UnitVin);
+      if (!vm.data.VinAckLookupFailure && !vinValid) {
+        // it is not acknowledged yet, but the vin is invalid
+        vm.data.VinAckLookupFailure = true;
+      }
 
       Floorplan.create (vm.data).then (
         function (response) {

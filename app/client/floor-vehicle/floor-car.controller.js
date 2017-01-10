@@ -28,7 +28,8 @@
     'gettext',
     'kissMetricInfo',
     'segmentio',
-    'metric'
+    'metric',
+    'VinValidator'
   ];
 
   function FloorCarCtrl($scope,
@@ -49,7 +50,8 @@
                         gettext,
                         kissMetricInfo,
                         segmentio,
-                        metric) {
+                        metric,
+                        VinValidator) {
 
     // init files as empty array to avoid
     // error of undefined.length from $watcher
@@ -322,6 +324,13 @@
       }
 
       var dialogParams;
+
+      // set the vin acknowledgment if it's not checked but the vin is invalid;
+      var vinValid = VinValidator.isValid($scope.data.UnitVin);
+      if (!$scope.data.VinAckLookupFailure && !vinValid) {
+        // it is not acknowledged yet, but the vin is invalid
+        $scope.data.VinAckLookupFailure = true;
+      }
 
       $scope.submitInProgress = true;
       Floorplan.create($scope.data).then(
