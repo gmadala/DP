@@ -11,7 +11,8 @@ if (process.env.bamboo_buildNumber) {
 
 exports.config = {
     seleniumAddress: selenium,
-    baseUrl: 'https://test.nextgearcapital.com/test/#/',
+    //baseUrl: 'https://test.nextgearcapital.com/test/#/',
+    baseUrl:  'https://customer.nextgearcapital.com/',
     //Capabilities to be passed to the webdriver instance.
     capabilities: {
         'browserName': 'chrome',
