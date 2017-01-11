@@ -107,11 +107,9 @@ describe('Controller: SalesInfoCtrl', function() {
       expect(salesInfo.maxDate.date()).toEqual(expectedMoment.date());
     });
 
-    it('should toggle the purchase date has value flag', function() {
-      salesInfo.onPurchaseDateChange();
-      expect(salesInfo.purchaseDateHasValue).toBe(false);
-      salesInfo.onPurchaseDateChange('some text');
-      expect(salesInfo.purchaseDateHasValue).toBe(true);
+    it('should check whether a field element has value or not', function() {
+      expect(salesInfo.fieldHasValue()).toBe(false);
+      expect(salesInfo.fieldHasValue('some text')).toBe(true);
     });
 
     it('should start with closed date picker', function() {
