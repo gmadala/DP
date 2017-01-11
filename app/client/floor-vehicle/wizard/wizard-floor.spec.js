@@ -522,7 +522,7 @@ describe ('Controller: WizardFloorCtrl', function () {
         VinAckLookupFailure: false
       };
 
-      spyOn(VinValidator, 'isValid').and.callThrough();;
+      spyOn(VinValidator, 'isValid').and.callThrough();
       wizardFloor.submit();
 
       expect(VinValidator.isValid).toHaveBeenCalledWith('1G8AN14F45Z10003');
