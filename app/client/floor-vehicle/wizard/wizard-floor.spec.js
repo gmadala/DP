@@ -516,7 +516,7 @@ describe ('Controller: WizardFloorCtrl', function () {
       expect (mockSegmentIO.track).toHaveBeenCalledWith (mockMetric.FLOORPLAN_REQUEST_WIZARD_RESULT, kissMetricsData);
     });
 
-    fit('should acknowledge invalid vin when vin is invalid but not checked', function() {
+    it('should acknowledge invalid vin when vin is invalid but not checked', function() {
       wizardFloor.data.UnitVin = '1G8AN14F45Z10003';
       wizardFloor.data.VinAckLookupFailure = false;
 
@@ -527,7 +527,7 @@ describe ('Controller: WizardFloorCtrl', function () {
       expect(wizardFloor.data.VinAckLookupFailure).toEqual(true);
     });
 
-    fit('should not acknowledge invalid vin when vin is valid', function() {
+    it('should not acknowledge invalid vin when vin is valid', function() {
       wizardFloor.data.UnitVin = '1FTYR10U92PB37336';
       wizardFloor.data.VinAckLookupFailure = false;
 
