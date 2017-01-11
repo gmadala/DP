@@ -13,7 +13,9 @@ describe('Build Verification', function () {
 
     it("1. Build Version  - Validating the current build version has been deployed", function () {
 
-        browser.get(browser.baseUrl.split('#')[0] + appendurl);
+        //browser.get(browser.baseUrl.split('#')[0] + appendurl);
+
+        browser.get('https://customer.nextgearcapital.com/version.txt');
 
         browser.sleep('3000');
 
