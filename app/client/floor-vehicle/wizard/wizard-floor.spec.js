@@ -516,30 +516,26 @@ describe ('Controller: WizardFloorCtrl', function () {
       expect (mockSegmentIO.track).toHaveBeenCalledWith (mockMetric.FLOORPLAN_REQUEST_WIZARD_RESULT, kissMetricsData);
     });
 
-    it('should acknowledge invalid vin when vin is invalid but not checked', function() {
-      wizardFloor.data = {
-        UnitVin: '1G8AN14F45Z10003',
-        VinAckLookupFailure: false
-      };
+    fit('should acknowledge invalid vin when vin is invalid but not checked', function() {
+      wizardFloor.data.UnitVin = '1G8AN14F45Z10003';
+      wizardFloor.data.VinAckLookupFailure = false;
 
       spyOn(VinValidator, 'isValid').and.callThrough();
       wizardFloor.submit();
 
       expect(VinValidator.isValid).toHaveBeenCalledWith('1G8AN14F45Z10003');
-      expect(scope.data.VinAckLookupFailure).toEqual(true);
+      expect(wizardFloor.data.VinAckLookupFailure).toEqual(true);
     });
 
-    it('should not acknowledge invalid vin when vin is valid', function() {
-      wizardFloor.data = {
-        UnitVin: '1FTYR10U92PB37336',
-        VinAckLookupFailure: false
-      };
+    fit('should not acknowledge invalid vin when vin is valid', function() {
+      wizardFloor.data.UnitVin = '1FTYR10U92PB37336';
+      wizardFloor.data.VinAckLookupFailure = false;
 
       spyOn(VinValidator, 'isValid').and.callThrough();
       wizardFloor.submit();
 
       expect(VinValidator.isValid).toHaveBeenCalledWith('1FTYR10U92PB37336');
-      expect(scope.data.VinAckLookupFailure).toEqual(false);
+      expect(wizardFloor.data.VinAckLookupFailure).toEqual(false);
     });
   });
 });
