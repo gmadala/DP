@@ -3,7 +3,7 @@ import { logMetric } from '../../actions/metricActions';
 import AuctionResources from './AuctionResources';
 
 const mapStateToProps = (state, props) => ({
-    docs: props.isUnitedStates ? state.resource.docs : [],
+    docs: props.isUnitedStates ? state.resource.auctionDocs : [],
     metrics: state.metric
 })
 
