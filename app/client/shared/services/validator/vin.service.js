@@ -47,6 +47,11 @@
             isValid: isValid
         };
 
+        /**
+         * Service implementation to validate vin data. Implementation is based on code on Discover VinUtility.cs.
+         *
+         * @param {string} vinString - the vin data to be validated.
+         */
         function isValid(vinString) {
             if (!vinString) {
                 return false;
