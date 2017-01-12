@@ -117,7 +117,7 @@
               <input type="number" id="inputPurchaseAmt" name="inputPurchaseAmt" ng-model="data.UnitPurchasePrice"
                      required
                      ng-min="1"
-                     ng-max="400000"
+                     ng-max="399999.99"
                      ng-class="{ 'nxg-invalid': validity.inputPurchaseAmt.$error.required || validity.inputPurchaseAmt.$error.max || validity.inputPurchaseAmt.$error.pattern || validity.inputPurchaseAmt.$error.maxlength || validity.inputPurchaseAmt.$error.nxgMin }"/>
               <label for="inputPurchaseAmt" class="text-error"
                      ng-show="validity.inputPurchaseAmt.$error.required" translate>
