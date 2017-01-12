@@ -240,15 +240,12 @@
       }
 
       $scope.vinDetailsErrorFlag = true;
-      if (!$scope.form.$valid) {
-        if (isDealer && $scope.canAttachDocuments()) {
-          $scope.missingDocuments = $scope.files.length < 1;
-        }
-        return false;
-      }
 
       if (isDealer && $scope.canAttachDocuments()) {
         $scope.missingDocuments = $scope.files.length < 1;
+      }
+
+      if (!$scope.form.$valid || $scope.missingDocuments) {
         return false;
       }
 
