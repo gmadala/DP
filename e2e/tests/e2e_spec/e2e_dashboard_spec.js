@@ -58,10 +58,11 @@ describe('\n Dashboard Page', function () {
         expect(browser.getCurrentUrl()).toEqual(helper.receiptsPage());
     });
 
-    it("5. Dashboard - Ribbon Validation ", function () {
+    it("5. Dashboard - Open Audit Ribbon Validation ", function () {
         helper.goToHome();
         expect(dashboard.elRibbonOpenAudit.isDisplayed()).toBe(true);
         expect(dashboard.getTextRibbonOpenAudits()).toContain('Open Audits');
+        //Navigating to Open Audits Page
         dashboard.doRibbonOpenAudit();
         expect(browser.getCurrentUrl()).toEqual(helper.openAuditsPage());
     });
