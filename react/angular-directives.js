@@ -6,17 +6,20 @@ import Ribbon from './app/dashboard/Ribbon';
 import store from './store';
 
 angular.module( 'nextgearWebApp' ).directive('dateComponent', reactDirective => reactDirective( Date ));
-angular.module( 'nextgearWebApp' ).directive('resourcesComponent', ( reactDirective, User, gettextCatalog, api ) =>
-reactDirective(ResourcesContainer, null, {}, {
+angular.module( 'nextgearWebApp' ).directive('resourcesComponent', ( reactDirective, User, gettextCatalog, api, kissMetricInfo, segmentio ) => reactDirective(ResourcesContainer, null, {}, {
     store,
     isUnitedStates: User.isUnitedStates( ),
     language: gettextCatalog.currentLanguage.substring( 0, 2 ),
-    api
+    api,
+    kissMetricInfo,
+    segmentio
 }));
-angular.module( 'nextgearWebApp' ).directive('auctionResourcesComponent', ( reactDirective, User, gettextCatalog ) => reactDirective(AuctionResourcesContainer, null, {}, {
+angular.module( 'nextgearWebApp' ).directive('auctionResourcesComponent', ( reactDirective, User, gettextCatalog, kissMetricInfo, segmentio ) => reactDirective(AuctionResourcesContainer, null, {}, {
     store,
     isUnitedStates: User.isUnitedStates( ),
     language: gettextCatalog.currentLanguage.substring( 0, 2 ),
+    kissMetricInfo,
+    segmentio
 }));
 angular.module( 'nextgearWebApp' ).directive('progressivePromptComponent', reactDirective => reactDirective( ProgressivePrompt ));
 angular.module( 'nextgearWebApp' ).directive('ribbonComponent', reactDirective => reactDirective( Ribbon ));

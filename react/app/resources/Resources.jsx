@@ -6,7 +6,13 @@ import MobileApps from './MobileApps';
 
 class Resources extends Component {
     componentDidMount() {
-        this.props.logMetric(this.props.metrics.VIEW_RESOURCES_PAGE);
+        this.props.logMetric(
+            {
+                metric: this.props.metrics.VIEW_RESOURCES_PAGE,
+                kissMetricInfo: this.props.kissMetricInfo,
+                segmentio: this.props.segmentio
+            }
+        );
         counterpart.setLocale(this.props.language); // set language
     }
 
@@ -30,6 +36,8 @@ Resources.propTypes = {
     mobileApps: PropTypes.array.isRequired,
     metrics: PropTypes.object.isRequired,
     logMetric: PropTypes.func.isRequired,
+    kissMetricInfo: PropTypes.any.isRequired,
+    segmentio: PropTypes.any.isRequired
 }
 
 export default Resources;
