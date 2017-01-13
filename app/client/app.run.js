@@ -96,7 +96,9 @@
     isMobile();
 
     angular.element($window).bind('resize', function () {
-      isMobile();
+      $rootScope.$apply(function () {
+        isMobile();
+      });
     });
 
     // listen for route changes
