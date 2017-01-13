@@ -56,7 +56,7 @@
              placeholder="{{ 'Purchase Amount' | translate }}"
              required
              ng-min="1"
-             ng-max="400000"
+             ng-max="399999.99"
              class="form-control"
              ng-class="{ 'nxg-invalid': (form.inputPurchaseAmt.$error.required || form.inputPurchaseAmt.$error.max || form.inputPurchaseAmt.$error.pattern || form.inputPurchaseAmt.$error.maxlength || form.inputPurchaseAmt.$error.nxgMin) && form.$submitted }" />
     </div>

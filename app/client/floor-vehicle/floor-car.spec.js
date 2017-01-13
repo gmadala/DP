@@ -95,7 +95,11 @@ describe('Controller: FloorCarCtrl', function () {
 
     mockForm = {
       $valid: true,
-      inputMileage: {}
+      inputMileage: {},
+      documents: {
+        $setValidity: function() {
+        }
+      }
     };
 
     initController = function() {
@@ -257,6 +261,43 @@ describe('Controller: FloorCarCtrl', function () {
     });
 
     registerCommonTests();
+
+    it('confirmation screen should not be called when no document is attached', function() {
+      spyOn(dialog, 'open').and.callFake(
+        function fakeDialogOpenFn() {
+          return {
+            result: {
+              then: function(s) {
+                s();
+              }
+            }
+          }
+        }
+      );
+      spyOn(scope, 'canAttachDocuments').and.returnValue(true);
+      scope.form = mockForm;
+      scope.submit();
+      expect(dialog.open).not.toHaveBeenCalled();
+    });
+
+    it('confirmation screen should be called when document is attached', function() {
+      spyOn(dialog, 'open').and.callFake(
+        function fakeDialogOpenFn() {
+          return {
+            result: {
+              then: function(s) {
+                s();
+              }
+            }
+          }
+        }
+      );
+      spyOn(scope, 'canAttachDocuments').and.returnValue(true);
+      scope.form = mockForm;
+      scope.files = ['file a', 'file b'];
+      scope.submit();
+      expect(dialog.open).toHaveBeenCalled();
+    });
 
     it('Additional Bank Account checks', function() {
       initController();
