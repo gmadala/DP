@@ -37,8 +37,6 @@ exports.config = {
 
     //Spec patterns are relative to the current working directly when protractor is called.
     specs: ['tests/e2e_spec/*_spec.js'],
-    //specs: ['tests/e2e_spec/e2e_dashboard_spec.js'],
-
 
     //To run a single test suite enter the following at the command prompt:
     //   grunt test:e2e -suite=<enter suite name>
