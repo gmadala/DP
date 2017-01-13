@@ -9,7 +9,7 @@ describe('app.js', function () {
 
   // instantiate service
   var rootScope, location, cookieStore, userInitRequired, passwordChangeRequired;
-  beforeEach(inject(function ($http, $rootScope, User, $state, LastState, $cookieStore, $location) {
+  beforeEach(inject(function ($http, $rootScope, User, $state, LastState, $cookieStore, $location, $httpBackend) {
     rootScope = $rootScope;
     user = User;
     state = $state;
@@ -47,6 +47,7 @@ describe('app.js', function () {
       return passwordChangeRequired;
     };
 
+    $httpBackend.whenGET('/info/v1_1/businesshours').respond({});
   }));
 
 
