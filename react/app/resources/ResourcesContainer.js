@@ -17,9 +17,14 @@ const mapStateToProps = (state, props) => {
     }
 }
 
-const mapDispatchToProps = dispatch => ({
+const mapDispatchToProps = (dispatch, props) => ({
     logMetric: ( metric ) => {
-        dispatch(logMetric( metric ))
+        console.log(props);
+        dispatch(logMetric( metric ));
+        props.kissMetricInfo.getKissMetricInfo( ).then(( result ) => {
+            console.log('logging a metric', result, metric);
+            props.segmentio.track( metric, result );
+        });
     }
 })
 

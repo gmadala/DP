@@ -7,9 +7,12 @@ const mapStateToProps = (state, props) => ({
     metrics: state.metric
 })
 
-const mapDispatchToProps = dispatch => ({
+const mapDispatchToProps = (dispatch, props) => ({
     logMetric: ( metric ) => {
         dispatch(logMetric( metric ))
+        props.kissMetricInfo.getKissMetricInfo( ).then(( result ) => {
+            props.segmentio.track( metric, result );
+        });
     }
 })
 

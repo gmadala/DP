@@ -4,13 +4,7 @@ import ResourceDocs from './ResourceDocs';
 
 class AuctionResources extends Component {
     componentDidMount() {
-        this.props.logMetric(
-            {
-                metric: this.props.metrics.VIEW_RESOURCES_PAGE,
-                kissMetricInfo: this.props.kissMetricInfo,
-                segmentio: this.props.segmentio
-            }
-        ); // log page view
+        this.props.logMetric(this.props.metrics.VIEW_RESOURCES_PAGE); // log page view
         counterpart.setLocale(this.props.language); // set language
     }
 
@@ -32,8 +26,6 @@ AuctionResources.propTypes = {
     metrics: PropTypes.object.isRequired,
     logMetric: PropTypes.func.isRequired,
     language: PropTypes.string.isRequired,
-    kissMetricInfo: PropTypes.any.isRequired,
-    segmentio: PropTypes.any.isRequired
 }
 
 export default AuctionResources;
