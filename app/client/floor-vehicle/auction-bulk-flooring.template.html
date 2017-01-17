@@ -115,9 +115,9 @@
             <div class="input-prepend dollar">
               <span class="add-on no-top" translate>$</span>
               <input type="number" id="inputPurchaseAmt" name="inputPurchaseAmt" ng-model="data.UnitPurchasePrice"
-                     nxg-min="1"
                      required
-                     nxg-input-currency="1000000000000"
+                     ng-min="1"
+                     ng-max="399999.99"
                      ng-class="{ 'nxg-invalid': validity.inputPurchaseAmt.$error.required || validity.inputPurchaseAmt.$error.max || validity.inputPurchaseAmt.$error.pattern || validity.inputPurchaseAmt.$error.maxlength || validity.inputPurchaseAmt.$error.nxgMin }"/>
               <label for="inputPurchaseAmt" class="text-error"
                      ng-show="validity.inputPurchaseAmt.$error.required" translate>
@@ -131,7 +131,7 @@
               <label for="inputPurchaseAmt" class="text-error"
                      ng-show="!validity.inputPurchaseAmt.$error.pattern && !validity.inputPurchaseAmt.$error.required && validity.inputPurchaseAmt.$error.max"
                      translate>
-                Please enter a value less than $1,000,000,000,000.
+                Please enter a value less than $400,000.
               </label>
             </div>
 

@@ -1,5 +1,5 @@
 <div class="container">
-  <section  ng-hide="isUnitedStates">
+  <section ng-hide="isUnitedStates">
     <div class="paired-media">
       <span nxg-icon="icon-info"></span>
     </div>
@@ -247,8 +247,8 @@
                nxg-chart-data="analytics.averageTurn.data"
                nxg-chart-labels="true"
                nxg-chart-size="chartSize"
-               nxg-chart-title-size="{{ isMobile() ? '11px' : ''}}"
-               nxg-chart-label-size="{{ isMobile() ? '10px' : ''}}"
+               nxg-chart-title-size="{{ isMobile ? '11px' : ''}}"
+               nxg-chart-label-size="{{ isMobile ? '10px' : ''}}"
                nxg-chart-label-rotation="-45">
           </div>
         </div>
@@ -341,7 +341,7 @@
                        nxg-chart-description-x="{{ 'Avg. # of Days to Turn' | translate }}"
                        nxg-chart-data="selectedMoverChart.data"
                        nxg-chart-labels="true"
-                       nxg-chart-label-size="{{ isMobile() ? '9px' : ''}}"></div>
+                       nxg-chart-label-size="{{ isMobile ? '9px' : ''}}"></div>
                 </div>
               </div>
             </div>
