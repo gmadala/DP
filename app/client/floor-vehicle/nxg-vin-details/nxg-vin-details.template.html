@@ -21,7 +21,9 @@
     </div>
   </div>
 
-
+  <label for="inputVin" class="text-warning" ng-show="showVinInvalidWarning" translate>
+    We are sorry, but we do not recognize this VIN.  If your VIN was entered correctly, you can still submit your request.
+  </label>
   <label for="inputVin" class="text-error" ng-show="validity.inputVin.$error.required" translate>
     Please enter a VIN.
   </label>
