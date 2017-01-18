@@ -193,11 +193,8 @@
   }
 }
 
-// Only hover on no touch devices
-.no-touch {
-  .hover .dropdown-menu {
-    display: block;
-  }
+.hover .dropdown-menu {
+  display: block;
 }
 
 .cart-btn {
