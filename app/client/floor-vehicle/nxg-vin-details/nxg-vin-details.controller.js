@@ -5,9 +5,9 @@
     .module('nextgearWebApp')
     .controller('VinDetailsCtrl', VinDetailsCtrl);
 
-  VinDetailsCtrl.$inject = ['$scope', 'moment', '$uibModal', '$q', 'Blackbook', 'User', 'Kbb'];
+  VinDetailsCtrl.$inject = ['$scope', 'moment', '$uibModal', '$q', 'Blackbook', 'User', 'Kbb', 'VinValidator'];
 
-  function VinDetailsCtrl($scope, moment, $uibModal, $q, Blackbook, User, Kbb) {
+  function VinDetailsCtrl($scope, moment, $uibModal, $q, Blackbook, User, Kbb, VinValidator) {
 
     var uibModal = $uibModal;
 
@@ -63,6 +63,7 @@
 
     $scope.vinChange = function () {
       if ($scope.data.settingsVinMode !== 'none') {
+        $scope.showVinInvalidWarning = false;
         // if the VIN changes after lookup, clear any match state
         $scope.data.$selectedVehicle = null;
         $scope.errorFlag = false;
@@ -106,6 +107,8 @@
       if ($scope.form.inputMileage.$valid) {
         mileage = $scope.data.UnitMileage;
       }
+
+      $scope.showVinInvalidWarning = !VinValidator.isValid($scope.data.UnitVin);
 
       s.vinLookupPending = true;
       Blackbook.lookupByVin($scope.data.UnitVin, mileage).then(
