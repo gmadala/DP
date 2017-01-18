@@ -173,8 +173,8 @@
           $window.location.reload(true);
         }
 
-        if (toState.name === 'dashboard' && (pendingFloorPlanFlag || openAuditsFlag)) {
-          $rootScope.ribbonStyle = {'margin-bottom': '0'};
+        if ((toState.name === 'dashboard' || toState.name === 'headless') && (pendingFloorPlanFlag || openAuditsFlag)) {
+          $rootScope.ribbonStyle = { 'margin-bottom': '0' };
         } else {
           $rootScope.ribbonStyle = {};
         }
