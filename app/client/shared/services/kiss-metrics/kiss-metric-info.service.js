@@ -26,6 +26,8 @@
       retObj.height = $window.screen.height;
       retObj.width = $window.screen.width;
 
+      retObj.isHeadless = ($window.navigator.standalone || $window.matchMedia('(display-mode: standalone)').matches);
+
       if(authenticated === true) {
         return BusinessHours.insideBusinessHours().then(function (result) {
           retObj.isBusinessHours = result;
