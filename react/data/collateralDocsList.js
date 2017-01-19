@@ -1,7 +1,7 @@
 import React from 'react';
 import Translate from 'react-translate-component';
 import counterpart from 'counterpart';
-import metric from '../../shared/metric';
+import metric from './metricList';
 
 let languagePrefix = counterpart.getLocale( );
 
@@ -11,7 +11,7 @@ if ( languagePrefix.indexOf( '_CA' ) !== -1 ) {
     languagePrefix = '';
 }
 
-module.exports = [
+export default [
     {
         id: 1,
         name: <Translate content="resources.collateralDocsList.welcomeLetter"/>,

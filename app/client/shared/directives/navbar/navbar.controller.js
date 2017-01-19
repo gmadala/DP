@@ -284,7 +284,9 @@
         $location.path(page.href.substring( 1 ));
         //remove open class
         $timeout( function( ) {
-          document.getElementsByClassName( 'dropdown open' )[ 0 ].classList.remove( 'open' );
+          if(document.getElementsByClassName( 'dropdown open' )[ 0 ]) {
+              document.getElementsByClassName( 'dropdown open' )[ 0 ].classList.remove( 'open' );
+          }
         }, 0);
       }
     };
