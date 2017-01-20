@@ -2,7 +2,7 @@ import Date from './app/shared/Date'
 import ResourcesContainer from './app/resources/ResourcesContainer';
 import AuctionResourcesContainer from './app/resources/AuctionResourcesContainer';
 import ProgressivePrompt from './app/progressivePrompt/ProgressivePrompt';
-import Ribbon from './app/dashboard/Ribbon';
+import Ribbon from './app/ribbon/Ribbon';
 import AngularServicesContainer from './app/angularServices/AngularServicesContainer';
 
 import store from './store';
