@@ -204,14 +204,15 @@ describe('Controller: FloorCarCtrl', function () {
     });
 
     describe('really submit function', function() {
-      var  p;
+      var  p, VinValidator;
 
       beforeEach(function() {
         $httpBackend.whenGET('/info/v1_1/businesshours').respond({});
       });
 
-      beforeEach(inject(function(protect) {
+      beforeEach(inject(function(protect, _VinValidator_) {
         p = protect;
+        VinValidator = _VinValidator_;
 
         spyOn(dialog, 'open').and.returnValue({
           open: function() {
@@ -230,6 +231,28 @@ describe('Controller: FloorCarCtrl', function () {
 
       it('should exist', function() {
         expect(typeof scope.reallySubmit).toBe('function');
+      });
+
+      it('should acknowledge invalid vin when vin is invalid but not checked', function() {
+        scope.data.UnitVin = '1G8AN14F45Z10003';
+        scope.data.VinAckLookupFailure = false;
+
+        spyOn(VinValidator, 'isValid').and.callThrough();
+        scope.reallySubmit(p);
+
+        expect(VinValidator.isValid).toHaveBeenCalledWith('1G8AN14F45Z10003');
+        expect(scope.data.VinAckLookupFailure).toEqual(true);
+      });
+
+      it('should not acknowledge invalid vin when vin is valid', function() {
+        scope.data.UnitVin = '1FTYR10U92PB37336';
+        scope.data.VinAckLookupFailure = false;
+
+        spyOn(VinValidator, 'isValid').and.callThrough();
+        scope.reallySubmit(p);
+
+        expect(VinValidator.isValid).toHaveBeenCalledWith('1FTYR10U92PB37336');
+        expect(scope.data.VinAckLookupFailure).toEqual(false);
       });
 
       it('should throw an error if guard and protect are not the same', function() {
