@@ -386,6 +386,11 @@
         vm.data.VinAckLookupFailure = true;
       }
 
+      if (!vm.data.PaySeller) {
+        // when they're paying the buyer, remove the seller information from submission.
+        vm.data.BusinessId = null;
+      }
+
       Floorplan.create (vm.data).then (
         function (response) {
           /**
