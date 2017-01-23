@@ -1,11 +1,25 @@
 import Date from './app/shared/Date'
+import ResourcesContainer from './app/resources/ResourcesContainer';
+import AuctionResourcesContainer from './app/resources/AuctionResourcesContainer';
 import ProgressivePrompt from './app/progressivePrompt/ProgressivePrompt';
-import Resources from './app/resources/Resources';
-import AuctionResources from './app/resources/AuctionResources';
 import Ribbon from './app/dashboard/Ribbon';
+import store from './store';
 
 angular.module( 'nextgearWebApp' ).directive('dateComponent', reactDirective => reactDirective( Date ));
-angular.module( 'nextgearWebApp' ).directive('resourcesComponent', reactDirective => reactDirective( Resources ));
-angular.module( 'nextgearWebApp' ).directive('auctionResourcesComponent', reactDirective => reactDirective( AuctionResources ));
+angular.module( 'nextgearWebApp' ).directive('resourcesComponent', ( reactDirective, User, gettextCatalog, api, kissMetricInfo, segmentio ) => reactDirective(ResourcesContainer, null, {}, {
+    store,
+    isUnitedStates: User.isUnitedStates( ),
+    language: gettextCatalog.currentLanguage.substring( 0, 2 ),
+    api,
+    kissMetricInfo,
+    segmentio
+}));
+angular.module( 'nextgearWebApp' ).directive('auctionResourcesComponent', ( reactDirective, User, gettextCatalog, kissMetricInfo, segmentio ) => reactDirective(AuctionResourcesContainer, null, {}, {
+    store,
+    isUnitedStates: User.isUnitedStates( ),
+    language: gettextCatalog.currentLanguage.substring( 0, 2 ),
+    kissMetricInfo,
+    segmentio
+}));
 angular.module( 'nextgearWebApp' ).directive('progressivePromptComponent', reactDirective => reactDirective( ProgressivePrompt ));
 angular.module( 'nextgearWebApp' ).directive('ribbonComponent', reactDirective => reactDirective( Ribbon ));
