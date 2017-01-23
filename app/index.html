@@ -58,17 +58,17 @@
     <!-- /processhtml -->
     <!-- htmlmin:ignore -->
     <div id="wrapper" class="menu-wrapper">
-      <div nav-bar></div>
+      <div nav-bar class="old-my-next-gear-general"></div>
       <div id="main-container" class="nxg-main-container" nxg-messages>
         <div class="nxg-main-view"
              ng-class="{'mobile-menu-push-toleft':navState.current.data.showMenu}"
              ng-click="navState.current.data.showMenu ? navState.current.data.showMenu=false : false">
-          <div ui-view autoscroll="true" id="{{ navState.current.data.pageId }}Page"></div>
+          <div ui-view autoscroll="true" id="{{ navState.current.data.pageId }}Page" ng-class="{'old-my-next-gear-general': (!navState.current.data.hasOwnProperty('oldStyles') || navState.current.data.oldStyles == true)}"></div>
         </div>
-        <div nxg-activity></div>
+        <div nxg-activity class="old-my-next-gear-general"></div>
       </div>
 
-      <div page-footer></div>
+      <div page-footer class="old-my-next-gear-general"></div>
     </div>
     <!-- build:js scripts/components.js -->
     <script src="components/modernizr/modernizr.js"></script>
