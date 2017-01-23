@@ -47,6 +47,11 @@
       return !data.SaleTradeIn && data.PaySeller;
     };
 
+    vm.togglePayee = function() {
+      var data = $scope.$parent.wizardFloor.data;
+      data.SaleTradeIn = !data.PaySeller;
+    };
+
     vm.switchChange = function (isTradeIn) {
       if ($scope.$parent.wizardFloor.data) {
         $scope.$parent.wizardFloor.data.PaySeller = !isTradeIn;
