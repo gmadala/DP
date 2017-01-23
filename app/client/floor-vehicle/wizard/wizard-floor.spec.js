@@ -537,5 +537,24 @@ describe ('Controller: WizardFloorCtrl', function () {
       expect(VinValidator.isValid).toHaveBeenCalledWith('1FTYR10U92PB37336');
       expect(wizardFloor.data.VinAckLookupFailure).toEqual(false);
     });
+
+    it('should not strip the seller information when paying seller', function() {
+      wizardFloor.data.PaySeller = false;
+      wizardFloor.data.BusinessId = {};
+
+      spyOn(VinValidator, 'isValid').and.returnValue(true);
+      wizardFloor.submit();
+      expect(wizardFloor.data.BusinessId).toEqual(null);
+    });
+
+    it('should not strip the seller information when paying seller', function() {
+      wizardFloor.data.PaySeller = true;
+      wizardFloor.data.BusinessId = {};
+
+      spyOn(VinValidator, 'isValid').and.returnValue(true);
+      wizardFloor.submit();
+
+      expect(wizardFloor.data.BusinessId).not.toEqual(null);
+    });
   });
 });
