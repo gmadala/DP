@@ -168,15 +168,6 @@ describe('Controller: SalesInfoCtrl', function() {
   });
 
   describe('seller search', function() {
-    it('should be toggled based on trade in value', function() {
-      scope.$parent.wizardFloor.data.PaySeller = true;
-      scope.$parent.wizardFloor.data.SaleTradeIn = true;
-      initController();
-      expect(salesInfo.showSellerSearch()).toBe(false);
-      scope.$parent.wizardFloor.data.SaleTradeIn = false;
-      expect(salesInfo.showSellerSearch()).toBe(true);
-    });
-
     it('should be toggled based on the pay seller flag', function() {
       scope.$parent.wizardFloor.data.PaySeller = true;
       scope.$parent.wizardFloor.data.SaleTradeIn = false;
@@ -184,6 +175,16 @@ describe('Controller: SalesInfoCtrl', function() {
       expect(salesInfo.showSellerSearch()).toBe(true);
       scope.$parent.wizardFloor.data.PaySeller = false;
       expect(salesInfo.showSellerSearch()).toBe(false);
+    });
+  });
+
+  describe('pay seller toggle', function() {
+    it('should toggle sale trade in flag', function() {
+      scope.$parent.wizardFloor.data.PaySeller = false;
+      scope.$parent.wizardFloor.data.SaleTradeIn = false;
+      initController();
+      salesInfo.toggleTradeIn();
+      expect(scope.$parent.wizardFloor.data.SaleTradeIn).toBe(true);
     });
   });
 

@@ -123,7 +123,7 @@
            ng-value="false"
            ng-model="wizardFloor.data.PaySeller"
            ng-disabled="!wizardFloor.canPayBuyer"
-           ng-change="salesInfo.togglePayee()"
+           ng-change="salesInfo.toggleTradeIn()"
            required/>
     <label class="radio-img" for="payBuyer"></label>
     <label class="cr-label" for="payBuyer" translate>Pay me</label>
@@ -131,7 +131,7 @@
     <input type="radio" name="payBuyerSeller" id="paySeller"
            ng-value="true"
            ng-model="wizardFloor.data.PaySeller"
-           ng-change="salesInfo.togglePayee()"
+           ng-change="salesInfo.toggleTradeIn()"
            required/>
     <label class="radio-img" for="paySeller"></label>
     <label class="cr-label" for="paySeller" translate>Pay someone else</label>
