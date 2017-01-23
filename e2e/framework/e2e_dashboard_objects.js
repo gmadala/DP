@@ -6,6 +6,7 @@ function DashboardObjects() {
     this.elReceiptsLink = browser.element(by.id('viewAllReceipts'));
     this.elResourcesLink = browser.element(by.css('a[ng-href="#/documents"]'));
     this.elRequestCreditIncrease = browser.element(by.id('requestCreditButton'));
+    this.elRibbonOpenAudit = browser.element(by.css("button.btn.btn-default.navbar-btn"));
 
     //Doers
     this.doResources = function () {
@@ -23,10 +24,18 @@ function DashboardObjects() {
         this.elRequestCreditIncrease.click();
         browser.sleep(browser.params.longerDelay);
     };
+    this.doRibbonOpenAudit = function () {
+        browser.sleep(browser.params.longDelay);
+        this.elRibbonOpenAudit.click();
+        browser.sleep(browser.params.longerDelay);
+    };
 
     //Getters
     this.getPasswordErrorTextPhoneNumber = function () {
         return this.passwordErrorPhoneNumbers().get(2).getText();
+    };
+    this.getTextRibbonOpenAudits = function () {
+        return this.elRibbonOpenAudit.getText();
     };
 
     //Setters

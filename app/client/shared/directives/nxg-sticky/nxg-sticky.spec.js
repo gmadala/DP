@@ -93,9 +93,9 @@ describe('Directive: nxgSticky', function () {
 
     it('isMobile() method should return "true" if < 768px or "false" if >= 768px', function () {
       if (winWidth >= 768) {
-        expect(scope.isMobile()).toBeFalsy();
+        expect(scope.isMobile).toBeFalsy();
       } else {
-        expect(scope.isMobile()).toBeTruthy();
+        expect(scope.isMobile).toBeTruthy();
       }
     });
   });

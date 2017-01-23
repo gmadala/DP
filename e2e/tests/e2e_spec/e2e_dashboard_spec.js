@@ -58,7 +58,16 @@ describe('\n Dashboard Page', function () {
         expect(browser.getCurrentUrl()).toEqual(helper.receiptsPage());
     });
 
-    it("5. Dashboard - Logout", function () {
+    it("5. Dashboard - Open Audit Ribbon Validation ", function () {
+        helper.goToHome();
+        expect(dashboard.elRibbonOpenAudit.isDisplayed()).toBe(true);
+        expect(dashboard.getTextRibbonOpenAudits()).toContain('Open Audits');
+        //Navigating to Open Audits Page
+        dashboard.doRibbonOpenAudit();
+        expect(browser.getCurrentUrl()).toEqual(helper.openAuditsPage());
+    });
+
+    it("6. Dashboard - Logout", function () {
         login.logout();
         expect(browser.getCurrentUrl()).toEqual(helper.loginPage());
     });
