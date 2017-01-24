@@ -1,1 +1,7 @@
-test2 : 
+Open Audits : 
+Pending Floorplans : 
+%(count)s Unit : 
+%(count)s Units : 
+Tap the top right menu icon %(icon)s and click on "Add to Home Screen" : 
+Tap the share icon %(icon)s and click on "Add to Home Screen" : 
+Tap to dismiss : 
