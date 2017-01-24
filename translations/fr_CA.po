@@ -1,0 +1,179 @@
+# Karl <karl.friedrich@translatemedia.com>, 2015.
+msgid ""
+msgstr ""
+"Project-Id-Version: NextGear\n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: 2016-08-30 11:59-0400\n"
+"Last-Translator: Karl <karl.friedrich@translatemedia.com>\n"
+"Language-Team: TranslateMedia New York\n"
+"Language: fr_CA\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"X-Generator: Poedit 1.8.8\n"
+
+#: app/client/title-releases/title-releases-checkout/title-release-checkout.html:82
+#: app/client/title-releases/title-releases.html:122
+#: app/client/title-releases/title-releases.html:151
+msgid "Added"
+msgstr ""
+
+#: app/client/shared/directives/nxg-value-lookup/nxg-value-lookup.directive.js:14
+msgid "Average Bookout"
+msgstr ""
+
+#: app/client/payments/payments-confirm.template.html:150
+msgid "Back To Payments"
+msgstr ""
+
+#: app/client/title-releases/title-releases-checkout/confirm-title-release/confirm-title-release.template.html:53
+msgid "Back To Title Releases"
+msgstr ""
+
+#: app/client/analytics/analytics.template.html:169
+msgid "Credit and Payments"
+msgstr ""
+
+#: app/client/value-lookup/value-lookup.html:51
+msgid "Fill out for Kelley Blue Book<sup>®</sup>Auction Values"
+msgstr ""
+
+#: app/client/vehicle-details/vehicle-details.html:124
+msgid "Floored on"
+msgstr ""
+
+#: app/client/vehicle-details/vehicle-details.html:392
+#: app/client/vehicle-details/vehicle-details.html:99
+msgid "Hide"
+msgstr ""
+
+#: app/client/shared/directives/nxg-value-lookup/nxg-value-lookup.directive.js:35
+msgid "Highest average bookout <br /> less than purchase price"
+msgstr ""
+
+#: app/client/floor-vehicle/confirmation/confirmation.template.html:8
+msgid "How would you rate your experience with flooring online?"
+msgstr ""
+
+#: app/client/floor-vehicle/wizard/sales-info.template.html:79
+msgid "MMR Value Vehicle Style"
+msgstr ""
+
+#: app/client/shared/directives/nxg-value-lookup/nxg-value-lookup.directive.js:36
+msgid "Only purchase price data <br /> is available"
+msgstr ""
+
+#: app/client/floor-vehicle/wizard/payment-info.template.html:27
+msgid "Pay me"
+msgstr ""
+
+#: app/client/floor-vehicle/wizard/payment-info.template.html:34
+msgid "Pay someone else"
+msgstr ""
+
+#: app/client/floor-vehicle/wizard/sales-info.template.html:39
+msgid "Please enter a valid purchase date (mm/dd/yyyy)."
+msgstr ""
+
+#: app/client/floor-vehicle/auction-bulk-flooring.template.html:131
+#: app/client/floor-vehicle/floor-car.template.html:160
+#: app/client/floor-vehicle/wizard/sales-info.template.html:72
+msgid "Please enter a value less than $400,000."
+msgstr ""
+
+#: app/client/floor-vehicle/wizard/sales-info.template.html:63
+msgid "Please enter the purchase amount."
+msgstr ""
+
+#: app/client/floor-vehicle/confirmation/confirmation.template.html:34
+msgid "Print FedEx Label"
+msgstr ""
+
+#: app/client/floor-vehicle/confirmation/confirmation.template.html:27
+msgid "Print Request Summary"
+msgstr ""
+
+#: app/client/floor-vehicle/wizard/sales-info.template.html:16
+msgid "Purchase Date (mm/dd/yyyy)"
+msgstr ""
+
+#: app/client/shared/directives/nxg-value-lookup/nxg-value-lookup.directive.js:15
+#: app/client/shared/directives/nxg-value-lookup/nxg-value-lookup.directive.js:34
+msgid "Purchase price less than <br /> highest average bookout"
+msgstr ""
+
+#: app/client/shared/directives/nxg-value-lookup/nxg-value-lookup.directive.js:16
+msgid "Purchase price more than <br /> highest average bookout"
+msgstr ""
+
+#: app/client/vehicle-details/vehicle-details.html:391
+#: app/client/vehicle-details/vehicle-details.html:98
+msgid "Show"
+msgstr ""
+
+#: app/client/floor-vehicle/confirmation/confirmation.template.html:5
+msgid "Stock Number:"
+msgstr ""
+
+#: app/client/floor-vehicle/confirmation/confirmation.template.html:20
+msgid "submit"
+msgstr ""
+
+#: app/client/floor-vehicle/confirmation/confirmation.template.html:16
+msgid "Survey comment is required."
+msgstr ""
+
+#: app/client/floor-vehicle/confirmation/confirmation.template.html:14
+#: app/client/floor-vehicle/confirmation/confirmation.template.html:15
+msgid "Tell us more!"
+msgstr ""
+
+#: app/client/floor-vehicle/confirmation/confirmation.template.html:24
+msgid "Thank you for the feedback!"
+msgstr ""
+
+#: app/client/floor-vehicle/confirmation/confirmation.template.html:4
+msgid "Thank you for your floor plan request."
+msgstr ""
+
+#: app/client/payments/payments-confirm.template.html:2
+msgid "Thank you for your payment submission."
+msgstr ""
+
+#: app/client/shared/directives/nxg-credit-availability/nxg-credit-availability.template.html:18
+msgid "The purchase amount is more than your available credit."
+msgstr ""
+
+#: app/client/title-releases/title-releases.html:104
+msgid "Title Released on"
+msgstr ""
+
+#: app/client/shared/directives/nxg-value-lookup/nxg-value-lookup.template.html:20
+msgid "Vehicle Value Comparison"
+msgstr ""
+
+#: app/client/floor-vehicle/nxg-vin-details/nxg-vin-details.template.html:24
+#: app/client/floor-vehicle/nxg-vin-details/nxg-vin-lookup.template.html:19
+msgid ""
+"We are sorry, but we do not recognize this VIN.  If your VIN was entered "
+"correctly, you can still submit your request."
+msgstr ""
+
+#: app/client/shared/directives/nxg-value-lookup/nxg-value-lookup.template.html:29
+msgid "We were unable to pull one or more bookout values from our partner."
+msgstr ""
+
+#: app/client/title-releases/title-releases-checkout/confirm-title-release/confirm-title-release.template.html:33
+msgid ""
+"We're sorry, the highlighted title(s) listed above cannot be processed at "
+"this time. Please call Customer Service at"
+msgstr ""
+
+#: app/client/floor-vehicle/wizard/payment-info.template.html:21
+msgid "Who do you want to pay?"
+msgstr ""
+
+#: app/client/floor-vehicle/confirmation/confirmation.template.html:6
+msgid "You will receive an email confirmation shortly at"
+msgstr ""
