@@ -18,16 +18,6 @@
     $uiViewScrollProvider.useAnchorScroll();
     $urlRouterProvider.otherwise(otherwiseRouteConfig);
     $stateProvider
-      .state('bootstrapTest', {
-        url: '/bootstrap/test',
-        templateUrl: 'client/bootstrap/test.template.html',
-        data: {
-          pageId: 'testBootStrap',
-          showNavBar: true,
-          showMenu: true,
-          oldStyles: false
-        }
-      })
       .state('flooringWizard', {
         abstract: true,
         url: '/flooring-wizard',
