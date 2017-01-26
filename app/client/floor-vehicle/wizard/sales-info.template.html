@@ -103,14 +103,34 @@
               <!--ng-disabled="wizardFloor.floorPlanSubmitting"-->
               <!--&gt;</textarea>-->
   <!--</div>-->
-  <label class="main-heading" style="margin-top: 18px; margin-bottom: 18px;"><span for="cmn-toggle-2" ng-hide="!wizardFloor.canPayBuyer" translate>Trade in</span></label>
 
-    <div style="margin-bottom: 38px;" ng-hide="!wizardFloor.canPayBuyer">
-      <input bs-switch type="checkbox" id="cmn-toggle-2" name="cmn-toggle-2" class="noglobal"
-            switch-size="normal" switch-off-text="{{ 'No' | translate }}" switch-on-text="{{ 'Yes' | translate }}" switch-on-color="success" ng-change="salesInfo.switchChange(wizardFloor.data.SaleTradeIn)" ng-model="wizardFloor.data.SaleTradeIn">
-    </div>
+  <label class="main-heading" translate>Who do you want to pay?</label>
+  <div class="cr-inline" style="margin-bottom: 24px;">
+    <input type="radio" name="payBuyerSeller" id="payBuyer"
+           ng-value="false"
+           ng-model="wizardFloor.data.PaySeller"
+           ng-disabled="!wizardFloor.canPayBuyer"
+           ng-change="salesInfo.toggleTradeIn()"
+           required/>
+    <label class="radio-img" for="payBuyer"></label>
+    <label class="cr-label" for="payBuyer" translate>Pay me</label>
+    <br/>
+    <input type="radio" name="payBuyerSeller" id="paySeller"
+           ng-value="true"
+           ng-model="wizardFloor.data.PaySeller"
+           ng-change="salesInfo.toggleTradeIn()"
+           required/>
+    <label class="radio-img" for="paySeller"></label>
+    <label class="cr-label" for="paySeller" translate>Pay someone else</label>
+  </div>
+  <label class="text-error" ng-show="form.payBuyerSeller.$error.required && form.$submitted"
+         style="position: relative; top: -16px;" translate>
+    Please select who to pay.
+  </label>
 
-  <span class="nxg-business-field" ng-class="{ 'hidden': wizardFloor.data.SaleTradeIn, 'has-error': (form.inputBiz.$error.nxgRequires || form.inputBiz.$error.minlength) && form.$submitted }">
+  <span class="nxg-business-field"
+        ng-class="{'has-error': (form.inputBiz.$error.nxgRequires || form.inputBiz.$error.minlength) && form.$submitted }"
+        ng-if="salesInfo.showSellerSearch()">
     <input nxg-business-field-v2="sellers"
            id="inputBiz"
            name="inputBiz"
@@ -119,7 +139,7 @@
            ng-disabled="wizardFloor.data.SaleTradeIn"
            ng-required="!wizardFloor.data.SaleTradeIn"
            selected-business="wizardFloor.data.BusinessId"
-           validity="wizardFloor.validity" />
+           validity="wizardFloor.validity"/>
   </span>
 
   <label class="main-heading"><span for="titleLocation" translate>Title Location</span></label>
