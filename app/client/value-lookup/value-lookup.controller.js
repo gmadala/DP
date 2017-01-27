@@ -7,6 +7,7 @@
 
   ValueLookupCtrl.$inject = [
     '$scope',
+    '$rootScope',
     '$filter',
     'Mmr',
     'Blackbook',
@@ -21,7 +22,7 @@
     '$window'
   ];
 
-  function ValueLookupCtrl($scope, $filter, Mmr, Blackbook, Kbb, User, gettextCatalog, gettext, metric, segmentio, kissMetricInfo, $sce, $window) {
+  function ValueLookupCtrl($scope, $rootScope, $filter, Mmr, Blackbook, Kbb, User, gettextCatalog, gettext, metric, segmentio, kissMetricInfo, $sce, $window) {
 
     // need to use the string twice because gettext doesn't like variable sadly.
     var disclaimerHeader = gettext('© %YEAR% By Kelley Blue Book Co., Inc.');
@@ -717,7 +718,7 @@
     }
 
     $scope.gotoValues = function() {
-      if ($window.innerWidth < 768) {
+      if ($rootScope.isMobile) {
         $('html, body').animate({
           scrollTop: $("#lookup-values").offset().top
         }, 500);

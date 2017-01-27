@@ -3,7 +3,7 @@
   <h4 translate>Purchase Information:</h4>
 
   <div class="date-field date-picker" style="width: 100% !important; margin-bottom: 24px;">
-    <label ng-show="wizardFloor.data.UnitPurchaseDate || salesInfo.purchaseDateHasValue" for="purchaseDate" class="input-title show-hide"><span translate>Purchase Date</span></label>
+    <label ng-show="wizardFloor.data.UnitPurchaseDate || salesInfo.fieldHasValue(form.purchaseDate.$viewValue)" for="purchaseDate" class="input-title show-hide"><span translate>Purchase Date</span></label>
 
     <div class="field row" style="margin-top:-9px;">
       <div class="col-sm-12">
@@ -21,7 +21,6 @@
                show-weeks="false"
                show-button-bar="false"
                is-open="salesInfo.datePicker.opened"
-               ng-keyup="salesInfo.onPurchaseDateChange(form.purchaseDate.$viewValue)"
                id="purchaseDate"
                name="purchaseDate"
                required
@@ -44,16 +43,20 @@
   </div>
 
   <div class="form-group">
-    <label ng-show="wizardFloor.data.UnitPurchasePrice" for="inputPurchaseAmt" class="input-title show-hide"><span translate>Purchase Amount</span></label>
+    <label ng-show="wizardFloor.data.UnitPurchasePrice || salesInfo.fieldHasValue(form.inputPurchaseAmt.$viewValue)"
+           for="inputPurchaseAmt" class="input-title show-hide">
+      <span translate>Purchase Amount</span>
+    </label>
     <div class="dollar input-group" style="display: block;"
           ng-class="{ 'has-error': (form.inputPurchaseAmt.$error.required || form.inputPurchaseAmt.$error.max || form.inputPurchaseAmt.$error.pattern || form.inputPurchaseAmt.$error.maxlength || form.inputPurchaseAmt.$error.nxgMin) && form.$submitted }">
       <div>
         <i class="glyphicon glyphicon-usd"></i>
       </div>
-      <input type="number" id="inputPurchaseAmt" name="inputPurchaseAmt" ng-model="wizardFloor.data.UnitPurchasePrice" placeholder="{{ 'Purchase Amount' | translate }}"
+      <input type="number" id="inputPurchaseAmt" name="inputPurchaseAmt" ng-model="wizardFloor.data.UnitPurchasePrice"
+             placeholder="{{ 'Purchase Amount' | translate }}"
              required
-             nxg-input-currency="400000"
-             nxg-min="1"
+             ng-min="1"
+             ng-max="399999.99"
              class="form-control"
              ng-class="{ 'nxg-invalid': (form.inputPurchaseAmt.$error.required || form.inputPurchaseAmt.$error.max || form.inputPurchaseAmt.$error.pattern || form.inputPurchaseAmt.$error.maxlength || form.inputPurchaseAmt.$error.nxgMin) && form.$submitted }" />
     </div>

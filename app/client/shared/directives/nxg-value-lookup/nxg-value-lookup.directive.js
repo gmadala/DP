@@ -181,6 +181,8 @@
           valuationTriangle = drawTriangleMarker(projectedPoint.plotY, labelY);
         } else {
           scope.projectedFinancedAmount = 0;
+          // remove plot line when the purchase price becomes undefined
+          chart.yAxis[0].removePlotLine('max-plot-line');
           // update the triangle and the text at the bottom of the chart.
           if (valuationLabel) {
             valuationLabel.destroy();

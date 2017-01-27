@@ -24,8 +24,8 @@
   function NavBarCtrl( $rootScope, $scope, $state, User, Payments, gettextCatalog, language, kissMetricInfo, $location, $timeout, localStorageService, fedex, nxgConfig, Dashboard, Audits ) {
     $scope.isCollapsed = true;
 
-    $scope.isDashboard = function( ) {
-      return $state.current.name === "dashboard" || $state.current.name === "auction_dashboard" || $scope.pageTitle === "";
+    $scope.isDashboard = function () {
+      return $state.current.name === "dashboard" || $state.current.name === "auction_dashboard" || $state.current.name === "headless" || $scope.pageTitle === "";
     };
 
     var paymentsSubMenu = [
@@ -129,12 +129,12 @@
       },
       profile: {
         name: gettextCatalog.getString( 'Profile Settings' ),
-        href: '#/act/profile_settings',
+        href: '#/profile_settings',
         activeWhen: 'profile_settings'
       },
       management: {
         name: gettextCatalog.getString( 'Account Management' ),
-        href: '#/act/account_management',
+        href: '#/account_management',
         activeWhen: 'account_management'
       }
     };
@@ -176,7 +176,7 @@
           BusinessName: info.BusinessName,
           isDealer: User.isDealer,
           logout: function( ) {
-            if ( $scope.isMobile ) {
+            if ( $rootScope.isMobile ) {
               // wait until animation completes before emitting logout, otherwise modal sometimes sizes incorrectly on slow phones
               setTimeout( function( ) {
                 $rootScope.$emit( 'event:userRequestedLogout' );
@@ -327,7 +327,7 @@
 
       $scope.navState = $state;
       $scope.hideMenuTip = localStorageService.get( 'hideMenuTip' ) || false;
-      $scope.isMobile = window.innerWidth < 768;
+      $scope.isMobile = $rootScope.isMobile;
       $scope.templateUrl = "/app/client/shared/directives/navbar/menuTip.html";
       $scope.closeMenuTip = function( ) {
         if ( !$scope.hideMenuTip ) {

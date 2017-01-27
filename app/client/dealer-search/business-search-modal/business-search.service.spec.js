@@ -181,7 +181,7 @@ describe('Service: BusinessSearch', function () {
     it('should NOT send BusinessName or BusinessNumber if search term is empty/null', function () {
       bs.search(true, '', 'BusinessName', false);
       httpBackend.flush();
-      expect(callParams.BusinessName).not.toBeDefined();
+      expect(callParams.BusinessName).toBe('');
       expect(callParams.BusinessNumber).not.toBeDefined();
     });
 
@@ -193,9 +193,9 @@ describe('Service: BusinessSearch', function () {
     });
 
     it('should send search term as BusinessNumber if numeric', function () {
-      bs.search(true, '1234', 'BusinessName', false);
+      bs.search(true, '1234', '1234', false);
       httpBackend.flush();
-      expect(callParams.BusinessName).not.toBeDefined();
+      expect(callParams.BusinessName).toBe('1234');
       expect(callParams.BusinessNumber).toBe('1234');
     });
 

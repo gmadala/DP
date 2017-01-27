@@ -5,9 +5,9 @@
     .module('nextgearWebApp')
     .directive('nxgUpcomingCalendar', nxgUpcomingCalendar);
 
-  nxgUpcomingCalendar.$inject = ['moment', '$state', '$window'];
+  nxgUpcomingCalendar.$inject = ['moment', '$state', '$window', '$rootScope'];
 
-  function nxgUpcomingCalendar(moment, $state, $window) {
+  function nxgUpcomingCalendar(moment, $state, $window, $rootScope) {
 
     return {
       template: '<div class="dash-calendar" ui-calendar="options" ng-model="eventSources" calendar="cal"></div>',
@@ -140,7 +140,7 @@
           }
         };
 
-        if ($window.innerWidth < 768) {
+        if ($rootScope.isMobile) {
           $scope.options.defaultView = 'basicDay';
         }
 

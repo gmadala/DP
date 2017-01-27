@@ -49,6 +49,11 @@ function Helper() {
         return browser.baseUrl + 'analytics';
     };
 
+    this.openAuditsPage = function () {
+        return browser.baseUrl + 'audits';
+    };
+
+
     //Navigation functions
     this.goToLogin = function () {
         /**
@@ -156,7 +161,7 @@ function Helper() {
 
     this.goToAccountManagement = function () {
         /**
-         * @name goToHome
+         * @name goToAccountManagement
          * @memberof helper
          * @author Javier Calderon
          * @description This function navigates to the AccountManagement
@@ -169,7 +174,7 @@ function Helper() {
 
     this.goToAnalytics = function () {
         /**
-         * @name goToHome
+         * @name goToAnalytics
          * @memberof helper
          * @author Bala Nithiya
          * @description This function navigates to the Analytics
@@ -177,6 +182,19 @@ function Helper() {
          * @returns {none}
          */
         browser.get(this.analyticsPage());
+        browser.sleep(browser.params.longerDelay);
+    };
+
+    this.goToOpenAudits= function () {
+        /**
+         * @name goToOpenAudits
+         * @memberof helper
+         * @author Bala Nithiya
+         * @description This function navigates to the Open Audits
+         *
+         * @returns {none}
+         */
+        browser.get(this.openAuditsPage);
         browser.sleep(browser.params.longerDelay);
     };
 

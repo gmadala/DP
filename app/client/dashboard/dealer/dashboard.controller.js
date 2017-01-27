@@ -18,7 +18,9 @@
     'gettextCatalog',
     'capitalizeFilter',
     'language',
-    'Audits'
+    '$cookieStore',
+    'Audits',
+    '$rootScope'
   ];
 
   function DashboardCtrl(
@@ -34,10 +36,46 @@
     gettextCatalog,
     capitalizeFilter,
     language,
-    Audits
+    $cookieStore,
+    Audits,
+    $rootScope
   ) {
 
     var uibModal = $uibModal;
+
+    User.getInfo().then(function(userInfo) {
+        var isMobile = $rootScope.isMobile;
+        var isAndroid = /Android/i.test(navigator.userAgent);
+        var isIos = /iPhone|iPad|iPod/i.test(navigator.userAgent);
+        var usersPrompted = $cookieStore.get('headlessUsersPrompted');
+        var userPrompted = usersPrompted && usersPrompted.indexOf(userInfo.BusinessContactUserName) !== -1;
+        var prompted = $cookieStore.get('headlessPrompted');
+        var isHeadless = $rootScope.currentState === 'headless';
+        var wasDashboard = $rootScope.previousState === 'dashboard';
+        $scope.showPrompt = !prompted && isHeadless && wasDashboard;
+
+        // check if mobile and android or ios
+        // check to see if it is not the headless page
+        // check to see if the user has been prompted already OR if it is a different user
+        if (isMobile && (isAndroid || isIos) && !isHeadless && (!prompted || !userPrompted)) {
+            $state.go('headless')
+        }
+
+        // check if mobile and android or isIos
+        // check if state is headless
+        // check if state was home
+        // check to see if the user has been prompted already OR if it is a different user
+        if (isMobile && (isAndroid || isIos) && isHeadless && wasDashboard && (!prompted || !userPrompted)) {
+            $cookieStore.put('headlessPrompted', true);
+
+            // add this user to prompted users cookie
+            if (!usersPrompted)
+                usersPrompted = [];
+
+            usersPrompted.push(userInfo.BusinessContactUserName);
+            $cookieStore.put('headlessUsersPrompted', usersPrompted);
+        }
+    });
 
     // for caching our week/month summary data
     $scope.paymentSummary = {
