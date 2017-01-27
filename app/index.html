@@ -51,24 +51,24 @@
     <![endif]-->
 
   </head>
-  <body ng-class="{'menu-open' : navState.current.data.showMenu, 'menu-closed': (!navState.current.data.showMenu && navState.current.data.menuToggled), 'old-my-next-gear-general': (!navState.current.data.hasOwnProperty('oldStyles') || navState.current.data.oldStyles == true)}">
+  <body ng-class="{'menu-open' : navState.current.data.showMenu, 'menu-closed': (!navState.current.data.showMenu && navState.current.data.menuToggled), 'nxg-legacy': (!navState.current.data.hasOwnProperty('oldStyles') || navState.current.data.oldStyles == true)}">
     <!-- htmlmin:ignore -->
     <!-- processhtml:include:svgDist,server /img/icons/icon_defs.svg -->
     This will pull in the content of our svg file for use across the app.
     <!-- /processhtml -->
     <!-- htmlmin:ignore -->
     <div id="wrapper" class="menu-wrapper">
-      <div nav-bar ng-class="{'old-my-next-gear-general': (navState.current.data.hasOwnProperty('oldStyles') && navState.current.data.oldStyles == false)}"></div>
+      <div nav-bar ng-class="{'nxg-legacy': (navState.current.data.hasOwnProperty('oldStyles') && navState.current.data.oldStyles == false)}"></div>
       <div id="main-container" class="nxg-main-container" nxg-messages>
         <div class="nxg-main-view"
              ng-class="{'mobile-menu-push-toleft':navState.current.data.showMenu}"
              ng-click="navState.current.data.showMenu ? navState.current.data.showMenu=false : false">
           <div ui-view autoscroll="true" id="{{ navState.current.data.pageId }}Page"></div>
         </div>
-        <div nxg-activity ng-class="{'old-my-next-gear-general': (navState.current.data.hasOwnProperty('oldStyles') && navState.current.data.oldStyles == false)}"></div>
+        <div nxg-activity ng-class="{'nxg-legacy': (navState.current.data.hasOwnProperty('oldStyles') && navState.current.data.oldStyles == false)}"></div>
       </div>
 
-      <div page-footer ng-class="{'old-my-next-gear-general': (navState.current.data.hasOwnProperty('oldStyles') && navState.current.data.oldStyles == false)}"></div>
+      <div page-footer ng-class="{'nxg-legacy': (navState.current.data.hasOwnProperty('oldStyles') && navState.current.data.oldStyles == false)}"></div>
     </div>
     <!-- build:js scripts/components.js -->
     <script src="components/modernizr/modernizr.js"></script>
