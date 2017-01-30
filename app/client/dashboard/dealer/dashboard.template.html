@@ -1,12 +1,13 @@
 <progressive-prompt-component ng-if="showPrompt"></progressive-prompt-component>
 <ribbon-component
                   ng-show="pendingFloorPlanFlag || openAuditsFlag"
-                  navfloorplan="navFloorplans"
-                  floorplancount="pendingFloorplans"
                   floorplanshow="pendingFloorPlanFlag"
+                  floorplancount="pendingFloorplans"
+                  navfloorplan="navFloorplans"
                   openauditsshow="openAuditsFlag"
                   openauditscount="audits.results.length"
-                  navaudit="navAudit"></ribbon-component>
+                  navaudit="navAudit"
+                  language="calLanguage"></ribbon-component>
 
 <div class="container">
   <section class="row upcoming">

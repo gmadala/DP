@@ -1,4 +1,5 @@
-import React, { PropTypes } from 'react';
+import React, { Component, PropTypes } from 'react';
+import counterpart from 'counterpart';
 import RibbonItem from './RibbonItem';
 
 const navBarStyles = {
@@ -12,18 +13,30 @@ const navBarStyles = {
     marginBottom: '20px',
 };
 
-const Ribbon = ({ floorplanshow, navfloorplan, floorplancount, openauditsshow, openauditscount, navaudit }) => (
-    <div className="row" style={navBarStyles}>
-        <div className="container">
-            <div className="col-xs-12">
-                { floorplanshow ? <RibbonItem itemcount={floorplancount} handleclick={navfloorplan} label="dashboard.ribbon.floorplanLabel" /> : null }
-                { openauditsshow ? <RibbonItem itemcount={openauditscount} handleclick={navaudit} label="dashboard.ribbon.auditLabel" /> : null}
+class Ribbon extends Component {
+    componentDidMount() {
+        const language = this.props.language.substring(0, 2);
+        counterpart.setLocale(language); // set language
+        counterpart.setFallbackLocale('en');
+    }
+
+    render() {
+        const { floorplanshow, navfloorplan, floorplancount, openauditsshow, openauditscount, navaudit } = this.props;
+        return (
+            <div className="row" style={navBarStyles}>
+                <div className="container">
+                    <div className="col-xs-12">
+                        { floorplanshow ? <RibbonItem itemcount={floorplancount} handleclick={navfloorplan} label="dashboard.ribbon.floorplanLabel" /> : null }
+                        { openauditsshow ? <RibbonItem itemcount={openauditscount} handleclick={navaudit} label="dashboard.ribbon.auditLabel" /> : null}
+                    </div>
+                </div>
             </div>
-        </div>
-    </div>
-);
+        );
+    }
+}
 
 Ribbon.propTypes = {
+    language: PropTypes.string.isRequired,
     floorplanshow: PropTypes.bool.isRequired,
     floorplancount: PropTypes.number.isRequired,
     navfloorplan: PropTypes.func.isRequired,
