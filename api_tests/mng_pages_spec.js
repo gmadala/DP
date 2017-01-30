@@ -6,9 +6,9 @@
 
 var frisby = require('./frisby_mobile_service');
 var base = frisby.apiBase;
-var make_a_payment_data = require('../api_tests/api_data/make_a_payment_data.json');
-var receipts_data = require('../api_tests/api_data/receipts_data.json');
-var view_floor_plan_data = require('../api_tests/api_data/view_floor_plan_data.json');
+var make_a_payment_data = require('../api_tests/api_test_data/make_a_payment_data.json');
+var receipts_data = require('../api_tests/api_test_data/receipts_data.json');
+var view_floor_plan_data = require('../api_tests/api_test_data/view_floor_plan_data.json');
 
 var frisby = require('frisby');
 
@@ -73,12 +73,6 @@ frisby.create('Analytics - Aging')
     .get(base + '/analytics/aging')
     .expectStatus(200)
     .expectHeaderContains('content-type', 'application/json; charset=utf-8')
-    .toss();
-
-frisby.create('Analytics - Book Value Margins')
-    .get(base + '/analytics/bookvaluemargins')
-    .expectStatus(404)
-    .expectHeaderContains('content-type', 'text/html')
     .toss();
 
 frisby.create('Promos')
