@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html ng-class="{'nxg-legacy': (!navState.current.data.hasOwnProperty('oldStyles') || navState.current.data.oldStyles == true)}">
   <head>
     <title>myNextGear</title>
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
@@ -51,7 +51,7 @@
     <![endif]-->
 
   </head>
-  <body ng-class="{'menu-open' : navState.current.data.showMenu, 'menu-closed': (!navState.current.data.showMenu && navState.current.data.menuToggled), 'nxg-legacy': (!navState.current.data.hasOwnProperty('oldStyles') || navState.current.data.oldStyles == true)}">
+  <body ng-class="{'menu-open' : navState.current.data.showMenu, 'menu-closed': (!navState.current.data.showMenu && navState.current.data.menuToggled)}">
     <!-- htmlmin:ignore -->
     <!-- processhtml:include:svgDist,server /img/icons/icon_defs.svg -->
     This will pull in the content of our svg file for use across the app.
