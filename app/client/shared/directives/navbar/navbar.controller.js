@@ -23,6 +23,7 @@
 
   function NavBarCtrl( $rootScope, $scope, $state, User, Payments, gettextCatalog, language, kissMetricInfo, $location, $timeout, localStorageService, fedex, nxgConfig, Dashboard, Audits ) {
     $scope.isCollapsed = true;
+    $scope.menuOpen = false;
 
     $scope.isDashboard = function () {
       return $state.current.name === "dashboard" || $state.current.name === "auction_dashboard" || $state.current.name === "headless" || $scope.pageTitle === "";
@@ -292,15 +293,18 @@
     };
 
     $scope.toggleMenu = function( ) {
-      $state.current.data.showMenu = !$state.current.data.showMenu;
-      $state.current.data.menuToggled = true;
-      $scope.closeMenuTip( );
-      if ( $state.current.data.showMenu ) {
-        $scope.navbarClosed = false;
-      } else {
-        setTimeout( function( ) {
-          $scope.navbarClosed = true;
-        }, 5000);
+        if ($state.current.data) {
+          $state.current.data.showMenu = !$state.current.data.showMenu;
+          $scope.menuOpen = $state.current.data.showMenu;
+          $state.current.data.menuToggled = true;
+          $scope.closeMenuTip( );
+          if ( $state.current.data.showMenu ) {
+            $scope.navbarClosed = false;
+          } else {
+            setTimeout( function( ) {
+              $scope.navbarClosed = true;
+            }, 5000);
+          }
       }
     };
 

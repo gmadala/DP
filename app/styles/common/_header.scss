@@ -401,6 +401,7 @@
 
   .navbar-default {
     .navbar-toggle {
+      margin-right: 25px;
       float: left;
       border: none;
       z-index: 10;
@@ -541,34 +542,6 @@
     left: 0;
   }
 
-  #navbar .navbar-collapse {
-    position: fixed;
-    top: 48px;
-    display: block;
-    width: 80vw;
-    height: 100vh !important;
-    max-height: inherit;
-    overflow-y: scroll;
-    -webkit-overflow-scrolling: touch;
-    margin: 0;
-    background-color: grey;
-    border-top: 0;
-    left: -80vw;
-    z-index: 1;
-    > ul {
-      padding-bottom: 80px;
-      margin: 0 -15px;
-    }
-
-    &.closed {
-      @include animations('close-nav .5s 1');
-    }
-
-    &.open {
-      @include animations('open-nav .5s 1');
-    }
-  }
-
   body.menu-open {
     overflow: hidden;
 
@@ -584,22 +557,6 @@
       background-color: white;
       transform: rotate3d(0, 0, 1, -45deg);
       transform-origin: 2px center;
-    }
-  }
-
-  .navbar-scroll-fix {
-    position: absolute;
-    right: 0;
-    top: 48px;
-    width: 100vw;
-    height: 100vh;
-    background-color: black;
-
-    &.open {
-      @include animations('open-nav-background .5s 1');
-    }
-    &.closed {
-      @include animations('close-nav-background .5s 1');
     }
   }
 }
