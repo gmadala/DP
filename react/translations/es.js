@@ -33,12 +33,12 @@ module.exports = {
         "auctionDocsList": {"sellerGuide": "Instrucciones para vendedores"}
     },
     "dashboard": {
-        "ribbon": {"auditLabel": "Auditorφas abiertas", "floorplanLabel": "Planos pendientes"},
+        "ribbon": {"auditLabel": "Auditorías abiertas", "floorplanLabel": "Planos pendientes"},
         "ribbonItem": {"units": {"one": "%(count)s Unidad", "other": "%(count)s Unidades"}}
     },
     "progressivePrompt": {
-        "isAndroid": "Pulse el icono de men· %(icon)s en la esquina superior derecha y haga clic en \"A±adir a pantalla de Inicio\"",
-        "isIos": "Pulse el icono de compartir %(icon)s y haga clic en \"A±adir a pantalla de Inicio\"",
+        "isAndroid": "Pulse el icono de men· %(icon)s en la esquina superior derecha y haga clic en \"Añadir a pantalla de Inicio\"",
+        "isIos": "Pulse el icono de compartir %(icon)s y haga clic en \"Añadir a pantalla de Inicio\"",
         "dismiss": "Pulse para descartar"
     }
 }

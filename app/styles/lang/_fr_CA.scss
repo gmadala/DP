@@ -43,6 +43,15 @@ body.lang_fr_CA {
         font-size: 18px;
       }
     }
+
+    .table-fixed-header-inner {
+      th, td {
+        &:last-child {
+          min-width: 100px;
+        }
+      }
+    }
+
     @media (max-width: 1090px) {
       .dash-well {
         .well-title {

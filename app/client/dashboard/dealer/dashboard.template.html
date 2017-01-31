@@ -92,16 +92,16 @@
     </div>
 
     <!-- Payment Summary -->
-    <div class="col-sm-3">
+    <div class="col-sm-3 payment-summary">
       <div class="panel panel-default dash-well">
         <h2 class="well-title" translate>Payments Summary</h2>
         <div class="panel-body">
           <ul class="counter-list">
             <li id="overdue" class="clickable row" ng-click="filterPayments('overdue')">
-              <div class="col-xs-6">
+              <div class="col-xs-5">
                 <span class="counter" ng-class="{overdue: paymentSummary[viewMode].OverduePayments > 0}">{{paymentSummary[viewMode].OverduePayments}}</span>
               </div>
-              <div class="dash-lockup col-xs-6">
+              <div class="dash-lockup col-xs-7">
                 <p class="dash-minor"
                    translate
                    translate-n="paymentSummary[viewMode].OverduePayments"
@@ -114,10 +114,10 @@
               </div>
             </li>
             <li id="today" class="clickable row" ng-click="filterPayments('today')">
-              <div class="col-xs-6">
+              <div class="col-xs-5">
                 <span class="counter" ng-class="{'due-today': paymentSummary[viewMode].PaymentsDueToday > 0}" id="paymentsDueDash">{{paymentSummary[viewMode].PaymentsDueToday}}</span>
               </div>
-              <div class="dash-lockup col-xs-6">
+              <div class="dash-lockup col-xs-7">
                 <p class="dash-minor"
                    translate
                    translate-n="paymentSummary[viewMode].PaymentsDueToday"
@@ -129,10 +129,10 @@
               </div>
             </li>
             <li id="week" class="clickable row" ng-click="filterPayments(viewMode)">
-              <div class="col-xs-6">
+              <div class="col-xs-5">
                 <span class="counter">{{paymentSummary[viewMode].UpcomingPayments}}</span>
               </div>
-              <div class="dash-lockup col-xs-6">
+              <div class="dash-lockup col-xs-7">
                 <p class="lockup-minor" ng-show="viewMode === 'week'"
                    translate
                    translate-n="paymentSummary[viewMode].UpcomingPayments"
@@ -151,10 +151,10 @@
               </div>
             </li>
             <li id="fees" class="clickable row" ng-click="filterPayments()">
-              <div class="col-xs-6">
+              <div class="col-xs-5">
                 <span class="counter">{{paymentSummary[viewMode].AccountFees}}</span>
               </div>
-              <div class="dash-lockup col-xs-6">
+              <div class="dash-lockup col-xs-7">
                 <p class="dash-minor" translate
                    translate-n="paymentSummary[viewMode].AccountFees"
                    translate-plural="Account Fees">Account Fee</p>
@@ -208,6 +208,7 @@
         <span class="paired-body" translate>Recently Floored Vehicles</span>
         <span class="paired-media icon-x-small" nxg-icon="icon-triangle"></span>
       </button>
+    </div>
   </section>
 
   <section class="page-break hidden-xs"></section>
@@ -290,7 +291,7 @@
           <th translate>Amount</th>
           </thead>
           <tr ng-repeat="receipt in dashboardData.Receipts">
-            <td class="table-label">{{ receipt.ReceiptDate | moment }}</td>
+            <td class="table-label center">{{ receipt.ReceiptDate | moment }}</td>
             <td class="table-value center"><a ng-href="{{ receipt.$receiptURL }}" target="_blank">#{{ receipt.ReceiptNumber }}</a></td>
             <td class="table-value table-numeric">{{ receipt.ReceiptAmount | currency }}</td>
           </tr>
@@ -400,8 +401,8 @@
                 <tr ng-repeat="item in floorplanData.results">
                   <td class="center">{{ item.FlooringDate | moment }}</td>
                   <td class="table-value"><a id="{{ item.Description }}" ng-model="item.StockNumber" href="#/vehicledetails?stockNumber={{ item.StockNumber }}">{{ item.Description }}</a></td>
-                  <td>{{ item.LineOfCredit }}</td>
-                  <td>{{ item.FloorplanStatusName }}</td>
+                  <td class="center">{{ item.LineOfCredit }}</td>
+                  <td class="center">{{ item.FloorplanStatusName }}</td>
                 </tr>
               </table>
             </div>
