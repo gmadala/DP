@@ -50,7 +50,7 @@ msgstr "Masquer"
 
 #: app/client/shared/directives/nxg-value-lookup/nxg-value-lookup.directive.js:35
 msgid "Highest average bookout <br /> less than purchase price"
-msgstr "La valeur aux livres moyenne la plus élevée <br /> est inférieure au prix d'achat"
+msgstr "La valeur aux livres moyenne <br /> la plus élevée  est inférieure <br /> au prix d'achat"
 
 #: app/client/floor-vehicle/confirmation/confirmation.template.html:8
 msgid "How would you rate your experience with flooring online?"
@@ -101,11 +101,11 @@ msgstr "Date d'achat (jj/mm/aaaa)"
 #: app/client/shared/directives/nxg-value-lookup/nxg-value-lookup.directive.js:15
 #: app/client/shared/directives/nxg-value-lookup/nxg-value-lookup.directive.js:34
 msgid "Purchase price less than <br /> highest average bookout"
-msgstr "Le prix d'achat est inférieur ŕ la <br /> valeur aux livres moyenne la plus élevée"
+msgstr "Le prix d'achat est inférieur <br />ŕ la valeur aux livres moyenne <br />la plus élevée"
 
 #: app/client/shared/directives/nxg-value-lookup/nxg-value-lookup.directive.js:16
 msgid "Purchase price more than <br /> highest average bookout"
-msgstr "Le prix d'achat est supérieur ŕ<br /> la valeur aux livres moyenne la plus élevée"
+msgstr "Le prix d'achat est supérieur <br />ŕ la valeur aux livres moyenne <br />la plus élevée"
 
 #: app/client/vehicle-details/vehicle-details.html:391
 #: app/client/vehicle-details/vehicle-details.html:98
