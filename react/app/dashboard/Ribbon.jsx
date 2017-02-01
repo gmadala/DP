@@ -17,7 +17,6 @@ class Ribbon extends Component {
     componentDidMount() {
         const language = this.props.language.substring(0, 2);
         counterpart.setLocale(language); // set language
-        counterpart.setFallbackLocale('en');
     }
 
     render() {
@@ -33,7 +32,7 @@ class Ribbon extends Component {
             </div>
         );
     }
-}
+};
 
 Ribbon.propTypes = {
     language: PropTypes.string.isRequired,
