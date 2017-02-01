@@ -1,6 +1,6 @@
 import types from '../actions/actionTypes';
 
-export default function reducer(state = {}, action) {
+export default function reducer(state = {}, action = {}) {
     switch (action.type) {
         case types.SET_ANGULAR_OBJ: {
             const newState = Object.assign({}, state);
