@@ -165,16 +165,6 @@
           showMenu: false
         }
       })
-      .state('headless', {
-        url: '/headless',
-        templateUrl: 'client/dashboard/dealer/dashboard.template.html',
-        controller: 'DashboardCtrl',
-        data: {
-          pageId: 'Dashboard',
-          showNavBar: true,
-          showMenu: false
-        }
-      })
       .state('payments', {
         url: '/payments?filter',
         templateUrl: 'client/payments/payments.template.html',
