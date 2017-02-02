@@ -170,7 +170,7 @@
     "webpack": "webpack",
     "webdriver-update": "webdriver-manager update",
     "webdriver-update-chrome": "webdriver-manager update --chrome",
-    "translate": "babel-node translate.js",
+    "translate": "babel-node react/translate.js",
     "lint:js": "eslint app/client/** --quiet",
     "test": "set NODE_ENV=development && karma start webpack.karma.conf.js --browsers PhantomJS",
     "test:ie": "set NODE_ENV=development && karma start webpack.karma.conf.js --browsers IE",

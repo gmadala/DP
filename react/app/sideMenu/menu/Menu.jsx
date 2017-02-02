@@ -2,9 +2,29 @@ import React, { PropTypes } from 'react'
 import Translate from 'react-translate-component'
 import { Icon } from 'react-fa'
 import MenuItem from '../menuItem/MenuItem'
+import permissions from '../../../data/permissionTypes'
 
-const Menu = ({items, title, style, isSubMenu, active, onItemClick, menuIndex}) => {
-    const menuItems = items.map((i, index) => <MenuItem item={i} menuIndex={menuIndex} itemIndex={index} key={index} insideSubMenu={isSubMenu} onClick={onItemClick} />)
+const buildMenuItem = (i, index, menuIndex, onClick, isSubMenu, isDealer, isAuction) => {
+    let allowed = false
+
+    switch (i.permission) {
+        case permissions.DEALER:
+            allowed = isDealer
+            break
+        case permissions.AUCTION:
+            allowed = isAuction
+            break
+        case permissions.ALL:
+            allowed = true
+            break;
+        default:
+            break;
+    }
+    return allowed ? (<MenuItem item={i} menuIndex={menuIndex} itemIndex={index} key={index} insideSubMenu={isSubMenu} onClick={onClick} isDealer={isDealer} isAuction={isAuction} />) : null
+}
+
+const Menu = ({items, title, style, isSubMenu, active, onItemClick, menuIndex, isDealer, isAuction}) => {
+    const menuItems = items.map((i, index) => buildMenuItem(i, index, menuIndex, onItemClick, isSubMenu, isDealer, isAuction))
     let itemsStyle = items && isSubMenu ? {
         paddingTop: '5px',
         backgroundColor: 'grey'
@@ -51,7 +71,9 @@ Menu.propTypes = {
     isSubMenu: PropTypes.any,
     active: PropTypes.bool,
     onItemClick: PropTypes.func.isRequired,
-    menuIndex: PropTypes.number
+    menuIndex: PropTypes.number,
+    isDealer: PropTypes.bool.isRequired,
+    isAuction: PropTypes.bool.isRequired
 }
 
 export default Menu

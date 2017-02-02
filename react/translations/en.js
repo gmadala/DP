@@ -60,7 +60,11 @@ module.exports = {
             floorPlan: 'Floor Plan',
             resources: 'Resources',
             support: 'Support',
-            signOut: 'Sign Out'
+            signOut: 'Sign Out',
+            settings: 'Settings',
+            dealerSearch: 'Dealer Search',
+            floorPlanSearch: 'Floor Plan Search',
+            reports: 'Reports'
         },
         paymentsMenu: {
             makeAPayment: 'Make A Payment',

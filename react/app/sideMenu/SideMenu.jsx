@@ -1,6 +1,8 @@
 import React, { PropTypes, Component } from 'react'
 import { TweenMax, TimelineMax, Power0 } from 'gsap'
 import Menu from './menu/Menu'
+import metrics from '../../data/metricList'
+import permissions from '../../data/permissionTypes'
 
 const containerStyle = {
     position: 'fixed',
@@ -84,31 +86,36 @@ class SideMenu extends Component {
                 const menu = [
                     {
                         title: 'sideMenu.supportMenu.chat',
-                        metric: '',
+                        metric: metrics.MOBILE_CLICK_CHAT_NOW_LINK,
                         href: 'https://home-c4.incontact.com/inContact/ChatClient/ChatClient.aspx?poc=0a63c698-c417-4ade-8e0d-55cccf2b0d85&bu=4592556',
                         target: '_blank',
                         active: false,
+                        permission: permissions.DEALER,
                     }, {
                         title: 'sideMenu.supportMenu.callAccountExecutive',
-                        metric: '',
+                        metric: metrics.MOBILE_CLICK_CALL_ACCOUNT_EXECUTIVE,
                         href: `tel:+${ info.MarketPhoneNumber }`,
                         active: false,
+                        permission: permissions.DEALER,
                     }, {
                         title: 'sideMenu.supportMenu.callCustomerService',
-                        metric: '',
+                        metric: metrics.MOBILE_CLICK_CALL_CUSTOMER_SERVICE,
                         href: `tel:+${ info.CSCPhoneNumber }`,
                         active: false,
+                        permission: permissions.ALL,
                     }, {
                         title: 'sideMenu.supportMenu.sendEmail',
-                        metric: '',
+                        metric: metrics.MOBILE_CLICK_SEND_EMAIL,
                         href: `mailto:${ this.props.user.isDealer( ) ? info.MarketEMail : 'auctionservices@nextgearcapital.com' }`,
                         active: false,
+                        permission: permissions.ALL,
                     }, {
                         title: 'sideMenu.supportMenu.feedback',
-                        metric: '',
+                        metric: metrics.MOBILE_CLICK_FEEDBACK,
                         href: `https://nextgearcapital.uservoice.com/clients/widgets/classic_widget?contact_enabled=true&custom_template_id=${customTemplateId}&default_mode=support&embed_type=lightbox&feedback_enabled=true&forum_id=${forumId}&link_color=1864A1&mobile=true&mode=full&primary_color=135889&referrer=${encodeURI(window.location.href)}&smartvote=true&strings=e30%3D&support_tab_name=Technical Support&trigger_background_color=135889&trigger_method=pin`, // eslint-disable-line
                         target: '_blank',
-                        active: false
+                        active: false,
+                        permission: permissions.ALL,
                     },
                 ]
                 this.props.updateSubMenuItems('support', menu)
@@ -122,7 +129,9 @@ class SideMenu extends Component {
     handleItemClick = (itemIndex, menuIndex, item) => {
         this.props.toggleMenuItem(itemIndex, menuIndex)
         if (item) {
-            this.props.logMetric(item.metric)
+            if (item.metric)
+                this.props.logMetric(item.metric)
+
             this.props.toggleMenu()
             this.state.tl.eventCallback('onReverseComplete', this.handleAngularLink, [item])
         }
@@ -146,7 +155,7 @@ class SideMenu extends Component {
                 <div style={overlayStyle} ref={(i) => { this.overlay = i }} onClick={() => { this.props.toggleMenu(); }} />
                 <div ref={(i) => { this.menuContainer = i }}>
                     <div className="list-group" style={menuStyle} ref={(i) => { this.menu = i }}>
-                        <Menu items={this.props.menuList} onItemClick={this.handleItemClick}/>
+                        <Menu items={this.props.menuList} onItemClick={this.handleItemClick} isDealer={this.props.user.isDealer()} isAuction={!this.props.user.isDealer()} />
                     </div>
                 </div>
             </div>

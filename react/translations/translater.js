@@ -2,118 +2,114 @@
 import fs from 'fs';
 import path from 'path';
 
-export default class Translater {
-    constructor( outputPath, resourcesPath ) {
-        this.outputPath = outputPath;
-        this.resourcesPath = resourcesPath;
-    }
+const GetTranslatedStrings = ( filePath ) => {
+    try {
+        // read in file and split by line
+        const array = fs.readFileSync( filePath ).toString( ).split( "\n" );
 
-    translate( fromObj, toObj, fromType, toType ) {
-        const filePath = path.resolve( this.outputPath, `${ toType }_untranslated.txt` );
-        const tFilePath = path.resolve( this.outputPath, `${ toType }_translated.txt` );
+        // return only lines that have been translated
+        const newTrans = array.filter(x => {
+            return typeof( x.split( ':' )[ 1 ]) === 'string' && x.split( ':' )[ 1 ].length > 0
+        });
 
-        const translated = this._getTranslated( tFilePath );
-        const mergedJson = this._mergeObjs( fromObj, toObj );
-        const translateResult = this._translateStrings( fromObj, mergedJson, translated );
-
-        return this._saveTranslated( translateResult.json, toType ) && this._saveUntranslated( translateResult.strings, filePath, fromType, toType );
-    }
-
-    _saveTranslated( json, toType ) {
-        const str = `module.exports = ${ JSON.stringify( json ) }`;
-        const filePath = path.resolve( this.resourcesPath, `${ toType }.js` );
-
-        try {
-            fs.writeFileSync( filePath, str );
-
-            return true;
-        } catch ( err ) {
-            console.log( err );
-            return false;
-        }
-    }
-
-    _saveUntranslated( untranslated, filePath, fromType, toType ) {
-        const str = untranslated.map( x => `${ x.string } : ` ).join( '\n' );
-
-        try {
-            fs.writeFileSync( filePath, str );
-
-            console.log( '' );
-            console.log( `${ fromType } to ${ toType }: ${ untranslated.length } new translation(s) needed` );
-            console.log( '' );
-
-            return true;
-        } catch ( err ) {
-            console.log( err );
-            return false;
-        }
-    }
-
-    _getTranslated( filePath ) {
-        try {
-            const array = fs.readFileSync( filePath ).toString( ).split( "\n" );
-            const newTrans = array.filter(x => {
-                return typeof( x.split( ' : ' )[ 1 ]) === 'string'
-            });
-
-            return newTrans.map(x => {
-                return {
-                    string: x.split( ' : ' )[0],
-                    translation: ( x.split( ' : ' )[ 1 ]).replace( '\r', '' )
-                }
-            });
-        } catch ( err ) {
-            return [ ];
-        }
-    }
-
-    _mergeObjs( fromObj, toObj ) {
-        let resultObj = {
-            ...fromObj,
-            ...toObj
-        }
-        for (let key of Object.keys( fromObj )) {
-            if ( typeof(fromObj[key]) === 'object' ) {
-                resultObj[key] = this._mergeObjs(fromObj[key], toObj[key])
+        // map new translations to object array
+        return newTrans.map(x => {
+            return {
+                string: x.split( ':' )[0].trim(),
+                translation: ( x.split( ':' )[ 1 ]).trim().replace( '\r', '' )
             }
-        }
-        return resultObj;
+        });
+    } catch ( err ) {
+        return [ ];
+    }
+}
+
+const SortByName = (a, b) => {
+    var nameA = a.toUpperCase(); // ignore upper and lowercase
+    var nameB = b.toUpperCase(); // ignore upper and lowercase
+    if (nameA < nameB) {
+        return -1;
+    }
+    if (nameA > nameB) {
+        return 1;
     }
 
-    _translateStrings( fromObj, toObj, newTranslations ) {
-        let strings = [ ];
-        let resultObj = {
-            ...toObj
-        };
-        for (let key of Object.keys( fromObj )) {
-            if ( typeof( resultObj ) !== 'undefined' ) {
-                if ( typeof(fromObj[key]) === 'object' ) {
-                    const subResult = this._translateStrings( fromObj[key], resultObj[key], newTranslations );
-                    strings = [
-                        ...strings,
-                        ...subResult.strings
-                    ];
-                    resultObj[key] = {
-                        ...(resultObj[key]),
-                        ...subResult.json
-                    }
-                } else if ( typeof(fromObj[key]) === 'string' && typeof(resultObj[key]) === 'string' ) {
-                    if (fromObj[key] === resultObj[key]) {
-                        if ( newTranslations.length > 0 ) {
-                            const found = newTranslations.find(x => x.string === fromObj[key])
-                            if ( found && found.translation.length > 0 ) {
-                                resultObj[key] = found.translation;
-                            } else {
-                                strings.push({ string: fromObj[key], translation: '' });
-                            }
-                        } else {
-                            strings.push({ string: fromObj[key], translation: '' });
-                        }
-                    }
+    // names must be equal
+    return 0;
+}
+
+const AddUpdateStrings = ( toObj, fromObj, translations ) => {
+    // don't mutate the original object, assign to a new one
+    const resultObj = Object.assign({}, toObj)
+    const newItems = []
+
+    // iterate through object properties
+    for (let key of Object.keys( fromObj )) {
+        // switch based on property type
+        switch(typeof(fromObj[key])) {
+            case 'object':
+                // found an object, recurse to parent function
+                const subResult = AddUpdateStrings((toObj[key] || {}), fromObj[key], translations)
+                resultObj[key] = subResult.resultObj
+                newItems.push(...subResult.newItems)
+                break
+            default:
+                // find translation string
+                const t = translations.find(x => x.string === fromObj[key])
+                if (t && t.translation)
+                    // only update if one is found
+                    resultObj[key] = t.translation
+                else if (!toObj[key]) {
+                    // not yet translated, add to items to translate
+                    newItems.push(fromObj[key])
                 }
-            }
+                break
         }
-        return { strings, json: resultObj };
     }
+    return { resultObj, newItems }
+}
+
+const SaveStrToFile = ( str, filePath ) => {
+    try {
+        fs.writeFileSync( filePath, str );
+
+        return true;
+    } catch ( err ) {
+        console.log( err );
+        return false;
+    }
+}
+
+export default function Translate(outputPath, resourcesPath, fromLocaleObj, toLocaleObj, fromLocaleType, toLocaleType) {
+    console.log()
+    console.log(`-- starting translation ${fromLocaleType} to ${toLocaleType} --`)
+    console.log()
+
+    // setup path variables
+    const translationsPath = path.resolve( outputPath, `${ toLocaleType }_translations.txt` );
+    const fileOutputPath = path.resolve( resourcesPath, `${ toLocaleType }.js` );
+
+    // get translated strings
+    const translatedStrings = GetTranslatedStrings(translationsPath)
+    console.log(translatedStrings)
+
+    // update translations for this obj and get any untranslated strings
+    const addUpdateResult = AddUpdateStrings(toLocaleObj, fromLocaleObj, translatedStrings)
+
+    // format strings for saving to file
+    const formattedStrings = addUpdateResult.newItems.filter(function(item, i, ar){ return ar.indexOf(item) === i; }).sort(SortByName).map( x => `${ x } : ` ).join( '\n' );
+
+    // save untranslated strings to file
+    SaveStrToFile(formattedStrings, translationsPath)
+
+    // format translations for saving to file
+    const formattedTranslations = `module.exports = ${ JSON.stringify( addUpdateResult.resultObj ) }`;
+
+    // save new translations to file
+    SaveStrToFile(formattedTranslations, fileOutputPath)
+
+    console.log('-- translation complete --')
+    console.log()
+    console.log(`-- ${addUpdateResult.newItems.length} new translations needed --`)
+    console.log()
 }

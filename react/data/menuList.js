@@ -1,107 +1,149 @@
+import permissions from './permissionTypes'
+
 export default [
     {
         title: 'sideMenu.defaultMenu.dashboard',
-        metric: '',
         state: 'dashboard',
-        active: false
+        active: false,
+        permission: permissions.ALL
     },
     {
         title: 'sideMenu.defaultMenu.profileSettings',
-        metric: '',
         state: 'profile_settings',
-        active: false
+        active: false,
+        permission: permissions.DEALER
     },
     {
         title: 'sideMenu.defaultMenu.accountManagement',
-        metric: '',
         state: 'account_management',
-        active: false
+        active: false,
+        permission: permissions.DEALER
+    },
+    {
+        title: 'sideMenu.defaultMenu.settings',
+        state: 'auction_settings',
+        active: false,
+        permission: permissions.AUCTION
+    },
+    {
+        title: 'sideMenu.defaultMenu.dealerSearch',
+        state: 'auction_dealersearch',
+        active: false,
+        permission: permissions.AUCTION
+    },
+    {
+        title: 'sideMenu.floorplanMenu.floorAVehicle',
+        state: 'auction_bulkflooring',
+        active: false,
+        permission: permissions.AUCTION
+    },
+    {
+        title: 'sideMenu.defaultMenu.floorPlanSearch',
+        state: 'auction_sellerfloorplan',
+        active: false,
+        permission: permissions.AUCTION
+    },
+    {
+        title: 'sideMenu.defaultMenu.reports',
+        state: 'auction_reports',
+        active: false,
+        permission: permissions.AUCTION
+    },
+    {
+        title: 'sideMenu.defaultMenu.resources',
+        state: 'auction_documents',
+        active: false,
+        permission: permissions.AUCTION
     },
     {
         title: 'sideMenu.defaultMenu.payments',
         active: false,
+        permission: permissions.DEALER,
         subMenu: [
             {
                 title: 'sideMenu.paymentsMenu.makeAPayment',
-                metric: '',
                 state: 'payments',
                 active: false,
+                permission: permissions.ALL
             }, {
                 title: 'sideMenu.paymentsMenu.receipts',
-                metric: '',
                 state: 'receipts',
                 active: false,
+                permission: permissions.ALL
             }
         ]
     },
     {
         title: 'sideMenu.defaultMenu.floorPlan',
         active: false,
+        permission: permissions.DEALER,
         subMenu: [
             {
                 title: 'sideMenu.floorplanMenu.viewFloorPlan',
-                metric: '',
                 state: 'floorplan',
                 active: false,
+                permission: permissions.ALL
             }, {
                 title: 'sideMenu.floorplanMenu.floorAVehicle',
-                metric: '',
                 state: 'floorcar',
                 active: false,
+                permission: permissions.ALL
             }, {
                 title: 'sideMenu.floorplanMenu.valueLookup',
-                metric: '',
                 state: 'valueLookup',
                 active: false,
+                permission: permissions.ALL
             }, {
                 title: 'sideMenu.floorplanMenu.openAudits',
-                metric: '',
                 state: 'audits',
                 active: false,
+                permission: permissions.NONE
             }, {
                 title: 'sideMenu.floorplanMenu.titleReleases',
-                metric: '',
                 state: 'titlereleases',
                 active: false,
+                permission: permissions.ALL
             }
         ]
     },
     {
         title: 'sideMenu.defaultMenu.resources',
         active: false,
+        permission: permissions.DEALER,
         subMenu: [
             {
                 title: 'sideMenu.resourcesMenu.resources',
-                metric: '',
                 state: 'documents',
                 active: false,
+                permission: permissions.ALL
             }, {
                 title: 'sideMenu.resourcesMenu.reports',
-                metric: '',
                 state: 'reports',
                 active: false,
+                permission: permissions.ALL
             }, {
                 title: 'sideMenu.resourcesMenu.analytics',
-                metric: '',
                 state: 'analytics',
                 active: false,
+                permission: permissions.ALL
             }, {
                 title: 'sideMenu.resourcesMenu.promos',
-                metric: '',
                 state: 'promos',
                 active: false,
+                permission: permissions.ALL
             }
         ]
     },
     {
         id: 'support',
         title: 'sideMenu.defaultMenu.support',
-        active: false
+        active: false,
+        permission: permissions.ALL
     },
     {
         id: 'signOut',
         title: 'sideMenu.defaultMenu.signOut',
-        metric: '',
-        active: false
+        active: false,
+        permission: permissions.ALL
     }
 ]

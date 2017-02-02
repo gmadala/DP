@@ -2,7 +2,7 @@ import React, { PropTypes } from 'react'
 import Translate from 'react-translate-component'
 import Menu from '../menu/Menu'
 
-const MenuItem = ({ item, menuIndex, insideSubMenu, onClick, itemIndex }) => {
+const MenuItem = ({ item, menuIndex, insideSubMenu, onClick, itemIndex, isDealer, isAuction }) => {
     const linkStyle = {
         color: 'white',
         padding: insideSubMenu ? '10px 10px 10px 20px' : '10px',
@@ -11,7 +11,7 @@ const MenuItem = ({ item, menuIndex, insideSubMenu, onClick, itemIndex }) => {
     }
     const target = item.target || '_self';
     return ( item.subMenu
-        ? <Menu items={item.subMenu} title={item.title} active={item.active} isSubMenu={item.subMenu} menuIndex={itemIndex} onItemClick={onClick} />
+        ? <Menu items={item.subMenu} title={item.title} active={item.active} isSubMenu={item.subMenu} menuIndex={itemIndex} onItemClick={onClick} isDealer={isDealer} isAuction={isAuction} />
     : <div>
             <a href={item.href} target={target} style={linkStyle} onClick={() => { onClick(itemIndex, menuIndex, item); return false; }}><Translate content={item.title}/></a>
         </div>)
@@ -22,7 +22,9 @@ MenuItem.propTypes = {
     insideSubMenu: PropTypes.array,
     onClick: PropTypes.func.isRequired,
     menuIndex: PropTypes.number,
-    itemIndex: PropTypes.number.isRequired
+    itemIndex: PropTypes.number.isRequired,
+    isDealer: PropTypes.bool.isRequired,
+    isAuction: PropTypes.bool.isRequired
 }
 
 export default MenuItem
