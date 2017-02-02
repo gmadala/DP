@@ -17,8 +17,8 @@ module.exports = {
         'react/lib/ReactContext': 'window'
     },
     output: {
-        path: './app/scripts',
-        filename: 'react-app.js'
+        path: './app/react',
+        filename: 'bundle.js'
     },
     node: {
         fs: "empty"
