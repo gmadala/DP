@@ -56,7 +56,7 @@ class SideMenu extends Component {
 
         this.toggleTimeline(this.props.isOpen)
         const supportList = this.props.menuList.find(x => x.id === 'support');
-        if (typeof(supportList.subMenu) === 'undefined') {
+        if (typeof(supportList.subMenu) === 'undefined' && this.props.nxgConfig) {
             this.buildSupportMenu()
         }
     }
@@ -155,7 +155,7 @@ class SideMenu extends Component {
                 <div style={overlayStyle} ref={(i) => { this.overlay = i }} onClick={() => { this.props.toggleMenu(); }} />
                 <div ref={(i) => { this.menuContainer = i }}>
                     <div className="list-group" style={menuStyle} ref={(i) => { this.menu = i }}>
-                        <Menu items={this.props.menuList} onItemClick={this.handleItemClick} isDealer={this.props.user.isDealer()} isAuction={!this.props.user.isDealer()} />
+                        <Menu items={this.props.menuList} onItemClick={this.handleItemClick} isDealer={this.props.user.isDealer() || false} isAuction={!this.props.user.isDealer() || false} />
                     </div>
                 </div>
             </div>

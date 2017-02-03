@@ -10,7 +10,8 @@ const mapStateToProps = (state, props) => ({
     toggleMenu: props.togglemenu,
     angularState: state.angular.$state,
     user: state.angular.User,
-    nxgConfig: state.angular.NxgConfig
+    nxgConfig: state.angular.NxgConfig,
+    $rootScope: state.angular.$rootScope
 })
 
 const mapDispatchToProps = dispatch => ({
