@@ -9,7 +9,8 @@ const mapStateToProps = (state, props) => ({
     isOpen: props.isopen,
     toggleMenu: props.togglemenu,
     angularState: state.angular.$state,
-    user: state.angular.User
+    user: state.angular.User,
+    nxgConfig: state.angular.NxgConfig
 })
 
 const mapDispatchToProps = dispatch => ({
