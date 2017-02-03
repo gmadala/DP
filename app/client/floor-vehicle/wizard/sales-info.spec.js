@@ -132,80 +132,29 @@ describe('Controller: SalesInfoCtrl', function() {
   });
 
   describe('switch change of the trade in', function() {
-    describe('coming from part 3 of wizard', function() {
-      it('should switch form part 3 flag when can pay buyer true and non trade in', function() {
-        scope.$parent.wizardFloor.canPayBuyer = true;
-        // coming from part 3 of the wizard
-        scope.$parent.wizardFloor.formParts.three = true;
-        initController();
-        salesInfo.switchChange(false);
-        // should clear pay seller selection
-        expect(scope.$parent.wizardFloor.data.PaySeller).toBe(null);
-        // form part 3 should be invalid forcing user to go there
-        expect(scope.$parent.wizardFloor.formParts.three).toBe(false);
-      });
-
-      it('should keep form part 3 flag when can pay buyer false and non trade in', function() {
-        scope.$parent.wizardFloor.canPayBuyer = false;
-        // coming from part 3 of the wizard
-        scope.$parent.wizardFloor.formParts.three = true;
-        initController();
-        salesInfo.switchChange(false);
-        // should set the pay seller to 'Pay Seller'
-        expect(scope.$parent.wizardFloor.data.PaySeller).toBe(true);
-        // should keep the original form part 3 flag
-        expect(scope.$parent.wizardFloor.formParts.three).toBe(true);
-      });
-
-      it('should keep form part 3 flag when can pay buyer true and trade in', function() {
-        scope.$parent.wizardFloor.canPayBuyer = true;
-        // coming from part 3 of the wizard
-        scope.$parent.wizardFloor.formParts.three = true;
-        initController();
-        salesInfo.switchChange(true);
-        // set the pay seller to be 'Pay Buyer'
-        expect(scope.$parent.wizardFloor.data.PaySeller).toBe(false);
-        // should keep the original form part 3 flag
-        expect(scope.$parent.wizardFloor.formParts.three).toBe(true);
-      });
-    });
-
     describe('not coming from part 3 of wizard', function() {
-
       it('should keep the original flag and clear pay seller default for non trade in', function() {
         scope.$parent.wizardFloor.canPayBuyer = true;
-        // not coming from part 3 of the wizard
-        scope.$parent.wizardFloor.formParts.three = false;
         initController();
         salesInfo.switchChange(false);
         // should clear the pay seller selection
-        expect(scope.$parent.wizardFloor.data.PaySeller).toBe(null);
-        // should keep the original form 3 flag
-        expect(scope.$parent.wizardFloor.formParts.three).toBe(false);
+        expect(scope.$parent.wizardFloor.data.PaySeller).toBe(true);
       });
 
       it('should keep the original flag and set pay to seller when can pay buyer false', function() {
         scope.$parent.wizardFloor.canPayBuyer = false;
-        // not coming from part 3 of the wizard
-        scope.$parent.wizardFloor.formParts.three = false;
         initController();
         salesInfo.switchChange(true);
         // should set the pay seller to 'Pay Seller'
         expect(scope.$parent.wizardFloor.data.PaySeller).toBe(true);
-        // should keep the original form 3 flag
-        expect(scope.$parent.wizardFloor.formParts.three).toBe(false);
       });
 
       it('should keep the original flag and set pay to buyer when can pay buyer true', function() {
         scope.$parent.wizardFloor.canPayBuyer = true;
-        // not coming from part 3 of the wizard
-        scope.$parent.wizardFloor.formParts.three = false;
         initController();
         // toggle to trade in
         salesInfo.switchChange(true);
         // should set the pay seller to 'Pay Buyer'
-        expect(scope.$parent.wizardFloor.formParts.three).toBe(false);
-        // should keep the original form 3 flag
         expect(scope.$parent.wizardFloor.data.PaySeller).toBe(false);
       });
     });
@@ -215,6 +164,27 @@ describe('Controller: SalesInfoCtrl', function() {
       initController();
       salesInfo.switchChange(true);
       expect(scope.$parent.wizardFloor.data).toBe(undefined);
+    });
+  });
+
+  describe('seller search', function() {
+    it('should be toggled based on the pay seller flag', function() {
+      scope.$parent.wizardFloor.data.PaySeller = true;
+      scope.$parent.wizardFloor.data.SaleTradeIn = false;
+      initController();
+      expect(salesInfo.showSellerSearch()).toBe(true);
+      scope.$parent.wizardFloor.data.PaySeller = false;
+      expect(salesInfo.showSellerSearch()).toBe(false);
+    });
+  });
+
+  describe('pay seller toggle', function() {
+    it('should toggle sale trade in flag', function() {
+      scope.$parent.wizardFloor.data.PaySeller = false;
+      scope.$parent.wizardFloor.data.SaleTradeIn = false;
+      initController();
+      salesInfo.toggleTradeIn();
+      expect(scope.$parent.wizardFloor.data.SaleTradeIn).toBe(true);
     });
   });
 
