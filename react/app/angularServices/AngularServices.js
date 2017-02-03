@@ -9,7 +9,10 @@ const AngularServices = ({
     segmentio,
     api,
     language,
-    $window
+    $window,
+    nxgConfig,
+    $rootScope,
+    $state
 }) => {
     setAngularObj(User, 'User');
     setAngularObj(gettextCatalog, 'GetText');
@@ -20,8 +23,11 @@ const AngularServices = ({
     setAngularObj($window, '$window');
     setAngularObj(User.isUnitedStates(), 'IsUnitedStates')
     setAngularObj(gettextCatalog.currentLanguage, 'CurrentLanguage')
+    setAngularObj(nxgConfig, 'NxgConfig')
+    setAngularObj($rootScope, '$rootScope')
+    setAngularObj($state, '$state')
 
-    counterpart.setLocale(gettextCatalog.currentLanguage); // set language
+    counterpart.setLocale(gettextCatalog.currentLanguage.substring(0, 2)); // set language
 
     return (
         <span/>
@@ -37,6 +43,9 @@ AngularServices.propTypes = {
     api: PropTypes.any.isRequired,
     language: PropTypes.any.isRequired,
     $window: PropTypes.any.isRequired,
+    $state: PropTypes.any.isRequired,
+    nxgConfig: PropTypes.any.isRequired,
+    $rootScope: PropTypes.any.isRequired
 }
 
 export default AngularServices;

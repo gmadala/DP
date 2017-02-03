@@ -12,18 +12,8 @@ angular.module( 'nextgearWebApp' ).directive('resourcesComponent', reactDirectiv
 angular.module( 'nextgearWebApp' ).directive('auctionResourcesComponent', reactDirective => reactDirective(AuctionResourcesContainer, null, {}, { store }));
 angular.module( 'nextgearWebApp' ).directive('progressivePromptComponent', reactDirective => reactDirective( ProgressivePrompt ));
 angular.module( 'nextgearWebApp' ).directive('ribbonComponent', reactDirective => reactDirective( Ribbon ));
-angular.module( 'nextgearWebApp' ).directive('sideMenuComponent', ( reactDirective, User, gettextCatalog, kissMetricInfo, segmentio, $state, $rootScope, nxgConfig ) =>
-reactDirective( SideMenuContainer, ['isopen', 'togglemenu', 'support'], {}, {
-    store,
-    isUnitedStates: User.isUnitedStates( ),
-    language: gettextCatalog.currentLanguage.substring( 0, 2 ),
-    kissMetricInfo,
-    segmentio,
-    $state,
-    User,
-    $rootScope,
-    nxgConfig
-}))
+angular.module( 'nextgearWebApp' ).directive('sideMenuComponent', reactDirective => reactDirective( SideMenuContainer, ['isopen', 'togglemenu', 'support'], {}, { store }))
+
 angular.module( 'nextgearWebApp' ).directive('angularServicesComponent',
 (
     reactDirective,
@@ -33,7 +23,10 @@ angular.module( 'nextgearWebApp' ).directive('angularServicesComponent',
     segmentio,
     api,
     language,
-    $window
+    $window,
+    nxgConfig,
+    $rootScope,
+    $state
 ) => reactDirective(
     AngularServicesContainer, null, {}, {
         store,
@@ -43,6 +36,9 @@ angular.module( 'nextgearWebApp' ).directive('angularServicesComponent',
         segmentio,
         api,
         language,
-        $window
+        $window,
+        nxgConfig,
+        $rootScope,
+        $state
     }
 ))

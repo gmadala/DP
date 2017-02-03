@@ -1,23 +1,20 @@
 import { connect } from 'react-redux'
-import { logMetric } from '../../actions/metricActions';
+import { logMetric } from '../../actions/angularActions';
 import { toggleMenuItem, updateSubMenuItems, addTopLevelLinkFunc } from '../../actions/sideMenuActions'
 import SideMenu from './SideMenu';
 
 const mapStateToProps = (state, props) => ({
     menuList: state.sideMenu,
-    metrics: state.metric,
+    metrics: state.resource.metric,
     isOpen: props.isopen,
     toggleMenu: props.togglemenu,
-    angularState: props.$state,
-    user: props.User
+    angularState: state.angular.$state,
+    user: state.angular.User
 })
 
-const mapDispatchToProps = (dispatch, props) => ({
+const mapDispatchToProps = dispatch => ({
     logMetric: ( metric ) => {
         dispatch(logMetric( metric ))
-        props.kissMetricInfo.getKissMetricInfo( ).then(( result ) => {
-            props.segmentio.track( metric, result );
-        });
     },
     toggleMenuItem: (menuIndex, itemIndex) => {
         dispatch(toggleMenuItem(menuIndex, itemIndex))
