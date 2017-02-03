@@ -3,8 +3,8 @@ import reducer from '../../reducers/angularReducer'
 
 describe('angular reducer', ( ) => {
     it('should return the initial state', ( ) => {
-        expect(
+        expect( // eslint-disable-line
             reducer()
-        ).toEqual({})
+        ).to.be.empty;
     })
 })
