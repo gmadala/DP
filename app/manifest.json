@@ -1,7 +1,7 @@
 {
   "name": "myNextGear",
   "short_name": "MNG",
-  "start_url": "./?utm_source=web_app_manifest",
+  "start_url": "/index.html?utm_source=web_app_manifest",
   "display": "fullscreen",
   "orientation": "portrait",
   "scope": "/",

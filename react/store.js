@@ -11,8 +11,8 @@ export default configureStore({
         collateralDocs,
         mobileApps,
         docs,
-        auctionDocs
+        auctionDocs,
+        metric
     },
-    metric,
     sideMenu: menuList
 });

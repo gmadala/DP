@@ -1,8 +1,8 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 
-import Ribbon from '../../app/dashboard/Ribbon'
-import RibbonItem from '../../app/dashboard/RibbonItem';
+import Ribbon from '../../app/ribbon/Ribbon'
+import RibbonItem from '../../app/ribbon/RibbonItem';
 
 describe('Ribbon', ( ) => {
     const navfloorplan = sinon.spy( );

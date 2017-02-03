@@ -5,9 +5,9 @@
     .module('nextgearWebApp')
     .factory('kissMetricInfo', kissMetricInfo);
 
-  kissMetricInfo.$inject = [ '$window', 'BusinessHours', '$q', 'User'];
+  kissMetricInfo.$inject = [ '$window', 'BusinessHours', '$q', 'User', '$rootScope'];
 
-  function kissMetricInfo($window, BusinessHours, $q, User) {
+  function kissMetricInfo($window, BusinessHours, $q, User, $rootScope) {
 
     return {
       getKissMetricInfoAuthenticated: getKissMetricInfoAuthenticated,
@@ -25,6 +25,9 @@
       retObj.version = getBrowserStats();
       retObj.height = $window.screen.height;
       retObj.width = $window.screen.width;
+
+      retObj.isMobile = $rootScope.isMobile;
+      retObj.isHeadless = ($window.navigator.standalone || $window.matchMedia('(display-mode: standalone)').matches);
 
       if(authenticated === true) {
         return BusinessHours.insideBusinessHours().then(function (result) {

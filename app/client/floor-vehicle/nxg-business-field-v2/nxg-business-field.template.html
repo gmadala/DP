@@ -1,6 +1,6 @@
 <div>
     <div class="form-group">
-      <label ng-show="wizardFloor.data.BusinessId" class="input-title show-hide"><span translate>Seller</span></label>
+      <label ng-show="wizardFloor.data.BusinessId" class="input-title show-hide"><span translate>Payee</span></label>
       <div style="margin-right: 20px;" class="input-group">
         <div>
           <i class="glyphicon glyphicon-search"></i>
@@ -10,7 +10,7 @@
                ng-disabled="disabled"
                ng-change="clearSelected()"
                ng-minlength="3"
-               placeholder="Seller"
+               placeholder="Search Payee"
                class="form-control"
                nxg-requires="!isRequired() || selection"
                nxg-blur="handleExit($event)"
