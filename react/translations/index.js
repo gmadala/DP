@@ -7,4 +7,4 @@ import frLocale from './fr';
 counterpart.registerTranslations( 'en', enLocale );
 counterpart.registerTranslations( 'es', esLocale );
 counterpart.registerTranslations( 'fr', frLocale );
-counterpart.setFallbackLocale("en");
+counterpart.setFallbackLocale('en');
