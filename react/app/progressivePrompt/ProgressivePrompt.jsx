@@ -19,6 +19,8 @@ class ProgressivePrompt extends Component {
         let iconPosition = null;
         let icon = null;
 
+        const showModal = () => (!(navigator.standalone || window.matchMedia('(display-mode: standalone)').matches) && contentKey);
+
         if (isAndroid) {
             contentKey = 'progressivePrompt.isAndroid';
             modalPosition = 'top';
@@ -51,7 +53,7 @@ class ProgressivePrompt extends Component {
             iconPosition = 'bottom'
         }
 
-        return (contentKey) ? (
+        return (showModal()) ? (
             <Modal position={modalPosition} dismissOnTap>
                 <Translate content={contentKey} with={{icon}} />
                 <Arrow position={iconPosition} />

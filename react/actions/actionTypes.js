@@ -1,0 +1,5 @@
+export default {
+    LOG_METRIC: 'LOG_METRIC',
+    SET_LOCALE: 'SET_LOCALE',
+    SET_ANGULAR_OBJ: 'SET_ANGULAR_OBJ'
+}
