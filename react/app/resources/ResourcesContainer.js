@@ -1,28 +1,26 @@
 import { connect } from 'react-redux'
-import { logMetric } from '../../actions/metricActions';
+import { logMetric } from '../../actions/angularActions';
 import Resources from './Resources';
 
-const mapStateToProps = (state, props) => {
+const mapStateToProps = (state) => {
     const docsList = state.resource.docs;
 
     // get fee schedule content link
-    docsList[0].url = props.api.contentLink('/dealer/feeschedule/FeeSchedule', { });
+    docsList[0].url = state.angular.Api.contentLink('/dealer/feeschedule/FeeSchedule', { });
 
     return {
-        docs: props.isUnitedStates ? docsList : [],
+        docs: state.angular.IsUnitedStates ? docsList : [],
         collateralDocs: state.resource.collateralDocs,
         mobileApps: state.resource.mobileApps,
-        language: props.language,
-        metrics: state.metric
+        language: state.angular.CurrentLanguage,
+        metrics: state.resource.metric,
+        logMetric: state.angular.LogMetric
     }
 }
 
-const mapDispatchToProps = (dispatch, props) => ({
-    logMetric: ( metric ) => {
-        dispatch(logMetric( metric ));
-        props.kissMetricInfo.getKissMetricInfo( ).then(( result ) => {
-            props.segmentio.track( metric, result );
-        });
+const mapDispatchToProps = dispatch => ({
+    logMetric: (metric) => {
+        dispatch(logMetric(metric));
     }
 })
 
