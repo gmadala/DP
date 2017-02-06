@@ -10,7 +10,7 @@
 
   function nxgCreditAvailability(api, gettext, gettextCatalog) {
 
-    gettext('Used');
+    gettext('Utilized');
     gettext('Available');
 
     return {
@@ -108,9 +108,19 @@
 
       function updateCharts(name, total, available) {
         scope.creditTypeName = name;
-        scope.creditLimit = numeral(total).format('($0.0a)');
-        var usedLine = '<span>' + gettextCatalog.getString('Used') + ': ' + numeral(total - available).format('($0,0.00)') + '</span><br />';
-        var availableLine = '<span>' + gettextCatalog.getString('Available') + ': ' + numeral(available).format('($0,0.00)') + '</span>';
+        scope.creditLimit = numeral(total).format('($0.0a)').toUpperCase();
+        var usedLine =
+            '<span>'
+            + gettextCatalog.getString('Utilized')
+            + ': '
+            + numeral(total - available).format('($0,0.00)')
+            + '</span><br />';
+        var availableLine =
+            '<span>'
+            + gettextCatalog.getString('Available')
+            + ': '
+            + numeral(available).format('($0,0.00)')
+            + '</span>';
         scope.availabilityTooltip = usedLine + availableLine;
 
         var chartElement = element.find('.nxg-credit-availability').highcharts();
@@ -120,7 +130,7 @@
           dataLabels: {
             align: 'right',
             formatter: function() {
-              return numeral(available).format('($0.0a)', Math.floor);
+              return numeral(available).format('($0.0a)', Math.floor).toUpperCase();
             }
           }
         }]);
@@ -130,7 +140,7 @@
           dataLabels: {
             align: 'left',
             formatter: function() {
-              return numeral(total - available).format('($0.0a)', Math.ceil);
+              return numeral(total - available).format('($0.0a)', Math.ceil).toUpperCase();
             }
           }
         }]);
