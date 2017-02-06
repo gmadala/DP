@@ -41,12 +41,12 @@
       Please enter a valid purchase date (mm/dd/yyyy).
     </label>
     <label for="purchaseDate" class="text-error"
-           ng-show="form.purchaseDate.$error.past && form.$submitted" translate>
-      You can only floor vehicle with purchase date on or after {{ salesInfo.dealerMindDate | moment }}.
+           ng-show="!form.purchaseDate.$error.date && form.purchaseDate.$error.past && form.$submitted" translate>
+      You can only floor vehicle purchased on or after {{ salesInfo.dealerMinDate | moment }}.
     </label>
     <label for="purchaseDate" class="text-error"
-           ng-show="form.purchaseDate.$error.future && form.$submitted" translate>
-      You entered a future date. You can only floor vehicle with purchase date on or before {{ salesInfo.maxDate | moment }}.
+           ng-show="!form.purchaseDate.$error.date && form.purchaseDate.$error.future && form.$submitted" translate>
+      You entered a future date. You can only floor vehicle purchased on or before {{ salesInfo.maxDate | moment }}.
     </label>
   </div>
 

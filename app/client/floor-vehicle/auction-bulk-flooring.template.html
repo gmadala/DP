@@ -162,10 +162,18 @@
             </div>
             <label for="purchaseAuctionDatePicker" class="text-error"
                    ng-show="validity.purchaseAuctionDatePicker.$error.required ||
-                          validity.purchaseAuctionDatePicker.$error.date ||
-                          validity.purchaseAuctionDatePicker.$error.past ||
-                          validity.purchaseAuctionDatePicker.$error.future" translate>
+                          validity.purchaseAuctionDatePicker.$error.date" translate>
               Please enter a Valid Sale Date.
+            </label>
+            <label for="purchaseAuctionDatePicker" class="text-error"
+                   ng-show="!form.purchaseDate.$error.date && form.purchaseDate.$error.past && form.$submitted"
+                   translate>
+              You can only floor vehicle purchased on or after {{ dealerMinDate | moment }}.
+            </label>
+            <label for="purchaseAuctionDatePicker" class="text-error"
+                   ng-show="!form.purchaseDate.$error.date && form.purchaseDate.$error.future && form.$submitted"
+                   translate>
+              You entered a future date. You can only floor vehicle purchased on or before {{ maxDate | moment }}.
             </label>
             <p>
               <span class="scale-description" translate>Actual sale date must be used when flooring a car</span>
