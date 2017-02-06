@@ -1,6 +1,6 @@
 import types from '../actions/actionTypes';
 
-export default function reducer(state = [], action) {
+export default function reducer(state = [], action = {}) {
     switch (action.type) {
         case types.TOGGLE_MENU_ITEM:
             return state.map((i, index) => Object.assign({}, i, {
