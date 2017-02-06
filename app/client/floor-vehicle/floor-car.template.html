@@ -129,14 +129,14 @@
               Please enter a Valid Purchase Date.
             </label>
             <label for="purchaseDate" class="text-error"
-                   ng-show="!form.purchaseDate.$error.date && form.purchaseDate.$error.past && form.$submitted"
-                   translate>
-              You can only floor vehicle purchased on or after {{ dealerMinDate | moment }}.
+                   ng-show="!validity.purchaseDate.$error.date && validity.purchaseDate.$error.past">
+              <span translate>You can only floor vehicle purchased on or after</span>
+              {{ dealerMinDate | moment }}.
             </label>
             <label for="purchaseDate" class="text-error"
-                   ng-show="!form.purchaseDate.$error.date && form.purchaseDate.$error.future && form.$submitted"
-                   translate>
-              You entered a future date. You can only floor vehicle purchased on or before {{ maxDate | moment }}.
+                   ng-show="!validity.purchaseDate.$error.date && validity.purchaseDate.$error.future">
+              <span translate>You entered a future date. You can only floor vehicle purchased on or before</span>
+              {{ maxDate | moment }}.
             </label>
             <div class="form-group" ng-hide="data.SaleTradeIn">
               <label for="inputBiz" class="input-title"><span translate>Seller</span> *</label>
