@@ -10,7 +10,7 @@ export default configureStore({
         collateralDocs,
         mobileApps,
         docs,
-        auctionDocs
-    },
-    metric,
+        auctionDocs,
+        metric
+    }
 });

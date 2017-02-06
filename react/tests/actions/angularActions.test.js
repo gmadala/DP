@@ -1,4 +1,4 @@
-import * as actions from '../../actions/metricActions';
+import * as actions from '../../actions/angularActions';
 import actionTypes from '../../actions/actionTypes';
 import metrics from '../../data/metricList';
 

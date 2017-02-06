@@ -1,18 +1,15 @@
 import { connect } from 'react-redux'
-import { logMetric } from '../../actions/metricActions';
+import { logMetric } from '../../actions/angularActions';
 import AuctionResources from './AuctionResources';
 
-const mapStateToProps = (state, props) => ({
-    docs: props.isUnitedStates ? state.resource.auctionDocs : [],
-    metrics: state.metric
+const mapStateToProps = state => ({
+    docs: state.angular.IsUnitedStates ? state.resource.auctionDocs : [],
+    metrics: state.resource.metric
 })
 
-const mapDispatchToProps = (dispatch, props) => ({
-    logMetric: ( metric ) => {
-        dispatch(logMetric( metric ))
-        props.kissMetricInfo.getKissMetricInfo( ).then(( result ) => {
-            props.segmentio.track( metric, result );
-        });
+const mapDispatchToProps = dispatch => ({
+    logMetric: (metric) => {
+        dispatch(logMetric(metric));
     }
 })
 

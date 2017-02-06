@@ -1,11 +1,9 @@
 import React, { Component, PropTypes } from 'react';
-import counterpart from 'counterpart';
 import ResourceDocs from './ResourceDocs';
 
 class AuctionResources extends Component {
     componentDidMount() {
         this.props.logMetric(this.props.metrics.VIEW_RESOURCES_PAGE); // log page view
-        counterpart.setLocale(this.props.language); // set language
     }
 
     render( ) {
@@ -24,8 +22,7 @@ class AuctionResources extends Component {
 AuctionResources.propTypes = {
     docs: PropTypes.array.isRequired,
     metrics: PropTypes.object.isRequired,
-    logMetric: PropTypes.func.isRequired,
-    language: PropTypes.string.isRequired,
+    logMetric: PropTypes.func.isRequired
 }
 
 export default AuctionResources;
