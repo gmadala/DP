@@ -110,9 +110,6 @@
               uib-popover-template="'client/shared/directives/navbar/menuTip.html'"
               popover-is-open="!hideMenuTip && !isMobile && user.isDealer()"
               popover-trigger="none">
-            <li class="visible-xs" ng-if="user.isDealer()">
-              <a href="#" ng-href="#/checkout" translate>Checkout</a>
-            </li>
             <li ng-repeat="link in user.navLinks().primary" class="link_{{ link.activeWhen }}" ng-class="{'dropdown': link.subMenu, 'hover': link.hasHover}">
               <a ng-href="{{link.href}}" ng-class="{ active: isActive(link) }" ng-if="!link.subMenu">{{link.name}}</a>
               <a class="sub-menu dropdown-toggle hidden-xs" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"
@@ -128,77 +125,6 @@
                   <a href="#" ng-href="{{item.href}}">{{item.name}}</a>
                 </li>
               </ul>
-              <ul class="visible-xs mobile-nav-list">
-                <li class="visible-xs" ng-repeat="item in link.subMenu" ng-class="{ active: isActive(item) }" ng-click="removeHover();">
-                  <a href="#" ng-href="{{item.href}}">{{item.name}}</a>
-                </li>
-              </ul>
-            </li>
-            <li class="visible-xs" ng-show="fedExWaybillEnabled">
-              <nxg-download-waybill title="FedEx Label"></nxg-download-waybill>
-            </li>
-            <li ng-class="{ active: isActive(mobileLinks.settings) }" class="visible-xs" ng-hide="user.isDealer()">
-              <a ng-href={{mobileLinks.settings.href}}>
-                {{mobileLinks.settings.name}}
-              </a>
-            </li>
-            <li ng-class="{ active: isActive(mobileLinks.profile) }" class="visible-xs" ng-show="user.isDealer()">
-              <a ng-href={{mobileLinks.profile.href}}>
-                {{mobileLinks.profile.name}}
-              </a>
-            </li>
-            <li ng-class="{ active: isActive(mobileLinks.management) }" class="visible-xs" ng-show="user.isDealer()">
-              <a ng-href={{mobileLinks.management.href}}>
-                {{mobileLinks.management.name}}
-              </a>
-            </li>
-            <li class="visible-xs" ng-click="$event.stopPropagation()">
-              <a ng-click="toggleSupport()">
-                <span translate>Support</span>
-                 <span class="paired-media icon-chevron support-chevron"
-                       ng-class="{ 'point-up':showSupport, 'point-down':!showSupport }"
-                       nxg-icon="icon-chevron" style="float: right;">
-                   </span>
-              </a>
-            </li>
-            <li class="visible-xs" ng-show="user.isDealer() && showSupport">
-              <span class="spacer" ng-show="chatEnabled && user.isDealer()">
-                <a class="support-text" nxg-chat-with-us nxg-track="{{metric.MOBILE_CLICK_CHAT_NOW_LINK}}" track-properties="{{ kissMetricData }}" translate>
-                  Chat
-                </a>
-                </span>
-            </li>
-            <li class="visible-xs" ng-show="user.isDealer() && showSupport">
-              <a class="support-text" href="tel:+{{support.phone}}" nxg-track="{{metric.MOBILE_CLICK_CALL_ACCOUNT_EXECUTIVE}}" track-properties="{{ kissMetricData }}" translate>
-                Call Account Executive
-              </a>
-            </li>
-            <li class="visible-xs" ng-show="showSupport">
-              <a class="support-text" href="tel:+{{ support.customerSupportPhone }}" nxg-track="{{metric.MOBILE_CLICK_CALL_CUSTOMER_SERVICE}}" track-properties="{{ kissMetricData }}" translate>
-                Call Customer Service
-              </a>
-            </li>
-            <li class="visible-xs" ng-show="showSupport">
-              <a class="support-text" href="mailto:{{ support.email }}" nxg-track="{{metric.MOBILE_CLICK_SEND_EMAIL}}" track-properties="{{ kissMetricData }}" translate>
-                Send Email
-              </a>
-            </li>
-            <li class="visible-xs" ng-show="showSupport">
-              <a class="support-text" href="javascript:void(0)"
-                 data-uv-lightbox="classic_widget"
-                 data-uv-mode="full"
-                 data-uv-primary-color="#135889"
-                 data-uv-link-color="#1864A1"
-                 data-uv-default-mode="support"
-                 data-uv-forum-id="{forumId}"
-                 data-uv-custom-template-id="{customTemplateId}"
-                 data-uv-trigger
-                 nxg-track="{{metric.MOBILE_CLICK_FEEDBACK}}" track-properties="{{ kissMetricData }}">
-                <span translate>Feedback</span>
-              </a>
-            </li>
-            <li class="visible-xs">
-              <a href="javascript:void(0)" ng-click="user.logout()" translate>Sign Out</a>
             </li>
           </ul>
         </div>
