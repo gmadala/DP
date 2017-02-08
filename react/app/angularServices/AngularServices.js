@@ -1,31 +1,33 @@
-import React, { PropTypes } from 'react';
+import React, { PropTypes, Component } from 'react';
 import counterpart from 'counterpart';
 
-const AngularServices = ({
-    setAngularObj,
-    User,
-    gettextCatalog,
-    kissMetricInfo,
-    segmentio,
-    api,
-    language,
-    $window
-}) => {
-    setAngularObj(User, 'User');
-    setAngularObj(gettextCatalog, 'GetText');
-    setAngularObj(kissMetricInfo, 'KissMetric');
-    setAngularObj(segmentio, 'SegmentIO');
-    setAngularObj(api, 'Api');
-    setAngularObj(language, 'Language');
-    setAngularObj($window, '$window');
-    setAngularObj(User.isUnitedStates(), 'IsUnitedStates')
-    setAngularObj(gettextCatalog.currentLanguage, 'CurrentLanguage')
+class AngularServices extends Component {
+    componentDidMount() {
+        this.props.setAngularObj(this.props.User, 'User');
+        this.props.setAngularObj(this.props.gettextCatalog, 'GetText');
+        this.props.setAngularObj(this.props.kissMetricInfo, 'KissMetric');
+        this.props.setAngularObj(this.props.segmentio, 'SegmentIO');
+        this.props.setAngularObj(this.props.api, 'Api');
+        this.props.setAngularObj(this.props.language, 'Language');
+        this.props.setAngularObj(this.props.$window, '$window');
+        this.props.setAngularObj(false, 'isUnitedStates')
+        this.props.setAngularObj(this.props.gettextCatalog.currentLanguage, 'CurrentLanguage')
+        this.props.setAngularObj(this.props.nxgConfig, 'NxgConfig')
+        this.props.setAngularObj(this.props.$rootScope, '$rootScope')
+        this.props.setAngularObj(this.props.$state, '$state')
+    }
 
-    counterpart.setLocale(gettextCatalog.currentLanguage); // set language
+    componentDidUpdate() {
+        counterpart.setLocale(this.props.gettextCatalog.currentLanguage.substring(0, 2)); // set language
 
-    return (
-        <span/>
-    );
+        this.props.User.refreshInfo().then(() => this.props.setAngularObj(this.props.User.isUnitedStates(), 'isUnitedStates'))
+    }
+
+    render() {
+        return (
+            <span/>
+        );
+    }
 }
 
 AngularServices.propTypes = {
@@ -37,6 +39,9 @@ AngularServices.propTypes = {
     api: PropTypes.any.isRequired,
     language: PropTypes.any.isRequired,
     $window: PropTypes.any.isRequired,
+    $state: PropTypes.any.isRequired,
+    nxgConfig: PropTypes.any.isRequired,
+    $rootScope: PropTypes.any.isRequired
 }
 
 export default AngularServices;

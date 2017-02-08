@@ -15,7 +15,13 @@ class Resources extends Component {
             <div className="container">
                 <div className="row">
                     {this.props.language === 'en' ? <ResourceVideos handleClick={this.props.logMetric}/> : null}
-                    <ResourceDocs docs={this.props.docs} collateralDocs={this.props.collateralDocs} handleClick={this.props.logMetric} titleKey="resources.resourceDocs.documents"/>
+                    <ResourceDocs
+                        docs={this.props.docs}
+                        collateralDocs={this.props.collateralDocs}
+                        handleClick={this.props.logMetric}
+                        titleKey="resources.resourceDocs.documents"
+                        isUnitedStates={this.props.isUnitedStates}
+                    />
                     <MobileApps apps={this.props.mobileApps} handleClick={this.props.logMetric}/>
                 </div>
             </div>
@@ -30,6 +36,7 @@ Resources.propTypes = {
     mobileApps: PropTypes.array.isRequired,
     metrics: PropTypes.object.isRequired,
     logMetric: PropTypes.func.isRequired,
+    isUnitedStates: PropTypes.bool.isRequired
 }
 
 export default Resources;

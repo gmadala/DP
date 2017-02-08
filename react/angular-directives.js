@@ -22,9 +22,12 @@ angular.module( 'nextgearWebApp' ).directive('angularServicesComponent',
     segmentio,
     api,
     language,
-    $window
+    $window,
+    nxgConfig,
+    $rootScope,
+    $state
 ) => reactDirective(
-    AngularServicesContainer, null, {}, {
+    AngularServicesContainer, ['isloggedin'], {}, {
         store,
         User,
         gettextCatalog,
@@ -32,6 +35,9 @@ angular.module( 'nextgearWebApp' ).directive('angularServicesComponent',
         segmentio,
         api,
         language,
-        $window
+        $window,
+        nxgConfig,
+        $rootScope,
+        $state
     }
 ))

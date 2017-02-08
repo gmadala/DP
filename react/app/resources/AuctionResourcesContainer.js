@@ -3,8 +3,9 @@ import { logMetric } from '../../actions/angularActions';
 import AuctionResources from './AuctionResources';
 
 const mapStateToProps = state => ({
-    docs: state.angular.IsUnitedStates ? state.resource.auctionDocs : [],
-    metrics: state.resource.metric
+    docs: state.resource.auctionDocs,
+    metrics: state.resource.metric,
+    isUnitedStates: state.angular.isUnitedStates
 })
 
 const mapDispatchToProps = dispatch => ({
