@@ -31,7 +31,18 @@ const menuStyle = {
     width: '100%',
     color: 'white',
     zIndex: '9999',
-    visibility: 'hidden'
+    visibility: 'hidden',
+    overflow: 'scroll-y'
+}
+
+const listStyle = {
+    top: '0',
+    bottom:'0',
+    left: '0',
+    right: '0',
+    position:'absolute',
+    overflowY:'scroll',
+    overflowX:'hidden'
 }
 
 class SideMenu extends Component {
@@ -72,7 +83,10 @@ class SideMenu extends Component {
 
     toggleTimeline = open => (open ? this.state.tl.play() : this.state.tl.reverse())
     reverseTimeline = () => { this.state.tl.reverse() }
-    preventScroll = () => { $(document).bind('touchmove', (e) => { e.preventDefault(); return true; }) }
+    preventScroll = () => {
+        $(document).bind('touchmove', (e) => { e.preventDefault(); return true; } )
+        $(this.container).bind('touchmove', (e) => { e.stopPropagation(); return true; })
+    }
     enableScroll = () => { $(document).unbind('touchmove') }
 
     buildSupportMenu = () => {
@@ -155,7 +169,13 @@ class SideMenu extends Component {
                 <div style={overlayStyle} ref={(i) => { this.overlay = i }} onClick={() => { this.props.toggleMenu(); }} />
                 <div ref={(i) => { this.menuContainer = i }}>
                     <div className="list-group" style={menuStyle} ref={(i) => { this.menu = i }}>
-                        <Menu items={this.props.menuList} onItemClick={this.handleItemClick} isDealer={this.props.user.isDealer() || false} isAuction={!this.props.user.isDealer() || false} />
+                        <Menu
+                            style={listStyle}
+                            items={this.props.menuList}
+                            onItemClick={this.handleItemClick}
+                            isDealer={this.props.user.isDealer() || false}
+                            isAuction={!this.props.user.isDealer() || false}
+                        />
                     </div>
                 </div>
             </div>
