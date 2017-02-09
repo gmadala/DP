@@ -28,7 +28,7 @@ angular.module( 'nextgearWebApp' ).directive('angularServicesComponent',
     $rootScope,
     $state
 ) => reactDirective(
-    AngularServicesContainer, null, {}, {
+    AngularServicesContainer, ['isloggedin'], {}, {
         store,
         User,
         gettextCatalog,
