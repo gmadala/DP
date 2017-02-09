@@ -1,5 +1,4 @@
 import React, { Component, PropTypes } from 'react';
-import counterpart from 'counterpart';
 import ResourceVideos from './ResourceVideos';
 import ResourceDocs from './ResourceDocs';
 import MobileApps from './MobileApps';
@@ -7,7 +6,6 @@ import MobileApps from './MobileApps';
 class Resources extends Component {
     componentDidMount() {
         this.props.logMetric(this.props.metrics.VIEW_RESOURCES_PAGE);
-        counterpart.setLocale(this.props.language); // set language
     }
 
     render( ) {

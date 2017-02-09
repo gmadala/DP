@@ -11,7 +11,7 @@ class AngularServices extends Component {
         this.props.setAngularObj(this.props.language, 'Language');
         this.props.setAngularObj(this.props.$window, '$window');
         this.props.setAngularObj(false, 'isUnitedStates')
-        this.props.setAngularObj(this.props.gettextCatalog.currentLanguage, 'CurrentLanguage')
+        this.props.setAngularObj(this.props.gettextCatalog.currentLanguage.substring(0, 2), 'CurrentLanguage')
         this.props.setAngularObj(this.props.nxgConfig, 'NxgConfig')
         this.props.setAngularObj(this.props.$rootScope, '$rootScope')
         this.props.setAngularObj(this.props.$state, '$state')
