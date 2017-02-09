@@ -3,7 +3,7 @@ import counterpart from 'counterpart';
 
 class AngularServices extends Component {
     componentDidMount() {
-        this.props.setAngularObj(null, 'User');
+        this.props.setAngularObj(this.props.User, 'User');
         this.props.setAngularObj(this.props.gettextCatalog, 'GetText');
         this.props.setAngularObj(this.props.kissMetricInfo, 'KissMetric');
         this.props.setAngularObj(this.props.segmentio, 'SegmentIO');
@@ -22,7 +22,6 @@ class AngularServices extends Component {
 
         this.props.User.refreshInfo().then(() => {
             this.props.setAngularObj(this.props.User.isUnitedStates(), 'isUnitedStates')
-            this.props.setAngularObj(this.props.User, 'User');
         })
     }
 
