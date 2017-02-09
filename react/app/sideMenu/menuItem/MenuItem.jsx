@@ -11,10 +11,24 @@ const MenuItem = ({ item, menuIndex, insideSubMenu, onClick, itemIndex, isDealer
     }
     const target = item.target || '_self';
     return ( item.subMenu
-        ? <Menu items={item.subMenu} title={item.title} active={item.active} isSubMenu={item.subMenu} menuIndex={itemIndex} onItemClick={onClick} isDealer={isDealer} isAuction={isAuction} />
+        ? <Menu
+            items={item.subMenu}
+            title={item.title}
+            active={item.active}
+            isSubMenu={item.subMenu}
+            menuIndex={itemIndex}
+            onItemClick={onClick}
+            isDealer={isDealer}
+            isAuction={isAuction}
+        />
     : <div>
-            <a href={item.href} target={target} style={linkStyle} onClick={() => { onClick(itemIndex, menuIndex, item); return false; }}><Translate content={item.title}/></a>
-        </div>)
+            <a
+                href={item.href}
+                target={target}
+                style={linkStyle}
+                onClick={() => { onClick(itemIndex, menuIndex, item); return false; }}
+            ><Translate content={item.title}/></a>
+    </div>)
 }
 
 MenuItem.propTypes = {
