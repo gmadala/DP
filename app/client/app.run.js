@@ -112,6 +112,7 @@
          uibModal.closeAll();
          }
          */
+
         if (!toState.data.allowAnonymous) {
           // enforce rules about what states certain users can see
           var isDealer = User.isDealer(),
@@ -173,7 +174,7 @@
           $window.location.reload(true);
         }
 
-        if ((toState.name === 'dashboard' || toState.name === 'headless') && (pendingFloorPlanFlag || openAuditsFlag)) {
+        if ((toState.name === 'dashboard') && (pendingFloorPlanFlag || openAuditsFlag)) {
           $rootScope.ribbonStyle = { 'margin-bottom': '0' };
         } else {
           $rootScope.ribbonStyle = {};

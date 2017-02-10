@@ -1,4 +1,3 @@
-
 // To test the bank account information retrieved is associated with the logged in dealer
 'use strict';
 
@@ -8,18 +7,19 @@ var base = frisby.apiBase;
 
 
 frisby.login()
-  .after(function () {
+    .after(function () {
 
-    frisby.create('Financial Account: Check unassociated financial account')
-      .get(base + 'dealer/bankAccount/f9bb018d-e33f-437e-bcb9-38ffdb66af76')
-      .expectJSON({
-        Message: 'Invalid access'
-      })
-      .expectStatus(403)
-      .toss();
+        frisby.create('Financial Account: Check unassociated financial account')
+            .get(base + 'dealer/bankAccount/f9bb018d-e33f-437e-bcb9-38ffdb66af76')
+            .expectJSON({
+                // Message: 'Invalid access'
+                Message: 'The bank account cannot be found'
+            })
+            .expectStatus(200)
+            .toss();
 
-  })
-  .toss();
+    })
+    .toss();
 
 
 

@@ -12,5 +12,5 @@ chai.use( chaiEnzyme() );
 chai.use( chaiAsPromised );
 chai.use( sinonChai );
 
-const context = require.context( './react/tests', true, /-test\.js$/ );
+const context = require.context( './react/tests', true, /.test\.js$/ );
 context.keys().forEach( context );
