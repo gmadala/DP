@@ -41,6 +41,10 @@
     }
   }
 
+  .modal ~ .tooltip {
+    z-index: 2000;
+  }
+
   &.top {
     margin: -6px 0 10px;
 
