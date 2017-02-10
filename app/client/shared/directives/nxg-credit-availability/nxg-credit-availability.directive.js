@@ -108,7 +108,7 @@
 
       function updateCharts(name, total, available) {
         scope.creditTypeName = name;
-        scope.creditLimit = numeral(total).format('($0.0a)').toUpperCase();
+        scope.creditLimit = numeral(total).format('($0.00a)').toUpperCase();
         var usedLine =
             '<span>'
             + gettextCatalog.getString('Utilized')
@@ -130,7 +130,7 @@
           dataLabels: {
             align: 'right',
             formatter: function() {
-              return numeral(available).format('($0.0a)', Math.floor).toUpperCase();
+              return numeral(available).format('($0.00a)', Math.floor).toUpperCase();
             }
           }
         }]);
@@ -140,7 +140,7 @@
           dataLabels: {
             align: 'left',
             formatter: function() {
-              return numeral(total - available).format('($0.0a)', Math.ceil).toUpperCase();
+              return numeral(total - available).format('($0.00a)', Math.ceil).toUpperCase();
             }
           }
         }]);
