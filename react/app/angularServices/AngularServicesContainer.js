@@ -2,7 +2,8 @@ import { connect } from 'react-redux'
 import { setAngularObj } from '../../actions/angularActions';
 import AngularServices from './AngularServices';
 
-const mapStateToProps = () => ({
+const mapStateToProps = (state, props) => ({
+    isLoggedIn: props.isloggedin
 })
 
 const mapDispatchToProps = dispatch => ({

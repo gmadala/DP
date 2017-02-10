@@ -391,6 +391,13 @@ input[type="checkbox"] {
   }
 }
 
+td {
+  input[type="checkbox"] {
+    display: block;
+    margin: 0 auto;
+  }
+}
+
 /*
  * CUSTOM RADIO BUTTONS
  * Our radio buttons use custom icons rather than default browser-rendered
