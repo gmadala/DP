@@ -9,12 +9,12 @@ const mapStateToProps = (state) => {
     docsList[0].url = state.angular.Api.contentLink('/dealer/feeschedule/FeeSchedule', { });
 
     return {
-        docs: state.angular.IsUnitedStates ? docsList : [],
+        docs: docsList,
         collateralDocs: state.resource.collateralDocs,
         mobileApps: state.resource.mobileApps,
         language: state.angular.CurrentLanguage,
         metrics: state.resource.metric,
-        logMetric: state.angular.LogMetric
+        isUnitedStates: state.angular.isUnitedStates
     }
 }
 

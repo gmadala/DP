@@ -62,26 +62,26 @@
 <div ng-hide="data.settingsVinMode == 'noMatch'">
   <div class="form-group">
     <label ng-show="data.$selectedVehicle.Year" for="outputYear" class="show-hide" translate>Year</label>
-    <input id="outputYear" class="form-control" placeholder="{{ 'Year' | translate }}" ng-model="data.$selectedVehicle.Year" disabled/>
+    <input id="outputYear" class="form-control full-width" placeholder="{{ 'Year' | translate }}" ng-model="data.$selectedVehicle.Year" disabled/>
   </div>
   <div class="form-group">
     <label ng-show="data.$selectedVehicle.Make" for="outputMake" class="show-hide" translate>Make</label>
-    <input id="outputMake" class="form-control" placeholder="{{ 'Make' | translate }}" ng-model="data.$selectedVehicle.Make" disabled/>
+    <input id="outputMake" class="form-control full-width" placeholder="{{ 'Make' | translate }}" ng-model="data.$selectedVehicle.Make" disabled/>
   </div>
   <div class="form-group">
     <label ng-show="data.$selectedVehicle.Model" for="outputModel" class="show-hide" translate>Model</label>
-    <input id="outputModel" class="form-control" placeholder="{{ 'Model' | translate }}" ng-model="data.$selectedVehicle.Model" disabled/>
+    <input id="outputModel" class="form-control full-width" placeholder="{{ 'Model' | translate }}" ng-model="data.$selectedVehicle.Model" disabled/>
   </div>
   <div class="form-group">
     <label ng-show="data.$selectedVehicle.Style" for="outputStyle" class="show-hide" translate>Style</label>
-    <input id="outputStyle" class="form-control" placeholder="{{ 'Style' | translate }}" ng-model="data.$selectedVehicle.Style" disabled/>
+    <input id="outputStyle" class="form-control full-width" placeholder="{{ 'Style' | translate }}" ng-model="data.$selectedVehicle.Style" disabled/>
   </div>
 </div>
 <div ng-if="(data.settingsVinMode == 'noMatch')">
     <div ng-if="data.dirtyStatus">
       <div class="form-group">
         <label ng-show="data.inputYear" for="inputYear" class="show-hide" translate>Year</label>
-        <input id="inputYear" name="inputYear" class="form-control" placeholder="{{ 'Year' | translate}}" ng-model="data.inputYear"
+        <input id="inputYear" name="inputYear" class="form-control full-width" placeholder="{{ 'Year' | translate}}" ng-model="data.inputYear"
                required ng-pattern="/^\d{4}$/" nxg-min="1901" nxg-max="settings.maxYear" />
          <label for="inputYear" class="text-error"
                 ng-show="validity.inputYear.$error.required" translate>
@@ -98,7 +98,7 @@
       </div>
       <div class="form-group">
         <label ng-show="data.inputMake" for="inputMake" class="show-hide" translate>Make</label>
-        <input id="inputMake" name="inputMake" class="form-control" placeholder="{{ 'Make' | translate }}" ng-model="data.inputMake"
+        <input id="inputMake" name="inputMake" class="form-control full-width" placeholder="{{ 'Make' | translate }}" ng-model="data.inputMake"
                required/>
         <label for="inputMake" class="text-error" ng-show="validity.inputMake.$error.required" translate>
           Please enter a Make.
@@ -106,7 +106,7 @@
       </div>
       <div class="form-group">
         <label ng-show="data.inputModel" for="inputModel" class="show-hide" translate>Model</label>
-        <input id="inputModel" name="inputModel" class="form-control" placeholder="{{ 'Model' | translate }}" ng-model="data.inputModel"
+        <input id="inputModel" name="inputModel" class="form-control full-width" placeholder="{{ 'Model' | translate }}" ng-model="data.inputModel"
                required/>
         <label for="inputModel" class="text-error" ng-show="validity.inputModel.$error.required" translate>
           Please enter a Model.
@@ -114,7 +114,7 @@
       </div>
       <div class="form-group">
       <label ng-show="data.inputStyle" for="inputStyle" class="show-hide" translate>Style</label>
-      <input id="inputStyle" name="inputStyle" class="form-control" placeholder="{{ 'Style' | translate }}" ng-model="data.inputStyle"
+      <input id="inputStyle" name="inputStyle" class="form-control full-width" placeholder="{{ 'Style' | translate }}" ng-model="data.inputStyle"
              required/>
       <label for="inputStyle" class="text-error" ng-show="validity.inputStyle.$error.required" translate>
         Please enter a Style.

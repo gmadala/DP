@@ -3,12 +3,17 @@ import Translate from 'react-translate-component';
 import counterpart from 'counterpart';
 import ListItemLink from '../shared/ListItemLink';
 
-const ResourceDocs = ({ docs, collateralDocs, handleClick, titleKey, classes }) => {
-    const docLinks = docs.map( item => <ListItemLink name={item.name} url={item.url} metric={item.metric} key={item.id} handleClick={handleClick}/> )
+const ResourceDocs = ({ docs, collateralDocs, handleClick, titleKey, classes, isUnitedStates }) => {
+    const docLinks = docs.map( item =>
+        (((item.isUnitedStates && isUnitedStates) || !item.isUnitedStates) ?
+        <ListItemLink name={item.name} url={item.url} metric={item.metric} key={item.id} handleClick={handleClick}/> : null))
 
     let collatDocs = null;
     if ( collateralDocs && collateralDocs.length > 0 ) {
-        const collateralDocLinks = collateralDocs.map( item => <ListItemLink name={item.name} url={item.url} metric={item.metric} key={item.id} handleClick={handleClick}/> )
+        const collateralDocLinks = collateralDocs.map( item =>
+            (((item.isUnitedStates && isUnitedStates) || !item.isUnitedStates) ?
+            <ListItemLink name={item.name} url={item.url} metric={item.metric} key={item.id} handleClick={handleClick}/> : null)
+        )
 
         collatDocs = (
             <div>
@@ -43,6 +48,7 @@ ResourceDocs.propTypes = {
     handleClick: PropTypes.func.isRequired,
     titleKey: PropTypes.string.isRequired,
     classes: PropTypes.string,
+    isUnitedStates: PropTypes.bool.isRequired
 };
 
 export default ResourceDocs;
