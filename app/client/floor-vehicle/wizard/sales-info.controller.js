@@ -42,16 +42,23 @@
       return !!fieldValue;
     };
 
+    vm.showSellerSearch = function() {
+      var data = $scope.$parent.wizardFloor.data;
+      return !data.SaleTradeIn && data.PaySeller;
+    };
+
+    vm.toggleTradeIn = function() {
+      var data = $scope.$parent.wizardFloor.data;
+      data.SaleTradeIn = !data.PaySeller;
+    };
+
     vm.switchChange = function (isTradeIn) {
       if ($scope.$parent.wizardFloor.data) {
-        $scope.$parent.wizardFloor.data.PaySeller = isTradeIn ? false : null;
+        $scope.$parent.wizardFloor.data.PaySeller = !isTradeIn;
 
         if (!$scope.$parent.wizardFloor.canPayBuyer) {
           $scope.$parent.wizardFloor.data.PaySeller = true;
         }
-
-        $scope.$parent.wizardFloor.formParts.three =
-          $scope.$parent.wizardFloor.formParts.three && ($scope.$parent.wizardFloor.data.PaySeller !== null);
       }
     };
 

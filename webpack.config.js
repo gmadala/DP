@@ -52,7 +52,8 @@ module.exports = {
             new webpack.DefinePlugin({
                 "process.env": {
                     NODE_ENV: JSON.stringify( "development" )
-                }
+                },
+                ENVIRONMENT: JSON.stringify('local_test')
             })
         ]
         : [
@@ -62,7 +63,8 @@ module.exports = {
             new webpack.DefinePlugin({
                 "process.env": {
                     NODE_ENV: JSON.stringify( "production" )
-                }
+                },
+                ENVIRONMENT: JSON.stringify('production')
             })
         ]
 }

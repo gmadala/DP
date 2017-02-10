@@ -23,6 +23,7 @@
 
   function NavBarCtrl( $rootScope, $scope, $state, User, Payments, gettextCatalog, language, kissMetricInfo, $location, $timeout, localStorageService, fedex, nxgConfig, Dashboard, Audits ) {
     $scope.isCollapsed = true;
+    $scope.isLoggedIn = false;
 
     $scope.isDashboard = function () {
       return $state.current.name === "dashboard" || $state.current.name === "auction_dashboard" || $state.current.name === "headless" || $scope.pageTitle === "";
@@ -145,6 +146,7 @@
       });
 
       return User.getInfo( ).then( function( info ) {
+        $scope.isLoggedIn = true;
         $scope.isUnitedStates = User.isUnitedStates( );
         $scope.displayTitleRelease = info.DisplayTitleReleaseProgram;
         $scope.eventSalesEnabled = User.getFeatures( ).hasOwnProperty( 'eventSales' ) ? User.getFeatures( ).eventSales.enabled : true;
@@ -284,7 +286,9 @@
         $location.path(page.href.substring( 1 ));
         //remove open class
         $timeout( function( ) {
-          document.getElementsByClassName( 'dropdown open' )[ 0 ].classList.remove( 'open' );
+          if(document.getElementsByClassName( 'dropdown open' )[ 0 ]) {
+              document.getElementsByClassName( 'dropdown open' )[ 0 ].classList.remove( 'open' );
+          }
         }, 0);
       }
     };
