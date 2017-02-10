@@ -36,7 +36,8 @@ describe('Controller: ScheduleCheckoutCtrl', function () {
       PrincipalDue: 800,
       FeesPaymentTotal: 80,
       InterestPaymentTotal: 90,
-      CollateralProtectionPaymentTotal: 30
+      CollateralProtectionPaymentTotal: 30,
+      TransportationFee: 25
     }, PaymentOptions.TYPE_PAYMENT);
 
     fee = CartItem.fromFee({
@@ -95,7 +96,7 @@ describe('Controller: ScheduleCheckoutCtrl', function () {
   it('should attach a getPaymentTotal function to the scope', function() {
     run('payment');
     expect(scope.model.getPaymentTotal).toBeDefined();
-    expect(scope.model.getPaymentTotal()).toBe(1000);
+    expect(scope.model.getPaymentTotal()).toBe(1025);
   });
 
   it('should default selected date to the next available date if none is currently set', function () {
