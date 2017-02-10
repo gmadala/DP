@@ -130,6 +130,16 @@
     }
   }
 
+  .reversed {
+    .queue-item {
+      background: #f5f5f5;
+
+      &:nth-child(2n) {
+        background: $white;
+      }
+    }
+  }
+
 // A block of content within a well. Can be
 // bordered, and have a lighter or darker background.
 .well-item {

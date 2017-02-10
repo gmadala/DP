@@ -35,6 +35,12 @@
   }
 }
 
+.dash-well {
+  .accordion-button {
+    top: -1px;
+  }
+}
+
 .date-picker button {
   border: none;
   border-radius: 0;
@@ -145,6 +151,16 @@
   }
 
   th &, td & {
+    margin: 0;
+
+    &.btn-square {
+      margin: 0 auto;
+    }
+  }
+}
+
+th, td {
+  .button, .btn {
     margin: 0;
 
     &.btn-square {

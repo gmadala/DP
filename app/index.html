@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html ng-class="{'nxg-legacy': (!navState.current.data.hasOwnProperty('oldStyles') || navState.current.data.oldStyles == true)}">
   <head>
     <title>myNextGear</title>
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
@@ -26,9 +26,9 @@
     <link rel="apple-touch-icon-precomposed" sizes="512x512" href="img/mobile-icons/myNextGearLogo512x512.png" />
 
     <!-- build:css styles/libraries.css -->
-    <link rel="stylesheet" href="components/bootstrap-datepicker/css/datepicker.css">
+    <link rel="stylesheet" href="components/bootstrap-datepicker/dist/css/bootstrap-datepicker.css">
     <link rel="stylesheet" href="components/fullcalendar/dist/fullcalendar.css">
-    <link rel="stylesheet" href="components/bootstrap-switch/dist/css/bootstrap3/bootstrap-switch.css"/>
+    <link rel="stylesheet" href="components/bootstrap-switch/dist/css/bootstrap3/bootstrap-switch.css">
     <!-- endbuild -->
 
     <!-- build:css styles/main1.css -->
@@ -51,24 +51,24 @@
     <![endif]-->
 
   </head>
-  <body ng-class="{'menu-open' : navState.current.data.showMenu, 'menu-closed': (!navState.current.data.showMenu && navState.current.data.menuToggled) }">
+  <body ng-class="{'menu-open' : navState.current.data.showMenu, 'menu-closed': (!navState.current.data.showMenu && navState.current.data.menuToggled)}">
     <!-- htmlmin:ignore -->
     <!-- processhtml:include:svgDist,server /img/icons/icon_defs.svg -->
     This will pull in the content of our svg file for use across the app.
     <!-- /processhtml -->
     <!-- htmlmin:ignore -->
     <div id="wrapper" class="menu-wrapper">
-      <div nav-bar></div>
+      <div nav-bar ng-class="{'nxg-legacy': (navState.current.data.hasOwnProperty('oldStyles') && navState.current.data.oldStyles == false)}"></div>
       <div id="main-container" class="nxg-main-container" nxg-messages>
         <div class="nxg-main-view"
              ng-class="{'mobile-menu-push-toleft':navState.current.data.showMenu}"
              ng-click="navState.current.data.showMenu ? navState.current.data.showMenu=false : false">
           <div ui-view autoscroll="true" id="{{ navState.current.data.pageId }}Page"></div>
         </div>
-        <div nxg-activity></div>
+        <div nxg-activity ng-class="{'nxg-legacy': (navState.current.data.hasOwnProperty('oldStyles') && navState.current.data.oldStyles == false)}"></div>
       </div>
 
-      <div page-footer></div>
+      <div page-footer ng-class="{'nxg-legacy': (navState.current.data.hasOwnProperty('oldStyles') && navState.current.data.oldStyles == false)}"></div>
     </div>
     <!-- build:js scripts/components.js -->
     <script src="components/modernizr/modernizr.js"></script>
