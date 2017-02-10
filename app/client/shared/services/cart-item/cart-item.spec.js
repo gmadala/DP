@@ -211,25 +211,28 @@ describe('Service: cartItem', function () {
           principal: 10,
           interest: 5,
           fees: 5,
-          cpp: 0
+          cpp: 0,
+          tpf: 5
         };
-        expect(result.getCheckoutAmount(PaymentOptions.TYPE_PAYMENT)).toBe(20);
+        expect(result.getCheckoutAmount(PaymentOptions.TYPE_PAYMENT)).toBe(25);
 
         result.scheduledValues.payoff = {
           principal: 100,
           interest: 50,
           fees: 50,
-          cpp: 0
+          cpp: 0,
+          tpf: 5
         };
-        expect(result.getCheckoutAmount(PaymentOptions.TYPE_PAYOFF)).toBe(200);
+        expect(result.getCheckoutAmount(PaymentOptions.TYPE_PAYOFF)).toBe(205);
 
         result.scheduledValues.interest = {
           principal: 0,
           interest: 50,
           fees: 0,
-          cpp: 0
+          cpp: 0,
+          tpf: 5
         };
-        expect(result.getCheckoutAmount(PaymentOptions.TYPE_INTEREST)).toBe(50);
+        expect(result.getCheckoutAmount(PaymentOptions.TYPE_INTEREST)).toBe(55);
       });
     });
 
