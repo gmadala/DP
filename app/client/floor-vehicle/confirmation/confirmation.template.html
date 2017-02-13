@@ -17,7 +17,7 @@
         </div>
 
         <div style="height: 35px; margin-bottom: 20px;">
-          <button class="btn-cta btn-lg cta-secondary pull-right" ng-click="flooringConfirmation.submitSurvey()" style="margin: 0px; font-size: 1.429em; height: 40px; font-weight: 300; padding: 8px 20px;" type="submit" translate>submit</button>
+          <button class="btn-cta btn-lg cta-secondary pull-right" ng-click="flooringConfirmation.submitSurvey()" style="margin: 0px; font-size: 1.429em; height: 40px; font-weight: 300; padding: 8px 20px;" type="submit" translate>Submit</button>
         </div>
       </form>
 
@@ -31,7 +31,7 @@
         <nxg-download-waybill wizard-status="true"
                               class="btn btn-lg btn-primary"
                               style="margin-left: 0px;font-size: 1.429em;padding: 8px 35px;height: 40px;font-weight: 300;background-color: black;color: #fff;"
-                              title="Print FedEx Label"></nxg-download-waybill>
+                              title="{{ 'Print FedEx Label' | translate }}"></nxg-download-waybill>
       </div>
 
       <button class="btn-cta btn-lg cta-primary" style="font-size: 1.429em; height: 40px; font-weight: 300; margin-left: 0px; padding: 8px 20px;" ui-sref="flooringWizard.car" translate>Floor Another Vehicle</button>
