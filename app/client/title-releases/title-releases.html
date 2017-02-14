@@ -111,8 +111,9 @@
                 </div>
                 <div class="col-xs-6 no-padding visible-xs">
                   <div class="lockup-minor vertical-spacing" ng-switch="item.TitleReleaseProgramStatus">
-                    <h6 ng-switch-when="OutstandingTitleReleaseProgramRelease" translate>Pay off this vehicle or return the title to remove from your
-                      limit.</h6>
+                    <h6 ng-switch-when="OutstandingTitleReleaseProgramRelease" translate>
+                      Pay off this vehicle or return the title to remove from your limit.
+                    </h6>
                     <div ng-switch-when="EligibleForRelease">
                       <button type="button" class="btn btn-icon btn-title-request" ng-click="toggleSelected(item)" ng-switch="isFloorplanOnQueue(item)"
                               ng-class="{selected: isFloorplanOnQueue(item)}"
