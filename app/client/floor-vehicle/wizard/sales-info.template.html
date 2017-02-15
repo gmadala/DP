@@ -37,8 +37,18 @@
       </div>
     </div>
     <label for="purchaseDate" class="text-error"
-           ng-show="(form.purchaseDate.$error.required || form.purchaseDate.$error.date || form.purchaseDate.$error.past || form.purchaseDate.$error.future) && form.$submitted" translate>
+           ng-show="(form.purchaseDate.$error.required || form.purchaseDate.$error.date) && form.$submitted" translate>
       Please enter a valid purchase date (mm/dd/yyyy).
+    </label>
+    <label for="purchaseDate" class="text-error"
+           ng-show="!form.purchaseDate.$error.date && form.purchaseDate.$error.past && form.$submitted">
+      <span translate>You can only floor vehicle purchased on or after</span>
+      {{ salesInfo.dealerMinDate | moment }}.
+    </label>
+    <label for="purchaseDate" class="text-error"
+           ng-show="!form.purchaseDate.$error.date && form.purchaseDate.$error.future && form.$submitted">
+      <span translate>You entered a future date. You can only floor vehicle purchased on or before</span>
+      {{ salesInfo.maxDate | moment }}.
     </label>
   </div>
 

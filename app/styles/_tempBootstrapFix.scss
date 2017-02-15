@@ -1,0 +1,20 @@
+html, body {
+  height: 100%;
+}
+
+.menu-wrapper {
+  position: relative;
+  min-height: 100%;
+}
+
+.nxg-main-view {
+  padding-bottom: 87px;
+  overflow: auto;
+}
+
+
+@media only screen and (max-width: 767px) {
+  .nxg-main-view {
+    padding-bottom: 0px;
+  }
+}

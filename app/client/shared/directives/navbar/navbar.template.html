@@ -30,7 +30,7 @@
             </a>
           </div>
           <div class="spacer" ng-show="fedExWaybillEnabled">
-            <nxg-download-waybill class="navLink" title="FedEx Label"></nxg-download-waybill>
+            <nxg-download-waybill class="navLink" title="{{ 'FedEx Label' | translate }}"></nxg-download-waybill>
           </div>
           <div uib-dropdown class="spacer">
             <span class="dropdown-toggle" uib-dropdown-toggle
@@ -135,7 +135,7 @@
               </ul>
             </li>
             <li class="visible-xs" ng-show="fedExWaybillEnabled">
-              <nxg-download-waybill title="FedEx Label"></nxg-download-waybill>
+              <nxg-download-waybill title="{{ 'FedEx Label' | translate }}"></nxg-download-waybill>
             </li>
             <li ng-class="{ active: isActive(mobileLinks.settings) }" class="visible-xs" ng-hide="user.isDealer()">
               <a ng-href={{mobileLinks.settings.href}}>
