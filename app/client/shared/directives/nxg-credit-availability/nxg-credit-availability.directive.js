@@ -10,7 +10,7 @@
 
   function nxgCreditAvailability(api, gettext, gettextCatalog) {
 
-    gettext('Used');
+    gettext('Utilized');
     gettext('Available');
 
     return {
@@ -108,9 +108,23 @@
 
       function updateCharts(name, total, available) {
         scope.creditTypeName = name;
-        scope.creditLimit = numeral(total).format('($0.0a)');
-        var usedLine = '<span>' + gettextCatalog.getString('Used') + ': ' + numeral(total - available).format('($0,0.00)') + '</span><br />';
-        var availableLine = '<span>' + gettextCatalog.getString('Available') + ': ' + numeral(available).format('($0,0.00)') + '</span>';
+        scope.creditLimit = total >= 1000 ?
+            // 1000 -> $1.0K
+            // 900 -> $900.00
+            numeral(total).format('($0.0a)').toUpperCase() :
+            numeral(total).format('$0.00');
+        var usedLine =
+            '<span>'
+            + gettextCatalog.getString('Utilized')
+            + ': '
+            + numeral(total - available).format('($0,0.00)')
+            + '</span><br />';
+        var availableLine =
+            '<span>'
+            + gettextCatalog.getString('Available')
+            + ': '
+            + numeral(available).format('($0,0.00)')
+            + '</span>';
         scope.availabilityTooltip = usedLine + availableLine;
 
         var chartElement = element.find('.nxg-credit-availability').highcharts();
@@ -120,7 +134,9 @@
           dataLabels: {
             align: 'right',
             formatter: function() {
-              return numeral(available).format('($0.0a)', Math.floor);
+              return Math.abs(available) >= 1000 ?
+                  numeral(available).format('($0.0a)', Math.floor).toUpperCase() :
+                  numeral(available).format('$0.00');
             }
           }
         }]);
@@ -130,7 +146,10 @@
           dataLabels: {
             align: 'left',
             formatter: function() {
-              return numeral(total - available).format('($0.0a)', Math.ceil);
+              var utilized = total - available;
+              return utilized >= 1000 ?
+                  numeral(utilized).format('($0.0a)', Math.ceil).toUpperCase() :
+                  numeral(utilized).format('$0.00');
             }
           }
         }]);
