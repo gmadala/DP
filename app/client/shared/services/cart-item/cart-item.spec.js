@@ -136,7 +136,7 @@ describe('Service: cartItem', function () {
       expect(typeof result.payment).toBe('object');
       expect(result.payment.amount).toBe(750);
       expect(result.payment.principal).toBe(350);
-      expect(result.payment.fees).toBe(100);
+      expect(result.payment.fees).toBe(-221);
       expect(result.payment.interest).toBe(250);
       expect(result.payment.cpp).toBe(50);
       expect(result.payment.additionalPrincipal).toBeDefined();
@@ -144,7 +144,7 @@ describe('Service: cartItem', function () {
       expect(typeof result.payoff).toBe('object');
       expect(result.payoff.amount).toBe(5000);
       expect(result.payoff.principal).toBe(4000);
-      expect(result.payoff.fees).toBe(500);
+      expect(result.payoff.fees).toBe(179);
       expect(result.payoff.interest).toBe(250);
       expect(result.payoff.cpp).toBe(250);
 
@@ -179,22 +179,22 @@ describe('Service: cartItem', function () {
     describe('getCheckoutAmount function', function() {
       it('should return the sum of principal, fees, interest, and cpp values for the selected payment option if none is provided', function() {
         var result = CartItem.fromPayment(mockPayment, PaymentOptions.TYPE_PAYOFF);
-        expect(result.getCheckoutAmount()).toBe(5321);
+        expect(result.getCheckoutAmount()).toBe(5000);
       });
 
       it('should return the sum of principal, fees, interest, and cpp values for a given payment type', function() {
         var result = CartItem.fromPayment(mockPayment, PaymentOptions.TYPE_PAYOFF);
-        expect(result.getCheckoutAmount(PaymentOptions.TYPE_PAYMENT)).toBe(1071);
-        expect(result.getCheckoutAmount(PaymentOptions.TYPE_PAYOFF)).toBe(5321);
+        expect(result.getCheckoutAmount(PaymentOptions.TYPE_PAYMENT)).toBe(750);
+        expect(result.getCheckoutAmount(PaymentOptions.TYPE_PAYOFF)).toBe(5000);
         expect(result.getCheckoutAmount(PaymentOptions.TYPE_INTEREST)).toBe(250);
       });
 
       it('should return the sum of principal, fees, interest, and cpp values + payment.additionalPrincipal if there is extra principal', function() {
         var result = CartItem.fromPayment(mockPayment, PaymentOptions.TYPE_PAYMENT);
 
-        expect(result.getCheckoutAmount()).toBe(1071);
+        expect(result.getCheckoutAmount()).toBe(750);
         result.payment.additionalPrincipal = 50;
-        expect(result.getCheckoutAmount()).toBe(1121);
+        expect(result.getCheckoutAmount()).toBe(800);
       });
 
       it('should return undefined if there was no option sent in and the cart item has no valid payment option set', function() {

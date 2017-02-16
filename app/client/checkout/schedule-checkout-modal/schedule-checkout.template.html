@@ -65,6 +65,10 @@
         <p class="col-xs-5" translate>CPP</p>
         <p class="col-xs-7 value numeric">{{ model.breakdown.cpp | currency }}</p>
       </li>
+        <li class="list-table-row">
+            <p class="col-xs-5"><span translate>Transportation Charge (Ready Logistics)</span>:</p>
+            <p class="col-xs-7 value numeric">{{ (model.breakdown.tpf | currency)}}</p>
+        </li>
       <li class="list-table-hr"></li>
       <li class="list-table-row">
         <p class="col-xs-5" translate>Payment Total</p>

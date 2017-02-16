@@ -32,7 +32,7 @@
       this.payoff = {
         amount: item.CurrentPayoff,
         principal: item.PrincipalPayoff,
-        fees: item.FeesPayoffTotal,
+        fees: item.FeesPayoffTotal - item.TransportationFee,
         interest: item.InterestPayoffTotal,
         cpp: item.CollateralProtectionPayoffTotal,
         tpf: item.TransportationFee
@@ -40,7 +40,7 @@
       this.payment = {
         amount: item.AmountDue,
         principal: item.PrincipalDue,
-        fees: item.FeesPaymentTotal,
+        fees: item.FeesPaymentTotal - item.TransportationFee,
         interest: item.InterestPaymentTotal,
         cpp: item.CollateralProtectionPaymentTotal,
         additionalPrincipal: item.AdditionaPrincipal || 0,
