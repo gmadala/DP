@@ -75,7 +75,11 @@ export default class Translater {
         }
         for (let key of Object.keys( fromObj )) {
             if ( typeof(fromObj[key]) === 'object' ) {
-                resultObj[key] = this._mergeObjs(fromObj[key], toObj[key])
+                if (toObj && toObj[key]) {
+                    resultObj[key] = this._mergeObjs(fromObj[key], toObj[key])
+                } else {
+                    resultObj[key] = fromObj[key];
+                }
             }
         }
         return resultObj;

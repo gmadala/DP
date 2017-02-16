@@ -29,8 +29,14 @@
     </p>
 
     <!-- Some Title Release Requests Failed -->
-    <p class="paragraph" ng-show="counts.failed > 0" translate>We're sorry, the highlighted title(s) listed above cannot be processed at this time. Please call Customer Service at
-      <span class="highlight"><nxg-dealer-customer-support-phone></nxg-dealer-customer-support-phone></span></p>
+    <p class="paragraph" ng-show="counts.failed > 0">
+      <span translate>
+        We're sorry, the highlighted title(s) listed above cannot be processed at this time. Please call Customer Service at
+      </span>
+      <span class="highlight">
+        <nxg-dealer-customer-support-phone></nxg-dealer-customer-support-phone>
+      </span>
+    </p>
 
     <!-- Some Title Release Requests Succeed -->
     <section ng-show="counts.failed < counts.total">
