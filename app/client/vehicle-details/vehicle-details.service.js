@@ -20,7 +20,10 @@
             if (data && data.FinancialSummaryInfo) {
               var fs = data.FinancialSummaryInfo;
               // Include transportation fee in total
-              fs.TotalOutstanding = fs.TransportationFee > 0 ? fs.TotalOutstanding + fs.TransportationFee : fs.TotalOutstanding;
+              if (fs.TransportationFee > 0) {
+                fs.FeesOutstanding = fs.FeesOutstanding - fs.TransportationFee;
+                fs.TotalOutstanding = fs.TotalOutstanding + fs.TransportationFee;
+              }
               fs.FloorplanTotal = fs.TotalPaid + fs.TotalOutstanding;
             }
             return data;
