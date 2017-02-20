@@ -13,167 +13,24 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 "X-Generator: Poedit 1.8.8\n"
 
-#: app/client/title-releases/title-releases-checkout/title-release-checkout.html:82
-#: app/client/title-releases/title-releases.html:122
-#: app/client/title-releases/title-releases.html:151
-msgid "Added"
-msgstr "Ajouté"
+#: app/client/dashboard/nxg-unapplied-funds-widget/nxg-unapplied-funds-widget.template.html:22
+msgid "Auto-Disburse Unapplied Funds:"
+msgstr ""
 
-#: app/client/shared/directives/nxg-value-lookup/nxg-value-lookup.directive.js:14
-msgid "Average Bookout"
-msgstr "Valeur moyenne aux livres"
+#: app/client/floor-vehicle/nxg-business-field-v2/nxg-business-field.template.html:3
+msgid "Payee"
+msgstr ""
 
-#: app/client/payments/payments-confirm.template.html:150
-msgid "Back To Payments"
-msgstr "Retour aux paiements"
+#: app/client/floor-vehicle/auction-bulk-flooring.template.html:170
+#: app/client/floor-vehicle/floor-car.template.html:133
+#: app/client/floor-vehicle/wizard/sales-info.template.html:45
+msgid "You can only floor a vehicle purchased on or after"
+msgstr ""
 
-#: app/client/title-releases/title-releases-checkout/confirm-title-release/confirm-title-release.template.html:53
-msgid "Back To Title Releases"
-msgstr "Retour ŕ l'émission des titres"
-
-#: app/client/analytics/analytics.template.html:169
-msgid "Credit and Payments"
-msgstr "Crédit et paiements"
-
-#: app/client/value-lookup/value-lookup.html:51
-msgid "Fill out for Kelley Blue Book<sup>®</sup>Auction Values"
-msgstr "Inscrivez la valeur aux enchčres du Kelley Blue Book<sup>®</sup>"
-
-#: app/client/vehicle-details/vehicle-details.html:124
-msgid "Floored on"
-msgstr "Nanti"
-
-#: app/client/vehicle-details/vehicle-details.html:392
-#: app/client/vehicle-details/vehicle-details.html:99
-msgid "Hide"
-msgstr "Masquer"
-
-#: app/client/shared/directives/nxg-value-lookup/nxg-value-lookup.directive.js:35
-msgid "Highest average bookout <br /> less than purchase price"
-msgstr "La valeur aux livres moyenne <br /> la plus élevée  est inférieure <br /> au prix d'achat"
-
-#: app/client/floor-vehicle/confirmation/confirmation.template.html:8
-msgid "How would you rate your experience with flooring online?"
-msgstr "Comment évalueriez-vous votre expérience de nantissement en ligne?"
-
-#: app/client/floor-vehicle/wizard/sales-info.template.html:79
-msgid "MMR Value Vehicle Style"
-msgstr "Valeur MMR du modčle du véhicule"
-
-#: app/client/shared/directives/nxg-value-lookup/nxg-value-lookup.directive.js:36
-msgid "Only purchase price data <br /> is available"
-msgstr "Seul le prix d'achat  <br /> est disponible"
-
-#: app/client/floor-vehicle/wizard/payment-info.template.html:27
-msgid "Pay me"
-msgstr "Payez ŕ moi"
-
-#: app/client/floor-vehicle/wizard/payment-info.template.html:34
-msgid "Pay someone else"
-msgstr "Payez ŕ quelqu'un d'autre"
-
-#: app/client/floor-vehicle/wizard/sales-info.template.html:39
-msgid "Please enter a valid purchase date (mm/dd/yyyy)."
-msgstr "Veuillez entrer une date d'achat valide (jj//mm/aaaa)."
-
-#: app/client/floor-vehicle/auction-bulk-flooring.template.html:131
-#: app/client/floor-vehicle/floor-car.template.html:160
-#: app/client/floor-vehicle/wizard/sales-info.template.html:72
-msgid "Please enter a value less than $400,000."
-msgstr "Veuillez entrer une valeur inférieure ŕ 400 000 $."
-
-#: app/client/floor-vehicle/wizard/sales-info.template.html:63
-msgid "Please enter the purchase amount."
-msgstr "Veuillez entrer le montant d'achat."
-
-#: app/client/floor-vehicle/confirmation/confirmation.template.html:34
-msgid "Print FedEx Label"
-msgstr "Imprimer l'étiquette FedEx"
-
-#: app/client/floor-vehicle/confirmation/confirmation.template.html:27
-msgid "Print Request Summary"
-msgstr "Imprimer la demande de résumé"
-
-#: app/client/floor-vehicle/wizard/sales-info.template.html:16
-msgid "Purchase Date (mm/dd/yyyy)"
-msgstr "Date d'achat (jj/mm/aaaa)"
-
-#: app/client/shared/directives/nxg-value-lookup/nxg-value-lookup.directive.js:15
-#: app/client/shared/directives/nxg-value-lookup/nxg-value-lookup.directive.js:34
-msgid "Purchase price less than <br /> highest average bookout"
-msgstr "Le prix d'achat est inférieur <br />ŕ la valeur aux livres moyenne <br />la plus élevée"
-
-#: app/client/shared/directives/nxg-value-lookup/nxg-value-lookup.directive.js:16
-msgid "Purchase price more than <br /> highest average bookout"
-msgstr "Le prix d'achat est supérieur <br />ŕ la valeur aux livres moyenne <br />la plus élevée"
-
-#: app/client/vehicle-details/vehicle-details.html:391
-#: app/client/vehicle-details/vehicle-details.html:98
-msgid "Show"
-msgstr "Afficher"
-
-#: app/client/floor-vehicle/confirmation/confirmation.template.html:5
-msgid "Stock Number:"
-msgstr "Numéro de stock:"
-
-#: app/client/floor-vehicle/confirmation/confirmation.template.html:20
-msgid "submit"
-msgstr "Soumettre"
-
-#: app/client/floor-vehicle/confirmation/confirmation.template.html:16
-msgid "Survey comment is required."
-msgstr "Un commentaire sur le sondage est requis."
-
-#: app/client/floor-vehicle/confirmation/confirmation.template.html:14
-#: app/client/floor-vehicle/confirmation/confirmation.template.html:15
-msgid "Tell us more!"
-msgstr "Dites-nous ce que vous en pensez!"
-
-#: app/client/floor-vehicle/confirmation/confirmation.template.html:24
-msgid "Thank you for the feedback!"
-msgstr "Nous vous remercions pour votre commentaire!"
-
-#: app/client/floor-vehicle/confirmation/confirmation.template.html:4
-msgid "Thank you for your floor plan request."
-msgstr "Nous vous remercions pour votre demande de plan de nantissement."
-
-#: app/client/payments/payments-confirm.template.html:2
-msgid "Thank you for your payment submission."
-msgstr "Merci de nous avoir fait parvenir votre paiement."
-
-#: app/client/shared/directives/nxg-credit-availability/nxg-credit-availability.template.html:18
-msgid "The purchase amount is more than your available credit."
-msgstr "Le montant de l'achat est supérieur ŕ votre crédit disponible."
-
-#: app/client/title-releases/title-releases.html:104
-msgid "Title Released on"
-msgstr "Titre émis le"
-
-#: app/client/shared/directives/nxg-value-lookup/nxg-value-lookup.template.html:20
-msgid "Vehicle Value Comparison"
-msgstr "Comparaison de la valeur du véhicule"
-
-#: app/client/floor-vehicle/nxg-vin-details/nxg-vin-details.template.html:24
-#: app/client/floor-vehicle/nxg-vin-details/nxg-vin-lookup.template.html:19
+#: app/client/floor-vehicle/auction-bulk-flooring.template.html:175
+#: app/client/floor-vehicle/floor-car.template.html:138
+#: app/client/floor-vehicle/wizard/sales-info.template.html:50
 msgid ""
-"We are sorry, but we do not recognize this VIN.  If your VIN was entered "
-"correctly, you can still submit your request."
-msgstr "Nous sommes désolés, mais nous ne parvenons pas ŕ reconnaitre ce NIV.  Si votre NIV a été entré correctement, vous pouvez continuer la soumission de votre demande."
-
-#: app/client/shared/directives/nxg-value-lookup/nxg-value-lookup.template.html:29
-msgid "We were unable to pull one or more bookout values from our partner."
-msgstr "Nous sommes incapables de retirer une ou plusieurs valeurs aux livres de votre partenaire."
-
-#: app/client/title-releases/title-releases-checkout/confirm-title-release/confirm-title-release.template.html:33
-msgid ""
-"We're sorry, the highlighted title(s) listed above cannot be processed at "
-"this time. Please call Customer Service at"
-msgstr "Nous sommes désolés, il est actuellement impossible de traiter le(s) titre(s) sélectionné(s) affichés ci-dessus. Veuillez communiquer avec le service ŕ la clientčle au"
-
-#: app/client/floor-vehicle/wizard/payment-info.template.html:21
-msgid "Who do you want to pay?"
-msgstr "Ŕ qui désirez-vous effectuer votre paiement?"
-
-#: app/client/floor-vehicle/confirmation/confirmation.template.html:6
-msgid "You will receive an email confirmation shortly at"
-msgstr "Vous recevrez sous peu un courriel de confirmation ŕ"
+"You entered a future date. You can only floor a vehicle purchased on or "
+"before"
+msgstr ""
