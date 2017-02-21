@@ -43,11 +43,12 @@
           // selected vehicle from black book is identified by the following two properties
           data.BlackBookGroupNumber = data.$selectedVehicle.GroupNumber;
           data.BlackBookUvc = data.$selectedVehicle.UVc;
-          // selected vehicle from black book takes precedence over manually-entered vehicle characteristics
-          data.UnitMake = null;
-          data.UnitModel = null;
-          data.UnitYear = null;
-          data.UnitStyle = null;
+
+          // we now need to set the make, model, style and year based on the values we're getting from blackbook.
+          data.UnitMake = data.$selectedVehicle.Make;
+          data.UnitModel = data.$selectedVehicle.Model;
+          data.UnitYear = data.$selectedVehicle.Year;
+          data.UnitStyle = data.$selectedVehicle.Style;
 
           // clean up data that's not part of the request object API
           delete data.$blackbookMileage;
