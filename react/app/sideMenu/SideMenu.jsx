@@ -45,8 +45,6 @@ const listStyle = {
     overflowX:'hidden'
 }
 
-let displayTitleRelease = false;
-
 class SideMenu extends Component {
     constructor(props) {
         super(props)
@@ -73,20 +71,6 @@ class SideMenu extends Component {
             supportList.set = true
             this.buildSupportMenu()
         }
-
-        const floorplanList = this.props.menuList.find(x => x.title === 'sideMenu.defaultMenu.floorPlan');
-        if (typeof(floorplanList.set) === 'undefined' && this.props.nxgConfig) {
-            floorplanList.set = true
-            this.getTitleRelease()
-        }
-    }
-
-    getTitleRelease = () => {
-        this.props.user.getInfo().then((info) => {
-            if (info) {
-                displayTitleRelease = info.DisplayTitleReleaseProgram
-            }
-        })
     }
 
     buildTimeline = () => {
@@ -193,7 +177,7 @@ class SideMenu extends Component {
                             isDealer={this.props.user.isDealer() || false}
                             isAuction={!this.props.user.isDealer() || false}
                             user={this.props.user}
-                            titleRelease={displayTitleRelease}
+                            titleRelease={this.props.userInfo.DisplayTitleReleaseProgram}
                         />
                     </div>
                 </div>
@@ -209,6 +193,7 @@ SideMenu.propTypes = {
     updateSubMenuItems: PropTypes.func.isRequired,
     angularState: PropTypes.object.isRequired,
     user: PropTypes.object.isRequired,
+    userInfo: PropTypes.object.isRequired,
     toggleMenu: PropTypes.func.isRequired,
     $rootScope: PropTypes.object.isRequired,
     addTopLevelLinkFunc: PropTypes.func.isRequired,

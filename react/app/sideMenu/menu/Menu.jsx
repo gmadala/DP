@@ -100,4 +100,8 @@ Menu.propTypes = {
     titleRelease: PropTypes.bool.isRequired
 }
 
+Menu.defaultProps = {
+    titleRelease: false
+}
+
 export default Menu
