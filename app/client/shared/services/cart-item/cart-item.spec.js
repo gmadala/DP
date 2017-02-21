@@ -46,7 +46,8 @@ describe('Service: cartItem', function () {
       FeesPayoffTotal: 500,
       InterestPayoffTotal: 250,
       CollateralProtectionPayoffTotal: 250,
-      TransportationFee: 321
+      TransportationFee: 321,
+      IsLastCurtailment: false
     };
 
     mockScheduled = {
@@ -184,7 +185,7 @@ describe('Service: cartItem', function () {
 
       it('should return the sum of principal, fees, interest, and cpp values for a given payment type', function() {
         var result = CartItem.fromPayment(mockPayment, PaymentOptions.TYPE_PAYOFF);
-        expect(result.getCheckoutAmount(PaymentOptions.TYPE_PAYMENT)).toBe(750);
+        expect(result.getCheckoutAmount(PaymentOptions.TYPE_PAYMENT)).toBe(429);
         expect(result.getCheckoutAmount(PaymentOptions.TYPE_PAYOFF)).toBe(5000);
         expect(result.getCheckoutAmount(PaymentOptions.TYPE_INTEREST)).toBe(250);
       });
@@ -192,9 +193,9 @@ describe('Service: cartItem', function () {
       it('should return the sum of principal, fees, interest, and cpp values + payment.additionalPrincipal if there is extra principal', function() {
         var result = CartItem.fromPayment(mockPayment, PaymentOptions.TYPE_PAYMENT);
 
-        expect(result.getCheckoutAmount()).toBe(750);
+        expect(result.getCheckoutAmount()).toBe(429);
         result.payment.additionalPrincipal = 50;
-        expect(result.getCheckoutAmount()).toBe(800);
+        expect(result.getCheckoutAmount()).toBe(479);
       });
 
       it('should return undefined if there was no option sent in and the cart item has no valid payment option set', function() {

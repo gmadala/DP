@@ -35,16 +35,18 @@
         fees: item.FeesPayoffTotal - item.TransportationFee,
         interest: item.InterestPayoffTotal,
         cpp: item.CollateralProtectionPayoffTotal,
-        tpf: item.TransportationFee
+        tpf: item.TransportationFee,
+        lastCurtailment : item.IsLastCurtailment
       };
       this.payment = {
         amount: item.AmountDue,
         principal: item.PrincipalDue,
-        fees: item.FeesPaymentTotal - item.TransportationFee,
+        fees: item.FeesPaymentTotal -  item.TransportationFee ,
         interest: item.InterestPaymentTotal,
         cpp: item.CollateralProtectionPaymentTotal,
         additionalPrincipal: item.AdditionaPrincipal || 0,
-        tpf: item.TransportationFee
+        tpf: ((item.IsLastCurtailment) ? item.TransportationFee : 0),
+        lastCurtailment : item.IsLastCurtailment
       };
       this.interest = {
         amount: item.InterestPaymentTotal,
@@ -52,7 +54,8 @@
         fees: 0,
         interest: item.InterestPaymentTotal,
         cpp: 0,
-        tpf: 0
+        tpf: 0,
+        lastCurtailment : false
       };
 
       this.scheduledValues = {
