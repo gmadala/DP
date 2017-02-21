@@ -1,6 +1,12 @@
 export default {
-    DEALER: 'DEALER',
-    AUCTION: 'AUCTION',
     ALL: 'ALL',
-    NONE: 'NONE'
+    AUCTION: 'AUCTION',
+    AUDITS: 'AUDITS',
+    DEALER: 'DEALER',
+    FLOORCAR: 'FLOORCAR',
+    NONE: 'NONE',
+    PROMOS: 'PROMOS',
+    TITLERELEASE: 'TITLERELEASE',
+    US: 'US',
+    WIZARD: 'WIZARD'
 }

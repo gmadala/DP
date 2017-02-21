@@ -45,6 +45,8 @@ const listStyle = {
     overflowX:'hidden'
 }
 
+let displayTitleRelease = false;
+
 class SideMenu extends Component {
     constructor(props) {
         super(props)
@@ -67,9 +69,24 @@ class SideMenu extends Component {
 
         this.toggleTimeline(this.props.isOpen)
         const supportList = this.props.menuList.find(x => x.id === 'support');
-        if (typeof(supportList.subMenu) === 'undefined' && this.props.nxgConfig) {
+        if (typeof(supportList.subMenu) === 'undefined' && typeof(supportList.set) === 'undefined' && this.props.nxgConfig) {
+            supportList.set = true
             this.buildSupportMenu()
         }
+
+        const floorplanList = this.props.menuList.find(x => x.title === 'sideMenu.defaultMenu.floorPlan');
+        if (typeof(floorplanList.set) === 'undefined' && this.props.nxgConfig) {
+            floorplanList.set = true
+            this.getTitleRelease()
+        }
+    }
+
+    getTitleRelease = () => {
+        this.props.user.getInfo().then((info) => {
+            if (info) {
+                displayTitleRelease = info.DisplayTitleReleaseProgram
+            }
+        })
     }
 
     buildTimeline = () => {
@@ -175,6 +192,8 @@ class SideMenu extends Component {
                             onItemClick={this.handleItemClick}
                             isDealer={this.props.user.isDealer() || false}
                             isAuction={!this.props.user.isDealer() || false}
+                            user={this.props.user}
+                            titleRelease={displayTitleRelease}
                         />
                     </div>
                 </div>

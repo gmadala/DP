@@ -2,7 +2,7 @@ import React, { PropTypes } from 'react'
 import Translate from 'react-translate-component'
 import Menu from '../menu/Menu'
 
-const MenuItem = ({ item, menuIndex, insideSubMenu, onClick, itemIndex, isDealer, isAuction }) => {
+const MenuItem = ({ item, menuIndex, insideSubMenu, onClick, itemIndex, isDealer, isAuction, user, titleRelease }) => {
     const linkStyle = {
         color: 'white',
         padding: insideSubMenu ? '10px 10px 10px 20px' : '10px',
@@ -20,6 +20,8 @@ const MenuItem = ({ item, menuIndex, insideSubMenu, onClick, itemIndex, isDealer
             onItemClick={onClick}
             isDealer={isDealer}
             isAuction={isAuction}
+            user={user}
+            titleRelease={titleRelease}
         />
     : <div>
             <a
@@ -38,7 +40,9 @@ MenuItem.propTypes = {
     menuIndex: PropTypes.number,
     itemIndex: PropTypes.number.isRequired,
     isDealer: PropTypes.bool.isRequired,
-    isAuction: PropTypes.bool.isRequired
+    isAuction: PropTypes.bool.isRequired,
+    user: PropTypes.object.isRequired,
+    titleRelease: PropTypes.bool.isRequired
 }
 
 export default MenuItem

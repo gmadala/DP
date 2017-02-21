@@ -8,24 +8,6 @@ export default [
         permission: permissions.ALL
     },
     {
-        title: 'sideMenu.defaultMenu.profileSettings',
-        state: 'profile_settings',
-        active: false,
-        permission: permissions.DEALER
-    },
-    {
-        title: 'sideMenu.defaultMenu.accountManagement',
-        state: 'account_management',
-        active: false,
-        permission: permissions.DEALER
-    },
-    {
-        title: 'sideMenu.defaultMenu.settings',
-        state: 'auction_settings',
-        active: false,
-        permission: permissions.AUCTION
-    },
-    {
         title: 'sideMenu.defaultMenu.dealerSearch',
         state: 'auction_dealersearch',
         active: false,
@@ -87,22 +69,27 @@ export default [
                 title: 'sideMenu.floorplanMenu.floorAVehicle',
                 state: 'floorcar',
                 active: false,
-                permission: permissions.ALL
+                permission: permissions.FLOORCAR
+            }, {
+                title: 'sideMenu.floorplanMenu.floorAVehicle',
+                state: 'flooringWizard.car',
+                active: false,
+                permission: permissions.WIZARD
             }, {
                 title: 'sideMenu.floorplanMenu.valueLookup',
                 state: 'valueLookup',
                 active: false,
-                permission: permissions.ALL
+                permission: permissions.US
             }, {
                 title: 'sideMenu.floorplanMenu.openAudits',
                 state: 'audits',
                 active: false,
-                permission: permissions.NONE
+                permission: permissions.AUDITS
             }, {
                 title: 'sideMenu.floorplanMenu.titleReleases',
                 state: 'titlereleases',
                 active: false,
-                permission: permissions.ALL
+                permission: permissions.TITLERELEASE
             }
         ]
     },
@@ -130,9 +117,27 @@ export default [
                 title: 'sideMenu.resourcesMenu.promos',
                 state: 'promos',
                 active: false,
-                permission: permissions.ALL
+                permission: permissions.PROMOS
             }
         ]
+    },
+    {
+        title: 'sideMenu.defaultMenu.profileSettings',
+        state: 'profile_settings',
+        active: false,
+        permission: permissions.DEALER
+    },
+    {
+        title: 'sideMenu.defaultMenu.accountManagement',
+        state: 'account_management',
+        active: false,
+        permission: permissions.DEALER
+    },
+    {
+        title: 'sideMenu.defaultMenu.settings',
+        state: 'auction_settings',
+        active: false,
+        permission: permissions.AUCTION
     },
     {
         id: 'support',
