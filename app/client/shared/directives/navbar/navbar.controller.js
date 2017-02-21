@@ -123,23 +123,28 @@
         ]
       };
 
-    $scope.mobileLinks = {
-      settings: {
-        name: gettextCatalog.getString( 'Settings' ),
-        href: '#/act/settings',
-        activeWhen: 'settings'
-      },
-      profile: {
-        name: gettextCatalog.getString( 'Profile Settings' ),
-        href: '#/profile_settings',
-        activeWhen: 'profile_settings'
-      },
-      management: {
-        name: gettextCatalog.getString( 'Account Management' ),
-        href: '#/account_management',
-        activeWhen: 'account_management'
+    if ($rootScope.isMobile) {
+      const mobileLinks = {
+        settings: {
+          name: gettextCatalog.getString('Settings'),
+          href: '#/act/settings',
+          activeWhen: 'auction_settings'
+        },
+        profile: {
+          name: gettextCatalog.getString('Profile Settings'),
+          href: '#/profile_settings',
+          activeWhen: 'profile_settings'
+        },
+        management: {
+          name: gettextCatalog.getString('Account Management'),
+          href: '#/account_management',
+          activeWhen: 'account_management'
+        }
       }
-    };
+      dealerLinks.primary.push(mobileLinks.profile);
+      dealerLinks.primary.push(mobileLinks.management);
+      auctionLinks.primary.push(mobileLinks.settings);
+    }
 
     $scope.initNav = function( ) {
       kissMetricInfo.getKissMetricInfo( ).then( function( result ) {
