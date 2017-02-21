@@ -18,11 +18,11 @@
              * Per Blake Weishaar, this value should be the sum of the Total Paid and the Total Outstanding.
              */
             if (data && data.FinancialSummaryInfo) {
-              var fs = data.FinancialSummaryInfo;
-              // Include transportation fee in total
+              const fs = data.FinancialSummaryInfo;
+
+              // Do not include transportation fee in fees outstanding
               if (fs.TransportationFee > 0) {
                 fs.FeesOutstanding = fs.FeesOutstanding - fs.TransportationFee;
-                fs.TotalOutstanding = fs.TotalOutstanding + fs.TransportationFee;
               }
               fs.FloorplanTotal = fs.TotalPaid + fs.TotalOutstanding;
             }
