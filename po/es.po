@@ -499,7 +499,7 @@ msgstr "Autorización y solicitud para darse de baja"
 
 #: app/client/dashboard/nxg-unapplied-funds-widget/nxg-unapplied-funds-widget.template.html:22
 msgid "Auto-Disburse Unapplied Funds:"
-msgstr ""
+msgstr "Desembolso automático de fondos no aplicado:"
 
 #: app/client/dashboard/dealer/dashboard.controller.js:253
 #: app/client/dashboard/dealer/dashboard.controller.js:327
@@ -2360,7 +2360,7 @@ msgstr "Pagar a otra persona"
 
 #: app/client/floor-vehicle/nxg-business-field-v2/nxg-business-field.template.html:3
 msgid "Payee"
-msgstr ""
+msgstr "Beneficiario"
 
 #: app/client/checkout/checkout.controller.js:394
 #: app/client/payments/nxg-payment-summary/payment-summary.controller.js:61
@@ -4914,7 +4914,7 @@ msgstr ""
 #: app/client/floor-vehicle/floor-car.template.html:133
 #: app/client/floor-vehicle/wizard/sales-info.template.html:45
 msgid "You can only floor a vehicle purchased on or after"
-msgstr ""
+msgstr "Usted solo puede poner en piso un vehículo que adquirió en o después"
 
 #: app/client/audits/open-audits.template.html:9
 msgid "You currently have no open audits."
@@ -4935,6 +4935,8 @@ msgid ""
 "You entered a future date. You can only floor a vehicle purchased on or "
 "before"
 msgstr ""
+"Ingresó una fecha futura. Usted solo puede poner en piso un vehículo que "
+"adquirió en o antes"
 
 #: app/client/title-releases/nxg-requests-summary/nxg-requests-summary.html:7
 msgid "You have"

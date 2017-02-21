@@ -15,17 +15,17 @@ msgstr ""
 
 #: app/client/dashboard/nxg-unapplied-funds-widget/nxg-unapplied-funds-widget.template.html:22
 msgid "Auto-Disburse Unapplied Funds:"
-msgstr ""
+msgstr "Desembolso automático de fondos no aplicado:"
 
 #: app/client/floor-vehicle/nxg-business-field-v2/nxg-business-field.template.html:3
 msgid "Payee"
-msgstr ""
+msgstr "Beneficiario"
 
 #: app/client/floor-vehicle/auction-bulk-flooring.template.html:170
 #: app/client/floor-vehicle/floor-car.template.html:133
 #: app/client/floor-vehicle/wizard/sales-info.template.html:45
 msgid "You can only floor a vehicle purchased on or after"
-msgstr ""
+msgstr "Usted solo puede poner en piso un vehículo que adquirió en o después"
 
 #: app/client/floor-vehicle/auction-bulk-flooring.template.html:175
 #: app/client/floor-vehicle/floor-car.template.html:138
@@ -33,4 +33,4 @@ msgstr ""
 msgid ""
 "You entered a future date. You can only floor a vehicle purchased on or "
 "before"
-msgstr ""
+msgstr "Ingresó una fecha futura. Usted solo puede poner en piso un vehículo que adquirió en o antes"
