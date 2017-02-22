@@ -20,14 +20,40 @@ const navBarStyles = {
     borderRadius: '0',
 };
 
-const pendingUnitsClickFunc = () => {
-    $('#pendingUnitsAccordion').collapse('toggle');
-};
+// const pendingUnitsClickFunc = () => {
+//     $('#pendingUnitsAccordion').collapse('toggle');
+// };
 
 class Ribbon extends Component {
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            arrowState: 'down',
+        };
+
+        this.pendingUnitsClickFunc = this.pendingUnitsClickFunc.bind(this);
+    }
+
     componentDidMount() {
         const language = this.props.language.substring(0, 2);
         counterpart.setLocale(language); // set language
+    }
+
+    pendingUnitsClickFunc() {
+        $('#pendingUnitsAccordion').collapse('toggle');
+
+        $('#pendingUnitsAccordion').on('hidden.bs.collapse', () => {
+            this.setState({
+                arrowState: 'down',
+            });
+        });
+
+        $('#pendingUnitsAccordion').on('shown.bs.collapse', () => {
+            this.setState({
+                arrowState: 'up',
+            });
+        });
     }
 
     render() {
@@ -44,7 +70,8 @@ class Ribbon extends Component {
                                         ? <RibbonItem
                                             itemcount={floorplancount}
                                             label="dashboard.ribbon.floorplanLabel"
-                                            handleclick={pendingUnitsClickFunc}
+                                            handleclick={this.pendingUnitsClickFunc}
+                                            arrowstate={this.state.arrowState}
                                         />
                                         : null }
                                     { openauditsshow ? <RibbonItem itemcount={openauditscount} handleclick={navaudit} label="dashboard.ribbon.auditLabel" /> : null}
@@ -53,7 +80,7 @@ class Ribbon extends Component {
                         </div>
                     </div>
                 </div>
-                { floorplanshow ? <PendingUnitsAccordion pendingunits={pendingunitsdata} removeClick={pendingUnitsClickFunc} /> : null }
+                { floorplanshow ? <PendingUnitsAccordion pendingunits={pendingunitsdata} removeClick={this.pendingUnitsClickFunc} /> : null }
             </div>
         );
     }

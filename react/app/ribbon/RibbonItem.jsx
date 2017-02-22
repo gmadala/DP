@@ -20,21 +20,13 @@ const arrowStyles = {
     verticalAlign: 'top',
 };
 
-const renderArrow = (arrowValue) => {
-    if (arrowValue === 'down') {
-        return <span className="glyphicon glyphicon-chevron-down" style={arrowStyles} />;
-    }
-
-    return <span className="glyphicon glyphicon-chevron-up" style={arrowStyles} />;
-};
-
 const RibbonItem = ({ itemcount, label, handleclick, arrowstate }) => (
     <span>
         <button className="btn btn-default navbar-btn" style={buttonStyles} onClick={( ) => { handleclick() }} role="button">
           <Translate style={labelStyles} content={label} /><br />
           <Translate content="dashboard.ribbonItem.units" with={{ count:itemcount }} />
           { arrowstate
-            ? renderArrow(arrowstate)
+            ? <span className={arrowstate === 'down' ? 'glyphicon glyphicon-chevron-down' : 'glyphicon glyphicon-chevron-up'} style={arrowStyles} />
             : null }
         </button>
     </span>

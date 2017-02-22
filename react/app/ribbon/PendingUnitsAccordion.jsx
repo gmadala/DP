@@ -41,8 +41,6 @@ class PendingUnitsAccordion extends Component {
         };
 
         const pendingList = pendingunits.map((pendingItem) => {
-            console.log(pendingItem);
-
             const detailsLink = `#/vehicledetails?stockNumber=${pendingItem.StockNumber}`;
 
             return (
