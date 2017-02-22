@@ -1,16 +1,27 @@
 import React, { Component, PropTypes } from 'react';
 import counterpart from 'counterpart';
 import RibbonItem from './RibbonItem';
+import PendingUnitsAccordion from './PendingUnitsAccordion';
+
+const wrapperStyles = {
+    marginBottom: '20px',
+};
+
+const ribbonStyles = {
+    boxShadow: 'rgba(0,0,0,0.25) 0px 2px 3px',
+    backgroundColor: '#051943',
+    borderColor: '#051943',
+};
 
 const navBarStyles = {
-    boxShadow: 'rgba(0,0,0,0.25) 0px 2px 3px',
-    backgroundColor: '#0e1e4e',
-    borderColor: '#0e1e4e',
     height: '38px',
     minHeight: '48px',
     fontSize: '1.4rem',
     borderRadius: '0',
-    marginBottom: '20px',
+};
+
+const pendingUnitsClickFunc = () => {
+    $('#pendingUnitsAccordion').collapse('toggle');
 };
 
 class Ribbon extends Component {
@@ -20,25 +31,39 @@ class Ribbon extends Component {
     }
 
     render() {
-        const { floorplanshow, navfloorplan, floorplancount, openauditsshow, openauditscount, navaudit } = this.props;
+        const { floorplanshow, floorplancount, pendingunitsdata, openauditsshow, openauditscount, navaudit } = this.props;
+
         return (
-            <div className="row" style={navBarStyles}>
-                <div className="container">
-                    <div className="col-xs-12">
-                        { floorplanshow ? <RibbonItem itemcount={floorplancount} handleclick={navfloorplan} label="dashboard.ribbon.floorplanLabel" /> : null }
-                        { openauditsshow ? <RibbonItem itemcount={openauditscount} handleclick={navaudit} label="dashboard.ribbon.auditLabel" /> : null}
+            <div style={wrapperStyles}>
+                <div style={ribbonStyles}>
+                    <div className="container">
+                        <div className="row" style={navBarStyles}>
+                            <div className="container">
+                                <div className="col-xs-12">
+                                    { floorplanshow
+                                        ? <RibbonItem
+                                            itemcount={floorplancount}
+                                            label="dashboard.ribbon.floorplanLabel"
+                                            handleclick={pendingUnitsClickFunc}
+                                        />
+                                        : null }
+                                    { openauditsshow ? <RibbonItem itemcount={openauditscount} handleclick={navaudit} label="dashboard.ribbon.auditLabel" /> : null}
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
+                { floorplanshow ? <PendingUnitsAccordion pendingunits={pendingunitsdata} removeClick={pendingUnitsClickFunc} /> : null }
             </div>
         );
     }
-};
+}
 
 Ribbon.propTypes = {
     language: PropTypes.string.isRequired,
     floorplanshow: PropTypes.bool.isRequired,
     floorplancount: PropTypes.number.isRequired,
-    navfloorplan: PropTypes.func.isRequired,
+    pendingunitsdata: PropTypes.array.isRequired,
     openauditsshow: PropTypes.bool.isRequired,
     openauditscount: PropTypes.number.isRequired,
     navaudit: PropTypes.func.isRequired,

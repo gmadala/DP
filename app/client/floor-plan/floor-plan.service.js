@@ -93,7 +93,7 @@
             OrderBy: criteria.sortField || 'FlooringDate',
             OrderByDirection: criteria.sortDescending === undefined || criteria.sortDescending === true ? 'DESC' : 'ASC',
             PageNumber: paginator ? paginator.nextPage() : Paginate.firstPage(),
-            PageSize: Paginate.PAGE_SIZE_MEDIUM,
+            PageSize: criteria.pageSize ? criteria.pageSize : Paginate.PAGE_SIZE_MEDIUM,
             PhysicalInventoryAddressIds: criteria.inventoryLocation && criteria.inventoryLocation.AddressId
           };
 

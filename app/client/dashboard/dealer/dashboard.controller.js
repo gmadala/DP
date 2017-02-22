@@ -11,6 +11,7 @@
     '$uibModal',
     'Dashboard',
     'User',
+    'Floorplan',
     'FloorplanUtil',
     'moment',
     '$filter',
@@ -29,6 +30,7 @@
     $uibModal,
     Dashboard,
     User,
+    Floorplan,
     FloorplanUtil,
     moment,
     $filter,
@@ -91,8 +93,11 @@
 
     // FloorplanUtil handles all search/fetch/reset functionality.
     $scope.floorplanData = new FloorplanUtil('FlooringDate');
+    $scope.pendingUnitsAccordion = new FloorplanUtil('FlooringDate');
+
     // initial search
     $scope.floorplanData.resetSearch();
+    $scope.pendingUnitsAccordion.resetSearch(Floorplan.filterValues.PENDING, 5);
 
     $scope.changeViewMode = function(mode) {
       $scope.viewMode = mode;
