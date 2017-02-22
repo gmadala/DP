@@ -5,9 +5,9 @@
     .module('nextgearWebApp')
     .factory('wizardService', wizardService);
 
-  wizardService.$inject = ['$q', 'Blackbook', 'Mmr'];
+  wizardService.$inject = ['$q', 'Blackbook', 'Mmr', 'messages'];
 
-  function wizardService($q, Blackbook, Mmr) {
+  function wizardService($q, Blackbook, Mmr, messages) {
     var self = this;
     self.cachedBlackbook = {
       cachedVin: undefined,
@@ -41,7 +41,8 @@
             deferred.resolve(cachedBlackbook.blackbookValuations);
           })
           .catch(function() {
-            deferred.reject();
+            preventWarningDialog();
+            deferred.resolve([]);
           })
       }
       return deferred.promise;
@@ -62,10 +63,19 @@
             deferred.resolve(cachedMmr.mmrValuations);
           })
           .catch(function() {
-            deferred.reject();
+            preventWarningDialog();
+            deferred.resolve([]);
           })
       }
       return deferred.promise;
+    }
+
+    //
+    function preventWarningDialog() {
+      var list = messages.list();
+      list.forEach(function(element) {
+        element.dismiss();
+      })
     }
   }
 })();
