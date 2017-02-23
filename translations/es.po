@@ -34,3 +34,7 @@ msgid ""
 "You entered a future date. You can only floor a vehicle purchased on or "
 "before"
 msgstr "Ingresó una fecha futura. Usted solo puede poner en piso un vehículo que adquirió en o antes"
+
+#: app/client/floor-vehicle/confirmation/confirmation.template.html:34
+msgid "Print FedEx Label"
+msgstr "Imprimir Etiqueta de FedEx"
