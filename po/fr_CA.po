@@ -3599,6 +3599,10 @@ msgid "Search for a VIN to import vehicle details &amp; style"
 msgstr ""
 "Rechercher un NIV pour importer les informations et le style du véhicule"
 
+#: app/client/floor-vehicle/nxg-business-field-v2/nxg-business-field.template.html:13
+msgid "Search Payee"
+msgstr ""
+
 #: app/client/login/login-recover/login-recover.template.html:80
 #: app/client/profile-settings/auction/auction-settings.template.html:67
 #: app/client/profile-settings/auction/auction-settings.template.html:75

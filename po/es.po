@@ -3172,11 +3172,11 @@ msgstr "Principal"
 
 #: app/client/floor-vehicle/confirmation/confirmation.template.html:34
 msgid "Print FedEx Label"
-msgstr "Favor de ingresar el monto de compra"
+msgstr "Imprimir Etiqueta de FedEx"
 
 #: app/client/floor-vehicle/confirmation/confirmation.template.html:27
 msgid "Print Request Summary"
-msgstr "Favor de ingresar el monto de compra"
+msgstr "Imprimir Resumen de solicitudes"
 
 #: app/client/shared/directives/nxg-privacy-statement.directive.js:12
 #: app/maintenance.html:173 app/unsupported.html:186
@@ -3584,6 +3584,10 @@ msgstr ""
 msgid "Search for a VIN to import vehicle details &amp; style"
 msgstr ""
 "Buscar un número VIN para importar la información y el estilo del vehículo"
+
+#: app/client/floor-vehicle/nxg-business-field-v2/nxg-business-field.template.html:13
+msgid "Search Payee"
+msgstr ""
 
 #: app/client/login/login-recover/login-recover.template.html:80
 #: app/client/profile-settings/auction/auction-settings.template.html:67
