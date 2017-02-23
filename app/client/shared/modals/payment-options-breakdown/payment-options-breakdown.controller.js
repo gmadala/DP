@@ -50,7 +50,7 @@
     $scope.paymentBreakdown = {};
     $scope.total = 0;
     $scope.showTranspo = false;
-
+    $scope.paymentBreakdown.tpf = 0;
     $scope.todayDate = moment().toDate();
     $scope.nextBusinessDay = null;
     var bizHours = function() {
@@ -91,7 +91,7 @@
       // change the optionInterestOnly value as the watch update the value.
       $scope.optionInterestOnly = ($scope.selector.paymentOption === PaymentOptions.TYPE_INTEREST);
 
-      if ($scope.paymentBreakdown.tpf > 0 )  {
+      if (typeof $scope.paymentBreakdown !== "undefined" && $scope.paymentBreakdown.tpf > 0 )  {
           $scope.showTranspo = ($scope.selector.paymentOption == PaymentOptions.TYPE_PAYOFF ) || ($scope.selector.paymentOption == PaymentOptions.TYPE_PAYMENT  &&  $scope.paymentBreakdown.lastCurtailment);
       } else {
           $scope.showTranspo = false;
