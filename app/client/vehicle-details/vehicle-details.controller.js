@@ -537,6 +537,20 @@
           });
         }
 
+        if (!(details.FinancialSummaryInfo.TransportationFee === 0)) {
+          $scope.financialSummary.paidChart.data.push({
+            name: gettextCatalog.getString('Transportation'),
+            y: 0,
+            color: '#F6881C'
+          });
+
+          $scope.financialSummary.outstandingChart.data.push({
+            name: gettextCatalog.getString('Transportation'),
+            y: details.FinancialSummaryInfo.TransportationFee,
+            color: '#F6881C'
+          });
+        }
+
         $scope.financialSummary.chart = {
           donutOptions: {
             size: '125%',
