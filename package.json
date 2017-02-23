@@ -59,7 +59,7 @@
     "babel-preset-react": "^6.16.0",
     "babel-preset-stage-0": "^6.16.0",
     "babelify": "^7.3.0",
-    "concurrently": "^3.1.0",
+    "concurrently": "^3.3.0",
     "cross-env": "^2.0.1",
     "flow-bin": "^0.37.0",
     "frisby": "^0.8.5",
@@ -152,20 +152,13 @@
     "eslint": "./bin/eslint"
   },
   "scripts": {
-    "serve": "grunt server & webpack --watch",
-    "serve:ie": "grunt server-ie & webpack --watch",
-    "serve:np": "grunt server-np & webpack --watch",
-    "serve:ie-test": "grunt server-ie --apiBase='https://test.nextgearcapital.com/MobileService/api' & webpack --watch",
-    "serve:np-test": "grunt server-np --apiBase='https://test.nextgearcapital.com/MobileService/api' & webpack --watch",
-    "webpack": "webpack",
     "webdriver-update": "webdriver-manager update",
     "webdriver-update-chrome": "webdriver-manager update --chrome",
     "translate": "babel-node translate.js",
-    "lint:js": "eslint app/client/** --quiet",
-    "test": "set NODE_ENV=development && karma start webpack.karma.conf.js --browsers PhantomJS",
-    "test:ie": "set NODE_ENV=development && karma start webpack.karma.conf.js --browsers IE",
-    "test:chrome": "set NODE_ENV=development && karma start webpack.karma.conf.js --browsers Chrome",
-    "test:firefox": "set NODE_ENV=development && karma start webpack.karma.conf.js --browsers Firefox",
-    "test:all": "set NODE_ENV=development && karma start webpack.karma.conf.js --browsers PhantomJS,IE,Chrome,Firefox"
+    "translate-angular": "grunt translate",
+    "lint-angular": "eslint app/client/**",
+    "prestart": "npm install && bower install && npm run translate",
+    "start": "cross-env NODE_ENV=development && concurrently --kill-others \"grunt server-np --apiBase='https://test.nextgearcapital.com/MobileService/api'\" \"webpack --watch\"",
+    "test": "cross-env NODE_ENV=development && karma start webpack.karma.conf.js --browsers Chrome"
   }
 }
