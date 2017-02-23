@@ -32,7 +32,7 @@ class Ribbon extends Component {
             </div>
         );
     }
-};
+}
 
 Ribbon.propTypes = {
     language: PropTypes.string.isRequired,

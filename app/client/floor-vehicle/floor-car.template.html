@@ -130,12 +130,12 @@
             </label>
             <label for="purchaseDate" class="text-error"
                    ng-show="!validity.purchaseDate.$error.date && validity.purchaseDate.$error.past">
-              <span translate>You can only floor vehicle purchased on or after</span>
+              <span translate>You can only floor a vehicle purchased on or after</span>
               {{ dealerMinDate | moment }}.
             </label>
             <label for="purchaseDate" class="text-error"
                    ng-show="!validity.purchaseDate.$error.date && validity.purchaseDate.$error.future">
-              <span translate>You entered a future date. You can only floor vehicle purchased on or before</span>
+              <span translate>You entered a future date. You can only floor a vehicle purchased on or before</span>
               {{ maxDate | moment }}.
             </label>
             <div class="form-group" ng-hide="data.SaleTradeIn">
