@@ -49,6 +49,7 @@
     $scope.maxAdditional = $scope.paymentObject.payoff.amount - $scope.paymentObject.payment.amount;
     $scope.paymentBreakdown = {};
     $scope.total = 0;
+    $scope.showTranspo = false;
 
     $scope.todayDate = moment().toDate();
     $scope.nextBusinessDay = null;
@@ -89,6 +90,13 @@
       $scope.paymentBreakdown = $scope.paymentObject.getBreakdown(newVal);
       // change the optionInterestOnly value as the watch update the value.
       $scope.optionInterestOnly = ($scope.selector.paymentOption === PaymentOptions.TYPE_INTEREST);
+
+      if ($scope.paymentBreakdown.tpf > 0 )  {
+          $scope.showTranspo = ($scope.selector.paymentOption == PaymentOptions.TYPE_PAYOFF ) || ($scope.selector.paymentOption == PaymentOptions.TYPE_PAYMENT  &&  $scope.paymentBreakdown.lastCurtailment);
+      } else {
+          $scope.showTranspo = false;
+      }
+
     });
 
     $scope.close = function() {
