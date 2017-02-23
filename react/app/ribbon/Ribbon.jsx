@@ -20,10 +20,6 @@ const navBarStyles = {
     borderRadius: '0',
 };
 
-// const pendingUnitsClickFunc = () => {
-//     $('#pendingUnitsAccordion').collapse('toggle');
-// };
-
 class Ribbon extends Component {
     constructor(props) {
         super(props);
