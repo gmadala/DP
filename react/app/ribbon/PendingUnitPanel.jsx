@@ -22,7 +22,7 @@ const PendingUnitPanel = ({ pendingItem }) => {
     const detailsLink = `#/vehicledetails?stockNumber=${pendingItem.StockNumber}`;
 
     return (
-        <div className="panel panel-default" style={panelStyles} key={pendingItem.FloorplanId}>
+        <div className="panel panel-default" style={panelStyles}>
             <div className="panel-body">
                 <div className="row">
                       <div className="col-sm-6">

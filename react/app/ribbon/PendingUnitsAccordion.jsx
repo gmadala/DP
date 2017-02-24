@@ -22,7 +22,7 @@ const PendingUnitsAccordion = ({ pendingunits, removeClick }) => {
     };
 
     const pendingList = pendingunits.map(pendingItem => (
-        <PendingUnitPanel pendingItem={pendingItem} />
+        <PendingUnitPanel pendingItem={pendingItem} key={pendingItem.FloorplanId} />
         )
     );
 

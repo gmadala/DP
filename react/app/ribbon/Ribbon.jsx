@@ -37,6 +37,10 @@ class Ribbon extends Component {
     }
 
     pendingUnitsClickFunc() {
+        if (this.props.floorplancount === 0) {
+            return;
+        }
+
         $('#pendingUnitsAccordion').collapse('toggle');
 
         $('#pendingUnitsAccordion').on('hidden.bs.collapse', () => {
@@ -76,7 +80,7 @@ class Ribbon extends Component {
                         </div>
                     </div>
                 </div>
-                { floorplanshow ? <PendingUnitsAccordion pendingunits={pendingunitsdata} removeClick={this.pendingUnitsClickFunc} /> : null }
+                { floorplanshow || !pendingunitsdata.length ? <PendingUnitsAccordion pendingunits={pendingunitsdata} removeClick={this.pendingUnitsClickFunc} /> : null }
             </div>
         );
     }
