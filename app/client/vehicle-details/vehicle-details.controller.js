@@ -247,7 +247,9 @@
           ScheduledPaymentDate: details.FinancialSummaryInfo.ScheduledPaymentDate,
           ScheduledPaymentAmount: details.FinancialSummaryInfo.ScheduledPaymentAmount,
           WebScheduledPaymentId: details.FinancialSummaryInfo.WebScheduledPaymentId,
-          CurtailmentPaymentScheduled: details.FinancialSummaryInfo.CurtailmentPaymentScheduled
+          CurtailmentPaymentScheduled: details.FinancialSummaryInfo.CurtailmentPaymentScheduled,
+          TransportationFee: details.FinancialSummaryInfo.TransportationFee,
+          IsLastCurtailment : details.FinancialSummaryInfo.IsLastCurtailment
         };
 
         Floorplan.determineFloorPlanExtendability(details.FinancialSummaryInfo.FloorplanId).then(
