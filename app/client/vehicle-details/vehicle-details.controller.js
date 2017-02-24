@@ -499,6 +499,8 @@
           ]
         };
 
+        const updatedOutstandingFees = details.FinancialSummaryInfo.IsLastCurtailment ? details.FinancialSummaryInfo.FeesOutstanding : details.FinancialSummaryInfo.FeesOutstanding - details.FinancialSummaryInfo.TransportationFee;
+
         $scope.financialSummary.outstandingChart = {
           title: {
             useHTML: true,
@@ -519,7 +521,7 @@
             },
             {
               name: gettextCatalog.getString('Fees'),
-              y: details.FinancialSummaryInfo.FeesOutstanding,
+              y: updatedOutstandingFees,
               color: '#A6A8AB'
             }
           ]
