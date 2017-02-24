@@ -22,7 +22,7 @@ const arrowStyles = {
 
 const RibbonItem = ({ itemcount, label, handleclick, arrowstate }) => (
     <span>
-        <button className="btn btn-default navbar-btn" style={buttonStyles} onClick={( ) => { handleclick() }} role="button" disabled={ itemcount === 0 }>
+        <button className="btn btn-default navbar-btn" style={buttonStyles} onClick={( ) => { handleclick() }} role="button" disabled={ itemcount === 0 && arrowstate }>
             <Translate style={labelStyles} content={label} /><br />
             <Translate content="dashboard.ribbonItem.units" with={{ count:itemcount }} />
             { arrowstate && itemcount > 0
