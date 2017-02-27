@@ -38,6 +38,7 @@ module.exports = {
         ribbon: {
             auditLabel: 'Open Audits',
             floorplanLabel: 'Pending Floorplans',
+            fundingTodayLabel: 'Funding Today',
         },
         ribbonItem: {
             units: {

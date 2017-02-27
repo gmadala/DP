@@ -1,12 +1,14 @@
 <progressive-prompt-component ng-if="showPrompt"></progressive-prompt-component>
 <ribbon-component
-                  ng-show="pendingFloorPlanFlag || openAuditsFlag"
+                  ng-show="pendingFloorPlanFlag || openAuditsFlag || fundingTodayFlag"
                   floorplanshow="pendingFloorPlanFlag"
                   floorplancount="pendingFloorplans"
                   navfloorplan="navFloorplans"
                   openauditsshow="openAuditsFlag"
                   openauditscount="audits.results.length"
                   navaudit="navAudit"
+                  amountfinanced = "amountFinanced"
+                  fundingtodayshow ="fundingTodayFlag"
                   language="calLanguage"></ribbon-component>
 
 <div class="container">
