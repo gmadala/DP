@@ -45,6 +45,15 @@ module.exports = {
                 other: '%(count)s Units',
             },
         },
+        pendingUnitsAccordion: {
+            pendingFloorplans: 'Pending Floorplans',
+        },
+        pendingUnitPanel: {
+            vin: 'VIN',
+            received: 'Received',
+            currentStatus: 'Current Status',
+            statusDescription: 'Floorplan request received. The Floorplan Services team will begin reviewing your request shortly.',
+        }
     },
     progressivePrompt: {
         isAndroid: 'Tap the top right menu icon %(icon)s and click on "Add to Home Screen"',

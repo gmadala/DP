@@ -21,7 +21,8 @@
     'language',
     '$cookieStore',
     'Audits',
-    '$rootScope'
+    '$rootScope',
+    'Paginate'
   ];
 
   function DashboardCtrl(
@@ -40,7 +41,8 @@
     language,
     $cookieStore,
     Audits,
-    $rootScope
+    $rootScope,
+    Paginate
   ) {
 
     var uibModal = $uibModal;
@@ -97,7 +99,7 @@
 
     // initial search
     $scope.floorplanData.resetSearch();
-    $scope.pendingUnitsAccordion.resetSearch(Floorplan.filterValues.PENDING, 5);
+    $scope.pendingUnitsAccordion.resetSearch(Floorplan.filterValues.PENDING, Paginate.PAGE_SIZE_SMALL);
 
     $scope.changeViewMode = function(mode) {
       $scope.viewMode = mode;

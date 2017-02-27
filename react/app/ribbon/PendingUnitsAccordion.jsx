@@ -1,5 +1,5 @@
 import React, { PropTypes } from 'react';
-
+import Translate from 'react-translate-component';
 import PendingUnitPanel from './PendingUnitPanel';
 
 const PendingUnitsAccordion = ({ pendingunits, removeClick }) => {
@@ -35,7 +35,8 @@ const PendingUnitsAccordion = ({ pendingunits, removeClick }) => {
                             <div className="row">
                                 <div className="col-xs-12" style={colStyles}>
                                     <h3 style={headerStyles}>
-                                        Pending Floorplans <span className="glyphicon glyphicon-remove pull-right" style={glyphiconStyles} onClick={( ) => { removeClick() }} />
+                                        <Translate content="dashboard.pendingUnitsAccordion.pendingFloorplans" />
+                                        <span className="glyphicon glyphicon-remove pull-right" style={glyphiconStyles} onClick={( ) => { removeClick() }} />
                                     </h3>
                                       {pendingList}
                                 </div>

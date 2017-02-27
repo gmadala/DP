@@ -1,4 +1,5 @@
 import React, { PropTypes } from 'react';
+import Translate from 'react-translate-component';
 
 const panelStyles = {
     marginBottom: '10px',
@@ -27,12 +28,12 @@ const PendingUnitPanel = ({ pendingItem }) => {
                 <div className="row">
                       <div className="col-sm-6">
                           <p style={linkStyles}><a href={detailsLink} style={linkAnchorStyles}>{pendingItem.Description}</a></p>
-                          <p style={vinStyles}>VIN: {pendingItem.UnitVIN}</p>
-                          <strong>Received: {pendingItem.FlooringDate}</strong>
+                          <p style={vinStyles}><Translate content="dashboard.pendingUnitPanel.vin" />: {pendingItem.UnitVIN}</p>
+                          <strong><Translate content="dashboard.pendingUnitPanel.received" />: {pendingItem.FlooringDate}</strong>
                       </div>
                       <div className="col-sm-5 col-sm-offset-1">
-                          <strong>Current Status:</strong>
-                          <p>Floorplan request received. The Floorplan Services team will begin reviewing your request shortly.</p>
+                          <strong><Translate content="dashboard.pendingUnitPanel.currentStatus" />:</strong>
+                          <p><Translate content="dashboard.pendingUnitPanel.statusDescription" /></p>
                       </div>
                 </div>
             </div>
