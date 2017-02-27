@@ -20,10 +20,10 @@ const labelStyle = {
 const FundingTodayItem = ({ itemcount, label }) => (
   <span>
         <button className="btn btn-default navbar-btn" style={buttonStyles} role="button">
-          <Translate style={labelStyle} content={label} /><br />
-          {numeral(itemcount).format('$0,0')}
+            <Translate style={labelStyle} content={label} /><br />
+            {numeral(itemcount).format('$0,0')}
         </button>
-    </span>
+  </span>
 );
 
 FundingTodayItem.propTypes = {
