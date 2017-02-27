@@ -459,8 +459,6 @@ describe('Controller: DashboardCtrl', function () {
       scope.filterFloorplans('foofers');
       expect(mockState.transitionTo).toHaveBeenCalledWith('floorplan', {filter: 'foofers'});
     });
-
-
   });
 
   describe('cached summary values', function() {
