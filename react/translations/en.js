@@ -47,6 +47,7 @@ module.exports = {
         },
         pendingUnitsAccordion: {
             pendingFloorplans: 'Pending Floorplans',
+            loadAll: 'View All Pending',
         },
         pendingUnitPanel: {
             vin: 'VIN',

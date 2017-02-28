@@ -2,7 +2,7 @@ import React, { PropTypes } from 'react';
 import Translate from 'react-translate-component';
 import PendingUnitPanel from './PendingUnitPanel';
 
-const PendingUnitsAccordion = ({ pendingunits, removeClick }) => {
+const PendingUnitsAccordion = ({ pendingUnits, removeClick, pendingCount }) => {
     const accordionStyles = {
         backgroundColor: '#244065',
     };
@@ -21,9 +21,40 @@ const PendingUnitsAccordion = ({ pendingunits, removeClick }) => {
         cursor: 'pointer',
     };
 
-    const pendingList = pendingunits.map(pendingItem => (
+    const loadAllStyles = {
+        marginBottom: '15px',
+    };
+
+    const loadAllLinkStyles = {
+        color: '#FFFFFF',
+        borderTopLeftRadius: '5px',
+        borderTopRightRadius: '5px',
+    };
+
+    const loadAllTriangleStyles = {
+        fill: '#FFFFFF',
+    };
+
+    const pendingList = pendingUnits.map(pendingItem => (
         <PendingUnitPanel pendingItem={pendingItem} key={pendingItem.FloorplanId} />
         )
+    );
+
+    const loadMore = (
+        <div id="loadAll" style={loadAllStyles}>
+            <a className="btn-cta cta-full cta-primary" href="/#/floorplan?filter=pending" style={loadAllLinkStyles}>
+                <span className="paired-body">
+                    <Translate content="dashboard.pendingUnitsAccordion.loadAll" />
+                </span>
+                <span className="paired-media icon-x-small svg-icon icon-triangle">
+                    <div className="svg-fix">
+                        <svg width="100%" height="100%" preserveAspectRatio="xMidYMid meet" style={loadAllTriangleStyles}>
+                            <use xmlnsXlink="http://www.w3.org/1999/xlink" xlinkHref="#icon-triangle" />
+                        </svg>
+                    </div>
+                </span>
+            </a>
+        </div>
     );
 
     return (
@@ -41,6 +72,11 @@ const PendingUnitsAccordion = ({ pendingunits, removeClick }) => {
                                       {pendingList}
                                 </div>
                             </div>
+                            {
+                                pendingCount > 5
+                                    ? loadMore
+                                    : null
+                            }
                         </div>
                     </div>
                 </div>
@@ -50,8 +86,9 @@ const PendingUnitsAccordion = ({ pendingunits, removeClick }) => {
 }
 
 PendingUnitsAccordion.propTypes = {
-    pendingunits: PropTypes.array.isRequired,
+    pendingUnits: PropTypes.array.isRequired,
     removeClick: PropTypes.func.isRequired,
+    pendingCount: PropTypes.number.isRequired,
 };
 
 export default PendingUnitsAccordion;

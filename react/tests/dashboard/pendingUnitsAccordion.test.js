@@ -6,9 +6,28 @@ import PendingUnitPanel from '../../app/ribbon/PendingUnitPanel';
 
 describe('PendingUnitsAccordion', () => {
     const props = {
-        pendingunits: [],
-        removeClick: sinon.spy()
+        pendingUnits: [],
+        removeClick: sinon.spy(),
+        pendingCount: 3,
     };
+
+    it('Check that view all button is hidden when pending count is < 5', () => {
+        const wrapper = shallow(
+            <PendingUnitsAccordion {...props} />
+        );
+
+        expect(wrapper.find('div#loadAll')).to.have.length(0);
+    });
+
+    it('Check that view all button is show when pending count is > 5', () => {
+        props.pendingCount = 6;
+
+        const wrapper = shallow(
+            <PendingUnitsAccordion {...props} />
+        );
+
+        expect(wrapper.find('div#loadAll')).to.have.length(1);
+    });
 
     it('Check the length of pending panels matches the length of pednignunits of 0', () => {
         const wrapper = shallow(
@@ -19,7 +38,7 @@ describe('PendingUnitsAccordion', () => {
     });
 
     it('Check the length of pending panels matches the length of pednignunits of 2', () => {
-        props.pendingunits = [
+        props.pendingUnits = [
             {
                 FloorplanId: '123123123',
                 StockNumber: 123,

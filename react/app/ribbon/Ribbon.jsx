@@ -80,7 +80,7 @@ class Ribbon extends Component {
                         </div>
                     </div>
                 </div>
-                { floorplanshow && pendingunitsdata.length ? <PendingUnitsAccordion pendingunits={pendingunitsdata} removeClick={this.pendingUnitsClickFunc} /> : null }
+                { floorplanshow && pendingunitsdata.length ? <PendingUnitsAccordion pendingCount={floorplancount} pendingUnits={pendingunitsdata} removeClick={this.pendingUnitsClickFunc} /> : null }
             </div>
         );
     }
