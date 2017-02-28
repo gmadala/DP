@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import counterpart from 'counterpart';
 import RibbonItem from './RibbonItem';
-import FundingTodayItem from './FundingTodayItem'
+import FundingTodayItem from './FundingTodayItem';
 
 const navBarStyles = {
     boxShadow: 'rgba(0,0,0,0.25) 0px 2px 3px',
