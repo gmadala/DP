@@ -399,10 +399,10 @@
                 <th><div class="th-inner" translate>Status</div></th>
                 </thead>
                 <tr ng-repeat="item in floorplanData.results">
-                  <td class="center">{{ item.FlooringDate | moment }}</td>
+                  <td>{{ item.FlooringDate | moment }}</td>
                   <td class="table-value"><a id="{{ item.Description }}" ng-model="item.StockNumber" href="#/vehicledetails?stockNumber={{ item.StockNumber }}">{{ item.Description }}</a></td>
-                  <td class="center">{{ item.LineOfCredit }}</td>
-                  <td class="center">{{ item.FloorplanStatusName }}</td>
+                  <td>{{ item.LineOfCredit }}</td>
+                  <td>{{ item.FloorplanStatusName }}</td>
                 </tr>
               </table>
             </div>
