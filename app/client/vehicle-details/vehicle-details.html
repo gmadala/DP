@@ -472,8 +472,15 @@
               <li class="list-table-row">
                 <p class="col-xs-7">{{ financialSummary.breakdown.interestFeesLabel }}</p>
 
+                <p class="col-xs-5 value numeric"><span class="table-symbol">+</span>
+                  {{financialSummary.breakdown.interestFeesCPP - financialSummary.TransportationFee | currency }}
+                </p>
+              </li>
+              <li class="list-table-row" ng-if="financialSummary.TransportationFee > 0">
+                <p class="col-xs-7">Transportation</p>
+
                 <p class="col-xs-5 value numeric"><span class="table-symbol">+</span>{{
-                  financialSummary.breakdown.interestFeesCPP | currency }}</p>
+                  financialSummary.TransportationFee | currency }}</p>
               </li>
               <li class="list-table-row">
                 <p class="col-xs-7" translate>Floor Plan Total</p>

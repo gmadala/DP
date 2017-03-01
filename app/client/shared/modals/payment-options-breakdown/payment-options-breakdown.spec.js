@@ -45,7 +45,9 @@ describe('Controller: PaymentOptionsBreakdownCtrl', function () {
       PrincipalPayoff: 3000,
       FeesPayoffTotal: 1000,
       InterestPayoffTotal: 1000,
-      CollateralProtectionPayoffTotal: 0
+      CollateralProtectionPayoffTotal: 0,
+      TransportationFee:100,
+      IsLastCurtailment: false
     };
 
     fromCartItemMock = CartItem.fromPayment(mockPayment);
@@ -63,6 +65,7 @@ describe('Controller: PaymentOptionsBreakdownCtrl', function () {
       FeesPayoffTotal: 500,
       InterestPayoffTotal: 500,
       CollateralProtectionPayoffTotal: 1000
+
     };
 
     dialogMock = {
@@ -115,6 +118,7 @@ describe('Controller: PaymentOptionsBreakdownCtrl', function () {
 
   it('should check if we are in business hours when opened', function() {
     run(fromCartItemMock);
+
     expect(BusinessHours.insideBusinessHours).toHaveBeenCalled();
     scope.$apply();
     expect(scope.canPayNow).toBe(true);

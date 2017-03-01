@@ -32,24 +32,30 @@
       this.payoff = {
         amount: item.CurrentPayoff,
         principal: item.PrincipalPayoff,
-        fees: item.FeesPayoffTotal,
+        fees: item.FeesPayoffTotal - item.TransportationFee,
         interest: item.InterestPayoffTotal,
-        cpp: item.CollateralProtectionPayoffTotal
+        cpp: item.CollateralProtectionPayoffTotal,
+        tpf: item.TransportationFee,
+        lastCurtailment : item.IsLastCurtailment
       };
       this.payment = {
         amount: item.AmountDue,
         principal: item.PrincipalDue,
-        fees: item.FeesPaymentTotal,
+        fees: item.FeesPaymentTotal -  item.TransportationFee ,
         interest: item.InterestPaymentTotal,
         cpp: item.CollateralProtectionPaymentTotal,
-        additionalPrincipal: item.AdditionaPrincipal || 0
+        additionalPrincipal: item.AdditionaPrincipal || 0,
+        tpf: ((item.IsLastCurtailment) ? item.TransportationFee : 0),
+        lastCurtailment : item.IsLastCurtailment
       };
       this.interest = {
         amount: item.InterestPaymentTotal,
         principal: 0,
         fees: 0,
         interest: item.InterestPaymentTotal,
-        cpp: 0
+        cpp: 0,
+        tpf: 0,
+        lastCurtailment : false
       };
 
       this.scheduledValues = {
@@ -79,7 +85,7 @@
           currentPaymentObject = this[option];
         }
 
-        amount = currentPaymentObject.principal + currentPaymentObject.fees + currentPaymentObject.interest + currentPaymentObject.cpp + (currentPaymentObject.additionalPrincipal ? currentPaymentObject.additionalPrincipal : 0);
+        amount = currentPaymentObject.tpf + currentPaymentObject.principal + currentPaymentObject.fees + currentPaymentObject.interest + currentPaymentObject.cpp + (currentPaymentObject.additionalPrincipal ? currentPaymentObject.additionalPrincipal : 0);
 
         return amount;
       },
@@ -104,20 +110,23 @@
           principal: this.payoff.principal,
           fees: amts.FeeAmount,
           interest: amts.InterestAmount,
-          cpp: amts.CollateralProtectionAmount
+          cpp: amts.CollateralProtectionAmount,
+          tpf: amts.TransportationFee
         };
         this.scheduledValues.payment = {
           principal: this.payment.principal,
           fees: amts.FeeAmount,
           interest: amts.InterestAmount,
           cpp: amts.CollateralProtectionAmount,
-          additionalPrincipal: this.payment.additionalPrincipal
+          additionalPrincipal: this.payment.additionalPrincipal,
+          tpf: amts.TransportationFee
         };
         this.scheduledValues.interest = {
           principal: 0,
           fees: 0,
           interest: amts.InterestAmount,
-          cpp: 0
+          cpp: 0,
+          tpf: 0
         };
       },
       getApiRequestObject: function () {

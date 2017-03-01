@@ -10,7 +10,7 @@
                ng-disabled="disabled"
                ng-change="clearSelected()"
                ng-minlength="3"
-               placeholder="Search Payee"
+               placeholder="{{ 'Search Payee' | translate }}"
                class="form-control"
                nxg-requires="!isRequired() || selection"
                nxg-blur="handleExit($event)"
