@@ -42,7 +42,7 @@ const PendingUnitsAccordion = ({ pendingUnits, removeClick, pendingCount }) => {
 
     const loadMore = (
         <div id="loadAll" style={loadAllStyles}>
-            <a className="btn-cta cta-full cta-primary" href="/#/floorplan?filter=pending" style={loadAllLinkStyles}>
+            <a className="btn-cta cta-full cta-primary" href="#/floorplan?filter=pending" style={loadAllLinkStyles}>
                 <span className="paired-body">
                     <Translate content="dashboard.pendingUnitsAccordion.loadAll" />
                 </span>
