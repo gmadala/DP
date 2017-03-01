@@ -37,7 +37,7 @@ module.exports = {
     dashboard: {
         ribbon: {
             auditLabel: 'Open Audits',
-            floorplanLabel: 'Pending Floorplans',
+            floorplanLabel: 'Pending Floor Plans',
         },
         ribbonItem: {
             units: {
@@ -46,14 +46,14 @@ module.exports = {
             },
         },
         pendingUnitsAccordion: {
-            pendingFloorplans: 'Pending Floorplans',
+            pendingFloorplans: 'Pending Floor Plans',
             loadAll: 'View All Pending',
         },
         pendingUnitPanel: {
             vin: 'VIN',
             received: 'Received',
             currentStatus: 'Current Status',
-            statusDescription: 'Floorplan request received. The Floorplan Services team will begin reviewing your request shortly.',
+            statusDescription: 'Floor Plan request received. The Floor Plan Services team will begin reviewing your request shortly.',
         }
     },
     progressivePrompt: {
