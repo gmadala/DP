@@ -53,7 +53,9 @@
         <li ng-repeat="file in wizardFloor.data.files">
           <!-- <img ngf-thumbnail="file" class="thumb"> -->
           <div>
-            <div class="pull-left" ng-bind="wizardFloor.renameFile(file.name,$index) | truncate:18"></div>
+            <div class="pull-left"
+                 style="font-size: 0.8em;"
+                 ng-bind="wizardFloor.renameFile(file.name,$index) | truncate:35"></div>
             <div class="wizard-file-delete" ng-click="removeFile($index)">&times;</div>
           </div>
         </li>
@@ -92,7 +94,7 @@
   <!--IE9 workaround -->
   <div ngf-no-file-drop>
     <div ng-show="wizardFloor.data.files">
-      <ul class="files-container" style="border-style: solid">
+      <ul class="files-container" style="border-style: solid;">
         <li ng-repeat="file in wizardFloor.data.files">
           <img ngf-thumbnail="file" class="thumb">
           <div class="file-delete" ng-click="removeFile($index)">&times;</div>
@@ -114,14 +116,18 @@
   </div>
 
   <!-- Floor Plan Comments -->
-  <label for="commentGeneral" class="sr-only">
-    <span translate>Additional Comments</span>
-  </label>
-  <textarea class="comment-box"
-            name="commentGeneral"
-            placeholder="{{ 'Please enter any additional comments you have for our team' | translate}}"
-            ng-model="wizardFloor.data.commentGeneral"
-            ng-disabled="wizardFloor.floorPlanSubmitting"
-            style="border: 1px solid #000;"
-  ></textarea>
+  <div class="form-group">
+    <label for="commentGeneral" class="sr-only">
+      <span translate>Additional Comments</span>
+    </label>
+    <textarea id="commentGeneral"
+              name="commentGeneral"
+              class="form-control comment-box"
+              rows="4"
+              placeholder="{{ 'Please enter any additional comments you have for our team' | translate}}"
+              ng-model="wizardFloor.data.commentGeneral"
+              ng-disabled="wizardFloor.floorPlanSubmitting"
+              style="border: 1px solid #000; height: auto;">
+  </textarea>
+  </div>
 </form>

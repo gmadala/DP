@@ -61,7 +61,8 @@
     <h4 style="margin-bottom:10px;" translate>Uploaded Documents</h4>
     <ul class="list-table">
       <li class="list-table-row" data-ng-repeat="file in wizardFloor.data.files">
-        <p class="col-xs-12 value" ng-bind="wizardFloor.renameFile(file.name,$index) | truncate:18"></p>
+        <p ng-show="isMobile" class="col-xs-12 value" ng-bind="wizardFloor.renameFile(file.name,$index) | truncate:35"></p>
+        <p ng-hide="isMobile" class="col-xs-12 value" ng-bind="wizardFloor.renameFile(file.name,$index) | truncate:50"></p>
       </li>
     </ul>
   </div>

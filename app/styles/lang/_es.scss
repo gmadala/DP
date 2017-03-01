@@ -177,6 +177,16 @@ body.lang_es {
     }
   }
 
+  #DashboardPage {
+    .table-fixed-header-inner {
+      th, td {
+        &:first-child.bigger {
+          min-width: 155px;
+        }
+      }
+    }
+  }
+
   #AuctionDashboardPage {
     @media (max-width: 1090px) {
 

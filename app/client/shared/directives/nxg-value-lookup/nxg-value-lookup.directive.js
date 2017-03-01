@@ -6,10 +6,10 @@
     .module('nextgearWebApp')
     .directive('nxgValueLookup', nxgValueLookup);
 
-  nxgValueLookup.$inject = ['gettext', 'gettextCatalog'];
+  nxgValueLookup.$inject = ['gettext', 'gettextCatalog', 'language'];
 
-  function nxgValueLookup(gettext, gettextCatalog) {
-
+  function nxgValueLookup(gettext, gettextCatalog, language) {
+    gettext('Bill of Sale');
     gettext('Purchase Amount');
     gettext('Average Bookout');
     gettext('Purchase price less than <br /> highest average bookout');
@@ -32,7 +32,7 @@
     function linkFn(scope, element) {
       // local vars for translations
       var purchasePriceLessText = gettextCatalog.getString('Purchase price less than <br /> highest average bookout');
-      var purchasePriceMoreText = gettextCatalog.getString('Highest average bookout <br /> less than purchase price');
+      var purchasePriceMoreText = gettextCatalog.getString('Purchase price more than <br /> highest average bookout');
       var purchasePriceOnlyText = gettextCatalog.getString('Only purchase price data <br /> is available');
       // local vars to hold svg references
       var valuationLabel, valuationTriangle;
@@ -136,7 +136,8 @@
               return element.y;
             });
             // the text will be depends on which one is the selected as projected financed amount.
-            labelText = projectedPoint.category === 'Bill of Sale' ? purchasePriceLessText : purchasePriceMoreText;
+            labelText = projectedPoint.category === gettextCatalog.getString('Bill of Sale') ?
+                purchasePriceLessText : purchasePriceMoreText;
           } else {
             projectedPoint = data[0];
             // the text label will be the purchase price only text
@@ -160,11 +161,18 @@
 
           // the text will have 3 position based on the percentage of where the plot line will be.
           // 0% - 30% - 70%
+          var languageSpecificOffset = 140;
+          if (language.getCurrentLanguageId() === 2) {
+            languageSpecificOffset = 165;
+          } else if (language.getCurrentLanguageId() === 3) {
+            languageSpecificOffset = 155;
+          }
+
           var percentage = (chart.plotWidth - projectedPoint.plotY) * 100 / chart.plotWidth;
           if (percentage > 70) {
-            labelX = labelX + chart.plotWidth - 145;
+            labelX = labelX + chart.plotWidth - languageSpecificOffset;
           } else if (percentage > 30 && percentage <= 70) {
-            labelX = labelX + ((chart.plotWidth - 145) / 2);
+            labelX = labelX + ((chart.plotWidth - languageSpecificOffset) / 2);
           } else {
             labelX = labelX - 5;
           }
@@ -252,7 +260,7 @@
             type: 'bar',
             height: 140,
             marginTop: 0,
-            marginRight: 0,
+            marginRight: 3, // to offset the right side of the triangle
             marginBottom: 50,
             marginLeft: 80
           },
@@ -263,7 +271,7 @@
             text: ''
           },
           xAxis: {
-            categories: ['Bill of Sale', 'Black Book', 'MMR'],
+            categories: [gettextCatalog.getString('Bill of Sale'), 'Black Book', 'MMR'],
             tickLength: 0,
             gridLineColor: 'transparent',
             lineWidth: 0,

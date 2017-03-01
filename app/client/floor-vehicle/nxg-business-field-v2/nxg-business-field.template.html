@@ -10,13 +10,13 @@
                ng-disabled="disabled"
                ng-change="clearSelected()"
                ng-minlength="3"
-               placeholder="Search Payee"
+               placeholder="{{ 'Search Payee' | translate }}"
                class="form-control"
                nxg-requires="!isRequired() || selection"
                nxg-blur="handleExit($event)"
                ng-class="{ 'nxg-invalid': validity.inputBiz.$error.minlength || (isValidLength(validity.inputBiz.$error) && validity.inputBiz.$error.nxgRequires)  }"/>
         <div class="input-group-btn">
-          <button style="margin: 0px; left: 20px;" class="btn-cta cta-secondary" type="button" placeholder="Seller" ng-click="disabled || openBusinessSearch()" ng-class="{disabled: disabled}" translate>SEARCH</button>
+          <button style="margin: 0px; left: 20px; padding-top: 7px;" class="btn-cta cta-secondary" type="button" placeholder="Seller" ng-click="disabled || openBusinessSearch()" ng-class="{disabled: disabled}" translate>Search</button>
         </div>
         <!-- <button href class="btn btn-input" ng-click="disabled || openBusinessSearch()"
          ng-class="{disabled: disabled}" type="button">

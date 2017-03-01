@@ -57,7 +57,7 @@
       breakdown: fee ? null : angular.copy(payment.getBreakdown()),
       getPaymentTotal: function() {
         return fee ? fee.Balance : $scope.model.breakdown.principal + ($scope.model.breakdown.additionalPrincipal || 0)  +
-        $scope.model.breakdown.interest + $scope.model.breakdown.fees + $scope.model.breakdown.cpp;
+        $scope.model.breakdown.interest + $scope.model.breakdown.fees + $scope.model.breakdown.cpp + $scope.model.breakdown.tpf;
       }
     };
 
@@ -77,11 +77,13 @@
           $scope.model.breakdown.fees = result.FeeAmount;
           $scope.model.breakdown.interest = result.InterestAmount;
           $scope.model.breakdown.cpp = result.CollateralProtectionAmount;
+          $scope.model.breakdown.tpf = result.TransportationFee;
 
           if($scope.model.payment.paymentOption === PaymentOptions.TYPE_INTEREST) {
             $scope.model.breakdown.principal = 0;
             $scope.model.breakdown.fees = 0;
             $scope.model.breakdown.cpp = 0;
+            $scope.model.breakdown.tpf = 0;
             $scope.model.breakdown.amount = $scope.model.breakdown.interest;
           }
         }, function(/*error*/) {
