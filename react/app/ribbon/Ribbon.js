@@ -69,14 +69,14 @@ class Ribbon extends Component {
                                 <div className="col-xs-12">
                                     { floorplanshow
                                         ? <RibbonItem
-                                            itemcount={floorplancount}
+                                            itemCount={floorplancount}
                                             label="dashboard.ribbon.floorplanLabel"
-                                            handleclick={this.pendingUnitsClickFunc}
-                                            arrowstate={this.state.arrowState}
+                                            handleClick={this.pendingUnitsClickFunc}
+                                            arrowState={this.state.arrowState}
                                         />
                                         : null }
-                                    { fundingtodayshow ? <FundingTodayItem itemcount={amountfinanced} label="dashboard.ribbon.fundingTodayLabel" /> : null }
-                                    { openauditsshow ? <RibbonItem itemcount={openauditscount} handleclick={navaudit} label="dashboard.ribbon.auditLabel" /> : null }
+                                    { fundingtodayshow ? <FundingTodayItem itemCount={amountfinanced} label="dashboard.ribbon.fundingTodayLabel" /> : null }
+                                    { openauditsshow ? <RibbonItem itemCount={openauditscount} handleClick={navaudit} label="dashboard.ribbon.auditLabel" /> : null }
                                 </div>
                             </div>
                         </div>
