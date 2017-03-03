@@ -9,7 +9,9 @@
 
   function Floorplan(api, Paginate, User, $q, gettextCatalog) {
     var overrideInProgress = false;
-
+    var floorplanFunding  = {
+      AmountFinanced : 0
+    };
     function handleNgenRequest(response) {
       api.resetSessionTimeout();
       return response;
@@ -99,6 +101,7 @@
 
         return api.request('GET', '/floorplan/search', params).then(
           function (results) {
+            self.setAmountFinanced(results.AmountFinanced);
             angular.forEach(results.Floorplans, function (floorplan) {
               floorplan.data = {query: criteria.query};
               if (floorplan.TitleImageAvailable) {
@@ -232,6 +235,12 @@
         fpArray.push(floorPlanIds);
         var fpJSON = JSON.stringify(fpArray);
         return api.request('POST', api.ngenContentLink('/floorplans/extension/determine_floorplan_extendability'), fpJSON, null, true, api.ngenSuccessHandler);
+      },
+      setAmountFinanced: function(amountFinanced){
+        floorplanFunding.AmountFinanced = amountFinanced;
+      },
+      getAmountFinanced: function() {
+        return floorplanFunding.AmountFinanced;
       }
     };
 

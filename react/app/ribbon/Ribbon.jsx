@@ -1,6 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import counterpart from 'counterpart';
 import RibbonItem from './RibbonItem';
+import FundingTodayItem from './FundingTodayItem';
 import PendingUnitsAccordion from './PendingUnitsAccordion';
 
 const wrapperStyles = {
@@ -57,7 +58,7 @@ class Ribbon extends Component {
     }
 
     render() {
-        const { floorplanshow, floorplancount, pendingunitsdata, openauditsshow, openauditscount, navaudit } = this.props;
+        const { floorplanshow, floorplancount, pendingunitsdata, openauditsshow, openauditscount, navaudit, fundingtodayshow, amountfinanced } = this.props;
 
         return (
             <div style={wrapperStyles}>
@@ -74,7 +75,8 @@ class Ribbon extends Component {
                                             arrowstate={this.state.arrowState}
                                         />
                                         : null }
-                                    { openauditsshow ? <RibbonItem itemcount={openauditscount} handleclick={navaudit} label="dashboard.ribbon.auditLabel" /> : null}
+                                    { fundingtodayshow ? <FundingTodayItem itemcount={amountfinanced} label="dashboard.ribbon.fundingTodayLabel" /> : null }
+                                    { openauditsshow ? <RibbonItem itemcount={openauditscount} handleclick={navaudit} label="dashboard.ribbon.auditLabel" /> : null }
                                 </div>
                             </div>
                         </div>
@@ -94,6 +96,8 @@ Ribbon.propTypes = {
     openauditsshow: PropTypes.bool.isRequired,
     openauditscount: PropTypes.number.isRequired,
     navaudit: PropTypes.func.isRequired,
+    amountfinanced: PropTypes.number.isRequired,
+    fundingtodayshow: PropTypes.bool.isRequired,
 };
 
 export default Ribbon;
