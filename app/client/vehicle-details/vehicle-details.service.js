@@ -18,7 +18,7 @@
              * Per Blake Weishaar, this value should be the sum of the Total Paid and the Total Outstanding.
              */
             if (data && data.FinancialSummaryInfo) {
-              const fs = data.FinancialSummaryInfo;
+              var fs = data.FinancialSummaryInfo;
 
               fs.FloorplanTotal = fs.TotalPaid + fs.TotalOutstanding;
             }
