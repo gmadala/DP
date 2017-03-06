@@ -70,7 +70,7 @@
       return deferred.promise;
     }
 
-    //
+    // Prevent the warning dialog
     function preventWarningDialog() {
       var list = messages.list();
       list.forEach(function(element) {
