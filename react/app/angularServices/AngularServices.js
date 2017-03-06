@@ -1,4 +1,4 @@
-import React, { PropTypes, Component } from 'react';
+import { PropTypes, Component } from 'react';
 import counterpart from 'counterpart';
 
 class AngularServices extends Component {
@@ -18,15 +18,15 @@ class AngularServices extends Component {
     }
 
     componentDidUpdate() {
-        counterpart.setLocale(this.props.gettextCatalog.currentLanguage.substring(0, 2)); // set language
+        if (this.props.isLoggedIn) {
+            counterpart.setLocale(this.props.gettextCatalog.currentLanguage.substring(0, 2)); // set language
 
-        this.props.User.refreshInfo().then(() => this.props.setAngularObj(this.props.User.isUnitedStates(), 'isUnitedStates'))
+            this.props.User.refreshInfo().then(() => this.props.setAngularObj(this.props.User.isUnitedStates(), 'isUnitedStates'))
+        }
     }
 
     render() {
-        return (
-            <span/>
-        );
+        return null
     }
 }
 
@@ -41,7 +41,8 @@ AngularServices.propTypes = {
     $window: PropTypes.any.isRequired,
     $state: PropTypes.any.isRequired,
     nxgConfig: PropTypes.any.isRequired,
-    $rootScope: PropTypes.any.isRequired
+    $rootScope: PropTypes.any.isRequired,
+    isLoggedIn: PropTypes.bool.isRequired
 }
 
 export default AngularServices;
