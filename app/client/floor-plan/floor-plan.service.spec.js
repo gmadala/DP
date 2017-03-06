@@ -195,6 +195,7 @@ describe('Model: Floorplan', function () {
         return [200, {
           Success: true,
           Data: {
+            AmountFinanced: 5000,
             FloorplanRowCount: 20,
             Floorplans: searchResults
           }
@@ -629,4 +630,12 @@ describe('Model: Floorplan', function () {
       expect(floorplan.overrideInProgress()).toBe(false);
     })
   });
+
+  describe('get/setAmountFinanced functions', function () {
+    it('should get and set the value of AmountFinanced', function () {
+      floorplan.setAmountFinanced(5000);
+      expect(floorplan.getAmountFinanced()).toBe(5000);
+    });
+  });
+
 });

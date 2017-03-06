@@ -1,12 +1,14 @@
 <progressive-prompt-component ng-if="showPrompt"></progressive-prompt-component>
 <ribbon-component
-                  ng-show="pendingFloorPlanFlag || openAuditsFlag"
+                  ng-show="pendingFloorPlanFlag || openAuditsFlag || fundingTodayFlag"
                   floorplanshow="pendingFloorPlanFlag"
                   floorplancount="pendingFloorplans"
                   navfloorplan="navFloorplans"
                   openauditsshow="openAuditsFlag"
                   openauditscount="audits.results.length"
                   navaudit="navAudit"
+                  amountfinanced = "amountFinanced"
+                  fundingtodayshow ="fundingTodayFlag"
                   language="calLanguage"></ribbon-component>
 
 <div class="container">
@@ -399,10 +401,10 @@
                 <th><div class="th-inner" translate>Status</div></th>
                 </thead>
                 <tr ng-repeat="item in floorplanData.results">
-                  <td class="center">{{ item.FlooringDate | moment }}</td>
+                  <td>{{ item.FlooringDate | moment }}</td>
                   <td class="table-value"><a id="{{ item.Description }}" ng-model="item.StockNumber" href="#/vehicledetails?stockNumber={{ item.StockNumber }}">{{ item.Description }}</a></td>
-                  <td class="center">{{ item.LineOfCredit }}</td>
-                  <td class="center">{{ item.FloorplanStatusName }}</td>
+                  <td>{{ item.LineOfCredit }}</td>
+                  <td>{{ item.FloorplanStatusName }}</td>
                 </tr>
               </table>
             </div>
