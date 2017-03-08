@@ -28,6 +28,7 @@
     "flow": "^0.2.3",
     "fs-writefile-promise": "^1.0.3",
     "matchdep": "^0.3.0",
+    "moment": "^2.17.1",
     "ngreact": "^0.3.0",
     "numeral": "^2.0.4",
     "react": "^15.3.1",

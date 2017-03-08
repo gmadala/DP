@@ -1,5 +1,6 @@
 import React, { PropTypes } from 'react';
 import Translate from 'react-translate-component';
+import moment from 'moment';
 
 const panelStyles = {
     marginBottom: '10px',
@@ -22,6 +23,8 @@ const vinStyles = {
 const PendingUnitPanel = ({ pendingItem }) => {
     const detailsLink = `#/vehicledetails?stockNumber=${pendingItem.StockNumber}`;
 
+    const floorDate = moment(pendingItem.FlooringDate).format('L');
+
     return (
         <div className="panel panel-default" style={panelStyles}>
             <div className="panel-body">
@@ -29,7 +32,7 @@ const PendingUnitPanel = ({ pendingItem }) => {
                       <div className="col-sm-6">
                           <p style={linkStyles}><a href={detailsLink} style={linkAnchorStyles}>{pendingItem.Description}</a></p>
                           <p style={vinStyles}><Translate content="dashboard.pendingUnitPanel.vin" />: {pendingItem.UnitVIN}</p>
-                          <strong><Translate content="dashboard.pendingUnitPanel.received" />: {pendingItem.FlooringDate}</strong>
+                          <strong><Translate content="dashboard.pendingUnitPanel.received" />: {floorDate}</strong>
                       </div>
                       <div className="col-sm-5 col-sm-offset-1">
                           <strong><Translate content="dashboard.pendingUnitPanel.currentStatus" />:</strong>
