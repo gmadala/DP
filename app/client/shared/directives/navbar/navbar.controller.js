@@ -25,6 +25,7 @@
     $scope.isCollapsed = true;
     $scope.menuOpen = false;
     $scope.isLoggedIn = false;
+    $scope.pageTitle = $rootScope.currentPage;
 
     $scope.isDashboard = function () {
       return $state.current.name === "dashboard" || $state.current.name === "auction_dashboard" || $state.current.name === "headless" || $scope.pageTitle === "";
@@ -141,9 +142,6 @@
           activeWhen: 'account_management'
         }
       }
-      dealerLinks.primary.push(mobileLinks.profile);
-      dealerLinks.primary.push(mobileLinks.management);
-      auctionLinks.primary.push(mobileLinks.settings);
     }
 
     $scope.initNav = function( ) {
@@ -270,11 +268,7 @@
     // this will return true and the active class will be applied to style the nav
     // link appropriately.
     $scope.isActive = function( link ) {
-      var isActive = $state.includes( link.activeWhen );
-      if ( isActive ) {
-        $scope.pageTitle = link.name;
-      }
-      return isActive;
+      return $state.includes( link.activeWhen );
     };
 
     $scope.isActiveGroup = function( subMenu ) {
@@ -326,6 +320,7 @@
     $rootScope.$on( '$stateChangeSuccess', function( ) {
       $scope.isCollapsed = true;
       $scope.navbarClosed = true;
+      $scope.pageTitle = $rootScope.currentPage;
 
       $scope.showSupport = false;
       $scope.closeSupport = function( ) {
