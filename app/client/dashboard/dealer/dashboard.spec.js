@@ -13,6 +13,7 @@ describe('Controller: DashboardCtrl', function () {
     searchSpy,
     auditsSpy,
     $q,
+    floorplan,
     dealerDashboardData = {
       "OverduePayments": 1,
       "OverduePaymentAmount": 340,
@@ -300,6 +301,7 @@ describe('Controller: DashboardCtrl', function () {
   beforeEach(inject(function ($controller, $rootScope, $cookieStore, Dashboard, Audits, Floorplan, FloorplanUtil, _$q_, $uibModal, $httpBackend) {
     scope = $rootScope.$new();
     $q = _$q_;
+    floorplan = Floorplan;
     mockState = {
       transitionTo: jasmine.createSpy(),
       current: {
@@ -329,6 +331,7 @@ describe('Controller: DashboardCtrl', function () {
       $state: mockState,
       $rootScope,
       $cookieStore,
+      Floorplan : floorplan,
     });
 
     $httpBackend.expectGET('/Dealer/v1_2/Info').respond({
@@ -341,6 +344,17 @@ describe('Controller: DashboardCtrl', function () {
       spyOn(dashboard, 'fetchDealerDashboard').and.callFake(function() {
         return $q.when(angular.copy(dealerDashboardData));
       });
+    });
+
+    it('should contain the amountFinanced', function () {
+      var start = new Date(),
+          end = new Date();
+      floorplan.setAmountFinanced(1234);
+      expect(floorplan.getAmountFinanced()).toBe(1234);
+      scope.$emit('setDateRange', start, end);
+      expect(dashboard.fetchDealerDashboard).toHaveBeenCalledWith(start, end);
+      scope.$apply();
+      expect(scope.amountFinanced).toBe(1234);
     });
 
     it('should set up a default viewMode', function() {
