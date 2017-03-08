@@ -349,7 +349,7 @@
 
 @media only screen and (max-width: 767px) {
   body {
-    //padding-top: 70px !important; Use this when fixing the navbar to top
+    padding-top: 50px !important; // Use this when fixing the navbar to top
     -webkit-overflow-scrolling: touch;
   }
 
@@ -416,8 +416,7 @@
   }
 
   .mobile-navbar {
-    position: relative;
-    top: auto;
+    position: fixed;
     right: 0;
     left: 0;
     top: 0;

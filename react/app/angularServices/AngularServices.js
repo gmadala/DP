@@ -22,10 +22,11 @@ class AngularServices extends Component {
         if (this.props.isLoggedIn) {
             counterpart.setLocale(this.props.gettextCatalog.currentLanguage.substring(0, 2)); // set language
 
-        this.props.User.refreshInfo().then((info) => {
-            this.props.setAngularObj(this.props.User.isUnitedStates(), 'isUnitedStates')
-            this.props.setAngularObj(info, 'UserInfo')
-        })
+            this.props.User.refreshInfo().then((info) => {
+                this.props.setAngularObj(this.props.User.isUnitedStates(), 'isUnitedStates')
+                this.props.setAngularObj(info, 'UserInfo')
+            })
+        }
     }
 
     render() {

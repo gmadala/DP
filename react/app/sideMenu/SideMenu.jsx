@@ -50,9 +50,7 @@ class SideMenu extends Component {
         super(props)
         this.state = {
             ...this.state,
-            tl: new TimelineMax({
-                onStart: this.preventScroll
-            })
+            tl: new TimelineMax()
         }
     }
 
@@ -84,11 +82,6 @@ class SideMenu extends Component {
 
     toggleTimeline = open => (open ? this.state.tl.play() : this.state.tl.reverse())
     reverseTimeline = () => { this.state.tl.reverse() }
-    preventScroll = () => {
-        $(document).bind('touchmove', (e) => { e.preventDefault(); return true; } )
-        $(this.container).bind('touchmove', (e) => { e.stopPropagation(); return true; })
-    }
-    enableScroll = () => { $(document).unbind('touchmove') }
 
     buildSupportMenu = () => {
         const config = this.props.nxgConfig.userVoice
@@ -149,7 +142,6 @@ class SideMenu extends Component {
     }
 
     handleAngularLink = (item) => {
-        this.enableScroll()
         if (item) {
             if (item.state) {
                 this.props.angularState.go(item.state)
