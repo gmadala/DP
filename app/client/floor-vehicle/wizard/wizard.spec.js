@@ -12,15 +12,26 @@ describe('Controller: SalesInfoCtrl', function() {
     blackbookObjects,
     wizardService;
 
+  var api;
+  var messages;
+  var $httpBackend;
+
   beforeEach(inject(function(_$q_,
                              $controller,
                              $rootScope,
+                             _api_,
                              _Mmr_,
                              _Blackbook_,
-                             _wizardService_) {
+                             _wizardService_,
+                             _$httpBackend_,
+                             _messages_) {
 
     $q = _$q_;
     scope = $rootScope.$new();
+
+    api = _api_;
+    messages = _messages_;
+    $httpBackend = _$httpBackend_;
 
     Mmr = _Mmr_;
     Blackbook = _Blackbook_;
@@ -146,6 +157,19 @@ describe('Controller: SalesInfoCtrl', function() {
       scope.$digest();
       expect(Blackbook.lookupByVin).toHaveBeenCalled();
       expect(Blackbook.lookupByVin.calls.count()).toBe(3);
+    });
+
+    it('should clear error messages when the lookup throw exceptions', function() {
+      // this will create unable to communicate dialog
+      $httpBackend.whenGET('/analytics/v1_2/blackbook/ABCD/100').respond();
+      spyOn(messages, 'list').and.callThrough();
+
+      Blackbook.lookupByVin.and.callThrough();
+      wizardService.getBlackbookValues('ABCD', 100);
+      $httpBackend.flush();
+
+      expect(messages.list).toHaveBeenCalled();
+      expect(messages.list()).toEqual([]);
     });
   });
 });
