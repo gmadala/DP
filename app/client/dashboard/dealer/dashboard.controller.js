@@ -12,6 +12,7 @@
     'Dashboard',
     'User',
     'FloorplanUtil',
+    'Floorplan',
     'moment',
     '$filter',
     'gettext',
@@ -30,6 +31,7 @@
     Dashboard,
     User,
     FloorplanUtil,
+    Floorplan,
     moment,
     $filter,
     gettext,
@@ -120,6 +122,7 @@
     // checking the feature flag for the displaying pending floorplans && open audits on the dashboard ribbon
     $scope.pendingFloorPlanFlag = User.getFeatures().hasOwnProperty('ribbonPendingFloorplans') ? User.getFeatures().ribbonPendingFloorplans.enabled : false;
     $scope.openAuditsFlag = User.getFeatures().hasOwnProperty('openAudits') ? User.getFeatures().openAudits.enabled : false;
+    $scope.fundingTodayFlag = User.getFeatures().hasOwnProperty('fundingToday') ? User.getFeatures().fundingToday.enabled : false;
 
     // get number of open audits for ribbon and for pending floorplans
     $scope.pendingFloorplans = 0;
@@ -334,6 +337,7 @@
               y: 75
             }
           };
+          $scope.amountFinanced = Floorplan.getAmountFinanced();
         }
       );
     });

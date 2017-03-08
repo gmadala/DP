@@ -247,7 +247,9 @@
           ScheduledPaymentDate: details.FinancialSummaryInfo.ScheduledPaymentDate,
           ScheduledPaymentAmount: details.FinancialSummaryInfo.ScheduledPaymentAmount,
           WebScheduledPaymentId: details.FinancialSummaryInfo.WebScheduledPaymentId,
-          CurtailmentPaymentScheduled: details.FinancialSummaryInfo.CurtailmentPaymentScheduled
+          CurtailmentPaymentScheduled: details.FinancialSummaryInfo.CurtailmentPaymentScheduled,
+          TransportationFee: details.FinancialSummaryInfo.TransportationFee,
+          IsLastCurtailment : details.FinancialSummaryInfo.IsLastCurtailment
         };
 
         Floorplan.determineFloorPlanExtendability(details.FinancialSummaryInfo.FloorplanId).then(
@@ -517,7 +519,7 @@
             },
             {
               name: gettextCatalog.getString('Fees'),
-              y: details.FinancialSummaryInfo.FeesOutstanding,
+              y: details.FinancialSummaryInfo.FeesOutstanding - details.FinancialSummaryInfo.TransportationFee,
               color: '#A6A8AB'
             }
           ]
@@ -534,6 +536,20 @@
             name: gettextCatalog.getString('CPP'),
             y: details.FinancialSummaryInfo.CollateralProtectionOutstanding,
             color: '#6D6E70'
+          });
+        }
+
+        if (!(details.FinancialSummaryInfo.TransportationFee === 0)) {
+          $scope.financialSummary.paidChart.data.push({
+            name: gettextCatalog.getString('Transportation'),
+            y: 0,
+            color: '#F6881C'
+          });
+
+          $scope.financialSummary.outstandingChart.data.push({
+            name: gettextCatalog.getString('Transportation'),
+            y: details.FinancialSummaryInfo.TransportationFee,
+            color: '#F6881C'
           });
         }
 

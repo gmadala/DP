@@ -5,34 +5,35 @@ describe('Model: VehicleDetails', function () {
   // load the service's module
   beforeEach(module('nextgearWebApp'));
 
-  var vehicleDetails,
-      api,
-      getDetailsReturn = {
-        'FinancialSummaryInfo': {
-          'FloorplanTotal': 3600.0000,
-          'TotalPaid': 655.6400,
-          'TotalOutstanding': 3109.3600,
-          'InterestPaid': 16.0600,
-          'PrincipalPaid': 540.0000,
-          'CollateralProtectionPaid': 14.5800,
-          'FeesPaid': 85.0000,
-          'InterestOutstanding': 23.6000,
-          'PrincipalOutstanding': 3060.0000,
-          'CollateralProtectionOutstanding': 25.7600,
-          'FeesOutstanding': 0.0,
-          'NextPaymentAmount': 508.3600,
-          'NextPaymentDueDate': "2014-10-08",
-          'PrincipalDue': 459.0000,
-          'InterestPaymentTotal': 23.6000,
-          'CollateralProtectionPaymentTotal': 25.7600,
-          'FeesPaymentTotal': 0.0,
-          'Scheduled': false,
-          'WebScheduledPaymentId': null,
-          'ScheduledPaymentDate': null,
-          'CurtailmentPaymentScheduled': false,
-          'FloorplanActivity': []
-        }
-      };
+  let vehicleDetails,
+    api,
+    getDetailsReturn = {
+      'FinancialSummaryInfo': {
+        'FloorplanTotal': 3600.0000,
+        'TotalPaid': 655.6400,
+        'TotalOutstanding': 3109.3600,
+        'InterestPaid': 16.0600,
+        'PrincipalPaid': 540.0000,
+        'CollateralProtectionPaid': 14.5800,
+        'FeesPaid': 85.0000,
+        'InterestOutstanding': 23.6000,
+        'PrincipalOutstanding': 3060.0000,
+        'CollateralProtectionOutstanding': 25.7600,
+        'FeesOutstanding': 0.0,
+        'NextPaymentAmount': 508.3600,
+        'NextPaymentDueDate': '2014-10-08',
+        'PrincipalDue': 459.0000,
+        'InterestPaymentTotal': 23.6000,
+        'CollateralProtectionPaymentTotal': 25.7600,
+        'FeesPaymentTotal': 0.0,
+        'Scheduled': false,
+        'WebScheduledPaymentId': null,
+        'ScheduledPaymentDate': null,
+        'CurtailmentPaymentScheduled': false,
+        'FloorplanActivity': [],
+        'TransportationFee': 0
+      }
+    };
 
   describe('getDetails', function() {
     beforeEach(inject(function (VehicleDetails, _api_) {
@@ -68,7 +69,7 @@ describe('Model: VehicleDetails', function () {
           result = r;
         }
       );
-      expect(result.FinancialSummaryInfo.FloorplanTotal).toBe(result.FinancialSummaryInfo.TotalPaid + result.FinancialSummaryInfo.TotalOutstanding);
+      expect(result.FinancialSummaryInfo.FloorplanTotal).toBe(result.FinancialSummaryInfo.TotalPaid + result.FinancialSummaryInfo.TotalOutstanding + result.FinancialSummaryInfo.TransportationFee);
     });
   });
 
