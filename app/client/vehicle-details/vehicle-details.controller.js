@@ -249,6 +249,7 @@
           WebScheduledPaymentId: details.FinancialSummaryInfo.WebScheduledPaymentId,
           CurtailmentPaymentScheduled: details.FinancialSummaryInfo.CurtailmentPaymentScheduled,
           TransportationFee: details.FinancialSummaryInfo.TransportationFee,
+          TransportationFeePaid: details.FinancialSummaryInfo.TransportationFeePaid,
           IsLastCurtailment : details.FinancialSummaryInfo.IsLastCurtailment
         };
 
@@ -493,7 +494,7 @@
             },
             {
               name: gettextCatalog.getString('Fees'),
-              y: details.FinancialSummaryInfo.FeesPaid,
+              y: details.FinancialSummaryInfo.FeesPaid - details.FinancialSummaryInfo.TransportationFeePaid,
               color: '#A6A8AB'
             }
           ]
@@ -539,16 +540,19 @@
           });
         }
 
-        if (!(details.FinancialSummaryInfo.TransportationFee === 0)) {
+        const transpoFee = details.FinancialSummaryInfo.TransportationFee ? details.FinancialSummaryInfo.TransportationFee : 0;
+        const transpoFeePaid = details.FinancialSummaryInfo.TransportationFeePaid ? details.FinancialSummaryInfo.TransportationFeePaid : 0;
+
+        if (!(transpoFee === 0) || !(transpoFeePaid === 0)) {
           $scope.financialSummary.paidChart.data.push({
             name: gettextCatalog.getString('Transportation'),
-            y: 0,
+            y: transpoFeePaid,
             color: '#F6881C'
           });
 
           $scope.financialSummary.outstandingChart.data.push({
             name: gettextCatalog.getString('Transportation'),
-            y: details.FinancialSummaryInfo.TransportationFee,
+            y: transpoFee,
             color: '#F6881C'
           });
         }
