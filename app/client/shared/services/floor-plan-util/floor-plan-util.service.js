@@ -8,7 +8,7 @@
   FloorplanUtilFn.$inject = ['Floorplan', 'User'];
 
   function FloorplanUtilFn(Floorplan, User) {
-    var FloorplanUtil = function (defaultSort, initialFilter) {
+    var FloorplanUtil = function (defaultSort, initialFilter, pageSize) {
       this.results = [];
       this.loading = false;
       this.paginator = null;
@@ -18,6 +18,7 @@
         query: null,
         startDate: null,
         endDate: null,
+        pageSize: pageSize || null,
         filter: initialFilter || Floorplan.filterValues.ALL,
         inventoryLocation: undefined,
         sortField: defaultSort,
@@ -131,11 +132,12 @@
 
         this.sellerSearch(this.searchCriteria);
       },
-      resetSearch: function (initialFilter) {
+      resetSearch: function (initialFilter, pageSize) {
         this.searchCriteria = {
           query: null,
           startDate: null,
           endDate: null,
+          pageSize: pageSize || null,
           filter: initialFilter || Floorplan.filterValues.ALL,
           inventoryLocation: undefined,
           sortField: this.defaultSort,
