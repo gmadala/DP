@@ -155,8 +155,9 @@
     "eslint": "./bin/eslint"
   },
   "scripts": {
-    "prebuild": "npm install && npm ls && bower install && npm run lint-angular",
+    "prebuild": "npm install && npm ls && bower install && npm run lint-angular && grunt test:unit",
     "build": "cross-env NODE_ENV=production webpack",
+    "build:grunt": "grunt build",
     "webdriver-update": "webdriver-manager update",
     "webdriver-update-chrome": "webdriver-manager update --chrome",
     "translate": "babel-node translate.js",
