@@ -24,7 +24,7 @@
     "eslint-plugin-jasmine": "^1.8.1",
     "eslint-plugin-jquery": "^1.0.1",
     "eslint-plugin-jsx-a11y": "^2.2.3",
-    "eslint-plugin-react": "^6.5.0",
+    "eslint-plugin-react": "^6.10.0",
     "flow": "^0.2.3",
     "fs-writefile-promise": "^1.0.3",
     "matchdep": "^0.3.0",
@@ -143,7 +143,7 @@
     "phantomjs-prebuilt": "^2.1.13",
     "protractor-jasmine2-screenshot-reporter": "^0.3.2",
     "protractor-linkuisref-locator": "1.1.2",
-    "serve-static": "1.10.0"
+    "serve-static": "^1.12.1"
   },
   "engines": {
     "node": ">=0.8.0"
@@ -155,13 +155,15 @@
     "eslint": "./bin/eslint"
   },
   "scripts": {
+    "prebuild": "npm install && npm ls && bower install && npm run lint-angular",
+    "build": "cross-env NODE_ENV=production webpack",
     "webdriver-update": "webdriver-manager update",
     "webdriver-update-chrome": "webdriver-manager update --chrome",
     "translate": "babel-node translate.js",
     "translate-angular": "grunt translate",
-    "lint-angular": "eslint app/client/**",
-    "prestart": "npm install && bower install && npm run translate",
-    "start": "cross-env NODE_ENV=development && concurrently --kill-others \"grunt server-np --apiBase='https://test.nextgearcapital.com/MobileService/api'\" \"webpack --watch\"",
+    "lint-angular": "eslint --quiet -c app/.eslintrc.json app/client/**/*.js",
+    "prestart": "npm install && npm ls && bower install && npm run translate && npm run lint-angular",
+    "start": "cross-env NODE_ENV=development && concurrently --kill-others \"grunt server-np --apiBase='https://test.nextgearcapital.com/MobileService/api'\" \"webpack --quiet --watch\"",
     "test": "cross-env NODE_ENV=development && karma start webpack.karma.conf.js --browsers Chrome"
   }
 }
