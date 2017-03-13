@@ -124,26 +124,6 @@
         ]
       };
 
-    if ($rootScope.isMobile) {
-      const mobileLinks = {
-        settings: {
-          name: gettextCatalog.getString('Settings'),
-          href: '#/act/settings',
-          activeWhen: 'auction_settings'
-        },
-        profile: {
-          name: gettextCatalog.getString('Profile Settings'),
-          href: '#/profile_settings',
-          activeWhen: 'profile_settings'
-        },
-        management: {
-          name: gettextCatalog.getString('Account Management'),
-          href: '#/account_management',
-          activeWhen: 'account_management'
-        }
-      }
-    }
-
     $scope.initNav = function( ) {
       kissMetricInfo.getKissMetricInfo( ).then( function( result ) {
         $scope.kissMetricData = result;
