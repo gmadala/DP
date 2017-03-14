@@ -3,7 +3,7 @@ import Translate from 'react-translate-component';
 import numeral from 'numeral';
 
 const buttonStyles = {
-    backgroundColor: '#0e1e4e',
+    backgroundColor: '#051943',
     border: '0px',
     color: '#fff',
     textAlign: 'left',
@@ -17,17 +17,17 @@ const labelStyle = {
     fontWeight: '100',
 };
 
-const FundingTodayItem = ({ itemcount, label }) => (
+const FundingTodayItem = ({ itemCount, label }) => (
   <span>
         <button className="btn btn-default navbar-btn" style={buttonStyles} role="button">
             <Translate style={labelStyle} content={label} /><br />
-            {numeral(itemcount).format('$0,0')}
+            {numeral(itemCount).format('$0,0')}
         </button>
   </span>
 );
 
 FundingTodayItem.propTypes = {
-    itemcount: PropTypes.number.isRequired,
+    itemCount: PropTypes.number.isRequired,
     label: PropTypes.string.isRequired,
 };
 

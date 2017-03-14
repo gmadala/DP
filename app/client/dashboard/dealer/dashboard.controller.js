@@ -11,8 +11,8 @@
     '$uibModal',
     'Dashboard',
     'User',
-    'FloorplanUtil',
     'Floorplan',
+    'FloorplanUtil',
     'moment',
     '$filter',
     'gettext',
@@ -21,7 +21,8 @@
     'language',
     '$cookieStore',
     'Audits',
-    '$rootScope'
+    '$rootScope',
+    'Paginate'
   ];
 
   function DashboardCtrl(
@@ -30,8 +31,8 @@
     $uibModal,
     Dashboard,
     User,
-    FloorplanUtil,
     Floorplan,
+    FloorplanUtil,
     moment,
     $filter,
     gettext,
@@ -40,7 +41,8 @@
     language,
     $cookieStore,
     Audits,
-    $rootScope
+    $rootScope,
+    Paginate
   ) {
 
     var uibModal = $uibModal;
@@ -93,8 +95,11 @@
 
     // FloorplanUtil handles all search/fetch/reset functionality.
     $scope.floorplanData = new FloorplanUtil('FlooringDate');
+    $scope.pendingUnitsAccordion = new FloorplanUtil('FlooringDate');
+
     // initial search
     $scope.floorplanData.resetSearch();
+    $scope.pendingUnitsAccordion.resetSearch(Floorplan.filterValues.PENDING, Paginate.PAGE_SIZE_SMALL);
 
     $scope.changeViewMode = function(mode) {
       $scope.viewMode = mode;

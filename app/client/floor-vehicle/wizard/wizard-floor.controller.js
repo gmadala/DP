@@ -365,6 +365,12 @@
         vm.data.UnitMake = !vm.data.dirtyStatus ? vm.data.kb.makes.selected.Value : vm.data.inputMake;
         vm.data.UnitModel = !vm.data.dirtyStatus ? vm.data.kb.models.selected.Value : vm.data.inputModel;
 
+        delete vm.data.kb;
+        delete vm.data.inputMake;
+        delete vm.data.inputModel;
+        delete vm.data.inputStyle;
+        delete vm.data.inputYear;
+
         if (addressIndex >= 0) {
           vm.data.PhysicalInventoryAddressId = vm.options.locations[addressIndex];
         }
