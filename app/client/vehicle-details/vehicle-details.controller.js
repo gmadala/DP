@@ -540,8 +540,8 @@
           });
         }
 
-        const transpoFee = details.FinancialSummaryInfo.TransportationFee ? details.FinancialSummaryInfo.TransportationFee : 0;
-        const transpoFeePaid = details.FinancialSummaryInfo.TransportationFeePaid ? details.FinancialSummaryInfo.TransportationFeePaid : 0;
+        var transpoFee = details.FinancialSummaryInfo.TransportationFee ? details.FinancialSummaryInfo.TransportationFee : 0;
+        var transpoFeePaid = details.FinancialSummaryInfo.TransportationFeePaid ? details.FinancialSummaryInfo.TransportationFeePaid : 0;
 
         if (!(transpoFee === 0) || !(transpoFeePaid === 0)) {
           $scope.financialSummary.paidChart.data.push({
