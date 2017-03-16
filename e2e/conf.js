@@ -17,6 +17,7 @@ exports.config = {
         'browserName': 'chrome',
         'chromeOptions': {
             'args': [
+                '--incognito',
                 '--disable-extensions',
                 '-–allow-file-access-from-files',
                 '--disable-web-security',
@@ -121,7 +122,7 @@ exports.config = {
     params: {
         userNameDealer: '57694AC',
         userNameAuction: '10298KB',
-        userName: '62434sf',
+        userName: '62434AM',
         userNameBankAccount: '3boysmotors',
         password: 'ringoffire@1',
         delay: '500',
