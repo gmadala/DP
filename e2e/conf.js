@@ -45,7 +45,7 @@ exports.config = {
 
     suites: {
         smoketest: ['smoketest/e2e_buildver_spec.js'],
-        accounts: ['tests/e2e_spec/e2e_bank_accounts_spec.js'],
+        bankaccounts: ['tests/e2e_spec/e2e_bank_accounts_spec.js'],
         dashboard: ['tests/e2e_spec/e2e_dashboard_spec.js'],
         loginrecover: ['tests/e2e_spec/e2e_login_recover_spec.js'],
         login: ['tests/e2e_spec/e2e_login_spec.js'],
