@@ -71,12 +71,13 @@ class SideMenu extends Component {
     }
 
     buildTimeline = () => {
-        const t1 = TweenMax.fromTo(this.container, 0, { autoAlpha: 0, left: '-100%', }, { autoAlpha: 1, left: '0', })
+        const t1 = TweenMax.fromTo(this.container, 0, { autoAlpha: 0 }, { autoAlpha: 1 })
         const t2 = TweenMax.fromTo(this.menuContainer, 0, { autoAlpha: 0 }, { autoAlpha: 1 })
         const t3 = TweenMax.fromTo(this.overlay, 0.2, { autoAlpha: 0, ease: Power0.easeOut }, { autoAlpha: 0.7, ease: Power0.easeIn })
         const t4 = TweenMax.fromTo(this.menu, 0.2, { autoAlpha: 0, left: '-100%', ease: Power0.easeOut }, { autoAlpha: 1, left: '0', ease: Power0.easeIn })
 
-        this.state.tl.add([t1, t2, t3, t4], '+=0', 'start')
+        this.state.tl.add([t1, t2], 0)
+        this.state.tl.add([t3, t4], 0.1)
     }
 
     toggleTimeline = open => (open ? this.state.tl.play() : this.state.tl.reverse())
