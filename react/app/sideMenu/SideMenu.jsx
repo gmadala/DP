@@ -8,9 +8,8 @@ const containerStyle = {
     position: 'fixed',
     top: '48px',
     bottom: '0',
-    left: '0',
     width: '80%',
-    zIndex: '9999',
+    zIndex: '1000',
     visibility: 'hidden'
 }
 
@@ -18,7 +17,7 @@ const overlayStyle = {
     ...containerStyle,
     backgroundColor: 'black',
     opacity: '0',
-    zIndex: '9998',
+    zIndex: '999',
     width: '100%',
     visibility: 'hidden'
 }
@@ -30,7 +29,7 @@ const menuStyle = {
     height: '100%',
     width: '100%',
     color: 'white',
-    zIndex: '9999',
+    zIndex: '1000',
     visibility: 'hidden',
     overflow: 'scroll-y'
 }
@@ -72,7 +71,7 @@ class SideMenu extends Component {
     }
 
     buildTimeline = () => {
-        const t1 = TweenMax.fromTo(this.container, 0, { autoAlpha: 0 }, { autoAlpha: 1 })
+        const t1 = TweenMax.fromTo(this.container, 0, { autoAlpha: 0, left: '-100%', }, { autoAlpha: 1, left: '0', })
         const t2 = TweenMax.fromTo(this.menuContainer, 0, { autoAlpha: 0 }, { autoAlpha: 1 })
         const t3 = TweenMax.fromTo(this.overlay, 0.2, { autoAlpha: 0, ease: Power0.easeOut }, { autoAlpha: 0.7, ease: Power0.easeIn })
         const t4 = TweenMax.fromTo(this.menu, 0.2, { autoAlpha: 0, left: '-100%', ease: Power0.easeOut }, { autoAlpha: 1, left: '0', ease: Power0.easeIn })

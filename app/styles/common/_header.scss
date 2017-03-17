@@ -348,11 +348,6 @@
 }
 
 @media only screen and (max-width: 767px) {
-  body {
-    padding-top: 50px !important; // Use this when fixing the navbar to top
-    -webkit-overflow-scrolling: touch;
-  }
-
   .header {
     flex-direction: column;
   }
@@ -416,6 +411,10 @@
         background: none !important;
       }
     }
+  }
+
+  .app-header {
+      margin: 0;
   }
 
   .mobile-navbar {

@@ -1,6 +1,6 @@
 <progressive-prompt-component ng-if="showPrompt"></progressive-prompt-component>
 <ribbon-component
-                  ng-show="pendingFloorPlanFlag || openAuditsFlag || fundingTodayFlag"
+                  ng-if="pendingFloorPlanFlag || openAuditsFlag || fundingTodayFlag"
                   floorplanshow="pendingFloorPlanFlag"
                   floorplancount="pendingFloorplans"
                   navfloorplan="navFloorplans"
@@ -82,7 +82,7 @@
           </div>
         </div>
 
-        <button id="showorhide" class="accordion-button paired-reversed hidden-xs" ng-click="isCollapsed = !isCollapsed" ng-class="{ expanded:!isCollapsed }">
+        <button id="showorhide" class="accordion-button paired-reversed hidden-xs" ng-click="isCollapsed = !isCollapsed" ng-class="{ expanded:!isCollapsed }" ng-if="!isMobile">
       <span class="paired-body">
         <span ng-show="isCollapsed" translate>Show Payment Details</span>
         <span ng-show="!isCollapsed" translate>Hide Payment Details</span>
@@ -101,7 +101,7 @@
           <ul class="counter-list">
             <li id="overdue" class="clickable row" ng-click="filterPayments('overdue')">
               <div class="col-xs-5">
-                <span class="counter" ng-class="{overdue: paymentSummary[viewMode].OverduePayments > 0}">{{paymentSummary[viewMode].OverduePayments}}</span>
+                <span class="counter" ng-class="{'overdue': overdue}">{{paymentSummary[viewMode].OverduePayments}}</span>
               </div>
               <div class="dash-lockup col-xs-7">
                 <p class="dash-minor"
@@ -111,13 +111,13 @@
                    translate-comment="Payment(s) overdue">
                   Overdue
                 </p>
-                <h4 class="dash-major" ng-class="{'overdue-amount': paymentSummary[viewMode].OverduePaymentAmount > 0}" id="overduePaymentDash">
+                <h4 class="dash-major" ng-class="{'overdue-amount': overdueAmt}" id="overduePaymentDash">
                   {{paymentSummary[viewMode].OverduePaymentAmount | currency}}</h4>
               </div>
             </li>
             <li id="today" class="clickable row" ng-click="filterPayments('today')">
               <div class="col-xs-5">
-                <span class="counter" ng-class="{'due-today': paymentSummary[viewMode].PaymentsDueToday > 0}" id="paymentsDueDash">{{paymentSummary[viewMode].PaymentsDueToday}}</span>
+                <span class="counter" ng-class="{'due-today': dueToday}" id="paymentsDueDash">{{paymentSummary[viewMode].PaymentsDueToday}}</span>
               </div>
               <div class="dash-lockup col-xs-7">
                 <p class="dash-minor"
@@ -135,14 +135,14 @@
                 <span class="counter">{{paymentSummary[viewMode].UpcomingPayments}}</span>
               </div>
               <div class="dash-lockup col-xs-7">
-                <p class="lockup-minor" ng-show="viewMode === 'week'"
+                <p class="lockup-minor" ng-if"viewMode === 'week'"
                    translate
                    translate-n="paymentSummary[viewMode].UpcomingPayments"
                    translate-plural="Due This Week"
                    translate-comment="Payment(s) due this week">
                   Due This Week
                 </p>
-                <p class="lockup-minor" ng-show="viewMode === 'month'"
+                <p class="lockup-minor" ng-if="viewMode === 'month'"
                    translate
                    translate-n="paymentSummary[viewMode].UpcomingPayments"
                    translate-plural="Due This Month"
@@ -213,7 +213,7 @@
     </div>
   </section>
 
-  <section class="page-break hidden-xs"></section>
+  <section class="page-break hidden-xs" ng-if="!isMobile"></section>
 
   <section class="row">
     <!-- Credit Summary -->
@@ -241,8 +241,8 @@
 
           <div class="col-md-8">
             <div class="chart-legend">
-              <h6 class="static-option" ng-show="dashboardData.LinesOfCredit.length == 1">{{ dashboardData.selectedLineOfCredit.CreditTypeName }}</h6>
-              <div class="style-select auto" ng-hide="dashboardData.LinesOfCredit.length == 1">
+              <h6 class="static-option" ng-if="dashboardData.LinesOfCredit.length == 1">{{ dashboardData.selectedLineOfCredit.CreditTypeName }}</h6>
+              <div class="style-select auto" ng-if="dashboardData.LinesOfCredit.length != 1">
                 <select id="lineOfCredit" name="lineOfCredit" ng-model="dashboardData.selectedLineOfCredit"
                         ng-options="loc.CreditTypeName for loc in dashboardData.LinesOfCredit"></select>
               </div>
@@ -272,7 +272,7 @@
                   <td class="table-value table-numeric">{{ dashboardData.selectedLineOfCredit.AvailableCreditAmount | numeral:'$0,0.00' }}</td>
                 </tr>
               </table>
-              <p class="tip" ng-show="dashboardData.selectedLineOfCredit.TempLineOfCreditExpiration != null" translate>This line has a temporary credit increase of {{ dashboardData.selectedLineOfCredit.TempLineOfCreditAmount | numeral:'$0,0.00' }} that expires on {{dashboardData.selectedLineOfCredit.TempLineOfCreditExpiration | moment}}.</p>
+              <p class="tip" ng-if="dashboardData.selectedLineOfCredit.TempLineOfCreditExpiration != null" translate>This line has a temporary credit increase of {{ dashboardData.selectedLineOfCredit.TempLineOfCreditAmount | numeral:'$0,0.00' }} that expires on {{dashboardData.selectedLineOfCredit.TempLineOfCreditExpiration | moment}}.</p>
             </div>
           </div>
         </div>
@@ -292,7 +292,7 @@
           <th translate>Receipt No.</th>
           <th translate>Amount</th>
           </thead>
-          <tr ng-repeat="receipt in dashboardData.Receipts">
+          <tr ng-repeat="receipt in dashboardData.Receipts | limitTo : 5">
             <td class="table-label center">{{ receipt.ReceiptDate | moment }}</td>
             <td class="table-value center"><a ng-href="{{ receipt.$receiptURL }}" target="_blank">#{{ receipt.ReceiptNumber }}</a></td>
             <td class="table-value table-numeric">{{ receipt.ReceiptAmount | currency }}</td>

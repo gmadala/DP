@@ -52,7 +52,22 @@ body {
 
 @media only screen and (max-width: 767px) {
     .nxg-main-view {
-        padding-bottom: 0px;
+      padding-bottom: 45px;
+    }
+    #main-container {
+        margin-top: 60px;
+        margin-bottom: 45px;
+        overflow-x: hidden;
+        overflow-y: scroll;
+        -webkit-overflow-scrolling: touch;
+
+        .nxg-main-view {
+            > div {
+                position: fixed;
+                top: 0;
+                bottom: 0;
+            }
+        }
     }
 }
 .nxg-fade {

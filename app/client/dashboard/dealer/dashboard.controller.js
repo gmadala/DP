@@ -92,10 +92,12 @@
       $scope.calLanguage = 'en';
     }
 
-    // FloorplanUtil handles all search/fetch/reset functionality.
-    $scope.floorplanData = new FloorplanUtil('FlooringDate');
-    // initial search
-    $scope.floorplanData.resetSearch();
+    if (!$scope.isMobile) {
+        // FloorplanUtil handles all search/fetch/reset functionality.
+        $scope.floorplanData = new FloorplanUtil('FlooringDate');
+        // initial search
+        $scope.floorplanData.resetSearch();
+    }
 
     $scope.changeViewMode = function(mode) {
       $scope.viewMode = mode;
@@ -309,6 +311,9 @@
               UpcomingPayments: result.UpcomingPayments,
               AccountFees: result.AccountFees
             };
+            $scope.overdue = result.OverduePayments > 0
+            $scope.overdueAmt = result.OverduePaymentAmount > 0
+            $scope.dueToday = result.PaymentsDueToday > 0
           }
 
           function getPaymentsTitle () {

@@ -1,6 +1,6 @@
 <angular-services-component isLoggedIn="isLoggedIn"></angular-services-component>
 <header class="app-header" ng-style="ribbonStyle" ng-class="{ login: !navState.current.data.showNavBar, auctions: !user.isDealer() }">
-  <div class="container" ng-class="{'hidden-xs':navState.current.data.showNavBar}">
+  <div class="container" ng-class="{'hidden-xs':navState.current.data.showNavBar}" ng-if="!isMobile">
     <div class="header">
       <a ng-href="{{user.homeLink()}}" class="col-sm-4 col-md-8 custom ng-binding">
         <div class="nxg-logo" nxg-debug-title></div>
@@ -104,7 +104,7 @@
           </div>
         </div>
 
-        <div id="navbarContainer" class="navbar-collapse hidden-xs" ng-class="{'open': navState.current.data.showMenu, 'closed': (!navState.current.data.showMenu && navState.current.data.menuToggled)}">
+        <div id="navbarContainer" class="navbar-collapse hidden-xs" ng-if="!isMobile" ng-class="{'open': navState.current.data.showMenu, 'closed': (!navState.current.data.showMenu && navState.current.data.menuToggled)}">
           <ul class="nav navbar-nav"
               popover-placement="bottom"
               uib-popover-template="'client/shared/directives/navbar/menuTip.html'"
