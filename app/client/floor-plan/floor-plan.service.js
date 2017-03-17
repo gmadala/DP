@@ -9,7 +9,9 @@
 
   function Floorplan(api, Paginate, User, $q, gettextCatalog) {
     var overrideInProgress = false;
-
+    var floorplanFunding  = {
+      AmountFinanced : 0
+    };
     function handleNgenRequest(response) {
       api.resetSessionTimeout();
       return response;
@@ -43,11 +45,12 @@
           // selected vehicle from black book is identified by the following two properties
           data.BlackBookGroupNumber = data.$selectedVehicle.GroupNumber;
           data.BlackBookUvc = data.$selectedVehicle.UVc;
-          // selected vehicle from black book takes precedence over manually-entered vehicle characteristics
-          data.UnitMake = null;
-          data.UnitModel = null;
-          data.UnitYear = null;
-          data.UnitStyle = null;
+
+          // we now need to set the make, model, style and year based on the values we're getting from blackbook.
+          data.UnitMake = data.$selectedVehicle.Make;
+          data.UnitModel = data.$selectedVehicle.Model;
+          data.UnitYear = data.$selectedVehicle.Year;
+          data.UnitStyle = data.$selectedVehicle.Style;
 
           // clean up data that's not part of the request object API
           delete data.$blackbookMileage;
@@ -93,12 +96,13 @@
             OrderBy: criteria.sortField || 'FlooringDate',
             OrderByDirection: criteria.sortDescending === undefined || criteria.sortDescending === true ? 'DESC' : 'ASC',
             PageNumber: paginator ? paginator.nextPage() : Paginate.firstPage(),
-            PageSize: Paginate.PAGE_SIZE_MEDIUM,
+            PageSize: criteria.pageSize ? criteria.pageSize : Paginate.PAGE_SIZE_MEDIUM,
             PhysicalInventoryAddressIds: criteria.inventoryLocation && criteria.inventoryLocation.AddressId
           };
 
         return api.request('GET', '/floorplan/search', params).then(
           function (results) {
+            self.setAmountFinanced(results.AmountFinanced);
             angular.forEach(results.Floorplans, function (floorplan) {
               floorplan.data = {query: criteria.query};
               if (floorplan.TitleImageAvailable) {
@@ -232,6 +236,12 @@
         fpArray.push(floorPlanIds);
         var fpJSON = JSON.stringify(fpArray);
         return api.request('POST', api.ngenContentLink('/floorplans/extension/determine_floorplan_extendability'), fpJSON, null, true, api.ngenSuccessHandler);
+      },
+      setAmountFinanced: function(amountFinanced){
+        floorplanFunding.AmountFinanced = amountFinanced;
+      },
+      getAmountFinanced: function() {
+        return floorplanFunding.AmountFinanced;
       }
     };
 
