@@ -43,7 +43,7 @@ exports.config = {
     //   Ex: grunt test:e2e -suite=smoketest
 
     suites: {
-        smoketest: ['smoketest/e2e_buildver_spec.js'],
+        smoketest: ['smoketest/e2e_smoke_dealer_spec.js'],
         accounts: ['tests/e2e_spec/e2e_bank_accounts_spec.js'],
         dashboard: ['tests/e2e_spec/e2e_dashboard_spec.js'],
         loginrecover: ['tests/e2e_spec/e2e_login_recover_spec.js'],
