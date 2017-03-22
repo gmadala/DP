@@ -46,19 +46,20 @@
   ) {
 
     var uibModal = $uibModal;
+    $scope.isMobile = $rootScope.isMobile;
+    var isAndroid = /Android/i.test(navigator.userAgent);
+    var isIos = /iPhone|iPad|iPod/i.test(navigator.userAgent);
+    var usersPrompted = $cookieStore.get('headlessUsersPrompted');
+    var isHeadless = (window.navigator.standalone || window.matchMedia('(display-mode: standalone)').matches);
 
     User.getInfo().then(function(userInfo) {
-        var isMobile = $rootScope.isMobile;
-        var isAndroid = /Android/i.test(navigator.userAgent);
-        var isIos = /iPhone|iPad|iPod/i.test(navigator.userAgent);
-        var usersPrompted = $cookieStore.get('headlessUsersPrompted');
         var userPrompted = usersPrompted && usersPrompted.indexOf(userInfo.BusinessContactUserName) !== -1;
-        var isHeadless = (window.navigator.standalone || window.matchMedia('(display-mode: standalone)').matches);
+
         $scope.showPrompt = !userPrompted && !isHeadless;
 
         // check if mobile and android or isIos
         // check to see if the user has been prompted already OR if it is a different user
-        if (isMobile && (isAndroid || isIos) && !isHeadless && !userPrompted) {
+        if ($scope.isMobile && (isAndroid || isIos) && !isHeadless && !userPrompted) {
             // add this user to prompted users cookie
             if (!usersPrompted)
                 usersPrompted = [];
@@ -313,6 +314,9 @@
               UpcomingPayments: result.UpcomingPayments,
               AccountFees: result.AccountFees
             };
+            $scope.overdue = result.OverduePayments > 0
+            $scope.overdueAmt = result.OverduePaymentAmount > 0
+            $scope.dueToday = result.PaymentsDueToday > 0
           }
 
           function getPaymentsTitle () {

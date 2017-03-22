@@ -8,9 +8,11 @@ export default function reducer(state = {}, action = {}) {
             return newState;
         }
         case types.LOG_METRIC: {
-            state.KissMetric.getKissMetricInfo( ).then(( result ) => {
-                state.SegmentIO.track( action.payload, result );
-            });
+            if (state.KissMetric) {
+                state.KissMetric.getKissMetricInfo( ).then(( result ) => {
+                    state.SegmentIO.track( action.payload, result );
+                });
+            }
             return state;
         }
         default:
