@@ -22,20 +22,20 @@ describe('Build Verification', function () {
 
     it("1. Login as a US dealer", function () {
         helper.goToLogin();
-        //Validate the NGC Logo and language pickers are visible
-        expect(loginObjects.elMNGLogo.isDisplayed()).toBe(true);
-        expect(loginObjects.elLangChooser.isDisplayed()).toBe(true);
-        expect(loginObjects.elEnglish.isDisplayed()).toBe(true);
-        expect(loginObjects.elSpanish.isDisplayed()).toBe(true);
-        expect(loginObjects.elFrench.isDisplayed()).toBe(true);
-
-        //Validating languages
-        expect(loginObjects.getTextLogin()).toBe("Login");
-        loginObjects.doSpanish();
-        expect(loginObjects.getTextLogin()).toBe("Inicio de sesión");
-        loginObjects.doFrench();
-        expect(loginObjects.getTextLogin()).toBe("Ouverture de session");
-        loginObjects.doEnglish();
+        // //Validate the NGC Logo and language pickers are visible
+        // expect(loginObjects.elMNGLogo.isDisplayed()).toBe(true);
+        // expect(loginObjects.elLangChooser.isDisplayed()).toBe(true);
+        // expect(loginObjects.elEnglish.isDisplayed()).toBe(true);
+        // expect(loginObjects.elSpanish.isDisplayed()).toBe(true);
+        // expect(loginObjects.elFrench.isDisplayed()).toBe(true);
+        //
+        // //Validating languages
+        // expect(loginObjects.getTextLogin()).toBe("Login");
+        // loginObjects.doSpanish();
+        // expect(loginObjects.getTextLogin()).toBe("Inicio de sesión");
+        // loginObjects.doFrench();
+        // expect(loginObjects.getTextLogin()).toBe("Ouverture de session");
+        // loginObjects.doEnglish();
 
         //Validating login & success
         expect(loginObjects.getTextLogin()).toBe("Login");
@@ -44,7 +44,7 @@ describe('Build Verification', function () {
         expect(browser.getCurrentUrl()).toEqual(helper.homePage());
     });
 
-    it("2. Verify dashboard stuff", function () {
+    xit("2. Verify dashboard stuff", function () {
         expect(dashboard.elShowHidePaymentDetailsLink.isDisplayed()).toBe(true);
         expect(dashboard.elViewAllPaymentsLink.isDisplayed()).toBe(true);
         expect(dashboard.elRequestCreditIncrease.isDisplayed()).toBe(true);

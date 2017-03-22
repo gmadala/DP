@@ -1,7 +1,5 @@
 'use strict';
 
-var EC = protractor.ExpectedConditions;
-
 function PaymentObjects() {
     //Locators
     this.elCheckoutButton = browser.element(by.css("button.btn-cta.cta-primary.cta-full"));
@@ -13,9 +11,10 @@ function PaymentObjects() {
     };
     this.doClickFirstPayoff = function () {
         browser.sleep(browser.params.longDelay);
-        var allPayoffs = element.all(by.repeater('payment in payments.results'));
-        this.elPaymentTablePayoff = allPayoffs.get(0).element(by.id('togglePayoff'));
-        this.elPaymentTablePayoff.click();
+        var allPayoffs = element.all(by.repeater('payment in payments.results')).get(0);
+        console.log(allPayoffs + ' **END** ');
+        console.log(allPayoffs(0));
+        allPayoffs.element(by.id('togglePayoff')).click();
         browser.sleep(browser.params.longDelay);
     };
     this.doCheckout = function () {
