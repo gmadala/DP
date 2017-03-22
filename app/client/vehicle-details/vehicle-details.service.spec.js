@@ -31,7 +31,9 @@ describe('Model: VehicleDetails', function () {
         'ScheduledPaymentDate': null,
         'CurtailmentPaymentScheduled': false,
         'FloorplanActivity': [],
-        'TransportationFee': 0
+        'TransportationFee': 0,
+        'TransportationFeePaid': 0,
+        'IsLastCurtailment': false
       }
     };
 
@@ -69,7 +71,7 @@ describe('Model: VehicleDetails', function () {
           result = r;
         }
       );
-      expect(result.FinancialSummaryInfo.FloorplanTotal).toBe(result.FinancialSummaryInfo.TotalPaid + result.FinancialSummaryInfo.TotalOutstanding + result.FinancialSummaryInfo.TransportationFee);
+      expect(result.FinancialSummaryInfo.FloorplanTotal).toBe(result.FinancialSummaryInfo.TotalPaid + result.FinancialSummaryInfo.TotalOutstanding);
     });
   });
 
