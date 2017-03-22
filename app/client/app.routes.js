@@ -28,7 +28,8 @@
           pageId: 'Floorplan',
           showNavBar: true,
           showMenu: false,
-          isFeature: 'responsiveFloorplanBuyer'
+          isFeature: 'responsiveFloorplanBuyer',
+          title: 'Floor a Vehicle'
         }
       })
       .state('flooringWizard.car', {
@@ -40,7 +41,8 @@
           pageId: 'Floorplan',
           showNavBar: true,
           showMenu: false,
-          isFeature: 'responsiveFloorplanBuyer'
+          isFeature: 'responsiveFloorplanBuyer',
+          title: 'Floor a Vehicle'
         }
       })
       .state('flooringWizard.sales', {
@@ -52,7 +54,8 @@
           pageId: 'Floorplan',
           showNavBar: true,
           showMenu: false,
-          isFeature: 'responsiveFloorplanBuyer'
+          isFeature: 'responsiveFloorplanBuyer',
+          title: 'Floor a Vehicle'
         }
       })
       .state('flooringWizard.payment', {
@@ -64,7 +67,8 @@
           pageId: 'Floorplan',
           showNavBar: true,
           showMenu: false,
-          isFeature: 'responsiveFloorplanBuyer'
+          isFeature: 'responsiveFloorplanBuyer',
+          title: 'Floor a Vehicle'
         }
       })
       .state('flooringWizard.document', {
@@ -76,7 +80,8 @@
           pageId: 'Floorplan',
           showNavBar: true,
           showMenu: false,
-          isFeature: 'responsiveFloorplanBuyer'
+          isFeature: 'responsiveFloorplanBuyer',
+          title: 'Floor a Vehicle'
         }
       })
       .state('flooringWizard.reviewRequest', {
@@ -88,7 +93,8 @@
           pageId: 'Floorplan',
           showNavBar: true,
           showMenu: false,
-          isFeature: 'responsiveFloorplanBuyer'
+          isFeature: 'responsiveFloorplanBuyer',
+          title: 'Floor a Vehicle'
         }
       })
       .state('flooringConfirmation', {
@@ -104,7 +110,8 @@
           pageId: 'Floorplan',
           showNavBar: true,
           showMenu: false,
-          isFeature: 'responsiveFloorplanBuyer'
+          isFeature: 'responsiveFloorplanBuyer',
+          title: 'Floor a Vehicle'
         }
       })
       .state('login', {
@@ -162,7 +169,8 @@
         data: {
           pageId: 'Dashboard',
           showNavBar: true,
-          showMenu: false
+          showMenu: false,
+          title: ''
         }
       })
       .state('payments', {
@@ -172,7 +180,8 @@
         data: {
           pageId: 'Payments',
           showNavBar: true,
-          showMenu: false
+          showMenu: false,
+          title: 'Make a Payment'
         }
       })
       .state('checkout', {
@@ -182,7 +191,8 @@
         data: {
           pageId: 'Checkout',
           showNavBar: true,
-          showMenu: false
+          showMenu: false,
+          title: 'Checkout'
         }
       })
       .state('paymentsConfirm', {
@@ -195,7 +205,8 @@
         data: {
           pageId: 'PaymentsConfirm',
           showNavBar: true,
-          showMenu: false
+          showMenu: false,
+          title: 'Make a Payment'
         }
       })
       .state('receipts', {
@@ -205,7 +216,8 @@
         data: {
           pageId: 'Receipts',
           showNavBar: true,
-          showMenu: false
+          showMenu: false,
+          title: 'Receipts'
         }
       })
       .state('floorplan', {
@@ -215,7 +227,8 @@
         data: {
           pageId: 'Floorplan',
           showNavBar: true,
-          showMenu: false
+          showMenu: false,
+          title: 'View Floor Plan'
         }
       })
       .state('titlereleases', {
@@ -225,7 +238,8 @@
         data: {
           pageId: 'TitleReleases',
           showNavBar: true,
-          showMenu: false
+          showMenu: false,
+          title: 'Title Releases'
         }
       })
       .state('titleReleaseCheckout', {
@@ -235,7 +249,8 @@
         data: {
           pageId: 'TitleReleasesCheckout',
           showNavBar: true,
-          showMenu: false
+          showMenu: false,
+          title: 'Title Releases'
         }
       })
       .state('titleReleaseConfirm', {
@@ -246,7 +261,8 @@
         data: {
           pageId: 'TitleReleasessConfirm',
           showNavBar: true,
-          showMenu: false
+          showMenu: false,
+          title: 'Title Releases'
         }
       })
       .state('vehicledetails', {
@@ -256,7 +272,8 @@
         data: {
           pageId: 'VehicleDetails',
           showNavBar: true,
-          showMenu: false
+          showMenu: false,
+          title: 'Vehicle Details'
         }
       })
       .state('floorcar', {
@@ -266,7 +283,8 @@
         data: {
           pageId: 'FloorCar',
           showNavBar: true,
-          showMenu: false
+          showMenu: false,
+          title: 'Floor a Vehicle'
         }
       })
       .state('audits', {
@@ -276,7 +294,8 @@
         data: {
           pageId: 'Audits',
           showNavBar: true,
-          showMenu: false
+          showMenu: false,
+          title: 'Audits'
         }
       })
       .state('reports', {
@@ -286,7 +305,8 @@
         data: {
           pageId: 'Reports',
           showNavBar: true,
-          showMenu: false
+          showMenu: false,
+          title: 'Reports'
         }
       })
       .state('analytics', {
@@ -296,7 +316,8 @@
         data: {
           pageId: 'Analytics',
           showNavBar: true,
-          showMenu: false
+          showMenu: false,
+          title: 'Analytics'
         }
       })
       .state('documents', {
@@ -306,7 +327,8 @@
         data: {
           pageId: 'Documents',
           showNavBar: true,
-          showMenu: false
+          showMenu: false,
+          title: 'Resources'
         }
       })
       .state('profile_settings', {
@@ -316,7 +338,8 @@
         data: {
           pageId: 'ProfileSettings',
           showNavBar: true,
-          showMenu: false
+          showMenu: false,
+          title: 'Profile Settings'
         }
       })
       .state('account_management', {
@@ -326,7 +349,8 @@
         data: {
           pageId: 'AccountManagement',
           showNavBar: true,
-          showMenu: false
+          showMenu: false,
+          title: 'Account Management'
         }
       })
       .state('promos', {
@@ -336,7 +360,8 @@
         data: {
           pageId: 'Promos',
           showNavBar: true,
-          showMenu: false
+          showMenu: false,
+          title: 'Promos'
         }
       })
       .state('valueLookup', {
@@ -346,7 +371,8 @@
         data: {
           pageId: 'ValueLookup',
           showNavBar: true,
-          showMenu: false
+          showMenu: false,
+          title: 'Value Lookup'
         }
       })
       // AUCTION STATES
@@ -358,7 +384,8 @@
           pageId: 'AuctionDashboard',
           isAuctionState: true,
           showNavBar: true,
-          showMenu: false
+          showMenu: false,
+          title: 'Dashboard'
         }
       })
       .state('auction_dealersearch', {
@@ -369,7 +396,8 @@
           pageId: 'AuctionDealerSearch',
           isAuctionState: true,
           showNavBar: true,
-          showMenu: false
+          showMenu: false,
+          title: 'Dealer Search'
         }
       })
       .state('auction_bulkflooring', {
@@ -380,7 +408,8 @@
           pageId: 'AuctionFloorCar',
           isAuctionState: true,
           showNavBar: true,
-          showMenu: false
+          showMenu: false,
+          title: 'Floor a Vehicle'
         }
       })
       .state('auction_sellerfloorplan', {
@@ -391,7 +420,8 @@
           pageId: 'AuctionFloorplan',
           isAuctionState: true,
           showNavBar: true,
-          showMenu: false
+          showMenu: false,
+          title: 'Floor Plan Search'
         }
       })
       .state('auction_reports', {
@@ -402,7 +432,8 @@
           pageId: 'AuctionReports',
           isAuctionState: true,
           showNavBar: true,
-          showMenu: false
+          showMenu: false,
+          title: 'Reports'
         }
       })
       .state('auction_documents', {
@@ -413,7 +444,8 @@
           pageId: 'AuctionDocuments',
           isAuctionState: true,
           showNavBar: true,
-          showMenu: false
+          showMenu: false,
+          title: 'Resources'
         }
       })
       .state('auction_settings', {
@@ -424,7 +456,8 @@
           pageId: 'AuctionSettings',
           isAuctionState: true,
           showNavBar: true,
-          showMenu: false
+          showMenu: false,
+          title: 'Settings'
         }
       });
 

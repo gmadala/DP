@@ -4,6 +4,7 @@ import counterpart from 'counterpart';
 class AngularServices extends Component {
     componentDidMount() {
         this.props.setAngularObj(this.props.User, 'User');
+        this.props.setAngularObj({}, 'UserInfo');
         this.props.setAngularObj(this.props.gettextCatalog, 'GetText');
         this.props.setAngularObj(this.props.kissMetricInfo, 'KissMetric');
         this.props.setAngularObj(this.props.segmentio, 'SegmentIO');
@@ -21,7 +22,10 @@ class AngularServices extends Component {
         if (this.props.isLoggedIn) {
             counterpart.setLocale(this.props.gettextCatalog.currentLanguage.substring(0, 2)); // set language
 
-            this.props.User.refreshInfo().then(() => this.props.setAngularObj(this.props.User.isUnitedStates(), 'isUnitedStates'))
+            this.props.User.refreshInfo().then((info) => {
+                this.props.setAngularObj(this.props.User.isUnitedStates(), 'isUnitedStates')
+                this.props.setAngularObj(info, 'UserInfo')
+            })
         }
     }
 

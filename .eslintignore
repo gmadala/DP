@@ -15,3 +15,6 @@ webpack.config.js
 webpack.karma.conf.js
 app/scripts/react-app.js
 app/client/debug-info.js
+react/translations/en.js
+react/translations/fr.js
+react/translations/es.js

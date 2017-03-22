@@ -38,6 +38,7 @@
     <!-- build:css styles/main2.css -->
     <link rel="stylesheet" href="styles/main.css">
     <!-- endbuild -->
+    <link rel="stylesheet" href="react/bundle.css">
     <!--[if IE 9]>
     <script>
       document.getElementsByTagName("html")[0].className += " ie9";
@@ -51,7 +52,7 @@
     <![endif]-->
 
   </head>
-  <body ng-class="{'menu-open' : navState.current.data.showMenu, 'menu-closed': (!navState.current.data.showMenu && navState.current.data.menuToggled)}">
+  <body>
     <!-- htmlmin:ignore -->
     <!-- processhtml:include:svgDist,server /img/icons/icon_defs.svg -->
     This will pull in the content of our svg file for use across the app.
@@ -60,9 +61,7 @@
     <div id="wrapper" class="menu-wrapper">
       <div nav-bar ng-class="{'nxg-legacy': (navState.current.data.hasOwnProperty('oldStyles') && navState.current.data.oldStyles == false)}"></div>
       <div id="main-container" class="nxg-main-container" nxg-messages>
-        <div class="nxg-main-view"
-             ng-class="{'mobile-menu-push-toleft':navState.current.data.showMenu}"
-             ng-click="navState.current.data.showMenu ? navState.current.data.showMenu=false : false">
+        <div class="nxg-main-view">
           <div ui-view autoscroll="true" id="{{ navState.current.data.pageId }}Page"></div>
         </div>
         <div nxg-activity ng-class="{'nxg-legacy': (navState.current.data.hasOwnProperty('oldStyles') && navState.current.data.oldStyles == false)}"></div>
@@ -272,7 +271,7 @@
     <script src="client/shared/services/fedex/fedex.service.js"></script>
     <script src="client/shared/services/validator/vin.service.js"></script>
 
-    <script src="scripts/react-app.js"></script>
+    <script src="react/bundle.js"></script>
 
     <script src="client/shared/directives/nxg-payment-buttons/cancel-fee-modal/cancel-fee.controller.js"></script>
     <script src="client/shared/directives/nxg-payment-buttons/cancel-payment-modal/cancel-payment.controller.js"></script>
