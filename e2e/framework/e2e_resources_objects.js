@@ -19,7 +19,7 @@ function Resources() {
     this.doResources = function () {
         browser.waitForAngular();
         this.elResourcesLink.click();
-        browser.sleep(browser.params.medium);
+        browser.sleep(browser.params.mediumDelay);
     };
     this.doRatesAndFees = function () {
         browser.waitForAngular();
