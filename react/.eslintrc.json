@@ -25,7 +25,7 @@
         "inject": true,
         "document": true,
         "assert": true,
-        "ENVIRONMENT": true,
+		"TimelineMax": true,
         "angular": true
     },
     "parser": "babel-eslint",

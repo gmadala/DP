@@ -2,7 +2,7 @@ import * as actions from '../../actions/angularActions';
 import actionTypes from '../../actions/actionTypes';
 import metrics from '../../data/metricList';
 
-describe('actions', () => {
+describe('angular actions', () => {
     it('should create an action to log a metric', () => {
         const metric = metrics.LOGIN_SUCCESSFUL;
         const expectedAction = {

@@ -30,7 +30,7 @@
           class="btn btn-adapts"
           ng-class="{'selected': onQueue == 'payment'}"
           ng-click="togglePaymentInQueue(false)">
-        <span class="paired-body">{{ item.IsLastCurtailment ? item.AmountDue : item.AmountDue-item.TransportationFee | currency }}</span>
+        <span class="paired-body">{{ item.AmountDue | currency }}</span>
         <span ng-switch="onQueue">
           <span ng-switch-when="false" class="paired-media icon-x-small" nxg-icon="icon-plus"></span>
           <span ng-switch-when="payoff" class="paired-media icon-x-small" nxg-icon="icon-plus"></span>
