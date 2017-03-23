@@ -1,5 +1,5 @@
 {
-  "name": "nextgearWeb",
+  "name": "nextgearweb",
   "version": "0.0.0",
   "repository": {
     "type": "git",
@@ -68,6 +68,7 @@
     "babel-preset-stage-0": "^6.16.0",
     "babelify": "^7.3.0",
     "concurrently": "^3.3.0",
+    "cross-conf-env": "^1.1.2",
     "cross-env": "^2.0.1",
     "css-loader": "^0.26.1",
     "extract-text-webpack-plugin": "^1.0.1",
@@ -164,16 +165,20 @@
     "webdriver-manager": "./bin/webdriver-manager",
     "eslint": "./bin/eslint"
   },
+  "config": {
+    "buildEnv": "test",
+    "apiBase": "https://test.nextgearcapital.com/MobileService/api"
+  },
   "scripts": {
     "prebuild": "npm install && npm ls && bower install && npm run lint:angular && npm test",
-    "build": "cross-env NODE_ENV=production webpack && npm grunt build",
+    "build": "cross-env NODE_ENV=production webpack --colors --no-info --client-log-level=error && cross-conf-env grunt build --target=npm_package_config_buildEnv",
     "webdriver-update": "webdriver-manager update",
     "webdriver-update-chrome": "webdriver-manager update --chrome",
     "translate": "babel-node react/translate.js",
     "translate-angular": "grunt translate",
     "lint:angular": "eslint --quiet -c app/.eslintrc.json app/client/**/*.js",
-    "prestart": "npm install && npm ls && bower install && npm run translate && npm run lint-angular",
-    "start": "cross-env NODE_ENV=development && concurrently --kill-others \"grunt server-np --apiBase='https://test.nextgearcapital.com/MobileService/api'\" \"webpack --quiet --watch\"",
+    "prestart": "npm install && npm ls && bower install && npm run translate && npm run lint:angular",
+    "start": "cross-env NODE_ENV=development && concurrently --kill-others \"cross-conf-env grunt server-np --apiBase='npm_package_config_apiBase'\" \"webpack --quiet --watch\"",
     "test": "npm run test:angular && npm run test:react",
     "test:angular": "grunt test:unit",
     "test:react": "cross-env NODE_ENV=development && karma start webpack.karma.conf.js --browsers Chrome"
