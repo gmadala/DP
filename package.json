@@ -1,5 +1,5 @@
 {
-  "name": "nextgearweb",
+  "name": "mng",
   "version": "0.0.0",
   "repository": {
     "type": "git",
@@ -171,14 +171,19 @@
   },
   "scripts": {
     "prebuild": "npm install && npm ls && bower install && npm run lint:angular && npm test",
-    "build": "cross-env NODE_ENV=production webpack --colors --no-info --client-log-level=error && cross-conf-env grunt build --target=npm_package_config_buildEnv",
+    "build:env": "cross-env NODE_ENV=production",
+    "build:webpack": "webpack --colors --no-info --client-log-level=error",
+    "build:grunt": "cross-conf-env grunt build --target=npm_package_config_buildEnv",
+    "build": "npm run build:env && npm run build:webpack && npm run build:grunt",
     "webdriver-update": "webdriver-manager update",
     "webdriver-update-chrome": "webdriver-manager update --chrome",
     "translate": "babel-node react/translate.js",
-    "translate-angular": "grunt translate",
+    "translate:angular": "grunt translate",
     "lint:angular": "eslint --quiet -c app/.eslintrc.json app/client/**/*.js",
     "prestart": "npm install && npm ls && bower install && npm run translate && npm run lint:angular",
-    "start": "cross-env NODE_ENV=development && concurrently --kill-others \"cross-conf-env grunt server-np --apiBase='npm_package_config_apiBase'\" \"webpack --quiet --watch\"",
+    "start:env": "cross-env NODE_ENV=development",
+    "start:server": "concurrently --kill-others \"cross-conf-env grunt server-np --apiBase='npm_package_config_apiBase'\" \"webpack --quiet --watch\"",
+    "start": "npm run start:env && npm run start:server",
     "test": "npm run test:angular && npm run test:react",
     "test:angular": "grunt test:unit",
     "test:react": "cross-env NODE_ENV=development && karma start webpack.karma.conf.js --browsers Chrome"
