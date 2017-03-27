@@ -20,14 +20,21 @@ Dist build (defaults to test)
 $ npm run build
 ```
 
-Build for environments:
+Build for environment / version:
+
+```sh
+Append: -- --mng:buildEnv=envName
+Append: -- --mng:buildVersion=versionNumber
+```
+
+Examples:
 
 ```sh
 $ npm run build -- --mng:buildEnv=training
 $ npm run build -- --mng:buildEnv=demo
 $ npm run build -- --mng:buildEnv=test
-$ npm run build -- --mng:buildEnv=uat
-$ npm run build -- --mng:buildEnv=production
+$ npm run build -- --mng:buildEnv=uat --mng:buildVersion=1.0
+$ npm run build -- --mng:buildEnv=production --mng:buildVersion=2.0
 ```
 
 ### Development
