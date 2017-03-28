@@ -102,6 +102,9 @@ module.exports = {
               },
               responsiveFloorplanBuyer: {
                 enabled: true
+              },
+              ribbonPendingFloorplans: {
+                enabled: true
               }
             }
           }

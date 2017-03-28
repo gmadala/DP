@@ -91,7 +91,8 @@
               symbolRadius: 0,
               symbolWidth: 20,
               useHTML: true,
-              y: -20
+              y: (scope.data.length > 4) ? 0 : -20
+
             },
             plotOptions: {
               bar: {

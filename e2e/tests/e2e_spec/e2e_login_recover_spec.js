@@ -7,7 +7,7 @@ var recoverErrorMessage = require('../../framework/e2e_login_recover_objects.js'
 var login = require('../../framework/e2e_login.js');
 var incorrectAnswer = 'f';
 var correctAnswer = 'a';
-var validEmail = 'test@gmail.com';
+var validEmail = 'DevTest@nextgearcapital.com';
 var invalidEmail = 'asdas@gmail.com';
 var invalidFormatEmail = 'testtesttest';
 
@@ -102,8 +102,8 @@ describe('\n Login Recovery Page', function () {
         loginObjects.doSubmitPassword();
         browser.sleep(browser.params.mediumDelay);
         //Answer Security Questions and validate
-        expect(recoverErrorMessage.getSecurityQuestion10Text()).toEqual("What is the name of a college you applied to but didn't attend?");
-        expect(recoverErrorMessage.getSecurityQuestion6Text()).toEqual("In what city or town was your first job?");
+        expect(recoverErrorMessage.getSecurityQuestion6Text()).toEqual("What is the name of a college you applied to but didn't attend?");
+        expect(recoverErrorMessage.getSecurityQuestion10Text()).toEqual("In what city or town was your first job?");
         expect(recoverErrorMessage.getSecurityQuestion9Text()).toEqual("What is your maternal grandmother's maiden name?");
         //Entering incorrect Answer
         loginObjects.setSecQuestions(incorrectAnswer);

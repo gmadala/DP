@@ -79,6 +79,8 @@ function Helper() {
          */
         return browser.get(this.loginPage())
             .then(browser.sleep(browser.params.longDelay));
+        browser.driver.manage().deleteAllCookies();
+
     };
 
     this.goToHome = function () {
@@ -198,7 +200,7 @@ function Helper() {
         browser.sleep(browser.params.longerDelay);
     };
 
-    this.goToOpenAudits= function () {
+    this.goToOpenAudits = function () {
         /**
          * @name goToOpenAudits
          * @memberof helper

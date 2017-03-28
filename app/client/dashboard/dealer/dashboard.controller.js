@@ -11,6 +11,7 @@
     '$uibModal',
     'Dashboard',
     'User',
+    'Floorplan',
     'FloorplanUtil',
     'moment',
     '$filter',
@@ -20,7 +21,8 @@
     'language',
     '$cookieStore',
     'Audits',
-    '$rootScope'
+    '$rootScope',
+    'Paginate'
   ];
 
   function DashboardCtrl(
@@ -29,6 +31,7 @@
     $uibModal,
     Dashboard,
     User,
+    Floorplan,
     FloorplanUtil,
     moment,
     $filter,
@@ -38,23 +41,25 @@
     language,
     $cookieStore,
     Audits,
-    $rootScope
+    $rootScope,
+    Paginate
   ) {
 
     var uibModal = $uibModal;
+    $scope.isMobile = $rootScope.isMobile;
+    var isAndroid = /Android/i.test(navigator.userAgent);
+    var isIos = /iPhone|iPad|iPod/i.test(navigator.userAgent);
+    var usersPrompted = $cookieStore.get('headlessUsersPrompted');
+    var isHeadless = (window.navigator.standalone || window.matchMedia('(display-mode: standalone)').matches);
 
     User.getInfo().then(function(userInfo) {
-        var isMobile = $rootScope.isMobile;
-        var isAndroid = /Android/i.test(navigator.userAgent);
-        var isIos = /iPhone|iPad|iPod/i.test(navigator.userAgent);
-        var usersPrompted = $cookieStore.get('headlessUsersPrompted');
         var userPrompted = usersPrompted && usersPrompted.indexOf(userInfo.BusinessContactUserName) !== -1;
-        var isHeadless = (window.navigator.standalone || window.matchMedia('(display-mode: standalone)').matches);
+
         $scope.showPrompt = !userPrompted && !isHeadless;
 
         // check if mobile and android or isIos
         // check to see if the user has been prompted already OR if it is a different user
-        if (isMobile && (isAndroid || isIos) && !isHeadless && !userPrompted) {
+        if ($scope.isMobile && (isAndroid || isIos) && !isHeadless && !userPrompted) {
             // add this user to prompted users cookie
             if (!usersPrompted)
                 usersPrompted = [];
@@ -91,8 +96,11 @@
 
     // FloorplanUtil handles all search/fetch/reset functionality.
     $scope.floorplanData = new FloorplanUtil('FlooringDate');
+    $scope.pendingUnitsAccordion = new FloorplanUtil('FlooringDate');
+
     // initial search
     $scope.floorplanData.resetSearch();
+    $scope.pendingUnitsAccordion.resetSearch(Floorplan.filterValues.PENDING, Paginate.PAGE_SIZE_SMALL);
 
     $scope.changeViewMode = function(mode) {
       $scope.viewMode = mode;
@@ -120,6 +128,7 @@
     // checking the feature flag for the displaying pending floorplans && open audits on the dashboard ribbon
     $scope.pendingFloorPlanFlag = User.getFeatures().hasOwnProperty('ribbonPendingFloorplans') ? User.getFeatures().ribbonPendingFloorplans.enabled : false;
     $scope.openAuditsFlag = User.getFeatures().hasOwnProperty('openAudits') ? User.getFeatures().openAudits.enabled : false;
+    $scope.fundingTodayFlag = User.getFeatures().hasOwnProperty('fundingToday') ? User.getFeatures().fundingToday.enabled : false;
 
     // get number of open audits for ribbon and for pending floorplans
     $scope.pendingFloorplans = 0;
@@ -305,6 +314,9 @@
               UpcomingPayments: result.UpcomingPayments,
               AccountFees: result.AccountFees
             };
+            $scope.overdue = result.OverduePayments > 0
+            $scope.overdueAmt = result.OverduePaymentAmount > 0
+            $scope.dueToday = result.PaymentsDueToday > 0
           }
 
           function getPaymentsTitle () {
@@ -334,6 +346,7 @@
               y: 75
             }
           };
+          $scope.amountFinanced = Floorplan.getAmountFinanced();
         }
       );
     });

@@ -19,6 +19,7 @@
              */
             if (data && data.FinancialSummaryInfo) {
               var fs = data.FinancialSummaryInfo;
+
               fs.FloorplanTotal = fs.TotalPaid + fs.TotalOutstanding;
             }
             return data;

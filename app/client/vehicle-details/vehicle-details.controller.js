@@ -247,7 +247,10 @@
           ScheduledPaymentDate: details.FinancialSummaryInfo.ScheduledPaymentDate,
           ScheduledPaymentAmount: details.FinancialSummaryInfo.ScheduledPaymentAmount,
           WebScheduledPaymentId: details.FinancialSummaryInfo.WebScheduledPaymentId,
-          CurtailmentPaymentScheduled: details.FinancialSummaryInfo.CurtailmentPaymentScheduled
+          CurtailmentPaymentScheduled: details.FinancialSummaryInfo.CurtailmentPaymentScheduled,
+          TransportationFee: details.FinancialSummaryInfo.TransportationFee,
+          TransportationFeePaid: details.FinancialSummaryInfo.TransportationFeePaid,
+          IsLastCurtailment : details.FinancialSummaryInfo.IsLastCurtailment
         };
 
         Floorplan.determineFloorPlanExtendability(details.FinancialSummaryInfo.FloorplanId).then(
@@ -491,7 +494,7 @@
             },
             {
               name: gettextCatalog.getString('Fees'),
-              y: details.FinancialSummaryInfo.FeesPaid,
+              y: details.FinancialSummaryInfo.FeesPaid - details.FinancialSummaryInfo.TransportationFeePaid,
               color: '#A6A8AB'
             }
           ]
@@ -517,7 +520,7 @@
             },
             {
               name: gettextCatalog.getString('Fees'),
-              y: details.FinancialSummaryInfo.FeesOutstanding,
+              y: details.FinancialSummaryInfo.FeesOutstanding - details.FinancialSummaryInfo.TransportationFee,
               color: '#A6A8AB'
             }
           ]
@@ -534,6 +537,23 @@
             name: gettextCatalog.getString('CPP'),
             y: details.FinancialSummaryInfo.CollateralProtectionOutstanding,
             color: '#6D6E70'
+          });
+        }
+
+        var transpoFee = details.FinancialSummaryInfo.TransportationFee ? details.FinancialSummaryInfo.TransportationFee : 0;
+        var transpoFeePaid = details.FinancialSummaryInfo.TransportationFeePaid ? details.FinancialSummaryInfo.TransportationFeePaid : 0;
+
+        if (!(transpoFee === 0) || !(transpoFeePaid === 0)) {
+          $scope.financialSummary.paidChart.data.push({
+            name: gettextCatalog.getString('Transportation'),
+            y: transpoFeePaid,
+            color: '#F6881C'
+          });
+
+          $scope.financialSummary.outstandingChart.data.push({
+            name: gettextCatalog.getString('Transportation'),
+            y: transpoFee,
+            color: '#F6881C'
           });
         }
 

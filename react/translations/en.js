@@ -37,7 +37,8 @@ module.exports = {
     dashboard: {
         ribbon: {
             auditLabel: 'Open Audits',
-            floorplanLabel: 'Pending Floorplans',
+            floorplanLabel: 'Pending Floor Plans',
+            fundingTodayLabel: 'Funding Today',
         },
         ribbonItem: {
             units: {
@@ -45,10 +46,60 @@ module.exports = {
                 other: '%(count)s Units',
             },
         },
+        pendingUnitsAccordion: {
+            pendingFloorplans: 'Pending Floor Plans',
+            loadAll: 'View All Pending',
+        },
+        pendingUnitPanel: {
+            vin: 'VIN',
+            received: 'Received',
+            currentStatus: 'Current Status',
+            statusDescription: 'Floor Plan request received. The Floor Plan Services team will begin reviewing your request shortly.',
+        }
     },
     progressivePrompt: {
         isAndroid: 'Tap the top right menu icon %(icon)s and click on "Add to Home Screen"',
         isIos: 'Tap the share icon %(icon)s and click on "Add to Home Screen"',
         dismiss: 'Tap to dismiss',
     },
+    sideMenu: {
+        defaultMenu: {
+            dashboard: 'Dashboard',
+            profileSettings: 'Profile Settings',
+            accountManagement: 'Account Management',
+            payments: 'Payments',
+            floorPlan: 'Floor Plan',
+            resources: 'Resources',
+            support: 'Support',
+            signOut: 'Sign Out',
+            settings: 'Settings',
+            dealerSearch: 'Dealer Search',
+            floorPlanSearch: 'Floor Plan Search',
+            reports: 'Reports'
+        },
+        paymentsMenu: {
+            makeAPayment: 'Make A Payment',
+            receipts: 'Receipts',
+        },
+        floorplanMenu: {
+            viewFloorPlan: 'View Floor Plan',
+            floorAVehicle: 'Floor a Vehicle',
+            valueLookup: 'Value Lookup',
+            openAudits: 'Open Audits',
+            titleReleases: 'Title Releases',
+        },
+        resourcesMenu: {
+            resources: 'Resources',
+            reports: 'Reports',
+            analytics: 'Analytics',
+            promos: 'Promos',
+        },
+        supportMenu: {
+            chat: 'Chat',
+            callAccountExecutive: 'Call Account Executive',
+            callCustomerService: 'Call Customer Service',
+            sendEmail: 'Send Email',
+            feedback: 'Feedback'
+        }
+    }
 };

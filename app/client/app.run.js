@@ -113,6 +113,8 @@
          }
          */
 
+        $rootScope.currentPage = toState.data.title;
+
         if (!toState.data.allowAnonymous) {
           // enforce rules about what states certain users can see
           var isDealer = User.isDealer(),

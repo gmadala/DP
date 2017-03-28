@@ -32,7 +32,8 @@
         "_": true,
         "document": true,
         "assert": true,
-        "ENVIRONMENT": true
+        "ENVIRONMENT": true,
+        "TimelineMax": true
     },
     "parser": "babel-eslint",
     "parserOptions":{
