@@ -64,7 +64,7 @@ function Helper() {
     };
 
     this.exportSummaryPage = function () {
-        return browser.baseUrl + 'MobileService/api/report/payment/summary/paymentsSummary?AuthToken=';
+        return 'MobileService/api/report/payment/summary/paymentsSummary?AuthToken=';
     };
 
     //Navigation functions

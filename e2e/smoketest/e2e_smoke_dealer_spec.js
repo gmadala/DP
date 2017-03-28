@@ -8,7 +8,7 @@ var loginObjects = require('../framework/e2e_login_objects.js');
 var loginObjects = new loginObjects.loginObjects();
 var payments = require('../framework/e2e_payment_objects.js');
 var payments = new payments.paymentObjects();
-var login = require('../../framework/e2e_login.js');
+var login = require('../framework/e2e_login.js');
 
 //********THIS HAS TO BE CHANGED TO SOMETHING THAT WORKS IN PRODUCTION********//
 var userName = '57694AC';
@@ -61,9 +61,10 @@ describe('Build Verification', function () {
         } else {
             console.log("Skipping payment tests because there are no payoffs.")
         }
-        browser.sleep(5000);
+        browser.sleep(browser.params.longDelay);
         subtotal = payments.getSubtotal();
         payments.doCheckoutButton();
+        browser.sleep(browser.params.longDelay);
         expect(browser.getCurrentUrl()).toEqual(helper.checkoutPage());
     });
 
@@ -82,10 +83,10 @@ describe('Build Verification', function () {
             var newWindowHandle = handles[1];
             browser.switchTo().window(newWindowHandle).then(function () {
                 expect(browser.getCurrentUrl()).toContain(helper.exportSummaryPage());
+                browser.close();
+                browser.switchTo().window(handles[0]);
             });
         });
-        browser.close();
-        browser.switchTo().window(handles[0]);
     });
 
     it("6. Remove payment and logout", function () {

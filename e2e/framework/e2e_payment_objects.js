@@ -20,7 +20,13 @@ function PaymentObjects() {
     };
     this.getTotal = function () {
         browser.sleep(browser.params.shortDelay);
-        return this.elTotal.getText();
+        var allElementsOfSelector = element.all(by.css("h3.lockup-major"));
+        var total = allElementsOfSelector.filter(function (elem) {
+            return elem.isDisplayed().then(function (displayedElement) {
+                return displayedElement;
+            });
+        }).first();
+        return total.getText();
     };
     this.getNoPaymentsText = function () {
         browser.sleep(browser.params.short);
@@ -37,7 +43,7 @@ function PaymentObjects() {
         return browser.isElementPresent(by.id('bankAccount'));
     };
     this.doClickFirstPayoff = function (selector) {
-        browser.sleep(5000);  //(browser.params.longDelay);
+        browser.sleep(browser.params.longDelay);
         var allElementsOfSelector = element.all(by.id('togglePayoff'));
         return allElementsOfSelector.filter(function (elem) {
             return elem.isDisplayed().then(function (displayedElement) {
