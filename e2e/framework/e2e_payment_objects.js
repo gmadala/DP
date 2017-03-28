@@ -7,6 +7,7 @@ function PaymentObjects() {
     //Locators
     this.elCheckoutButton = browser.element(by.css("button.btn-cta.cta-primary.cta-full"));
     this.elRemovePayment = browser.element(by.css("button.btn-unstyle.btn-link.right"));
+    this.elNoPaymentsText = browser.element(by.css("p.info-block-text"));
     this.elBankAccount = browser.element(by.id('bankAccount'));
     this.elExportSummary = browser.element(by.css('span.icon-small.svg-icon.icon-document'));
     this.elSubtotal = browser.element(by.css('h3.numeric'));
@@ -20,6 +21,10 @@ function PaymentObjects() {
     this.getTotal = function () {
         browser.sleep(browser.params.shortDelay);
         return this.elTotal.getText();
+    };
+    this.getNoPaymentsText = function () {
+        browser.sleep(browser.params.short);
+        return this.elNoPaymentsText.getText();
     };
 
     //Doers
@@ -53,7 +58,7 @@ function PaymentObjects() {
         this.elExportSummary.click();
     };
     this.doRemovePayment = function () {
-        browser.sleep(browser.params.shortDelay);
+        browser.sleep(browser.params.longDelay);
         this.elRemovePayment.click();
     }
 

@@ -8,6 +8,7 @@ var loginObjects = require('../framework/e2e_login_objects.js');
 var loginObjects = new loginObjects.loginObjects();
 var payments = require('../framework/e2e_payment_objects.js');
 var payments = new payments.paymentObjects();
+var login = require('../../framework/e2e_login.js');
 
 //********THIS HAS TO BE CHANGED TO SOMETHING THAT WORKS IN PRODUCTION********//
 var userName = '57694AC';
@@ -21,7 +22,7 @@ describe('Build Verification', function () {
         browser.ignoreSynchronization = true;
     });
 
-    xit("1. Login as a US dealer", function () {
+    it("1. Login as a US dealer", function () {
         helper.goToLogin();
         //Validate the NGC Logo and language pickers are visible
         expect(loginObjects.elMNGLogo.isDisplayed()).toBe(true);
@@ -45,14 +46,14 @@ describe('Build Verification', function () {
         expect(browser.getCurrentUrl()).toEqual(helper.homePage());
     });
 
-    xit("2. Verify dashboard stuff", function () {
+    it("2. Verify dashboard stuff", function () {
         expect(dashboard.elShowHidePaymentDetailsLink.isDisplayed()).toBe(true);
         expect(dashboard.elViewAllPaymentsLink.isDisplayed()).toBe(true);
         expect(dashboard.elRequestCreditIncrease.isDisplayed()).toBe(true);
         expect(dashboard.elFloorPlansLink.isDisplayed()).toBe(true);
     });
 
-    xit("3. Nav to make a payment and add one", function () {
+    it("3. Nav to make a payment and add one", function () {
         dashboard.doPayments();
         expect(browser.getCurrentUrl()).toEqual(helper.paymentsPage());
         if (payments.checkPayoffsExist()) {
@@ -66,7 +67,7 @@ describe('Build Verification', function () {
         expect(browser.getCurrentUrl()).toEqual(helper.checkoutPage());
     });
 
-    xit("4. Select bank account and validate amount", function () {
+    it("4. Select bank account and validate amount", function () {
         if (payments.checkBankAccountsExist()) {
             payments.doBankAccountSelect();
         } else {
@@ -75,7 +76,7 @@ describe('Build Verification', function () {
         expect(subtotal).toEqual(payments.getTotal());
     });
 
-    xit("5. Export Summary and validate", function () {
+    it("5. Export Summary and validate", function () {
         payments.doExportSummary();
         browser.getAllWindowHandles().then(function (handles) {
             var newWindowHandle = handles[1];
@@ -87,7 +88,11 @@ describe('Build Verification', function () {
         browser.switchTo().window(handles[0]);
     });
 
-    xit("6. Logout", function () {
-
+    it("6. Remove payment and logout", function () {
+        payments.doRemovePayment();
+        payments.getNoPaymentsText();
+        expect(browser.getCurrentUrl()).toEqual(helper.checkoutPage());
+        login.logout();
+        expect(browser.getCurrentUrl()).toEqual(helper.loginPage());
     });
 });
