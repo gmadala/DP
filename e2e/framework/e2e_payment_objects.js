@@ -1,27 +1,61 @@
 'use strict';
 
+var helper = require('../framework/e2e_helper_functions.js');
+var helper = new helper.helper();
+
 function PaymentObjects() {
     //Locators
     this.elCheckoutButton = browser.element(by.css("button.btn-cta.cta-primary.cta-full"));
+    this.elRemovePayment = browser.element(by.css("button.btn-unstyle.btn-link.right"));
+    this.elBankAccount = browser.element(by.id('bankAccount'));
+    this.elExportSummary = browser.element(by.css('span.icon-small.svg-icon.icon-document'));
+    this.elSubtotal = browser.element(by.css('h3.numeric'));
+    this.elTotal = browser.element(by.css('h3.lockup-major'));
+
+    //Getters
+    this.getSubtotal = function () {
+        browser.sleep(browser.params.shortDelay);
+        return this.elSubtotal.getText();
+    };
+    this.getTotal = function () {
+        browser.sleep(browser.params.shortDelay);
+        return this.elTotal.getText();
+    };
 
     //Doers
     this.checkPayoffsExist = function () {
         browser.sleep(browser.params.shortDelay);
         return browser.isElementPresent(by.id('paymentsSearchTable'));
     };
-    this.doClickFirstPayoff = function () {
-        browser.sleep(browser.params.longDelay);
-        var allPayoffs = element.all(by.repeater('payment in payments.results')).get(0);
-        console.log(allPayoffs + ' **END** ');
-        console.log(allPayoffs(0));
-        allPayoffs.element(by.id('togglePayoff')).click();
-        browser.sleep(browser.params.longDelay);
+    this.checkBankAccountsExist = function () {
+        browser.sleep(browser.params.shortDelay);
+        return browser.isElementPresent(by.id('bankAccount'));
     };
-    this.doCheckout = function () {
+    this.doClickFirstPayoff = function (selector) {
+        browser.sleep(5000);  //(browser.params.longDelay);
+        var allElementsOfSelector = element.all(by.id('togglePayoff'));
+        return allElementsOfSelector.filter(function (elem) {
+            return elem.isDisplayed().then(function (displayedElement) {
+                return displayedElement;
+            });
+        }).first().click();
+    };
+    this.doCheckoutButton = function () {
         browser.sleep(browser.params.longDelay);
         this.elCheckoutButton.click();
-        browser.sleep(browser.params.longDelay);
     };
+    this.doBankAccountSelect = function () {
+        browser.sleep(browser.params.longDelay);
+        helper.doDropdownSelect(this.elBankAccount, 0);
+    };
+    this.doExportSummary = function () {
+        browser.sleep(browser.params.shortDelay);
+        this.elExportSummary.click();
+    };
+    this.doRemovePayment = function () {
+        browser.sleep(browser.params.shortDelay);
+        this.elRemovePayment.click();
+    }
 
 }
 module.exports.paymentObjects = PaymentObjects;

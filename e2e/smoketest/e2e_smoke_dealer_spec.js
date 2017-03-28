@@ -12,6 +12,7 @@ var payments = new payments.paymentObjects();
 //********THIS HAS TO BE CHANGED TO SOMETHING THAT WORKS IN PRODUCTION********//
 var userName = '57694AC';
 var password = 'ringoffire@1';
+var subtotal = '';
 
 describe('Build Verification', function () {
 
@@ -20,22 +21,22 @@ describe('Build Verification', function () {
         browser.ignoreSynchronization = true;
     });
 
-    it("1. Login as a US dealer", function () {
+    xit("1. Login as a US dealer", function () {
         helper.goToLogin();
-        // //Validate the NGC Logo and language pickers are visible
-        // expect(loginObjects.elMNGLogo.isDisplayed()).toBe(true);
-        // expect(loginObjects.elLangChooser.isDisplayed()).toBe(true);
-        // expect(loginObjects.elEnglish.isDisplayed()).toBe(true);
-        // expect(loginObjects.elSpanish.isDisplayed()).toBe(true);
-        // expect(loginObjects.elFrench.isDisplayed()).toBe(true);
-        //
-        // //Validating languages
-        // expect(loginObjects.getTextLogin()).toBe("Login");
-        // loginObjects.doSpanish();
-        // expect(loginObjects.getTextLogin()).toBe("Inicio de sesión");
-        // loginObjects.doFrench();
-        // expect(loginObjects.getTextLogin()).toBe("Ouverture de session");
-        // loginObjects.doEnglish();
+        //Validate the NGC Logo and language pickers are visible
+        expect(loginObjects.elMNGLogo.isDisplayed()).toBe(true);
+        expect(loginObjects.elLangChooser.isDisplayed()).toBe(true);
+        expect(loginObjects.elEnglish.isDisplayed()).toBe(true);
+        expect(loginObjects.elSpanish.isDisplayed()).toBe(true);
+        expect(loginObjects.elFrench.isDisplayed()).toBe(true);
+
+        //Validating languages
+        expect(loginObjects.getTextLogin()).toBe("Login");
+        loginObjects.doSpanish();
+        expect(loginObjects.getTextLogin()).toBe("Inicio de sesión");
+        loginObjects.doFrench();
+        expect(loginObjects.getTextLogin()).toBe("Ouverture de session");
+        loginObjects.doEnglish();
 
         //Validating login & success
         expect(loginObjects.getTextLogin()).toBe("Login");
@@ -51,34 +52,42 @@ describe('Build Verification', function () {
         expect(dashboard.elFloorPlansLink.isDisplayed()).toBe(true);
     });
 
-    it("3. Make a Payment", function () {
+    xit("3. Nav to make a payment and add one", function () {
         dashboard.doPayments();
+        expect(browser.getCurrentUrl()).toEqual(helper.paymentsPage());
         if (payments.checkPayoffsExist()) {
             payments.doClickFirstPayoff();
         } else {
-            console.log("Skipping Make Payment test because there are no payoffs")
+            console.log("Skipping payment tests because there are no payoffs.")
         }
-        //payments.doCheckout();
-        //expect(browser.getCurrentUrl()).toEqual(helper.homePage())
+        browser.sleep(5000);
+        subtotal = payments.getSubtotal();
+        payments.doCheckoutButton();
+        expect(browser.getCurrentUrl()).toEqual(helper.checkoutPage());
     });
 
-    // Fill out form and verify amounts
-    xit("4. ", function () {
-
+    xit("4. Select bank account and validate amount", function () {
+        if (payments.checkBankAccountsExist()) {
+            payments.doBankAccountSelect();
+        } else {
+            console.log("Only one bank account, proceed to export summary.")
+        }
+        expect(subtotal).toEqual(payments.getTotal());
     });
 
-    // Click Export Summary and verify
-    xit("5. ", function () {
-
+    xit("5. Export Summary and validate", function () {
+        payments.doExportSummary();
+        browser.getAllWindowHandles().then(function (handles) {
+            var newWindowHandle = handles[1];
+            browser.switchTo().window(newWindowHandle).then(function () {
+                expect(browser.getCurrentUrl()).toContain(helper.exportSummaryPage());
+            });
+        });
+        browser.close();
+        browser.switchTo().window(handles[0]);
     });
 
-    // Remove payment (DO NOT SUBMIT)
-    xit("6. ", function () {
-
-    });
-
-    // Sign off
-    xit("7. ", function () {
+    xit("6. Logout", function () {
 
     });
 });

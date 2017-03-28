@@ -19,6 +19,10 @@ function Helper() {
         return browser.baseUrl + 'home';
     };
 
+    this.checkoutPage = function () {
+        return browser.baseUrl + 'checkout';
+    };
+
     this.auctionHomePage = function () {
         return browser.baseUrl + 'act/home';
     };
@@ -34,9 +38,15 @@ function Helper() {
     this.promosPage = function () {
         return browser.baseUrl + 'promos';
     };
+
+    this.paymentsPage = function () {
+        return browser.baseUrl + 'payments';
+    };
+
     this.receiptsPage = function () {
         return browser.baseUrl + 'receipts';
     };
+
     this.profileSettingsPage = function () {
         return browser.baseUrl + 'profile_settings';
     };
@@ -53,6 +63,9 @@ function Helper() {
         return browser.baseUrl + 'audits';
     };
 
+    this.exportSummaryPage = function () {
+        return browser.baseUrl + 'MobileService/api/report/payment/summary/paymentsSummary?AuthToken=';
+    };
 
     //Navigation functions
     this.goToLogin = function () {
@@ -310,6 +323,15 @@ function Helper() {
                     return true;
                 }
             });
+    };
+
+    this.doDropdownSelect = function (element, optionNum) {
+        if (optionNum) {
+            var options = element.findElements(by.tagName('option'))
+                .then(function (options) {
+                    options[optionNum].click();
+                });
+        }
     };
 }
 
