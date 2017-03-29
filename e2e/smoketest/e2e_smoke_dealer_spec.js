@@ -77,7 +77,7 @@ describe('Build Verification', function () {
         expect(subtotal).toEqual(payments.getTotal());
     });
 
-    it("5. Export Summary and validate", function () {
+    it("5. Export Summary, validate, and remove payment", function () {
         payments.doExportSummary();
         browser.getAllWindowHandles().then(function (handles) {
             var newWindowHandle = handles[1];
@@ -87,12 +87,12 @@ describe('Build Verification', function () {
                 browser.switchTo().window(handles[0]);
             });
         });
-    });
-
-    it("6. Remove payment and logout", function () {
         payments.doRemovePayment();
         payments.getNoPaymentsText();
         expect(browser.getCurrentUrl()).toEqual(helper.checkoutPage());
+    });
+
+    it("6. Logout", function () {
         login.logout();
         expect(browser.getCurrentUrl()).toEqual(helper.loginPage());
     });
