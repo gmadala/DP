@@ -5,7 +5,6 @@ var base = frisby.apiBase;
 
 frisby.login()
     .after(function () {
-
         frisby.create('Dealer: Get info')
             .get(base + 'dealer/v1_2/info')
             .expectJSONTypes('Data', {

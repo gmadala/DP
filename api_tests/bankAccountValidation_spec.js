@@ -18,7 +18,6 @@ frisby.login()
             })
             .expectStatus(200)
             .toss();
-
     })
     .toss();
 
