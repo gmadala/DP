@@ -20,7 +20,7 @@ frisby.login()
             .toss();
 
         frisby.create('Financial Account: Get one financial account')
-            .get(base + 'dealer/bankAccount/4ed7e947-db20-43e1-a36e-b2dbb79c3ce5')
+            .get(base + 'dealer/bankAccount/16555779-4266-4f8f-af9e-41910ddc3d46')
             .expectJSONTypes('Data', {
                 AccountId: String,
                 AccountName: String,
@@ -39,7 +39,7 @@ frisby.login()
         frisby.create('Financial Account: Update one financial account')
             .put(base + 'dealer/bankAccount',
                 {
-                    AccountId: '4ed7e947-db20-43e1-a36e-b2dbb79c3ce5',
+                    AccountId: '16555779-4266-4f8f-af9e-41910ddc3d46',
                     AccountName: 'JP Morgan Chase Bank - 7905',
                     BankName: 'JP Morgan Chase Bank',
                     IsActive: true,
