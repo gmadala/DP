@@ -11,7 +11,6 @@ function PaymentObjects() {
     this.elBankAccount = browser.element(by.id('bankAccount'));
     this.elExportSummary = browser.element(by.css('span.icon-small.svg-icon.icon-document'));
     this.elSubtotal = browser.element(by.css('h3.numeric'));
-    this.elTotal = browser.element(by.css('h3.lockup-major'));
 
     //Getters
     this.getSubtotal = function () {
