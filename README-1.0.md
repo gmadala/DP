@@ -37,6 +37,12 @@ $ npm run build -- --mng:buildEnv=uat --mng:buildVersion=1.0
 $ npm run build -- --mng:buildEnv=production --mng:buildVersion=2.0
 ```
 
+Maintenance build
+
+```sh
+$ npm run build:maintenance
+```
+
 ### Development
 
 Build for local environment ([localhost:9000](http://localhost:9000))

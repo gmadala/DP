@@ -176,6 +176,8 @@
     "build:webpack": "webpack --colors --no-info --client-log-level=error",
     "build:grunt": "cross-conf-env grunt build --target=npm_package_config_buildEnv --buildVersion=npm_package_config_buildVersion",
     "build": "npm run build:env && npm run build:webpack && npm run build:grunt",
+    "prebuild:maintenance": "npm install && npm ls && bower install",
+    "build:maintenance": "grunt build-maintenance",
     "webdriver-update": "webdriver-manager update",
     "webdriver-update-chrome": "webdriver-manager update --chrome",
     "extract:es": "msgattrib --untranslated po/es.po > translations/es_untranslated.po",
