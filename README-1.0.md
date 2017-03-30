@@ -16,6 +16,8 @@ Windows requirement for angular translations: add both of these to your environm
 
 Dist build (defaults to test)
 
+NOTE: If you have any issues running the script, delete your node_modules folder and try again
+
 ```sh
 $ npm run build
 ```
@@ -47,6 +49,8 @@ $ npm run build:maintenance
 
 Build for local environment ([localhost:9000](http://localhost:9000))
 (this command will run grunt serve and webpack --watch concurrently)
+
+NOTE: If you have any issues running the script, delete your node_modules folder and try again
 
 ```sh
 $ npm start

@@ -190,7 +190,7 @@
     "translate:react": "babel-node react/translate.js",
     "translate": "npm run translate:react && npm run translate:angular",
     "lint:angular": "eslint --quiet -c app/.eslintrc.json app/client/**/*.js",
-    "prestart": "bower install && npm install && npm ls && npm run translate && npm run lint:angular",
+    "prestart": "bower install && npm install && npm ls && npm run lint:angular",
     "start:env": "cross-env NODE_ENV=development",
     "start:server": "concurrently --kill-others \"cross-conf-env grunt server-np --apiBase='npm_package_config_apiBase'\" \"webpack --quiet --watch\"",
     "start": "npm run start:env && npm run start:server",
