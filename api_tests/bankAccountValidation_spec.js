@@ -5,7 +5,6 @@
 var frisby = require('./frisby_mobile_service');
 var base = frisby.apiBase;
 
-
 frisby.login()
     .after(function () {
 
