@@ -24,7 +24,6 @@
 var frisby = require('frisby');
 
 var apiBase = process.env.API_BASE || 'https://test.nextgearcapital.com/MobileService/api/';
-//var username = process.env.USERNAME || '53190md';
 var username = process.env.USERNAME || '57694ac';
 var password = process.env.PASSWORD || 'ringoffire@1';
 console.log(password);

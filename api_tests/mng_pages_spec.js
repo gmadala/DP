@@ -47,7 +47,15 @@ frisby.create('Value Lookup')
 
 frisby.create('Open Audits')
     .get('https://uat.api.nextgearcapital.com/test/ngen/cam/6e56cd8c-36dd-4397-aa61-9facd666aaf4/open_audits?api_key=fbymcqgckrvh7a2h8eavek7e&apiToken=C66E86A2-621B-42E3-9814-E5903BF161AB')
-    .expectStatus(200)
+    //Need to create positive test with active authentication token
+    .expectJSON({
+        "errors": [
+            {
+                Message: String
+            }
+        ]
+    })
+    .expectStatus(401)
     .expectHeaderContains('content-type', 'application/json')
     .toss();
 
@@ -77,7 +85,15 @@ frisby.create('Analytics - Aging')
 
 frisby.create('Promos')
     .get('https://uat.api.nextgearcapital.com/test/ngen/eventsales?api_key=fbymcqgckrvh7a2h8eavek7e&apiToken=C66E86A2-621B-42E3-9814-E5903BF161AB')
-    .expectStatus(200)
+    //Need to create positive test with active authentication token
+    .expectJSON({
+        "errors": [
+            {
+                Message: String
+            }
+        ]
+    })
+    .expectStatus(401)
     .expectHeaderContains('content-type', 'application/json')
     .toss();
 
