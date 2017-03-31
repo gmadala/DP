@@ -23,7 +23,9 @@
 
   function NavBarCtrl( $rootScope, $scope, $state, User, Payments, gettextCatalog, language, kissMetricInfo, $location, $timeout, localStorageService, fedex, nxgConfig, Dashboard, Audits ) {
     $scope.isCollapsed = true;
+    $scope.menuOpen = false;
     $scope.isLoggedIn = false;
+    $scope.pageTitle = $rootScope.currentPage;
 
     $scope.isDashboard = function () {
       return $state.current.name === "dashboard" || $state.current.name === "auction_dashboard" || $state.current.name === "headless" || $scope.pageTitle === "";
@@ -121,24 +123,6 @@
           }
         ]
       };
-
-    $scope.mobileLinks = {
-      settings: {
-        name: gettextCatalog.getString( 'Settings' ),
-        href: '#/act/settings',
-        activeWhen: 'settings'
-      },
-      profile: {
-        name: gettextCatalog.getString( 'Profile Settings' ),
-        href: '#/profile_settings',
-        activeWhen: 'profile_settings'
-      },
-      management: {
-        name: gettextCatalog.getString( 'Account Management' ),
-        href: '#/account_management',
-        activeWhen: 'account_management'
-      }
-    };
 
     $scope.initNav = function( ) {
       kissMetricInfo.getKissMetricInfo( ).then( function( result ) {
@@ -264,11 +248,7 @@
     // this will return true and the active class will be applied to style the nav
     // link appropriately.
     $scope.isActive = function( link ) {
-      var isActive = $state.includes( link.activeWhen );
-      if ( isActive ) {
-        $scope.pageTitle = link.name;
-      }
-      return isActive;
+      return $state.includes( link.activeWhen );
     };
 
     $scope.isActiveGroup = function( subMenu ) {
@@ -294,15 +274,18 @@
     };
 
     $scope.toggleMenu = function( ) {
-      $state.current.data.showMenu = !$state.current.data.showMenu;
-      $state.current.data.menuToggled = true;
-      $scope.closeMenuTip( );
-      if ( $state.current.data.showMenu ) {
-        $scope.navbarClosed = false;
-      } else {
-        setTimeout( function( ) {
-          $scope.navbarClosed = true;
-        }, 5000);
+        if ($state.current.data) {
+          $state.current.data.showMenu = !$state.current.data.showMenu;
+          $scope.menuOpen = $state.current.data.showMenu;
+          $state.current.data.menuToggled = true;
+          $scope.closeMenuTip( );
+          if ( $state.current.data.showMenu ) {
+            $scope.navbarClosed = false;
+          } else {
+            setTimeout( function( ) {
+              $scope.navbarClosed = true;
+            }, 5000);
+          }
       }
     };
 
@@ -317,6 +300,7 @@
     $rootScope.$on( '$stateChangeSuccess', function( ) {
       $scope.isCollapsed = true;
       $scope.navbarClosed = true;
+      $scope.pageTitle = $rootScope.currentPage;
 
       $scope.showSupport = false;
       $scope.closeSupport = function( ) {

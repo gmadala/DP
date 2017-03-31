@@ -377,6 +377,12 @@ module.exports = function( grunt ) {
                         expand: true,
                         dot: true,
                         flatten: true,
+                        dest: '<%= yeoman.dist %>/react/',
+                        src: '<%= yeoman.app %>/react/*'
+                    }, {
+                        expand: true,
+                        dot: true,
+                        flatten: true,
                         dest: '<%= yeoman.dist %>/img/addtohomescreen/',
                         src: '<%= yeoman.app %>/img/addtohomescreen/*'
                     }, {
