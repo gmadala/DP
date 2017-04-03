@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: NextGear\n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2016-10-06 09:38-0400\n"
+"PO-Revision-Date: 2017-04-03 08:55-0400\n"
 "Last-Translator: Karl <karl.friedrich@translatemedia.com>\n"
 "Language-Team: TranslateMedia New York\n"
 "MIME-Version: 1.0\n"
@@ -11,7 +11,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Language: es\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 1.8.9\n"
+"X-Generator: Poedit 1.8.12\n"
 
 #: app/client/login/login-update-security/login-update-security.template.html:22
 msgid "-- Select a Question --"
@@ -3570,7 +3570,7 @@ msgstr ""
 
 #: app/client/floor-vehicle/nxg-business-field-v2/nxg-business-field.template.html:13
 msgid "Search Payee"
-msgstr ""
+msgstr "Buscar beneficiario"
 
 #: app/client/login/login-recover/login-recover.template.html:80
 #: app/client/profile-settings/auction/auction-settings.template.html:67
@@ -4038,8 +4038,8 @@ msgid ""
 "The title(s) will be sent to the following address: <strong>{{addresses[0] | "
 "address}}</strong>"
 msgstr ""
-"El (los) título(s) se enviarán a la siguiente dirección: <strong> {{addresses"
-"[0] | address}}</strong>"
+"El (los) título(s) se enviarán a la siguiente dirección: <strong> "
+"{{addresses[0] | address}}</strong>"
 
 #: app/client/value-lookup/value-lookup.html:346
 msgid ""
@@ -4422,12 +4422,12 @@ msgstr "Detalles de la transacción"
 #: app/client/vehicle-details/vehicle-details.controller.js:548
 #: app/client/vehicle-details/vehicle-details.controller.js:554
 msgid "Transportation"
-msgstr ""
+msgstr "Transporte"
 
 #: app/client/checkout/schedule-checkout-modal/schedule-checkout.template.html:69
 #: app/client/shared/modals/payment-options-breakdown/payment-options-breakdown.template.html:95
 msgid "Transportation Charge (Ready Logistics)"
-msgstr ""
+msgstr "Cargos por transporte (Ready Logistics)"
 
 #: app/client/shared/services/api/api.service.js:234
 #: app/client/shared/services/api/api.service.js:265
@@ -5220,8 +5220,8 @@ msgstr "Código postal"
 #~ msgstr "Anterior"
 
 #~ msgid ""
-#~ "Sorry, no results found. Please <a ng-click=\"floorplanData.resetSearch()"
-#~ "\" title=\"New Search\">try a new search</a>."
+#~ "Sorry, no results found. Please <a ng-click=\"floorplanData."
+#~ "resetSearch()\" title=\"New Search\">try a new search</a>."
 #~ msgstr ""
 #~ "Lo sentimos, no encontramos ningún resultado. Por favor, <a ng-click="
 #~ "\"floorplanData.resetSearch()\" title=\"New Search\">realice una nueva "
