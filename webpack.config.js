@@ -4,6 +4,9 @@ var debug = process.env.NODE_ENV !== "production"
 var ExtractTextPlugin = require('extract-text-webpack-plugin')
 
 module.exports = {
+    stats: {
+      warnings: false
+    },
     target: 'web',
     context: __dirname,
     devtool: "inline-sourcemap",
