@@ -5,13 +5,22 @@ function DashboardObjects() {
     //Locators
     this.elReceiptsLink = browser.element(by.id('viewAllReceipts'));
     this.elResourcesLink = browser.element(by.css('a[ng-href="#/documents"]'));
+    this.elPaymentsLink = browser.element(by.css('li.link_payments.dropdown'));
     this.elRequestCreditIncrease = browser.element(by.id('requestCreditButton'));
     this.elRibbonOpenAudit = browser.element(by.css("button.btn.btn-default.navbar-btn"));
+    this.elShowHidePaymentDetailsLink = browser.element(by.id('showorhide'));
+    this.elViewAllPaymentsLink = browser.element(by.id('viewAllButton'));
+    this.elFloorPlansLink = browser.element(by.id('floorPlan'));
 
     //Doers
     this.doResources = function () {
         browser.sleep(browser.sleep(browser.params.longDelay));
         this.elResourcesLink.click();
+        browser.sleep(browser.params.shortDelay);
+    };
+    this.doPayments = function () {
+        browser.sleep(browser.sleep(browser.params.longDelay));
+        this.elPaymentsLink.click();
         browser.sleep(browser.params.shortDelay);
     };
     this.doReceipts = function () {
@@ -29,6 +38,9 @@ function DashboardObjects() {
         this.elRibbonOpenAudit.click();
         browser.sleep(browser.params.longerDelay);
     };
+    this.placeholder = function (index) {
+        return this._thumbnail(index).click();
+    };
 
     //Getters
     this.getPasswordErrorTextPhoneNumber = function () {
@@ -38,18 +50,9 @@ function DashboardObjects() {
         return this.elRibbonOpenAudit.getText();
     };
 
-    //Setters
-    this.enterQuestion9 = function (param) {
-        return this.securityQuestion9().clear().sendKeys(param);
-    };
-
     //Count
     this.disabledCount = function () {
         return this.disabledFields().count();
-    };
-    //LAST ONE
-    this.placeholder = function (index) {
-        return this._thumbnail(index).click();
     };
 
 }
