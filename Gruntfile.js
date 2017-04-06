@@ -522,24 +522,6 @@ module.exports = function( grunt ) {
                     // comment lines which typically have an irrelevant msgid)
                     return 'msgmerge -U -N -v ' + filename + ' po/extracted.pot -C ../mobile-apps/' + filename + ' && ' + 'msgattrib --untranslated ' + filename + ' | tail -n +10 | echo $(grep "msgid" -c) untranslated strings';
                 }
-            },
-            webpack: {
-                command: 'set NODE_ENV=development && npm run webpack'
-            },
-            webpack_prod: {
-                command: 'set NODE_ENV=production && npm run webpack'
-            },
-            npm: {
-                command: 'npm install'
-            },
-            bower: {
-                command: 'bower install'
-            },
-            test_react: {
-                command: 'set NODE_ENV=development && karma start webpack.karma.conf.js'
-            },
-            translate_react: {
-                command: 'babel-node translate.js'
             }
         },
         protractor: { // a specific suite can be run with grunt protractor:run --suite=suite_name
@@ -568,11 +550,8 @@ module.exports = function( grunt ) {
         }
     });
 
-    grunt.registerTask('webpack-dev', [ 'env:dev', 'shell:npm', 'shell:bower', 'shell:webpack' ]);
-    grunt.registerTask('webpack-prod', [ 'env:prod', 'shell:npm', 'shell:bower', 'shell:webpack_prod' ]);
     grunt.registerTask('dev-setup', [
         'gitinfo',
-        'webpack-dev',
         'env:dev',
         'clean:server',
         'processhtml:server',
@@ -597,7 +576,6 @@ module.exports = function( grunt ) {
 
     grunt.registerTask('build', [
         'gitinfo',
-        'webpack-prod',
         'env',
         'clean:dist',
         'nggettext_compile',

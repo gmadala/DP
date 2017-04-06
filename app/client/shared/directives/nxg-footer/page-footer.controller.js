@@ -63,6 +63,6 @@
           break;
       }
     }
-
+    $scope.currentYear = new Date().getFullYear();
   }
 })();
