@@ -2,10 +2,8 @@
     "env": {
       "jasmine": true,
       "jquery": true,
-      "es6": true,
       "browser": true,
-      "node": true,
-      "mocha": true
+      "node": true
     },
     "extends": [
         "airbnb",
@@ -14,8 +12,6 @@
         "jquery"
     ],
     "plugins": [
-        "jsx-a11y",
-        "import",
         "jasmine",
         "angular",
         "jquery"
@@ -31,7 +27,6 @@
         "document": true,
         "assert": true
     },
-    "parser": "babel-eslint",
     "rules": {
         "camelcase": 0,
         "comma-dangle": 0,

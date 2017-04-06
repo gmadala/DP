@@ -15,4 +15,4 @@ msgstr ""
 
 #: app/client/floor-vehicle/nxg-business-field-v2/nxg-business-field.template.html:13
 msgid "Search Payee"
-msgstr ""
+msgstr "Recherche de bénéficiaire"

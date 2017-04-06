@@ -4,10 +4,14 @@ import reduxThunk from 'redux-thunk';
 
 import reducers from '../reducers';
 
-const createStoreWithMiddleware = applyMiddleware(
-    reduxThunk,
-    logger()
-)(createStore);
+const debug = process.env.NODE_ENV !== 'production';
+
+let middleware = [reduxThunk]
+if (debug) {
+    middleware = [...middleware, logger()]
+}
+
+const createStoreWithMiddleware = applyMiddleware(...middleware)(createStore);
 
 export default function configureStore(initialState) {
     return createStoreWithMiddleware(reducers, initialState);

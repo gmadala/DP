@@ -373,6 +373,7 @@
     <div class="visible-xs mobile-checkout-widget hidden-print">
       <button class="btn-cta cta-primary"
               ng-disabled="paymentQueue.isEmpty()"
+              id="checkoutButton"
               ng-click="navigator('checkout')">
         <span translate>Checkout</span> ({{ getCounter() }})
         {{ getTotal() | currency }}
