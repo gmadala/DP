@@ -126,7 +126,9 @@ class SideMenu extends Component {
                 permission: permissions.ALL,
             },
         ]
-        this.props.updateSubMenuItems('support', menu)
+        if (this.props.userInfo) {
+            this.props.updateSubMenuItems('support', menu)
+        }
     }
     updateLogoutLink = () => {
         this.props.addTopLevelLinkFunc('signOut', () => { this.props.$rootScope.$emit( 'event:userRequestedLogout' ) })
