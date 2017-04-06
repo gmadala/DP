@@ -413,7 +413,7 @@
 
   <div class="row">
     <!-- [BRAND] -->
-    <div class="col-xs-6">
+    <div class="col-xs-12 col-md-6">
       <div class="panel panel-default settings-well" ng-show="brand.autoPay.isDisplayed()">
         <h2 class="well-title">
           <span translate>[New Label Here]</span>
@@ -431,16 +431,12 @@
         <div class="well-item">
           <form class="form-block" name="brandSettings" novalidate>
             <div class="row">
-              <div class="nxg-small-logo col-xs-2">
+              <div class="col-xs-12" ng-show="brand.autoPay.isDisplayed()">
 
-              </div>
-              <div class="col-xs-10" ng-show="brand.autoPay.isDisplayed()">
-
-                <label class="col-xs-7 no-left-padding" for="autoPay"><span
+                <label class="col-xs-10 col-md-7 no-left-padding" for="autoPay"><span
                   translate>Enrolled in Automated Payments</span></label>
 
-                <div class="col-xs-1"></div>
-                <div class="col-xs-4 no-left-padding">
+                <div class="col-xs-2 col-md-4 col-md-push-1 no-left-padding">
                   <div class="row">
                     <div class="static" ng-show="brand.data.autoPayEnabled && !brand.autoPay.isEditable()" translate>
                       Yes
@@ -464,7 +460,7 @@
                     </div>
                   </div>
                 </div>
-                <div class="col-xs-7 no-left-padding">
+                <div class="col-xs-12 no-left-padding autopayDesc">
                   <p class="description" translate>
                     Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
                   </p>
