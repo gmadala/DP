@@ -10,8 +10,8 @@ module.exports = {
             ngcDocuments: 'NextGear Capital Documents',
         },
         mobileApps: {
-            title: 'Mobile Apps',
-            subText: 'Manage your business with NextGear Capital on the go.',
+            title: 'myNextGear Mobile',
+            subText: 'Manage your business with myNextGear mobile on the go.',
         },
         collateralDocsList: {
             welcomeLetter: 'Welcome Letter',
@@ -20,8 +20,8 @@ module.exports = {
             claimForm: 'Claim Form',
         },
         mobileAppsList: {
-            mobileIos: 'Download myNextGear mobile iOS',
-            mobileAndroid: 'Download myNextGear mobile Android',
+            mobileIos: 'iOS Installation Guide',
+            mobileAndroid: 'Android Installation Guide',
         },
         docsList: {
             welcomePacket: 'Welcome Packet',

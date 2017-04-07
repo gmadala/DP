@@ -9,10 +9,12 @@ class Resources extends Component {
     }
 
     render( ) {
+        const videos = this.props.language === 'en' ? <ResourceVideos handleClick={this.props.logMetric}/> : null;
+        const showVideos = false;
         return (
             <div className="container">
                 <div className="row">
-                    {this.props.language === 'en' ? <ResourceVideos handleClick={this.props.logMetric}/> : null}
+                    {showVideos ? videos : null}
                     <ResourceDocs
                         docs={this.props.docs}
                         collateralDocs={this.props.collateralDocs}
