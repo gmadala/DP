@@ -18,9 +18,9 @@ const AutopaySettings = ({ displayed, edit, save, cancel, editable, disable, ena
                             <div className="row">
                                 <div className="col-xs-12">
 
-                                    <Translate content="autoPay.settings.enroll" className="col-xs-10 col-md-7 no-left-padding" htmlFor="autoPay" component="label" />
+                                    <Translate content="autoPay.settings.enroll" className="col-xs-8 col-md-7 no-left-padding" htmlFor="autoPay" component="label" />
 
-                                    <div className="col-xs-2 col-md-4 col-md-push-1 no-left-padding">
+                                    <div className="col-xs-4 col-md-4 col-md-push-1 no-left-padding">
                                         <div className="row">
                                             { autopayenabled && !editable ? <Translate content="autoPay.settings.yes" className="static" component="div" /> : null }
                                             { !autopayenabled && !editable ? <Translate content="autoPay.settings.no" className="static" component="div" /> : null }
