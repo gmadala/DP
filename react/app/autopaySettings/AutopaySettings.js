@@ -1,6 +1,10 @@
 import React, { PropTypes } from 'react'
 import Translate from 'react-translate-component';
 
+const pStyle = {
+    fontSize: '12px'
+}
+
 const AutopaySettings = ({ displayed, edit, save, cancel, editable, disable, enable, autopayenabled }) => (
     displayed ? (
         <div className="row">
@@ -53,7 +57,7 @@ const AutopaySettings = ({ displayed, edit, save, cancel, editable, disable, ena
                                         </div>
                                     </div>
                                     <div className="col-xs-12 no-left-padding autopayDesc">
-                                        <Translate className="description" content="autoPay.settings.description" component="p" />
+                                        <Translate style={pStyle} className="description" content="autoPay.settings.description" component="p" />
                                     </div>
                                 </div>
                             </div>
