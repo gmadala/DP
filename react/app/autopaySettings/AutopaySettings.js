@@ -70,14 +70,14 @@ const AutopaySettings = ({ displayed, edit, save, cancel, editable, disable, ena
 )
 
 AutopaySettings.propTypes = {
-    displayed: PropTypes.bool.isRequired,
-    edit: PropTypes.func.isRequired,
-    save: PropTypes.func.isRequired,
-    cancel: PropTypes.func.isRequired,
-    editable: PropTypes.bool.isRequired,
-    disable: PropTypes.func.isRequired,
-    enable: PropTypes.func.isRequired,
-    autopayenabled: PropTypes.bool.isRequired
+    displayed: PropTypes.bool,
+    edit: PropTypes.func,
+    save: PropTypes.func,
+    cancel: PropTypes.func,
+    editable: PropTypes.bool,
+    disable: PropTypes.func,
+    enable: PropTypes.func,
+    autopayenabled: PropTypes.bool
 }
 
 export default AutopaySettings
