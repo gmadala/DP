@@ -102,13 +102,13 @@ class SideMenu extends Component {
             }, {
                 title: 'sideMenu.supportMenu.callAccountExecutive',
                 metric: metrics.MOBILE_CLICK_CALL_ACCOUNT_EXECUTIVE,
-                href: `tel:+${ userInfo ? this.props.userInfo.MarketPhoneNumber : '' }`,
+                href: `tel:+1${ userInfo ? this.props.userInfo.MarketPhoneNumber : '' }`,
                 active: false,
                 permission: permissions.DEALER,
             }, {
                 title: 'sideMenu.supportMenu.callCustomerService',
                 metric: metrics.MOBILE_CLICK_CALL_CUSTOMER_SERVICE,
-                href: `tel:+${ userInfo ? this.props.userInfo.CSCPhoneNumber : '' }`,
+                href: `tel:+1${ userInfo ? this.props.userInfo.CSCPhoneNumber : '' }`,
                 active: false,
                 permission: permissions.ALL,
             }, {
