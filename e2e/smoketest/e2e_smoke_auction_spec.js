@@ -19,6 +19,7 @@ const login = require('../framework/e2e_login.js');
 
 const username = '10298KB'; // Needs to be updated
 const password = 'ringoffire@1'; // Needs to be updated
+const dealerNumber = '70264'; // Needs to be updated
 
 describe('Build Verification for Auction User', () => {
 
@@ -60,17 +61,13 @@ describe('Build Verification for Auction User', () => {
     });
 
     it('5. Perform search and verify result plus modal', () => {
-        const dealerNumber = '70264'; // Needs to be updated
-
         dealerSearchObj.setSearchValue(dealerNumber);
         dealerSearchObj.doSearch();
-
-        browser.sleep(browser.params.longDelay);
 
         expect(dealerSearchObj.elDealerSearchFirstResult.isDisplayed()).toBe(true);
     });
 
-    it('6. Nav to Floor Vehicle apge via menu', () => {
+    it('6. Nav to Floor Vehicle page via menu', () => {
         dealerSearchObj.clickMenuFloorVehicle();
 
         expect(browser.getCurrentUrl()).toBe(helper.auctionFloorVehiclePage());

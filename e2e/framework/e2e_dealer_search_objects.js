@@ -25,6 +25,8 @@ function DealerSearchObjects() {
 
     this.doSearch = () => {
         this.elSearchBtn.click();
+
+        browser.sleep(browser.params.longDelay);
     };
 
     this.clickMenuFloorVehicle = () => {
