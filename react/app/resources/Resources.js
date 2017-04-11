@@ -1,5 +1,4 @@
 import React, { Component, PropTypes } from 'react';
-import ResourceVideos from './ResourceVideos';
 import ResourceDocs from './ResourceDocs';
 import MobileApps from './MobileApps';
 
@@ -9,12 +8,9 @@ class Resources extends Component {
     }
 
     render( ) {
-        const videos = this.props.language === 'en' ? <ResourceVideos handleClick={this.props.logMetric}/> : null;
-        const showVideos = false;
         return (
             <div className="container">
                 <div className="row">
-                    {showVideos ? videos : null}
                     <ResourceDocs
                         docs={this.props.docs}
                         collateralDocs={this.props.collateralDocs}
@@ -30,7 +26,6 @@ class Resources extends Component {
 }
 
 Resources.propTypes = {
-    language: PropTypes.string.isRequired,
     docs: PropTypes.array.isRequired,
     collateralDocs: PropTypes.array.isRequired,
     mobileApps: PropTypes.array.isRequired,
