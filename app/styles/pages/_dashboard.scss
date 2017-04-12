@@ -66,7 +66,9 @@
 
   @media only screen and (max-width: 767px) {
     margin-bottom: 20px;
-
+    ribbon-component > div:first-of-type {
+      margin-top: -12px;
+    }
     .fc-content-skeleton {
       td:not(.fc-event-container)::before {
         content: 'No payments due on this date';
