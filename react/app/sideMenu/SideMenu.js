@@ -15,10 +15,11 @@ const containerStyle = {
 
 const overlayStyle = {
     ...containerStyle,
+    right: '0',
     backgroundColor: 'black',
     opacity: '0',
     zIndex: '999',
-    width: '100%',
+    width: '20%',
     visibility: 'hidden'
 }
 
