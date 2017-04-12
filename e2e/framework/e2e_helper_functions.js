@@ -63,8 +63,16 @@ function Helper() {
         return browser.baseUrl + 'audits';
     };
 
+    this.dealerSearchPage = function () {
+        return browser.baseUrl + 'act/dealersearch';
+    };
+
     this.exportSummaryPage = function () {
         return 'MobileService/api/report/payment/summary/paymentsSummary?AuthToken=';
+    };
+
+    this.auctionFloorVehiclePage = function () {
+        return browser.baseUrl + 'act/bulkflooring';
     };
 
     //Navigation functions
