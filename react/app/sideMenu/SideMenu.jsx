@@ -64,9 +64,9 @@ class SideMenu extends Component {
 
         this.toggleTimeline(this.props.isOpen)
         const supportList = this.props.menuList.find(x => x.id === 'support');
-        if (typeof(supportList.subMenu) === 'undefined' && typeof(supportList.set) === 'undefined' && this.props.nxgConfig) {
-            supportList.set = true
-            if (this.props.userInfo) { this.buildSupportMenu() }
+
+        if ((!supportList.subMenu || (supportList.subMenu.length <= 0 && this.props.userInfo.CSCPhoneNumber) ) && this.props.nxgConfig) {
+            this.buildSupportMenu()
         }
     }
 
@@ -89,6 +89,8 @@ class SideMenu extends Component {
         // check user type, dealers and auctions will have different subdomains to go to
         const forumId = this.props.user.isDealer ? config.dealerForumId : config.auctionForumId
         const customTemplateId = this.props.user.isDealer ? config.dealerCustomTemplateId : config.auctionCustomTemplateId;
+        const userInfo = this.props.userInfo;
+        const marketEmail = userInfo ? this.props.userInfo.MarketEMail : '';
         const menu = [
             {
                 title: 'sideMenu.supportMenu.chat',
@@ -100,19 +102,19 @@ class SideMenu extends Component {
             }, {
                 title: 'sideMenu.supportMenu.callAccountExecutive',
                 metric: metrics.MOBILE_CLICK_CALL_ACCOUNT_EXECUTIVE,
-                href: `tel:+${ this.props.userInfo.MarketPhoneNumber }`,
+                href: `tel:+1${ userInfo ? this.props.userInfo.MarketPhoneNumber : '' }`,
                 active: false,
                 permission: permissions.DEALER,
             }, {
                 title: 'sideMenu.supportMenu.callCustomerService',
                 metric: metrics.MOBILE_CLICK_CALL_CUSTOMER_SERVICE,
-                href: `tel:+${ this.props.userInfo.CSCPhoneNumber }`,
+                href: `tel:+1${ userInfo ? this.props.userInfo.CSCPhoneNumber : '' }`,
                 active: false,
                 permission: permissions.ALL,
             }, {
                 title: 'sideMenu.supportMenu.sendEmail',
                 metric: metrics.MOBILE_CLICK_SEND_EMAIL,
-                href: `mailto:${ this.props.user.isDealer( ) ? this.props.userInfo.MarketEMail : 'auctionservices@nextgearcapital.com' }`,
+                href: `mailto:${ this.props.user.isDealer() ? marketEmail : 'auctionservices@nextgearcapital.com' }`,
                 active: false,
                 permission: permissions.ALL,
             }, {
@@ -124,7 +126,9 @@ class SideMenu extends Component {
                 permission: permissions.ALL,
             },
         ]
-        this.props.updateSubMenuItems('support', menu)
+        if (this.props.userInfo) {
+            this.props.updateSubMenuItems('support', menu)
+        }
     }
     updateLogoutLink = () => {
         this.props.addTopLevelLinkFunc('signOut', () => { this.props.$rootScope.$emit( 'event:userRequestedLogout' ) })
@@ -165,7 +169,7 @@ class SideMenu extends Component {
                             isDealer={this.props.user.isDealer() || false}
                             isAuction={!this.props.user.isDealer() || false}
                             user={this.props.user}
-                            titleRelease={this.props.userInfo.DisplayTitleReleaseProgram}
+                            titleRelease={(this.props.userInfo && this.props.userInfo.DisplayTitleReleaseProgram) || false}
                         />
                     </div>
                 </div>
@@ -181,12 +185,12 @@ SideMenu.propTypes = {
     updateSubMenuItems: PropTypes.func.isRequired,
     angularState: PropTypes.object.isRequired,
     user: PropTypes.object.isRequired,
-    userInfo: PropTypes.object.isRequired,
     toggleMenu: PropTypes.func.isRequired,
     $rootScope: PropTypes.object.isRequired,
     addTopLevelLinkFunc: PropTypes.func.isRequired,
     nxgConfig: PropTypes.object.isRequired,
-    logMetric: PropTypes.func.isRequired
+    logMetric: PropTypes.func.isRequired,
+    userInfo: PropTypes.object,
 }
 
 export default SideMenu
