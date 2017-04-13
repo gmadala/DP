@@ -59,6 +59,7 @@
         $('.es').hide();
         $('.fr').show();
       });
+      $('#currentYear').html(new Date().getFullYear());
     });
   </script>
 
@@ -285,7 +286,7 @@
       <a class="col-sm-12 nxg-cox-logo img-responsive" href="https://www.coxautoinc.com/" target="_blank"></a>
     </div>
     <ul class="horizontal-list" style="margin: 12px 0 11px 0;padding-bottom:5px;">
-      <li>&copy; 2013-2016 NextGear Capital, Inc. All Rights Reserved.</li>
+      <li>Copyright 2013-<span id="currentYear"></span>. NextGear Capital, Inc.</li>
       <li>
         <a href="http://www.nextgearcapital.com/privacy-statement" target="_blank">
           <span class="en">Privacy Statement</span>

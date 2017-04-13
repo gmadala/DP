@@ -7,43 +7,12 @@
       "node": true,
       "mocha": true
     },
-    "extends": [
-        "airbnb",
-        "plugin:jasmine/recommended",
-        "plugin:react/recommended",
-        "jquery"
-    ],
-    "plugins": [
-        "react",
-        "jsx-a11y",
-        "import",
-        "jasmine",
-        "angular",
-        "jquery"
-    ],
     "globals": {
-        "angular": true,
-        "Highcharts": true,
-        "jQuery": true,
-        "Modernizr": true,
         "sinon": true,
         "inject": true,
-        "moment": true,
-        "_": true,
-        "document": true,
-        "assert": true,
-        "ENVIRONMENT": true,
-        "TimelineMax": true
+        "document": true
     },
     "parser": "babel-eslint",
-    "parserOptions":{
-        "ecmaVersion": 7,
-        "ecmaFeatures": {
-            "jsx": true,
-            "sourceType": "module",
-            "experimentalObjectRestSpread": true
-        }
-      },
     "rules": {
         "camelcase": "off",
         "comma-dangle": ["off", "always-multiline"],
@@ -108,19 +77,6 @@
         "object-curly-spacing": "off",
         "template-curly-spacing": "off",
         "operator-linebreak": "off",
-        "space-before-function-paren": ["error", "never"],
-
-        "react/jsx-uses-vars": "warn",
-        "react/prop-types": ["warn", { "ignore": ["children"] }],
-        "react/prefer-stateless-function": "warn",
-        "react/jsx-curly-spacing": "off",
-        "react/jsx-indent": "off",
-        "react/jsx-indent-props": "off",
-        "react/jsx-filename-extension": "off",
-        "react/require-extension": "off",
-        "react/forbid-prop-types": "off",
-        "react/jsx-space-before-closing": "off",
-
-        "jsx-a11y/no-static-element-interactions": 1,
+        "space-before-function-paren": ["error", "never"]
     }
 }
