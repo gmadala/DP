@@ -11,7 +11,7 @@ module.exports = {
         },
         mobileApps: {
             title: 'myNextGear Mobile',
-            subText: 'Manage your business with myNextGear mobile on the go.',
+            subText: 'Manage your business with myNextGear Capital on the go.',
         },
         collateralDocsList: {
             welcomeLetter: 'Welcome Letter',
