@@ -152,6 +152,7 @@
     "phantomjs-prebuilt": "^2.1.13",
     "protractor-jasmine2-screenshot-reporter": "^0.3.2",
     "protractor-linkuisref-locator": "1.1.2",
+    "react-test-renderer": "^15.5.4",
     "serve-static": "^1.12.1",
     "style-loader": "^0.13.1",
     "url-loader": "^0.5.7"
@@ -171,7 +172,7 @@
     "apiBase": "https://test.nextgearcapital.com/MobileService/api"
   },
   "scripts": {
-    "prebuild": "bower install && npm install && npm ls && npm run lint:angular && npm test",
+    "prebuild": "npm install && bower install && npm ls && npm run lint:angular && npm test",
     "build:env": "cross-env NODE_ENV=production",
     "build:webpack": "webpack --colors --no-info --client-log-level=error",
     "build:grunt": "cross-conf-env grunt build --target=npm_package_config_buildEnv --buildVersion=npm_package_config_buildVersion",
