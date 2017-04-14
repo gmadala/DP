@@ -10,7 +10,7 @@ module.exports = {
             ngcDocuments: 'NextGear Capital Documents',
         },
         mobileApps: {
-            title: 'myNextGear Mobile',
+            title: 'myNextGear mobile',
             subText: 'Manage your business with NextGear Capital on the go.',
         },
         collateralDocsList: {
