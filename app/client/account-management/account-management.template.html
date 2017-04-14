@@ -411,69 +411,14 @@
     </div>
   </div>
 
-  <div class="row">
-    <!-- [BRAND] -->
-    <div class="col-xs-6">
-      <div class="panel panel-default settings-well" ng-show="brand.autoPay.isDisplayed()">
-        <h2 class="well-title">
-          <span translate>[New Label Here]</span>
-          <button ng-hide="brand.editable" class="btn-unstyle  right no-padding no-margin" ng-click="brand.edit()"
-                  translate>Edit Settings
-          </button>
-          <button ng-show="brand.editable" class="btn-unstyle  right no-padding no-margin" ng-click="brand.save()"
-                  translate>Save Settings
-          </button>
-          <button ng-show="brand.editable" class="btn-unstyle  right no-padding cancel" ng-click="brand.cancel()"
-                  translate>Cancel
-          </button>
-        </h2>
-
-        <div class="well-item">
-          <form class="form-block" name="brandSettings" novalidate>
-            <div class="row">
-              <div class="nxg-small-logo col-xs-2">
-
-              </div>
-              <div class="col-xs-10" ng-show="brand.autoPay.isDisplayed()">
-
-                <label class="col-xs-7 no-left-padding" for="autoPay"><span
-                  translate>Enrolled in Automated Payments</span></label>
-
-                <div class="col-xs-1"></div>
-                <div class="col-xs-4 no-left-padding">
-                  <div class="row">
-                    <div class="static" ng-show="brand.data.autoPayEnabled && !brand.autoPay.isEditable()" translate>
-                      Yes
-                    </div>
-                    <!-- check if equal to false so "No" doesn't appear until the API call finishes -->
-                    <div class="static" ng-show="brand.data.autoPayEnabled == false && !brand.autoPay.isEditable()"
-                         translate>
-                      No
-                    </div>
-
-                    <div class="cr-inline" ng-show="brand.autoPay.isEditable()">
-                      <input type="radio" id="autoPayNo" name="autoPay" ng-model="brand.dirtyData.autoPayEnabled"
-                             ng-value='false' ng-click="brand.autoPay.confirmDisable()"/>
-                      <label class="radio-img" for="autoPayNo"></label>
-                      <label class="cr-label" for="autoPayNo" translate>No</label>
-
-                      <input type="radio" id="autoPayYes" name="autoPay" ng-model="brand.dirtyData.autoPayEnabled"
-                             ng-value='true' ng-click="brand.autoPay.confirmEnable()"/>
-                      <label class="radio-img" for="autoPayYes"></label>
-                      <label class="cr-label" for="autoPayYes" translate>Yes</label>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-xs-7 no-left-padding">
-                  <p class="description" translate>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                  </p>
-                </div>
-              </div>
-            </div>
-          </form>
-        </div>
-      </div>
-    </div>
-  </div>
+  <autopay-settings-component
+    displayed="brand.autoPay.isDisplayed()"
+    edit="brand.edit"
+    save="brand.save"
+    cancel="brand.cancel"
+    editable="brand.autoPay.isEditable()"
+    disable="brand.autoPay.confirmDisable"
+    enable="brand.autoPay.confirmEnable"
+    autoPayEnabled="(brand.dirtyData ? brand.dirtyData.autoPayEnabled : brand.data.autoPayEnabled)"
+  ></autopay-settings-component>
 </div>

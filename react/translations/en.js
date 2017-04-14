@@ -10,7 +10,7 @@ module.exports = {
             ngcDocuments: 'NextGear Capital Documents',
         },
         mobileApps: {
-            title: 'myNextGear mobile',
+            title: 'myNextGear Mobile',
             subText: 'Manage your business with NextGear Capital on the go.',
         },
         collateralDocsList: {
@@ -100,6 +100,18 @@ module.exports = {
             callCustomerService: 'Call Customer Service',
             sendEmail: 'Send Email',
             feedback: 'Feedback'
+        }
+    },
+    autoPay: {
+        settings: {
+            enroll: 'Enroll in AutoPay',
+            title: 'AutoPay',
+            edit: 'Edit Settings',
+            save: 'Save Settings',
+            cancel: 'Cancel',
+            yes: 'Yes',
+            no: 'No',
+            description: 'Enjoy the convenience of Automated Payments, an easy and secure way to make your payments on time.'
         }
     }
 };
