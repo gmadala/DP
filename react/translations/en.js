@@ -101,5 +101,17 @@ module.exports = {
             sendEmail: 'Send Email',
             feedback: 'Feedback'
         }
+    },
+    autoPay: {
+        settings: {
+            enroll: 'Enroll in AutoPay',
+            title: 'AutoPay',
+            edit: 'Edit Settings',
+            save: 'Save Settings',
+            cancel: 'Cancel',
+            yes: 'Yes',
+            no: 'No',
+            description: 'Enjoy the convenience of Automated Payments, an easy and secure way to make your payments on time.'
+        }
     }
 };
