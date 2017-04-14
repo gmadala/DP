@@ -263,9 +263,6 @@
             return $scope.brand.data.autoPayEnabled !== $scope.brand.dirtyData.autoPayEnabled;
           },
           validate: function () {
-            // var brand = $scope.brand;
-            // brand.validation = angular.copy($scope.brandSettings);
-            // return brand.validation.$valid;
             return true;
           },
           autoPay: {
