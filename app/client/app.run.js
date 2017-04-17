@@ -117,11 +117,10 @@
          */
 
         $rootScope.currentPage = toState.data.title;
-
+        var savedAuth = localStorageService.get('userData');
         if (!toState.data.allowAnonymous) {
           // enforce rules about what states certain users can see
-          var isDealer = User.isDealer(),
-            savedAuth = $cookieStore.get('auth');
+          var isDealer = User.isDealer();
 
           if (!User.isLoggedIn() && savedAuth) {
             // we're restoring session from saved auth token
@@ -160,7 +159,18 @@
               $state.go(isDealer || isDealer === null ? 'dashboard' : 'auction_dashboard');
             }
           }
-        }
+        } else {
+              if (savedAuth && toState.name === 'login') {
+                  event.preventDefault();
+                  User.initSession(savedAuth).then(
+                    function () {
+                      var isDealer = User.isDealer();
+                      var route = isDealer ? 'dashboard' : 'auction_dashboard';
+                      $state.go(route);
+                    }
+                  );
+              }
+          }
       }
     );
 
@@ -233,7 +243,7 @@
     );
 
     $rootScope.$on('event:userAuthenticated',
-      function (data) {
+      function (d, data) {
         kissMetricInfo.getKissMetricInfo().then(
           function (result) {
             segmentio.track(metric.LOGIN_SUCCESSFUL, result);
