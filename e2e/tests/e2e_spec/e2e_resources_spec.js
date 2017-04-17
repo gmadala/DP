@@ -149,7 +149,7 @@ describe('\n Resources Page', function () {
         });
     });
 
-    it("11. Resources - Validating the myNextGear Mobile IOS", function () {
+    it("11. Resources - Validating the iOS Installation Guide", function () {
         helper.goToResources();
         resources.doMobileIOS();
         browser.getAllWindowHandles().then(function (handles) {
@@ -163,7 +163,7 @@ describe('\n Resources Page', function () {
         });
     });
 
-    it("12. Resources - Validating the myNextGear Mobile Android", function () {
+    it("12. Resources - Validating the Android Installation Guide", function () {
         helper.goToResources();
         resources.doMobileAndroid();
         browser.getAllWindowHandles().then(function (handles) {
