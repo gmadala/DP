@@ -173,7 +173,7 @@
     "apiBase": "https://test.nextgearcapital.com/MobileService/api"
   },
   "scripts": {
-    "prebuild": "bower install && npm install && npm ls && npm run lint:angular && npm test",
+    "prebuild": "bower install && npm install && npm run lint:angular && npm test",
     "build:env": "cross-env NODE_ENV=production",
     "build:webpack": "webpack --colors --no-info --client-log-level=error",
     "build:grunt": "cross-conf-env grunt build --target=npm_package_config_buildEnv --buildVersion=npm_package_config_buildVersion",
@@ -192,7 +192,7 @@
     "translate:react": "babel-node react/translate.js",
     "translate": "npm run translate:react && npm run translate:angular",
     "lint:angular": "eslint --quiet -c app/.eslintrc.json app/client/**/*.js",
-    "prestart": "bower install && npm install && npm ls && npm run lint:angular",
+    "prestart": "bower install && npm install && npm run lint:angular",
     "start:env": "cross-env NODE_ENV=development",
     "start:server": "concurrently -p [{name}] -n GRUNT,WEBPACK -k \"cross-conf-env grunt server-np --apiBase='npm_package_config_apiBase'\" \"webpack --quiet --watch\"",
     "start:mock": "concurrently -p [{name}] -n GRUNT,WEBPACK -k \"cross-conf-env grunt server-np\" \"webpack --quiet --watch\"",

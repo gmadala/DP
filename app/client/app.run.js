@@ -13,6 +13,7 @@
     'nxgConfig',
     'LogoutGuard',
     '$cookieStore',
+    'localStorageService',
     '$state',
     '$uibModal',
     'LastState',
@@ -32,6 +33,7 @@
     nxgConfig,
     LogoutGuard,
     $cookieStore,
+    localStorageService,
     $state,
     $uibModal,
     LastState,
@@ -64,6 +66,7 @@
     };
 
     function resetToLogin() {
+      localStorageService.remove('userData')
       $state.go('login');
       prv.pendingReload = true;
     }
@@ -223,18 +226,21 @@
     $rootScope.$on('event:forceClearAuth',
       function () {
         User.dropSession();
+        localStorageService.remove('userData')
         // save last visited state
         LastState.saveUserState();
       }
     );
 
     $rootScope.$on('event:userAuthenticated',
-      function () {
+      function (data) {
         kissMetricInfo.getKissMetricInfo().then(
           function (result) {
             segmentio.track(metric.LOGIN_SUCCESSFUL, result);
           }
         );
+
+        localStorageService.set('userData', data)
 
         if (User.isPasswordChangeRequired()) {
           // temporary password? user needs to change it before it can proceed
