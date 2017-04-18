@@ -174,7 +174,7 @@
     "apiBase": "https://test.nextgearcapital.com/MobileService/api"
   },
   "scripts": {
-    "prebuild": "bower install && npm install && npm ls && npm run lint:angular && npm test",
+    "prebuild": "bower install && npm install && npm run lint:angular && npm test",
     "build:env": "cross-env NODE_ENV=production",
     "build:webpack": "webpack --colors --no-info --client-log-level=error",
     "build:grunt": "cross-conf-env grunt build --target=npm_package_config_buildEnv --buildVersion=npm_package_config_buildVersion",
