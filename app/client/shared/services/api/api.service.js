@@ -14,7 +14,7 @@
     '$interval',
     'nxgConfig',
     'messages',
-    '$cookieStore',
+    'localStorageService',
     'gettextCatalog',
     'apiCommon'
   ];
@@ -28,7 +28,7 @@
     $interval,
     nxgConfig,
     messages,
-    $cookieStore,
+    localStorageService,
     gettextCatalog,
     apiCommon) {
 
@@ -79,6 +79,19 @@
     }
 
     function resetSessionTimeout(debug) {
+      var st = localStorageService.get('sessionTimeout')
+      if (st) {
+          var diff = moment().diff(st, 'milliseconds');
+          if (diff > nxgConfig.sessionTimeoutMs) {
+              onSessionTimeout(debug);
+              return;
+          } else {
+              localStorageService.set('sessionTimeout', moment().toISOString())
+          }
+      } else {
+          localStorageService.set('sessionTimeout', moment().toISOString())
+      }
+
       if (sessionTimeout) { $interval.cancel(sessionTimeout); }
       sessionTimeout = $interval(function(){
         $interval.cancel(sessionTimeout);
@@ -90,7 +103,7 @@
       resetSessionTimeout: resetSessionTimeout,
       setAuth: function(authData) {
         // save authData on cookies to allow us to restore in case of reload
-        $cookieStore.put('auth', authData);
+        localStorageService.set('auth', authData);
 
         authToken = authData.Token;
         sessionHasTimedOut = false;
@@ -99,7 +112,7 @@
       },
       resetAuth: function() {
         // clear saved token
-        $cookieStore.remove('auth');
+        localStorageService.remove('auth');
         delete $http.defaults.headers.common.Authorization;
         authToken = null;
       },
@@ -107,7 +120,7 @@
         return !!authToken;
       },
       getAuthParam: function (paramName) {
-        var auth = $cookieStore.get('auth');
+        var auth = localStorageService.get('auth');
         if (auth) {
           return auth[paramName];
         } else {
@@ -115,10 +128,10 @@
         }
       },
       setAuthParam: function (paramName, value) {
-        var auth = $cookieStore.get('auth');
+        var auth = localStorageService.get('auth');
         if (auth) {
           auth[paramName] = value;
-          $cookieStore.put('auth', auth);
+          localStorageService.put('auth', auth);
         }
       },
       request: function(method, url, data, headers, isNgen, overrideSuccessHandler, overrideErrorHanlder) {

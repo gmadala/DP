@@ -67,6 +67,7 @@
 
     function resetToLogin() {
       localStorageService.remove('userData')
+      localStorageService.remove('auth');
       $state.go('login');
       prv.pendingReload = true;
     }
@@ -118,6 +119,7 @@
 
         $rootScope.currentPage = toState.data.title;
         var savedAuth = localStorageService.get('userData');
+
         if (!toState.data.allowAnonymous) {
           // enforce rules about what states certain users can see
           var isDealer = User.isDealer();

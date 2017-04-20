@@ -11,7 +11,6 @@
 
   function otherwiseRouteConfig($injector) {
     var User = $injector.get('User');
-    console.log('loggedIn in otherwise', User.isLoggedIn())
     return !User.isLoggedIn() ? '/login' : User.isDealer() ? '/home' : '/act/home';
   }
 

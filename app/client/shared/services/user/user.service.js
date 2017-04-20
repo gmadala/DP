@@ -15,7 +15,8 @@
     'nxgConfig',
     'Addresses',
     'gettextCatalog',
-    'language'
+    'language',
+    'localStorageService'
   ];
 
   function User(
@@ -28,7 +29,8 @@
     nxgConfig,
     Addresses,
     gettextCatalog,
-    language) {
+    language,
+    localStorageService) {
 
     // Private
     var staticsRequest = null,
@@ -36,9 +38,9 @@
       securityQuestions = null,
       infoRequest = null,
       infoLoaded = false,
-      isDealer,
-      isUnitedStates,
-      isManufacturer,
+      isDealer = localStorageService.get('isDealer'),
+      isUnitedStates = localStorageService.get('isUnitedStates'),
+      isManufacturer = localStorageService.get('isManufacturer'),
       info = null; // only user cached info for synchronous function
 
     function filterByBusinessName(subsidiaries) {
@@ -187,6 +189,10 @@
        * and will then call this function
        */
       dropSession: function() {
+          localStorageService.remove('isDealer');
+          localStorageService.remove('isUnitedStates');
+          localStorageService.remove('isManufacturer');
+
         api.resetAuth();
       },
 
@@ -230,6 +236,11 @@
           data.ManufacturerSubsidiaries = filterByBusinessName(data.ManufacturerSubsidiaries);
           Addresses.init(data.DealerAddresses || []);
           info = data;
+
+          localStorageService.set('isDealer', isDealer);
+          localStorageService.set('isUnitedStates', isUnitedStates);
+          localStorageService.set('isManufacturer', isManufacturer);
+
           return data;
         }, function() {
           infoLoaded = false;
