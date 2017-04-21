@@ -79,11 +79,23 @@
     }
 
     function resetSessionTimeout(debug) {
+      // get session timeout
       var st = localStorageService.get('sessionTimeout')
+
+      // check for existing sessionTimeout, set if it doesn't exist
       if (st) {
+          // get milliseconds difference between now and the timeout
           var diff = moment().diff(st, 'milliseconds');
+
+          // check if difference is greater than the config timeout
           if (diff > nxgConfig.sessionTimeoutMs) {
+              // remove the session timeout so it starts again on next login
+              localStorageService.remove('sessionTimeout')
+
+              // call session timeout to log the user out and show the error message
               onSessionTimeout(debug);
+
+              // make sure we don't continue into the $interval calls to prevent a double event call
               return;
           } else {
               localStorageService.set('sessionTimeout', moment().toISOString())

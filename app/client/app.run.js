@@ -65,6 +65,8 @@
       isStateNotForRole: isStateNotForRole
     };
 
+    var appInitialized = false;
+
     function resetToLogin() {
       localStorageService.remove('userData')
       localStorageService.remove('auth');
@@ -82,7 +84,6 @@
         if (LastState.getUserState() && LastState.getUserState() !== '') {
           // go back to the last state visited
           $state.transitionTo(LastState.getUserState());
-          LastState.clearUserState();
         } else {
           $state.go(User.isDealer() ? 'dashboard' : 'auction_dashboard');
         }
@@ -123,13 +124,12 @@
         if (!toState.data.allowAnonymous) {
           // enforce rules about what states certain users can see
           var isDealer = User.isDealer();
-
           if (!User.isLoggedIn() && savedAuth) {
             // we're restoring session from saved auth token
             event.preventDefault();
             User.initSession(savedAuth).then(
               function () {
-                $state.go(toState, toStateParams);
+                continuePostLogin();
               }
             );
           } else if (!User.isLoggedIn()) {
@@ -166,9 +166,7 @@
                   event.preventDefault();
                   User.initSession(savedAuth).then(
                     function () {
-                      var isDealer = User.isDealer();
-                      var route = isDealer ? 'dashboard' : 'auction_dashboard';
-                      $state.go(route);
+                      continuePostLogin();
                     }
                   );
               }
@@ -195,6 +193,12 @@
           $rootScope.ribbonStyle = { 'margin-bottom': '0' };
         } else {
           $rootScope.ribbonStyle = {};
+        }
+
+        if (appInitialized) {
+            LastState.saveUserState();
+        } else {
+            appInitialized = true;
         }
       }
     );

@@ -11,7 +11,10 @@
 
   function otherwiseRouteConfig($injector) {
     var User = $injector.get('User');
-    return !User.isLoggedIn() ? '/login' : User.isDealer() ? '/home' : '/act/home';
+    var LastState = $injector.get('LastState');
+    var url = LastState.getUserUrl();
+    var toState = url ? url : User.isDealer() ? '/home' : '/act/home';
+    return !User.isLoggedIn() ? '/login' : toState;
   }
 
   function routeConfig($stateProvider, $urlRouterProvider, $uiViewScrollProvider) {
