@@ -6,17 +6,17 @@ describe('Service: LastState', function () {
   beforeEach(module('nextgearWebApp'));
 
   // instantiate service
-  var LastState, rootScope, $state, $cookieStore, User, $q;
+  var LastState, rootScope, $state, localStorageService, User, $q;
 
   var username = {
     BusinessContactUserName: 'user'
   };
 
-  beforeEach(inject(function (_LastState_, _$cookieStore_, _$state_, $rootScope, _User_, _$q_) {
+  beforeEach(inject(function (_LastState_, _localStorageService_, _$state_, $rootScope, _User_, _$q_) {
     LastState = _LastState_;
     rootScope = $rootScope;
     $state = _$state_;
-    $cookieStore = _$cookieStore_;
+    localStorageService = _localStorageService_;
     User = _User_;
     $q = _$q_;
 
@@ -25,7 +25,7 @@ describe('Service: LastState', function () {
       return username;
     };
 
-    $cookieStore.put('uiState', '');
+    localStorageService.set('uiState', '');
 
   }));
 
@@ -37,7 +37,7 @@ describe('Service: LastState', function () {
       };
 
       LastState.saveUserState();
-      expect($cookieStore.get('uiState').lastState.user).toEqual('thisState');
+      expect(localStorageService.get('uiState').lastState.user).toEqual('thisState');
     });
 
     it('should set two different user states properly', function() {
@@ -53,8 +53,8 @@ describe('Service: LastState', function () {
       username.BusinessContactUserName = 'user2';
       LastState.saveUserState();
 
-      expect($cookieStore.get('uiState').lastState.user1).toEqual('thisState');
-      expect($cookieStore.get('uiState').lastState.user2).toEqual('otherState');
+      expect(localStorageService.get('uiState').lastState.user1).toEqual('thisState');
+      expect(localStorageService.get('uiState').lastState.user2).toEqual('otherState');
     });
 
     it('should set default states properly', function() {
@@ -64,7 +64,7 @@ describe('Service: LastState', function () {
       User.infoLoaded = function(){return false;};
 
       LastState.saveUserState();
-      expect($cookieStore.get('uiState').lastState.default).toEqual('thisState');
+      expect(localStorageService.get('uiState').lastState.default).toEqual('thisState');
     });
   });
 
@@ -137,7 +137,7 @@ describe('Service: LastState', function () {
 
   describe('pop user state', function() {
     beforeEach(function(){
-      $cookieStore.put('uiState', {
+      localStorageService.set('uiState', {
         lastState: {
           user1: 'state1',
           user2: 'state2'
@@ -154,7 +154,7 @@ describe('Service: LastState', function () {
     });
 
     it('should unset default user state', function() {
-      $cookieStore.put('uiState', {
+      localStorageService.set('uiState', {
         lastState: {
           default: 'statedefault'
         }

@@ -38,9 +38,9 @@
       securityQuestions = null,
       infoRequest = null,
       infoLoaded = false,
-      isDealer = localStorageService.get('isDealer'),
-      isUnitedStates = localStorageService.get('isUnitedStates'),
-      isManufacturer = localStorageService.get('isManufacturer'),
+      isDealer = (localStorageService.get('isDealer') === 'true') || false,
+      isUnitedStates = (localStorageService.get('isUnitedStates') === 'true') || false,
+      isManufacturer = (localStorageService.get('isManufacturer') === 'true') || false,
       info = null; // only user cached info for synchronous function
 
     function filterByBusinessName(subsidiaries) {

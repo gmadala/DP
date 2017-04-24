@@ -117,7 +117,7 @@
         // save authData on cookies to allow us to restore in case of reload
         localStorageService.set('auth', authData);
 
-        authToken = authData.Token;
+        authToken = authData.Token || null;
         sessionHasTimedOut = false;
         // set a default Authorization header with the authentication token
         $http.defaults.headers.common.Authorization =  authToken;
@@ -143,7 +143,7 @@
         var auth = localStorageService.get('auth');
         if (auth) {
           auth[paramName] = value;
-          localStorageService.put('auth', auth);
+          localStorageService.set('auth', auth);
         }
       },
       request: function(method, url, data, headers, isNgen, overrideSuccessHandler, overrideErrorHanlder) {

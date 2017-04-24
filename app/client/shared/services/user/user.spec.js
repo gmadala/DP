@@ -543,8 +543,8 @@ describe('Model: User', function () {
 
   describe('isDealer method', function () {
 
-    it('should return null if dealer info is not yet loaded', function () {
-      expect(user.isDealer()).toBe(null);
+    it('should return false if dealer info is not yet loaded', function () {
+      expect(user.isDealer()).toBe(false);
     });
 
     it('should return true if dealer info DealerAuctionStatusForGA flag is Dealer', function () {
@@ -575,9 +575,9 @@ describe('Model: User', function () {
 
   describe('isUserInitRequired + clearUserInitRequired methods', function () {
 
-    var $cookieStore;
-    beforeEach(inject(function (_$cookieStore_) {
-      $cookieStore = _$cookieStore_;
+    var localStorageService;
+    beforeEach(inject(function (_localStorageService_) {
+      localStorageService = _localStorageService_;
     }));
 
     it('should return false normally', function () {
@@ -585,12 +585,12 @@ describe('Model: User', function () {
     });
 
     it('should return true when flag is present in auth cookie', function () {
-      $cookieStore.put('auth', { ShowUserInitialization: true });
+      localStorageService.set('auth', { ShowUserInitialization: true });
       expect(user.isUserInitRequired()).toBe(true);
     });
 
     it('should return false once clear is called', function () {
-      $cookieStore.put('auth', { ShowUserInitialization: true });
+      localStorageService.set('auth', { ShowUserInitialization: true });
       user.clearUserInitRequired();
       expect(user.isUserInitRequired()).toBe(false);
     });

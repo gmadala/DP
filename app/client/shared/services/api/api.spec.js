@@ -12,11 +12,11 @@ describe('Service: api', function () {
     cookies,
     $timeout;
 
-  beforeEach(inject(function (_api_, $http, $rootScope, $cookieStore, _$timeout_) {
+  beforeEach(inject(function (_api_, $http, $rootScope, localStorageService, _$timeout_) {
     api = _api_;
     http = $http;
     rootScope = $rootScope;
-    cookies = $cookieStore;
+    cookies = localStorageService;
     $timeout = _$timeout_;
   }));
 
@@ -58,7 +58,7 @@ describe('Service: api', function () {
     it('should remove the cookie containing the auth data', function() {
       api.setAuth({ Token: 'foo' });
       api.resetAuth();
-      expect(cookies.get('auth')).not.toBeDefined();
+      expect(cookies.get('auth')).toBeNull();
     });
 
     it('should remove the HTTP authorization header', function() {
@@ -76,12 +76,12 @@ describe('Service: api', function () {
     });
 
     it('should return undefined when no property of that name is present on auth cookie', function () {
-      cookies.put('auth', { foo: 'bar' });
+      cookies.set('auth', { foo: 'bar' });
       expect(api.getAuthParam('bar')).not.toBeDefined();
     });
 
     it('should return the value when present on auth cookie', function () {
-      cookies.put('auth', { foo: 'bar' });
+      cookies.set('auth', { foo: 'bar' });
       expect(api.getAuthParam('foo')).toBe('bar');
     });
 
@@ -92,11 +92,11 @@ describe('Service: api', function () {
     it('should do nothing when no auth cookie is present', function () {
       cookies.remove('auth');
       api.setAuthParam('foo', 'bar');
-      expect(cookies.get('auth')).not.toBeDefined();
+      expect(cookies.get('auth')).toBeNull();
     });
 
     it('should set the property when auth cookie is present', function () {
-      cookies.put('auth', { foo: 'bar' });
+      cookies.set('auth', { foo: 'bar' });
       api.setAuthParam('foo', 'bar2');
       expect(cookies.get('auth').foo).toBe('bar2');
     });
