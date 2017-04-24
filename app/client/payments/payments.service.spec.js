@@ -8,14 +8,16 @@ describe("Model: Payments", function () {
     httpBackend,
     urlParser,
     cartItem,
-    PaymentOptions;
+    PaymentOptions,
+    localStorage;
 
-  beforeEach(inject(function ($httpBackend, Payments, URLParser, CartItem, _PaymentOptions_) {
+  beforeEach(inject(function ($httpBackend, Payments, URLParser, CartItem, _PaymentOptions_, localStorageService) {
     payments = Payments;
     httpBackend = $httpBackend;
     urlParser = URLParser;
     cartItem = CartItem;
     PaymentOptions = _PaymentOptions_;
+    localStorage = localStorageService;
   }));
 
   describe('requestUnappliedFundsPayout method', function () {
@@ -657,6 +659,7 @@ describe("Model: Payments", function () {
       mockPaymentItem;
 
     beforeEach(function () {
+      localStorage.clearAll();
       mockPaymentItem = {
         id: 'foo',
         updateAmountsOnDate: angular.noop

@@ -10,10 +10,11 @@ describe('Service: BusinessSearch', function () {
     httpBackend,
     urlParser;
 
-  beforeEach(inject(function ($httpBackend, BusinessSearch, URLParser) {
+  beforeEach(inject(function ($httpBackend, BusinessSearch, URLParser, localStorageService) {
     httpBackend = $httpBackend;
     bs = BusinessSearch;
     urlParser = URLParser;
+    localStorageService.clearAll()
   }));
 
   describe('search function, seller mode', function () {
