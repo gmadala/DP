@@ -245,27 +245,25 @@
           dirtyData: null,
           editable: false,
           edit: function () {
-            prv.edit.apply(this);
+            prv.edit.apply($scope.brand);
           },
           cancel: function () {
-            prv.cancel.apply(this);
+            prv.cancel.apply($scope.brand);
           },
           save: function () {
-            if (prv.save.apply(this)) {
-              var d = this.dirtyData;
+            if (prv.save.apply($scope.brand)) {
+              var d = $scope.brand.dirtyData;
 
               AccountManagement.saveBusiness($scope.business.data.email, $scope.business.data.enhancedRegistrationEnabled, $scope.business.data.enhancedRegistrationPin,
-                d.autoPayEnabled).then(prv.saveSuccess.bind(this))
-                .then(User.setAutoPayEnabled.bind(this, d.autoPayEnabled));
+                d.autoPayEnabled).then(prv.saveSuccess.bind($scope.brand))
+                .then(User.setAutoPayEnabled.bind($scope.brand, d.autoPayEnabled));
             }
           },
           isDirty: function () {
-            return $scope.brandSettings.$dirty;
+            return $scope.brand.data.autoPayEnabled !== $scope.brand.dirtyData.autoPayEnabled;
           },
           validate: function () {
-            var brand = $scope.brand;
-            brand.validation = angular.copy($scope.brandSettings);
-            return brand.validation.$valid;
+            return true;
           },
           autoPay: {
             confirmEnable: function () {
@@ -277,7 +275,7 @@
                 controller: 'ConfirmCtrl'
               };
               uibModal.open(dialogOptions).result.then(function (result) {
-                $scope.brand.dirtyData.autoPayEnabled = !!result;
+                $scope.brand.dirtyData.autoPayEnabled = result;
               });
             },
             confirmDisable: function () {
