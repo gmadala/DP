@@ -1,5 +1,5 @@
 import React, { PropTypes, Component } from 'react';
-import Translate from 'react-translate-component';;
+import Translate from 'react-translate-component';
 import ReactPDF from 'react-pdf';
 
 
