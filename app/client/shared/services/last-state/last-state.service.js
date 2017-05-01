@@ -32,7 +32,7 @@
         }
 
         cookieVal.lastState['url'] = $state.current.url;
-        
+
         cookieSet(cookieVal);
       },
       clearUserState: function() {
@@ -51,7 +51,7 @@
       },
       getUserUrl: function() {
           var cookieVal = cookieGet();
-          return cookieVal.lastState['url'];
+          return cookieVal ? cookieVal.lastState['url'] : null;
       },
       getUserState: function() {
         var cookieVal = cookieGet();
