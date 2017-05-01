@@ -2,20 +2,6 @@ import React, { PropTypes, Component } from 'react';
 import Translate from 'react-translate-component';
 import ReactPDF from 'react-pdf';
 
-
-const wrapperStyles = {
-    position: 'fixed',
-    top: '0',
-    left: '0',
-    width: '100%',
-    height: '100%',
-    display: 'block',
-    marginTop: '48px',
-    paddingBottom: '48px',
-    backgroundColor: '#eff0f1',
-
-};
-
 class MobileEmbedViewer extends Component {
     constructor(props) {
         super(props);
@@ -47,6 +33,19 @@ class MobileEmbedViewer extends Component {
 
     render() {
         const { pageIndex, pageNumber, total } = this.state;
+
+        const wrapperStyles = {
+            position: 'fixed',
+            top: '0',
+            left: '0',
+            width: '100%',
+            height: '100%',
+            display: 'block',
+            marginTop: '48px',
+            paddingBottom: '48px',
+            backgroundColor: '#eff0f1',
+
+        };
 
         const innerWrapperStyles = {
             width: '100%',
