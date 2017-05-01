@@ -13,10 +13,6 @@ class MobileEmbedViewer extends Component {
         };
     }
 
-    componentWillUnmount() {
-        $('body').removeClass('modal-open');
-    }
-
     onDocumentLoad = ({total}) => {
         this.setState({ total });
     }
