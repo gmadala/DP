@@ -62,7 +62,7 @@ class MobileEmbedViewer extends Component {
 
         const btnWrapperStyles = {
             width: '100%',
-            backgroundColor: '#39c',
+            backgroundColor: '#FFFFFF',
             height: '48px',
             position: 'absolute',
             bottom: '0',
@@ -70,8 +70,15 @@ class MobileEmbedViewer extends Component {
             textAlign: 'center',
         };
 
+        const btnStyles = {
+            margin: '0',
+            height: '48px',
+            borderRadius: '0px',
+            border: 'none',
+        };
+
         const pageNumberStyles = {
-            marginTop: '20px',
+            marginTop: '17px',
         };
 
         const pdfWidth = window.innerWidth;
@@ -92,11 +99,11 @@ class MobileEmbedViewer extends Component {
                         />
                     </div>
                     <div style={btnWrapperStyles}>
-                        <button className="btn btn-default pull-left" disabled={pageNumber <= 1} onClick={() => this.changePage(-1)}>
+                        <button className="btn cta-primary pull-left col-xs-4" style={btnStyles} disabled={pageNumber <= 1} onClick={() => this.changePage(-1)}>
                             <Translate content="mobileEmbedViewer.previous" />
                         </button>
-                        <span style={pageNumberStyles}>Page {pageNumber || '--'} of {total || '--'}</span>
-                        <button className="btn btn-default pull-right" disabled={pageNumber >= total} onClick={() => this.changePage(1)}>
+                        <span className="col-xs-4" style={pageNumberStyles}>Page {pageNumber || '--'} of {total || '--'}</span>
+                        <button className="btn cta-primary pull-right col-xs-4" style={btnStyles} disabled={pageNumber >= total} onClick={() => this.changePage(1)}>
                             <Translate content="mobileEmbedViewer.next" />
                         </button>
                     </div>

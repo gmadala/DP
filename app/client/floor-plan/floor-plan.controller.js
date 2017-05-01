@@ -175,14 +175,14 @@
     $scope.showMobileTitle = false;
 
     $scope.renderTitle = function(titleURL) {
-        if (!($window.navigator.standalone || $window.matchMedia('(display-mode: standalone)').matches)) {
-            $window.open(
-                titleURL,
-                '_blank'
-            );
-
-            return;
-        }
+        // if (!($window.navigator.standalone || $window.matchMedia('(display-mode: standalone)').matches)) {
+        //     $window.open(
+        //         titleURL,
+        //         '_blank'
+        //     );
+        //
+        //     return;
+        // }
 
         jQuery('body').addClass('modal-open');
 
