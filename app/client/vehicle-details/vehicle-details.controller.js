@@ -25,7 +25,8 @@
     'nxgConfig',
     'kissMetricInfo',
     'segmentio',
-    'metric'
+    'metric',
+    '$window'
   ];
 
   function VehicleDetailsCtrl(
@@ -48,7 +49,9 @@
     nxgConfig,
     kissMetricInfo,
     segmentio,
-    metric) {
+    metric,
+    $window
+) {
 
     var uibModal = $uibModal;
 
@@ -653,6 +656,32 @@
 
         $scope.dataLoaded = true;
       });
+    };
+
+    // Mobile title PDF viewer
+    $scope.titleURL = '';
+    $scope.showMobileTitle = false;
+
+    $scope.renderTitle = function(titleURL) {
+        if (!($window.navigator.standalone || $window.matchMedia('(display-mode: standalone)').matches)) {
+            $window.open(
+                titleURL,
+                '_blank'
+            );
+
+            return;
+        }
+
+        jQuery('body').addClass('modal-open');
+
+        $scope.titleURL = titleURL;
+        $scope.showMobileTitle = true;
+    };
+
+    $scope.hideMobileTitle = function() {
+        jQuery('body').removeClass('modal-open');
+
+        $scope.showMobileTitle = false;
     };
 
 

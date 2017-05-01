@@ -6,6 +6,7 @@ import Ribbon from './app/ribbon/Ribbon'
 import AngularServicesContainer from './app/angularServices/AngularServicesContainer'
 import SideMenuContainer from './app/sideMenu/SideMenuContainer'
 import AutopaySettings from './app/autopaySettings/AutopaySettings'
+import MobileEmbedViewer from './app/mobileEmbedViewer/MobileEmbedViewer'
 import store from './store'
 
 angular.module( 'nextgearWebApp' ).directive('dateComponent', reactDirective => reactDirective( Date ));
@@ -15,6 +16,7 @@ angular.module( 'nextgearWebApp' ).directive('progressivePromptComponent', react
 angular.module( 'nextgearWebApp' ).directive('ribbonComponent', reactDirective => reactDirective( Ribbon ));
 angular.module( 'nextgearWebApp' ).directive('sideMenuComponent', reactDirective => reactDirective( SideMenuContainer, ['isopen', 'togglemenu', 'support'], {}, { store }))
 angular.module( 'nextgearWebApp' ).directive('autopaySettingsComponent', reactDirective => reactDirective( AutopaySettings ))
+angular.module( 'nextgearWebApp' ).directive('mobileEmbedViewer', reactDirective => reactDirective( MobileEmbedViewer ));
 
 angular.module( 'nextgearWebApp' ).directive('angularServicesComponent',
 (

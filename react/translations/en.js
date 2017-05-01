@@ -1,4 +1,8 @@
 module.exports = {
+    mobileEmbedViewer: {
+        next: 'Next',
+        previous: 'Previous',
+    },
     resources: {
         resourceVideos: {
             loggingIn: 'Logging In to myNextGear',

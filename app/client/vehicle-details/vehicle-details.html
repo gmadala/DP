@@ -655,8 +655,7 @@
             <div class="well-item">
               <div class="row visible-sm visible-xs" style="padding-top:5px;">
                 <div class="col-md-12">
-                  <a class="featured" ng-show="titleInfo.TitleImageAvailable" ng-href="{{ titleInfo.TitleUrl }}"
-                     target="_blank">
+                  <a class="featured" ng-show="titleInfo.TitleImageAvailable"  ng-click="renderTitle(titleInfo.TitleUrl)">
                     &nbsp;<span class="paired-body" translate>View the Title</span><span class="paired-media"
                                                                                          nxg-icon="icon-title"></span>
                   </a>
@@ -784,4 +783,5 @@
 
 
   </div>
+  <mobile-embed-viewer url="titleURL" close="hideMobileTitle" ng-show="showMobileTitle" />
 </div>

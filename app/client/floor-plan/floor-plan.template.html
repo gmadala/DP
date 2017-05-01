@@ -113,8 +113,7 @@
                     <p ng-show="item.LastPaymentDate"><span translate>Last Payment: </span> {{ item.LastPaymentDate |
                       moment }} </p>
                     <a class="btn btn-square" style="margin:5px 15px;" ng-show="item.TitleImageAvailable"
-                       ng-href="{{ item.$titleURL }}"
-                       target="_blank">
+                       ng-click="renderTitle(item.$titleURL)">
                       <span nxg-icon="icon-title"></span>
                     </a>
                   </div>
@@ -135,7 +134,8 @@
                 <p class="lockup-major">{{ item.LastPaymentDate | moment }}</p>
               </td>
               <td class="hidden-xs">
-                <a class="btn btn-square" ng-show="item.TitleImageAvailable"
+                <a class="btn btn-square"
+                   ng-show="item.TitleImageAvailable"
                    ng-href="{{ item.$titleURL }}"
                    target="_blank">
                   <span nxg-icon="icon-title"></span>
@@ -151,4 +151,5 @@
       </div>
     </section>
   </section>
+  <mobile-embed-viewer url="titleURL" close="hideMobileTitle" ng-show="showMobileTitle" />
 </div>
