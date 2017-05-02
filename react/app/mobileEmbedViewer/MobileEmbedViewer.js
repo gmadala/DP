@@ -57,7 +57,8 @@ class MobileEmbedViewer extends Component {
             overflow: 'scroll',
             width: '100%',
             height: '100%',
-            paddingBottom: '88px'
+            paddingBottom: '88px',
+            position: 'relative',
         };
 
         const btnWrapperStyles = {
@@ -83,6 +84,25 @@ class MobileEmbedViewer extends Component {
 
         const pdfWidth = window.innerWidth;
 
+        const loadingWrapperStyles = {
+            width: '100%',
+            height: '100%',
+            position: 'absolute',
+            backgroundColor: '#FFFFFF',
+        };
+
+        const loadingStyles = {
+            backgroundImage: 'url(../img/loader-white.gif)',
+            height: '100%',
+            width: '100%',
+        };
+
+        const loadingScreen = (
+            <div style={loadingWrapperStyles}>
+                <div className="loading" style={loadingStyles} />
+            </div>
+        );
+
         return (
             <div style={wrapperStyles}>
                 <div style={innerWrapperStyles}>
@@ -91,11 +111,14 @@ class MobileEmbedViewer extends Component {
                     </div>
                     <div style={canvasWrapperStyles}>
                         <ReactPDF
-                            file={this.props.url}
+                            file={this.props.url + 'gar'}
                             onDocumentLoad={this.onDocumentLoad}
                             onPageLoad={this.onPageLoad}
                             pageIndex={pageIndex}
                             width={pdfWidth}
+                            loading={loadingScreen}
+                            noData={loadingScreen}
+                            error={loadingScreen}
                         />
                     </div>
                     <div style={btnWrapperStyles}>
