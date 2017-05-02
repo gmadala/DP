@@ -6,6 +6,7 @@
 - [Node](https://nodejs.org/)
 - [Python](https://www.python.org/downloads/)
 - [Ruby](http://rubyinstaller.org/)
+- [Yarn](https://yarnpkg.com/en/)
 
 Windows requirement for angular translations: add both of these to your environment path variable
 
@@ -19,7 +20,7 @@ Dist build (defaults to test)
 NOTE: If you have any issues running the script, delete your node_modules folder and try again
 
 ```sh
-$ npm run build
+$ yarn run build
 ```
 
 Build for environment / version:
@@ -32,17 +33,17 @@ Append: -- --mng:buildVersion=versionNumber
 Examples:
 
 ```sh
-$ npm run build -- --mng:buildEnv=training
-$ npm run build -- --mng:buildEnv=demo
-$ npm run build -- --mng:buildEnv=test
-$ npm run build -- --mng:buildEnv=uat --mng:buildVersion=1.0
-$ npm run build -- --mng:buildEnv=production --mng:buildVersion=2.0
+$ yarn run build -- --mng:buildEnv=training
+$ yarn run build -- --mng:buildEnv=demo
+$ yarn run build -- --mng:buildEnv=test
+$ yarn run build -- --mng:buildEnv=uat --mng:buildVersion=1.0
+$ yarn run build -- --mng:buildEnv=production --mng:buildVersion=2.0
 ```
 
 Maintenance build
 
 ```sh
-$ npm run build:maintenance
+$ yarn run build:maintenance
 ```
 
 ### Development
@@ -53,26 +54,26 @@ Build for local environment ([localhost:9000](http://localhost:9000))
 NOTE: If you have any issues running the script, delete your node_modules folder and try again
 
 ```sh
-$ npm start
+$ yarn start
 ```
 
 Custom api endpoint (default value shown)
 
 ```sh
-$ npm start -- --mng:apiBase=https://test.nextgearcapital.com/MobileService/api
+$ yarn start -- --mng:apiBase=https://test.nextgearcapital.com/MobileService/api
 ```
 
 Run angular and react unit tests
 
 ```sh
-$ npm test
+$ yarn run test
 ```
 
 Run angular or react tests individually
 
 ```sh
-$ npm run test:angular
-$ npm run test:react
+$ yarn run test:angular
+$ yarn run test:react
 ```
 
 ### Translations
@@ -80,7 +81,7 @@ $ npm run test:react
 Run react and angular translation procedures
 
 ```sh
-$ npm run translate
+$ yarn run translate
 ```
 
 Run react translation procedure
@@ -89,7 +90,7 @@ This will output untranslated strings to "/translations/language_translations.tx
 This will pull in any translated strings from the same file
 
 ```sh
-$ npm run translate:react
+$ yarn run translate:react
 ```
 
 Run angular translation procedure...
@@ -98,5 +99,5 @@ This will output untranslated strings to "/translations/language_untranslated.po
 This will insert new translations from "/translations/language_translated.po"
 
 ```sh
-$ npm run translate:angular
+$ yarn run translate:angular
 ```
