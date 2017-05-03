@@ -149,13 +149,13 @@ describe('\n Resources Page', function () {
         });
     });
 
-    it("11. Resources - Validating the myNextGear Mobile IOS", function () {
+    it("11. Resources - Validating the iOS Installation Guide", function () {
         helper.goToResources();
         resources.doMobileIOS();
         browser.getAllWindowHandles().then(function (handles) {
             browser.switchTo().window(handles[1]).then(function () {
                 browser.ignoreSynchronization = true;
-                expect(browser.getCurrentUrl()).toEqual("https://itunes.apple.com/us/app/nextgear-capital/id748609885?mt=8");
+                expect(browser.getCurrentUrl()).toEqual("https://customer.nextgearcapital.com/documents/my_nextgear_ios_steps_v3.pdf");
                 browser.ignoreSynchronization = false;
                 browser.close();
                 browser.driver.switchTo().window(handles[0]);
@@ -163,13 +163,13 @@ describe('\n Resources Page', function () {
         });
     });
 
-    it("12. Resources - Validating the myNextGear Mobile Android", function () {
+    it("12. Resources - Validating the Android Installation Guide", function () {
         helper.goToResources();
         resources.doMobileAndroid();
         browser.getAllWindowHandles().then(function (handles) {
             browser.switchTo().window(handles[1]).then(function () {
                 browser.ignoreSynchronization = true;
-                expect(browser.getCurrentUrl()).toEqual("https://play.google.com/store/apps/details?id=com.nextgear.mobile");
+                expect(browser.getCurrentUrl()).toEqual("https://customer.nextgearcapital.com/documents/my_nextgear_android_steps_v3.pdf");
                 browser.ignoreSynchronization = false;
                 browser.close();
                 browser.driver.switchTo().window(handles[0]);

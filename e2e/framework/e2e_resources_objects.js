@@ -12,8 +12,8 @@ function Resources() {
     this.elGuidelines = element(by.linkText('Guidelines'));
     this.elInformationSheets = element(by.linkText('Information Sheet'));
     this.elClaimForm = element(by.linkText('Claim Form'));
-    this.elMyNextGearMobileIOS = element(by.linkText('Download myNextGear mobile iOS'));
-    this.elMyNextGearMobileAndroid = element(by.linkText('Download myNextGear mobile Android'));
+    this.elMyNextGearMobileIOS = element(by.linkText('iOS Installation Guide'));
+    this.elMyNextGearMobileAndroid = element(by.linkText('Android Installation Guide'));
 
     //Doers
     this.doResources = function () {
