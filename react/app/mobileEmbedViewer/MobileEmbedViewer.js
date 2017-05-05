@@ -2,6 +2,98 @@ import React, { PropTypes, Component } from 'react';
 import Translate from 'react-translate-component';
 import ReactPDF from 'react-pdf';
 
+const wrapperStyles = {
+    position: 'fixed',
+    top: '0',
+    left: '0',
+    width: '100%',
+    height: '100%',
+    display: 'block',
+    marginTop: '48px',
+    paddingBottom: '48px',
+    backgroundColor: '#eff0f1',
+
+};
+
+const innerWrapperStyles = {
+    width: '100%',
+    height: '100%',
+};
+
+const closeIconStyles = {
+    fontSize: '20px',
+    margin: '10px',
+};
+
+const canvasWrapperStyles = {
+    overflow: 'scroll',
+    width: '100%',
+    height: '100%',
+    paddingBottom: '88px',
+    position: 'relative',
+};
+
+const btnWrapperStyles = {
+    width: '100%',
+    backgroundColor: '#FFFFFF',
+    height: '48px',
+    position: 'absolute',
+    bottom: '0',
+    marginBottom: '48px',
+    textAlign: 'center',
+};
+
+const btnStyles = {
+    margin: '0',
+    height: '48px',
+    borderRadius: '0px',
+    border: 'none',
+};
+
+const pageNumberStyles = {
+    marginTop: '17px',
+};
+
+const pdfWidth = window.innerWidth;
+
+const screenWrapper = {
+    width: '100%',
+    height: '100%',
+    position: 'absolute',
+    backgroundColor: '#FFFFFF',
+    paddingBottom: '96px',
+    display: 'table',
+};
+
+const loadingStyles = {
+    backgroundImage: 'url(../img/loader-white.gif)',
+    height: '100%',
+    width: '100%',
+};
+
+const errorTextWrapperStyles = {
+    display: 'table-cell',
+    verticalAlign: 'middle',
+};
+
+const errorTextStyles = {
+    textAlign: 'center',
+};
+
+const loadingScreen = (
+    <div style={screenWrapper}>
+        <div className="loading" style={loadingStyles} />
+    </div>
+);
+
+const errorScreen = (
+    <div style={screenWrapper}>
+        <div style={errorTextWrapperStyles}>
+            <p style={errorTextStyles}>Oops! Something went wrong!</p>
+        </div>
+    </div>
+);
+
 class MobileEmbedViewer extends Component {
     constructor(props) {
         super(props);
@@ -14,7 +106,7 @@ class MobileEmbedViewer extends Component {
     }
 
     onDocumentLoad = ({total}) => {
-        this.setState({ total });
+        this.setState({ total, pageIndex: 0 });
     }
 
     onPageLoad = ({ pageIndex, pageNumber }) => {
@@ -30,79 +122,6 @@ class MobileEmbedViewer extends Component {
     render() {
         const { pageIndex, pageNumber, total } = this.state;
 
-        const wrapperStyles = {
-            position: 'fixed',
-            top: '0',
-            left: '0',
-            width: '100%',
-            height: '100%',
-            display: 'block',
-            marginTop: '48px',
-            paddingBottom: '48px',
-            backgroundColor: '#eff0f1',
-
-        };
-
-        const innerWrapperStyles = {
-            width: '100%',
-            height: '100%',
-        };
-
-        const closeIconStyles = {
-            fontSize: '20px',
-            margin: '10px',
-        };
-
-        const canvasWrapperStyles = {
-            overflow: 'scroll',
-            width: '100%',
-            height: '100%',
-            paddingBottom: '88px',
-            position: 'relative',
-        };
-
-        const btnWrapperStyles = {
-            width: '100%',
-            backgroundColor: '#FFFFFF',
-            height: '48px',
-            position: 'absolute',
-            bottom: '0',
-            marginBottom: '48px',
-            textAlign: 'center',
-        };
-
-        const btnStyles = {
-            margin: '0',
-            height: '48px',
-            borderRadius: '0px',
-            border: 'none',
-        };
-
-        const pageNumberStyles = {
-            marginTop: '17px',
-        };
-
-        const pdfWidth = window.innerWidth;
-
-        const loadingWrapperStyles = {
-            width: '100%',
-            height: '100%',
-            position: 'absolute',
-            backgroundColor: '#FFFFFF',
-        };
-
-        const loadingStyles = {
-            backgroundImage: 'url(../img/loader-white.gif)',
-            height: '100%',
-            width: '100%',
-        };
-
-        const loadingScreen = (
-            <div style={loadingWrapperStyles}>
-                <div className="loading" style={loadingStyles} />
-            </div>
-        );
-
         return (
             <div style={wrapperStyles}>
                 <div style={innerWrapperStyles}>
@@ -111,14 +130,14 @@ class MobileEmbedViewer extends Component {
                     </div>
                     <div style={canvasWrapperStyles}>
                         <ReactPDF
-                            file={this.props.url + 'gar'}
+                            file={this.props.url}
                             onDocumentLoad={this.onDocumentLoad}
                             onPageLoad={this.onPageLoad}
                             pageIndex={pageIndex}
                             width={pdfWidth}
                             loading={loadingScreen}
                             noData={loadingScreen}
-                            error={loadingScreen}
+                            error={errorScreen}
                         />
                     </div>
                     <div style={btnWrapperStyles}>
