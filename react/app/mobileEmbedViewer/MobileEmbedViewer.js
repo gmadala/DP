@@ -66,7 +66,6 @@ const screenWrapper = {
 };
 
 const loadingStyles = {
-    backgroundImage: 'url(../img/loader-white.gif)',
     height: '100%',
     width: '100%',
 };
@@ -82,7 +81,7 @@ const errorTextStyles = {
 
 const loadingScreen = (
     <div style={screenWrapper}>
-        <div className="loading" style={loadingStyles} />
+        <div className="loading loding-large-white" style={loadingStyles} />
     </div>
 );
 
@@ -130,14 +129,14 @@ class MobileEmbedViewer extends Component {
                     </div>
                     <div style={canvasWrapperStyles}>
                         <ReactPDF
-                            file={this.props.url}
+                            file={this.props.url + '/sdfs'}
                             onDocumentLoad={this.onDocumentLoad}
                             onPageLoad={this.onPageLoad}
                             pageIndex={pageIndex}
                             width={pdfWidth}
                             loading={loadingScreen}
                             noData={loadingScreen}
-                            error={errorScreen}
+                            error={loadingScreen}
                         />
                     </div>
                     <div style={btnWrapperStyles}>
