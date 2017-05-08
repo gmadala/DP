@@ -1251,7 +1251,7 @@ babel-register@^6.24.1:
     mkdirp "^0.5.1"
     source-map-support "^0.4.2"
 
-babel-runtime@^6.0.0, babel-runtime@^6.18.0, babel-runtime@^6.22.0:
+babel-runtime@^6.18.0, babel-runtime@^6.22.0:
   version "6.23.0"
   resolved "https://nexus.nextgearcapital.com/repository/npm/babel-runtime/-/babel-runtime-6.23.0.tgz#0a9489f144de70efb3ce4300accdb329e2fc543b"
   dependencies:
@@ -1813,7 +1813,7 @@ bytes@2.2.0:
   version "2.2.0"
   resolved "https://nexus.nextgearcapital.com/repository/npm/bytes/-/bytes-2.2.0.tgz#fd35464a403f6f9117c2de3609ecff9cae000588"
 
-bytes@2.4.0, bytes@^2.4.0:
+bytes@2.4.0:
   version "2.4.0"
   resolved "https://nexus.nextgearcapital.com/repository/npm/bytes/-/bytes-2.4.0.tgz#7d97196f9d5baf7f6935e25985549edd2a6c2339"
 
@@ -1856,10 +1856,6 @@ camelcase@^1.0.2, camelcase@^1.2.1:
 camelcase@^2.0.0:
   version "2.1.1"
   resolved "https://nexus.nextgearcapital.com/repository/npm/camelcase/-/camelcase-2.1.1.tgz#7c1d16d679a1bbe59ca02cacecfb011e201f5a1f"
-
-camelcase@^4.0.0:
-  version "4.1.0"
-  resolved "https://nexus.nextgearcapital.com/repository/npm/camelcase/-/camelcase-4.1.0.tgz#d545635be1e33c542649c69173e5de6acfae34dd"
 
 caniuse-api@^1.5.2:
   version "1.6.1"
@@ -2072,10 +2068,6 @@ chokidar@^1.0.0, chokidar@^1.4.1, chokidar@^1.6.1:
   optionalDependencies:
     fsevents "^1.0.0"
 
-ci-info@^1.0.0:
-  version "1.0.0"
-  resolved "https://nexus.nextgearcapital.com/repository/npm/ci-info/-/ci-info-1.0.0.tgz#dc5285f2b4e251821683681c381c3388f46ec534"
-
 circular-json@^0.3.1:
   version "0.3.1"
   resolved "https://nexus.nextgearcapital.com/repository/npm/circular-json/-/circular-json-0.3.1.tgz#be8b36aefccde8b3ca7aa2d6afc07a37242c0d2d"
@@ -2115,12 +2107,6 @@ cli-cursor@^1.0.1:
   dependencies:
     restore-cursor "^1.0.1"
 
-cli-cursor@^2.1.0:
-  version "2.1.0"
-  resolved "https://nexus.nextgearcapital.com/repository/npm/cli-cursor/-/cli-cursor-2.1.0.tgz#b35dac376479facc3e94747d41d0d0f5238ffcb5"
-  dependencies:
-    restore-cursor "^2.0.0"
-
 cli-table@~0.3.1:
   version "0.3.1"
   resolved "https://nexus.nextgearcapital.com/repository/npm/cli-table/-/cli-table-0.3.1.tgz#f53b05266a8b1a0b934b3d0821e6e2dc5914ae23"
@@ -2157,13 +2143,6 @@ clone@^0.2.0:
 clone@^1.0.0, clone@^1.0.2:
   version "1.0.2"
   resolved "https://nexus.nextgearcapital.com/repository/npm/clone/-/clone-1.0.2.tgz#260b7a99ebb1edfe247538175f783243cb19d149"
-
-cmd-shim@^2.0.1:
-  version "2.0.2"
-  resolved "https://nexus.nextgearcapital.com/repository/npm/cmd-shim/-/cmd-shim-2.0.2.tgz#6fcbda99483a8fd15d7d30a196ca69d688a2efdb"
-  dependencies:
-    graceful-fs "^4.1.2"
-    mkdirp "~0.5.0"
 
 co@3.1.0:
   version "3.1.0"
@@ -2714,10 +2693,6 @@ dateformat@^2.0.0:
   version "2.0.0"
   resolved "https://nexus.nextgearcapital.com/repository/npm/dateformat/-/dateformat-2.0.0.tgz#2743e3abb5c3fc2462e527dca445e04e9f4dee17"
 
-death@^1.0.0:
-  version "1.1.0"
-  resolved "https://nexus.nextgearcapital.com/repository/npm/death/-/death-1.1.0.tgz#01aa9c401edd92750514470b8266390c66c67318"
-
 debug@0.7.4:
   version "0.7.4"
   resolved "https://nexus.nextgearcapital.com/repository/npm/debug/-/debug-0.7.4.tgz#06e1ea8082c2cb14e39806e22e2f6f757f92af39"
@@ -2934,10 +2909,6 @@ detect-indent@^4.0.0:
   resolved "https://nexus.nextgearcapital.com/repository/npm/detect-indent/-/detect-indent-4.0.0.tgz#f76d064352cdf43a1cb6ce619c4ee3a9475de208"
   dependencies:
     repeating "^2.0.0"
-
-detect-indent@^5.0.0:
-  version "5.0.0"
-  resolved "https://nexus.nextgearcapital.com/repository/npm/detect-indent/-/detect-indent-5.0.0.tgz#3871cc0a6a002e8c3e5b3cf7f336264675f06b9d"
 
 detective@^4.0.0, detective@^4.3.1:
   version "4.5.0"
@@ -3641,12 +3612,6 @@ extend@^1.2.1:
   version "1.3.0"
   resolved "https://nexus.nextgearcapital.com/repository/npm/extend/-/extend-1.3.0.tgz#d1516fb0ff5624d2ebf9123ea1dac5a1994004f8"
 
-external-editor@^2.0.1:
-  version "2.0.1"
-  resolved "https://nexus.nextgearcapital.com/repository/npm/external-editor/-/external-editor-2.0.1.tgz#4c597c6c88fa6410e41dbbaa7b1be2336aa31095"
-  dependencies:
-    tmp "^0.0.31"
-
 extglob@^0.3.1:
   version "0.3.2"
   resolved "https://nexus.nextgearcapital.com/repository/npm/extglob/-/extglob-0.3.2.tgz#2e18ff3d2f49ab2765cec9023f011daa8d8349a1"
@@ -3737,12 +3702,6 @@ figures@^1.0.1, figures@^1.3.2, figures@^1.3.5:
   dependencies:
     escape-string-regexp "^1.0.5"
     object-assign "^4.1.0"
-
-figures@^2.0.0:
-  version "2.0.0"
-  resolved "https://nexus.nextgearcapital.com/repository/npm/figures/-/figures-2.0.0.tgz#3ab1a2d2a62c8bfb431a0c94cb797a2fce27c962"
-  dependencies:
-    escape-string-regexp "^1.0.5"
 
 file-entry-cache@^2.0.0:
   version "2.0.0"
@@ -5257,24 +5216,6 @@ inquirer@^0.6.0:
     rx "^2.2.27"
     through "~2.3.4"
 
-inquirer@^3.0.1:
-  version "3.0.6"
-  resolved "https://nexus.nextgearcapital.com/repository/npm/inquirer/-/inquirer-3.0.6.tgz#e04aaa9d05b7a3cb9b0f407d04375f0447190347"
-  dependencies:
-    ansi-escapes "^1.1.0"
-    chalk "^1.0.0"
-    cli-cursor "^2.1.0"
-    cli-width "^2.0.0"
-    external-editor "^2.0.1"
-    figures "^2.0.0"
-    lodash "^4.3.0"
-    mute-stream "0.0.7"
-    run-async "^2.2.0"
-    rx "^4.1.0"
-    string-width "^2.0.0"
-    strip-ansi "^3.0.0"
-    through "^2.3.6"
-
 insert-module-globals@^7.0.0:
   version "7.0.1"
   resolved "https://nexus.nextgearcapital.com/repository/npm/insert-module-globals/-/insert-module-globals-7.0.1.tgz#c03bf4e01cb086d5b5e5ace8ad0afe7889d638c3"
@@ -5365,12 +5306,6 @@ is-bzip2@^1.0.0:
 is-callable@^1.1.1, is-callable@^1.1.2, is-callable@^1.1.3:
   version "1.1.3"
   resolved "https://nexus.nextgearcapital.com/repository/npm/is-callable/-/is-callable-1.1.3.tgz#86eb75392805ddc33af71c92a0eedf74ee7604b2"
-
-is-ci@^1.0.10:
-  version "1.0.10"
-  resolved "https://nexus.nextgearcapital.com/repository/npm/is-ci/-/is-ci-1.0.10.tgz#f739336b2632365061a9d48270cd56ae3369318e"
-  dependencies:
-    ci-info "^1.0.0"
 
 is-date-object@^1.0.1:
   version "1.0.1"
@@ -5522,10 +5457,6 @@ is-posix-bracket@^0.1.0:
 is-primitive@^2.0.0:
   version "2.0.0"
   resolved "https://nexus.nextgearcapital.com/repository/npm/is-primitive/-/is-primitive-2.0.0.tgz#207bab91638499c07b2adf240a41a87210034575"
-
-is-promise@^2.1.0:
-  version "2.1.0"
-  resolved "https://nexus.nextgearcapital.com/repository/npm/is-promise/-/is-promise-2.1.0.tgz#79a2a9ece7f096e80f36d2b2f3bc16c1ff4bf3fa"
 
 is-property@^1.0.0:
   version "1.0.2"
@@ -6236,10 +6167,6 @@ leven@^1.0.2:
   version "1.0.2"
   resolved "https://nexus.nextgearcapital.com/repository/npm/leven/-/leven-1.0.2.tgz#9144b6eebca5f1d0680169f1a6770dcea60b75c3"
 
-leven@^2.0.0:
-  version "2.1.0"
-  resolved "https://nexus.nextgearcapital.com/repository/npm/leven/-/leven-2.1.0.tgz#c2e7a9f772094dee9d34202ae8acce4687875580"
-
 levn@^0.3.0, levn@~0.3.0:
   version "0.3.0"
   resolved "https://nexus.nextgearcapital.com/repository/npm/levn/-/levn-0.3.0.tgz#3b09924edf9f083c0490fdd4c0bc4421e04764ee"
@@ -6658,7 +6585,7 @@ loose-envify@^1.0.0, loose-envify@^1.1.0, loose-envify@^1.2.0:
   dependencies:
     js-tokens "^3.0.0"
 
-loud-rejection@^1.0.0, loud-rejection@^1.2.0:
+loud-rejection@^1.0.0:
   version "1.6.0"
   resolved "https://nexus.nextgearcapital.com/repository/npm/loud-rejection/-/loud-rejection-1.6.0.tgz#5b46f80147edee578870f086d04821cf998e551f"
   dependencies:
@@ -6862,10 +6789,6 @@ mime@~1.2.11:
   version "1.2.11"
   resolved "https://nexus.nextgearcapital.com/repository/npm/mime/-/mime-1.2.11.tgz#58203eed86e3a5ef17aed2b7d9ebd47f0a60dd10"
 
-mimic-fn@^1.0.0:
-  version "1.1.0"
-  resolved "https://nexus.nextgearcapital.com/repository/npm/mimic-fn/-/mimic-fn-1.1.0.tgz#e667783d92e89dbd342818b5230b9d62a672ad18"
-
 minimatch@0.3, minimatch@0.x:
   version "0.3.0"
   resolved "https://nexus.nextgearcapital.com/repository/npm/minimatch/-/minimatch-0.3.0.tgz#275d8edaac4f1bb3326472089e7949c8394699dd"
@@ -7024,10 +6947,6 @@ mute-stream@0.0.5, mute-stream@~0.0.4:
   version "0.0.5"
   resolved "https://nexus.nextgearcapital.com/repository/npm/mute-stream/-/mute-stream-0.0.5.tgz#8fbfabb0a98a253d3184331f9e8deb7372fac6c0"
 
-mute-stream@0.0.7:
-  version "0.0.7"
-  resolved "https://nexus.nextgearcapital.com/repository/npm/mute-stream/-/mute-stream-0.0.7.tgz#3075ce93bc21b8fab43e1bc4da7e8115ed1e7bab"
-
 mz@^2.3.1:
   version "2.6.0"
   resolved "https://nexus.nextgearcapital.com/repository/npm/mz/-/mz-2.6.0.tgz#c8b8521d958df0a4f2768025db69c719ee4ef1ce"
@@ -7112,11 +7031,9 @@ nock@*:
     propagate "0.4.0"
     qs "^6.0.2"
 
-node-emoji@^1.0.4:
-  version "1.5.1"
-  resolved "https://nexus.nextgearcapital.com/repository/npm/node-emoji/-/node-emoji-1.5.1.tgz#fd918e412769bf8c448051238233840b2aff16a1"
-  dependencies:
-    string.prototype.codepointat "^0.2.0"
+node-ensure@^0.0.0:
+  version "0.0.0"
+  resolved "https://nexus.nextgearcapital.com/repository/npm/node-ensure/-/node-ensure-0.0.0.tgz#ecae764150de99861ec5c810fd5d096b183932a7"
 
 node-fetch@^1.0.1:
   version "1.6.3"
@@ -7124,24 +7041,6 @@ node-fetch@^1.0.1:
   dependencies:
     encoding "^0.1.11"
     is-stream "^1.0.1"
-
-node-gyp@^3.2.1:
-  version "3.6.0"
-  resolved "https://nexus.nextgearcapital.com/repository/npm/node-gyp/-/node-gyp-3.6.0.tgz#7474f63a3a0501161dda0b6341f022f14c423fa6"
-  dependencies:
-    fstream "^1.0.0"
-    glob "^7.0.3"
-    graceful-fs "^4.1.2"
-    minimatch "^3.0.2"
-    mkdirp "^0.5.0"
-    nopt "2 || 3"
-    npmlog "0 || 1 || 2 || 3 || 4"
-    osenv "0"
-    request "2"
-    rimraf "2"
-    semver "~5.3.0"
-    tar "^2.0.0"
-    which "1"
 
 node-libs-browser@^0.7.0:
   version "0.7.0"
@@ -7207,7 +7106,7 @@ nomnomnomnom@^2.0.0:
     chalk "~0.4.0"
     underscore "~1.6.0"
 
-"nopt@2 || 3", nopt@3.x, nopt@^3.0.0, nopt@~3.0.0, nopt@~3.0.1, nopt@~3.0.6:
+nopt@3.x, nopt@^3.0.0, nopt@~3.0.0, nopt@~3.0.1, nopt@~3.0.6:
   version "3.0.6"
   resolved "https://nexus.nextgearcapital.com/repository/npm/nopt/-/nopt-3.0.6.tgz#c6465dbf08abcd4db359317f79ac68a646b28ff9"
   dependencies:
@@ -7274,7 +7173,7 @@ npmconf@^2.0.1:
     semver "2 || 3 || 4"
     uid-number "0.0.5"
 
-"npmlog@0 || 1 || 2 || 3 || 4", npmlog@^4.0.2:
+npmlog@^4.0.2:
   version "4.0.2"
   resolved "https://nexus.nextgearcapital.com/repository/npm/npmlog/-/npmlog-4.0.2.tgz#d03950e0e78ce1527ba26d2a7592e9348ac3e75f"
   dependencies:
@@ -7357,10 +7256,6 @@ object-keys@^1.0.10, object-keys@^1.0.8:
   version "1.0.11"
   resolved "https://nexus.nextgearcapital.com/repository/npm/object-keys/-/object-keys-1.0.11.tgz#c54601778ad560f1142ce0e01bcca8b56d13426d"
 
-object-path@^0.11.2:
-  version "0.11.4"
-  resolved "https://nexus.nextgearcapital.com/repository/npm/object-path/-/object-path-0.11.4.tgz#370ae752fbf37de3ea70a861c23bba8915691949"
-
 object.assign@^4.0.4:
   version "4.0.4"
   resolved "https://nexus.nextgearcapital.com/repository/npm/object.assign/-/object.assign-4.0.4.tgz#b1c9cc044ef1b9fe63606fc141abbb32e14730cc"
@@ -7423,12 +7318,6 @@ once@~1.3.0:
 onetime@^1.0.0:
   version "1.1.0"
   resolved "https://nexus.nextgearcapital.com/repository/npm/onetime/-/onetime-1.1.0.tgz#a1f7838f8314c516f05ecefcbc4ccfe04b4ed789"
-
-onetime@^2.0.0:
-  version "2.0.1"
-  resolved "https://nexus.nextgearcapital.com/repository/npm/onetime/-/onetime-2.0.1.tgz#067428230fd67443b2794b22bba528b6867962d4"
-  dependencies:
-    mimic-fn "^1.0.0"
 
 open@~0.0.4:
   version "0.0.5"
@@ -7547,13 +7436,6 @@ os-tmpdir@^1.0.0, os-tmpdir@^1.0.1, os-tmpdir@~1.0.1:
   version "1.0.2"
   resolved "https://nexus.nextgearcapital.com/repository/npm/os-tmpdir/-/os-tmpdir-1.0.2.tgz#bbe67406c79aa85c5cfec766fe5734555dfa1274"
 
-osenv@0, osenv@^0.1.4:
-  version "0.1.4"
-  resolved "https://nexus.nextgearcapital.com/repository/npm/osenv/-/osenv-0.1.4.tgz#42fe6d5953df06c8064be6f176c3d05aaaa34644"
-  dependencies:
-    os-homedir "^1.0.0"
-    os-tmpdir "^1.0.0"
-
 osenv@0.0.3:
   version "0.0.3"
   resolved "https://nexus.nextgearcapital.com/repository/npm/osenv/-/osenv-0.0.3.tgz#cd6ad8ddb290915ad9e22765576025d411f29cb6"
@@ -7561,6 +7443,13 @@ osenv@0.0.3:
 osenv@0.1.0, osenv@^0.1.0:
   version "0.1.0"
   resolved "https://nexus.nextgearcapital.com/repository/npm/osenv/-/osenv-0.1.0.tgz#61668121eec584955030b9f470b1d2309504bfcb"
+
+osenv@^0.1.4:
+  version "0.1.4"
+  resolved "https://nexus.nextgearcapital.com/repository/npm/osenv/-/osenv-0.1.4.tgz#42fe6d5953df06c8064be6f176c3d05aaaa34644"
+  dependencies:
+    os-homedir "^1.0.0"
+    os-tmpdir "^1.0.0"
 
 osx-release@^1.0.0:
   version "1.1.0"
@@ -7733,6 +7622,13 @@ pathval@~0.1.1:
 pbkdf2-compat@2.0.1:
   version "2.0.1"
   resolved "https://nexus.nextgearcapital.com/repository/npm/pbkdf2-compat/-/pbkdf2-compat-2.0.1.tgz#b6e0c8fa99494d94e0511575802a59a5c142f288"
+
+pdfjs-dist@^1.7.339:
+  version "1.8.299"
+  resolved "https://nexus.nextgearcapital.com/repository/npm/pdfjs-dist/-/pdfjs-dist-1.8.299.tgz#c3486ba503736a227975f435835b4eae6038c606"
+  dependencies:
+    node-ensure "^0.0.0"
+    worker-loader "^0.8.0"
 
 pend@~1.2.0:
   version "1.2.0"
@@ -8141,13 +8037,6 @@ propagate@0.4.0:
   version "0.4.0"
   resolved "https://nexus.nextgearcapital.com/repository/npm/propagate/-/propagate-0.4.0.tgz#f3fcca0a6fe06736a7ba572966069617c130b481"
 
-proper-lockfile@^2.0.0:
-  version "2.0.0"
-  resolved "https://nexus.nextgearcapital.com/repository/npm/proper-lockfile/-/proper-lockfile-2.0.0.tgz#b21f5e79bcbb6b4e23eeeced15cfc7f63e8a2e55"
-  dependencies:
-    graceful-fs "^4.1.2"
-    retry "^0.10.0"
-
 proto-list@~1.2.1:
   version "1.2.4"
   resolved "https://nexus.nextgearcapital.com/repository/npm/proto-list/-/proto-list-1.2.4.tgz#212d5bfe1318306a420f6402b8e26ff39647a849"
@@ -8336,7 +8225,7 @@ rc@^1.0.1, rc@^1.1.2, rc@^1.1.7:
     fbjs "^0.8.4"
     object-assign "^4.1.0"
 
-react-dom@^15.3.2:
+react-dom@>=15.0, react-dom@^15.3.2:
   version "15.5.4"
   resolved "https://nexus.nextgearcapital.com/repository/npm/react-dom/-/react-dom-15.5.4.tgz#ba0c28786fd52ed7e4f2135fe0288d462aef93da"
   dependencies:
@@ -8375,6 +8264,14 @@ react-interpolate-component@^0.10.0:
     fbjs "^0.4.0"
     object-assign "^4.1.0"
 
+react-pdf@^1.6.1:
+  version "1.6.1"
+  resolved "https://nexus.nextgearcapital.com/repository/npm/react-pdf/-/react-pdf-1.6.1.tgz#dc528ebee6b7e7864db5036d5d52209b67a8e0d1"
+  dependencies:
+    pdfjs-dist "^1.7.339"
+    react ">=15.0"
+    react-dom ">=15.0"
+
 react-redux@^5.0.1:
   version "5.0.4"
   resolved "https://nexus.nextgearcapital.com/repository/npm/react-redux/-/react-redux-5.0.4.tgz#1563babadcfb2672f57f9ceaa439fb16bf85d55b"
@@ -8410,7 +8307,7 @@ react-translate-component@^0.13.1:
   dependencies:
     object-assign "^4.0.1"
 
-react@^15.3.1:
+react@>=15.0, react@^15.3.1:
   version "15.5.4"
   resolved "https://nexus.nextgearcapital.com/repository/npm/react/-/react-15.5.4.tgz#fa83eb01506ab237cdc1c8c3b1cea8de012bf047"
   dependencies:
@@ -8447,7 +8344,7 @@ read-pkg@^1.0.0:
     normalize-package-data "^2.3.2"
     path-type "^1.0.0"
 
-read@1.0.x, read@^1.0.7, read@~1.0.4:
+read@1.0.x, read@~1.0.4:
   version "1.0.7"
   resolved "https://nexus.nextgearcapital.com/repository/npm/read/-/read-1.0.7.tgz#b3da19bd052431a97671d44a42634adf710b40c4"
   dependencies:
@@ -8722,10 +8619,6 @@ replace-ext@0.0.1:
   version "0.0.1"
   resolved "https://nexus.nextgearcapital.com/repository/npm/replace-ext/-/replace-ext-0.0.1.tgz#29bbd92078a739f0bcce2b4ee41e837953522924"
 
-request-capture-har@^1.1.4:
-  version "1.2.2"
-  resolved "https://nexus.nextgearcapital.com/repository/npm/request-capture-har/-/request-capture-har-1.2.2.tgz#cd692cfb2cc744fd84a3358aac6ee51528cf720d"
-
 request-progress@0.3.0:
   version "0.3.0"
   resolved "https://nexus.nextgearcapital.com/repository/npm/request-progress/-/request-progress-0.3.0.tgz#bdf2062bfc197c5d492500d44cb3aff7865b492e"
@@ -8744,7 +8637,7 @@ request-replay@~0.2.0:
   dependencies:
     retry "~0.6.0"
 
-request@2, request@>=2.51, request@^2.40.0, request@^2.75.0, request@^2.78.0, request@^2.81.0:
+request@>=2.51, request@^2.40.0, request@^2.78.0, request@^2.81.0:
   version "2.81.0"
   resolved "https://nexus.nextgearcapital.com/repository/npm/request/-/request-2.81.0.tgz#c6928946a0e06c5f8d6f8a9333469ffda46298a0"
   dependencies:
@@ -8892,20 +8785,9 @@ restore-cursor@^1.0.1:
     exit-hook "^1.0.0"
     onetime "^1.0.0"
 
-restore-cursor@^2.0.0:
-  version "2.0.0"
-  resolved "https://nexus.nextgearcapital.com/repository/npm/restore-cursor/-/restore-cursor-2.0.0.tgz#9f7ee287f82fd326d4fd162923d62129eee0dfaf"
-  dependencies:
-    onetime "^2.0.0"
-    signal-exit "^3.0.2"
-
 retry@0.6.0, retry@~0.6.0:
   version "0.6.0"
   resolved "https://nexus.nextgearcapital.com/repository/npm/retry/-/retry-0.6.0.tgz#1c010713279a6fd1e8def28af0c3ff1871caa537"
-
-retry@^0.10.0:
-  version "0.10.1"
-  resolved "https://nexus.nextgearcapital.com/repository/npm/retry/-/retry-0.10.1.tgz#e76388d217992c252750241d3d3956fed98d8ff4"
 
 revalidator@0.1.x:
   version "0.1.8"
@@ -8917,7 +8799,7 @@ right-align@^0.1.1:
   dependencies:
     align-text "^0.1.1"
 
-rimraf@2, rimraf@2.x.x, rimraf@^2.2.2, rimraf@^2.2.6, rimraf@^2.2.8, rimraf@^2.4.3, rimraf@^2.5.0, rimraf@^2.5.1, rimraf@^2.5.2, rimraf@^2.6.0, rimraf@^2.6.1:
+rimraf@2, rimraf@2.x.x, rimraf@^2.2.2, rimraf@^2.2.6, rimraf@^2.2.8, rimraf@^2.4.3, rimraf@^2.5.1, rimraf@^2.5.2, rimraf@^2.6.0, rimraf@^2.6.1:
   version "2.6.1"
   resolved "https://nexus.nextgearcapital.com/repository/npm/rimraf/-/rimraf-2.6.1.tgz#c2338ec643df7a1b7fe5c54fa86f57428a55f33d"
   dependencies:
@@ -8931,21 +8813,11 @@ ripemd160@0.2.0:
   version "0.2.0"
   resolved "https://nexus.nextgearcapital.com/repository/npm/ripemd160/-/ripemd160-0.2.0.tgz#2bf198bde167cacfa51c0a928e84b68bbe171fce"
 
-roadrunner@^1.1.0:
-  version "1.1.0"
-  resolved "https://nexus.nextgearcapital.com/repository/npm/roadrunner/-/roadrunner-1.1.0.tgz#1180a30d64e1970d8f55dd8cb0da8ffccecad71e"
-
 run-async@^0.1.0:
   version "0.1.0"
   resolved "https://nexus.nextgearcapital.com/repository/npm/run-async/-/run-async-0.1.0.tgz#c8ad4a5e110661e402a7d21b530e009f25f8e389"
   dependencies:
     once "^1.3.0"
-
-run-async@^2.2.0:
-  version "2.3.0"
-  resolved "https://nexus.nextgearcapital.com/repository/npm/run-async/-/run-async-2.3.0.tgz#0371ab4ae0bdd720d4166d7dfda64ff7a445a6c0"
-  dependencies:
-    is-promise "^2.1.0"
 
 rx-lite@^3.1.2:
   version "3.1.2"
@@ -8954,10 +8826,6 @@ rx-lite@^3.1.2:
 rx@2.3.24, rx@^2.2.27:
   version "2.3.24"
   resolved "https://nexus.nextgearcapital.com/repository/npm/rx/-/rx-2.3.24.tgz#14f950a4217d7e35daa71bbcbe58eff68ea4b2b7"
-
-rx@^4.1.0:
-  version "4.1.0"
-  resolved "https://nexus.nextgearcapital.com/repository/npm/rx/-/rx-4.1.0.tgz#a5f13ff79ef3b740fe30aa803fb09f98805d4782"
 
 safe-buffer@^5.0.1:
   version "5.0.1"
@@ -9023,7 +8891,7 @@ semver-truncate@^1.0.0:
   version "4.3.6"
   resolved "https://nexus.nextgearcapital.com/repository/npm/semver/-/semver-4.3.6.tgz#300bc6e0e86374f7ba61068b5b1ecd57fc6532da"
 
-"semver@2 || 3 || 4 || 5", semver@^5.0.1, semver@^5.0.3, semver@^5.1.0, semver@^5.3.0, semver@~5.3.0:
+"semver@2 || 3 || 4 || 5", semver@^5.0.1, semver@^5.0.3, semver@^5.3.0:
   version "5.3.0"
   resolved "https://nexus.nextgearcapital.com/repository/npm/semver/-/semver-5.3.0.tgz#9b2ce5d3de02d17c6012ad326aa6b4d0cf54f94f"
 
@@ -9161,7 +9029,7 @@ sigmund@~1.0.0:
   version "1.0.1"
   resolved "https://nexus.nextgearcapital.com/repository/npm/sigmund/-/sigmund-1.0.1.tgz#3ff21f198cad2175f9f3b781853fd94d0d19b590"
 
-signal-exit@^3.0.0, signal-exit@^3.0.2:
+signal-exit@^3.0.0:
   version "3.0.2"
   resolved "https://nexus.nextgearcapital.com/repository/npm/signal-exit/-/signal-exit-3.0.2.tgz#b5fdc08f1287ea1178628e415e25132b73646c6d"
 
@@ -9471,10 +9339,6 @@ string-width@^2.0.0:
     is-fullwidth-code-point "^2.0.0"
     strip-ansi "^3.0.0"
 
-string.prototype.codepointat@^0.2.0:
-  version "0.2.0"
-  resolved "https://nexus.nextgearcapital.com/repository/npm/string.prototype.codepointat/-/string.prototype.codepointat-0.2.0.tgz#6b26e9bd3afcaa7be3b4269b526de1b82000ac78"
-
 string.prototype.startswith@^0.2.0:
   version "0.2.0"
   resolved "https://nexus.nextgearcapital.com/repository/npm/string.prototype.startswith/-/string.prototype.startswith-0.2.0.tgz#da68982e353a4e9ac4a43b450a2045d1c445ae7b"
@@ -9731,7 +9595,7 @@ tar-stream@^0.4.6:
     readable-stream "^1.0.27-1"
     xtend "^4.0.0"
 
-tar-stream@^1.1.1, tar-stream@^1.5.2:
+tar-stream@^1.1.1:
   version "1.5.2"
   resolved "https://nexus.nextgearcapital.com/repository/npm/tar-stream/-/tar-stream-1.5.2.tgz#fbc6c6e83c1a19d4cb48c7d96171fc248effc7bf"
   dependencies:
@@ -9740,7 +9604,7 @@ tar-stream@^1.1.1, tar-stream@^1.5.2:
     readable-stream "^2.0.0"
     xtend "^4.0.0"
 
-tar@^2.0.0, tar@^2.2.1:
+tar@^2.2.1:
   version "2.2.1"
   resolved "https://nexus.nextgearcapital.com/repository/npm/tar/-/tar-2.2.1.tgz#8e4d2a256c0e2185c6b18ad694aec968b83cb1d1"
   dependencies:
@@ -9865,7 +9729,7 @@ tmp@0.0.24:
   version "0.0.24"
   resolved "https://nexus.nextgearcapital.com/repository/npm/tmp/-/tmp-0.0.24.tgz#d6a5e198d14a9835cc6f2d7c3d9e302428c8cf12"
 
-tmp@0.0.31, tmp@0.0.x, tmp@^0.0.31:
+tmp@0.0.31, tmp@0.0.x:
   version "0.0.31"
   resolved "https://nexus.nextgearcapital.com/repository/npm/tmp/-/tmp-0.0.31.tgz#8f38ab9438e17315e5dbd8b3657e8bfb277ae4a7"
   dependencies:
@@ -10220,10 +10084,6 @@ uuid@^3.0.0:
   version "3.0.1"
   resolved "https://nexus.nextgearcapital.com/repository/npm/uuid/-/uuid-3.0.1.tgz#6544bba2dfda8c1cf17e629a3a305e2bb1fee6c1"
 
-v8-compile-cache@^1.0.0:
-  version "1.1.0"
-  resolved "https://nexus.nextgearcapital.com/repository/npm/v8-compile-cache/-/v8-compile-cache-1.1.0.tgz#1dc2a340fb8e5f800a32bcdbfb8c23cd747021b9"
-
 v8flags@^2.0.10:
   version "2.0.12"
   resolved "https://nexus.nextgearcapital.com/repository/npm/v8flags/-/v8flags-2.0.12.tgz#73235d9f7176f8e8833fb286795445f7938d84e5"
@@ -10481,15 +10341,15 @@ whet.extend@~0.9.9:
   version "0.9.9"
   resolved "https://nexus.nextgearcapital.com/repository/npm/whet.extend/-/whet.extend-0.9.9.tgz#f877d5bf648c97e5aa542fadc16d6a259b9c11a1"
 
-which@1, which@^1.1.1, which@^1.2.1, which@^1.2.9, which@~1.2.10:
+which@1.0.x, which@^1.0.9, which@~1.0.5:
+  version "1.0.9"
+  resolved "https://nexus.nextgearcapital.com/repository/npm/which/-/which-1.0.9.tgz#460c1da0f810103d0321a9b633af9e575e64486f"
+
+which@^1.1.1, which@^1.2.1, which@^1.2.9, which@~1.2.10:
   version "1.2.14"
   resolved "https://nexus.nextgearcapital.com/repository/npm/which/-/which-1.2.14.tgz#9a87c4378f03e827cecaf1acdf56c736c01c14e5"
   dependencies:
     isexe "^2.0.0"
-
-which@1.0.x, which@^1.0.9, which@~1.0.5:
-  version "1.0.9"
-  resolved "https://nexus.nextgearcapital.com/repository/npm/which/-/which-1.0.9.tgz#460c1da0f810103d0321a9b633af9e575e64486f"
 
 wide-align@^1.1.0:
   version "1.1.0"
@@ -10534,6 +10394,12 @@ wordwrap@0.0.x, wordwrap@~0.0.2:
 wordwrap@^1.0.0, wordwrap@~1.0.0:
   version "1.0.0"
   resolved "https://nexus.nextgearcapital.com/repository/npm/wordwrap/-/wordwrap-1.0.0.tgz#27584810891456a4171c8d0226441ade90cbcaeb"
+
+worker-loader@^0.8.0:
+  version "0.8.0"
+  resolved "https://nexus.nextgearcapital.com/repository/npm/worker-loader/-/worker-loader-0.8.0.tgz#13582960dcd7d700dc829d3fd252a7561696167e"
+  dependencies:
+    loader-utils "^1.0.2"
 
 wrap-fn@^0.1.0:
   version "0.1.5"
@@ -10642,44 +10508,6 @@ yargs@~3.5.4:
     decamelize "^1.0.0"
     window-size "0.1.0"
     wordwrap "0.0.2"
-
-yarn@^0.22.0:
-  version "0.22.0"
-  resolved "https://nexus.nextgearcapital.com/repository/npm/yarn/-/yarn-0.22.0.tgz#fd8511dc29225b925be967dc185772cc59de5888"
-  dependencies:
-    babel-runtime "^6.0.0"
-    bytes "^2.4.0"
-    camelcase "^4.0.0"
-    chalk "^1.1.1"
-    cmd-shim "^2.0.1"
-    commander "^2.9.0"
-    death "^1.0.0"
-    debug "^2.2.0"
-    detect-indent "^5.0.0"
-    ini "^1.3.4"
-    inquirer "^3.0.1"
-    invariant "^2.2.0"
-    is-builtin-module "^1.0.0"
-    is-ci "^1.0.10"
-    leven "^2.0.0"
-    loud-rejection "^1.2.0"
-    minimatch "^3.0.3"
-    mkdirp "^0.5.1"
-    node-emoji "^1.0.4"
-    node-gyp "^3.2.1"
-    object-path "^0.11.2"
-    proper-lockfile "^2.0.0"
-    read "^1.0.7"
-    request "^2.75.0"
-    request-capture-har "^1.1.4"
-    rimraf "^2.5.0"
-    roadrunner "^1.1.0"
-    semver "^5.1.0"
-    strip-bom "^3.0.0"
-    tar "^2.2.1"
-    tar-stream "^1.5.2"
-    v8-compile-cache "^1.0.0"
-    validate-npm-package-license "^3.0.1"
 
 yauzl@2.4.1, yauzl@^2.2.1:
   version "2.4.1"

@@ -13,7 +13,9 @@
     'User',
     '$timeout',
     'gettextCatalog',
-    'Addresses'
+    'Addresses',
+    '$uibModal',
+    '$window'
   ];
 
   function FloorplanCtrl(
@@ -24,7 +26,10 @@
     User,
     $timeout,
     gettextCatalog,
-    Addresses) {
+    Addresses,
+    $uibModal,
+    $window
+  ) {
 
     $scope.isCollapsed = true;
 
@@ -162,6 +167,33 @@
           floorplan.TitleLocation = hasTitle ? gettextCatalog.getString('Seller') : gettextCatalog.getString('Title Absent');
         }
       );
+    };
+
+
+    // Mobile title PDF viewer (test comment)
+    $scope.titleURL = '';
+    $scope.showMobileTitle = false;
+
+    $scope.renderTitle = function(titleURL) {
+        if (!($window.navigator.standalone || $window.matchMedia('(display-mode: standalone)').matches)) {
+            $window.open(
+                titleURL,
+                '_blank'
+            );
+
+            return;
+        }
+
+        jQuery('body').addClass('modal-open');
+
+        $scope.titleURL = titleURL;
+        $scope.showMobileTitle = true;
+    };
+
+    $scope.hideMobileTitle = function() {
+        jQuery('body').removeClass('modal-open');
+
+        $scope.showMobileTitle = false;
     };
 
   }
