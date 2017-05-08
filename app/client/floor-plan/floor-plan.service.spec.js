@@ -11,11 +11,12 @@ describe('Model: Floorplan', function () {
     urlParser,
     $q;
 
-  beforeEach(inject(function ($httpBackend, Floorplan, URLParser, _$q_) {
+  beforeEach(inject(function ($httpBackend, Floorplan, URLParser, _$q_, localStorageService) {
     httpBackend = $httpBackend;
     floorplan = Floorplan;
     urlParser = URLParser;
     $q = _$q_;
+    localStorageService.clearAll()
   }));
 
   it('should have a getVehicleDescription function that concatenates vehicle info', function () {

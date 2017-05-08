@@ -5,15 +5,15 @@
     .module('nextgearWebApp')
     .factory('LastState', LastState);
 
-  LastState.$inject = ['$cookieStore', '$state', 'User'];
+  LastState.$inject = ['localStorageService', '$state', 'User'];
 
-  function LastState($cookieStore, $state, User) {
+  function LastState(localStorageService, $state, User) {
 
     var cookieGet = function(){
-      return $cookieStore.get('uiState');
+      return localStorageService.get('uiState');
     };
     var cookieSet = function(value){
-      return $cookieStore.put('uiState', value);
+      return localStorageService.set('uiState', value);
     };
 
     return {
@@ -31,6 +31,8 @@
           cookieVal.lastState['default'] = $state.current.name;
         }
 
+        cookieVal.lastState['url'] = $state.current.url;
+
         cookieSet(cookieVal);
       },
       clearUserState: function() {
@@ -46,6 +48,10 @@
 
         cookieSet(cookieVal);
 
+      },
+      getUserUrl: function() {
+          var cookieVal = cookieGet();
+          return cookieVal ? cookieVal.lastState['url'] : null;
       },
       getUserState: function() {
         var cookieVal = cookieGet();

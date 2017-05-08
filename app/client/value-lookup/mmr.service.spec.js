@@ -21,9 +21,10 @@ describe('Service: Mmr', function () {
         style: { Id: 'style1' }
       };
 
-  beforeEach(inject(function (_Mmr_, _$httpBackend_) {
+  beforeEach(inject(function (_Mmr_, _$httpBackend_, localStorageService) {
     Mmr = _Mmr_;
     $httpBackend = _$httpBackend_;
+    localStorageService.clearAll()
 
     success = jasmine.createSpy('success');
     failure = jasmine.createSpy('failure');

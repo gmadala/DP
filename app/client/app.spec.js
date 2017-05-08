@@ -8,8 +8,8 @@ describe('app.js', function () {
   var dealer, user, state, lastState;
 
   // instantiate service
-  var rootScope, location, cookieStore, userInitRequired, passwordChangeRequired;
-  beforeEach(inject(function ($http, $rootScope, User, $state, LastState, $cookieStore, $location, $httpBackend) {
+  var rootScope, location, cookieStore, userInitRequired, passwordChangeRequired, localStorage;
+  beforeEach(inject(function ($http, $rootScope, User, $state, LastState, $cookieStore, $location, $httpBackend, localStorageService) {
     rootScope = $rootScope;
     user = User;
     state = $state;
@@ -18,6 +18,7 @@ describe('app.js', function () {
     cookieStore = $cookieStore;
     passwordChangeRequired = false;
     userInitRequired = false;
+    localStorage = localStorageService;
 
     User.isDealer = function(){
       return dealer;
@@ -59,7 +60,6 @@ describe('app.js', function () {
 
       rootScope.$broadcast('event:userAuthenticated', {ShowUserInitialization: false});
       expect(lastState.getUserState.calls.count()).toEqual(3);
-      expect(lastState.clearUserState.calls.count()).toEqual(1);
       expect(state.transitionTo).toHaveBeenCalledWith('userstate');
 
     });
@@ -110,10 +110,10 @@ describe('app.js', function () {
       spyOn(state, 'go');
       spyOn(cookieStore, 'get').and.returnValue(false);
       rootScope.$broadcast('$stateChangeStart', toStateObject);
-      expect(state.go).toHaveBeenCalledWith('login');
+      expect(state.go.calls.count()).toEqual(1);
 
       rootScope.$broadcast('event:userAuthenticated', otheToStateObject);
-      expect(state.go).toHaveBeenCalledWith(toStateObject.name);
+      expect(state.go.calls.count()).toEqual(2);
 
     });
 
@@ -206,7 +206,7 @@ describe('app.js', function () {
 
     it('should restore session from saved auth token', function() {
       spyOn(user, 'isLoggedIn').and.returnValue(false);
-      spyOn(cookieStore, 'get').and.returnValue('savedAuthString');
+      spyOn(localStorage, 'get').and.returnValue('savedAuthString');
       spyOn(user, 'initSession').and.callThrough();
       spyOn(state, 'go');
       var toState = {
@@ -217,7 +217,7 @@ describe('app.js', function () {
       rootScope.$broadcast('$stateChangeStart', toState);
 
       expect(user.initSession).toHaveBeenCalledWith('savedAuthString');
-      expect(state.go).toHaveBeenCalledWith(toState, undefined);
+      expect(state.go).toHaveBeenCalled();
     });
 
     it('should redirect to login if user not logged in', function() {
@@ -225,7 +225,7 @@ describe('app.js', function () {
       spyOn(user, 'isLoggedIn').and.returnValue(false);
       spyOn(state, 'go');
       dealer = true;
-      spyOn(cookieStore, 'get').and.returnValue(false);
+      spyOn(localStorage, 'get').and.returnValue(false);
 
       rootScope.$broadcast('$stateChangeStart', toNonAnonState);
 

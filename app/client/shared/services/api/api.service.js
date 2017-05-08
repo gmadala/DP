@@ -14,7 +14,7 @@
     '$interval',
     'nxgConfig',
     'messages',
-    '$cookieStore',
+    'localStorageService',
     'gettextCatalog',
     'apiCommon'
   ];
@@ -28,7 +28,7 @@
     $interval,
     nxgConfig,
     messages,
-    $cookieStore,
+    localStorageService,
     gettextCatalog,
     apiCommon) {
 
@@ -79,6 +79,31 @@
     }
 
     function resetSessionTimeout(debug) {
+      // get session timeout
+      var st = localStorageService.get('sessionTimeout')
+
+      // check for existing sessionTimeout, set if it doesn't exist
+      if (st) {
+          // get milliseconds difference between now and the timeout
+          var diff = moment().diff(st, 'milliseconds');
+
+          // check if difference is greater than the config timeout
+          if (diff > nxgConfig.sessionTimeoutMs) {
+              // remove the session timeout so it starts again on next login
+              localStorageService.remove('sessionTimeout')
+
+              // call session timeout to log the user out and show the error message
+              onSessionTimeout(debug);
+
+              // make sure we don't continue into the $interval calls to prevent a double event call
+              return;
+          } else {
+              localStorageService.set('sessionTimeout', moment().toISOString())
+          }
+      } else {
+          localStorageService.set('sessionTimeout', moment().toISOString())
+      }
+
       if (sessionTimeout) { $interval.cancel(sessionTimeout); }
       sessionTimeout = $interval(function(){
         $interval.cancel(sessionTimeout);
@@ -90,16 +115,16 @@
       resetSessionTimeout: resetSessionTimeout,
       setAuth: function(authData) {
         // save authData on cookies to allow us to restore in case of reload
-        $cookieStore.put('auth', authData);
+        localStorageService.set('auth', authData);
 
-        authToken = authData.Token;
+        authToken = authData.Token || null;
         sessionHasTimedOut = false;
         // set a default Authorization header with the authentication token
         $http.defaults.headers.common.Authorization =  authToken;
       },
       resetAuth: function() {
         // clear saved token
-        $cookieStore.remove('auth');
+        localStorageService.remove('auth');
         delete $http.defaults.headers.common.Authorization;
         authToken = null;
       },
@@ -107,7 +132,7 @@
         return !!authToken;
       },
       getAuthParam: function (paramName) {
-        var auth = $cookieStore.get('auth');
+        var auth = localStorageService.get('auth');
         if (auth) {
           return auth[paramName];
         } else {
@@ -115,10 +140,10 @@
         }
       },
       setAuthParam: function (paramName, value) {
-        var auth = $cookieStore.get('auth');
+        var auth = localStorageService.get('auth');
         if (auth) {
           auth[paramName] = value;
-          $cookieStore.put('auth', auth);
+          localStorageService.set('auth', auth);
         }
       },
       request: function(method, url, data, headers, isNgen, overrideSuccessHandler, overrideErrorHanlder) {

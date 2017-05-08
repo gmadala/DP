@@ -12,7 +12,7 @@
     'segmentio',
     'nxgConfig',
     'LogoutGuard',
-    '$cookieStore',
+    'localStorageService',
     '$state',
     '$uibModal',
     'LastState',
@@ -31,7 +31,7 @@
     segmentio,
     nxgConfig,
     LogoutGuard,
-    $cookieStore,
+    localStorageService,
     $state,
     $uibModal,
     LastState,
@@ -63,7 +63,11 @@
       isStateNotForRole: isStateNotForRole
     };
 
+    var appInitialized = false;
+
     function resetToLogin() {
+      localStorageService.remove('userData')
+      localStorageService.remove('auth');
       $state.go('login');
       prv.pendingReload = true;
     }
@@ -78,7 +82,6 @@
         if (LastState.getUserState() && LastState.getUserState() !== '') {
           // go back to the last state visited
           $state.transitionTo(LastState.getUserState());
-          LastState.clearUserState();
         } else {
           $state.go(User.isDealer() ? 'dashboard' : 'auction_dashboard');
         }
@@ -114,18 +117,17 @@
          */
 
         $rootScope.currentPage = toState.data.title;
+        var savedAuth = localStorageService.get('userData');
 
         if (!toState.data.allowAnonymous) {
           // enforce rules about what states certain users can see
-          var isDealer = User.isDealer(),
-            savedAuth = $cookieStore.get('auth');
-
+          var isDealer = User.isDealer();
           if (!User.isLoggedIn() && savedAuth) {
             // we're restoring session from saved auth token
             event.preventDefault();
             User.initSession(savedAuth).then(
               function () {
-                $state.go(toState, toStateParams);
+                continuePostLogin();
               }
             );
           } else if (!User.isLoggedIn()) {
@@ -157,7 +159,16 @@
               $state.go(isDealer || isDealer === null ? 'dashboard' : 'auction_dashboard');
             }
           }
-        }
+        } else {
+              if (savedAuth && toState.name === 'login') {
+                  event.preventDefault();
+                  User.initSession(savedAuth).then(
+                    function () {
+                      continuePostLogin();
+                    }
+                  );
+              }
+          }
       }
     );
 
@@ -180,6 +191,12 @@
           $rootScope.ribbonStyle = { 'margin-bottom': '0' };
         } else {
           $rootScope.ribbonStyle = {};
+        }
+
+        if (appInitialized) {
+            LastState.saveUserState();
+        } else {
+            appInitialized = true;
         }
       }
     );
@@ -223,18 +240,21 @@
     $rootScope.$on('event:forceClearAuth',
       function () {
         User.dropSession();
+        localStorageService.remove('userData')
         // save last visited state
         LastState.saveUserState();
       }
     );
 
     $rootScope.$on('event:userAuthenticated',
-      function () {
+      function (d, data) {
         kissMetricInfo.getKissMetricInfo().then(
           function (result) {
             segmentio.track(metric.LOGIN_SUCCESSFUL, result);
           }
         );
+
+        localStorageService.set('userData', data)
 
         if (User.isPasswordChangeRequired()) {
           // temporary password? user needs to change it before it can proceed
