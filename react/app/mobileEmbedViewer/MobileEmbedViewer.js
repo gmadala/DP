@@ -129,14 +129,14 @@ class MobileEmbedViewer extends Component {
                     </div>
                     <div style={canvasWrapperStyles}>
                         <ReactPDF
-                            file={this.props.url + '/sdfs'}
+                            file={this.props.url}
                             onDocumentLoad={this.onDocumentLoad}
                             onPageLoad={this.onPageLoad}
                             pageIndex={pageIndex}
                             width={pdfWidth}
                             loading={loadingScreen}
                             noData={loadingScreen}
-                            error={loadingScreen}
+                            error={errorScreen}
                         />
                     </div>
                     <div style={btnWrapperStyles}>
