@@ -42,6 +42,8 @@
     kissMetricInfo,
     resize) {
 
+    var loginWorkaround = true;
+
     var uibModal = $uibModal;
     // state whose transition was interrupted to ask the user to log in
     var pendingState = null;
@@ -73,6 +75,7 @@
     }
 
     function continuePostLogin() {
+      loginWorkaround = false;
       if (pendingState) {
         // resume transition to the original state destination
         $state.go(pendingState.name);
@@ -81,7 +84,8 @@
         // Make sure we got a valid last state to switch to. Fixes VO-804
         if (LastState.getUserState() && LastState.getUserState() !== '') {
           // go back to the last state visited
-          $state.transitionTo(LastState.getUserState());
+          console.log(LastState.getUserState());
+          $state.transitionTo(LastState.getUserState() === 'login' ? User.isDealer() ? 'dashboard' : 'auction_dashboard' : LastState.getUserState());
         } else {
           $state.go(User.isDealer() ? 'dashboard' : 'auction_dashboard');
         }
@@ -160,8 +164,9 @@
             }
           }
         } else {
-              if (savedAuth && toState.name === 'login') {
+              if (savedAuth && toState.name === 'login' && loginWorkaround) {
                   event.preventDefault();
+                  console.log(savedAuth);
                   User.initSession(savedAuth).then(
                     function () {
                       continuePostLogin();
@@ -202,6 +207,8 @@
     );
 
     $rootScope.$on('event:switchState', function (event, state) {
+      console.log('state:');
+      console.log(state);
       $state.go(state);
     });
 
