@@ -59,7 +59,7 @@ describe('app.js', function () {
       spyOn(state, 'transitionTo');
 
       rootScope.$broadcast('event:userAuthenticated', {ShowUserInitialization: false});
-      expect(lastState.getUserState.calls.count()).toEqual(3);
+      expect(lastState.getUserState.calls.count()).toEqual(4);
       expect(state.transitionTo).toHaveBeenCalledWith('userstate');
 
     });

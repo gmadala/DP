@@ -31,7 +31,6 @@
           cookieVal.lastState['default'] = $state.current.name;
         }
 
-        console.log($state.current.url);
         cookieVal.lastState['url'] = $state.current.url;
 
         cookieSet(cookieVal);

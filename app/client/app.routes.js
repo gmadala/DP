@@ -12,11 +12,9 @@
   function otherwiseRouteConfig($injector) {
     var User = $injector.get('User');
     var LastState = $injector.get('LastState');
-    console.log('LastState: ' + LastState);
     var url = LastState.getUserUrl();
-    console.log('LastState.getUserUrl(): ' + url);
     var toState = url ? url : User.isDealer() ? '/home' : '/act/home';
-    console.log('toState: ' + toState);
+    
     return !User.isLoggedIn() ? '/login' : toState;
   }
 
