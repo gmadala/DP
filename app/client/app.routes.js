@@ -14,6 +14,7 @@
     var LastState = $injector.get('LastState');
     var url = LastState.getUserUrl();
     var toState = url ? url : User.isDealer() ? '/home' : '/act/home';
+    
     return !User.isLoggedIn() ? '/login' : toState;
   }
 

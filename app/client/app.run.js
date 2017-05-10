@@ -81,7 +81,7 @@
         // Make sure we got a valid last state to switch to. Fixes VO-804
         if (LastState.getUserState() && LastState.getUserState() !== '') {
           // go back to the last state visited
-          $state.transitionTo(LastState.getUserState());
+          $state.transitionTo(LastState.getUserState() === 'login' ? User.isDealer() ? 'dashboard' : 'auction_dashboard' : LastState.getUserState());
         } else {
           $state.go(User.isDealer() ? 'dashboard' : 'auction_dashboard');
         }
@@ -254,7 +254,7 @@
           }
         );
 
-        localStorageService.set('userData', data)
+        localStorageService.set('userData', data);
 
         if (User.isPasswordChangeRequired()) {
           // temporary password? user needs to change it before it can proceed
